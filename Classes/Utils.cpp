@@ -28,6 +28,15 @@ template <typename T> T* MakeFromLua(lua_State *state, const std::string &func, 
     return object;
 }
 
+bool Utils::IsPlatformDesctop()
+{
+    cocos2d::Application::Platform platform;
+    platform = cocos2d::Application::getInstance()->getTargetPlatform();
+    return platform == cocos2d::Application::Platform::OS_MAC ||
+           platform == cocos2d::Application::Platform::OS_LINUX ||
+           platform == cocos2d::Application::Platform::OS_WINDOWS;
+}
+
 cocos2d::Layer* Utils::MakeLayerFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();

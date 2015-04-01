@@ -1,5 +1,8 @@
 #include "AppDelegate.h"
 
+#include "GameInfo.h"
+#include "Utils.h"
+
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -30,9 +33,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    // turn on display FPS
-    director->setDisplayStats(true);
-
+    GameInfo::Instance().LoadInfo("gameInfo.xml");
+    
+    // iPhone5 as reference
+    const cocos2d::Size frameSize(640.0f, 1136.0f);
+    
+    if (Utils::IsPlatformDesctop()) {
+        director->setDisplayStats(true);
+        glview->setFrameSize(frameSize.width, frameSize.height);
+        glview->setFrameZoomFactor(GameInfo::Instance().GetFloat("DESCTOP_FRAME_SCALE", 1.0f));
+    }
+    
+    glview->setDesignResolutionSize(frameSize.width, frameSize.height,
+                                    ResolutionPolicy::FIXED_WIDTH);
+    
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
     
