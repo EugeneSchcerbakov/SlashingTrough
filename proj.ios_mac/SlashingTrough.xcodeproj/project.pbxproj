@@ -642,6 +642,10 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
+					"-pagezero_size",
+					10000,
+					"-image_base",
+					100000000,
 				);
 				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
 			};
@@ -676,6 +680,10 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
+					"-pagezero_size",
+					10000,
+					"-image_base",
+					100000000,
 				);
 				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
 			};
