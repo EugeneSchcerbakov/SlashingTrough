@@ -35,10 +35,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
+    
+    LuaEngine* engine = LuaEngine::getInstance();
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
 
     // create a scene. it's an autorelease object
     auto scene = cocos2d::Scene::create();
-
+    
     // run
     director->runWithScene(scene);
 
