@@ -1,5 +1,8 @@
 #include "AppDelegate.h"
 
+#include "ui/lua_cocos2dx_ui_manual.hpp"
+#include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
+
 #include "GameInfo.h"
 #include "Utils.h"
 
@@ -28,36 +31,50 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
+    auto fileUtils = cocos2d::FileUtils::getInstance();
+    auto luaEngine = cocos2d::LuaEngine::getInstance();
+    
+    ScriptEngineManager::getInstance()->setScriptEngine(luaEngine);
+    GameInfo::Instance().LoadInfo("gameInfo.xml");
+    
     if(!glview) {
         glview = GLViewImpl::create("Slashing Trough");
         director->setOpenGLView(glview);
     }
-
-    GameInfo::Instance().LoadInfo("gameInfo.xml");
     
-    // iPhone5 as reference
     const cocos2d::Size frameSize(640.0f, 1136.0f);
     
     if (Utils::IsPlatformDesctop()) {
         director->setDisplayStats(true);
-        glview->setFrameSize(frameSize.width, frameSize.height);
         glview->setFrameZoomFactor(GameInfo::Instance().GetFloat("DESCTOP_FRAME_SCALE", 1.0f));
+        glview->setFrameSize(frameSize.width, frameSize.height);
     }
     
-    glview->setDesignResolutionSize(frameSize.width, frameSize.height,
-                                    ResolutionPolicy::FIXED_WIDTH);
-    
-    // set FPS. the default value is 1.0/60 if you don't call this
+    glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::FIXED_WIDTH);
     director->setAnimationInterval(1.0 / 60);
+    fileUtils->addSearchPath("fonts/");
+    luaEngine->addSearchPath("scripts/");
     
-    LuaEngine* engine = LuaEngine::getInstance();
-    ScriptEngineManager::getInstance()->setScriptEngine(engine);
-
-    // create a scene. it's an autorelease object
-    auto scene = cocos2d::Scene::create();
+    lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
+    register_ui_moudle(luaState);
+    register_cocostudio_module(luaState);
     
-    // run
-    director->runWithScene(scene);
+    luaEngine->executeScriptFile("gui.lua");
+    
+    cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartScene");
+    
+    auto OnStartPressed = [&](cocos2d::EventCustom *)
+    {
+    };
+    
+    if (scene) {
+        cocos2d::EventDispatcher *dispatcher;
+        dispatcher = scene->getEventDispatcher();
+        dispatcher->addCustomEventListener("StartButtonPressed", OnStartPressed);
+        director->runWithScene(scene);
+    } else {
+        return false;
+    }
 
     return true;
 }
