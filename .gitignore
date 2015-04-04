@@ -10,6 +10,8 @@
 *.opensdf
 *.ilk
 *.xcuserstate
+*.xccheckout
+*.xcbkptlist
 proj.android/bin/
 proj.android/assets/
 CMakeLists.txt.user
