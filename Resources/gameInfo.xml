@@ -1,4 +1,15 @@
 <?xml version="1.0"?>
 <GameInfo>
-	<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
+	<GlobalVariables>
+		<Const name="SEСTOR_SQUARES_COUNT" type="int" value="5" />
+		<Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="3" />
+
+		<Const name="DRAW_DEBUG_GRID" type="bool" value="true" />
+		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
+	</GlobalVariables>
+	<DifficultProgress>
+		<Stage sectors="5" obstacles="3" enemies="5" />
+		<Stage sectors="7" obstacles="5" enemies="7" />
+		<Stage sectors="12" obstacles="8" enemies="9" />
+	</DifficultProgress>
 </GameInfo>

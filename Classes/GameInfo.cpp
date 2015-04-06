@@ -27,9 +27,10 @@ bool GameInfo::LoadInfo(const std::string &filename)
     if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
     {
         tinyxml2::XMLNode *root = document.RootElement();
-        tinyxml2::XMLNode *node = root->FirstChild();
-        while (node) {
-            tinyxml2::XMLElement *elem = node->ToElement();
+        tinyxml2::XMLNode *globVar = root->FirstChild();
+        tinyxml2::XMLNode *globVarNode = globVar->FirstChild();
+        while (globVarNode) {
+            tinyxml2::XMLElement *elem = globVarNode->ToElement();
             std::string name = elem->Attribute("name");
             std::string type = elem->Attribute("type");
             std::string value = elem->Attribute("value");
@@ -44,7 +45,19 @@ bool GameInfo::LoadInfo(const std::string &filename)
             } else {
                 assert(false);
             }
-            node = node->NextSibling();
+            globVarNode = globVarNode->NextSibling();
+        }
+        tinyxml2::XMLNode *diffSettings = globVar->NextSibling();
+        tinyxml2::XMLNode *diffSettingsNode = diffSettings->FirstChild();
+        _diffucultSettings.clear();
+        while (diffSettingsNode) {
+            tinyxml2::XMLElement *elem = diffSettingsNode->ToElement();
+            GameInfo::DiffucultInfo difficult;
+            difficult.sectors = atoi(elem->Attribute("sectors"));
+            difficult.obstacles = atoi(elem->Attribute("obstacles"));
+            difficult.enemies = atoi(elem->Attribute("enemies"));
+            _diffucultSettings.push_back(difficult);
+            diffSettingsNode = diffSettingsNode->NextSibling();
         }
         return true;
     } else {
@@ -97,3 +110,9 @@ void GameInfo::SetString(const std::string &name, const std::string &value)
 {
     _variablesStr[name] = value;
 }
+
+const GameInfo::DiffucultSettings& GameInfo::GetDiffucultSettings() const
+{
+    return _diffucultSettings;
+}
+

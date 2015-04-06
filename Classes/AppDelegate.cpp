@@ -3,6 +3,7 @@
 #include "ui/lua_cocos2dx_ui_manual.hpp"
 #include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
 
+#include "GameScene.h"
 #include "GameInfo.h"
 #include "Utils.h"
 
@@ -61,10 +62,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     luaEngine->executeScriptFile("gui.lua");
     
+    float squareSize = director->getVisibleSize().width / 3.0f;
+    GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
+    
     cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartScene");
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
     {
+        GameScene *gs = GameScene::create();
+        cocos2d::Director *director;
+        director = cocos2d::Director::getInstance();
+        director->pushScene(gs);
     };
     
     if (scene) {
