@@ -12,6 +12,7 @@
 *.xcuserstate
 *.xccheckout
 *.xcbkptlist
+*.xcsettings
 proj.android/bin/
 proj.android/assets/
 CMakeLists.txt.user
