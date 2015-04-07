@@ -10,6 +10,7 @@
 #define __SlashingTrough__GameField__
 
 #include "PathSectorWidget.h"
+#include "CharacterWidget.h"
 
 #include "GameInfo.h"
 
@@ -39,11 +40,20 @@ private:
     typedef std::list<PathSectorWidget *> SectorsSequence;
     typedef SectorsSequence::iterator SectorsSequenceIter;
     
+    enum DrawOrder
+    {
+        PATH_CONTENT,
+        CHARACTER
+    };
+    
 private:
     int _sectorsQueueSize;
     int _passedSectors;
     int _difficultIndex;
     float _scrollSpeed;
+    
+    Character::Ptr _character;
+    CharacterWidget *_characterWidget;
     
     GameInfo::DiffucultInfo _difficult;
     SectorsSequence _sectorsSequence;

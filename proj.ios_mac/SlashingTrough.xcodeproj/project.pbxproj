@@ -70,6 +70,10 @@
 		CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
 		CD89CC631ACC55D9008C1E06 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC621ACC55D9008C1E06 /* gui.lua */; };
 		CD89CC641ACC55D9008C1E06 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC621ACC55D9008C1E06 /* gui.lua */; };
+		CDA8F4441AD2F356006A3210 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4421AD2F356006A3210 /* Character.cpp */; };
+		CDA8F4451AD2F356006A3210 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4421AD2F356006A3210 /* Character.cpp */; };
+		CDA8F4491AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */; };
+		CDA8F44A1AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */; };
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
@@ -193,6 +197,10 @@
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CD89CC621ACC55D9008C1E06 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
+		CDA8F4421AD2F356006A3210 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		CDA8F4431AD2F356006A3210 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterWidget.cpp; sourceTree = "<group>"; };
+		CDA8F4481AD2F6B8006A3210 /* CharacterWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterWidget.h; sourceTree = "<group>"; };
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -343,6 +351,10 @@
 				CD5F8C821AD04C9C000CF14A /* PathSector.h */,
 				CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */,
 				CD2D182C1AD11BCE00F96E8F /* PathSectorWidget.h */,
+				CDA8F4421AD2F356006A3210 /* Character.cpp */,
+				CDA8F4431AD2F356006A3210 /* Character.h */,
+				CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */,
+				CDA8F4481AD2F6B8006A3210 /* CharacterWidget.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -595,6 +607,8 @@
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
+				CDA8F4491AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */,
+				CDA8F4441AD2F356006A3210 /* Character.cpp in Sources */,
 				CD2D182D1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,11 +620,13 @@
 				CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
+				CDA8F4451AD2F356006A3210 /* Character.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
+				CDA8F44A1AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

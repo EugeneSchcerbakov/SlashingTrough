@@ -75,8 +75,15 @@ bool GameField::init()
         testPathWidget->setPosition(cocos2d::Vec2(0.0f, k * sectorSquaresCount * squareSize));
         testPathWidget->DrawDebugGrid();
         _sectorsSequence.push_back(testPathWidget);
-        addChild(testPathWidget, 0);
+        addChild(testPathWidget, DrawOrder::PATH_CONTENT);
     }
+    
+    _character = Character::Create();
+    _characterWidget = CharacterWidget::create(_character);
+    _characterWidget->setPositionX(squareSize * 3.0f * 0.5f);
+    _characterWidget->setPositionY(squareSize + squareSize * 0.5f);
+    
+    addChild(_characterWidget, DrawOrder::CHARACTER);
     
     scheduleUpdate();
     
@@ -85,6 +92,8 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
+    SetScrollSpeed(_character->GetRunningSpeed());
+    
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
     // scroll level down
@@ -145,7 +154,7 @@ void GameField::AddSector(PathSectorWidget *sectorWidget)
     
     sectorWidget->setPositionY(ypos);
     _sectorsSequence.push_back(sectorWidget);
-    addChild(sectorWidget);
+    addChild(sectorWidget, DrawOrder::PATH_CONTENT);
 }
 
 void GameField::UpdateDifficult()
