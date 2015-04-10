@@ -5,6 +5,7 @@
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="25.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="100.0" />
 		<Const name="CHARACTER_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
+		<Const name="CHARACTER_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
 		<Const name="SEСTOR_SQUARES_COUNT" type="int" value="5" />
 		<Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="3" />

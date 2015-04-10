@@ -11,6 +11,8 @@
 
 #include <memory>
 
+#include "CharacterAction.h"
+
 class Character
 {
 public:
@@ -22,17 +24,36 @@ public:
     
     Character();
     
+    void FinishCurrentAction();
+    void SetLogicalPos(float x, float y);
+    
+    void AddAction(CharacterAction &action);
     void AddHealth(float health);
     
     float GetRunningSpeed() const;
+    float GetLogicalX() const;
+    float GetLogicalY() const;
+    CharacterAction& CurrentAction();
+    
     bool IsAlive() const;
+    bool IsAbleToPerform(const CharacterAction &action) const;
+    bool IsActionsQueueFull() const;
+    bool HasActionToPerform() const;
+    
+protected:
+    typedef std::queue<CharacterAction> ActionSequence;
     
 protected:
     virtual void Init();
     
+    ActionSequence _actionSequence;
+    
     float _runningSpeed;
     float _attackDamage;
     float _healthPoints;
+    float _logicalPosX;
+    float _logicalPosY;
+    int _actionsSequenceMaxSize;
 };
 
 #endif /* defined(__SlashingTrough__Character__) */

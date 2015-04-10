@@ -56,6 +56,10 @@
 		CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */; };
 		CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D18301AD1532D00F96E8F /* GameField.cpp */; };
 		CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D18301AD1532D00F96E8F /* GameField.cpp */; };
+		CD3E69AB1AD3A593008F7FB0 /* CharacterControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* CharacterControlKeyboard.cpp */; };
+		CD3E69AC1AD3A593008F7FB0 /* CharacterControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* CharacterControlKeyboard.cpp */; };
+		CD3ECE8C1AD6F08100613ADD /* CharacterAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3ECE8A1AD6F08100613ADD /* CharacterAction.cpp */; };
+		CD3ECE8D1AD6F08100613ADD /* CharacterAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3ECE8A1AD6F08100613ADD /* CharacterAction.cpp */; };
 		CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */; };
 		CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */; };
 		CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
@@ -187,6 +191,10 @@
 		CD2D182C1AD11BCE00F96E8F /* PathSectorWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSectorWidget.h; sourceTree = "<group>"; };
 		CD2D18301AD1532D00F96E8F /* GameField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameField.cpp; sourceTree = "<group>"; };
 		CD2D18311AD1532D00F96E8F /* GameField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameField.h; sourceTree = "<group>"; };
+		CD3E69A91AD3A593008F7FB0 /* CharacterControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterControlKeyboard.cpp; sourceTree = "<group>"; };
+		CD3E69AA1AD3A593008F7FB0 /* CharacterControlKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterControlKeyboard.h; sourceTree = "<group>"; };
+		CD3ECE8A1AD6F08100613ADD /* CharacterAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterAction.cpp; sourceTree = "<group>"; };
+		CD3ECE8B1AD6F08100613ADD /* CharacterAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterAction.h; sourceTree = "<group>"; };
 		CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2d.lua; sourceTree = "<group>"; };
 		CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2dConstants.lua; sourceTree = "<group>"; };
 		CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
@@ -353,8 +361,12 @@
 				CD2D182C1AD11BCE00F96E8F /* PathSectorWidget.h */,
 				CDA8F4421AD2F356006A3210 /* Character.cpp */,
 				CDA8F4431AD2F356006A3210 /* Character.h */,
+				CD3ECE8A1AD6F08100613ADD /* CharacterAction.cpp */,
+				CD3ECE8B1AD6F08100613ADD /* CharacterAction.h */,
 				CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */,
 				CDA8F4481AD2F6B8006A3210 /* CharacterWidget.h */,
+				CD3E69A91AD3A593008F7FB0 /* CharacterControlKeyboard.cpp */,
+				CD3E69AA1AD3A593008F7FB0 /* CharacterControlKeyboard.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -603,7 +615,9 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */,
+				CD3E69AB1AD3A593008F7FB0 /* CharacterControlKeyboard.cpp in Sources */,
 				CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */,
+				CD3ECE8C1AD6F08100613ADD /* CharacterAction.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
@@ -618,11 +632,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */,
+				CD3E69AC1AD3A593008F7FB0 /* CharacterControlKeyboard.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CDA8F4451AD2F356006A3210 /* Character.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
+				CD3ECE8D1AD6F08100613ADD /* CharacterAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,

@@ -22,12 +22,16 @@ protected:
     virtual ~CharacterWidget();
     
     bool init();
+    void update(float dt);
     
     enum DrawOrder
     {
         BODY = 0,
         SWORD
     };
+    
+protected:
+    virtual void PerformAction(const CharacterAction &action);
     
 private:
     Character::WeakPtr _character;

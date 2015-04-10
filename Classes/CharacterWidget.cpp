@@ -8,6 +8,8 @@
 
 #include "CharacterWidget.h"
 
+#include "GameInfo.h"
+
 CharacterWidget* CharacterWidget::create(Character::WeakPtr character)
 {
     CharacterWidget *widget = new CharacterWidget(character);
@@ -54,10 +56,47 @@ bool CharacterWidget::init()
     _sword->setPosition(cocos2d::Vec2(60.0f, 0.0f));
     _sword->setRotation(160.0f);
     
+    scheduleUpdate();
     addChild(_sword, DrawOrder::SWORD);
     addChild(_body, DrawOrder::BODY);
     
     return true;
 }
 
+void CharacterWidget::update(float dt)
+{
+    Character::Ptr characterPtr = _character.lock();
+    
+    if (characterPtr->HasActionToPerform()) {
+        CharacterAction *action = &characterPtr->CurrentAction();
+        if (action->IsReady() && getNumberOfRunningActions() == 0) {
+            action->Start();
+            PerformAction(*action);
+        }
+    }
+}
+
+void CharacterWidget::PerformAction(const CharacterAction &action)
+{
+    const float square_size = GameInfo::Instance().GetFloat("SQUARE_SIZE");
+    float deltaX = 0.0f;
+    if (action.IsType(CharacterAction::Type::SWIPE_LEFT)) {
+        deltaX = -square_size;
+    }
+    if (action.IsType(CharacterAction::Type::SWIPE_RIGHT)) {
+        deltaX = square_size;
+    }
+    
+    std::function<void()> end = [&]() {
+        Character::Ptr ptr = _character.lock();
+        ptr->FinishCurrentAction();
+        ptr->SetLogicalPos(getPositionX(), getPositionY());
+    };
+    
+    cocos2d::MoveBy *move = cocos2d::MoveBy::create(action.GetDuration(), cocos2d::Vec2(deltaX, 0.0f));
+    cocos2d::CallFunc *func = cocos2d::CallFunc::create(end);
+    cocos2d::Sequence *seq = cocos2d::Sequence::create(move, func, nullptr);
+    
+    runAction(seq);
+}
 

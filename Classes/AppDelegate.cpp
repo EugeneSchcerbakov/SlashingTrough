@@ -64,6 +64,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     float squareSize = director->getVisibleSize().width / 3.0f;
     GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
+    GameInfo::Instance().SetFloat("PATH_LEFT_BORDER", squareSize);
+    GameInfo::Instance().SetFloat("PATH_RIGHT_BORDER", squareSize * 2.0f);
     
     cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartScene");
     

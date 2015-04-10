@@ -78,11 +78,17 @@ bool GameField::init()
         addChild(testPathWidget, DrawOrder::PATH_CONTENT);
     }
     
+    const float characterStartX = squareSize * 3.0f * 0.5f;
+    const float characterStartY = squareSize + squareSize * 0.5f;
     _character = Character::Create();
+    _character->SetLogicalPos(characterStartX, characterStartY);
     _characterWidget = CharacterWidget::create(_character);
-    _characterWidget->setPositionX(squareSize * 3.0f * 0.5f);
-    _characterWidget->setPositionY(squareSize + squareSize * 0.5f);
+    _characterWidget->setPositionX(_character->GetLogicalX());
+    _characterWidget->setPositionY(_character->GetLogicalY());
     
+    _controlKeyboard = CharacterControlKeyboard::Create(_character,
+                                                        _characterWidget->getEventDispatcher(),
+                                                        _characterWidget);
     addChild(_characterWidget, DrawOrder::CHARACTER);
     
     scheduleUpdate();
