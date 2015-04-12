@@ -4,6 +4,7 @@
 		<Const name="CHARACTER_RUNNING_SPEED" type="float" value="200.0" />
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="25.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="100.0" />
+        <Const name="CHARACTER_SWIPE_DURATION" type="float" value="0.4" />
 		<Const name="CHARACTER_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
 		<Const name="CHARACTER_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 

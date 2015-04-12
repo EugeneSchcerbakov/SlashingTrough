@@ -24,21 +24,43 @@ protected:
     bool init();
     void update(float dt);
     
-    enum DrawOrder
-    {
-        BODY = 0,
-        SWORD
-    };
+    void PerformAction(const CharacterAction &action);
     
-protected:
-    virtual void PerformAction(const CharacterAction &action);
+    cocos2d::Action* AnimSwordRightSwipeRight(float duration);
+    cocos2d::Action* AnimSwordRightSwipeLeft(float duration);
+    cocos2d::Action* AnimSwordLeftSwipeRight(float duration);
+    cocos2d::Action* AnimSwordLeftSwipeLeft(float duration);
     
 private:
+    enum class SwordSide
+    {
+        LEFT,
+        RIGHT
+    };
+    struct SwordTransform
+    {
+        cocos2d::Vec2 localPos;
+        float angle;
+        SwordTransform(cocos2d::Vec2 p, float a)
+        : localPos(p)
+        , angle(a)
+        {}
+        SwordTransform()
+        {}
+    };
+
+private:
+    static const SwordTransform _swordRightSideTrans;
+    static const SwordTransform _swordLeftSideTrans;
+    
     Character::WeakPtr _character;
     
     cocos2d::DrawNode *_sword;
     cocos2d::DrawNode *_body;
+    cocos2d::DrawNode *_head;
     cocos2d::DrawNode *_bodyBorder;
+    
+    SwordSide _swordSide;
 };
 
 #endif /* defined(__SlashingTrough__CharacterWidget__) */

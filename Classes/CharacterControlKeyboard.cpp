@@ -40,15 +40,21 @@ void CharacterControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key,
     }
     
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
+        const float deltaX = _squareSize;
+        const float deltaY = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
+        const float duration = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_DURATION");
         CharacterAction::Type type = CharacterAction::Type::SWIPE_RIGHT;
-        CharacterAction action(type, 0.5f, _squareSize, 0.0f);
+        CharacterAction action(type, duration, deltaX, deltaY);
         if (characterPtr->IsAbleToPerform(action)) {
             characterPtr->AddAction(action);
         }
     }
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
+        const float deltaX = -_squareSize;
+        const float deltaY = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
+        const float duration = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_DURATION");
         CharacterAction::Type type = CharacterAction::Type::SWIPE_LEFT;
-        CharacterAction action(type, 0.5f, -_squareSize, 0.0f);
+        CharacterAction action(type, duration, deltaX, deltaY);
         if (characterPtr->IsAbleToPerform(action)) {
             characterPtr->AddAction(action);
         }
