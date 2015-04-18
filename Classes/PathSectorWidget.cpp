@@ -44,6 +44,23 @@ bool PathSectorWidget::init()
     _sectorHeight = squareSize * pathPtr->GetSquaresByHeight();
     _sectorWidth = squareSize * 3.0f;
     
+    for (GameplayObject::Ptr object : pathPtr->GetGameplayObjects())
+    {
+        if (object->IsType(GameplayObject::Type::OBSTACLE)) {
+            ObstacleWidget *widget = ObstacleWidget::create(object);
+            widget->setPositionX(object->GetLogicalX());
+            widget->setPositionY(object->GetLogicalY());
+            widget->setScale(1.0f);
+            addChild(widget, DrawOrder::OBSTACLES);
+        } else if (object->IsType(GameplayObject::Type::ENEMY)) {
+            EnemyWidget *widget = EnemyWidget::create(object);
+            widget->setPositionX(object->GetLogicalX());
+            widget->setPositionY(object->GetLogicalY());
+            widget->setScale(1.0f);
+            addChild(widget, DrawOrder::ENEMIES);
+        }
+    }
+    
     cocos2d::Vec2 pathVerts[4] {
         cocos2d::Vec2(0.0f, 0.0f),
         cocos2d::Vec2(0.0f, _sectorHeight),

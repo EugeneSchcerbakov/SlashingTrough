@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "PathSector.h"
+#include "GameplayObjectsWidgets.h"
 
 class PathSectorWidget : public cocos2d::Node
 {
@@ -35,7 +36,7 @@ private:
     {
         GROUND,
         DEBUG_GREED,
-        OBSTICLES,
+        OBSTACLES,
         BONUSES,
         ENEMIES
     };

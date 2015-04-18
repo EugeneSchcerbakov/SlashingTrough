@@ -54,6 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::FIXED_WIDTH);
     director->setAnimationInterval(1.0 / 60);
     fileUtils->addSearchPath("fonts/");
+    fileUtils->addSearchPath("textures/");
     luaEngine->addSearchPath("scripts/");
     
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();

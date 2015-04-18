@@ -53,11 +53,33 @@ bool GameInfo::LoadInfo(const std::string &filename)
         while (diffSettingsNode) {
             tinyxml2::XMLElement *elem = diffSettingsNode->ToElement();
             GameInfo::DiffucultInfo difficult;
-            difficult.sectors = atoi(elem->Attribute("sectors"));
-            difficult.obstacles = atoi(elem->Attribute("obstacles"));
-            difficult.enemies = atoi(elem->Attribute("enemies"));
+            difficult.sectors = elem->IntAttribute("sectors");
+            difficult.obstacles = elem->IntAttribute("obstacles");
+            difficult.enemies = elem->IntAttribute("enemies");
             _diffucultSettings.push_back(difficult);
             diffSettingsNode = diffSettingsNode->NextSibling();
+        }
+        tinyxml2::XMLNode *objects = diffSettings->NextSibling();
+        tinyxml2::XMLNode *objectsNode = objects->FirstChild();
+        while (objectsNode) {
+            tinyxml2::XMLElement *elem = objectsNode->ToElement();
+            std::string type = elem->Name();
+            if (type == "Obstacle") {
+                bool destructible = elem->BoolAttribute("destructible");
+                float health = elem->FloatAttribute("health");
+                std::string sprite = elem->Attribute("sprite");
+                std::string name = elem->Attribute("name");
+                _obstaclesSettings[name] = ObstacleType(destructible, health, sprite);
+            } else if (type == "Enemy") {
+                float damage = elem->FloatAttribute("damage");
+                float health = elem->FloatAttribute("health");
+                std::string sprite = elem->Attribute("sprite");
+                std::string name = elem->Attribute("name");
+                _enemiesSettings[name] = EnemyType(damage, health, sprite);
+            } else {
+                CC_ASSERT(false);
+            }
+            objectsNode = objectsNode->NextSibling();
         }
         return true;
     } else {
@@ -111,8 +133,51 @@ void GameInfo::SetString(const std::string &name, const std::string &value)
     _variablesStr[name] = value;
 }
 
+const GameInfo::ObstacleType& GameInfo::GetObstacleInfoByName(const std::string &name) const
+{
+    ObstaclesSettings::const_iterator it;
+    it = _obstaclesSettings.find(name);
+    if (it != _obstaclesSettings.end()) {
+        return (*it).second;
+    } else {
+        CC_ASSERT(false);
+        return (*_obstaclesSettings.end()).second;
+    }
+}
+
+const GameInfo::EnemyType& GameInfo::GetEnemyInfoByName(const std::string &name) const
+{
+    EnemiesSettings::const_iterator it;
+    it = _enemiesSettings.find(name);
+    if (it != _enemiesSettings.end()) {
+        return (*it).second;
+    } else {
+        CC_ASSERT(false);
+        return (*_enemiesSettings.end()).second;
+    }
+}
+
+GameInfo::GameplayObjectsTypes GameInfo::GetObstaclesTypes() const
+{
+    GameplayObjectsTypes types;
+    types.reserve(_obstaclesSettings.size());
+    for (auto object : _obstaclesSettings) {
+        types.push_back(object.first);
+    }
+    return types;
+}
+
+GameInfo::GameplayObjectsTypes GameInfo::GetEnemiesTypes() const
+{
+    GameplayObjectsTypes types;
+    types.reserve(_obstaclesSettings.size());
+    for (auto object : _enemiesSettings) {
+        types.push_back(object.first);
+    }
+    return types;
+}
+
 const GameInfo::DiffucultSettings& GameInfo::GetDiffucultSettings() const
 {
     return _diffucultSettings;
 }
-

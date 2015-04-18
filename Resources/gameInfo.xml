@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <GameInfo>
 	<GlobalVariables>
-		<Const name="CHARACTER_RUNNING_SPEED" type="float" value="200.0" />
+		<Const name="CHARACTER_RUNNING_SPEED" type="float" value="400.0" />
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="25.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="100.0" />
-        <Const name="CHARACTER_SWIPE_DURATION" type="float" value="0.4" />
+        <Const name="CHARACTER_SWIPE_DURATION" type="float" value="0.3" />
 		<Const name="CHARACTER_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
 		<Const name="CHARACTER_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
@@ -15,8 +15,12 @@
 		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
 	</GlobalVariables>
 	<DifficultProgress>
-		<Stage sectors="5" obstacles="3" enemies="5" />
-		<Stage sectors="7" obstacles="5" enemies="7" />
-		<Stage sectors="12" obstacles="8" enemies="9" />
+		<Stage sectors="5" obstacles="1" enemies="2" />
+		<Stage sectors="7" obstacles="3" enemies="2" />
+		<Stage sectors="12" obstacles="2" enemies="3" />
 	</DifficultProgress>
+    <GameplayObjects>
+        <Obstacle name="Box" destructible="true" health="1.0" sprite="obstacle_0.png" />
+        <Enemy name="Creep" damage="2.0" health="1.0" sprite="creep_0.png" />
+    </GameplayObjects>
 </GameInfo>

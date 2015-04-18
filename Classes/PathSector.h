@@ -11,35 +11,59 @@
 
 #include <memory>
 
+#include "GameplayObjects.h"
+
 class PathSector
 {
 public:
-    enum class ValidationResult
-    {
-        PATH_IS_VALID,
-        PASSAGE_NOT_EXIST,
-        NOT_ENOUGH_SPACE
-    };
-    
     typedef std::shared_ptr<PathSector> Ptr;
     typedef std::weak_ptr<PathSector> WeakPtr;
+    typedef std::vector<GameplayObject::Ptr> GameplayObjects;
     
 public:
     static Ptr Create();
     
     PathSector();
     
-    void Generate(int obsticles, int enemies, int squaresByHeight);
+    void Generate(int obstacles, int enemies, int squaresByHeight);
     void Reset();
     
-    inline int GetObsticlesCount() const {return _countObsticles;}
+    inline int GetObstaclesCount() const {return _countObstacles;}
     inline int GetEmeniesCount() const {return _countEnemies;}
     inline int GetSquaresByHeight() const {return _squaresByHeight;}
     
-    ValidationResult Validate() const;
+    const GameplayObjects& GetGameplayObjects() const;
     
 private:
-    int _countObsticles;
+    struct Square
+    {
+        enum class State
+        {
+            FREE,
+            OBSTACLE,
+            ENEMY
+        };
+        
+        int x;
+        int y;
+        State state;
+        Square()
+        : x(0)
+        , y(0)
+        , state(State::FREE)
+        {}
+    };
+    
+    typedef std::vector<Square> Grid;
+    
+private:
+    void SpawnObjects(const std::function<void(int, int)> &spawn, int amount);
+    bool IsValidRow(int row) const;
+    
+    Grid _grid;
+    GameplayObjects _objects;
+    
+    int _countObstacles;
     int _countEnemies;
     int _squaresByHeight;
 };

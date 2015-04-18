@@ -32,7 +32,38 @@ public:
         {}
     };
     
+    struct ObstacleType
+    {
+        float health;
+        bool destructible;
+        std::string sprite;
+        ObstacleType(float h, bool d, const std::string &s)
+        : health(h)
+        , destructible(d)
+        , sprite(s)
+        {}
+        ObstacleType()
+        {}
+    };
+    
+    struct EnemyType
+    {
+        float damage;
+        float health;
+        std::string sprite;
+        EnemyType(float d, float h, std::string s)
+        : damage(d)
+        , health(h)
+        , sprite(s)
+        {}
+        EnemyType()
+        {}
+    };
+    
     typedef std::vector<DiffucultInfo> DiffucultSettings;
+    typedef std::vector<std::string> GameplayObjectsTypes;
+    typedef std::map<std::string, ObstacleType> ObstaclesSettings;
+    typedef std::map<std::string, EnemyType> EnemiesSettings;
     
 public:
     static GameInfo& Instance();
@@ -49,6 +80,12 @@ public:
     void SetFloat(const std::string &name, float value);
     void SetString(const std::string &name, const std::string &value);
     
+    const ObstacleType& GetObstacleInfoByName(const std::string &name) const;
+    const EnemyType& GetEnemyInfoByName(const std::string &name) const;
+    
+    GameplayObjectsTypes GetObstaclesTypes() const;
+    GameplayObjectsTypes GetEnemiesTypes() const;
+    
     const DiffucultSettings& GetDiffucultSettings() const;
     
 private:
@@ -57,6 +94,8 @@ private:
     std::map<std::string, std::string> _variablesStr;
     
     DiffucultSettings _diffucultSettings;
+    ObstaclesSettings _obstaclesSettings;
+    EnemiesSettings _enemiesSettings;
 };
 
 #endif /* defined(__SlashingTrough__GameInfo__) */

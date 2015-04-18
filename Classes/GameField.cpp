@@ -70,7 +70,7 @@ bool GameField::init()
     for (int k = 0; k < _sectorsQueueSize; ++k)
     {
         PathSector::Ptr testPath = PathSector::Create();
-        testPath->Generate(0, 0, sectorSquaresCount);
+        testPath->Generate(2, 3, sectorSquaresCount);
         PathSectorWidget *testPathWidget = PathSectorWidget::create(testPath);
         testPathWidget->setPosition(cocos2d::Vec2(0.0f, k * sectorSquaresCount * squareSize));
         testPathWidget->DrawDebugGrid();
@@ -170,10 +170,7 @@ void GameField::UpdateDifficult()
     if (_passedSectors >= _difficult.sectors) {
         _passedSectors = 0;
         ++_difficultIndex;
-        if (_difficultIndex >= settings.size()) {
-            // use last difficult
-            _difficult = *(settings.end()--);
-        } else {
+        if (_difficultIndex < settings.size()) {
             _difficult = settings[_difficultIndex];
         }
     }
