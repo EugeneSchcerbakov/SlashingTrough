@@ -14,6 +14,7 @@ PathSector::Ptr PathSector::Create()
 }
 
 PathSector::PathSector()
+: _squareSize(GameInfo::Instance().GetFloat("SQUARE_SIZE"))
 {
     Reset();
 }
@@ -29,6 +30,14 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
     
     _grid.resize(row * col);
     
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < _squaresByHeight; ++j) {
+            int index = i*row+j;
+            _grid[index].x = i;
+            _grid[index].y = j;
+        }
+    }
+    
     std::function<void(int, int)> spawnObstacle = [&](int x, int y)
     {
         GameInfo &gameInfo = GameInfo::Instance();
@@ -39,17 +48,17 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
         GameInfo::ObstacleType info;
         info = gameInfo.GetObstacleInfoByName(obstacleTypes[0]);
         
-        float square = gameInfo.GetFloat("SQUARE_SIZE");
-        float localX = x * square + square * 0.5f;
-        float localY = y * square + square * 0.5f;
+        float localX = x * _squareSize + _squareSize * 0.5f;
+        float localY = y * _squareSize + _squareSize * 0.5f;
         
-        Obstacle::Ptr obj;
-        obj = Obstacle::Create(info);
+        GameplayObject::UID uid = GenerateUID();
+        Obstacle::Ptr obj = Obstacle::Create(info, uid);
         obj->SetLogicalPos(localX, localY);
         _objects.push_back(obj);
         
         int index = x * _squaresByHeight + y;
         _grid[index].state = Square::State::OBSTACLE;
+        _grid[index].objUID = uid;
     };
     
     std::function<void(int, int)> spawnEnemies = [&](int x, int y)
@@ -62,17 +71,17 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
         GameInfo::EnemyType info;
         info = gameInfo.GetEnemyInfoByName(enemiesTypes[0]);
         
-        float square = gameInfo.GetFloat("SQUARE_SIZE");
-        float localX = x * square + square * 0.5f;
-        float localY = y * square + square * 0.5f;
+        float localX = x * _squareSize + _squareSize * 0.5f;
+        float localY = y * _squareSize + _squareSize * 0.5f;
         
-        Enemy::Ptr obj;
-        obj = Enemy::Create(info);
+        GameplayObject::UID uid = GenerateUID();
+        Enemy::Ptr obj = Enemy::Create(info, uid);
         obj->SetLogicalPos(localX, localY);
         _objects.push_back(obj);
         
         int index = x * _squaresByHeight + y;
         _grid[index].state = Square::State::ENEMY;
+        _grid[index].objUID = uid;
     };
     
     SpawnObjects(spawnObstacle, obstacles);
@@ -88,9 +97,54 @@ void PathSector::Reset()
     _grid.clear();
 }
 
-const PathSector::GameplayObjects& PathSector::GetGameplayObjects() const
+PathSector::Square PathSector::GetSquareByLocalXY(float x, float y) const
+{
+    int xidx = (int)floorf(x / _squareSize);
+    int yidx = (int)floorf(y / _squareSize);
+    
+    return GetSquareByIndexXY(xidx, yidx);
+}
+
+PathSector::Square PathSector::GetSquareByIndexXY(int x, int y) const
+{
+    if (IsValidSquareAddress(x, y)) {
+        int index = x * _squaresByHeight + y;
+        return _grid[index];
+    }
+    return Square();
+}
+
+PathSector::Square PathSector::GetSquareByObject(GameplayObject::Ptr object) const
+{
+    float x = object->GetLogicalX();
+    float y = object->GetLogicalY();
+    
+    Square square = GetSquareByLocalXY(x, y);
+    if (IsValidSquareAddress(square.x, square.y)) {
+        return square;
+    }
+    
+    return Square();
+}
+
+GameplayObject::WeakPtr PathSector::GetObjectByUID(int uid)
+{
+    for (auto obj : _objects) {
+        if (obj->GetUID() == uid) {
+            return obj;
+        }
+    }
+    return GameplayObject::Ptr();
+}
+
+PathSector::GameplayObjects& PathSector::GetGameplayObjects()
 {
     return _objects;
+}
+
+bool PathSector::IsValidSquareAddress(int x, int y) const
+{
+    return x >= 0 && x < 3 && y >= 0 && y < _squaresByHeight;
 }
 
 void PathSector::SpawnObjects(const std::function<void(int, int)> &spawn, int amount)
@@ -143,3 +197,11 @@ bool PathSector::IsValidRow(int row) const
     }
     return true;
 }
+
+GameplayObject::UID PathSector::GenerateUID()
+{
+    static GameplayObject::UID uid = 0;
+    ++uid;
+    return uid;
+}
+

@@ -10,7 +10,7 @@
 
 #include "GameInfo.h"
 
-PathSectorWidget* PathSectorWidget::create(PathSector::WeakPtr path)
+PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path)
 {
     PathSectorWidget *sector = new PathSectorWidget(path);
     if (sector && sector->init()) {
@@ -22,7 +22,7 @@ PathSectorWidget* PathSectorWidget::create(PathSector::WeakPtr path)
     return sector;
 }
 
-PathSectorWidget::PathSectorWidget(PathSector::WeakPtr path)
+PathSectorWidget::PathSectorWidget(PathSector::Ptr path)
 : _path(path)
 , _debugGrid(nullptr)
 {
@@ -38,13 +38,11 @@ bool PathSectorWidget::init()
         return false;
     }
     
-    PathSector::Ptr pathPtr = _path.lock();
-    
     const float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
-    _sectorHeight = squareSize * pathPtr->GetSquaresByHeight();
+    _sectorHeight = squareSize * _path->GetSquaresByHeight();
     _sectorWidth = squareSize * 3.0f;
     
-    for (GameplayObject::Ptr object : pathPtr->GetGameplayObjects())
+    for (GameplayObject::Ptr object : _path->GetGameplayObjects())
     {
         if (object->IsType(GameplayObject::Type::OBSTACLE)) {
             ObstacleWidget *widget = ObstacleWidget::create(object);
@@ -52,12 +50,14 @@ bool PathSectorWidget::init()
             widget->setPositionY(object->GetLogicalY());
             widget->setScale(1.0f);
             addChild(widget, DrawOrder::OBSTACLES);
+            _widgets[object->GetUID()] = widget;
         } else if (object->IsType(GameplayObject::Type::ENEMY)) {
             EnemyWidget *widget = EnemyWidget::create(object);
             widget->setPositionX(object->GetLogicalX());
             widget->setPositionY(object->GetLogicalY());
             widget->setScale(1.0f);
             addChild(widget, DrawOrder::ENEMIES);
+            _widgets[object->GetUID()] = widget;
         }
     }
     
@@ -71,9 +71,30 @@ bool PathSectorWidget::init()
     _ground = cocos2d::DrawNode::create();
     _ground->drawPolygon(pathVerts, 4, cocos2d::Color4F::GRAY, 0.0f, cocos2d::Color4F::GRAY);
     
+    scheduleUpdate();
     addChild(_ground, DrawOrder::GROUND);
     
     return true;
+}
+
+void PathSectorWidget::update(float dt)
+{
+    PathSector::GameplayObjects &objects = _path->GetGameplayObjects();
+    for (PathSector::GameplayObjectsIter it = objects.begin(); it != objects.end();) {
+        if ((*it)->IsAlive()) {
+            ++it;
+        } else {
+            // remove widget
+            std::map<GameplayObject::UID, cocos2d::Node *>::iterator witer;
+            witer = _widgets.find((*it)->GetUID());
+            if (witer != _widgets.end()) {
+                removeChild((*witer).second);
+                witer = _widgets.erase(witer);
+            }
+            // remove object
+            it = objects.erase(it);
+        }
+    }
 }
 
 void PathSectorWidget::DrawDebugGrid()
@@ -82,7 +103,7 @@ void PathSectorWidget::DrawDebugGrid()
     
     const cocos2d::Color4F color = cocos2d::Color4F::BLACK;
     const float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
-    const int squareByX = _path.lock()->GetSquaresByHeight();
+    const int squareByX = _path->GetSquaresByHeight();
     const int squareByY = 3.0f;
     
     _debugGrid = cocos2d::DrawNode::create();
@@ -121,6 +142,6 @@ cocos2d::Size PathSectorWidget::GetSectorSize() const
 
 PathSector::Ptr PathSectorWidget::GetPath() const
 {
-    return _path.lock();
+    return _path;
 }
 

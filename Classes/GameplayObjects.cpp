@@ -8,8 +8,11 @@
 
 #include "GameplayObjects.h"
 
-GameplayObject::GameplayObject()
+const GameplayObject::UID GameplayObject::InvalidUID = 0;
+
+GameplayObject::GameplayObject(UID uid)
 : _type(Type::NONE)
+, _uid(uid)
 {
 }
 
@@ -58,11 +61,16 @@ float GameplayObject::GetLogicalY() const
     return _logicalY;
 }
 
+GameplayObject::UID GameplayObject::GetUID() const
+{
+    return _uid;
+}
+
 // Obstacle implementation
 
-GameplayObject::Ptr Obstacle::Create(const GameInfo::ObstacleType &info)
+GameplayObject::Ptr Obstacle::Create(const GameInfo::ObstacleType &info, UID uid)
 {
-    return std::make_shared<Obstacle>(info);
+    return std::make_shared<Obstacle>(info, uid);
 }
 
 Obstacle* Obstacle::Cast(GameplayObject::Ptr ptr)
@@ -70,7 +78,7 @@ Obstacle* Obstacle::Cast(GameplayObject::Ptr ptr)
     return static_cast<Obstacle *>(ptr.get());
 }
 
-Obstacle::Obstacle(const GameInfo::ObstacleType &info) : GameplayObject()
+Obstacle::Obstacle(const GameInfo::ObstacleType &info, UID uid) : GameplayObject(uid)
 {
     _type = Type::OBSTACLE;
     _health = info.health;
@@ -89,9 +97,9 @@ bool Obstacle::IsDestructible() const
 
 // Enemy implementation
 
-GameplayObject::Ptr Enemy::Create(const GameInfo::EnemyType &info)
+GameplayObject::Ptr Enemy::Create(const GameInfo::EnemyType &info, UID uid)
 {
-    return std::make_shared<Enemy>(info);
+    return std::make_shared<Enemy>(info, uid);
 }
 
 Enemy* Enemy::Cast(GameplayObject::Ptr ptr)
@@ -99,7 +107,7 @@ Enemy* Enemy::Cast(GameplayObject::Ptr ptr)
     return static_cast<Enemy *>(ptr.get());
 }
 
-Enemy::Enemy(const GameInfo::EnemyType &info)
+Enemy::Enemy(const GameInfo::EnemyType &info, UID uid) : GameplayObject(uid)
 {
     _type = Type::ENEMY;
     _health = info.health;

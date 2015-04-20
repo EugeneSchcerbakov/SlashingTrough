@@ -10,12 +10,16 @@
 #define __SlashingTrough__CharacterWidget__
 
 #include "cocos2d.h"
+
 #include "Character.h"
+#include "PathSectorWidget.h"
 
 class CharacterWidget : public cocos2d::Node
 {
 public:
     static CharacterWidget* create(Character::WeakPtr character);
+    
+    void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
     
 protected:
     CharacterWidget(Character::WeakPtr character);
@@ -24,6 +28,7 @@ protected:
     bool init();
     void update(float dt);
     
+    void Attack();
     void PerformAction(const CharacterAction &action);
     
     cocos2d::Action* AnimSwordRightSwipeRight(float duration);
@@ -37,6 +42,7 @@ private:
         LEFT,
         RIGHT
     };
+    
     struct SwordTransform
     {
         cocos2d::Vec2 localPos;
@@ -54,6 +60,8 @@ private:
     static const SwordTransform _swordLeftSideTrans;
     
     Character::WeakPtr _character;
+  
+    PathSectorWidget::SectorsSequence *_sectors;
     
     cocos2d::DrawNode *_sword;
     cocos2d::DrawNode *_body;
@@ -61,6 +69,8 @@ private:
     cocos2d::DrawNode *_bodyBorder;
     
     SwordSide _swordSide;
+    
+    int _attackedRowIndex;
 };
 
 #endif /* defined(__SlashingTrough__CharacterWidget__) */

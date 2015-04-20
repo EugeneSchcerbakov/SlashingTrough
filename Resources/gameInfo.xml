@@ -3,6 +3,7 @@
 	<GlobalVariables>
 		<Const name="CHARACTER_RUNNING_SPEED" type="float" value="400.0" />
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="25.0" />
+        <Const name="CHARACTER_ATTACK_DISTANCE" type="float" value="270.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="100.0" />
         <Const name="CHARACTER_SWIPE_DURATION" type="float" value="0.3" />
 		<Const name="CHARACTER_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />

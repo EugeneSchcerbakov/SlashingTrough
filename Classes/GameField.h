@@ -38,9 +38,6 @@ protected:
     void UpdateDifficult();
     
 private:
-    typedef std::list<PathSectorWidget *> SectorsSequence;
-    typedef SectorsSequence::iterator SectorsSequenceIter;
-    
     enum DrawOrder
     {
         PATH_CONTENT,
@@ -58,7 +55,7 @@ private:
     CharacterControlKeyboard::Ptr _controlKeyboard;
     
     GameInfo::DiffucultInfo _difficult;
-    SectorsSequence _sectorsSequence;
+    PathSectorWidget::SectorsSequence _sectorsSequence;
 };
 
 #endif /* defined(__SlashingTrough__GameField__) */

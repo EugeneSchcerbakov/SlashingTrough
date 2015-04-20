@@ -63,6 +63,13 @@ CharacterAction& Character::CurrentAction()
     return _actionSequence.front();
 }
 
+void Character::Attack(GameplayObject::Ptr object, float distance)
+{
+    if (object->IsAlive() && distance <= _attackDistance) {
+        object->AddHealth(-_attackDamage);
+    }
+}
+
 void Character::FinishCurrentAction()
 {
     _actionSequence.pop();
@@ -115,6 +122,7 @@ void Character::Init()
     
     _runningSpeed = gameinfo.GetFloat("CHARACTER_RUNNING_SPEED");
     _attackDamage = gameinfo.GetFloat("CHARACTER_ATTACK_DAMAGE");
+    _attackDistance = gameinfo.GetFloat("CHARACTER_ATTACK_DISTANCE");
     _healthPoints = gameinfo.GetFloat("CHARACTER_HEALTH_POINTS");
     _actionsSequenceMaxSize = gameinfo.GetInt("CHARACTER_ACTIONS_SEQUENCE_SIZE");
 }

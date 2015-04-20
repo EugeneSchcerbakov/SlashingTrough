@@ -26,9 +26,12 @@ public:
     
     typedef std::shared_ptr<GameplayObject> Ptr;
     typedef std::weak_ptr<GameplayObject> WeakPtr;
+    typedef unsigned int UID;
+    
+    static const UID InvalidUID;
     
 public:
-    GameplayObject();
+    GameplayObject(UID uid);
     virtual ~GameplayObject();
     
     virtual void AddHealth(float health);
@@ -42,22 +45,26 @@ public:
     virtual float GetLogicalX() const;
     virtual float GetLogicalY() const;
     
+    UID GetUID() const;
+    
 protected:
     float _logicalX;
     float _logicalY;
     float _health;
     std::string _sprite;
     Type _type;
+    
+    const UID _uid;
 };
 
 class Obstacle : public GameplayObject
 {
 public:
-    static GameplayObject::Ptr Create(const GameInfo::ObstacleType &info);
+    static GameplayObject::Ptr Create(const GameInfo::ObstacleType &info, UID uid);
     static Obstacle* Cast(GameplayObject::Ptr ptr);
     
 public:
-    Obstacle(const GameInfo::ObstacleType &info);
+    Obstacle(const GameInfo::ObstacleType &info, UID uid);
     virtual ~Obstacle();
     
     bool IsDestructible() const;
@@ -69,11 +76,11 @@ private:
 class Enemy : public GameplayObject
 {
 public:
-    static GameplayObject::Ptr Create(const GameInfo::EnemyType &info);
+    static GameplayObject::Ptr Create(const GameInfo::EnemyType &info, UID uid);
     static Enemy* Cast(GameplayObject::Ptr ptr);
     
 public:
-    Enemy(const GameInfo::EnemyType &info);
+    Enemy(const GameInfo::EnemyType &info, UID uid);
     virtual ~Enemy();
     
     float GetDamage() const;

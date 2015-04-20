@@ -19,22 +19,8 @@ public:
     typedef std::shared_ptr<PathSector> Ptr;
     typedef std::weak_ptr<PathSector> WeakPtr;
     typedef std::vector<GameplayObject::Ptr> GameplayObjects;
+    typedef GameplayObjects::iterator GameplayObjectsIter;
     
-public:
-    static Ptr Create();
-    
-    PathSector();
-    
-    void Generate(int obstacles, int enemies, int squaresByHeight);
-    void Reset();
-    
-    inline int GetObstaclesCount() const {return _countObstacles;}
-    inline int GetEmeniesCount() const {return _countEnemies;}
-    inline int GetSquaresByHeight() const {return _squaresByHeight;}
-    
-    const GameplayObjects& GetGameplayObjects() const;
-    
-private:
     struct Square
     {
         enum class State
@@ -44,24 +30,50 @@ private:
             ENEMY
         };
         
-        int x;
-        int y;
+        GameplayObject::UID objUID;
         State state;
+        int x, y;
+        
         Square()
-        : x(0)
-        , y(0)
+        : objUID(GameplayObject::InvalidUID)
         , state(State::FREE)
+        , x(-1), y(-1)
         {}
     };
+
+public:
+    static Ptr Create();
     
+    PathSector();
+    
+    void Generate(int obstacles, int enemies, int squaresByHeight);
+    void Reset();
+    
+    Square GetSquareByLocalXY(float x, float y) const;
+    Square GetSquareByIndexXY(int x, int y) const;
+    Square GetSquareByObject(GameplayObject::Ptr object) const;
+    
+    inline int GetObstaclesCount() const {return _countObstacles;}
+    inline int GetEmeniesCount() const {return _countEnemies;}
+    inline int GetSquaresByHeight() const {return _squaresByHeight;}
+    
+    GameplayObject::WeakPtr GetObjectByUID(int uid);
+    GameplayObjects& GetGameplayObjects();
+    
+    bool IsValidSquareAddress(int x, int y) const;
+    
+private:
     typedef std::vector<Square> Grid;
     
 private:
     void SpawnObjects(const std::function<void(int, int)> &spawn, int amount);
     bool IsValidRow(int row) const;
+    GameplayObject::UID GenerateUID();
     
     Grid _grid;
     GameplayObjects _objects;
+    
+    const float _squareSize;
     
     int _countObstacles;
     int _countEnemies;

@@ -27,6 +27,7 @@ CharacterWidget* CharacterWidget::create(Character::WeakPtr character)
 
 CharacterWidget::CharacterWidget(Character::WeakPtr character)
 : _character(character)
+, _sectors(nullptr)
 {
 }
 
@@ -86,6 +87,46 @@ void CharacterWidget::update(float dt)
     }
 }
 
+void CharacterWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors)
+{
+    _sectors = &sectors;
+}
+
+void CharacterWidget::Attack()
+{
+    if (!_sectors)
+    {
+        return;
+    }
+    
+    // pos in the sector space
+    cocos2d::Vec2 localPlayer;
+    Character::Ptr characterPtr = _character.lock();
+    
+    for (PathSectorWidget *sector : *_sectors)
+    {
+        PathSector::Ptr path = sector->GetPath();
+        PathSector::GameplayObjects &objects = path->GetGameplayObjects();
+        localPlayer = sector->convertToNodeSpace(getPosition());
+        
+        for (GameplayObject::Ptr obj : objects)
+        {
+            PathSector::Square square = path->GetSquareByObject(obj);
+            if (square.x == _attackedRowIndex && localPlayer.y < obj->GetLogicalY())
+            {
+                float x1 = obj->GetLogicalX();
+                float y1 = obj->GetLogicalY();
+                float x2 = localPlayer.x;
+                float y2 = localPlayer.y;
+                float dx = x1 - x2;
+                float dy = y1 - y2;
+                float L = sqrtf(dx * dx + dy * dy);
+                characterPtr->Attack(obj, L);
+            }
+        }
+    }
+}
+
 void CharacterWidget::PerformAction(const CharacterAction &action)
 {
     float deltaX = action.GetDeltaX();
@@ -112,13 +153,20 @@ void CharacterWidget::PerformAction(const CharacterAction &action)
         return;
     }
     
+    float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
+    _attackedRowIndex = (int)floorf(getPositionX() / squareSize);
+    
+    cocos2d::CallFunc *attack_func = cocos2d::CallFunc::create([&](){Attack();});
+    cocos2d::DelayTime *attack_delay = cocos2d::DelayTime::create(duration * 0.3f);
+    cocos2d::Sequence *attack = cocos2d::Sequence::create(attack_delay, attack_func, nullptr);
+    
     cocos2d::MoveBy *move = cocos2d::MoveBy::create(duration, cocos2d::Vec2(deltaX, deltaY));
     cocos2d::EaseSineInOut *move_ease = cocos2d::EaseSineInOut::create(move);
     cocos2d::Spawn *moution = cocos2d::Spawn::create(move_ease, anim, nullptr);
     cocos2d::CallFunc *func = cocos2d::CallFunc::create(end);
     cocos2d::Sequence *seq = cocos2d::Sequence::create(moution, func, nullptr);
     
-    runAction(seq);
+    runAction(cocos2d::Spawn::create(seq, attack, nullptr));
 }
 
 cocos2d::Action* CharacterWidget::AnimSwordRightSwipeRight(float duration)

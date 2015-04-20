@@ -16,7 +16,11 @@
 class PathSectorWidget : public cocos2d::Node
 {
 public:
-    static PathSectorWidget* create(PathSector::WeakPtr path);
+    typedef std::list<PathSectorWidget *> SectorsSequence;
+    typedef SectorsSequence::iterator SectorsSequenceIter;
+    
+public:
+    static PathSectorWidget* create(PathSector::Ptr path);
     
     void DrawDebugGrid();
     void ClearDebugGrid();
@@ -26,10 +30,11 @@ public:
     PathSector::Ptr GetPath() const;
     
 protected:
-    PathSectorWidget(PathSector::WeakPtr path);
+    PathSectorWidget(PathSector::Ptr path);
     virtual ~PathSectorWidget();
     
     bool init();
+    void update(float dt);
     
 private:
     enum DrawOrder
@@ -45,7 +50,9 @@ private:
     float _sectorWidth;
     float _sectorHeight;
     
-    PathSector::WeakPtr _path;
+    std::map<GameplayObject::UID, cocos2d::Node *> _widgets;
+    
+    PathSector::Ptr _path;
     
     cocos2d::DrawNode *_ground;
     cocos2d::DrawNode *_debugGrid;

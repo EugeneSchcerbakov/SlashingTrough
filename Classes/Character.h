@@ -12,6 +12,7 @@
 #include <memory>
 
 #include "CharacterAction.h"
+#include "PathSector.h"
 
 class Character
 {
@@ -24,7 +25,9 @@ public:
     
     Character();
     
+    void Attack(GameplayObject::Ptr object, float distance);
     void FinishCurrentAction();
+    
     void SetLogicalPos(float x, float y);
     
     void AddAction(CharacterAction &action);
@@ -50,6 +53,7 @@ protected:
     
     float _runningSpeed;
     float _attackDamage;
+    float _attackDistance;
     float _healthPoints;
     float _logicalPosX;
     float _logicalPosY;

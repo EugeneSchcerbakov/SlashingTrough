@@ -102,8 +102,10 @@ void GameField::update(float dt)
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
+    _characterWidget->RefreshSectorsSequence(_sectorsSequence);
+    
     // scroll level down
-    for (SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end(); ++it)
+    for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end(); ++it)
     {
         PathSectorWidget *sector = (*it);
         float ypos = sector->getPositionY();
@@ -112,11 +114,11 @@ void GameField::update(float dt)
     }
     
     // create new and delete passed sectors
-    for (SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end();)
+    for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end();)
     {
         PathSectorWidget *sector = (*it);
-        cocos2d::Vec2 localPos = sector->getPosition();
-        cocos2d::Vec2 upperPos = localPos + cocos2d::Vec2(0.0f, sector->GetSectorSize().height);
+        cocos2d::Vec2 lowerPos = sector->getPosition();
+        cocos2d::Vec2 upperPos = lowerPos + cocos2d::Vec2(0.0f, sector->GetSectorSize().height);
         cocos2d::Vec2 worldPos = convertToWorldSpace(upperPos);
         if (worldPos.y < origin.y)
         {
@@ -153,7 +155,7 @@ void GameField::AddSector(PathSectorWidget *sectorWidget)
     float ypos = 0.0f;
     if (!_sectorsSequence.empty())
     {
-        SectorsSequenceIter lastSector = --_sectorsSequence.end();
+        PathSectorWidget::SectorsSequenceIter lastSector = --_sectorsSequence.end();
         float lastSectorY = (*lastSector)->getPositionY();
         ypos = lastSectorY + sectorWidget->GetSectorSize().height;
     }
