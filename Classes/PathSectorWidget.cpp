@@ -9,10 +9,11 @@
 #include "PathSectorWidget.h"
 
 #include "GameInfo.h"
+#include "CharacterWidget.h"
 
-PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path)
+PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path, CharacterWidget *character)
 {
-    PathSectorWidget *sector = new PathSectorWidget(path);
+    PathSectorWidget *sector = new PathSectorWidget(path, character);
     if (sector && sector->init()) {
         sector->autorelease();
     } else {
@@ -22,8 +23,9 @@ PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path)
     return sector;
 }
 
-PathSectorWidget::PathSectorWidget(PathSector::Ptr path)
+PathSectorWidget::PathSectorWidget(PathSector::Ptr path, CharacterWidget *character)
 : _path(path)
+, _characterWidget(character)
 , _debugGrid(nullptr)
 {
 }
@@ -80,6 +82,8 @@ bool PathSectorWidget::init()
 void PathSectorWidget::update(float dt)
 {
     PathSector::GameplayObjects &objects = _path->GetGameplayObjects();
+    
+    // delete dead objects
     for (PathSector::GameplayObjectsIter it = objects.begin(); it != objects.end();) {
         if ((*it)->IsAlive()) {
             ++it;
@@ -93,6 +97,26 @@ void PathSectorWidget::update(float dt)
             }
             // remove object
             it = objects.erase(it);
+        }
+    }
+    
+    // update objects attack
+    cocos2d::Vec2 playerLocal = convertToNodeSpace(_characterWidget->getPosition());
+    float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
+    int playerSquareIndex = floorf(playerLocal.x / squareSize);
+    
+    for (GameplayObject::Ptr object : objects)
+    {
+        cocos2d::Vec2 local(object->GetLogicalX(), object->GetLogicalY());
+        PathSector::Square square = _path->GetSquareByLocalXY(local.x, local.y);
+        if (square.x == playerSquareIndex && object->GetLogicalY() > playerLocal.y)
+        {
+            float D = local.distance(playerLocal);
+            GameplayObject::Ptr ptr = _characterWidget->GetCharacter().lock();
+            if (object->Attack(ptr, D)) {
+                object->Kill();
+                _characterWidget->RunEffectReceiveDamage();
+            }
         }
     }
 }

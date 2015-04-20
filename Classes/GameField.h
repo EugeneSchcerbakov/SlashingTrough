@@ -50,7 +50,7 @@ private:
     int _difficultIndex;
     float _scrollSpeed;
     
-    Character::Ptr _character;
+    GameplayObject::Ptr _character;
     CharacterWidget *_characterWidget;
     CharacterControlKeyboard::Ptr _controlKeyboard;
     

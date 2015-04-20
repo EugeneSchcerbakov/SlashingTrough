@@ -10,22 +10,26 @@
 
 #include "GameInfo.h"
 
-Character::Ptr Character::Create()
+GameplayObject::Ptr Character::Create()
 {
     return std::make_shared<Character>();
 }
 
+Character* Character::Cast(GameplayObject::Ptr object)
+{
+    return static_cast<Character *>(object.get());
+}
+
 Character::Character()
-: _logicalPosX(0.0f)
-, _logicalPosY(0.0f)
+: GameplayObject(Type::CHARACTER, InvalidUID)
 {
     Init();
 }
 
 void Character::AddAction(CharacterAction &action)
 {
-    float finishPosX = _logicalPosX + action.GetDeltaX();
-    float finishPosY = _logicalPosY + action.GetDeltaX();
+    float finishPosX = _logicalX + action.GetDeltaX();
+    float finishPosY = _logicalY + action.GetDeltaX();
     if (!_actionSequence.empty()) {
         // check position by last action
         const CharacterAction &lastAction = _actionSequence.back();
@@ -38,24 +42,9 @@ void Character::AddAction(CharacterAction &action)
     _actionSequence.push(action);
 }
 
-void Character::AddHealth(float health)
-{
-    _healthPoints += health;
-}
-
 float Character::GetRunningSpeed() const
 {
     return _runningSpeed;
-}
-
-float Character::GetLogicalX() const
-{
-    return _logicalPosX;
-}
-
-float Character::GetLogicalY() const
-{
-    return _logicalPosY;
 }
 
 CharacterAction& Character::CurrentAction()
@@ -63,33 +52,15 @@ CharacterAction& Character::CurrentAction()
     return _actionSequence.front();
 }
 
-void Character::Attack(GameplayObject::Ptr object, float distance)
-{
-    if (object->IsAlive() && distance <= _attackDistance) {
-        object->AddHealth(-_attackDamage);
-    }
-}
-
 void Character::FinishCurrentAction()
 {
     _actionSequence.pop();
 }
 
-void Character::SetLogicalPos(float x, float y)
-{
-    _logicalPosX = x;
-    _logicalPosY = y;
-}
-
-bool Character::IsAlive() const
-{
-    return _healthPoints > 0.0f;
-}
-
 bool Character::IsAbleToPerform(const CharacterAction &action) const
 {
-    float lastPosX = _logicalPosX;
-    float lastPosY = _logicalPosY;
+    float lastPosX = _logicalX;
+    float lastPosY = _logicalY;
     if (!_actionSequence.empty()) {
         // check position by last action
         const CharacterAction &lastAction = _actionSequence.back();
@@ -121,8 +92,9 @@ void Character::Init()
     GameInfo &gameinfo = GameInfo::Instance();
     
     _runningSpeed = gameinfo.GetFloat("CHARACTER_RUNNING_SPEED");
-    _attackDamage = gameinfo.GetFloat("CHARACTER_ATTACK_DAMAGE");
-    _attackDistance = gameinfo.GetFloat("CHARACTER_ATTACK_DISTANCE");
-    _healthPoints = gameinfo.GetFloat("CHARACTER_HEALTH_POINTS");
+    _damage = gameinfo.GetFloat("CHARACTER_ATTACK_DAMAGE");
+    _radius = gameinfo.GetFloat("CHARACTER_ATTACK_DISTANCE");
+    _health = gameinfo.GetFloat("CHARACTER_HEALTH_POINTS");
     _actionsSequenceMaxSize = gameinfo.GetInt("CHARACTER_ACTIONS_SEQUENCE_SIZE");
 }
+

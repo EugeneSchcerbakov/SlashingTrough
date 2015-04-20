@@ -35,10 +35,12 @@ public:
     struct ObstacleType
     {
         float health;
+        float damage;
         bool destructible;
         std::string sprite;
-        ObstacleType(float h, bool d, const std::string &s)
+        ObstacleType(float h, float dmg, bool d, const std::string &s)
         : health(h)
+        , damage(dmg)
         , destructible(d)
         , sprite(s)
         {}

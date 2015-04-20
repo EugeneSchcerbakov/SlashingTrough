@@ -17,12 +17,15 @@
 class CharacterWidget : public cocos2d::Node
 {
 public:
-    static CharacterWidget* create(Character::WeakPtr character);
+    static CharacterWidget* create(GameplayObject::WeakPtr character);
     
     void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
+    void RunEffectReceiveDamage();
+    
+    GameplayObject::WeakPtr GetCharacter() const;
     
 protected:
-    CharacterWidget(Character::WeakPtr character);
+    CharacterWidget(GameplayObject::WeakPtr character);
     virtual ~CharacterWidget();
     
     bool init();
@@ -59,7 +62,7 @@ private:
     static const SwordTransform _swordRightSideTrans;
     static const SwordTransform _swordLeftSideTrans;
     
-    Character::WeakPtr _character;
+    GameplayObject::WeakPtr _character;
   
     PathSectorWidget::SectorsSequence *_sectors;
     
@@ -71,6 +74,7 @@ private:
     SwordSide _swordSide;
     
     int _attackedRowIndex;
+    bool _isGameplayActionRunning;
 };
 
 #endif /* defined(__SlashingTrough__CharacterWidget__) */

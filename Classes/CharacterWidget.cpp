@@ -13,7 +13,7 @@
 const CharacterWidget::SwordTransform CharacterWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
 const CharacterWidget::SwordTransform CharacterWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
 
-CharacterWidget* CharacterWidget::create(Character::WeakPtr character)
+CharacterWidget* CharacterWidget::create(GameplayObject::WeakPtr character)
 {
     CharacterWidget *widget = new CharacterWidget(character);
     if (widget && widget->init()) {
@@ -25,9 +25,10 @@ CharacterWidget* CharacterWidget::create(Character::WeakPtr character)
     return widget;
 }
 
-CharacterWidget::CharacterWidget(Character::WeakPtr character)
+CharacterWidget::CharacterWidget(GameplayObject::WeakPtr character)
 : _character(character)
 , _sectors(nullptr)
+, _isGameplayActionRunning(false)
 {
 }
 
@@ -76,11 +77,12 @@ bool CharacterWidget::init()
 
 void CharacterWidget::update(float dt)
 {
-    Character::Ptr characterPtr = _character.lock();
+    GameplayObject::Ptr characterPtr = _character.lock();
+    Character *character = Character::Cast(characterPtr);
     
-    if (characterPtr->HasActionToPerform()) {
-        CharacterAction *action = &characterPtr->CurrentAction();
-        if (action->IsReady() && getNumberOfRunningActions() == 0) {
+    if (character->HasActionToPerform()) {
+        CharacterAction *action = &character->CurrentAction();
+        if (action->IsReady() && !_isGameplayActionRunning) {
             action->Start();
             PerformAction(*action);
         }
@@ -92,6 +94,22 @@ void CharacterWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &
     _sectors = &sectors;
 }
 
+
+void CharacterWidget::RunEffectReceiveDamage()
+{
+    cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.07f, 0.5f);
+    cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.2f, 1.0f);
+    cocos2d::EaseSineIn *scale_ease0 = cocos2d::EaseSineIn::create(scale0);
+    cocos2d::EaseSineOut *scale_ease1 = cocos2d::EaseSineOut::create(scale1);
+    cocos2d::Sequence *effect = cocos2d::Sequence::create(scale_ease0, scale_ease1, nullptr);
+    runAction(effect);
+}
+
+GameplayObject::WeakPtr CharacterWidget::GetCharacter() const
+{
+    return _character;
+}
+
 void CharacterWidget::Attack()
 {
     if (!_sectors)
@@ -101,7 +119,7 @@ void CharacterWidget::Attack()
     
     // pos in the sector space
     cocos2d::Vec2 localPlayer;
-    Character::Ptr characterPtr = _character.lock();
+    GameplayObject::Ptr characterPtr = _character.lock();
     
     for (PathSectorWidget *sector : *_sectors)
     {
@@ -134,9 +152,10 @@ void CharacterWidget::PerformAction(const CharacterAction &action)
     float duration = action.GetDuration();
     
     std::function<void()> end = [&]() {
-        Character::Ptr ptr = _character.lock();
-        ptr->FinishCurrentAction();
-        ptr->SetLogicalPos(getPositionX(), getPositionY());
+        GameplayObject::Ptr ptr = _character.lock();
+        Character::Cast(ptr)->FinishCurrentAction();
+        Character::Cast(ptr)->SetLogicalPos(getPositionX(), getPositionY());
+        _isGameplayActionRunning = false;
     };
     
     cocos2d::Action *anim = nullptr;
@@ -167,6 +186,8 @@ void CharacterWidget::PerformAction(const CharacterAction &action)
     cocos2d::Sequence *seq = cocos2d::Sequence::create(moution, func, nullptr);
     
     runAction(cocos2d::Spawn::create(seq, attack, nullptr));
+    
+    _isGameplayActionRunning = true;
 }
 
 cocos2d::Action* CharacterWidget::AnimSwordRightSwipeRight(float duration)

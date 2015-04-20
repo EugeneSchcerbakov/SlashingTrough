@@ -10,14 +10,28 @@
 
 const GameplayObject::UID GameplayObject::InvalidUID = 0;
 
-GameplayObject::GameplayObject(UID uid)
-: _type(Type::NONE)
+GameplayObject::GameplayObject(Type type, UID uid)
+: _type(type)
 , _uid(uid)
 {
 }
 
 GameplayObject::~GameplayObject()
 {
+}
+
+bool GameplayObject::Attack(GameplayObject::Ptr object, float distance)
+{
+    if (object->IsAlive() && distance <= _radius) {
+        object->AddHealth(-_damage);
+        return true;
+    }
+    return false;
+}
+
+void GameplayObject::Kill()
+{
+    _health = 0.0f;
 }
 
 void GameplayObject::AddHealth(float health)
@@ -78,11 +92,13 @@ Obstacle* Obstacle::Cast(GameplayObject::Ptr ptr)
     return static_cast<Obstacle *>(ptr.get());
 }
 
-Obstacle::Obstacle(const GameInfo::ObstacleType &info, UID uid) : GameplayObject(uid)
+Obstacle::Obstacle(const GameInfo::ObstacleType &info, UID uid)
+: GameplayObject(Type::OBSTACLE, uid)
 {
-    _type = Type::OBSTACLE;
     _health = info.health;
     _sprite = info.sprite;
+    _damage = info.damage;
+    _radius = 150.0f;
     _destructible = info.destructible;
 }
 
@@ -116,19 +132,16 @@ Enemy* Enemy::Cast(GameplayObject::Ptr ptr)
     return static_cast<Enemy *>(ptr.get());
 }
 
-Enemy::Enemy(const GameInfo::EnemyType &info, UID uid) : GameplayObject(uid)
+Enemy::Enemy(const GameInfo::EnemyType &info, UID uid)
+: GameplayObject(Type::ENEMY, uid)
 {
-    _type = Type::ENEMY;
     _health = info.health;
     _sprite = info.sprite;
     _damage = info.damage;
+    _radius = 150.0f;
 }
 
 Enemy::~Enemy()
 {
 }
 
-float Enemy::GetDamage() const
-{
-    return _damage;
-}

@@ -20,6 +20,7 @@ public:
     enum class Type
     {
         NONE,
+        CHARACTER,
         OBSTACLE,
         ENEMY,
     };
@@ -31,9 +32,11 @@ public:
     static const UID InvalidUID;
     
 public:
-    GameplayObject(UID uid);
+    GameplayObject(Type type, UID uid);
     virtual ~GameplayObject();
     
+    virtual bool Attack(GameplayObject::Ptr object, float distance);
+    virtual void Kill();
     virtual void AddHealth(float health);
     virtual void SetLogicalPos(float x, float y);
     
@@ -51,9 +54,11 @@ protected:
     float _logicalX;
     float _logicalY;
     float _health;
+    float _damage;
+    float _radius;
     std::string _sprite;
-    Type _type;
     
+    const Type _type;
     const UID _uid;
 };
 
@@ -84,11 +89,6 @@ public:
 public:
     Enemy(const GameInfo::EnemyType &info, UID uid);
     virtual ~Enemy();
-    
-    float GetDamage() const;
-    
-private:
-    float _damage;
 };
 
 #endif /* defined(__SlashingTrough__GameplayObjects__) */

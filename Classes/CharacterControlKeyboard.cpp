@@ -10,14 +10,14 @@
 
 #include "GameInfo.h"
 
-CharacterControlKeyboard::Ptr CharacterControlKeyboard::Create(Character::WeakPtr charater,
+CharacterControlKeyboard::Ptr CharacterControlKeyboard::Create(GameplayObject::WeakPtr charater,
                                                                cocos2d::EventDispatcher *dispatcher,
                                                                cocos2d::Node *node)
 {
     return std::make_shared<CharacterControlKeyboard>(charater, dispatcher, node);
 }
 
-CharacterControlKeyboard::CharacterControlKeyboard(Character::WeakPtr character,
+CharacterControlKeyboard::CharacterControlKeyboard(GameplayObject::WeakPtr character,
                                                    cocos2d::EventDispatcher *dispatcher,
                                                    cocos2d::Node *node)
 : _character(character)
@@ -34,8 +34,10 @@ void CharacterControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key,
         return;
     }
     
-    Character::Ptr characterPtr = _character.lock();
-    if (characterPtr->IsActionsQueueFull()) {
+    GameplayObject::Ptr characterPtr = _character.lock();
+    Character *character = Character::Cast(characterPtr);
+    
+    if (character->IsActionsQueueFull()) {
         return;
     }
     
@@ -45,8 +47,8 @@ void CharacterControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key,
         const float duration = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_DURATION");
         CharacterAction::Type type = CharacterAction::Type::SWIPE_RIGHT;
         CharacterAction action(type, duration, deltaX, deltaY);
-        if (characterPtr->IsAbleToPerform(action)) {
-            characterPtr->AddAction(action);
+        if (character->IsAbleToPerform(action)) {
+            character->AddAction(action);
         }
     }
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
@@ -55,8 +57,8 @@ void CharacterControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key,
         const float duration = GameInfo::Instance().GetFloat("CHARACTER_SWIPE_DURATION");
         CharacterAction::Type type = CharacterAction::Type::SWIPE_LEFT;
         CharacterAction action(type, duration, deltaX, deltaY);
-        if (characterPtr->IsAbleToPerform(action)) {
-            characterPtr->AddAction(action);
+        if (character->IsAbleToPerform(action)) {
+            character->AddAction(action);
         }
     }
 }

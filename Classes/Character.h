@@ -14,31 +14,24 @@
 #include "CharacterAction.h"
 #include "PathSector.h"
 
-class Character
+class Character : public GameplayObject
 {
 public:
     typedef std::shared_ptr<Character> Ptr;
     typedef std::weak_ptr<Character> WeakPtr;
     
 public:
-    static Ptr Create();
+    static GameplayObject::Ptr Create();
+    static Character* Cast(GameplayObject::Ptr object);
     
     Character();
     
-    void Attack(GameplayObject::Ptr object, float distance);
     void FinishCurrentAction();
-    
-    void SetLogicalPos(float x, float y);
-    
     void AddAction(CharacterAction &action);
-    void AddHealth(float health);
     
     float GetRunningSpeed() const;
-    float GetLogicalX() const;
-    float GetLogicalY() const;
     CharacterAction& CurrentAction();
     
-    bool IsAlive() const;
     bool IsAbleToPerform(const CharacterAction &action) const;
     bool IsActionsQueueFull() const;
     bool HasActionToPerform() const;
@@ -54,9 +47,7 @@ protected:
     float _runningSpeed;
     float _attackDamage;
     float _attackDistance;
-    float _healthPoints;
-    float _logicalPosX;
-    float _logicalPosY;
+    
     int _actionsSequenceMaxSize;
 };
 

@@ -67,17 +67,6 @@ bool GameField::init()
     const float squareSize = gameinfo.GetFloat("SQUARE_SIZE");
     const int sectorSquaresCount = gameinfo.GetInt("SEСTOR_SQUARES_COUNT");
     
-    for (int k = 0; k < _sectorsQueueSize; ++k)
-    {
-        PathSector::Ptr testPath = PathSector::Create();
-        testPath->Generate(2, 3, sectorSquaresCount);
-        PathSectorWidget *testPathWidget = PathSectorWidget::create(testPath);
-        testPathWidget->setPosition(cocos2d::Vec2(0.0f, k * sectorSquaresCount * squareSize));
-        testPathWidget->DrawDebugGrid();
-        _sectorsSequence.push_back(testPathWidget);
-        addChild(testPathWidget, DrawOrder::PATH_CONTENT);
-    }
-    
     const float characterStartX = squareSize * 3.0f * 0.5f;
     const float characterStartY = squareSize + squareSize * 0.5f;
     _character = Character::Create();
@@ -85,6 +74,26 @@ bool GameField::init()
     _characterWidget = CharacterWidget::create(_character);
     _characterWidget->setPositionX(_character->GetLogicalX());
     _characterWidget->setPositionY(_character->GetLogicalY());
+
+    for (int k = 0; k < _sectorsQueueSize; ++k)
+    {
+        int obsticles = 2;
+        int enemies = 3;
+        if (k == 0) {
+            // first sector must be empty
+            obsticles = 0;
+            enemies = 0;
+        }
+        
+        PathSector::Ptr testPath = PathSector::Create();
+        testPath->Generate(obsticles, enemies, sectorSquaresCount);
+        
+        PathSectorWidget *testPathWidget = PathSectorWidget::create(testPath, _characterWidget);
+        testPathWidget->setPosition(cocos2d::Vec2(0.0f, k * sectorSquaresCount * squareSize));
+        testPathWidget->DrawDebugGrid();
+        _sectorsSequence.push_back(testPathWidget);
+        addChild(testPathWidget, DrawOrder::PATH_CONTENT);
+    }
     
     _controlKeyboard = CharacterControlKeyboard::Create(_character,
                                                         _characterWidget->getEventDispatcher(),
@@ -98,7 +107,7 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
-    SetScrollSpeed(_character->GetRunningSpeed());
+    SetScrollSpeed(Character::Cast(_character)->GetRunningSpeed());
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
@@ -140,7 +149,7 @@ PathSectorWidget* GameField::GenerateNewSector() const
     
     PathSector::Ptr sector = PathSector::Create();
     sector->Generate(_difficult.obstacles, _difficult.enemies, sectorSquaresCount);
-    PathSectorWidget *sectorWidget = PathSectorWidget::create(sector);
+    PathSectorWidget *sectorWidget = PathSectorWidget::create(sector, _characterWidget);
     sectorWidget->DrawDebugGrid();
     sectorWidget->setPosition(cocos2d::Vec2(0.0f, 0.0f));
     return sectorWidget;

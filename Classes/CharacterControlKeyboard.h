@@ -18,10 +18,10 @@ public:
     typedef std::weak_ptr<CharacterControlKeyboard> WeakPtr;
     
 public:
-    static CharacterControlKeyboard::Ptr Create(Character::WeakPtr charater,
+    static CharacterControlKeyboard::Ptr Create(GameplayObject::WeakPtr charater,
                                                 cocos2d::EventDispatcher *dispatcher,
                                                 cocos2d::Node *node);
-    CharacterControlKeyboard(Character::WeakPtr character,
+    CharacterControlKeyboard(GameplayObject::WeakPtr character,
                              cocos2d::EventDispatcher *dispatcher,
                              cocos2d::Node *node);
     void Free();
@@ -32,7 +32,7 @@ private:
     
     const float _squareSize;
     
-    Character::WeakPtr _character;
+    GameplayObject::WeakPtr _character;
     cocos2d::EventDispatcher *_dispatcher;
     cocos2d::EventListenerKeyboard *_listener;
 };
