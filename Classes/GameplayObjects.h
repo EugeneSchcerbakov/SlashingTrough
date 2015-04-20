@@ -67,6 +67,8 @@ public:
     Obstacle(const GameInfo::ObstacleType &info, UID uid);
     virtual ~Obstacle();
     
+    void AddHealth(float health) override;
+    
     bool IsDestructible() const;
 
 private:

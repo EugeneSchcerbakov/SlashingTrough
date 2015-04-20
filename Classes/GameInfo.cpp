@@ -69,7 +69,7 @@ bool GameInfo::LoadInfo(const std::string &filename)
                 float health = elem->FloatAttribute("health");
                 std::string sprite = elem->Attribute("sprite");
                 std::string name = elem->Attribute("name");
-                _obstaclesSettings[name] = ObstacleType(destructible, health, sprite);
+                _obstaclesSettings[name] = ObstacleType(health, destructible, sprite);
             } else if (type == "Enemy") {
                 float damage = elem->FloatAttribute("damage");
                 float health = elem->FloatAttribute("health");

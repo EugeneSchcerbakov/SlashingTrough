@@ -90,6 +90,15 @@ Obstacle::~Obstacle()
 {
 }
 
+void Obstacle::AddHealth(float health)
+{
+    if (health < 0.0f && !_destructible) {
+        return;
+    } else {
+        GameplayObject::AddHealth(health);
+    }
+}
+
 bool Obstacle::IsDestructible() const
 {
     return _destructible;
