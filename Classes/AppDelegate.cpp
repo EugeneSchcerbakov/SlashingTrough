@@ -34,17 +34,30 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     auto fileUtils = cocos2d::FileUtils::getInstance();
     auto luaEngine = cocos2d::LuaEngine::getInstance();
+	auto frameSize = cocos2d::Size(640.0f, 1136.0f);
     
     ScriptEngineManager::getInstance()->setScriptEngine(luaEngine);
-    GameInfo::Instance().LoadInfo("gameInfo.xml");
+
+	cocos2d::Application::Platform platform;
+	platform = cocos2d::Application::getInstance()->getTargetPlatform();
+	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
+		fileUtils->addSearchPath("../../Resources");
+		fileUtils->addSearchPath("../../Resources/fonts/");
+		fileUtils->addSearchPath("../../Resources/textures/");
+		luaEngine->addSearchPath("../../Resources/scripts/");
+	} else {
+		fileUtils->addSearchPath("fonts/");
+		fileUtils->addSearchPath("textures/");
+		luaEngine->addSearchPath("scripts/");
+	}
     
     if(!glview) {
         glview = GLViewImpl::create("Slashing Trough");
         director->setOpenGLView(glview);
     }
     
-    const cocos2d::Size frameSize(640.0f, 1136.0f);
-    
+	GameInfo::Instance().LoadInfo("gameInfo.xml");
+
     if (Utils::IsPlatformDesctop()) {
         director->setDisplayStats(true);
         glview->setFrameZoomFactor(GameInfo::Instance().GetFloat("DESCTOP_FRAME_SCALE", 1.0f));
@@ -53,10 +66,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::FIXED_WIDTH);
     director->setAnimationInterval(1.0 / 60);
-    fileUtils->addSearchPath("fonts/");
-    fileUtils->addSearchPath("textures/");
-    luaEngine->addSearchPath("scripts/");
-    
+
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
     register_ui_moudle(luaState);
     register_cocostudio_module(luaState);

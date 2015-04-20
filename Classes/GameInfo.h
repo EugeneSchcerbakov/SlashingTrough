@@ -9,6 +9,7 @@
 #ifndef __SlashingTrough__GameInfo__
 #define __SlashingTrough__GameInfo__
 
+#include <vector>
 #include <string>
 #include <map>
 

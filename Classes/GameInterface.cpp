@@ -10,14 +10,14 @@
 
 GameInterface* GameInterface::create()
 {
-    GameInterface *interface = new GameInterface();
-    if (interface && interface->init()) {
-        interface->autorelease();
+    GameInterface *gameInterface = new GameInterface();
+	if (gameInterface && gameInterface->init()) {
+		gameInterface->autorelease();
     } else {
-        delete interface;
-        interface = nullptr;
+		delete gameInterface;
+		gameInterface = nullptr;
     }
-    return interface;
+	return gameInterface;
 }
 
 GameInterface::GameInterface()

@@ -7,7 +7,8 @@
 //
 
 #include "GameInfo.h"
-#include "external/tinyxml2/tinyxml2.h"
+#include "cocos2d.h"
+#include "tinyxml2/tinyxml2.h"
 
 GameInfo& GameInfo::Instance()
 {
