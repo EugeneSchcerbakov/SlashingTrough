@@ -107,6 +107,13 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
+    if (!_character->IsAlive()) {
+        cocos2d::Director *director;
+        director = cocos2d::Director::getInstance();
+        director->popScene();
+        return;
+    }
+    
     SetScrollSpeed(Character::Cast(_character)->GetRunningSpeed());
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
