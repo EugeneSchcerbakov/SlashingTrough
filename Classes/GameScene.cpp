@@ -57,7 +57,10 @@ bool GameScene::init()
     
     _layerField = GameField::create();
     _layerField->setScale(1.0f);
-    _layerGui = GameInterface::create();
+    _layerGui = Utils::MakeLayerFromLua("CreateInterfaceLayer");
+    
+    GameInfo::Instance().SetInt("CHARACTER_SCORE", 0);
+    Utils::LuaCallVoidFunction("UpdateScoreWidget", "0");
     
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     addChild(_layerField, LayerZOrder::GAME_FIELD);
@@ -103,6 +106,5 @@ void GameScene::OnMouseScroll(cocos2d::Event *event)
         cocos2d::Director *director = cocos2d::Director::getInstance();
         cocos2d::Scheduler *scheduler = director->getScheduler();
         scheduler->setTimeScale(_currentTimeScale);
-        _layerGui->SetTimeScaleLabel(_currentTimeScale);
     }
 }

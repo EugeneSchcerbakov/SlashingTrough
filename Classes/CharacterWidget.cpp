@@ -9,6 +9,7 @@
 #include "CharacterWidget.h"
 
 #include "GameInfo.h"
+#include "Utils.h"
 
 const CharacterWidget::SwordTransform CharacterWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
 const CharacterWidget::SwordTransform CharacterWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
@@ -139,7 +140,14 @@ void CharacterWidget::Attack()
                 float dx = x1 - x2;
                 float dy = y1 - y2;
                 float L = sqrtf(dx * dx + dy * dy);
-                characterPtr->Attack(obj, L);
+                if (characterPtr->Attack(obj, L) && !obj->IsAlive())
+                {
+                    int score = GameInfo::Instance().GetInt("CHARACTER_SCORE");
+                    score += 1;
+                    GameInfo::Instance().SetInt("CHARACTER_SCORE", score);
+                    std::string scoreString = cocos2d::StringUtils::format("%d", score);
+                    Utils::LuaCallVoidFunction("UpdateScoreWidget", scoreString);
+                }
             }
         }
     }

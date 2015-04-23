@@ -7,6 +7,7 @@
 //
 
 #include "GameField.h"
+#include "Utils.h"
 
 GameField* GameField::create()
 {
@@ -75,6 +76,12 @@ bool GameField::init()
     _characterWidget->setPositionX(_character->GetLogicalX());
     _characterWidget->setPositionY(_character->GetLogicalY());
 
+    int totalHealth = (int)GameInfo::Instance().GetFloat("CHARACTER_HEALTH_POINTS");
+    int currentHealth = (int)_character->GetHealth();
+    int percentHealth = (currentHealth * 100) / totalHealth;
+    std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
+    Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
+    
     for (int k = 0; k < _sectorsQueueSize; ++k)
     {
         int obsticles = 2;

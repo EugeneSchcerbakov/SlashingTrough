@@ -65,6 +65,11 @@ const std::string& GameplayObject::GetSpriteFilename() const
     return _sprite;
 }
 
+float GameplayObject::GetHealth() const
+{
+    return _health;
+}
+
 float GameplayObject::GetLogicalX() const
 {
     return _logicalX;

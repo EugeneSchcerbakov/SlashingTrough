@@ -42,12 +42,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	platform = cocos2d::Application::getInstance()->getTargetPlatform();
 	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
 		fileUtils->addSearchPath("../../Resources");
-		fileUtils->addSearchPath("../../Resources/fonts/");
 		fileUtils->addSearchPath("../../Resources/textures/");
 		luaEngine->addSearchPath("../../Resources/scripts/");
 	} else {
-		fileUtils->addSearchPath("fonts/");
 		fileUtils->addSearchPath("textures/");
+        fileUtils->addSearchPath("gui/");
 		luaEngine->addSearchPath("scripts/");
 	}
     
@@ -77,6 +76,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
     GameInfo::Instance().SetFloat("PATH_LEFT_BORDER", squareSize);
     GameInfo::Instance().SetFloat("PATH_RIGHT_BORDER", squareSize * 2.0f);
+    GameInfo::Instance().SetInt("CHARACTER_SCORE", 0);
     
     cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartScene");
     

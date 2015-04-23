@@ -15,6 +15,8 @@ namespace Utils
 {
     bool IsPlatformDesctop();
     
+    void LuaCallVoidFunction(const std::string &funcName, const std::string &passData);
+    
     cocos2d::Layer* MakeLayerFromLua(const std::string &luaFuncName);
     cocos2d::Scene* MakeSceneFromLua(const std::string &luaFuncName);
     cocos2d::Node* MakeNodeFromLua(const std::string &luaFuncName);

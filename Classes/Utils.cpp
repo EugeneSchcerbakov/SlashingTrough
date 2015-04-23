@@ -37,6 +37,16 @@ bool Utils::IsPlatformDesctop()
            platform == cocos2d::Application::Platform::OS_WINDOWS;
 }
 
+void Utils::LuaCallVoidFunction(const std::string &funcName, const std::string &passData)
+{
+    cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
+    lua_State *L = luaEngine->getLuaStack()->getLuaState();
+    
+    lua_getglobal(L, funcName.c_str());
+    lua_pushstring(L, passData.c_str());
+    lua_call(L, 1, 0);
+}
+
 cocos2d::Layer* Utils::MakeLayerFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();

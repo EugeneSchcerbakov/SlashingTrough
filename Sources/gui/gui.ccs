@@ -1,0 +1,12 @@
+<Solution>
+  <PropertyGroup Name="gui" Version="2.2.1.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Project Name="hud.csd" Type="Scene" />
+        <File Name="font_prototype.ttf" />
+        <Image Name="heart.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

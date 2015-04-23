@@ -45,6 +45,7 @@ public:
     
     virtual Type GetType() const;
     virtual const std::string& GetSpriteFilename() const;
+    virtual float GetHealth() const;
     virtual float GetLogicalX() const;
     virtual float GetLogicalY() const;
     

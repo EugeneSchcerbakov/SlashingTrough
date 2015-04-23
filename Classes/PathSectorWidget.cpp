@@ -8,6 +8,7 @@
 
 #include "PathSectorWidget.h"
 
+#include "Utils.h"
 #include "GameInfo.h"
 #include "CharacterWidget.h"
 
@@ -113,9 +114,16 @@ void PathSectorWidget::update(float dt)
         {
             float D = local.distance(playerLocal);
             GameplayObject::Ptr ptr = _characterWidget->GetCharacter().lock();
-            if (object->Attack(ptr, D)) {
+            if (object->Attack(ptr, D))
+            {
                 object->Kill();
                 _characterWidget->RunEffectReceiveDamage();
+                
+                int totalHealth = (int)GameInfo::Instance().GetFloat("CHARACTER_HEALTH_POINTS");
+                int currentHealth = (int)ptr->GetHealth();
+                int percentHealth = (currentHealth * 100) / totalHealth;
+                std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
+                Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
             }
         }
     }

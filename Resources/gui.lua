@@ -7,6 +7,21 @@
 require "Cocos2d"
 require "Cocos2dConstants"
 
+local PlayerHealthString = "null"
+local PlayerHealthDirty = false
+local PlayerScoreString = "null"
+local PlayerScoreDirty = false
+
+function UpdateHealthWidget(health)
+	PlayerHealthString = string.format("%s%%", health)
+	PlayerHealthDirty = true
+end
+
+function UpdateScoreWidget(score)
+	PlayerScoreString = string.format("Kills: %s", score)
+	PlayerScoreDirty = true
+end
+
 local function StratchingBounceEffect()
 	local stratchOut = cc.ScaleBy:create(0.3, 1.4, 0.8, 1.0)
 	local stratchIn = cc.ScaleTo:create(0.55, 1.0, 1.0, 1.0)
@@ -102,4 +117,27 @@ function CreateStartScene()
 	scene:addChild(button)
 
 	return scene
+end
+
+function CreateInterfaceLayer()
+	local director = cc.Director:getInstance()
+	local scheduler = director:getScheduler()
+	local layer = cc.Layer:create()
+	local hud = cc.CSLoader:createNode("hud.csb")
+	
+	local function update(dt)
+		if PlayerHealthDirty then
+			local widget = hud:getChildByName("health")
+			widget:setString(PlayerHealthString)
+			PlayerHealthDirty = false
+		elseif PlayerScoreDirty then
+			local widget = hud:getChildByName("score")
+			widget:setString(PlayerScoreString)
+			PlayerScoreDirty = false
+		end
+	end
+
+	scheduler:scheduleScriptFunc(update, 0, false)
+	layer:addChild(hud, 0)
+	return layer
 end
