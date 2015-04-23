@@ -106,5 +106,8 @@ void GameScene::OnMouseScroll(cocos2d::Event *event)
         cocos2d::Director *director = cocos2d::Director::getInstance();
         cocos2d::Scheduler *scheduler = director->getScheduler();
         scheduler->setTimeScale(_currentTimeScale);
+        
+        std::string timeScaleString = cocos2d::StringUtils::format("%.1f", _currentTimeScale);
+        Utils::LuaCallVoidFunction("UpdateTimeScaleWidget", timeScaleString);
     }
 }

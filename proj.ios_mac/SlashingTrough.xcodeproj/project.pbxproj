@@ -72,8 +72,6 @@
 		CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
 		CD69BAC51AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
 		CD69BAC61AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
-		CD7C10271AD949F60061863F /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7C10251AD949F60061863F /* GameInterface.cpp */; };
-		CD7C10281AD949F60061863F /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7C10251AD949F60061863F /* GameInterface.cpp */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
@@ -213,8 +211,6 @@
 		CD5F8C811AD04C9C000CF14A /* PathSector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSector.cpp; sourceTree = "<group>"; };
 		CD5F8C821AD04C9C000CF14A /* PathSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSector.h; sourceTree = "<group>"; };
 		CD69BAC41AE61CCF00D9BEC0 /* gui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gui; sourceTree = "<group>"; };
-		CD7C10251AD949F60061863F /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
-		CD7C10261AD949F60061863F /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
@@ -371,8 +367,6 @@
 				CD5F8C7D1AD03DB8000CF14A /* GameScene.h */,
 				CD2D18301AD1532D00F96E8F /* GameField.cpp */,
 				CD2D18311AD1532D00F96E8F /* GameField.h */,
-				CD7C10251AD949F60061863F /* GameInterface.cpp */,
-				CD7C10261AD949F60061863F /* GameInterface.h */,
 				CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */,
 				CD543C0F1ADA8D8F00DDCF1A /* GameplayObjects.h */,
 				CD543C131ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp */,
@@ -633,7 +627,6 @@
 				CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD3E69AB1AD3A593008F7FB0 /* CharacterControlKeyboard.cpp in Sources */,
 				CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */,
-				CD7C10271AD949F60061863F /* GameInterface.cpp in Sources */,
 				CD3ECE8C1AD6F08100613ADD /* CharacterAction.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */,
@@ -664,7 +657,6 @@
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 				CDA8F44A1AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */,
-				CD7C10281AD949F60061863F /* GameInterface.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
