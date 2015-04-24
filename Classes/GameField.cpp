@@ -105,6 +105,10 @@ bool GameField::init()
     _controlKeyboard = CharacterControlKeyboard::Create(_character,
                                                         _characterWidget->getEventDispatcher(),
                                                         _characterWidget);
+    _controlTouch = CharacterControlTouch::Create(_character,
+                                                  _characterWidget->getEventDispatcher(),
+                                                  _characterWidget);
+    
     addChild(_characterWidget, DrawOrder::CHARACTER);
     
     scheduleUpdate();

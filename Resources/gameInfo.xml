@@ -12,6 +12,7 @@
 		<Const name="SEСTOR_SQUARES_COUNT" type="int" value="5" />
 		<Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="3" />
 
+        <Const name="TOUCH_SWIPE_DISTANCE" type="float" value="100.0" />
 		<Const name="DRAW_DEBUG_GRID" type="bool" value="true" />
 		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
 	</GlobalVariables>

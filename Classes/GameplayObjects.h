@@ -9,7 +9,6 @@
 #ifndef __SlashingTrough__GameplayObjects__
 #define __SlashingTrough__GameplayObjects__
 
-#include "cocos2d.h"
 #include "GameInfo.h"
 
 #include <memory>

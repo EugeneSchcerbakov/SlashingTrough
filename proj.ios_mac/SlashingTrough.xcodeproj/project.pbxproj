@@ -62,6 +62,8 @@
 		CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */; };
 		CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
 		CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
+		CD44C6FE1AE9503E008569F6 /* CharacterControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* CharacterControlTouch.cpp */; };
+		CD44C6FF1AE9503E008569F6 /* CharacterControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* CharacterControlTouch.cpp */; };
 		CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */; };
 		CD543C111ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */; };
 		CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C131ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp */; };
@@ -202,6 +204,8 @@
 		CD3ECE8B1AD6F08100613ADD /* CharacterAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterAction.h; sourceTree = "<group>"; };
 		CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2d.lua; sourceTree = "<group>"; };
 		CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2dConstants.lua; sourceTree = "<group>"; };
+		CD44C6FC1AE9503E008569F6 /* CharacterControlTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterControlTouch.cpp; sourceTree = "<group>"; };
+		CD44C6FD1AE9503E008569F6 /* CharacterControlTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterControlTouch.h; sourceTree = "<group>"; };
 		CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameplayObjects.cpp; sourceTree = "<group>"; };
 		CD543C0F1ADA8D8F00DDCF1A /* GameplayObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayObjects.h; sourceTree = "<group>"; };
 		CD543C131ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameplayObjectsWidgets.cpp; sourceTree = "<group>"; };
@@ -383,6 +387,8 @@
 				CDA8F4481AD2F6B8006A3210 /* CharacterWidget.h */,
 				CD3E69A91AD3A593008F7FB0 /* CharacterControlKeyboard.cpp */,
 				CD3E69AA1AD3A593008F7FB0 /* CharacterControlKeyboard.h */,
+				CD44C6FC1AE9503E008569F6 /* CharacterControlTouch.cpp */,
+				CD44C6FD1AE9503E008569F6 /* CharacterControlTouch.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -635,6 +641,7 @@
 				CDA8F4441AD2F356006A3210 /* Character.cpp in Sources */,
 				CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
+				CD44C6FE1AE9503E008569F6 /* CharacterControlTouch.cpp in Sources */,
 				CD2D182D1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,6 +658,7 @@
 				CD543C161ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CDA8F4451AD2F356006A3210 /* Character.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				CD44C6FF1AE9503E008569F6 /* CharacterControlTouch.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD3ECE8D1AD6F08100613ADD /* CharacterAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,

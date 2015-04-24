@@ -12,6 +12,7 @@
 #include "PathSectorWidget.h"
 #include "CharacterWidget.h"
 #include "CharacterControlKeyboard.h"
+#include "CharacterControlTouch.h"
 
 #include "GameInfo.h"
 
@@ -52,7 +53,9 @@ private:
     
     GameplayObject::Ptr _character;
     CharacterWidget *_characterWidget;
+    
     CharacterControlKeyboard::Ptr _controlKeyboard;
+    CharacterControlTouch::Ptr _controlTouch;
     
     GameInfo::DiffucultInfo _difficult;
     PathSectorWidget::SectorsSequence _sectorsSequence;

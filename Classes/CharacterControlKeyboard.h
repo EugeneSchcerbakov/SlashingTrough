@@ -9,6 +9,7 @@
 #ifndef __SlashingTrough__CharacterControlKeyboard__
 #define __SlashingTrough__CharacterControlKeyboard__
 
+#include "cocos2d.h"
 #include "Character.h"
 
 class CharacterControlKeyboard
