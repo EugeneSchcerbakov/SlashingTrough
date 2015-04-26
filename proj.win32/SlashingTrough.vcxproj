@@ -141,10 +141,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Character.cpp" />
     <ClCompile Include="..\Classes\CharacterAction.cpp" />
     <ClCompile Include="..\Classes\CharacterControlKeyboard.cpp" />
+    <ClCompile Include="..\Classes\CharacterControlTouch.cpp" />
     <ClCompile Include="..\Classes\CharacterWidget.cpp" />
     <ClCompile Include="..\Classes\GameField.cpp" />
     <ClCompile Include="..\Classes\GameInfo.cpp" />
-    <ClCompile Include="..\Classes\GameInterface.cpp" />
     <ClCompile Include="..\Classes\GameplayObjects.cpp" />
     <ClCompile Include="..\Classes\GameplayObjectsWidgets.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -158,10 +158,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Character.h" />
     <ClInclude Include="..\Classes\CharacterAction.h" />
     <ClInclude Include="..\Classes\CharacterControlKeyboard.h" />
+    <ClInclude Include="..\Classes\CharacterControlTouch.h" />
     <ClInclude Include="..\Classes\CharacterWidget.h" />
     <ClInclude Include="..\Classes\GameField.h" />
     <ClInclude Include="..\Classes\GameInfo.h" />
-    <ClInclude Include="..\Classes\GameInterface.h" />
     <ClInclude Include="..\Classes\GameplayObjects.h" />
     <ClInclude Include="..\Classes\GameplayObjectsWidgets.h" />
     <ClInclude Include="..\Classes\GameScene.h" />

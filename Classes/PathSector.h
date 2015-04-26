@@ -10,6 +10,7 @@
 #define __SlashingTrough__PathSector__
 
 #include <memory>
+#include <functional>
 
 #include "GameplayObjects.h"
 

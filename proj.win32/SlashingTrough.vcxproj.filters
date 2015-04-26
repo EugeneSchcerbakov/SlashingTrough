@@ -36,9 +36,6 @@
     <ClCompile Include="..\Classes\GameInfo.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameInterface.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameplayObjects.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Utils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CharacterControlTouch.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,9 +83,6 @@
     <ClInclude Include="..\Classes\GameInfo.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameInterface.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameplayObjects.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Utils.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CharacterControlTouch.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

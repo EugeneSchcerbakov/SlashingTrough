@@ -10,6 +10,7 @@
 #define __SlashingTrough__Character__
 
 #include <memory>
+#include <queue>
 
 #include "CharacterAction.h"
 #include "PathSector.h"
