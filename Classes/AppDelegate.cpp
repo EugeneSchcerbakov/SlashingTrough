@@ -42,14 +42,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	platform = cocos2d::Application::getInstance()->getTargetPlatform();
 	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
 		fileUtils->addSearchPath("../../Resources");
-		fileUtils->addSearchPath("../../Resources/gui/");
-		fileUtils->addSearchPath("../../Resources/textures/");
-		luaEngine->addSearchPath("../../Resources/scripts/");
-	} else {
-		fileUtils->addSearchPath("textures/");
-        fileUtils->addSearchPath("gui/");
-		luaEngine->addSearchPath("scripts/");
+		fileUtils->addSearchPath("../../Resources/gui");
+		fileUtils->addSearchPath("../../Resources/textures");
+		luaEngine->addSearchPath("../../Resources/scripts");
 	}
+
+	fileUtils->addSearchPath("textures");
+    fileUtils->addSearchPath("gui");
+	luaEngine->addSearchPath("scripts");
     
     if(!glview) {
         glview = GLViewImpl::create("Slashing Trough");

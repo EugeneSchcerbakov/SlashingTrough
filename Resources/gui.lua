@@ -4,8 +4,8 @@
 -- Created by Eugene Shcherbakov on 01/04/15.
 --
 
-require "Cocos2d"
-require "Cocos2dConstants"
+require "scripts/Cocos2d"
+require "scripts/Cocos2dConstants"
 
 local PlayerHealthString = "null"
 local PlayerHealthDirty = false
@@ -171,7 +171,7 @@ function CreateInterfaceLayer()
 		end
 	end
 
-	scheduler:scheduleScriptFunc(update, 0, false)
+	layer:scheduleUpdateWithPriorityLua(update, 0)
 	layer:addChild(hud, 0)
 	layer:addChild(timeScaleText, 1)
 	return layer
