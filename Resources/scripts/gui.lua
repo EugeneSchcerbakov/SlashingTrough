@@ -4,8 +4,8 @@
 -- Created by Eugene Shcherbakov on 01/04/15.
 --
 
-require "scripts/Cocos2d"
-require "scripts/Cocos2dConstants"
+require "Cocos2d"
+require "Cocos2dConstants"
 
 local PlayerHealthString = "null"
 local PlayerHealthDirty = false

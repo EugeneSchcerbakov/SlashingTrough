@@ -78,14 +78,14 @@
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
 		CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
-		CD89CC631ACC55D9008C1E06 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC621ACC55D9008C1E06 /* gui.lua */; };
-		CD89CC641ACC55D9008C1E06 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC621ACC55D9008C1E06 /* gui.lua */; };
 		CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDA8F4441AD2F356006A3210 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4421AD2F356006A3210 /* Character.cpp */; };
 		CDA8F4451AD2F356006A3210 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4421AD2F356006A3210 /* Character.cpp */; };
 		CDA8F4491AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */; };
 		CDA8F44A1AD2F6B8006A3210 /* CharacterWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */; };
+		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
+		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
@@ -218,12 +218,12 @@
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
-		CD89CC621ACC55D9008C1E06 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CDA8F4421AD2F356006A3210 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		CDA8F4431AD2F356006A3210 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		CDA8F4471AD2F6B8006A3210 /* CharacterWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterWidget.cpp; sourceTree = "<group>"; };
 		CDA8F4481AD2F6B8006A3210 /* CharacterWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterWidget.h; sourceTree = "<group>"; };
+		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -351,7 +351,6 @@
 				CD69BAC41AE61CCF00D9BEC0 /* gui */,
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
-				CD89CC621ACC55D9008C1E06 /* gui.lua */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
 			);
 			name = Resources;
@@ -444,6 +443,7 @@
 		CD3F1A8B1ACD15C5000ADDD6 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
+				CDBF5AEC1AEEAC1000BF3812 /* gui.lua */,
 				CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */,
 				CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */,
 			);
@@ -588,9 +588,9 @@
 				CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
-				CD89CC631ACC55D9008C1E06 /* gui.lua in Resources */,
 				CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -611,7 +611,7 @@
 			files = (
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
-				CD89CC641ACC55D9008C1E06 /* gui.lua in Resources */,
+				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
 				CD69BAC61AE61CCF00D9BEC0 /* gui in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
