@@ -71,7 +71,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_ui_moudle(luaState);
     register_cocostudio_module(luaState);
     
-    luaEngine->executeScriptFile("gui.lua");
+    luaEngine->executeScriptFile("scripts/gui.lua");
     
     float squareSize = director->getVisibleSize().width / 3.0f;
     GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
