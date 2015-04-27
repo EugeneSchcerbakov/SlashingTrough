@@ -9,6 +9,8 @@
 #ifndef __SlashingTrough__PathSector__
 #define __SlashingTrough__PathSector__
 
+#include <stdlib.h>
+#include <cmath>
 #include <memory>
 #include <functional>
 
