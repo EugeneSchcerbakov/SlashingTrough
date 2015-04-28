@@ -74,6 +74,8 @@
 		CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
 		CD69BAC51AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
 		CD69BAC61AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
+		CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */; };
+		CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
@@ -123,6 +125,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
+		};
+		CD79525A1AEF5097006EC5A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 15EFA59E198B2DAA000C57D3;
+			remoteInfo = "libluacocos2d iOS";
 		};
 		CDD8F7AF1ACBB617002ADCCE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -215,6 +224,7 @@
 		CD5F8C811AD04C9C000CF14A /* PathSector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSector.cpp; sourceTree = "<group>"; };
 		CD5F8C821AD04C9C000CF14A /* PathSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSector.h; sourceTree = "<group>"; };
 		CD69BAC41AE61CCF00D9BEC0 /* gui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gui; sourceTree = "<group>"; };
+		CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
@@ -238,6 +248,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */,
+				CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
@@ -325,6 +337,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */,
 				52B47A461A53D09B004E4C60 /* Security.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
 				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
@@ -473,6 +486,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CD79525B1AEF5097006EC5A5 /* PBXTargetDependency */,
 				1AC6FB25180E99E1004C840B /* PBXTargetDependency */,
 			);
 			name = "SlashingTrough iOS";
@@ -681,6 +695,11 @@
 			name = "cocos2dx iOS";
 			targetProxy = 1AC6FB24180E99E1004C840B /* PBXContainerItemProxy */;
 		};
+		CD79525B1AEF5097006EC5A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libluacocos2d iOS";
+			targetProxy = CD79525A1AEF5097006EC5A5 /* PBXContainerItemProxy */;
+		};
 		CDD8F7B61ACBB693002ADCCE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "libluacocos2d Mac";
@@ -710,6 +729,10 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
+					"$(SRCROOT)/../cocos2d/cocos/scripting/lua-bindings/manual",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+					"$(SRCROOT)/../cocos2d/external/lua/luajit/include",
+					"$(SRCROOT)/../cocos2d/external/lua/tolua",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -744,6 +767,10 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
+					"$(SRCROOT)/../cocos2d/cocos/scripting/lua-bindings/manual",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+					"$(SRCROOT)/../cocos2d/external/lua/luajit/include",
+					"$(SRCROOT)/../cocos2d/external/lua/tolua",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
