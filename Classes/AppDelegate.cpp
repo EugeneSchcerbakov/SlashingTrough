@@ -44,11 +44,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		fileUtils->addSearchPath("../../Resources");
 		fileUtils->addSearchPath("../../Resources/gui");
 		fileUtils->addSearchPath("../../Resources/textures");
+		fileUtils->addSearchPath("../../Resources/scripts");
 		luaEngine->addSearchPath("../../Resources/scripts");
 	}
 
 	fileUtils->addSearchPath("textures");
     fileUtils->addSearchPath("gui");
+	fileUtils->addSearchPath("scripts");
 	luaEngine->addSearchPath("scripts");
     
     if(!glview) {
@@ -71,7 +73,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_ui_moudle(luaState);
     register_cocostudio_module(luaState);
     
-    luaEngine->executeScriptFile("scripts/gui.lua");
+    luaEngine->executeScriptFile("gui.lua");
     
     float squareSize = director->getVisibleSize().width / 3.0f;
     GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
