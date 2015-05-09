@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <GameInfo>
 	<GlobalVariables>
+        <Const name="CHARACTER_DAMAGE_UP_KP" type="int" value="3" />
+        <const name="CHARACTER_DAMAGE_UP_VALUE" type="float" value="1.0f" />
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="1.0" />
         <Const name="CHARACTER_ATTACK_DISTANCE" type="float" value="280.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="1.0" />

@@ -29,6 +29,7 @@ public:
     
     void FinishCurrentAction();
     void AddAction(CharacterAction &action);
+    void AddKillPoint(int killPoitns = 1);
     
     CharacterAction& CurrentAction();
     
@@ -44,10 +45,14 @@ protected:
     
     ActionSequence _actionSequence;
     
-    float _attackDamage;
     float _attackDistance;
+    float _damageUpValue;
     
+    int _killPointToNextDamageUp;
+    int _damageUpKillPoints;
     int _actionsSequenceMaxSize;
+    
+    int _killPoints;
 };
 
 #endif /* defined(__SlashingTrough__Character__) */

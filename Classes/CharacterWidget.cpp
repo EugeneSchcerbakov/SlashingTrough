@@ -90,7 +90,6 @@ void CharacterWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &
     _sectors = &sectors;
 }
 
-
 void CharacterWidget::RunEffectReceiveDamage()
 {
     cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.07f, 0.5f);
@@ -137,6 +136,7 @@ void CharacterWidget::Attack()
                 float L = sqrtf(dx * dx + dy * dy);
                 if (characterPtr->Attack(obj, L) && !obj->IsAlive())
                 {
+                    Character::Cast(characterPtr)->AddKillPoint();
                     int score = GameInfo::Instance().GetInt("CHARACTER_SCORE");
                     score += 1;
                     GameInfo::Instance().SetInt("CHARACTER_SCORE", score);
