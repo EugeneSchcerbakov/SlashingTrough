@@ -114,7 +114,7 @@ void GameField::update(float dt)
         return;
     }
     
-    SetScrollSpeed(Character::Cast(_character)->GetRunningSpeed());
+    SetScrollSpeed(_difficult.speed);
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     

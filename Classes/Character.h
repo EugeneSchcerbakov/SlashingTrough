@@ -30,7 +30,6 @@ public:
     void FinishCurrentAction();
     void AddAction(CharacterAction &action);
     
-    float GetRunningSpeed() const;
     CharacterAction& CurrentAction();
     
     bool IsAbleToPerform(const CharacterAction &action) const;
@@ -45,7 +44,6 @@ protected:
     
     ActionSequence _actionSequence;
     
-    float _runningSpeed;
     float _attackDamage;
     float _attackDistance;
     

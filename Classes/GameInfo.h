@@ -33,13 +33,9 @@ public:
         
         SpawnList enemiesPerSector;
         SpawnList obstaclesPerSector;
+        float speed;
         int sectors;
         
-        DifficultInfo(int sectorsAmount, SpawnList enemies, SpawnList obstacles)
-        : sectors(sectorsAmount)
-        , enemiesPerSector(enemies)
-        , obstaclesPerSector(obstacles)
-        {}
         DifficultInfo()
         : sectors(0)
         {}

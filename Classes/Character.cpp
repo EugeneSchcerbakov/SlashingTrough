@@ -42,11 +42,6 @@ void Character::AddAction(CharacterAction &action)
     _actionSequence.push(action);
 }
 
-float Character::GetRunningSpeed() const
-{
-    return _runningSpeed;
-}
-
 CharacterAction& Character::CurrentAction()
 {
     return _actionSequence.front();
@@ -91,7 +86,6 @@ void Character::Init()
 {
     GameInfo &gameinfo = GameInfo::Instance();
     
-    _runningSpeed = gameinfo.GetFloat("CHARACTER_RUNNING_SPEED");
     _damage = gameinfo.GetFloat("CHARACTER_ATTACK_DAMAGE");
     _radius = gameinfo.GetFloat("CHARACTER_ATTACK_DISTANCE");
     _health = gameinfo.GetFloat("CHARACTER_HEALTH_POINTS");

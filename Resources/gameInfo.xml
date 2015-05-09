@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <GameInfo>
 	<GlobalVariables>
-		<Const name="CHARACTER_RUNNING_SPEED" type="float" value="460.0" />
 		<Const name="CHARACTER_ATTACK_DAMAGE" type="float" value="1.0" />
         <Const name="CHARACTER_ATTACK_DISTANCE" type="float" value="280.0" />
 		<Const name="CHARACTER_HEALTH_POINTS" type="float" value="1.0" />
@@ -16,16 +15,16 @@
 		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
 	</GlobalVariables>
 	<DifficultProgress>
-		<Stage sectors="5">
+		<Stage sectors="5" runningSpeed="460">
             <Enemy name="enemy-A" amount="1" />
             <Enemy name="enemy-B" amount="1" />
             <Obstacle name="Box" amount="3" />
         </Stage>
-		<Stage sectors="7">
+		<Stage sectors="7" runningSpeed="560">
             <Enemy name="enemy-B" amount="3" />
             <Obstacle name="Box" amount="2" />
         </Stage>
-		<Stage sectors="12">
+		<Stage sectors="12" runningSpeed="660">
             <Enemy name="enemy-C" amount="2" />
             <Obstacle name="Box" amount="3" />
         </Stage>
