@@ -45,7 +45,6 @@ bool CharacterWidget::init()
     
     _sword = cocos2d::DrawNode::create();
     _body = cocos2d::DrawNode::create();
-    _head = cocos2d::DrawNode::create();
     _bodyBorder = cocos2d::DrawNode::create();
     
     const cocos2d::Color4F bodyColor = cocos2d::Color4F(0.0f, 0.7f, 1.0f, 0.4f);
@@ -55,13 +54,9 @@ bool CharacterWidget::init()
     _bodyBorder->setPosition(cocos2d::Vec2(0.0f, 0.0f));
     _bodyBorder->drawCircle(cocos2d::Vec2(0.0f, 0.0f), radius, 0.0f, 25, false, 1.0f, 0.9f, borderColor);
     
-    _head->setPosition(cocos2d::Vec2(0.0f, radius * 0.9f));
-    _head->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), 15.0f, 0.0f, 10, 1.0f, 1.0f, cocos2d::Color4F::MAGENTA);
-    
     _body->setPosition(cocos2d::Vec2(0.0f, 0.0f));
     _body->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), radius, 0.0f, 25, 1.0f, 0.9f, bodyColor);
     _body->addChild(_bodyBorder, 0);
-    _body->addChild(_head, 1);
     
     _sword->drawSegment(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(0.0f, 250.0f), 9.0f, cocos2d::Color4F::BLACK);
     _sword->setPosition(_swordRightSideTrans.localPos);

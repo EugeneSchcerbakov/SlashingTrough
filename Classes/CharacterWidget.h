@@ -68,7 +68,6 @@ private:
     
     cocos2d::DrawNode *_sword;
     cocos2d::DrawNode *_body;
-    cocos2d::DrawNode *_head;
     cocos2d::DrawNode *_bodyBorder;
     
     SwordSide _swordSide;
