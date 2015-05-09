@@ -53,10 +53,24 @@ bool GameInfo::LoadInfo(const std::string &filename)
         _diffucultSettings.clear();
         while (diffSettingsNode) {
             tinyxml2::XMLElement *elem = diffSettingsNode->ToElement();
-            GameInfo::DiffucultInfo difficult;
+            GameInfo::DifficultInfo difficult;
             difficult.sectors = elem->IntAttribute("sectors");
-            difficult.obstacles = elem->IntAttribute("obstacles");
-            difficult.enemies = elem->IntAttribute("enemies");
+            tinyxml2::XMLNode *spawnInfoNode = diffSettingsNode->FirstChild();
+            while (spawnInfoNode) {
+                tinyxml2::XMLElement *spawnInfoElem = spawnInfoNode->ToElement();
+                SpawnInfo spawnInfo;
+                spawnInfo.name = spawnInfoElem->Attribute("name");
+                spawnInfo.amount = spawnInfoElem->IntAttribute("amount");
+                std::string type = spawnInfoElem->Name();
+                if (type == "Enemy") {
+                    difficult.enemiesPerSector.push_back(spawnInfo);
+                } else if (type == "Obstacle") {
+                    difficult.obstaclesPerSector.push_back(spawnInfo);
+                } else {
+                    CC_ASSERT(false);
+                }
+                spawnInfoNode = spawnInfoNode->NextSibling();
+            }
             _diffucultSettings.push_back(difficult);
             diffSettingsNode = diffSettingsNode->NextSibling();
         }

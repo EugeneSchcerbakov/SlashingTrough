@@ -49,16 +49,16 @@ public:
     
     PathSector();
     
-    void Generate(int obstacles, int enemies, int squaresByHeight);
+    void Generate(int squaresByHeight);
+    void SpawnObjects(const GameInfo::DifficultInfo::SpawnList &obstacles,
+                      const GameInfo::DifficultInfo::SpawnList &enemies);
     void Reset();
     
     Square GetSquareByLocalXY(float x, float y) const;
     Square GetSquareByIndexXY(int x, int y) const;
     Square GetSquareByObject(GameplayObject::Ptr object) const;
     
-    inline int GetObstaclesCount() const {return _countObstacles;}
-    inline int GetEmeniesCount() const {return _countEnemies;}
-    inline int GetSquaresByHeight() const {return _squaresByHeight;}
+    int GetSquaresByHeight() const;
     
     GameplayObject::WeakPtr GetObjectByUID(int uid);
     GameplayObjects& GetGameplayObjects();
@@ -69,7 +69,8 @@ private:
     typedef std::vector<Square> Grid;
     
 private:
-    void SpawnObjects(const std::function<void(int, int)> &spawn, int amount);
+    void GenerateBunchOfObjects(const std::function<void(int, int, const std::string &)> &spawn,
+                      const GameInfo::SpawnInfo &spawnInfo);
     bool IsValidRow(int row) const;
     GameplayObject::UID GenerateUID();
     
@@ -78,8 +79,6 @@ private:
     
     const float _squareSize;
     
-    int _countObstacles;
-    int _countEnemies;
     int _squaresByHeight;
 };
 

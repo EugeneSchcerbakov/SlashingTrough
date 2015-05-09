@@ -34,8 +34,7 @@ protected:
     bool init();
     void update(float dt);
     
-    PathSectorWidget* GenerateNewSector() const;
-    void AddSector(PathSectorWidget *sectorWidget);
+    void GenerateNewSector(bool makeEmpty = false);
     void UpdateDifficult();
     
 private:
@@ -57,7 +56,7 @@ private:
     CharacterControlKeyboard::Ptr _controlKeyboard;
     CharacterControlTouch::Ptr _controlTouch;
     
-    GameInfo::DiffucultInfo _difficult;
+    GameInfo::DifficultInfo _difficult;
     PathSectorWidget::SectorsSequence _sectorsSequence;
 };
 

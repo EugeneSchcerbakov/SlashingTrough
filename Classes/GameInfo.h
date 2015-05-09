@@ -16,20 +16,32 @@
 class GameInfo
 {
 public:
-    struct DiffucultInfo
+    struct SpawnInfo
     {
-        int sectors;
-        int obstacles;
-        int enemies;
-        DiffucultInfo(int sectorsAmount, int obstaclesAmount, int enemiesAmount)
-        : sectors(sectorsAmount)
-        , obstacles(obstaclesAmount)
-        , enemies(enemiesAmount)
+        std::string name;
+        int amount;
+        
+        SpawnInfo()
+        : name("")
+        , amount(0)
         {}
-        DiffucultInfo()
+    };
+    
+    struct DifficultInfo
+    {
+        typedef std::vector<SpawnInfo> SpawnList;
+        
+        SpawnList enemiesPerSector;
+        SpawnList obstaclesPerSector;
+        int sectors;
+        
+        DifficultInfo(int sectorsAmount, SpawnList enemies, SpawnList obstacles)
+        : sectors(sectorsAmount)
+        , enemiesPerSector(enemies)
+        , obstaclesPerSector(obstacles)
+        {}
+        DifficultInfo()
         : sectors(0)
-        , obstacles(0)
-        , enemies(0)
         {}
     };
     
@@ -63,7 +75,7 @@ public:
         {}
     };
     
-    typedef std::vector<DiffucultInfo> DiffucultSettings;
+    typedef std::vector<DifficultInfo> DiffucultSettings;
     typedef std::vector<std::string> GameplayObjectsTypes;
     typedef std::map<std::string, ObstacleType> ObstaclesSettings;
     typedef std::map<std::string, EnemyType> EnemiesSettings;

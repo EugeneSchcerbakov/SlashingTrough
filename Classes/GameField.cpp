@@ -82,24 +82,13 @@ bool GameField::init()
     std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
     Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
     
-    for (int k = 0; k < _sectorsQueueSize; ++k)
-    {
-        int obsticles = 2;
-        int enemies = 3;
+    for (int k = 0; k < _sectorsQueueSize; ++k) {
+        bool makeEmpty = false;
         if (k == 0) {
             // first sector must be empty
-            obsticles = 0;
-            enemies = 0;
+            makeEmpty = true;
         }
-        
-        PathSector::Ptr testPath = PathSector::Create();
-        testPath->Generate(obsticles, enemies, sectorSquaresCount);
-        
-        PathSectorWidget *testPathWidget = PathSectorWidget::create(testPath, _characterWidget);
-        testPathWidget->setPosition(cocos2d::Vec2(0.0f, k * sectorSquaresCount * squareSize));
-        testPathWidget->DrawDebugGrid();
-        _sectorsSequence.push_back(testPathWidget);
-        addChild(testPathWidget, DrawOrder::PATH_CONTENT);
+        GenerateNewSector(makeEmpty);
     }
     
     _controlKeyboard = CharacterControlKeyboard::Create(_character,
@@ -151,34 +140,26 @@ void GameField::update(float dt)
         {
             removeChild(sector, true);
             it = _sectorsSequence.erase(it);
-            PathSectorWidget *newSector = GenerateNewSector();
-            
-            AddSector(newSector);
+            GenerateNewSector();
             _passedSectors++;
-            UpdateDifficult();
         } else
             ++it;
     }
 }
 
-PathSectorWidget* GameField::GenerateNewSector() const
+void GameField::GenerateNewSector(bool makeEmpty)
 {
     const int sectorSquaresCount = GameInfo::Instance().GetInt("SEСTOR_SQUARES_COUNT");
-    
     PathSector::Ptr sector = PathSector::Create();
-    sector->Generate(_difficult.obstacles, _difficult.enemies, sectorSquaresCount);
+    sector->Generate(sectorSquaresCount);
+    if (!makeEmpty) {
+        sector->SpawnObjects(_difficult.obstaclesPerSector, _difficult.enemiesPerSector);
+    }
+    
     PathSectorWidget *sectorWidget = PathSectorWidget::create(sector, _characterWidget);
     sectorWidget->DrawDebugGrid();
     sectorWidget->setPosition(cocos2d::Vec2(0.0f, 0.0f));
-    return sectorWidget;
-}
-
-void GameField::AddSector(PathSectorWidget *sectorWidget)
-{
-    if (!sectorWidget) {
-        return;
-    }
-
+    
     float ypos = 0.0f;
     if (!_sectorsSequence.empty())
     {
@@ -190,6 +171,8 @@ void GameField::AddSector(PathSectorWidget *sectorWidget)
     sectorWidget->setPositionY(ypos);
     _sectorsSequence.push_back(sectorWidget);
     addChild(sectorWidget, DrawOrder::PATH_CONTENT);
+    
+    UpdateDifficult();
 }
 
 void GameField::UpdateDifficult()

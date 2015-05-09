@@ -19,10 +19,8 @@ PathSector::PathSector()
     Reset();
 }
 
-void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
+void PathSector::Generate(int squaresByHeight)
 {
-    _countObstacles = obstacles;
-    _countEnemies = enemies;
     _squaresByHeight = squaresByHeight;
     
     const int col = 3;
@@ -37,16 +35,17 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
             _grid[index].y = j;
         }
     }
-    
-    std::function<void(int, int)> spawnObstacle = [&](int x, int y)
+}
+
+void PathSector::SpawnObjects(const GameInfo::DifficultInfo::SpawnList &obstacles,
+                              const GameInfo::DifficultInfo::SpawnList &enemies)
+{
+    std::function<void(int, int, const std::string &)> spawnObstacle = [&](int x, int y, const std::string &type)
     {
         GameInfo &gameInfo = GameInfo::Instance();
         
-        GameInfo::GameplayObjectsTypes obstacleTypes;
-        obstacleTypes = gameInfo.GetObstaclesTypes();
-        
         GameInfo::ObstacleType info;
-        info = gameInfo.GetObstacleInfoByName(obstacleTypes[0]);
+        info = gameInfo.GetObstacleInfoByName(type);
         
         float localX = x * _squareSize + _squareSize * 0.5f;
         float localY = y * _squareSize + _squareSize * 0.5f;
@@ -61,15 +60,12 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
         _grid[index].objUID = uid;
     };
     
-    std::function<void(int, int)> spawnEnemies = [&](int x, int y)
+    std::function<void(int, int, const std::string &)> spawnEnemy = [&](int x, int y, const std::string &type)
     {
         GameInfo &gameInfo = GameInfo::Instance();
         
-        GameInfo::GameplayObjectsTypes enemiesTypes;
-        enemiesTypes = gameInfo.GetEnemiesTypes();
-        
         GameInfo::EnemyType info;
-        info = gameInfo.GetEnemyInfoByName(enemiesTypes[0]);
+        info = gameInfo.GetEnemyInfoByName(type);
         
         float localX = x * _squareSize + _squareSize * 0.5f;
         float localY = y * _squareSize + _squareSize * 0.5f;
@@ -84,14 +80,17 @@ void PathSector::Generate(int obstacles, int enemies, int squaresByHeight)
         _grid[index].objUID = uid;
     };
     
-    SpawnObjects(spawnObstacle, obstacles);
-    SpawnObjects(spawnEnemies, enemies);
+    for (auto spawnInfo : enemies) {
+        GenerateBunchOfObjects(spawnEnemy, spawnInfo);
+    }
+    
+    for (auto spawnInfo : obstacles) {
+        GenerateBunchOfObjects(spawnObstacle, obstacles.at(0));
+    }
 }
 
 void PathSector::Reset()
 {
-    _countObstacles = 0;
-    _countEnemies = 0;
     _squaresByHeight = 0;
     _objects.clear();
     _grid.clear();
@@ -127,6 +126,11 @@ PathSector::Square PathSector::GetSquareByObject(GameplayObject::Ptr object) con
     return Square();
 }
 
+int PathSector::GetSquaresByHeight() const
+{
+    return _squaresByHeight;
+}
+
 GameplayObject::WeakPtr PathSector::GetObjectByUID(int uid)
 {
     for (auto obj : _objects) {
@@ -147,10 +151,12 @@ bool PathSector::IsValidSquareAddress(int x, int y) const
     return x >= 0 && x < 3 && y >= 0 && y < _squaresByHeight;
 }
 
-void PathSector::SpawnObjects(const std::function<void(int, int)> &spawn, int amount)
+void PathSector::GenerateBunchOfObjects(const std::function<void(int, int, const std::string &)> &spawn,
+                                        const GameInfo::SpawnInfo &spawnInfo)
 {
     const int col = 3;
     const int row = _squaresByHeight;
+    const int amount = spawnInfo.amount;
     
     int generated = 0;
     while (generated < amount) {
@@ -159,7 +165,7 @@ void PathSector::SpawnObjects(const std::function<void(int, int)> &spawn, int am
             int xidx = rand() % col;
             bool allowGenerate = true;
             while (allowGenerate) {
-                spawn(xidx, yidx);
+                spawn(xidx, yidx, spawnInfo.name);
                 ++generated;
                 if (generated >= amount) {
                     break;
