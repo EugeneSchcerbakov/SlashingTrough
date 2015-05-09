@@ -8,6 +8,62 @@
 
 #include "GameplayObjectsWidgets.h"
 
+// HealthBarWidget implementation
+
+HealthBarWidget* HealthBarWidget::create()
+{
+    HealthBarWidget *widget = new HealthBarWidget();
+    if (widget && widget->init()) {
+        widget->autorelease();
+    } else {
+        delete widget;
+        widget = nullptr;
+    }
+    return widget;
+}
+
+HealthBarWidget::HealthBarWidget()
+: _healthPoints(0)
+{
+}
+
+HealthBarWidget::~HealthBarWidget()
+{
+}
+
+bool HealthBarWidget::init()
+{
+    if (!cocos2d::Node::init()) {
+        return false;
+    }
+    
+    _bar = cocos2d::DrawNode::create();
+    addChild(_bar);
+    
+    return true;
+}
+
+void HealthBarWidget::Refresh(int healthPoints)
+{
+    _healthPoints = healthPoints;
+    
+    cocos2d::Color4F barColor(0.75f, 0.0f, 0.0f, 1.0f);
+    
+    float radius = 15.0f;
+    float w = radius * 2.0f;
+    float shiftX = 10.0f;
+    float totalWidth = w * healthPoints + shiftX * (healthPoints - 1);
+    float offset = (totalWidth - w) * 0.5f;
+    
+    _bar->clear();
+    
+    for (int k = 0; k < _healthPoints; ++k) {
+        float w = radius * 2.0f;
+        float x = w * k + shiftX * k;
+        _bar->drawSolidCircle(cocos2d::Vec2(x - offset, 0.0f), radius, 0.0f, 10, 1.0f, 1.0f, barColor);
+    }
+}
+
 // ObstacleWidget implementation
 
 ObstacleWidget* ObstacleWidget::create(GameplayObject::WeakPtr obstacle)
@@ -84,46 +140,40 @@ bool EnemyWidget::init()
     
     GameplayObject::Ptr ptr = _enemy.lock();
     
-    _leftFoot = cocos2d::DrawNode::create();
-    _leftFoot->setPosition(cocos2d::Vec2(-30.0f, 16.0f));
-    _leftFoot->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), 25.0f, 0.0f, 20, 1.0f, 1.0f, cocos2d::Color4F::BLACK);
-    
-    _rightFoot = cocos2d::DrawNode::create();
-    _rightFoot->setPosition(cocos2d::Vec2(30.0f, -16.0f));
-    _rightFoot->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), 25.0f, 0.0f, 20, 1.0f, 1.0f, cocos2d::Color4F::BLACK);
-    
-    const float stepDelta = 32.0f;
-    const float stepTime = 0.5f;
-    
-    cocos2d::MoveBy *leftFootDown = cocos2d::MoveBy::create(stepTime, cocos2d::Vec2(0.0f, -stepDelta));
-    cocos2d::MoveBy *leftFootUp = cocos2d::MoveBy::create(stepTime, cocos2d::Vec2(0.0f, stepDelta));
-    cocos2d::EaseSineInOut *leftFootDownEase = cocos2d::EaseSineInOut::create(leftFootDown);
-    cocos2d::EaseSineInOut *leftFootUpEase = cocos2d::EaseSineInOut::create(leftFootUp);
-    cocos2d::Sequence *leftFootStep = cocos2d::Sequence::create(leftFootDownEase, leftFootUpEase, nullptr);
-    cocos2d::RepeatForever *leftFootEffect = cocos2d::RepeatForever::create(leftFootStep);
-    
-    cocos2d::MoveBy *rightFootDown = cocos2d::MoveBy::create(stepTime, cocos2d::Vec2(0.0f, -stepDelta));
-    cocos2d::MoveBy *rightFootUp = cocos2d::MoveBy::create(stepTime, cocos2d::Vec2(0.0f, stepDelta));
-    cocos2d::EaseSineInOut *rightFootDownEase = cocos2d::EaseSineInOut::create(rightFootDown);
-    cocos2d::EaseSineInOut *rightFootUpEase = cocos2d::EaseSineInOut::create(rightFootUp);
-    cocos2d::Sequence *rightFootStep = cocos2d::Sequence::create(rightFootUpEase, rightFootDownEase, nullptr);
-    cocos2d::RepeatForever *rightFootEffect = cocos2d::RepeatForever::create(rightFootStep);
-    
-    _leftFoot->runAction(leftFootEffect);
-    _rightFoot->runAction(rightFootEffect);
-    
-    cocos2d::Node *footsHolder = cocos2d::Node::create();
-    footsHolder->setPosition(-10.0f, -20.0f);
-    footsHolder->addChild(_leftFoot);
-    footsHolder->addChild(_rightFoot);
+    _lastHealth = ptr->GetHealth();
     
     _sprite = cocos2d::Sprite::create(ptr->GetSpriteFilename());
     _sprite->setPosition(0.0f, 0.0f);
     
-    addChild(_sprite, 1);
-    addChild(footsHolder, 0);
+    float healthWidgetYShift = 80.0f;
+    _healthWidet = HealthBarWidget::create();
+    _healthWidet->setPositionY(healthWidgetYShift);
+    _healthWidet->Refresh((int)ptr->GetHealth());
     
+    addChild(_sprite, 0);
+    addChild(_healthWidet, 1);
+    scheduleUpdate();
+   
     return true;
+}
+
+void EnemyWidget::update(float dt)
+{
+    GameplayObject::Ptr ptr = _enemy.lock();
+    
+    if (_lastHealth != ptr->GetHealth()) {
+        _lastHealth = ptr->GetHealth();
+        _healthWidet->Refresh((int)_lastHealth);
+        RunHitAccentEffect();
+    }
+}
+
+void EnemyWidget::RunHitAccentEffect()
+{
+    cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.1f, 0.9f);
+    cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+    cocos2d::Sequence *effect = cocos2d::Sequence::create(scale0, scale1, nullptr);
+    _sprite->runAction(effect);
 }
 
 GameplayObject::Ptr EnemyWidget::GetEnemy() const
