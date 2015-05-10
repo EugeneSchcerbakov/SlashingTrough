@@ -10,11 +10,11 @@
 
 #include "Utils.h"
 #include "GameInfo.h"
-#include "CharacterWidget.h"
+#include "HeroWidget.h"
 
-PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path, CharacterWidget *character)
+PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path, HeroWidget *hero)
 {
-    PathSectorWidget *sector = new PathSectorWidget(path, character);
+    PathSectorWidget *sector = new PathSectorWidget(path, hero);
     if (sector && sector->init()) {
         sector->autorelease();
     } else {
@@ -24,9 +24,9 @@ PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path, CharacterWidget
     return sector;
 }
 
-PathSectorWidget::PathSectorWidget(PathSector::Ptr path, CharacterWidget *character)
+PathSectorWidget::PathSectorWidget(PathSector::Ptr path, HeroWidget *hero)
 : _path(path)
-, _characterWidget(character)
+, _heroWidget(hero)
 , _debugGrid(nullptr)
 {
 }
@@ -102,7 +102,7 @@ void PathSectorWidget::update(float dt)
     }
     
     // update objects attack
-    cocos2d::Vec2 playerLocal = convertToNodeSpace(_characterWidget->getPosition());
+    cocos2d::Vec2 playerLocal = convertToNodeSpace(_heroWidget->getPosition());
     float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
     int playerSquareIndex = floorf(playerLocal.x / squareSize);
     
@@ -113,13 +113,13 @@ void PathSectorWidget::update(float dt)
         if (square.x == playerSquareIndex && object->GetLogicalY() > playerLocal.y)
         {
             float D = local.distance(playerLocal);
-            GameplayObject::Ptr ptr = _characterWidget->GetCharacter().lock();
+            GameplayObject::Ptr ptr = _heroWidget->GetHero().lock();
             if (object->Attack(ptr, D))
             {
                 object->Kill();
-                _characterWidget->RunEffectReceiveDamage();
+                _heroWidget->RunEffectReceiveDamage();
                 
-                int totalHealth = (int)GameInfo::Instance().GetFloat("CHARACTER_HEALTH_POINTS");
+                int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
                 int currentHealth = (int)ptr->GetHealth();
                 int percentHealth = (currentHealth * 100) / totalHealth;
                 std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);

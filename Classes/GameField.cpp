@@ -68,16 +68,16 @@ bool GameField::init()
     const float squareSize = gameinfo.GetFloat("SQUARE_SIZE");
     const int sectorSquaresCount = gameinfo.GetInt("SEСTOR_SQUARES_COUNT");
     
-    const float characterStartX = squareSize * 3.0f * 0.5f;
-    const float characterStartY = squareSize + squareSize * 0.5f;
-    _character = Character::Create();
-    _character->SetLogicalPos(characterStartX, characterStartY);
-    _characterWidget = CharacterWidget::create(_character);
-    _characterWidget->setPositionX(_character->GetLogicalX());
-    _characterWidget->setPositionY(_character->GetLogicalY());
+    const float heroStartX = squareSize * 3.0f * 0.5f;
+    const float heroStartY = squareSize + squareSize * 0.5f;
+    _hero = Hero::Create();
+    _hero->SetLogicalPos(heroStartX, heroStartY);
+    _heroWidget = HeroWidget::create(_hero);
+    _heroWidget->setPositionX(_hero->GetLogicalX());
+    _heroWidget->setPositionY(_hero->GetLogicalY());
 
-    int totalHealth = (int)GameInfo::Instance().GetFloat("CHARACTER_HEALTH_POINTS");
-    int currentHealth = (int)_character->GetHealth();
+    int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
+    int currentHealth = (int)_hero->GetHealth();
     int percentHealth = (currentHealth * 100) / totalHealth;
     std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
     Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
@@ -91,14 +91,10 @@ bool GameField::init()
         GenerateNewSector(makeEmpty);
     }
     
-    _controlKeyboard = CharacterControlKeyboard::Create(_character,
-                                                        _characterWidget->getEventDispatcher(),
-                                                        _characterWidget);
-    _controlTouch = CharacterControlTouch::Create(_character,
-                                                  _characterWidget->getEventDispatcher(),
-                                                  _characterWidget);
+    _controlKeyboard = HeroControlKeyboard::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
+    _controlTouch = HeroControlTouch::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
     
-    addChild(_characterWidget, DrawOrder::CHARACTER);
+    addChild(_heroWidget, DrawOrder::HERO);
     
     scheduleUpdate();
     
@@ -107,7 +103,7 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
-    if (!_character->IsAlive()) {
+    if (!_hero->IsAlive()) {
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();
         director->popScene();
@@ -118,7 +114,7 @@ void GameField::update(float dt)
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
-    _characterWidget->RefreshSectorsSequence(_sectorsSequence);
+    _heroWidget->RefreshSectorsSequence(_sectorsSequence);
     
     // scroll level down
     for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end(); ++it)
@@ -156,7 +152,7 @@ void GameField::GenerateNewSector(bool makeEmpty)
         sector->SpawnObjects(_difficult.obstaclesPerSector, _difficult.enemiesPerSector);
     }
     
-    PathSectorWidget *sectorWidget = PathSectorWidget::create(sector, _characterWidget);
+    PathSectorWidget *sectorWidget = PathSectorWidget::create(sector, _heroWidget);
     sectorWidget->DrawDebugGrid();
     sectorWidget->setPosition(cocos2d::Vec2(0.0f, 0.0f));
     

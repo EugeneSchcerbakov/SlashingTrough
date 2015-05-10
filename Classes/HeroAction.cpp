@@ -1,14 +1,14 @@
 //
-//  CharacterAction.cpp
+//  HeroAction.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 09/04/15.
 //
 //
 
-#include "CharacterAction.h"
+#include "HeroAction.h"
 
-CharacterAction::CharacterAction(Type type, float duration, float deltaX, float deltaY)
+HeroAction::HeroAction(Type type, float duration, float deltaX, float deltaY)
 : _type(type)
 , _duration(duration)
 , _deltaX(deltaX)
@@ -20,7 +20,7 @@ CharacterAction::CharacterAction(Type type, float duration, float deltaX, float 
 {
 }
 
-CharacterAction::CharacterAction()
+HeroAction::HeroAction()
 : _type(Type::NONE)
 , _duration(0.0f)
 , _deltaX(0.0f)
@@ -32,59 +32,59 @@ CharacterAction::CharacterAction()
 {
 }
 
-bool CharacterAction::IsType(Type type) const
+bool HeroAction::IsType(Type type) const
 {
     return _type == type;
 }
 
-float CharacterAction::GetFinishX() const
+float HeroAction::GetFinishX() const
 {
     return _finishPosX;
 }
 
-float CharacterAction::GetFinishY() const
+float HeroAction::GetFinishY() const
 {
     return _finishPosY;
 }
 
-float CharacterAction::GetDeltaX() const
+float HeroAction::GetDeltaX() const
 {
     return _deltaX;
 }
 
-float CharacterAction::GetDeltaY() const
+float HeroAction::GetDeltaY() const
 {
     return _deltaY;
 }
 
-float CharacterAction::GetDuration() const
+float HeroAction::GetDuration() const
 {
     return _duration;
 }
 
-bool CharacterAction::IsReady() const
+bool HeroAction::IsReady() const
 {
     return !_isFinished && !_isProcessing;
 }
 
-void CharacterAction::Start()
+void HeroAction::Start()
 {
     _isFinished = false;
     _isProcessing = true;
 }
 
-void CharacterAction::Finish()
+void HeroAction::Finish()
 {
     _isFinished = true;
     _isProcessing = false;
 }
 
-void CharacterAction::SetFinishPosX(float x)
+void HeroAction::SetFinishPosX(float x)
 {
     _finishPosX = x;
 }
 
-void CharacterAction::SetFinishPosY(float y)
+void HeroAction::SetFinishPosY(float y)
 {
     _finishPosY = y;
 }

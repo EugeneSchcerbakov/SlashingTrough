@@ -1,38 +1,38 @@
 //
-//  CharacterWidget.h
+//  HeroWidget.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 06/04/15.
 //
 //
 
-#ifndef __SlashingTrough__CharacterWidget__
-#define __SlashingTrough__CharacterWidget__
+#ifndef __SlashingTrough__HeroWidget__
+#define __SlashingTrough__HeroWidget__
 
 #include "cocos2d.h"
 
-#include "Character.h"
+#include "Hero.h"
 #include "PathSectorWidget.h"
 
-class CharacterWidget : public cocos2d::Node
+class HeroWidget : public cocos2d::Node
 {
 public:
-    static CharacterWidget* create(GameplayObject::WeakPtr character);
+    static HeroWidget* create(GameplayObject::WeakPtr Hero);
     
     void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
     void RunEffectReceiveDamage();
     
-    GameplayObject::WeakPtr GetCharacter() const;
+    GameplayObject::WeakPtr GetHero() const;
     
 protected:
-    CharacterWidget(GameplayObject::WeakPtr character);
-    virtual ~CharacterWidget();
+    HeroWidget(GameplayObject::WeakPtr Hero);
+    virtual ~HeroWidget();
     
     bool init();
     void update(float dt);
     
     void Attack();
-    void PerformAction(const CharacterAction &action);
+    void PerformAction(const HeroAction &action);
     
     cocos2d::Action* AnimSwordRightSwipeRight(float duration);
     cocos2d::Action* AnimSwordRightSwipeLeft(float duration);
@@ -62,7 +62,7 @@ private:
     static const SwordTransform _swordRightSideTrans;
     static const SwordTransform _swordLeftSideTrans;
     
-    GameplayObject::WeakPtr _character;
+    GameplayObject::WeakPtr _hero;
   
     PathSectorWidget::SectorsSequence *_sectors;
     
@@ -76,4 +76,4 @@ private:
     bool _isGameplayActionRunning;
 };
 
-#endif /* defined(__SlashingTrough__CharacterWidget__) */
+#endif /* defined(__SlashingTrough__HeroWidget__) */

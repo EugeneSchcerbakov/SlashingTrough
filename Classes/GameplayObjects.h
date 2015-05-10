@@ -19,7 +19,7 @@ public:
     enum class Type
     {
         NONE,
-        CHARACTER,
+        HERO,
         OBSTACLE,
         ENEMY,
     };

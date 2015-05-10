@@ -1,15 +1,15 @@
 //
-//  CharacterAction.h
+//  HeroAction.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 09/04/15.
 //
 //
 
-#ifndef __SlashingTrough__CharacterAction__
-#define __SlashingTrough__CharacterAction__
+#ifndef __SlashingTrough__HeroAction__
+#define __SlashingTrough__HeroAction__
 
-class CharacterAction
+class HeroAction
 {
 public:
     enum Type
@@ -19,11 +19,11 @@ public:
         SWIPE_LEFT
     };
     
-    friend class Character;
+    friend class Hero;
     
 public:
-    CharacterAction(Type type, float duration, float deltaX, float deltaY);
-    CharacterAction();
+    HeroAction(Type type, float duration, float deltaX, float deltaY);
+    HeroAction();
     
     bool IsType(Type type) const;
     float GetFinishX() const;
@@ -50,4 +50,4 @@ private:
     bool _isFinished;
 };
 
-#endif /* defined(__SlashingTrough__CharacterAction__) */
+#endif /* defined(__SlashingTrough__HeroAction__) */

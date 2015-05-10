@@ -1,40 +1,40 @@
 //
-//  Character.cpp
+//  Hero.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 06/04/15.
 //
 //
 
-#include "Character.h"
+#include "Hero.h"
 
 #include "GameInfo.h"
 
-GameplayObject::Ptr Character::Create()
+GameplayObject::Ptr Hero::Create()
 {
-    return std::make_shared<Character>();
+    return std::make_shared<Hero>();
 }
 
-Character* Character::Cast(GameplayObject::Ptr object)
+Hero* Hero::Cast(GameplayObject::Ptr object)
 {
-    return static_cast<Character *>(object.get());
+    return static_cast<Hero *>(object.get());
 }
 
-Character::Character()
-: GameplayObject(Type::CHARACTER, InvalidUID)
+Hero::Hero()
+: GameplayObject(Type::HERO, InvalidUID)
 , _killPointToNextDamageUp(0)
 , _killPoints(0)
 {
     Init();
 }
 
-void Character::AddAction(CharacterAction &action)
+void Hero::AddAction(HeroAction &action)
 {
     float finishPosX = _logicalX + action.GetDeltaX();
     float finishPosY = _logicalY + action.GetDeltaX();
     if (!_actionSequence.empty()) {
         // check position by last action
-        const CharacterAction &lastAction = _actionSequence.back();
+        const HeroAction &lastAction = _actionSequence.back();
         finishPosX = lastAction.GetFinishX() + action.GetDeltaX();
         finishPosY = lastAction.GetFinishY() + action.GetDeltaY();
     }
@@ -44,7 +44,7 @@ void Character::AddAction(CharacterAction &action)
     _actionSequence.push(action);
 }
 
-void Character::AddKillPoint(int killPoint)
+void Hero::AddKillPoint(int killPoint)
 {
     _killPoints += killPoint;
     _killPointToNextDamageUp += killPoint;
@@ -54,55 +54,55 @@ void Character::AddKillPoint(int killPoint)
     }
 }
 
-CharacterAction& Character::CurrentAction()
+HeroAction& Hero::CurrentAction()
 {
     return _actionSequence.front();
 }
 
-void Character::FinishCurrentAction()
+void Hero::FinishCurrentAction()
 {
     _actionSequence.pop();
 }
 
-bool Character::IsAbleToPerform(const CharacterAction &action) const
+bool Hero::IsAbleToPerform(const HeroAction &action) const
 {
     float lastPosX = _logicalX;
     float lastPosY = _logicalY;
     if (!_actionSequence.empty()) {
         // check position by last action
-        const CharacterAction &lastAction = _actionSequence.back();
+        const HeroAction &lastAction = _actionSequence.back();
         lastPosX = lastAction.GetFinishX();
         lastPosY = lastAction.GetFinishY();
     }
     
-    if (action.IsType(CharacterAction::Type::SWIPE_RIGHT)) {
+    if (action.IsType(HeroAction::Type::SWIPE_RIGHT)) {
         return lastPosX <= GameInfo::Instance().GetFloat("PATH_RIGHT_BORDER");
     }
-    if (action.IsType(CharacterAction::Type::SWIPE_LEFT)) {
+    if (action.IsType(HeroAction::Type::SWIPE_LEFT)) {
         return lastPosX >= GameInfo::Instance().GetFloat("PATH_LEFT_BORDER");
     }
     return false;
 }
 
-bool Character::IsActionsQueueFull() const
+bool Hero::IsActionsQueueFull() const
 {
     return _actionSequence.size() >= _actionsSequenceMaxSize;
 }
 
-bool Character::HasActionToPerform() const
+bool Hero::HasActionToPerform() const
 {
     return !_actionSequence.empty();
 }
 
-void Character::Init()
+void Hero::Init()
 {
     GameInfo &gameinfo = GameInfo::Instance();
     
-    _damage = gameinfo.GetFloat("CHARACTER_ATTACK_DAMAGE");
-    _radius = gameinfo.GetFloat("CHARACTER_ATTACK_DISTANCE");
-    _health = gameinfo.GetFloat("CHARACTER_HEALTH_POINTS");
-    _damageUpValue = gameinfo.GetFloat("CHARACTER_DAMAGE_UP_VALUE");
-    _damageUpKillPoints = gameinfo.GetInt("CHARACTER_DAMAGE_UP_KP");
-    _actionsSequenceMaxSize = gameinfo.GetInt("CHARACTER_ACTIONS_SEQUENCE_SIZE");
+    _damage = gameinfo.GetFloat("HERO_ATTACK_DAMAGE");
+    _radius = gameinfo.GetFloat("HERO_ATTACK_DISTANCE");
+    _health = gameinfo.GetFloat("HERO_HEALTH_POINTS");
+    _damageUpValue = gameinfo.GetFloat("HERO_DAMAGE_UP_VALUE");
+    _damageUpKillPoints = gameinfo.GetInt("HERO_DAMAGE_UP_KP");
+    _actionsSequenceMaxSize = gameinfo.GetInt("HERO_ACTIONS_SEQUENCE_SIZE");
 }
 

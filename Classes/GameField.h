@@ -10,9 +10,9 @@
 #define __SlashingTrough__GameField__
 
 #include "PathSectorWidget.h"
-#include "CharacterWidget.h"
-#include "CharacterControlKeyboard.h"
-#include "CharacterControlTouch.h"
+#include "HeroWidget.h"
+#include "HeroControlKeyboard.h"
+#include "HeroControlTouch.h"
 
 #include "GameInfo.h"
 
@@ -41,7 +41,7 @@ private:
     enum DrawOrder
     {
         PATH_CONTENT,
-        CHARACTER
+        HERO
     };
     
 private:
@@ -50,11 +50,11 @@ private:
     int _difficultIndex;
     float _scrollSpeed;
     
-    GameplayObject::Ptr _character;
-    CharacterWidget *_characterWidget;
+    GameplayObject::Ptr _hero;
+    HeroWidget *_heroWidget;
     
-    CharacterControlKeyboard::Ptr _controlKeyboard;
-    CharacterControlTouch::Ptr _controlTouch;
+    HeroControlKeyboard::Ptr _controlKeyboard;
+    HeroControlTouch::Ptr _controlTouch;
     
     GameInfo::DifficultInfo _difficult;
     PathSectorWidget::SectorsSequence _sectorsSequence;

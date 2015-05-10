@@ -1,28 +1,28 @@
 //
-//  CharacterControlKeyboard.h
+//  HeroControlKeyboard.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 07/04/15.
 //
 //
 
-#ifndef __SlashingTrough__CharacterControlKeyboard__
-#define __SlashingTrough__CharacterControlKeyboard__
+#ifndef __SlashingTrough__HeroControlKeyboard__
+#define __SlashingTrough__HeroControlKeyboard__
 
 #include "cocos2d.h"
-#include "Character.h"
+#include "Hero.h"
 
-class CharacterControlKeyboard
+class HeroControlKeyboard
 {
 public:
-    typedef std::shared_ptr<CharacterControlKeyboard> Ptr;
-    typedef std::weak_ptr<CharacterControlKeyboard> WeakPtr;
+    typedef std::shared_ptr<HeroControlKeyboard> Ptr;
+    typedef std::weak_ptr<HeroControlKeyboard> WeakPtr;
     
 public:
-    static CharacterControlKeyboard::Ptr Create(GameplayObject::WeakPtr charater,
+    static HeroControlKeyboard::Ptr Create(GameplayObject::WeakPtr hero,
                                                 cocos2d::EventDispatcher *dispatcher,
                                                 cocos2d::Node *node);
-    CharacterControlKeyboard(GameplayObject::WeakPtr character,
+    HeroControlKeyboard(GameplayObject::WeakPtr hero,
                              cocos2d::EventDispatcher *dispatcher,
                              cocos2d::Node *node);
     void Free();
@@ -33,9 +33,9 @@ private:
     
     const float _squareSize;
     
-    GameplayObject::WeakPtr _character;
+    GameplayObject::WeakPtr _hero;
     cocos2d::EventDispatcher *_dispatcher;
     cocos2d::EventListenerKeyboard *_listener;
 };
 
-#endif /* defined(__SlashingTrough__CharacterControlKeyboard__) */
+#endif /* defined(__SlashingTrough__HeroControlKeyboard__) */

@@ -13,7 +13,7 @@
 #include "PathSector.h"
 #include "GameplayObjectsWidgets.h"
 
-class CharacterWidget;
+class HeroWidget;
 
 class PathSectorWidget : public cocos2d::Node
 {
@@ -22,7 +22,7 @@ public:
     typedef SectorsSequence::iterator SectorsSequenceIter;
     
 public:
-    static PathSectorWidget* create(PathSector::Ptr path, CharacterWidget *character);
+    static PathSectorWidget* create(PathSector::Ptr path, HeroWidget *hero);
     
     void DrawDebugGrid();
     void ClearDebugGrid();
@@ -32,7 +32,7 @@ public:
     PathSector::Ptr GetPath() const;
     
 protected:
-    PathSectorWidget(PathSector::Ptr path, CharacterWidget *character);
+    PathSectorWidget(PathSector::Ptr path, HeroWidget *hero);
     virtual ~PathSectorWidget();
     
     bool init();
@@ -55,7 +55,7 @@ private:
     std::map<GameplayObject::UID, cocos2d::Node *> _widgets;
     
     PathSector::Ptr _path;
-    CharacterWidget *_characterWidget;
+    HeroWidget *_heroWidget;
     
     cocos2d::DrawNode *_ground;
     cocos2d::DrawNode *_debugGrid;

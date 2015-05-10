@@ -1,22 +1,22 @@
 //
-//  CharacterWidget.cpp
+//  HeroWidget.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 06/04/15.
 //
 //
 
-#include "CharacterWidget.h"
+#include "HeroWidget.h"
 
 #include "GameInfo.h"
 #include "Utils.h"
 
-const CharacterWidget::SwordTransform CharacterWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
-const CharacterWidget::SwordTransform CharacterWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
+const HeroWidget::SwordTransform HeroWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
+const HeroWidget::SwordTransform HeroWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
 
-CharacterWidget* CharacterWidget::create(GameplayObject::WeakPtr character)
+HeroWidget* HeroWidget::create(GameplayObject::WeakPtr Hero)
 {
-    CharacterWidget *widget = new CharacterWidget(character);
+    HeroWidget *widget = new HeroWidget(Hero);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -26,18 +26,18 @@ CharacterWidget* CharacterWidget::create(GameplayObject::WeakPtr character)
     return widget;
 }
 
-CharacterWidget::CharacterWidget(GameplayObject::WeakPtr character)
-: _character(character)
+HeroWidget::HeroWidget(GameplayObject::WeakPtr hero)
+: _hero(hero)
 , _sectors(nullptr)
 , _isGameplayActionRunning(false)
 {
 }
 
-CharacterWidget::~CharacterWidget()
+HeroWidget::~HeroWidget()
 {
 }
 
-bool CharacterWidget::init()
+bool HeroWidget::init()
 {
     if (!cocos2d::Node::create()) {
         return false;
@@ -71,13 +71,13 @@ bool CharacterWidget::init()
     return true;
 }
 
-void CharacterWidget::update(float dt)
+void HeroWidget::update(float dt)
 {
-    GameplayObject::Ptr characterPtr = _character.lock();
-    Character *character = Character::Cast(characterPtr);
+    GameplayObject::Ptr HeroPtr = _hero.lock();
+    Hero *Hero = Hero::Cast(HeroPtr);
     
-    if (character->HasActionToPerform()) {
-        CharacterAction *action = &character->CurrentAction();
+    if (Hero->HasActionToPerform()) {
+        HeroAction *action = &Hero->CurrentAction();
         if (action->IsReady() && !_isGameplayActionRunning) {
             action->Start();
             PerformAction(*action);
@@ -85,12 +85,12 @@ void CharacterWidget::update(float dt)
     }
 }
 
-void CharacterWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors)
+void HeroWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors)
 {
     _sectors = &sectors;
 }
 
-void CharacterWidget::RunEffectReceiveDamage()
+void HeroWidget::RunEffectReceiveDamage()
 {
     cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.07f, 0.5f);
     cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.2f, 1.0f);
@@ -100,12 +100,12 @@ void CharacterWidget::RunEffectReceiveDamage()
     runAction(effect);
 }
 
-GameplayObject::WeakPtr CharacterWidget::GetCharacter() const
+GameplayObject::WeakPtr HeroWidget::GetHero() const
 {
-    return _character;
+    return _hero;
 }
 
-void CharacterWidget::Attack()
+void HeroWidget::Attack()
 {
     if (!_sectors)
     {
@@ -114,7 +114,7 @@ void CharacterWidget::Attack()
     
     // pos in the sector space
     cocos2d::Vec2 localPlayer;
-    GameplayObject::Ptr characterPtr = _character.lock();
+    GameplayObject::Ptr heroPtr = _hero.lock();
     
     for (PathSectorWidget *sector : *_sectors)
     {
@@ -134,12 +134,12 @@ void CharacterWidget::Attack()
                 float dx = x1 - x2;
                 float dy = y1 - y2;
                 float L = sqrtf(dx * dx + dy * dy);
-                if (characterPtr->Attack(obj, L) && !obj->IsAlive())
+                if (heroPtr->Attack(obj, L) && !obj->IsAlive())
                 {
-                    Character::Cast(characterPtr)->AddKillPoint();
-                    int score = GameInfo::Instance().GetInt("CHARACTER_SCORE");
+                    Hero::Cast(heroPtr)->AddKillPoint();
+                    int score = GameInfo::Instance().GetInt("HERO_SCORE");
                     score += 1;
-                    GameInfo::Instance().SetInt("CHARACTER_SCORE", score);
+                    GameInfo::Instance().SetInt("HERO_SCORE", score);
                     std::string scoreString = cocos2d::StringUtils::format("%d", score);
                     Utils::LuaCallVoidFunction("UpdateScoreWidget", scoreString);
                 }
@@ -148,27 +148,27 @@ void CharacterWidget::Attack()
     }
 }
 
-void CharacterWidget::PerformAction(const CharacterAction &action)
+void HeroWidget::PerformAction(const HeroAction &action)
 {
     float deltaX = action.GetDeltaX();
     float deltaY = action.GetDeltaY();
     float duration = action.GetDuration();
     
     std::function<void()> end = [&]() {
-        GameplayObject::Ptr ptr = _character.lock();
-        Character::Cast(ptr)->FinishCurrentAction();
-        Character::Cast(ptr)->SetLogicalPos(getPositionX(), getPositionY());
+        GameplayObject::Ptr ptr = _hero.lock();
+        Hero::Cast(ptr)->FinishCurrentAction();
+        Hero::Cast(ptr)->SetLogicalPos(getPositionX(), getPositionY());
         _isGameplayActionRunning = false;
     };
     
     cocos2d::Action *anim = nullptr;
-    if (action.IsType(CharacterAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::RIGHT) {
+    if (action.IsType(HeroAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::RIGHT) {
         anim = AnimSwordRightSwipeRight(duration);
-    } else if (action.IsType(CharacterAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::RIGHT) {
+    } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::RIGHT) {
         anim = AnimSwordRightSwipeLeft(duration);
-    } else if (action.IsType(CharacterAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::LEFT) {
+    } else if (action.IsType(HeroAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::LEFT) {
         anim = AnimSwordLeftSwipeRight(duration);
-    } else if (action.IsType(CharacterAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::LEFT) {
+    } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::LEFT) {
         anim = AnimSwordLeftSwipeLeft(duration);
     } else {
         CC_ASSERT(false);
@@ -193,7 +193,7 @@ void CharacterWidget::PerformAction(const CharacterAction &action)
     _isGameplayActionRunning = true;
 }
 
-cocos2d::Action* CharacterWidget::AnimSwordRightSwipeRight(float duration)
+cocos2d::Action* HeroWidget::AnimSwordRightSwipeRight(float duration)
 {
     // sword anim
     cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
@@ -208,7 +208,7 @@ cocos2d::Action* CharacterWidget::AnimSwordRightSwipeRight(float duration)
     return anim;
 }
 
-cocos2d::Action* CharacterWidget::AnimSwordRightSwipeLeft(float duration)
+cocos2d::Action* HeroWidget::AnimSwordRightSwipeLeft(float duration)
 {
     // sword anim
     cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordLeftSideTrans.localPos);
@@ -224,7 +224,7 @@ cocos2d::Action* CharacterWidget::AnimSwordRightSwipeLeft(float duration)
     return anim;
 }
 
-cocos2d::Action* CharacterWidget::AnimSwordLeftSwipeRight(float duration)
+cocos2d::Action* HeroWidget::AnimSwordLeftSwipeRight(float duration)
 {
     // sword anim
     cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordRightSideTrans.localPos);
@@ -240,7 +240,7 @@ cocos2d::Action* CharacterWidget::AnimSwordLeftSwipeRight(float duration)
     return anim;
 }
 
-cocos2d::Action* CharacterWidget::AnimSwordLeftSwipeLeft(float duration)
+cocos2d::Action* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
 {
     // sword anim
     cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);

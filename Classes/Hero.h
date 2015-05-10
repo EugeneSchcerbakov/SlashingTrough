@@ -1,44 +1,44 @@
 //
-//  Character.h
+//  Hero.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 06/04/15.
 //
 //
 
-#ifndef __SlashingTrough__Character__
-#define __SlashingTrough__Character__
+#ifndef __SlashingTrough__Hero__
+#define __SlashingTrough__Hero__
 
 #include <memory>
 #include <queue>
 
-#include "CharacterAction.h"
+#include "HeroAction.h"
 #include "PathSector.h"
 
-class Character : public GameplayObject
+class Hero : public GameplayObject
 {
 public:
-    typedef std::shared_ptr<Character> Ptr;
-    typedef std::weak_ptr<Character> WeakPtr;
+    typedef std::shared_ptr<Hero> Ptr;
+    typedef std::weak_ptr<Hero> WeakPtr;
     
 public:
     static GameplayObject::Ptr Create();
-    static Character* Cast(GameplayObject::Ptr object);
+    static Hero* Cast(GameplayObject::Ptr object);
     
-    Character();
+    Hero();
     
     void FinishCurrentAction();
-    void AddAction(CharacterAction &action);
+    void AddAction(HeroAction &action);
     void AddKillPoint(int killPoitns = 1);
     
-    CharacterAction& CurrentAction();
+    HeroAction& CurrentAction();
     
-    bool IsAbleToPerform(const CharacterAction &action) const;
+    bool IsAbleToPerform(const HeroAction &action) const;
     bool IsActionsQueueFull() const;
     bool HasActionToPerform() const;
     
 protected:
-    typedef std::queue<CharacterAction> ActionSequence;
+    typedef std::queue<HeroAction> ActionSequence;
     
 protected:
     virtual void Init();
@@ -55,4 +55,4 @@ protected:
     int _killPoints;
 };
 
-#endif /* defined(__SlashingTrough__Character__) */
+#endif /* defined(__SlashingTrough__Hero__) */

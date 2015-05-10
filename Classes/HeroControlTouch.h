@@ -1,28 +1,28 @@
 //
-//  CharacterControlTouch.h
+//  HeroControlTouch.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 23/04/15.
 //
 //
 
-#ifndef __SlashingTrough__CharacterControlTouch__
-#define __SlashingTrough__CharacterControlTouch__
+#ifndef __SlashingTrough__HeroControlTouch__
+#define __SlashingTrough__HeroControlTouch__
 
 #include "cocos2d.h"
-#include "Character.h"
+#include "Hero.h"
 
-class CharacterControlTouch
+class HeroControlTouch
 {
 public:
-    typedef std::shared_ptr<CharacterControlTouch> Ptr;
-    typedef std::weak_ptr<CharacterControlTouch> WeakPtr;
+    typedef std::shared_ptr<HeroControlTouch> Ptr;
+    typedef std::weak_ptr<HeroControlTouch> WeakPtr;
     
 public:
-    static CharacterControlTouch::Ptr Create(GameplayObject::WeakPtr charater,
+    static HeroControlTouch::Ptr Create(GameplayObject::WeakPtr hero,
                                                 cocos2d::EventDispatcher *dispatcher,
                                                 cocos2d::Node *node);
-    CharacterControlTouch(GameplayObject::WeakPtr character,
+    HeroControlTouch(GameplayObject::WeakPtr Hero,
                              cocos2d::EventDispatcher *dispatcher,
                              cocos2d::Node *node);
     void Free();
@@ -36,7 +36,7 @@ private:
     const float _squareSize;
     const float _swipeDistance;
     
-    GameplayObject::WeakPtr _character;
+    GameplayObject::WeakPtr _hero;
     cocos2d::EventDispatcher *_dispatcher;
     cocos2d::EventListenerTouchOneByOne *_listener;
     cocos2d::Vec2 _touchBeginPos;
@@ -44,4 +44,4 @@ private:
     bool _isSwipingNow;
 };
 
-#endif /* defined(__SlashingTrough__CharacterControlTouch__) */
+#endif /* defined(__SlashingTrough__HeroControlTouch__) */
