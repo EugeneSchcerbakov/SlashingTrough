@@ -46,6 +46,7 @@ public:
     int GetGoldPoints() const;
     int GetStaminaPoints() const;
     int GetScorePoints() const;
+    int GetDamagePoints() const;
     
 protected:
     typedef std::queue<HeroAction> ActionSequence;

@@ -7,13 +7,6 @@
 require "Cocos2d"
 require "Cocos2dConstants"
 
-local PlayerHealthString = "null"
-local PlayerHealthDirty = false
-local PlayerScoreString = "null"
-local PlayerScoreDirty = false
-local TimeScaleString = "null"
-local TimeScaleDirty = false
-
 function UpdateHealthWidget(health)
 	PlayerHealthString = string.format("%s%%", health)
 	PlayerHealthDirty = true
@@ -22,11 +15,6 @@ end
 function UpdateScoreWidget(score)
 	PlayerScoreString = string.format("Kills: %s", score)
 	PlayerScoreDirty = true
-end
-
-function UpdateTimeScaleWidget(timeScale)
-	TimeScaleString = string.format("x%s", timeScale)
-	TimeScaleDirty = true
 end
 
 local function StratchingBounceEffect()
@@ -124,55 +112,4 @@ function CreateStartScene()
 	scene:addChild(button)
 
 	return scene
-end
-
-function CreateInterfaceLayer()
-	local director = cc.Director:getInstance()
-	local scheduler = director:getScheduler()
-	local layer = cc.Layer:create()
-	local hud = cc.CSLoader:createNode("hud.csb")
-	
-	local origin = director:getVisibleOrigin()
-	local size = director:getVisibleSize()
-
-	local timeScaleText = ccui.Text:create()
-	timeScaleText:setFontName("font_prototype.ttf")
-	timeScaleText:setFontSize(150)
-	timeScaleText:setString("")
-	timeScaleText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	timeScaleText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	timeScaleText:setVisible(false)
-	local timeScaleTextYShift = -400.0
-	timeScaleText:setPositionX(origin.x + size.width * 0.5)
-	timeScaleText:setPositionY(origin.y + size.height * 0.5 + timeScaleTextYShift)
-
-	local function update(dt)
-		if PlayerHealthDirty then
-			local widget = hud:getChildByName("health")
-			widget:setString(PlayerHealthString)
-			PlayerHealthDirty = false
-		elseif PlayerScoreDirty then
-			local widget = hud:getChildByName("score")
-			widget:setString(PlayerScoreString)
-			PlayerScoreDirty = false
-		elseif TimeScaleDirty then
-			timeScaleText:setVisible(true)
-			timeScaleText:setString(TimeScaleString)
-			TimeScaleDirty = false
-			if TimeScaleString == "x1.0" then
-				local function func( ... )
-					timeScaleText:setVisible(false)
-				end
-				local delay = cc.DelayTime:create(2.0)
-				local call = cc.CallFunc:create(func)
-				local seq = cc.Sequence:create(delay, call)
-				timeScaleText:runAction(seq)
-			end
-		end
-	end
-
-	layer:scheduleUpdateWithPriorityLua(update, 0)
-	layer:addChild(hud, 0)
-	layer:addChild(timeScaleText, 1)
-	return layer
 end

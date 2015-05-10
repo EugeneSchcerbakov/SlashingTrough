@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 
+#include "GameInterface.h"
 #include "GameField.h"
 
 class GameScene : public cocos2d::Scene
@@ -35,7 +36,7 @@ private:
     
 private:
     GameField *_layerField;
-    cocos2d::Layer *_layerGui;
+    GameInterface *_layerGui;
     
     void OnKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
     void OnKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);

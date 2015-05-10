@@ -38,7 +38,7 @@ bool GameInfo::LoadInfo(const std::string &filename)
             if (type == "int") {
                 SetInt(name, atoi(value.c_str()));
             } else if (type == "bool") {
-                SetBool(name, (bool)atoi(value.c_str()));
+                SetBool(name, value == "true");
             } else if (type == "float") {
                 SetFloat(name, atof(value.c_str()));
             } else if (type == "string") {

@@ -55,11 +55,9 @@ bool GameScene::init()
         dispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
     }
     
-    _layerField = GameField::create();
+    _layerGui = GameInterface::create();
+    _layerField = GameField::create(_layerGui);
     _layerField->setScale(1.0f);
-    _layerGui = Utils::MakeLayerFromLua("CreateInterfaceLayer");
-    
-    // Utils::LuaCallVoidFunction("UpdateScoreWidget", "0");
     
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     addChild(_layerField, LayerZOrder::GAME_FIELD);
@@ -105,8 +103,6 @@ void GameScene::OnMouseScroll(cocos2d::Event *event)
         cocos2d::Director *director = cocos2d::Director::getInstance();
         cocos2d::Scheduler *scheduler = director->getScheduler();
         scheduler->setTimeScale(_currentTimeScale);
-        
-        std::string timeScaleString = cocos2d::StringUtils::format("%.1f", _currentTimeScale);
-        Utils::LuaCallVoidFunction("UpdateTimeScaleWidget", timeScaleString);
+        _layerGui->SetTimeScaleLabel(_currentTimeScale);
     }
 }

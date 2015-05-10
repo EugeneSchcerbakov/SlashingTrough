@@ -137,6 +137,11 @@ int Hero::GetScorePoints() const
     return _scorePoints;
 }
 
+int Hero::GetDamagePoints() const
+{
+    return (int)_damage;
+}
+
 void Hero::Init()
 {
     GameInfo &gameinfo = GameInfo::Instance();

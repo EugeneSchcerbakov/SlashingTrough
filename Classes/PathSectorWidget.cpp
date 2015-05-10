@@ -118,12 +118,7 @@ void PathSectorWidget::update(float dt)
             {
                 object->Kill();
                 _heroWidget->RunEffectReceiveDamage();
-                
-                int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
-                int currentHealth = (int)ptr->GetHealth();
-                int percentHealth = (currentHealth * 100) / totalHealth;
-                std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
-                Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
+                getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
             }
         }
     }

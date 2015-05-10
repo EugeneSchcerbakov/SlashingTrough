@@ -42,14 +42,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	platform = cocos2d::Application::getInstance()->getTargetPlatform();
 	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
 		fileUtils->addSearchPath("../../Resources");
-		fileUtils->addSearchPath("../../Resources/gui");
+		fileUtils->addSearchPath("../../Resources/fonts");
 		fileUtils->addSearchPath("../../Resources/textures");
 		fileUtils->addSearchPath("../../Resources/scripts");
 		luaEngine->addSearchPath("../../Resources/scripts");
 	}
 
 	fileUtils->addSearchPath("textures");
-    fileUtils->addSearchPath("gui");
+    fileUtils->addSearchPath("fonts");
 	fileUtils->addSearchPath("scripts");
 	luaEngine->addSearchPath("scripts");
     

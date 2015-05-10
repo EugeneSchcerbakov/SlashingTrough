@@ -9,9 +9,9 @@
 #include "GameField.h"
 #include "Utils.h"
 
-GameField* GameField::create()
+GameField* GameField::create(GameInterface *gameInterface)
 {
-    GameField *field = new GameField();
+    GameField *field = new GameField(gameInterface);
     if (field && field->init()) {
         field->autorelease();
     } else {
@@ -21,8 +21,9 @@ GameField* GameField::create()
     return field;
 }
 
-GameField::GameField()
-: _scrollSpeed(400.0f)
+GameField::GameField(GameInterface *gameInterface)
+: _gameInterface(gameInterface)
+, _scrollSpeed(400.0f)
 , _sectorsQueueSize(3)
 , _passedSectors(0)
 , _difficultIndex(0)
@@ -31,6 +32,7 @@ GameField::GameField()
 
 GameField::~GameField()
 {
+    getEventDispatcher()->removeCustomEventListeners("RefreshInterface");
 }
 
 void GameField::SetSectorsQueueSize(int size)
@@ -76,12 +78,6 @@ bool GameField::init()
     _heroWidget->setPositionX(_hero->GetLogicalX());
     _heroWidget->setPositionY(_hero->GetLogicalY());
 
-    int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
-    int currentHealth = (int)_hero->GetHealth();
-    int percentHealth = (currentHealth * 100) / totalHealth;
-    std::string stringHealth = cocos2d::StringUtils::format("%d", percentHealth);
-    Utils::LuaCallVoidFunction("UpdateHealthWidget", stringHealth);
-    
     for (int k = 0; k < _sectorsQueueSize; ++k) {
         bool makeEmpty = false;
         if (k == 0) {
@@ -94,9 +90,11 @@ bool GameField::init()
     _controlKeyboard = HeroControlKeyboard::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
     _controlTouch = HeroControlTouch::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
     
+    getEventDispatcher()->addCustomEventListener("RefreshInterface", [&](cocos2d::EventCustom*){RefreshInterface();});
     addChild(_heroWidget, DrawOrder::HERO);
-    
     scheduleUpdate();
+    
+    RefreshInterface();
     
     return true;
 }
@@ -183,3 +181,17 @@ void GameField::UpdateDifficult()
         }
     }
 }
+
+void GameField::RefreshInterface()
+{
+    Hero *hero = Hero::Cast(_hero);
+    _gameInterface->SetGoldPointsLabel(hero->GetGoldPoints());
+    _gameInterface->SetKillPointsLabel(hero->GetKillPoints());
+    _gameInterface->SetDamagePointsLabel(hero->GetDamagePoints());
+    
+    int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
+    int currentHealth = (int)hero->GetHealth();
+    int percentHealth = (currentHealth * 100) / totalHealth;
+    _gameInterface->SetHealthPointsLabel(percentHealth);
+}
+

@@ -14,12 +14,13 @@
 #include "HeroControlKeyboard.h"
 #include "HeroControlTouch.h"
 
+#include "GameInterface.h"
 #include "GameInfo.h"
 
 class GameField : public cocos2d::Layer
 {
 public:
-    static GameField* create();
+    static GameField* create(GameInterface *gameInterface);
     
     void SetSectorsQueueSize(int size);
     void SetScrollSpeed(float scrollSpeed);
@@ -28,7 +29,7 @@ public:
     void Reset();
     
 protected:
-    GameField();
+    GameField(GameInterface *gameInterface);
     virtual ~GameField();
     
     bool init();
@@ -36,6 +37,7 @@ protected:
     
     void GenerateNewSector(bool makeEmpty = false);
     void UpdateDifficult();
+    void RefreshInterface();
     
 private:
     enum DrawOrder
@@ -58,6 +60,8 @@ private:
     
     GameInfo::DifficultInfo _difficult;
     PathSectorWidget::SectorsSequence _sectorsSequence;
+    
+    GameInterface *_gameInterface;
 };
 
 #endif /* defined(__SlashingTrough__GameField__) */

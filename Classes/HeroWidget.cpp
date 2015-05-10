@@ -142,13 +142,7 @@ void HeroWidget::Attack()
                     hero->AddStaminaPoints(obj->GetRewardStaminaPoints());
                     hero->AddScorePoints(obj->GetRewardScorePoints());
                     
-                    /*
-                    int score = GameInfo::Instance().GetInt("HERO_SCORE");
-                    score += 1;
-                    GameInfo::Instance().SetInt("HERO_SCORE", score);
-                    std::string scoreString = cocos2d::StringUtils::format("%d", score);
-                    Utils::LuaCallVoidFunction("UpdateScoreWidget", scoreString);
-                    */
+                    getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
                 }
             }
         }

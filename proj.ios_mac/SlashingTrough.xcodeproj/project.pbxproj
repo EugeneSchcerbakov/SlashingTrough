@@ -72,8 +72,10 @@
 		CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
 		CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
-		CD69BAC51AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
-		CD69BAC61AE61CCF00D9BEC0 /* gui in Resources */ = {isa = PBXBuildFile; fileRef = CD69BAC41AE61CCF00D9BEC0 /* gui */; };
+		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
+		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
+		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
+		CD75035B1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
 		CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */; };
 		CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
@@ -223,7 +225,9 @@
 		CD5F8C7D1AD03DB8000CF14A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		CD5F8C811AD04C9C000CF14A /* PathSector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSector.cpp; sourceTree = "<group>"; };
 		CD5F8C821AD04C9C000CF14A /* PathSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSector.h; sourceTree = "<group>"; };
-		CD69BAC41AE61CCF00D9BEC0 /* gui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gui; sourceTree = "<group>"; };
+		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
+		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
+		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
@@ -361,7 +365,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CD69BAC41AE61CCF00D9BEC0 /* gui */,
+				CD7503591AFF9AF000DBD732 /* fonts */,
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
@@ -381,6 +385,8 @@
 				CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */,
 				CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */,
 				CD5F8C7D1AD03DB8000CF14A /* GameScene.h */,
+				CD7503511AFF6BED00DBD732 /* GameInterface.cpp */,
+				CD7503521AFF6BED00DBD732 /* GameInterface.h */,
 				CD2D18301AD1532D00F96E8F /* GameField.cpp */,
 				CD2D18311AD1532D00F96E8F /* GameField.h */,
 				CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */,
@@ -592,7 +598,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD69BAC51AE61CCF00D9BEC0 /* gui in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
@@ -608,6 +613,7 @@
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				CD75035A1AFF9AF000DBD732 /* fonts in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -626,7 +632,7 @@
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
-				CD69BAC61AE61CCF00D9BEC0 /* gui in Resources */,
+				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */,
@@ -653,6 +659,7 @@
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CDA8F4491AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
 				CDA8F4441AD2F356006A3210 /* Hero.cpp in Sources */,
+				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
 				CD44C6FE1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */,
@@ -677,6 +684,7 @@
 				CD3ECE8D1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
+				CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 				CDA8F44A1AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
 			);
