@@ -33,9 +33,38 @@
         </Stage>
 	</DifficultProgress>
     <GameplayObjects>
-        <Obstacle name="Box" destructible="false" health="1.0" damage="1.0" sprite="obstacle_0.png" />
-        <Enemy name="enemy-A" damage="1.0" health="1.0" sprite="creep_0.png" />
-        <Enemy name="enemy-B" damage="1.0" health="2.0" sprite="creep_1.png" />
-        <Enemy name="enemy-C" damage="1.0" health="3.0" sprite="creep_2.png" />
+        <Obstacle name="Box"
+            destructible="false"
+            health="1.0"
+            damage="1.0"
+            killPoints="1"
+            goldPointsReward="0"
+            staminaPointsReward="0"
+            scorePointsReward="0"
+            sprite="obstacle_0.png" />
+        <Enemy name="enemy-A"
+            damage="1.0"
+            health="1.0"
+            killPoints="1"
+            goldPointsReward="5"
+            staminaPointsReward="3"
+            scorePointsReward="10"
+            sprite="creep_0.png" />
+        <Enemy name="enemy-B"
+            damage="1.0"
+            health="2.0"
+            killPoints="1"
+            goldPointsReward="20"
+            staminaPointsReward="5"
+            scorePointsReward="30"
+            sprite="creep_1.png" />
+        <Enemy name="enemy-C"
+            damage="1.0"
+            health="3.0"
+            killPoints="1"
+            goldPointsReward="50"
+            staminaPointsReward="15"
+            scorePointsReward="50"
+            sprite="creep_2.png" />
     </GameplayObjects>
 </GameInfo>

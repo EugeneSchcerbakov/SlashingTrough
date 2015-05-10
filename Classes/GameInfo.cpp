@@ -81,18 +81,28 @@ bool GameInfo::LoadInfo(const std::string &filename)
             tinyxml2::XMLElement *elem = objectsNode->ToElement();
             std::string type = elem->Name();
             if (type == "Obstacle") {
-                bool destructible = elem->BoolAttribute("destructible");
-                float health = elem->FloatAttribute("health");
-                float damage = elem->FloatAttribute("damage");
-                std::string sprite = elem->Attribute("sprite");
+                ObstacleType info;
+                info.destructible = elem->BoolAttribute("destructible");
+                info.health = elem->FloatAttribute("health");
+                info.damage = elem->FloatAttribute("damage");
+                info.killPoints = elem->IntAttribute("killPoints");
+                info.goldPointsReward = elem->IntAttribute("goldPointsReward");
+                info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");
+                info.scorePointsReward = elem->IntAttribute("scorePointsReward");
+                info.sprite = elem->Attribute("sprite");
                 std::string name = elem->Attribute("name");
-                _obstaclesSettings[name] = ObstacleType(health, damage, destructible, sprite);
+                _obstaclesSettings[name] = info;
             } else if (type == "Enemy") {
-                float damage = elem->FloatAttribute("damage");
-                float health = elem->FloatAttribute("health");
-                std::string sprite = elem->Attribute("sprite");
+                EnemyType info;
+                info.damage = elem->FloatAttribute("damage");
+                info.health = elem->FloatAttribute("health");
+                info.killPoints = elem->IntAttribute("killPoints");
+                info.goldPointsReward = elem->IntAttribute("goldPointsReward");
+                info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");
+                info.scorePointsReward = elem->IntAttribute("scorePointsReward");
+                info.sprite = elem->Attribute("sprite");
                 std::string name = elem->Attribute("name");
-                _enemiesSettings[name] = EnemyType(damage, health, sprite);
+                _enemiesSettings[name] = info;
             } else {
                 CC_ASSERT(false);
             }

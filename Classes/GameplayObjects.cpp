@@ -80,6 +80,26 @@ float GameplayObject::GetLogicalY() const
     return _logicalY;
 }
 
+int GameplayObject::GetRewardKillPoints() const
+{
+    return _killPoints;
+}
+
+int GameplayObject::GetRewardGoldPoints() const
+{
+    return _goldPointsReward;
+}
+
+int GameplayObject::GetRewardStaminaPoints() const
+{
+    return _staminaPointsReward;
+}
+
+int GameplayObject::GetRewardScorePoints() const
+{
+    return _scorePointsReward;
+}
+
 GameplayObject::UID GameplayObject::GetUID() const
 {
     return _uid;
@@ -104,6 +124,10 @@ Obstacle::Obstacle(const GameInfo::ObstacleType &info, UID uid)
     _sprite = info.sprite;
     _damage = info.damage;
     _radius = 150.0f;
+    _killPoints = info.killPoints;
+    _goldPointsReward = info.goldPointsReward;
+    _staminaPointsReward = info.staminaPointsReward;
+    _scorePointsReward = info.scorePointsReward;
     _destructible = info.destructible;
 }
 
@@ -143,6 +167,10 @@ Enemy::Enemy(const GameInfo::EnemyType &info, UID uid)
     _health = info.health;
     _sprite = info.sprite;
     _damage = info.damage;
+    _killPoints = info.killPoints;
+    _goldPointsReward = info.goldPointsReward;
+    _staminaPointsReward = info.staminaPointsReward;
+    _scorePointsReward = info.scorePointsReward;
     _radius = 150.0f;
 }
 

@@ -59,8 +59,7 @@ bool GameScene::init()
     _layerField->setScale(1.0f);
     _layerGui = Utils::MakeLayerFromLua("CreateInterfaceLayer");
     
-    GameInfo::Instance().SetInt("HERO_SCORE", 0);
-    Utils::LuaCallVoidFunction("UpdateScoreWidget", "0");
+    // Utils::LuaCallVoidFunction("UpdateScoreWidget", "0");
     
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     addChild(_layerField, LayerZOrder::GAME_FIELD);

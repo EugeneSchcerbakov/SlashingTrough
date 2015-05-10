@@ -136,12 +136,19 @@ void HeroWidget::Attack()
                 float L = sqrtf(dx * dx + dy * dy);
                 if (heroPtr->Attack(obj, L) && !obj->IsAlive())
                 {
-                    Hero::Cast(heroPtr)->AddKillPoint();
+                    Hero *hero = Hero::Cast(heroPtr);
+                    hero->AddKillPoints(obj->GetRewardKillPoints());
+                    hero->AddGoldPoints(obj->GetRewardGoldPoints());
+                    hero->AddStaminaPoints(obj->GetRewardStaminaPoints());
+                    hero->AddScorePoints(obj->GetRewardScorePoints());
+                    
+                    /*
                     int score = GameInfo::Instance().GetInt("HERO_SCORE");
                     score += 1;
                     GameInfo::Instance().SetInt("HERO_SCORE", score);
                     std::string scoreString = cocos2d::StringUtils::format("%d", score);
                     Utils::LuaCallVoidFunction("UpdateScoreWidget", scoreString);
+                    */
                 }
             }
         }

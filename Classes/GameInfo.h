@@ -46,29 +46,30 @@ public:
         float health;
         float damage;
         bool destructible;
+        
+        int killPoints;
+        int goldPointsReward;
+        int scorePointsReward;
+        int staminaPointsReward;
+        
         std::string sprite;
-        ObstacleType(float h, float dmg, bool d, const std::string &s)
-        : health(h)
-        , damage(dmg)
-        , destructible(d)
-        , sprite(s)
-        {}
-        ObstacleType()
-        {}
+        
+        ObstacleType() {}
     };
     
     struct EnemyType
     {
         float damage;
         float health;
+        
+        int killPoints;
+        int goldPointsReward;
+        int scorePointsReward;
+        int staminaPointsReward;
+        
         std::string sprite;
-        EnemyType(float d, float h, std::string s)
-        : damage(d)
-        , health(h)
-        , sprite(s)
-        {}
-        EnemyType()
-        {}
+        
+        EnemyType() {}
     };
     
     typedef std::vector<DifficultInfo> DiffucultSettings;

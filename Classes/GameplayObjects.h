@@ -48,6 +48,11 @@ public:
     virtual float GetLogicalX() const;
     virtual float GetLogicalY() const;
     
+    virtual int GetRewardKillPoints() const;
+    virtual int GetRewardGoldPoints() const;
+    virtual int GetRewardStaminaPoints() const;
+    virtual int GetRewardScorePoints() const;
+    
     UID GetUID() const;
     
 protected:
@@ -56,6 +61,12 @@ protected:
     float _health;
     float _damage;
     float _radius;
+    
+    int _killPoints;
+    int _goldPointsReward;
+    int _staminaPointsReward;
+    int _scorePointsReward;
+    
     std::string _sprite;
     
     const Type _type;

@@ -27,15 +27,25 @@ public:
     
     Hero();
     
+    void FlushAllRewards();
     void FinishCurrentAction();
     void AddAction(HeroAction &action);
-    void AddKillPoint(int killPoitns = 1);
     
     HeroAction& CurrentAction();
     
     bool IsAbleToPerform(const HeroAction &action) const;
     bool IsActionsQueueFull() const;
     bool HasActionToPerform() const;
+    
+    void AddKillPoints(int killPoints);
+    void AddGoldPoints(int goldPoints);
+    void AddStaminaPoints(int staminaPoints);
+    void AddScorePoints(int scorePoints);
+    
+    int GetKillPoints() const;
+    int GetGoldPoints() const;
+    int GetStaminaPoints() const;
+    int GetScorePoints() const;
     
 protected:
     typedef std::queue<HeroAction> ActionSequence;
@@ -53,6 +63,9 @@ protected:
     int _actionsSequenceMaxSize;
     
     int _killPoints;
+    int _goldPoints;
+    int _staminaPoints;
+    int _scorePoints;
 };
 
 #endif /* defined(__SlashingTrough__Hero__) */

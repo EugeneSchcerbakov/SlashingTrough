@@ -23,9 +23,10 @@ Hero* Hero::Cast(GameplayObject::Ptr object)
 Hero::Hero()
 : GameplayObject(Type::HERO, InvalidUID)
 , _killPointToNextDamageUp(0)
-, _killPoints(0)
+, _staminaPoints(0)
 {
     Init();
+    FlushAllRewards();
 }
 
 void Hero::AddAction(HeroAction &action)
@@ -44,19 +45,16 @@ void Hero::AddAction(HeroAction &action)
     _actionSequence.push(action);
 }
 
-void Hero::AddKillPoint(int killPoint)
-{
-    _killPoints += killPoint;
-    _killPointToNextDamageUp += killPoint;
-    if (_killPointToNextDamageUp >= _damageUpKillPoints) {
-        _killPointToNextDamageUp = 0;
-        _damage += _damageUpValue;
-    }
-}
-
 HeroAction& Hero::CurrentAction()
 {
     return _actionSequence.front();
+}
+
+void Hero::FlushAllRewards()
+{
+    _killPoints = 0;
+    _goldPoints = 0;
+    _scorePoints = 0;
 }
 
 void Hero::FinishCurrentAction()
@@ -92,6 +90,51 @@ bool Hero::IsActionsQueueFull() const
 bool Hero::HasActionToPerform() const
 {
     return !_actionSequence.empty();
+}
+
+void Hero::AddKillPoints(int killPoints)
+{
+    _killPoints += killPoints;
+    _killPointToNextDamageUp += killPoints;
+    if (_killPointToNextDamageUp >= _damageUpKillPoints) {
+        _killPointToNextDamageUp = 0;
+        _damage += _damageUpValue;
+    }
+}
+
+void Hero::AddGoldPoints(int goldPoints)
+{
+    _goldPoints += goldPoints;
+}
+
+void Hero::AddStaminaPoints(int staminaPoints)
+{
+    _staminaPoints += staminaPoints;
+}
+
+void Hero::AddScorePoints(int scorePoints)
+{
+    _scorePoints += scorePoints;
+}
+
+int Hero::GetKillPoints() const
+{
+    return _killPoints;
+}
+
+int Hero::GetGoldPoints() const
+{
+    return _goldPoints;
+}
+
+int Hero::GetStaminaPoints() const
+{
+    return _staminaPoints;
+}
+
+int Hero::GetScorePoints() const
+{
+    return _scorePoints;
 }
 
 void Hero::Init()
