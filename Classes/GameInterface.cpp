@@ -75,6 +75,11 @@ void GameInterface::SetHealthPointsLabel(int value)
     _healthPointsText->setString(str);
 }
 
+void GameInterface::SetStaminaPoints(float value)
+{
+    _staminaBar->setProgress(value);
+}
+
 bool GameInterface::init()
 {
     if (!cocos2d::Layer::init()) {
@@ -171,6 +176,12 @@ bool GameInterface::init()
     healthPointsBack->addChild(healthIcon);
     healthPointsBack->addChild(_healthPointsText);
     
+    _staminaBar = StaminaBarWidget::create();
+    _staminaBar->setPositionX(screen.width * 0.5f);
+    _staminaBar->setPositionY(_staminaBar->getContentSize().height * 0.5f + 15.0f);
+    _staminaBar->setProgress(0.8f);
+    
+    addChild(_staminaBar);
     addChild(goldPointsBack);
     addChild(killPointsBack);
     addChild(damagePointsBack);
@@ -181,6 +192,7 @@ bool GameInterface::init()
     killPointsBack->setVisible(GameInfo::Instance().GetBool("KILL_POINTS_VISIBILITY"));
     damagePointsBack->setVisible(GameInfo::Instance().GetBool("DAMAGE_POINTS_VISIBILITY"));
     healthPointsBack->setVisible(GameInfo::Instance().GetBool("HEALTH_POINTS_VISIBILITY"));
+    _staminaBar->setVisible(GameInfo::Instance().GetBool("STAMINA_BAR_VISIBILITY"));
     
     return true;
 }

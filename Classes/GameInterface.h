@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
+#include "StaminaBarWidget.h"
+
 class GameInterface : public cocos2d::Layer
 {
 public:
@@ -22,6 +24,7 @@ public:
     void SetKillPointsLabel(int value);
     void SetDamagePointsLabel(int value);
     void SetHealthPointsLabel(int value);
+    void SetStaminaPoints(float value);
     
 protected:
     GameInterface();
@@ -35,6 +38,8 @@ private:
     cocos2d::ui::Text *_damagePointsText;
     cocos2d::ui::Text *_healthPointsText;
     cocos2d::ui::Text *_timeScaleText;
+    
+    StaminaBarWidget *_staminaBar;
 };
 
 #endif /* defined(__SlashingTrough__GameInterface__) */

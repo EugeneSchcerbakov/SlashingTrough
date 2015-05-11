@@ -112,6 +112,7 @@ void GameField::update(float dt)
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
+    Hero::Cast(_hero)->IdleUpdate(dt);
     _heroWidget->RefreshSectorsSequence(_sectorsSequence);
     
     // scroll level down
@@ -193,5 +194,9 @@ void GameField::RefreshInterface()
     int currentHealth = (int)hero->GetHealth();
     int percentHealth = (currentHealth * 100) / totalHealth;
     _gameInterface->SetHealthPointsLabel(percentHealth);
+    
+    float maxStaminaPoints = GameInfo::Instance().GetFloat("HERO_STAMINA_POINTS");
+    float curStaminaPoints = hero->GetStaminaPoints();
+    _gameInterface->SetStaminaPoints(curStaminaPoints / maxStaminaPoints);
 }
 

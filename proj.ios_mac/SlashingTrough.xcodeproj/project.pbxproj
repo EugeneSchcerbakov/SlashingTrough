@@ -72,6 +72,8 @@
 		CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
 		CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
+		CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
+		CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -225,6 +227,8 @@
 		CD5F8C7D1AD03DB8000CF14A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		CD5F8C811AD04C9C000CF14A /* PathSector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSector.cpp; sourceTree = "<group>"; };
 		CD5F8C821AD04C9C000CF14A /* PathSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSector.h; sourceTree = "<group>"; };
+		CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaminaBarWidget.cpp; sourceTree = "<group>"; };
+		CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaminaBarWidget.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 				CD3E69AA1AD3A593008F7FB0 /* HeroControlKeyboard.h */,
 				CD44C6FC1AE9503E008569F6 /* HeroControlTouch.cpp */,
 				CD44C6FD1AE9503E008569F6 /* HeroControlTouch.h */,
+				CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */,
+				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -649,6 +655,7 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD3E69AB1AD3A593008F7FB0 /* HeroControlKeyboard.cpp in Sources */,
@@ -671,6 +678,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* HeroControlKeyboard.cpp in Sources */,
 				CD543C111ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,

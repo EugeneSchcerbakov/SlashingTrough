@@ -63,6 +63,7 @@ bool HeroWidget::init()
     _sword->setRotation(_swordRightSideTrans.angle);
     
     _swordSide = SwordSide::RIGHT;
+    _lastStamina = Hero::Cast(_hero.lock())->GetStaminaPoints();
     
     scheduleUpdate();
     addChild(_body, 0);
@@ -74,14 +75,19 @@ bool HeroWidget::init()
 void HeroWidget::update(float dt)
 {
     GameplayObject::Ptr HeroPtr = _hero.lock();
-    Hero *Hero = Hero::Cast(HeroPtr);
+    Hero *hero = Hero::Cast(HeroPtr);
     
-    if (Hero->HasActionToPerform()) {
-        HeroAction *action = &Hero->CurrentAction();
+    if (hero->HasActionToPerform()) {
+        HeroAction *action = &hero->CurrentAction();
         if (action->IsReady() && !_isGameplayActionRunning) {
             action->Start();
             PerformAction(*action);
         }
+    }
+    
+    if (_lastStamina != hero->GetStaminaPoints()) {
+        _lastStamina = hero->GetStaminaPoints();
+        getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
     }
 }
 

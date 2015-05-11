@@ -72,6 +72,7 @@ private:
     
     SwordSide _swordSide;
     
+    float _lastStamina;
     int _attackedRowIndex;
     bool _isGameplayActionRunning;
 };

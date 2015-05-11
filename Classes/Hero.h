@@ -27,6 +27,7 @@ public:
     
     Hero();
     
+    void IdleUpdate(float dt);
     void FlushAllRewards();
     void FinishCurrentAction();
     void AddAction(HeroAction &action);
@@ -37,14 +38,14 @@ public:
     bool IsActionsQueueFull() const;
     bool HasActionToPerform() const;
     
+    void AddStaminaPoints(float staminaPoints);
     void AddKillPoints(int killPoints);
     void AddGoldPoints(int goldPoints);
-    void AddStaminaPoints(int staminaPoints);
     void AddScorePoints(int scorePoints);
     
+    float GetStaminaPoints() const;
     int GetKillPoints() const;
     int GetGoldPoints() const;
-    int GetStaminaPoints() const;
     int GetScorePoints() const;
     int GetDamagePoints() const;
     
@@ -58,6 +59,10 @@ protected:
     
     float _attackDistance;
     float _damageUpValue;
+    float _staminaPoints;
+    float _staminaDrainTime;
+    float _staminaDrainTimeCounter;
+    float _staminaDrainValue;
     
     int _killPointToNextDamageUp;
     int _damageUpKillPoints;
@@ -65,7 +70,6 @@ protected:
     
     int _killPoints;
     int _goldPoints;
-    int _staminaPoints;
     int _scorePoints;
 };
 

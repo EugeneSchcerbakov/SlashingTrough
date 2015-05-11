@@ -23,7 +23,7 @@ Hero* Hero::Cast(GameplayObject::Ptr object)
 Hero::Hero()
 : GameplayObject(Type::HERO, InvalidUID)
 , _killPointToNextDamageUp(0)
-, _staminaPoints(0)
+, _staminaDrainTimeCounter(0.0f)
 {
     Init();
     FlushAllRewards();
@@ -48,6 +48,20 @@ void Hero::AddAction(HeroAction &action)
 HeroAction& Hero::CurrentAction()
 {
     return _actionSequence.front();
+}
+
+void Hero::IdleUpdate(float dt)
+{
+    _staminaDrainTimeCounter += dt;
+    if (_staminaDrainTimeCounter >= _staminaDrainTime) {
+        _staminaDrainTimeCounter = 0.0f;
+        AddStaminaPoints(-_staminaDrainValue);
+    }
+    
+    if (_staminaPoints <= 0.0f) {
+        _staminaPoints = 0.0f;
+        //Kill();
+    }
 }
 
 void Hero::FlushAllRewards()
@@ -102,19 +116,32 @@ void Hero::AddKillPoints(int killPoints)
     }
 }
 
+void Hero::AddStaminaPoints(float staminaPoints)
+{
+    _staminaPoints += staminaPoints;
+    
+    float max = GameInfo::Instance().GetFloat("HERO_STAMINA_POINTS");
+    if (_staminaPoints > max) {
+        _staminaPoints = max;
+    }
+    if (_staminaPoints < 0.0f) {
+        _staminaPoints = 0.0f;
+    }
+}
+
 void Hero::AddGoldPoints(int goldPoints)
 {
     _goldPoints += goldPoints;
 }
 
-void Hero::AddStaminaPoints(int staminaPoints)
-{
-    _staminaPoints += staminaPoints;
-}
-
 void Hero::AddScorePoints(int scorePoints)
 {
     _scorePoints += scorePoints;
+}
+
+float Hero::GetStaminaPoints() const
+{
+    return _staminaPoints;
 }
 
 int Hero::GetKillPoints() const
@@ -125,11 +152,6 @@ int Hero::GetKillPoints() const
 int Hero::GetGoldPoints() const
 {
     return _goldPoints;
-}
-
-int Hero::GetStaminaPoints() const
-{
-    return _staminaPoints;
 }
 
 int Hero::GetScorePoints() const
@@ -151,6 +173,9 @@ void Hero::Init()
     _health = gameinfo.GetFloat("HERO_HEALTH_POINTS");
     _damageUpValue = gameinfo.GetFloat("HERO_DAMAGE_UP_VALUE");
     _damageUpKillPoints = gameinfo.GetInt("HERO_DAMAGE_UP_KP");
+    _staminaPoints = gameinfo.GetFloat("HERO_STAMINA_POINTS");
+    _staminaDrainTime = gameinfo.GetFloat("HERO_STAMINA_DRAIN_TIME");
+    _staminaDrainValue = gameinfo.GetFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.GetInt("HERO_ACTIONS_SEQUENCE_SIZE");
 }
 
