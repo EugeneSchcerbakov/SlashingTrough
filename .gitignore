@@ -1,5 +1,4 @@
 *.suo
-*.exe
 *.obj
 *.tlog
 *.log
@@ -19,7 +18,11 @@ CMakeLists.txt.user
 
 log.txt
 /proj.win32/Debug.win32
-/proj.win32/Release.win32
+/proj.win32/Release.win32/SlashingTrough.tlog
+/proj.win32/Release.win32/*.res
+/proj.win32/Release.win32/*.obj
+/proj.win32/Release.win32/*.log
+/proj.win32/Release.win32/*.exp
 *.apk
 *.o
 *.d
