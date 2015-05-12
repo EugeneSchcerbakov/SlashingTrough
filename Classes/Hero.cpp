@@ -60,7 +60,7 @@ void Hero::IdleUpdate(float dt)
     
     if (_staminaPoints <= 0.0f) {
         _staminaPoints = 0.0f;
-        //Kill();
+        Kill();
     }
 }
 
