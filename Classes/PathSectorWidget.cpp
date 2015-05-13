@@ -118,6 +118,7 @@ void PathSectorWidget::update(float dt)
             {
                 object->Kill();
                 _heroWidget->RunEffectReceiveDamage();
+                Hero::Cast(ptr)->AddStaminaPoints(-object->GetStaminaDrainPoints());
                 getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
             }
         }

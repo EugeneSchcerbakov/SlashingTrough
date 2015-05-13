@@ -85,6 +85,7 @@ bool GameInfo::LoadInfo(const std::string &filename)
                 info.destructible = elem->BoolAttribute("destructible");
                 info.health = elem->FloatAttribute("health");
                 info.damage = elem->FloatAttribute("damage");
+                info.staminaDrainPoints = elem->FloatAttribute("staminaDrainPoints");
                 info.killPoints = elem->IntAttribute("killPoints");
                 info.goldPointsReward = elem->IntAttribute("goldPointsReward");
                 info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");
@@ -96,6 +97,7 @@ bool GameInfo::LoadInfo(const std::string &filename)
                 EnemyType info;
                 info.damage = elem->FloatAttribute("damage");
                 info.health = elem->FloatAttribute("health");
+                info.staminaDrainPoints = elem->FloatAttribute("staminaDrainPoints");
                 info.killPoints = elem->IntAttribute("killPoints");
                 info.goldPointsReward = elem->IntAttribute("goldPointsReward");
                 info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");

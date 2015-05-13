@@ -45,6 +45,7 @@ public:
     {
         float health;
         float damage;
+        float staminaDrainPoints;
         bool destructible;
         
         int killPoints;
@@ -61,6 +62,7 @@ public:
     {
         float damage;
         float health;
+        float staminaDrainPoints;
         
         int killPoints;
         int goldPointsReward;

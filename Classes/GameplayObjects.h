@@ -47,6 +47,7 @@ public:
     virtual float GetHealth() const;
     virtual float GetLogicalX() const;
     virtual float GetLogicalY() const;
+    virtual float GetStaminaDrainPoints() const;
     
     virtual int GetRewardKillPoints() const;
     virtual int GetRewardGoldPoints() const;
@@ -61,6 +62,7 @@ protected:
     float _health;
     float _damage;
     float _radius;
+    float _staminaDrainPoints;
     
     int _killPoints;
     int _goldPointsReward;
