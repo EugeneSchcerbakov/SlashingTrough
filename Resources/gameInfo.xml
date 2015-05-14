@@ -8,7 +8,7 @@
 		<Const name="HERO_HEALTH_POINTS" type="float" value="10.0" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="300.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.2" />
-        <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="4.0" />
+        <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="3.5" />
         <Const name="HERO_SWIPE_DURATION" type="float" value="0.33" />
 		<Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
 		<Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
@@ -32,37 +32,46 @@
             <Enemy name="enemy-B" amount="0" />
             <Obstacle name="Box" amount="1" />
         </Stage>
-		<Stage sectors="8" runningSpeed="480">
+		<Stage sectors="6" runningSpeed="480">
 			<Enemy name="enemy-A" amount="2" />
             <Enemy name="enemy-B" amount="1" />
             <Obstacle name="Box" amount="2" />
         </Stage>
-		<Stage sectors="8" runningSpeed="500">
+		<Stage sectors="6" runningSpeed="500">
             <Enemy name="enemy-B" amount="1" />
             <Enemy name="enemy-C" amount="2" />
             <Obstacle name="Box" amount="2" />
         </Stage>
-        <Stage sectors="8" runningSpeed="520">
+        <Stage sectors="6" runningSpeed="520">
             <Enemy name="enemy-B" amount="1" />
             <Enemy name="enemy-C" amount="2" />
             <Enemy name="enemy-D" amount="1" />
             <Obstacle name="Box" amount="1" />
         </Stage>
-        <Stage sectors="8" runningSpeed="540">
+        <Stage sectors="5" runningSpeed="540">
             <Enemy name="enemy-C" amount="1" />
             <Enemy name="enemy-D" amount="3" />
             <Obstacle name="Box" amount="1" />
         </Stage>
-        <Stage sectors="8" runningSpeed="560">
+        <Stage sectors="5" runningSpeed="560">
         	 <Enemy name="enemy-C" amount="1" />
             <Enemy name="enemy-D" amount="3" />
             <Obstacle name="Box" amount="1" />
         </Stage>
-        <Stage sectors="10" runningSpeed="600">
+        <Stage sectors="5" runningSpeed="600">
         	 <Enemy name="enemy-C" amount="1" />
             <Enemy name="enemy-D" amount="3" />
             <Obstacle name="Box" amount="1" />
         </Stage>
+        <Stage sectors="4" runningSpeed="640">
+             <Enemy name="enemy-D" amount="1" />
+            <Enemy name="enemy-E" amount="3" />
+            <Obstacle name="Box" amount="1" />
+        </Stage> 
+        <Stage sectors="6" runningSpeed="680">
+             <Enemy name="enemy-E" amount="3" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>                
 	</DifficultProgress>
     <GameplayObjects>
         <Obstacle name="Box"
@@ -85,7 +94,7 @@
             scorePointsReward="10"
             sprite="creep_0.png" />
         <Enemy name="enemy-B"
-            damage="1.0"
+            damage="0.0"
             health="2.0"
             killPoints="1"
             staminaDrainPoints="50"
@@ -94,7 +103,7 @@
             scorePointsReward="20"
             sprite="creep_1.png" />
         <Enemy name="enemy-C"
-            damage="1.0"
+            damage="0.0"
             health="3.0"
             killPoints="1"
             staminaDrainPoints="50"
@@ -103,13 +112,22 @@
             scorePointsReward="30"
             sprite="creep_2.png" />
          <Enemy name="enemy-D"
-            damage="1.0"
-            health="5.0"
+            damage="0.0"
+            health="4.0"
             killPoints="1"
-            staminaDrainPoints="100"
+            staminaDrainPoints="150"
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
             sprite="creep_2.png" />
+         <Enemy name="enemy-E"
+            damage="0.0"
+            health="5.0"
+            killPoints="1"
+            staminaDrainPoints="200"
+            goldPointsReward="50"
+            staminaPointsReward="50"
+            scorePointsReward="50"
+            sprite="creep_2.png" />            
     </GameplayObjects>
 </GameInfo>
