@@ -15,16 +15,18 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Utils.cpp \
                    ../../Classes/GameInfo.cpp \
                    ../../Classes/GameScene.cpp \
+                   ../../Classes/GameInterface.cpp \
                    ../../Classes/GameField.cpp \
                    ../../Classes/GameplayObjects.cpp \
                    ../../Classes/GameplayObjectsWidgets.cpp \
                    ../../Classes/PathSector.cpp \
                    ../../Classes/PathSectorWidget.cpp \
-                   ../../Classes/Character.cpp \
-                   ../../Classes/CharacterAction.cpp \
-                   ../../Classes/CharacterWidget.cpp \
-                   ../../Classes/CharacterControlKeyboard.cpp \
-                   ../../Classes/CharacterControlTouch.cpp
+                   ../../Classes/Hero.cpp \
+                   ../../Classes/HeroAction.cpp \
+                   ../../Classes/HeroWidget.cpp \
+                   ../../Classes/HeroControlKeyboard.cpp \
+                   ../../Classes/HeroControlTouch.cpp \
+                   ../../Classes/StaminaBarWidget.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../cocos2d/scripting/lua-bindings/manual \
