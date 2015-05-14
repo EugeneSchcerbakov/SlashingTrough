@@ -32,45 +32,40 @@
             <Enemy name="enemy-B" amount="0" />
             <Obstacle name="Box" amount="1" />
         </Stage>
-		<Stage sectors="6" runningSpeed="480">
+		<Stage sectors="5" runningSpeed="480">
 			<Enemy name="enemy-A" amount="2" />
             <Enemy name="enemy-B" amount="1" />
             <Obstacle name="Box" amount="2" />
         </Stage>
-		<Stage sectors="6" runningSpeed="500">
+		<Stage sectors="3" runningSpeed="500">
             <Enemy name="enemy-B" amount="1" />
             <Enemy name="enemy-C" amount="2" />
             <Obstacle name="Box" amount="2" />
         </Stage>
-        <Stage sectors="6" runningSpeed="520">
+        <Stage sectors="3" runningSpeed="520">
             <Enemy name="enemy-B" amount="1" />
-            <Enemy name="enemy-C" amount="2" />
-            <Enemy name="enemy-D" amount="1" />
-            <Obstacle name="Box" amount="1" />
-        </Stage>
-        <Stage sectors="5" runningSpeed="540">
             <Enemy name="enemy-C" amount="1" />
-            <Enemy name="enemy-D" amount="3" />
-            <Obstacle name="Box" amount="1" />
-        </Stage>
-        <Stage sectors="5" runningSpeed="560">
-        	 <Enemy name="enemy-C" amount="1" />
-            <Enemy name="enemy-D" amount="3" />
-            <Obstacle name="Box" amount="1" />
-        </Stage>
-        <Stage sectors="5" runningSpeed="600">
-        	 <Enemy name="enemy-C" amount="1" />
-            <Enemy name="enemy-D" amount="3" />
-            <Obstacle name="Box" amount="1" />
-        </Stage>
-        <Stage sectors="4" runningSpeed="640">
-             <Enemy name="enemy-D" amount="1" />
-            <Enemy name="enemy-E" amount="3" />
-            <Obstacle name="Box" amount="1" />
-        </Stage> 
-        <Stage sectors="6" runningSpeed="680">
-             <Enemy name="enemy-E" amount="3" />
+            <Enemy name="enemy-D" amount="1" />
             <Obstacle name="Box" amount="2" />
+        </Stage>
+        <Stage sectors="2" runningSpeed="540">
+            <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="2" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>
+        <Stage sectors="2" runningSpeed="570">
+        	 <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="2" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>
+        <Stage sectors="2" runningSpeed="600">
+             <Enemy name="enemy-D" amount="1" />
+            <Enemy name="enemy-E" amount="2" />
+            <Obstacle name="Box" amount="2" />
+        </Stage> 
+        <Stage sectors="6" runningSpeed="640">
+             <Enemy name="enemy-E" amount="2" />
+            <Obstacle name="Box" amount="3" />
         </Stage>                
 	</DifficultProgress>
     <GameplayObjects>
@@ -119,7 +114,7 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="creep_2.png" />
+            sprite="creep_3.png" />
          <Enemy name="enemy-E"
             damage="0.0"
             health="5.0"
@@ -128,6 +123,6 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="creep_2.png" />            
+            sprite="creep_4.png" />            
     </GameplayObjects>
 </GameInfo>
