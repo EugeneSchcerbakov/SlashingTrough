@@ -74,6 +74,8 @@
 		CD5F8C841AD04C9C000CF14A /* PathSector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C811AD04C9C000CF14A /* PathSector.cpp */; };
 		CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
 		CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
+		CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
+		CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -229,6 +231,7 @@
 		CD5F8C821AD04C9C000CF14A /* PathSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSector.h; sourceTree = "<group>"; };
 		CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaminaBarWidget.cpp; sourceTree = "<group>"; };
 		CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaminaBarWidget.h; sourceTree = "<group>"; };
+		CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiConstants.lua; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -468,6 +471,7 @@
 		CD3F1A8B1ACD15C5000ADDD6 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
+				CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */,
 				CDBF5AEC1AEEAC1000BF3812 /* gui.lua */,
 				CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */,
 				CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */,
@@ -623,6 +627,7 @@
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
@@ -637,6 +642,7 @@
 			files = (
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
+				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
 				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,

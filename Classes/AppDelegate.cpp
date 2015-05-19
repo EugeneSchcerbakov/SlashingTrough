@@ -88,7 +88,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         GameScene *gs = GameScene::create();
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();
-        director->pushScene(gs);
+        director->replaceScene(gs);
     };
     
     if (scene) {

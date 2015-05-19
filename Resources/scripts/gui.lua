@@ -6,16 +6,10 @@
 
 require "Cocos2d"
 require "Cocos2dConstants"
+require "GuiConstants"
 
-function UpdateHealthWidget(health)
-	PlayerHealthString = string.format("%s%%", health)
-	PlayerHealthDirty = true
-end
-
-function UpdateScoreWidget(score)
-	PlayerScoreString = string.format("Kills: %s", score)
-	PlayerScoreDirty = true
-end
+PlayerResultGoldPoints = 0
+PlayerResultKillPoints = 0
 
 local function StratchingBounceEffect()
 	local stratchOut = cc.ScaleBy:create(0.3, 1.4, 0.8, 1.0)
@@ -110,6 +104,129 @@ function CreateStartScene()
 
 	scene:addChild(title)
 	scene:addChild(button)
+
+	return scene
+end
+
+function CreateResultScene()
+	local scene = cc.Scene:create()
+	local director = cc.Director:getInstance()
+	local frameSize = director:getVisibleSize()
+	local frameOrigin = director:getVisibleOrigin()
+
+	local function OnRunPressed(touch, event)
+		if event == ccui.TouchEventType.ended then
+			local event = cc.EventCustom:new("StartButtonPressed")
+			local dispatcher = scene:getEventDispatcher()
+			dispatcher:dispatchEvent(event)
+		end
+	end
+
+	local background = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
+
+	local runButton = ccui.Button:create("run_button.png")
+	runButton:setPositionX(frameSize.width * 0.5)
+	runButton:setPositionY(frameOrigin.y - runButton:getContentSize().height)
+	runButton:setScale(1.8)
+	runButton:addTouchEventListener(OnRunPressed)
+	local btnMove = cc.MoveTo:create(0.7, cc.p(frameSize.width * 0.5, 150.0))
+	local btnEase = cc.EaseCubicActionOut:create(btnMove)
+	local btnWait = cc.DelayTime:create(0.5)
+	runButton:runAction(cc.Sequence:create(btnWait, btnEase))
+
+	local panelYShift = -100.0
+	local panel = ccui.Layout:create()
+	panel:setBackGroundImage("panel.png")
+	panel:setScale(1.8)
+	panel:setPositionX(frameSize.width - panel:getBackGroundImageTextureSize().width)
+	panel:setPositionY(frameSize.height - panel:getBackGroundImageTextureSize().height + panelYShift)
+
+	local scoreTitle = ccui.Text:create("SCORE:", "font_prototype.ttf", 25)
+	scoreTitle:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	scoreTitle:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	scoreTitle:setTextColor(cc.c4b(0, 0, 0, 255))
+	scoreTitle:setPositionX(20.0)
+	scoreTitle:setPositionY(panel:getBackGroundImageTextureSize().height * 0.5 + scoreTitle:getContentSize().height * 0.5)
+
+	local goldPointsText = ccui.Text:create("", "font_prototype.ttf", 30)
+	goldPointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	goldPointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	goldPointsText:setTextColor(cc.c4b(0, 0, 0, 255))
+	goldPointsText:setPositionX(30.0)
+	goldPointsText:setPositionY(18.0)
+	goldPointsText:setString(tostring(PlayerResultGoldPoints))
+
+	local killPointsText = ccui.Text:create("", "font_prototype.ttf", 30)
+	killPointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	killPointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	killPointsText:setTextColor(cc.c4b(0, 0, 0, 255))
+	killPointsText:setPositionX(30.0)
+	killPointsText:setPositionY(-28.0)
+	killPointsText:setString(tostring(PlayerResultKillPoints))
+
+	local iconGold = cc.Sprite:create("icon_gold.png")
+	iconGold:setPositionX(-50.0)
+	iconGold:setPositionY(18.0)
+	iconGold:setScale(0.9)
+
+	local iconKill = cc.Sprite:create("icon_kill.png")
+	iconKill:setPositionX(-50.0)
+	iconKill:setPositionY(-28.0)
+	iconKill:setScale(0.9)
+
+	panel:addChild(scoreTitle)
+	panel:addChild(goldPointsText)
+	panel:addChild(killPointsText)
+	panel:addChild(iconGold)
+	panel:addChild(iconKill)
+	local rotate0 = cc.RotateTo:create(3.0, 5.0)
+	local rotate1 = cc.RotateTo:create(3.0, -5.0)
+	local rotateEase0 = cc.EaseSineInOut:create(rotate0)
+	local rotateEase1 = cc.EaseSineInOut:create(rotate1)
+	local seq = cc.Sequence:create(rotateEase0, rotateEase1)
+	local effect = cc.RepeatForever:create(seq)
+	panel:runAction(effect)
+
+	local barbarianImage = cc.Sprite:create("barbarian_sketch.jpg")
+	local barbarianXShift = -100.0
+	barbarianImage:setPositionX(frameSize.width * 0.5 + barbarianXShift)
+	barbarianImage:setPositionY(frameSize.height * 0.5)
+	barbarianImage:setScale(0.85)
+	
+	background:addChild(barbarianImage, 0)
+	background:addChild(runButton, 1)
+	background:addChild(panel, 2)
+
+	local visualGoldPoints = 0
+	local visualKillPoints = 0
+	local goldCountingSpeed = 250.0
+	local killCountingSpeed = 50.0
+
+	local function update(dt)
+		-- counting gold points
+		if visualGoldPoints <= PlayerResultGoldPoints then
+			local absdiff = math.abs(visualGoldPoints - PlayerResultGoldPoints)
+			if (goldCountingSpeed * dt > absdiff) then
+				visualGoldPoints = PlayerResultGoldPoints
+			else
+				visualGoldPoints = visualGoldPoints + goldCountingSpeed * dt
+			end
+			goldPointsText:setString(tostring(math.floor(visualGoldPoints)))
+		end
+		-- counting kill points
+		if visualKillPoints <= PlayerResultKillPoints then
+			local absdiff = math.abs(visualKillPoints - PlayerResultKillPoints)
+			if (killCountingSpeed * dt > absdiff) then
+				visualKillPoints = PlayerResultKillPoints
+			else
+				visualKillPoints = visualKillPoints + killCountingSpeed * dt
+			end
+			killPointsText:setString(tostring(math.floor(visualKillPoints)))
+		end
+	end
+
+	scene:scheduleUpdateWithPriorityLua(update, 0)
+	scene:addChild(background)
 
 	return scene
 end

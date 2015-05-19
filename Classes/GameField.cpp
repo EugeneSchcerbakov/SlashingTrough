@@ -101,10 +101,19 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
-    if (!_hero->IsAlive()) {
+    if (!_hero->IsAlive())
+    {
+        Hero *hero = Hero::Cast(_hero);
+        int goldPoints = hero->GetGoldPoints();
+        int killPoints = hero->GetKillPoints();
+        
+        Utils::LuaSetGlobalInteger("PlayerResultGoldPoints", goldPoints);
+        Utils::LuaSetGlobalInteger("PlayerResultKillPoints", killPoints);
+        auto scene = Utils::MakeSceneFromLua("CreateResultScene");
+        
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();
-        director->popScene();
+        director->replaceScene(scene);
         return;
     }
     
