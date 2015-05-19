@@ -122,6 +122,17 @@ function CreateResultScene()
 		end
 	end
 
+	local function OnKeyReleased(key, event)
+		if key == cc.KeyCode.KEY_SPACE then
+			local event = cc.EventCustom:new("StartButtonPressed")
+			local dispatcher = scene:getEventDispatcher()
+			dispatcher:dispatchEvent(event)
+		end
+	end
+	local keyboardListener = cc.EventListenerKeyboard:create()
+	keyboardListener:registerScriptHandler(OnKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED)
+	director:getEventDispatcher():addEventListenerWithSceneGraphPriority(keyboardListener, scene)
+
 	local background = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
 
 	local runButton = ccui.Button:create("run_button.png")
