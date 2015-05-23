@@ -50,7 +50,6 @@ private:
     int _sectorsQueueSize;
     int _passedSectors;
     int _difficultIndex;
-    float _scrollSpeed;
     
     GameplayObject::Ptr _hero;
     HeroWidget *_heroWidget;

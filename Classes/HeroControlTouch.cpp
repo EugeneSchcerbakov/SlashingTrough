@@ -106,6 +106,17 @@ void HeroControlTouch::TouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
                 _isSwipingNow = false;
             }
         }
+        // swipe down
+        if (scalar >= -0.3f && scalar <= 0.3 && touch->getDelta().y < 0.0f) {
+            float deltaY = GameInfo::Instance().GetFloat("HERO_JUMP_BACK_DISTANCE");
+            float duration = GameInfo::Instance().GetFloat("HERO_JUMP_BACK_DURATION");
+            HeroAction::Type type = HeroAction::Type::JUMP_BACK;
+            HeroAction action(type, duration, 0.0f, deltaY);
+            if (hero->IsAbleToPerform(action)) {
+                hero->AddAction(action);
+                _isSwipingNow = false;
+            }
+        }
     }
 }
 

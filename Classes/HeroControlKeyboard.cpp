@@ -61,6 +61,15 @@ void HeroControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key, coco
             hero->AddAction(action);
         }
     }
+    if (key == cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
+        float deltaY = GameInfo::Instance().GetFloat("HERO_JUMP_BACK_DISTANCE");
+        float duration = GameInfo::Instance().GetFloat("HERO_JUMP_BACK_DURATION");
+        HeroAction::Type type = HeroAction::Type::JUMP_BACK;
+        HeroAction action(type, duration, 0.0f, deltaY);
+        if (hero->IsAbleToPerform(action)) {
+            hero->AddAction(action);
+        }
+    }
 }
 
 bool HeroControlKeyboard::Init(cocos2d::Node *node)

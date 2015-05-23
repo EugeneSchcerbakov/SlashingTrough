@@ -34,10 +34,13 @@ protected:
     void Attack();
     void PerformAction(const HeroAction &action);
     
-    cocos2d::Action* AnimSwordRightSwipeRight(float duration);
-    cocos2d::Action* AnimSwordRightSwipeLeft(float duration);
-    cocos2d::Action* AnimSwordLeftSwipeRight(float duration);
-    cocos2d::Action* AnimSwordLeftSwipeLeft(float duration);
+    cocos2d::FiniteTimeAction* HorizontalMotion(float deltaX, float deltaY, float time);
+    cocos2d::FiniteTimeAction* HorizontalAttack(float attackTime = 0.0f);
+    
+    cocos2d::FiniteTimeAction* AnimSwordRightSwipeRight(float duration);
+    cocos2d::FiniteTimeAction* AnimSwordRightSwipeLeft(float duration);
+    cocos2d::FiniteTimeAction* AnimSwordLeftSwipeRight(float duration);
+    cocos2d::FiniteTimeAction* AnimSwordLeftSwipeLeft(float duration);
     
 private:
     enum class SwordSide

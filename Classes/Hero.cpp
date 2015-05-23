@@ -9,6 +9,7 @@
 #include "Hero.h"
 
 #include "GameInfo.h"
+#include "Utils.h"
 
 GameplayObject::Ptr Hero::Create()
 {
@@ -24,6 +25,14 @@ Hero::Hero()
 : GameplayObject(Type::HERO, InvalidUID)
 , _killPointToNextDamageUp(0)
 , _staminaDrainTimeCounter(0.0f)
+, _runningSpeed(0.0f)
+, _posOnRoadX(0.0f)
+, _posOnRoadY(0.0f)
+, _jumpBackDuration(0.0f)
+, _jumpingBackTime(0.0f)
+, _jumpStartPos(0.0f)
+, _jumpEndPos(0.0f)
+, _jumpingBack(false)
 {
     Init();
     FlushAllRewards();
@@ -45,6 +54,17 @@ void Hero::AddAction(HeroAction &action)
     _actionSequence.push(action);
 }
 
+void Hero::SetPosOnRoad(float x, float y)
+{
+    _posOnRoadX = x;
+    _posOnRoadY = y;
+}
+
+void Hero::SetRunningSpeed(float speed)
+{
+    _runningSpeed = speed;
+}
+
 HeroAction& Hero::CurrentAction()
 {
     return _actionSequence.front();
@@ -52,6 +72,17 @@ HeroAction& Hero::CurrentAction()
 
 void Hero::IdleUpdate(float dt)
 {
+    if (_jumpingBack) {
+        _jumpingBackTime += dt * (1.0f / _jumpBackDuration);
+        _posOnRoadY = math::lerp(_jumpStartPos, _jumpEndPos, _jumpingBackTime);
+        if (_jumpingBackTime >= 1.0f) {
+            _jumpingBackTime = 0.0f;
+            _jumpingBack = 0.0f;
+        }
+    } else {
+        _posOnRoadY += _runningSpeed * dt;
+    }
+    
     _staminaDrainTimeCounter += dt;
     if (_staminaDrainTimeCounter >= _staminaDrainTime) {
         _staminaDrainTimeCounter = 0.0f;
@@ -62,6 +93,15 @@ void Hero::IdleUpdate(float dt)
         _staminaPoints = 0.0f;
         Kill();
     }
+}
+
+void Hero::JumpBack(float duration, float distance)
+{
+    _jumpBackDuration = duration;
+    _jumpStartPos = _posOnRoadY;
+    _jumpEndPos = _posOnRoadY - distance;
+    _jumpingBackTime = 0.0f;
+    _jumpingBack = true;
 }
 
 void Hero::FlushAllRewards()
@@ -89,9 +129,10 @@ bool Hero::IsAbleToPerform(const HeroAction &action) const
     
     if (action.IsType(HeroAction::Type::SWIPE_RIGHT)) {
         return lastPosX <= GameInfo::Instance().GetFloat("PATH_RIGHT_BORDER");
-    }
-    if (action.IsType(HeroAction::Type::SWIPE_LEFT)) {
+    } else if (action.IsType(HeroAction::Type::SWIPE_LEFT)) {
         return lastPosX >= GameInfo::Instance().GetFloat("PATH_LEFT_BORDER");
+    } else if (action.IsType(HeroAction::Type::JUMP_BACK)) {
+        return true;
     }
     return false;
 }
@@ -137,6 +178,21 @@ void Hero::AddGoldPoints(int goldPoints)
 void Hero::AddScorePoints(int scorePoints)
 {
     _scorePoints += scorePoints;
+}
+
+float Hero::GetXPosOnRoad() const
+{
+    return _posOnRoadX;
+}
+
+float Hero::GetYPosOnRoad() const
+{
+    return _posOnRoadY;
+}
+
+float Hero::GetRunningSpeed() const
+{
+    return _runningSpeed;
 }
 
 float Hero::GetStaminaPoints() const

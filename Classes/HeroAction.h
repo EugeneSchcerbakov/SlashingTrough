@@ -16,7 +16,8 @@ public:
     {
         NONE,
         SWIPE_RIGHT,
-        SWIPE_LEFT
+        SWIPE_LEFT,
+        JUMP_BACK
     };
     
     friend class Hero;

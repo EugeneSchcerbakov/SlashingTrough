@@ -23,4 +23,12 @@ namespace Utils
     cocos2d::Node* MakeNodeFromLua(const std::string &luaFuncName);
 }
 
+namespace math
+{
+    template <class T>
+    T lerp(T a, T b, float time) {
+        return a+time*(b-a);
+    }
+}
+
 #endif /* defined(__SlashingTrough__Utils__) */

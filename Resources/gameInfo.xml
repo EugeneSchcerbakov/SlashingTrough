@@ -11,6 +11,8 @@
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="3.5" />
         <Const name="HERO_SWIPE_DURATION" type="float" value="0.33" />
 		<Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
+        <Const name="HERO_JUMP_BACK_DISTANCE" type="float" value="100.0" />
+        <Const name="HERO_JUMP_BACK_DURATION" type="float" value="0.1" />
 		<Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
 		<Const name="SEСTOR_SQUARES_COUNT" type="int" value="5" />

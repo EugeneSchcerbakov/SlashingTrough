@@ -23,7 +23,6 @@ GameField* GameField::create(GameInterface *gameInterface)
 
 GameField::GameField(GameInterface *gameInterface)
 : _gameInterface(gameInterface)
-, _scrollSpeed(400.0f)
 , _sectorsQueueSize(3)
 , _passedSectors(0)
 , _difficultIndex(0)
@@ -38,11 +37,6 @@ GameField::~GameField()
 void GameField::SetSectorsQueueSize(int size)
 {
     _sectorsQueueSize = size;
-}
-
-void GameField::SetScrollSpeed(float scrollSpeed)
-{
-    _scrollSpeed = scrollSpeed;
 }
 
 void GameField::Start()
@@ -68,10 +62,9 @@ bool GameField::init()
     
     _sectorsQueueSize = gameinfo.GetInt("SECTORS_SEQUENCE_MAX_SIZE");
     const float squareSize = gameinfo.GetFloat("SQUARE_SIZE");
-    const int sectorSquaresCount = gameinfo.GetInt("SEСTOR_SQUARES_COUNT");
-    
     const float heroStartX = squareSize * 3.0f * 0.5f;
     const float heroStartY = squareSize + squareSize * 0.5f;
+    
     _hero = Hero::Create();
     _hero->SetLogicalPos(heroStartX, heroStartY);
     _heroWidget = HeroWidget::create(_hero);
@@ -101,9 +94,10 @@ bool GameField::init()
 
 void GameField::update(float dt)
 {
+    Hero *hero = Hero::Cast(_hero);
+    
     if (!_hero->IsAlive())
     {
-        Hero *hero = Hero::Cast(_hero);
         int goldPoints = hero->GetGoldPoints();
         int killPoints = hero->GetKillPoints();
         
@@ -117,21 +111,19 @@ void GameField::update(float dt)
         return;
     }
     
-    SetScrollSpeed(_difficult.speed);
-    
-    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
-    
-    Hero::Cast(_hero)->IdleUpdate(dt);
+    hero->SetRunningSpeed(_difficult.speed);
+    hero->IdleUpdate(dt);
     _heroWidget->RefreshSectorsSequence(_sectorsSequence);
     
     // scroll level down
     for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end(); ++it)
     {
         PathSectorWidget *sector = (*it);
-        float ypos = sector->getPositionY();
-        ypos -= _scrollSpeed * dt;
+        float ypos = sector->GetSnapPos().y - hero->GetYPosOnRoad();
         sector->setPositionY(ypos);
     }
+    
+    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
     // create new and delete passed sectors
     for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end();)
@@ -168,11 +160,12 @@ void GameField::GenerateNewSector(bool makeEmpty)
     if (!_sectorsSequence.empty())
     {
         PathSectorWidget::SectorsSequenceIter lastSector = --_sectorsSequence.end();
-        float lastSectorY = (*lastSector)->getPositionY();
+        float lastSectorY = (*lastSector)->GetSnapPos().y;
         ypos = lastSectorY + sectorWidget->GetSectorSize().height;
     }
     
     sectorWidget->setPositionY(ypos);
+    sectorWidget->SetSnapPos(cocos2d::Vec2(0.0f, ypos));
     _sectorsSequence.push_back(sectorWidget);
     addChild(sectorWidget, DrawOrder::PATH_CONTENT);
     

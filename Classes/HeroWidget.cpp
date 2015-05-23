@@ -163,20 +163,38 @@ void HeroWidget::PerformAction(const HeroAction &action)
     
     std::function<void()> end = [&]() {
         GameplayObject::Ptr ptr = _hero.lock();
-        Hero::Cast(ptr)->FinishCurrentAction();
-        Hero::Cast(ptr)->SetLogicalPos(getPositionX(), getPositionY());
+        Hero *hero = Hero::Cast(ptr);
+        hero->FinishCurrentAction();
+        hero->SetLogicalPos(getPositionX(), getPositionY());
         _isGameplayActionRunning = false;
     };
     
-    cocos2d::Action *anim = nullptr;
+    cocos2d::FiniteTimeAction *moution = nullptr;
+    cocos2d::FiniteTimeAction *attack = nullptr;
+    
     if (action.IsType(HeroAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::RIGHT) {
-        anim = AnimSwordRightSwipeRight(duration);
+        cocos2d::FiniteTimeAction *anim = AnimSwordRightSwipeRight(duration);
+        cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
+        moution = cocos2d::Spawn::create(move, anim, nullptr);
+        attack = HorizontalAttack(duration * 0.3f);
     } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::RIGHT) {
-        anim = AnimSwordRightSwipeLeft(duration);
+        cocos2d::FiniteTimeAction *anim = AnimSwordRightSwipeLeft(duration);
+        cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
+        moution = cocos2d::Spawn::create(move, anim, nullptr);
+        attack = HorizontalAttack(duration * 0.3f);
     } else if (action.IsType(HeroAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::LEFT) {
-        anim = AnimSwordLeftSwipeRight(duration);
+        cocos2d::FiniteTimeAction *anim = AnimSwordLeftSwipeRight(duration);
+        cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
+        moution = cocos2d::Spawn::create(move, anim, nullptr);
+        attack = HorizontalAttack(duration * 0.3f);
     } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::LEFT) {
-        anim = AnimSwordLeftSwipeLeft(duration);
+        cocos2d::FiniteTimeAction *anim = AnimSwordLeftSwipeLeft(duration);
+        cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
+        moution = cocos2d::Spawn::create(move, anim, nullptr);
+        attack = HorizontalAttack(duration * 0.3f);
+    } else if (action.IsType(HeroAction::Type::JUMP_BACK)) {
+        moution = cocos2d::DelayTime::create(duration);
+        Hero::Cast(_hero.lock())->JumpBack(duration, deltaY);
     } else {
         CC_ASSERT(false);
         return;
@@ -185,22 +203,36 @@ void HeroWidget::PerformAction(const HeroAction &action)
     float squareSize = GameInfo::Instance().GetFloat("SQUARE_SIZE");
     _attackedRowIndex = (int)floorf(getPositionX() / squareSize);
     
-    cocos2d::CallFunc *attack_func = cocos2d::CallFunc::create([&](){Attack();});
-    cocos2d::DelayTime *attack_delay = cocos2d::DelayTime::create(duration * 0.3f);
-    cocos2d::Sequence *attack = cocos2d::Sequence::create(attack_delay, attack_func, nullptr);
+    cocos2d::CallFunc *actionEndCallback = cocos2d::CallFunc::create(end);
+    cocos2d::Sequence *motionWithFinish = cocos2d::Sequence::create(moution, actionEndCallback, nullptr);
+    cocos2d::FiniteTimeAction *resultantAction = nullptr;
     
-    cocos2d::MoveBy *move = cocos2d::MoveBy::create(duration, cocos2d::Vec2(deltaX, deltaY));
-    cocos2d::EaseSineInOut *move_ease = cocos2d::EaseSineInOut::create(move);
-    cocos2d::Spawn *moution = cocos2d::Spawn::create(move_ease, anim, nullptr);
-    cocos2d::CallFunc *func = cocos2d::CallFunc::create(end);
-    cocos2d::Sequence *seq = cocos2d::Sequence::create(moution, func, nullptr);
-    
-    runAction(cocos2d::Spawn::create(seq, attack, nullptr));
-    
+    if (attack) {
+        resultantAction = cocos2d::Spawn::create(motionWithFinish, attack, nullptr);
+    } else {
+        resultantAction = motionWithFinish;
+    }
+
+    runAction(resultantAction);
     _isGameplayActionRunning = true;
 }
 
-cocos2d::Action* HeroWidget::AnimSwordRightSwipeRight(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::HorizontalMotion(float deltaX, float deltaY, float time)
+{
+    cocos2d::MoveBy *move = cocos2d::MoveBy::create(time, cocos2d::Vec2(deltaX, deltaY));
+    cocos2d::EaseSineInOut *move_ease = cocos2d::EaseSineInOut::create(move);
+    return move_ease;
+}
+
+cocos2d::FiniteTimeAction* HeroWidget::HorizontalAttack(float attackTime)
+{
+    cocos2d::CallFunc *attack_func = cocos2d::CallFunc::create([&](){Attack();});
+    cocos2d::DelayTime *attack_delay = cocos2d::DelayTime::create(attackTime);
+    cocos2d::Sequence *attack = cocos2d::Sequence::create(attack_delay, attack_func, nullptr);
+    return attack;
+}
+
+cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)
 {
     // sword anim
     cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
@@ -215,7 +247,7 @@ cocos2d::Action* HeroWidget::AnimSwordRightSwipeRight(float duration)
     return anim;
 }
 
-cocos2d::Action* HeroWidget::AnimSwordRightSwipeLeft(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeLeft(float duration)
 {
     // sword anim
     cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordLeftSideTrans.localPos);
@@ -231,7 +263,7 @@ cocos2d::Action* HeroWidget::AnimSwordRightSwipeLeft(float duration)
     return anim;
 }
 
-cocos2d::Action* HeroWidget::AnimSwordLeftSwipeRight(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeRight(float duration)
 {
     // sword anim
     cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordRightSideTrans.localPos);
@@ -247,7 +279,7 @@ cocos2d::Action* HeroWidget::AnimSwordLeftSwipeRight(float duration)
     return anim;
 }
 
-cocos2d::Action* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
 {
     // sword anim
     cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);
