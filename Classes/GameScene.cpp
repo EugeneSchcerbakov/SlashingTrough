@@ -58,11 +58,23 @@ bool GameScene::init()
     _layerGui = GameInterface::create();
     _layerField = GameField::create(_layerGui);
     _layerField->setScale(1.0f);
+    _effectsAbsolute = EffectsLayer::create();
+    _effectsGameField = EffectsLayer::create();
     
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     addChild(_layerField, LayerZOrder::GAME_FIELD);
     
     return true;
+}
+
+void GameScene::AddEffectAbsolute(Effect *effect)
+{
+    _effectsAbsolute->AddEffect(effect);
+}
+
+void GameScene::AddEffectGameField(Effect *effect)
+{
+    _effectsGameField->AddEffect(effect);
 }
 
 void GameScene::OnKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)

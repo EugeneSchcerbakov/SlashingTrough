@@ -54,6 +54,8 @@
 		CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */; };
 		CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D18301AD1532D00F96E8F /* GameField.cpp */; };
 		CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D18301AD1532D00F96E8F /* GameField.cpp */; };
+		CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
+		CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD3E69AB1AD3A593008F7FB0 /* HeroControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* HeroControlKeyboard.cpp */; };
 		CD3E69AC1AD3A593008F7FB0 /* HeroControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* HeroControlKeyboard.cpp */; };
 		CD3ECE8C1AD6F08100613ADD /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3ECE8A1AD6F08100613ADD /* HeroAction.cpp */; };
@@ -213,6 +215,8 @@
 		CD2D182C1AD11BCE00F96E8F /* PathSectorWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSectorWidget.h; sourceTree = "<group>"; };
 		CD2D18301AD1532D00F96E8F /* GameField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameField.cpp; sourceTree = "<group>"; };
 		CD2D18311AD1532D00F96E8F /* GameField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameField.h; sourceTree = "<group>"; };
+		CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectsLayer.cpp; sourceTree = "<group>"; };
+		CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsLayer.h; sourceTree = "<group>"; };
 		CD3E69A91AD3A593008F7FB0 /* HeroControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroControlKeyboard.cpp; sourceTree = "<group>"; };
 		CD3E69AA1AD3A593008F7FB0 /* HeroControlKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroControlKeyboard.h; sourceTree = "<group>"; };
 		CD3ECE8A1AD6F08100613ADD /* HeroAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroAction.cpp; sourceTree = "<group>"; };
@@ -416,6 +420,8 @@
 				CD44C6FD1AE9503E008569F6 /* HeroControlTouch.h */,
 				CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */,
 				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
+				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
+				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -672,6 +678,7 @@
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CDA8F4491AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
 				CDA8F4441AD2F356006A3210 /* Hero.cpp in Sources */,
+				CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
@@ -690,6 +697,7 @@
 				CD543C111ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
+				CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CD543C161ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CDA8F4451AD2F356006A3210 /* Hero.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
