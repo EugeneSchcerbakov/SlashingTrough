@@ -114,6 +114,7 @@ void HeroControlTouch::TouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
             HeroAction action(type, duration, 0.0f, deltaY);
             if (hero->IsAbleToPerform(action)) {
                 hero->AddAction(action);
+                _touchBeginPos = location;
                 _isSwipingNow = false;
             }
         }
