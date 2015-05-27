@@ -163,19 +163,9 @@ void PathSectorWidget::ClearDebugGrid()
     }
 }
 
-void PathSectorWidget::SetSnapPos(const cocos2d::Vec2 &snapPos)
-{
-    _snapPos = snapPos;
-}
-
 cocos2d::Size PathSectorWidget::GetSectorSize() const
 {
     return cocos2d::Size(_sectorWidth, _sectorHeight);
-}
-
-cocos2d::Vec2 PathSectorWidget::GetSnapPos() const
-{
-    return _snapPos;
 }
 
 PathSector::Ptr PathSectorWidget::GetPath() const

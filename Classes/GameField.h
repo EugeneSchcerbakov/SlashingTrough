@@ -60,6 +60,8 @@ private:
     GameInfo::DifficultInfo _difficult;
     PathSectorWidget::SectorsSequence _sectorsSequence;
     
+    cocos2d::Node *_roadBasis;
+    
     GameInterface *_gameInterface;
 };
 

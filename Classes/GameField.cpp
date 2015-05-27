@@ -65,6 +65,8 @@ bool GameField::init()
     const float heroStartX = squareSize * 3.0f * 0.5f;
     const float heroStartY = squareSize + squareSize * 0.5f;
     
+    _roadBasis = cocos2d::Node::create();
+    
     _hero = Hero::Create();
     _hero->SetLogicalPos(heroStartX, heroStartY);
     _heroWidget = HeroWidget::create(_hero);
@@ -83,8 +85,12 @@ bool GameField::init()
     _controlKeyboard = HeroControlKeyboard::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
     _controlTouch = HeroControlTouch::Create(_hero, _heroWidget->getEventDispatcher(), _heroWidget);
     
-    getEventDispatcher()->addCustomEventListener("RefreshInterface", [&](cocos2d::EventCustom*){RefreshInterface();});
+    auto handler = [&](cocos2d::EventCustom*){RefreshInterface();};
+    auto dispatcher = getEventDispatcher();
+    dispatcher->addCustomEventListener("RefreshInterface", handler);
+    
     addChild(_heroWidget, DrawOrder::HERO);
+    addChild(_roadBasis, DrawOrder::PATH_CONTENT);
     scheduleUpdate();
     
     RefreshInterface();
@@ -114,14 +120,7 @@ void GameField::update(float dt)
     hero->SetRunningSpeed(_difficult.speed);
     hero->IdleUpdate(dt);
     _heroWidget->RefreshSectorsSequence(_sectorsSequence);
-    
-    // scroll level down
-    for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end(); ++it)
-    {
-        PathSectorWidget *sector = (*it);
-        float ypos = sector->GetSnapPos().y - hero->GetYPosOnRoad();
-        sector->setPositionY(ypos);
-    }
+    _roadBasis->setPositionY(-hero->GetYPosOnRoad()); // scroll level down
     
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
@@ -129,12 +128,12 @@ void GameField::update(float dt)
     for (PathSectorWidget::SectorsSequenceIter it = _sectorsSequence.begin(); it != _sectorsSequence.end();)
     {
         PathSectorWidget *sector = (*it);
-        cocos2d::Vec2 lowerPos = sector->getPosition();
+        cocos2d::Vec2 lowerPos = _roadBasis->convertToWorldSpace(sector->getPosition());
         cocos2d::Vec2 upperPos = lowerPos + cocos2d::Vec2(0.0f, sector->GetSectorSize().height);
-        cocos2d::Vec2 worldPos = convertToWorldSpace(upperPos);
+        cocos2d::Vec2 worldPos = upperPos;
         if (worldPos.y < origin.y)
         {
-            removeChild(sector, true);
+            _roadBasis->removeChild(sector, true);
             it = _sectorsSequence.erase(it);
             GenerateNewSector();
             _passedSectors++;
@@ -160,14 +159,13 @@ void GameField::GenerateNewSector(bool makeEmpty)
     if (!_sectorsSequence.empty())
     {
         PathSectorWidget::SectorsSequenceIter lastSector = --_sectorsSequence.end();
-        float lastSectorY = (*lastSector)->GetSnapPos().y;
+        float lastSectorY = (*lastSector)->getPositionY();
         ypos = lastSectorY + sectorWidget->GetSectorSize().height;
     }
     
     sectorWidget->setPositionY(ypos);
-    sectorWidget->SetSnapPos(cocos2d::Vec2(0.0f, ypos));
     _sectorsSequence.push_back(sectorWidget);
-    addChild(sectorWidget, DrawOrder::PATH_CONTENT);
+    _roadBasis->addChild(sectorWidget);
     
     UpdateDifficult();
 }

@@ -26,10 +26,8 @@ public:
     
     void DrawDebugGrid();
     void ClearDebugGrid();
-    void SetSnapPos(const cocos2d::Vec2 &snapPos);
     
     cocos2d::Size GetSectorSize() const;
-    cocos2d::Vec2 GetSnapPos() const;
     
     PathSector::Ptr GetPath() const;
     
@@ -53,7 +51,6 @@ private:
 private:
     float _sectorWidth;
     float _sectorHeight;
-    cocos2d::Vec2 _snapPos;
     
     std::map<GameplayObject::UID, cocos2d::Node *> _widgets;
     
