@@ -62,12 +62,22 @@ bool HeroWidget::init()
     _sword->setPosition(_swordRightSideTrans.localPos);
     _sword->setRotation(_swordRightSideTrans.angle);
     
+    _swordTrail = cocos2d::Sprite::create("sword_trail.png");
+    _swordTrail->setPositionY(180.0f);
+    _swordTrail->setScale(1.9f);
+    _swordTrail->setOpacity(0);
+    _swordTrail->setVisible(false);
+    
     _swordSide = SwordSide::RIGHT;
     _lastStamina = Hero::Cast(_hero.lock())->GetStaminaPoints();
     
+    _bodyControlNode = cocos2d::Node::create();
+    _bodyControlNode->addChild(_body, 0);
+    _bodyControlNode->addChild(_sword, 1);
+    
     scheduleUpdate();
-    addChild(_body, 0);
-    addChild(_sword, 1);
+    addChild(_bodyControlNode, 0);
+    addChild(_swordTrail, 1);
     
     return true;
 }
@@ -104,6 +114,26 @@ void HeroWidget::RunEffectReceiveDamage()
     cocos2d::EaseSineOut *scale_ease1 = cocos2d::EaseSineOut::create(scale1);
     cocos2d::Sequence *effect = cocos2d::Sequence::create(scale_ease0, scale_ease1, nullptr);
     runAction(effect);
+}
+
+void HeroWidget::RunEffectSwordTrail(float duration)
+{
+    auto func_start = [&](){_swordTrail->setVisible(true);};
+    auto func_end = [&](){_swordTrail->setVisible(false);};
+    
+    float timeRef = 0.33f;
+    float fadeinTime = duration * (0.075f / timeRef);
+    float fadeoutTime = duration * (0.13f / timeRef);
+    float delayTime = duration * (0.11f / timeRef);
+    
+    cocos2d::FadeIn *fadein = cocos2d::FadeIn::create(fadeinTime);
+    cocos2d::FadeOut *fadeout = cocos2d::FadeOut::create(fadeoutTime);
+    cocos2d::DelayTime *dealy = cocos2d::DelayTime::create(delayTime);
+    cocos2d::CallFunc *start = cocos2d::CallFunc::create(func_start);
+    cocos2d::CallFunc *end = cocos2d::CallFunc::create(func_end);
+    cocos2d::Sequence *effect = cocos2d::Sequence::create(start, dealy, fadein,
+                                                          fadeout, end, nullptr);
+    _swordTrail->runAction(effect);
 }
 
 GameplayObject::WeakPtr HeroWidget::GetHero() const
@@ -209,6 +239,7 @@ void HeroWidget::PerformAction(const HeroAction &action)
     
     if (attack) {
         resultantAction = cocos2d::Spawn::create(motionWithFinish, attack, nullptr);
+        RunEffectSwordTrail(duration);
     } else {
         resultantAction = motionWithFinish;
     }
@@ -242,8 +273,11 @@ cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)
     // body anim
     cocos2d::RotateBy *rotate = cocos2d::RotateBy::create(duration, -360.0f);
     cocos2d::EaseSineInOut *rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+    _bodyControlNode->runAction(rotate_ease);
+    
+    cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
     cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT;});
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(rotate_ease, func, nullptr);
+    cocos2d::Sequence *anim = cocos2d::Sequence::create(wait, func, nullptr);
     return anim;
 }
 
@@ -274,7 +308,7 @@ cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeRight(float duration)
     _sword->runAction(sword_anim);
     // no body anim
     cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT;});
-     cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
+    cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
     cocos2d::Sequence *anim = cocos2d::Sequence::create(wait, func, nullptr);
     return anim;
 }
@@ -289,8 +323,11 @@ cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
     // body anim
     cocos2d::RotateBy *rotate = cocos2d::RotateBy::create(duration, 360.0f);
     cocos2d::EaseSineInOut *rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+    _bodyControlNode->runAction(rotate_ease);
+    
+    cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
     cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::LEFT;});
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(rotate_ease, func, nullptr);
+    cocos2d::Sequence *anim = cocos2d::Sequence::create(wait, func, nullptr);
     return anim;
 }
 
