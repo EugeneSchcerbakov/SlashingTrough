@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "GameplayObjects.h"
+#include "HeroWidget.h"
 
 class HealthBarWidget : public cocos2d::Node
 {
@@ -31,7 +32,17 @@ private:
     int _healthPoints;
 };
 
-class ObstacleWidget : public cocos2d::Node
+class GameplayObjectWidget : public cocos2d::Node
+{
+public:
+    GameplayObjectWidget();
+    virtual ~GameplayObjectWidget();
+    
+    virtual bool init();
+    virtual void OnDamageReceived(HeroWidget::SwordSide side);
+};
+
+class ObstacleWidget : public GameplayObjectWidget
 {
 public:
     static ObstacleWidget* create(GameplayObject::WeakPtr obstacle);
@@ -40,7 +51,7 @@ protected:
     ObstacleWidget(GameplayObject::WeakPtr obstacle);
     virtual ~ObstacleWidget();
     
-    bool init();
+    bool init() override;
     
     GameplayObject::Ptr GetObstacle() const;
     
@@ -50,19 +61,19 @@ private:
     cocos2d::Sprite *_sprite;
 };
 
-class EnemyWidget : public cocos2d::Node
+class EnemyWidget : public GameplayObjectWidget
 {
 public:
     static EnemyWidget* create(GameplayObject::WeakPtr enemy);
     
     void RunHitAccentEffect();
+    void OnDamageReceived(HeroWidget::SwordSide side) override;
     
 protected:
     EnemyWidget(GameplayObject::WeakPtr enemy);
     virtual ~EnemyWidget();
     
-    bool init();
-    void update(float dt);
+    bool init() override;
     
     GameplayObject::Ptr GetEnemy() const;
     
@@ -70,8 +81,8 @@ private:
     GameplayObject::WeakPtr _enemy;
     HealthBarWidget *_healthWidet;
     cocos2d::Sprite *_sprite;
-    
-    float _lastHealth;
+    cocos2d::Sprite *_blood;
+    cocos2d::ProgressTimer *_bloodClip;
 };
 
 #endif /* defined(__SlashingTrough__GameplayObjectsWidgets__) */

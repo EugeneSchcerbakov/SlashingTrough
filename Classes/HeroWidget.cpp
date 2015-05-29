@@ -10,6 +10,7 @@
 
 #include "GameInfo.h"
 #include "Utils.h"
+#include "GameplayObjectsWidgets.h"
 
 const HeroWidget::SwordTransform HeroWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
 const HeroWidget::SwordTransform HeroWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
@@ -141,6 +142,11 @@ GameplayObject::WeakPtr HeroWidget::GetHero() const
     return _hero;
 }
 
+HeroWidget::SwordSide HeroWidget::GetSwordSide() const
+{
+    return _swordSide;
+}
+
 void HeroWidget::Attack()
 {
     if (!_sectors)
@@ -170,15 +176,21 @@ void HeroWidget::Attack()
                 float dx = x1 - x2;
                 float dy = y1 - y2;
                 float L = sqrtf(dx * dx + dy * dy);
-                if (heroPtr->Attack(obj, L) && !obj->IsAlive())
+                if (heroPtr->Attack(obj, L))
                 {
-                    Hero *hero = Hero::Cast(heroPtr);
-                    hero->AddKillPoints(obj->GetRewardKillPoints());
-                    hero->AddGoldPoints(obj->GetRewardGoldPoints());
-                    hero->AddStaminaPoints(obj->GetRewardStaminaPoints());
-                    hero->AddScorePoints(obj->GetRewardScorePoints());
+                    auto widget = sector->GetObjectWidget(obj->GetUID());
+                    widget->OnDamageReceived(_swordSide);
                     
-                    getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
+                    if (!obj->IsAlive())
+                    {
+                        Hero *hero = Hero::Cast(heroPtr);
+                        hero->AddKillPoints(obj->GetRewardKillPoints());
+                        hero->AddGoldPoints(obj->GetRewardGoldPoints());
+                        hero->AddStaminaPoints(obj->GetRewardStaminaPoints());
+                        hero->AddScorePoints(obj->GetRewardScorePoints());
+                    
+                        getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
+                    }
                 }
             }
         }

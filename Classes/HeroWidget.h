@@ -17,6 +17,13 @@
 class HeroWidget : public cocos2d::Node
 {
 public:
+    enum class SwordSide
+    {
+        LEFT,
+        RIGHT
+    };
+    
+public:
     static HeroWidget* create(GameplayObject::WeakPtr Hero);
     
     void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
@@ -24,6 +31,8 @@ public:
     void RunEffectSwordTrail(float duration);
     
     GameplayObject::WeakPtr GetHero() const;
+    
+    SwordSide GetSwordSide() const;
     
 protected:
     HeroWidget(GameplayObject::WeakPtr Hero);
@@ -44,12 +53,6 @@ protected:
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeLeft(float duration);
     
 private:
-    enum class SwordSide
-    {
-        LEFT,
-        RIGHT
-    };
-    
     struct SwordTransform
     {
         cocos2d::Vec2 localPos;

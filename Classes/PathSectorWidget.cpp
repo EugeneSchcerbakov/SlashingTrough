@@ -11,6 +11,7 @@
 #include "Utils.h"
 #include "GameInfo.h"
 #include "HeroWidget.h"
+#include "GameplayObjectsWidgets.h"
 
 PathSectorWidget* PathSectorWidget::create(PathSector::Ptr path, HeroWidget *hero)
 {
@@ -90,7 +91,7 @@ void PathSectorWidget::update(float dt)
             ++it;
         } else {
             // remove widget
-            std::map<GameplayObject::UID, cocos2d::Node *>::iterator witer;
+            std::map<GameplayObject::UID, GameplayObjectWidget *>::iterator witer;
             witer = _widgets.find((*it)->GetUID());
             if (witer != _widgets.end()) {
                 removeChild((*witer).second);
@@ -173,3 +174,12 @@ PathSector::Ptr PathSectorWidget::GetPath() const
     return _path;
 }
 
+GameplayObjectWidget* PathSectorWidget::GetObjectWidget(GameplayObject::UID uid)
+{
+    std::map<GameplayObject::UID, GameplayObjectWidget *>::iterator iter;
+    iter = _widgets.find(uid);
+    if (iter != _widgets.end()) {
+        return iter->second;
+    }
+    return nullptr;
+}

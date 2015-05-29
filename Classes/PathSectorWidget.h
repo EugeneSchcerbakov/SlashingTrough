@@ -11,9 +11,9 @@
 
 #include "cocos2d.h"
 #include "PathSector.h"
-#include "GameplayObjectsWidgets.h"
 
 class HeroWidget;
+class GameplayObjectWidget;
 
 class PathSectorWidget : public cocos2d::Node
 {
@@ -28,8 +28,8 @@ public:
     void ClearDebugGrid();
     
     cocos2d::Size GetSectorSize() const;
-    
     PathSector::Ptr GetPath() const;
+    GameplayObjectWidget* GetObjectWidget(GameplayObject::UID uid);
     
 protected:
     PathSectorWidget(PathSector::Ptr path, HeroWidget *hero);
@@ -52,7 +52,7 @@ private:
     float _sectorWidth;
     float _sectorHeight;
     
-    std::map<GameplayObject::UID, cocos2d::Node *> _widgets;
+    std::map<GameplayObject::UID, GameplayObjectWidget *> _widgets;
     
     PathSector::Ptr _path;
     HeroWidget *_heroWidget;
