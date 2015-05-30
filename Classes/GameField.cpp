@@ -34,6 +34,11 @@ GameField::~GameField()
     getEventDispatcher()->removeCustomEventListeners("RefreshInterface");
 }
 
+void GameField::AddEffectOnField(Effect *effect)
+{
+    _effectsGameField->AddEffect(effect);
+}
+
 void GameField::SetSectorsQueueSize(int size)
 {
     _sectorsQueueSize = size;
@@ -45,6 +50,11 @@ void GameField::Start()
 
 void GameField::Reset()
 {
+}
+
+cocos2d::Vec2 GameField::ConvertToRoadSpace(const cocos2d::Vec2 point)
+{
+    return _roadBasis->convertToNodeSpace(point);
 }
 
 bool GameField::init()
@@ -65,11 +75,14 @@ bool GameField::init()
     const float heroStartX = squareSize * 3.0f * 0.5f;
     const float heroStartY = squareSize + squareSize * 0.5f;
     
+    _effectsGameField = EffectsLayer::create();
+    
     _roadBasis = cocos2d::Node::create();
+    _roadBasis->addChild(_effectsGameField, 3);
     
     _hero = Hero::Create();
     _hero->SetLogicalPos(heroStartX, heroStartY);
-    _heroWidget = HeroWidget::create(_hero);
+    _heroWidget = HeroWidget::create(_hero, this);
     _heroWidget->setPositionX(_hero->GetLogicalX());
     _heroWidget->setPositionY(_hero->GetLogicalY());
 

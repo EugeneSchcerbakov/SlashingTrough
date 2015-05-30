@@ -66,6 +66,8 @@
 		CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
 		CD44C6FE1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* HeroControlTouch.cpp */; };
 		CD44C6FF1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* HeroControlTouch.cpp */; };
+		CD4FF0931B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */; };
+		CD4FF0941B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */; };
 		CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */; };
 		CD543C111ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */; };
 		CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD543C131ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp */; };
@@ -225,6 +227,8 @@
 		CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2dConstants.lua; sourceTree = "<group>"; };
 		CD44C6FC1AE9503E008569F6 /* HeroControlTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroControlTouch.cpp; sourceTree = "<group>"; };
 		CD44C6FD1AE9503E008569F6 /* HeroControlTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroControlTouch.h; sourceTree = "<group>"; };
+		CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectEnemyDeath.cpp; sourceTree = "<group>"; };
+		CD4FF0921B18C794007E7BAA /* EffectEnemyDeath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectEnemyDeath.h; sourceTree = "<group>"; };
 		CD543C0E1ADA8D8F00DDCF1A /* GameplayObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameplayObjects.cpp; sourceTree = "<group>"; };
 		CD543C0F1ADA8D8F00DDCF1A /* GameplayObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayObjects.h; sourceTree = "<group>"; };
 		CD543C131ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameplayObjectsWidgets.cpp; sourceTree = "<group>"; };
@@ -422,6 +426,8 @@
 				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
+				CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */,
+				CD4FF0921B18C794007E7BAA /* EffectEnemyDeath.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -675,6 +681,7 @@
 				CD3ECE8C1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */,
+				CD4FF0931B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CDA8F4491AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
 				CDA8F4441AD2F356006A3210 /* Hero.cpp in Sources */,
@@ -706,6 +713,7 @@
 				CD3ECE8D1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
+				CD4FF0941B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */,
 				CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 				CDA8F44A1AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,

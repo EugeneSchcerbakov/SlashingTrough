@@ -19,12 +19,12 @@ public:
     Effect(const std::string &name, int zOrder);
     
     virtual bool init();
-    virtual void update(float dt);
-    virtual bool isFinshed() const;
+    virtual bool isFinished() const;
     
-private:
+protected:
     std::string _name;
     const int _zOrder;
+    bool _isFinished;
     
     friend class EffectsLayer;
 };

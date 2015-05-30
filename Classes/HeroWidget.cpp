@@ -11,13 +11,15 @@
 #include "GameInfo.h"
 #include "Utils.h"
 #include "GameplayObjectsWidgets.h"
+#include "GameField.h"
+#include "EffectEnemyDeath.h"
 
 const HeroWidget::SwordTransform HeroWidget::_swordRightSideTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
 const HeroWidget::SwordTransform HeroWidget::_swordLeftSideTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
 
-HeroWidget* HeroWidget::create(GameplayObject::WeakPtr Hero)
+HeroWidget* HeroWidget::create(GameplayObject::WeakPtr hero, GameField *gamefield)
 {
-    HeroWidget *widget = new HeroWidget(Hero);
+    HeroWidget *widget = new HeroWidget(hero, gamefield);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -27,8 +29,9 @@ HeroWidget* HeroWidget::create(GameplayObject::WeakPtr Hero)
     return widget;
 }
 
-HeroWidget::HeroWidget(GameplayObject::WeakPtr hero)
-: _hero(hero)
+HeroWidget::HeroWidget(GameplayObject::WeakPtr hero, GameField *gamefield)
+: _gamefield(gamefield)
+, _hero(hero)
 , _sectors(nullptr)
 , _isGameplayActionRunning(false)
 {
@@ -190,6 +193,12 @@ void HeroWidget::Attack()
                         hero->AddScorePoints(obj->GetRewardScorePoints());
                     
                         getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
+                        
+                        cocos2d::Vec2 worldPos = sector->convertToWorldSpace(widget->getPosition());
+                        cocos2d::Vec2 roadPos = _gamefield->ConvertToRoadSpace(worldPos);
+                        
+                        auto effect = EffectEnemyDeath::create(obj->GetSpriteFilename(), roadPos, _swordSide);
+                        _gamefield->AddEffectOnField(effect);
                     }
                 }
             }
@@ -202,6 +211,7 @@ void HeroWidget::PerformAction(const HeroAction &action)
     float deltaX = action.GetDeltaX();
     float deltaY = action.GetDeltaY();
     float duration = action.GetDuration();
+    float attackDelay = duration * 0.25f;
     
     std::function<void()> end = [&]() {
         GameplayObject::Ptr ptr = _hero.lock();
@@ -218,22 +228,22 @@ void HeroWidget::PerformAction(const HeroAction &action)
         cocos2d::FiniteTimeAction *anim = AnimSwordRightSwipeRight(duration);
         cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
         moution = cocos2d::Spawn::create(move, anim, nullptr);
-        attack = HorizontalAttack(duration * 0.3f);
+        attack = HorizontalAttack(attackDelay);
     } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::RIGHT) {
         cocos2d::FiniteTimeAction *anim = AnimSwordRightSwipeLeft(duration);
         cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
         moution = cocos2d::Spawn::create(move, anim, nullptr);
-        attack = HorizontalAttack(duration * 0.3f);
+        attack = HorizontalAttack(attackDelay);
     } else if (action.IsType(HeroAction::Type::SWIPE_RIGHT) && _swordSide == SwordSide::LEFT) {
         cocos2d::FiniteTimeAction *anim = AnimSwordLeftSwipeRight(duration);
         cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
         moution = cocos2d::Spawn::create(move, anim, nullptr);
-        attack = HorizontalAttack(duration * 0.3f);
+        attack = HorizontalAttack(attackDelay);
     } else if (action.IsType(HeroAction::Type::SWIPE_LEFT) && _swordSide == SwordSide::LEFT) {
         cocos2d::FiniteTimeAction *anim = AnimSwordLeftSwipeLeft(duration);
         cocos2d::FiniteTimeAction *move = HorizontalMotion(deltaX, deltaY, duration);
         moution = cocos2d::Spawn::create(move, anim, nullptr);
-        attack = HorizontalAttack(duration * 0.3f);
+        attack = HorizontalAttack(attackDelay);
     } else if (action.IsType(HeroAction::Type::JUMP_BACK)) {
         moution = cocos2d::DelayTime::create(duration);
         Hero::Cast(_hero.lock())->JumpBack(duration, deltaY);

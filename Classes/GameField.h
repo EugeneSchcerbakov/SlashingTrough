@@ -13,20 +13,24 @@
 #include "HeroWidget.h"
 #include "HeroControlKeyboard.h"
 #include "HeroControlTouch.h"
-
 #include "GameInterface.h"
 #include "GameInfo.h"
+#include "EffectsLayer.h"
 
 class GameField : public cocos2d::Layer
 {
 public:
     static GameField* create(GameInterface *gameInterface);
     
+    void AddEffectOnField(Effect *effect);
+    
     void SetSectorsQueueSize(int size);
     void SetScrollSpeed(float scrollSpeed);
     
     void Start();
     void Reset();
+    
+    cocos2d::Vec2 ConvertToRoadSpace(const cocos2d::Vec2 point);
     
 protected:
     GameField(GameInterface *gameInterface);
@@ -63,6 +67,7 @@ private:
     cocos2d::Node *_roadBasis;
     
     GameInterface *_gameInterface;
+    EffectsLayer *_effectsGameField;
 };
 
 #endif /* defined(__SlashingTrough__GameField__) */

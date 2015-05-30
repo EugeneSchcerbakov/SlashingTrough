@@ -203,7 +203,9 @@ void EnemyWidget::OnDamageReceived(HeroWidget::SwordSide side)
     
     float health = ptr->GetHealth();
     _healthWidet->Refresh((int)health);
-    RunHitAccentEffect();
+    if (ptr->IsAlive()) {
+        RunHitAccentEffect();
+    }
 }
 
 void EnemyWidget::RunHitAccentEffect()

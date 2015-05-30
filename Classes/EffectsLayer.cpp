@@ -13,6 +13,7 @@
 Effect::Effect(const std::string &name, int zOrder)
 : _name(name)
 , _zOrder(zOrder)
+, _isFinished(false)
 {
 }
 
@@ -21,17 +22,12 @@ bool Effect::init()
     if (!cocos2d::Node::init()) {
         return false;
     }
-    scheduleUpdate();
     return true;
 }
 
-void Effect::update(float dt)
+bool Effect::isFinished() const
 {
-}
-
-bool Effect::isFinshed() const
-{
-    return true;
+    return _isFinished;
 }
 
 // EffectsLayer implementation
@@ -80,9 +76,9 @@ bool EffectsLayer::init()
 
 void EffectsLayer::update(float dt)
 {
-    for (Effects::iterator it = _effects.begin(); it != _effects.end(); ++it) {
+    for (Effects::iterator it = _effects.begin(); it != _effects.end();) {
         Effect *effect = (*it);
-        if (effect->isFinshed()) {
+        if (effect->isFinished()) {
             removeChild(effect);
             it = _effects.erase(it);
         } else {

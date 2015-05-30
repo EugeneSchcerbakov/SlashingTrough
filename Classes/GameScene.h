@@ -13,7 +13,6 @@
 
 #include "GameInterface.h"
 #include "GameField.h"
-#include "EffectsLayer.h"
 
 class GameScene : public cocos2d::Scene
 {
@@ -25,9 +24,6 @@ protected:
     virtual ~GameScene();
     
     bool init() override;
-    
-    void AddEffectAbsolute(Effect *effect);
-    void AddEffectGameField(Effect *effect);
     
 private:
     enum LayerZOrder
@@ -41,8 +37,6 @@ private:
 private:
     GameField *_layerField;
     GameInterface *_layerGui;
-    EffectsLayer *_effectsAbsolute;
-    EffectsLayer *_effectsGameField;
     
     void OnKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
     void OnKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);

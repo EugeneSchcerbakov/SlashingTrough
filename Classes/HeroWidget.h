@@ -14,6 +14,8 @@
 #include "Hero.h"
 #include "PathSectorWidget.h"
 
+class GameField;
+
 class HeroWidget : public cocos2d::Node
 {
 public:
@@ -24,7 +26,7 @@ public:
     };
     
 public:
-    static HeroWidget* create(GameplayObject::WeakPtr Hero);
+    static HeroWidget* create(GameplayObject::WeakPtr hero, GameField *gamefield);
     
     void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
     void RunEffectReceiveDamage();
@@ -35,7 +37,7 @@ public:
     SwordSide GetSwordSide() const;
     
 protected:
-    HeroWidget(GameplayObject::WeakPtr Hero);
+    HeroWidget(GameplayObject::WeakPtr Hero, GameField *gamefield);
     virtual ~HeroWidget();
     
     bool init();
@@ -57,6 +59,7 @@ private:
     {
         cocos2d::Vec2 localPos;
         float angle;
+        
         SwordTransform(cocos2d::Vec2 p, float a)
         : localPos(p)
         , angle(a)
@@ -69,8 +72,8 @@ private:
     static const SwordTransform _swordRightSideTrans;
     static const SwordTransform _swordLeftSideTrans;
     
+    GameField *_gamefield;
     GameplayObject::WeakPtr _hero;
-  
     PathSectorWidget::SectorsSequence *_sectors;
     
     cocos2d::Node *_bodyControlNode; // all rotations performed by this node
