@@ -63,6 +63,12 @@
     <ClCompile Include="..\Classes\StaminaBarWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EffectEnemyDeath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EffectsLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -114,6 +120,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StaminaBarWidget.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EffectEnemyDeath.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EffectsLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
