@@ -26,7 +26,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/HeroWidget.cpp \
                    ../../Classes/HeroControlKeyboard.cpp \
                    ../../Classes/HeroControlTouch.cpp \
-                   ../../Classes/StaminaBarWidget.cpp
+                   ../../Classes/StaminaBarWidget.cpp \
+                   ../../Classes/EffectsLayer.cpp \
+                   ../../Classes/EffectEnemyDeath.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../cocos2d/scripting/lua-bindings/manual \
