@@ -5,6 +5,7 @@
 
 #include "GameScene.h"
 #include "GameInfo.h"
+#include "Store.h"
 #include "Utils.h"
 
 USING_NS_CC;
@@ -59,6 +60,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
 	GameInfo::Instance().LoadInfo("gameInfo.xml");
+    Store::Instance().LoadStore("storeItems.xml");
 
     if (Utils::IsPlatformDesctop()) {
         director->setDisplayStats(true);

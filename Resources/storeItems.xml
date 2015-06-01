@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Store>
+	<Weapon id="default_sword"
+        price="0"
+        name="Iron Sword"
+        desc="Your default weapon"
+        icon="iron_sword_icon.png"
+        damage="1.0"
+        speed="0.33" />
+</Store>

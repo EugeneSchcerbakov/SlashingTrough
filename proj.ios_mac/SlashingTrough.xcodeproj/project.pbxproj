@@ -98,6 +98,10 @@
 		CDA8F44A1AD2F6B8006A3210 /* HeroWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDA8F4471AD2F6B8006A3210 /* HeroWidget.cpp */; };
 		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
+		CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC794571B1C1A0000B83EA2 /* Store.cpp */; };
+		CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC794571B1C1A0000B83EA2 /* Store.cpp */; };
+		CDC7945C1B1C202D00B83EA2 /* storeItems.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC7945B1B1C202D00B83EA2 /* storeItems.xml */; };
+		CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC7945B1B1C202D00B83EA2 /* storeItems.xml */; };
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
@@ -253,6 +257,9 @@
 		CDA8F4471AD2F6B8006A3210 /* HeroWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroWidget.cpp; sourceTree = "<group>"; };
 		CDA8F4481AD2F6B8006A3210 /* HeroWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroWidget.h; sourceTree = "<group>"; };
 		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
+		CDC794571B1C1A0000B83EA2 /* Store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Store.cpp; sourceTree = "<group>"; };
+		CDC794581B1C1A0000B83EA2 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		CDC7945B1B1C202D00B83EA2 /* storeItems.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = storeItems.xml; sourceTree = "<group>"; };
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -384,6 +391,7 @@
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
+				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -424,6 +432,8 @@
 				CD44C6FD1AE9503E008569F6 /* HeroControlTouch.h */,
 				CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */,
 				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
+				CDC794571B1C1A0000B83EA2 /* Store.cpp */,
+				CDC794581B1C1A0000B83EA2 /* Store.h */,
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
 				CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */,
@@ -642,6 +652,7 @@
 				CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */,
+				CDC7945C1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -652,6 +663,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
@@ -689,6 +701,7 @@
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD543C151ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CD543C101ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
+				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD44C6FE1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */,
 				CD2D182D1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 			);
@@ -705,6 +718,7 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
+				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD543C161ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CDA8F4451AD2F356006A3210 /* Hero.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
