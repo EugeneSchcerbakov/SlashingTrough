@@ -83,7 +83,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GameInfo::Instance().SetFloat("PATH_RIGHT_BORDER", squareSize * 2.0f);
     GameInfo::Instance().SetInt("CHARACTER_SCORE", 0);
     
-    cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartScene");
+    cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartscreenScene");
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
     {

@@ -10,6 +10,8 @@ require "GuiConstants"
 
 PlayerResultGoldPoints = 0
 PlayerResultKillPoints = 0
+PlayerBestResultGoldPoints = 0
+PlayerBestResultKillPoints = 0
 
 local function StratchingBounceEffect()
 	local stratchOut = cc.ScaleBy:create(0.3, 1.4, 0.8, 1.0)
@@ -21,89 +23,152 @@ local function StratchingBounceEffect()
 	return effect
 end
 
+local function AppearBouncedWithDelay(delay, finalScale)
+	local upscale = cc.ScaleTo:create(0.8, finalScale)
+	local bounce = cc.EaseBounceOut:create(upscale)
+	local fadein = cc.FadeIn:create(0.2)
+	local wait = cc.DelayTime:create(delay)
+	local motion = cc.Spawn:create(bounce, fadein)
+	local effect = cc.Sequence:create(wait, motion)
+	return effect
+end
+
 -- this scene must send StartButtonPressed event
-function CreateStartScene()
+function CreateStartscreenScene()
 	local scene = cc.Scene:create()
 	local director = cc.Director:getInstance()
 	local frameSize = director:getVisibleSize()
 	local frameOrigin = director:getVisibleOrigin()
+	local allowToContinue = false
 
 	-- calculate center of the screen
 	local center = {x = 0.0, y = 0.0}
 	center.x = frameOrigin.x + frameSize.width * 0.5
 	center.y = frameOrigin.y + frameSize.height * 0.5
 
-	local buttonNormalColor = cc.c4f(1.0, 1.0, 1.0, 1.0)
-	local buttonPressedColor = cc.c4f(0.7, 0.7, 0.7, 1.0)
+	local whiteBkg = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
 
-	local title = ccui.Text:create("Slashing\nTrough", "font_marigoldwild.ttf", 200)
-	title:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	title:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	title:setTextColor(cc.c4b(255, 0, 0, 255))
-	title:setRotation(-30.0)
-	title:setPositionX(center.x)
-	title:setPositionY(center.y + 200.0)
+	local imageBkg = cc.Sprite:create("ui/ui_startscreen_girl.png")
+	imageBkg:setScale(1.8)
+	imageBkg:setAnchorPoint(cc.p(0.0, 0.0))
+	imageBkg:setPosition(cc.p(0.0, 0.0))
 
-	local caption = ccui.Text:create("Start", "font_marigoldwild.ttf", 130)
-	caption:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	caption:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
-	caption:setTextColor(cc.c4b(0, 0, 0, 255))
-	caption:setPosition(cc.p(0.0, 0.0))
-
-	local btnYOffset = -220.0
-	local btnPos = {x = center.x, y = center.y + btnYOffset}
-	local button = cc.DrawNode:create()
-	local radius = 200.0
-	local yScale = 0.5
-	button:setPosition(btnPos)
-	button:drawSolidCircle(cc.p(0.0, 0.0), radius, 0.0, 70, 1.0, yScale, buttonNormalColor)
-	button:setContentSize(cc.size(radius * 2.0, (radius * yScale) * 2.0))
-	button:addChild(caption)
-	button:runAction(StratchingBounceEffect())
-
-	local wasPressed = false
-	local function OnTouchBegin(touch, event)
-		local touchPos = scene:convertToNodeSpace(touch:getLocation())
-		local hitArea = cc.rect(
-			-- lower left corner
-			button:getPositionX() - button:getContentSize().width * 0.5,
-			button:getPositionY() - button:getContentSize().height * 0.5,
-			-- initial size
-			button:getContentSize().width,
-			button:getContentSize().height
-		)
-		if cc.rectContainsPoint(hitArea, touchPos) then
-			button:cleanup()
-			button:drawSolidCircle(cc.p(0.0, 0.0), radius, 0.0, 70, 1.0, yScale, buttonPressedColor)
-			wasPressed = true
-		end
-		return true
+	local function tipEndCallback()
+		allowToContinue = true
 	end
 
-	local function OnTouchEnded(touch, event)
-		button:cleanup()
-		button:drawSolidCircle(cc.p(0.0, 0.0), radius, 0.0, 70, 1.0, yScale, buttonNormalColor)
-		if wasPressed then
+	local imageTip = cc.Sprite:create("ui/ui_run_slash_tip.png")
+	local imageTipYShift = -218.0
+	local imageTipScale = 1.8
+	imageTip:setScale(imageTipScale)
+	imageTip:setPositionX(center.x)
+	imageTip:setPositionY(frameSize.height + imageTip:getContentSize().height * imageTipScale * 0.5)
+	local tipMoveDown = cc.MoveTo:create(0.7, cc.p(center.x, center.y + imageTipYShift * 1.1))
+	local tipMoveEase = cc.EaseCubicActionOut:create(tipMoveDown)
+	local tipMoveEnd = cc.CallFunc:create(tipEndCallback)
+	imageTip:runAction(cc.Sequence:create(tipMoveEase, tipMoveEnd))
+
+	local gameLogo = cc.Sprite:create("ui/ui_st_tmp-logo.png")
+	gameLogo:setScale(1.8)
+	gameLogo:setPositionX(center.x)
+	gameLogo:setPositionY(frameSize.height - gameLogo:getContentSize().height)
+
+	local studioLogo = cc.Sprite:create("ui/ui_blank_logo.png")
+	local studioLogoScale = 1.8
+	studioLogo:setScale(studioLogoScale)
+	studioLogo:setPositionX(frameSize.width - studioLogo:getContentSize().width * studioLogoScale * 0.5 - 15.0)
+	studioLogo:setPositionY(studioLogo:getContentSize().height * studioLogoScale * 0.5 + 15.0)
+
+	local optionsBtn = ccui.Button:create("ui/ui_btn_options.png")
+	local optionsBtnScale = 1.8
+	optionsBtn:setScale(optionsBtnScale)
+	optionsBtn:setPositionX(optionsBtn:getContentSize().width * optionsBtnScale * 0.5)
+	optionsBtn:setPositionY(optionsBtn:getContentSize().height * optionsBtnScale * 0.5)
+	optionsBtn:setScale(0.1)
+	optionsBtn:setOpacity(0)
+	optionsBtn:runAction(AppearBouncedWithDelay(0.0, optionsBtnScale))
+
+	local shopBtn = ccui.Button:create("ui/ui_btn_shop.png")
+	local shopBtnScale = 1.8
+	shopBtn:setScale(shopBtnScale)
+	shopBtn:setPositionX(optionsBtn:getContentSize().width * optionsBtnScale + shopBtn:getContentSize().width * shopBtnScale * 0.5)
+	shopBtn:setPositionY(shopBtn:getContentSize().height * shopBtnScale * 0.5)
+	shopBtn:setScale(0.1)
+	shopBtn:setOpacity(0)
+	shopBtn:runAction(AppearBouncedWithDelay(0.2, shopBtnScale))
+
+	local panelYShift = -200.0
+	local bestScorePanel = ccui.Layout:create()
+	bestScorePanel:setBackGroundImage("ui/ui_frame_best-score_blank.png")
+	bestScorePanel:setScale(1.8)
+	bestScorePanel:setPositionX(frameSize.width - bestScorePanel:getBackGroundImageTextureSize().width)
+	bestScorePanel:setPositionY(frameSize.height - bestScorePanel:getBackGroundImageTextureSize().height + panelYShift)
+
+	local scoreTitle = ccui.Text:create("Best SCORE:", "font_prototype.ttf", 25)
+	scoreTitle:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	scoreTitle:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	scoreTitle:setTextColor(cc.c4b(0, 0, 0, 255))
+	scoreTitle:setPositionX(0.0)
+	scoreTitle:setPositionY(bestScorePanel:getBackGroundImageTextureSize().height * 0.5 + scoreTitle:getContentSize().height * 0.5)
+
+	local goldPointsText = ccui.Text:create("", "font_prototype.ttf", 28)
+	goldPointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	goldPointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	goldPointsText:setTextColor(cc.c4b(0, 0, 0, 255))
+	goldPointsText:setPositionX(30.0)
+	goldPointsText:setPositionY(35.0)
+	goldPointsText:setString(tostring(PlayerBestResultGoldPoints))
+
+	local killPointsText = ccui.Text:create("", "font_prototype.ttf", 28)
+	killPointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	killPointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
+	killPointsText:setTextColor(cc.c4b(0, 0, 0, 255))
+	killPointsText:setPositionX(30.0)
+	killPointsText:setPositionY(-8.0)
+	killPointsText:setString(tostring(PlayerBestResultKillPoints))
+
+	local iconGold = cc.Sprite:create("icon_gold.png")
+	iconGold:setPositionX(-40.0)
+	iconGold:setPositionY(35.0)
+	iconGold:setScale(0.8)
+
+	local iconKill = cc.Sprite:create("icon_kill.png")
+	iconKill:setPositionX(-40.0)
+	iconKill:setPositionY(-8.0)
+	iconKill:setScale(0.8)
+
+	bestScorePanel:addChild(scoreTitle)
+	bestScorePanel:addChild(goldPointsText)
+	bestScorePanel:addChild(killPointsText)
+	bestScorePanel:addChild(iconGold)
+	bestScorePanel:addChild(iconKill)
+
+	local function onTouchBegan(touch, event)
+		return true
+	end
+	local function onTouchEnded(touch, event)
+		if allowToContinue then
 			local event = cc.EventCustom:new("StartButtonPressed")
 			local dispatcher = scene:getEventDispatcher()
 			dispatcher:dispatchEvent(event)
 		end
 	end
 
-	local function OnTouchCancelled(touch, event)
-		button:cleanup()
-		button:drawSolidCircle(cc.p(0.0, 0.0), radius, 0.0, 70, 1.0, yScale, buttonNormalColor)
-	end
-	
 	local listener = cc.EventListenerTouchOneByOne:create()
-	listener:registerScriptHandler(OnTouchBegin, cc.Handler.EVENT_TOUCH_BEGAN)
-	listener:registerScriptHandler(OnTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
-	listener:registerScriptHandler(OnTouchCancelled, cc.Handler.EVENT_TOUCH_CANCELLED)
+	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+	listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
+	listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_CANCELLED)
 	local dispatcher = director:getEventDispatcher()
 	dispatcher:addEventListenerWithSceneGraphPriority(listener, scene)
 
-	scene:addChild(title)
-	scene:addChild(button)
+	scene:addChild(whiteBkg, 0)
+	scene:addChild(imageBkg, 1)
+	scene:addChild(gameLogo, 2)
+	scene:addChild(studioLogo, 2)
+	scene:addChild(optionsBtn, 2)
+	scene:addChild(shopBtn, 2)
+	scene:addChild(bestScorePanel, 3)
+	scene:addChild(imageTip, 4)
 
 	return scene
 end
