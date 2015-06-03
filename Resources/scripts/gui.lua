@@ -206,23 +206,23 @@ function CreateResultScene()
 	center.x = frameOrigin.x + frameSize.width * 0.5
 	center.y = frameOrigin.y + frameSize.height * 0.5
 
-	local function OnRunPressed(touch, event)
+	local function onHomePressed(touch, event)
 		if event == ccui.TouchEventType.ended then
-			local event = cc.EventCustom:new("StartButtonPressed")
+			local event = cc.EventCustom:new(MoveToHomeEventName)
 			local dispatcher = scene:getEventDispatcher()
 			dispatcher:dispatchEvent(event)
 		end
 	end
 
-	local function OnKeyReleased(key, event)
+	local function onKeyReleased(key, event)
 		if key == cc.KeyCode.KEY_SPACE then
-			local event = cc.EventCustom:new("StartButtonPressed")
+			local event = cc.EventCustom:new(StartRunEventName)
 			local dispatcher = scene:getEventDispatcher()
 			dispatcher:dispatchEvent(event)
 		end
 	end
 	local keyboardListener = cc.EventListenerKeyboard:create()
-	keyboardListener:registerScriptHandler(OnKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED)
+	keyboardListener:registerScriptHandler(onKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED)
 	director:getEventDispatcher():addEventListenerWithSceneGraphPriority(keyboardListener, scene)
 
 	local background = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
@@ -302,6 +302,7 @@ function CreateResultScene()
 	homeBtn:setPositionY(homeBtn:getContentSize().height * homeBtnScale * 0.5)
 	homeBtn:setScale(0.1)
 	homeBtn:setOpacity(0)
+	homeBtn:addTouchEventListener(onHomePressed)
 	homeBtn:runAction(AppearBouncedWithDelay(0.0, homeBtnScale))
 
 	local shopBtn = ccui.Button:create("ui/ui_btn_shop.png")

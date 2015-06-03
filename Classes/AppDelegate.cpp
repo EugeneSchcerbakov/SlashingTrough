@@ -93,10 +93,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->replaceScene(gs);
     };
     
+    auto OnHomePressed = [&](cocos2d::EventCustom *)
+    {
+        auto homescreen = Utils::MakeSceneFromLua("CreateStartscreenScene");
+        auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);
+        cocos2d::Director *director;
+        director = cocos2d::Director::getInstance();
+        director->replaceScene(transition);
+    };
+    
     if (scene) {
         cocos2d::EventDispatcher *dispatcher;
         dispatcher = scene->getEventDispatcher();
         dispatcher->addCustomEventListener("StartButtonPressed", OnStartPressed);
+        dispatcher->addCustomEventListener("MoveToHomeScreen", OnHomePressed);
         director->runWithScene(scene);
     } else {
         return false;
