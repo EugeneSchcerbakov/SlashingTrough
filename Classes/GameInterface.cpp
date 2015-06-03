@@ -135,13 +135,16 @@ bool GameInterface::init()
     _healthPointsText->setPosition(cocos2d::Vec2(105.0f, 28.0f));
     _healthPointsText->setTextColor(cocos2d::Color4B::RED);
 
-    cocos2d::Sprite *goldIcon = cocos2d::Sprite::create("icon_gold.png");
-    cocos2d::Sprite *killIcon = cocos2d::Sprite::create("icon_kill.png");
-    cocos2d::Sprite *damageIcon = cocos2d::Sprite::create("icon_sword.png");
-    cocos2d::Sprite *healthIcon = cocos2d::Sprite::create("icon_health.png");
+    cocos2d::Sprite *goldIcon = cocos2d::Sprite::create("icons/icon_coin.png");
+    cocos2d::Sprite *killIcon = cocos2d::Sprite::create("icons/icon_kills.png");
+    cocos2d::Sprite *damageIcon = cocos2d::Sprite::create("icons/icon_dmg.png");
+    cocos2d::Sprite *healthIcon = cocos2d::Sprite::create("icons/icon_health.png");
     goldIcon->setPosition(27.0f, 28.0f);
+    goldIcon->setScale(1.3f);
     killIcon->setPosition(27.0f, 28.0f);
+    killIcon->setScale(1.3f);
     damageIcon->setPosition(27.0f, 28.0f);
+    damageIcon->setScale(1.3f);
     healthIcon->setPosition(27.0f, 28.0f);
     
     cocos2d::Size goldPointsBackSize(190.0f, 60.0f);

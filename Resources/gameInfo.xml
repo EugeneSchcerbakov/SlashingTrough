@@ -80,7 +80,7 @@
             goldPointsReward="0"
             staminaPointsReward="0"
             scorePointsReward="0"
-            sprite="obstacle_0.png" />
+            sprite="gamefield/obstacle_0.png" />
         <Enemy name="enemy-A"
             damage="0.0"
             health="1.0"
@@ -89,7 +89,7 @@
             goldPointsReward="5"
             staminaPointsReward="20"
             scorePointsReward="10"
-            sprite="creep_0.png" />
+            sprite="gamefield/creep_0.png" />
         <Enemy name="enemy-B"
             damage="0.0"
             health="2.0"
@@ -98,7 +98,7 @@
             goldPointsReward="50"
             staminaPointsReward="20"
             scorePointsReward="20"
-            sprite="creep_1.png" />
+            sprite="gamefield/creep_1.png" />
         <Enemy name="enemy-C"
             damage="0.0"
             health="3.0"
@@ -107,7 +107,7 @@
             goldPointsReward="75"
             staminaPointsReward="50"
             scorePointsReward="30"
-            sprite="creep_2.png" />
+            sprite="gamefield/creep_2.png" />
          <Enemy name="enemy-D"
             damage="0.0"
             health="4.0"
@@ -116,7 +116,7 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="creep_3.png" />
+            sprite="gamefield/creep_3.png" />
          <Enemy name="enemy-E"
             damage="0.0"
             health="5.0"
@@ -125,6 +125,6 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="creep_4.png" />            
+            sprite="gamefield/creep_4.png" />            
     </GameplayObjects>
 </GameInfo>

@@ -168,7 +168,7 @@ bool EnemyWidget::init()
     _sprite = cocos2d::Sprite::create(ptr->GetSpriteFilename());
     _sprite->setPosition(0.0f, 0.0f);
     
-    _blood = cocos2d::Sprite::create("blood_sprite.png");
+    _blood = cocos2d::Sprite::create("effects/blood_sprite.png");
     
     _bloodClip = cocos2d::ProgressTimer::create(_blood);
     _bloodClip->setScale(2.0f);

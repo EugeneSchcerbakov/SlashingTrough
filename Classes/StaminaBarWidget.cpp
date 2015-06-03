@@ -42,8 +42,8 @@ bool StaminaBarWidget::init()
         return false;
     }
     
-    _bar = cocos2d::Sprite::create("stamina_bar.png");
-    _back = cocos2d::Sprite::create("stamina_bar_back.png");
+    _bar = cocos2d::Sprite::create("ui/stamina_bar.png");
+    _back = cocos2d::Sprite::create("ui/stamina_bar_back.png");
     _bar->setScaleX(_visibleProgress);
     
     addChild(_back, 0);

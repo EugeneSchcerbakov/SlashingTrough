@@ -66,7 +66,7 @@ bool HeroWidget::init()
     _sword->setPosition(_swordRightSideTrans.localPos);
     _sword->setRotation(_swordRightSideTrans.angle);
     
-    _swordTrail = cocos2d::Sprite::create("sword_trail.png");
+    _swordTrail = cocos2d::Sprite::create("effects/sword_trail.png");
     _swordTrail->setPositionY(180.0f);
     _swordTrail->setScale(1.9f);
     _swordTrail->setOpacity(0);

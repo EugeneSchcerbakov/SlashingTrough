@@ -36,7 +36,7 @@ bool EffectEnemyDeath::init(const std::string &enemySprite,
     }
     
     _enemy = cocos2d::Sprite::create(enemySprite);
-    _blood = cocos2d::Sprite::create("blood_sprite.png");
+    _blood = cocos2d::Sprite::create("effects/blood_sprite.png");
     _blood->setScale(2.0);
     
     _clip = cocos2d::ProgressTimer::create(_blood);
