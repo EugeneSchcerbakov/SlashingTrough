@@ -14,10 +14,12 @@ PlayerBestResultGoldPoints = 0
 PlayerBestResultKillPoints = 0
 PlayerTotalGoldPoints = 123456
 PlayerTotalDamagePoints = 345
+StartScreenSceneName = "StartScreenScene"
+ResultScreenSceneName = "ResultScreenScene"
 
 local StartRunEventName = "StartButtonPressed"
 local MoveToHomeEventName = "MoveToHomeScreen"
-local MovetoStoreEventName = "MovetoStoreEventName"
+local MoveToStoreEventName = "MoveToStore"
 
 local function StratchingBounceEffect()
 	local stratchOut = cc.ScaleBy:create(0.3, 1.4, 0.8, 1.0)
@@ -105,6 +107,14 @@ function CreateStartscreenScene()
 	optionsBtn:setOpacity(0)
 	optionsBtn:runAction(AppearBouncedWithDelay(0.0, optionsBtnScale))
 
+	local function onStorePressed(touch, event)
+		if event == ccui.TouchEventType.ended then
+			local event = cc.EventCustom:new(MoveToStoreEventName)
+			local dispatcher = scene:getEventDispatcher()
+			dispatcher:dispatchEvent(event)
+		end
+	end
+
 	local shopBtn = ccui.Button:create("ui/ui_btn_shop.png")
 	local shopBtnScale = 1.8
 	shopBtn:setScale(shopBtnScale)
@@ -112,6 +122,7 @@ function CreateStartscreenScene()
 	shopBtn:setPositionY(shopBtn:getContentSize().height * shopBtnScale * 0.5)
 	shopBtn:setScale(0.1)
 	shopBtn:setOpacity(0)
+	shopBtn:addTouchEventListener(onStorePressed)
 	shopBtn:runAction(AppearBouncedWithDelay(0.2, shopBtnScale))
 
 	local panelYShift = -200.0
@@ -191,6 +202,7 @@ function CreateStartscreenScene()
 	scene:addChild(shopBtn, 2)
 	scene:addChild(bestScorePanel, 3)
 	scene:addChild(imageTip, 4)
+	scene:setName(StartScreenSceneName)
 
 	return scene
 end
@@ -305,6 +317,14 @@ function CreateResultScene()
 	homeBtn:addTouchEventListener(onHomePressed)
 	homeBtn:runAction(AppearBouncedWithDelay(0.0, homeBtnScale))
 
+	local function onStorePressed(touch, event)
+		if event == ccui.TouchEventType.ended then
+			local event = cc.EventCustom:new(MoveToStoreEventName)
+			local dispatcher = scene:getEventDispatcher()
+			dispatcher:dispatchEvent(event)
+		end
+	end
+
 	local shopBtn = ccui.Button:create("ui/ui_btn_shop.png")
 	local shopBtnScale = 1.8
 	shopBtn:setScale(shopBtnScale)
@@ -312,6 +332,7 @@ function CreateResultScene()
 	shopBtn:setPositionY(shopBtn:getContentSize().height * shopBtnScale * 0.5)
 	shopBtn:setScale(0.1)
 	shopBtn:setOpacity(0)
+	shopBtn:addTouchEventListener(onStorePressed)
 	shopBtn:runAction(AppearBouncedWithDelay(0.2, shopBtnScale))
 
 	local coinsShopBtn = ccui.Button:create("ui/ui_btn_coins_shop.png")
@@ -403,6 +424,7 @@ function CreateResultScene()
 	scene:addChild(totalGoldPointsText, 4)
 	scene:addChild(totalDamagePointsText, 4)
 	scene:addChild(imageTip, 5)
+	scene:setName(ResultScreenSceneName)
 
 	local visualGoldPoints = 0
 	local visualKillPoints = 0

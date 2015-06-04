@@ -86,6 +86,8 @@
 		CD75035B1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
 		CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */; };
 		CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */; };
+		CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
+		CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
@@ -248,6 +250,8 @@
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		CD81E5121B20B439008059C2 /* StoreInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreInterface.cpp; sourceTree = "<group>"; };
+		CD81E5131B20B439008059C2 /* StoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInterface.h; sourceTree = "<group>"; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
@@ -434,6 +438,8 @@
 				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
 				CDC794571B1C1A0000B83EA2 /* Store.cpp */,
 				CDC794581B1C1A0000B83EA2 /* Store.h */,
+				CD81E5121B20B439008059C2 /* StoreInterface.cpp */,
+				CD81E5131B20B439008059C2 /* StoreInterface.h */,
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
 				CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */,
@@ -684,6 +690,7 @@
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
@@ -724,6 +731,7 @@
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
+				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				CD3ECE8D1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,

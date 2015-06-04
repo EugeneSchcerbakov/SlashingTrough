@@ -54,6 +54,18 @@ void Utils::LuaSetGlobalInteger(const std::string &varName, int value)
     luaEngine->executeString(command.c_str());
 }
 
+std::string Utils::LuaGetGlobalString(const std::string &varName)
+{
+    cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
+    lua_State *L = luaEngine->getLuaStack()->getLuaState();
+    
+    lua_getglobal(L, varName.c_str());
+    if (!lua_isstring(L, -1)) {
+        return "";
+    }
+    return lua_tostring(L, -1);
+}
+
 cocos2d::Layer* Utils::MakeLayerFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();

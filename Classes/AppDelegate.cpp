@@ -3,6 +3,7 @@
 #include "ui/lua_cocos2dx_ui_manual.hpp"
 #include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
 
+#include "StoreInterface.h"
 #include "GameScene.h"
 #include "GameInfo.h"
 #include "Store.h"
@@ -74,7 +75,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
     register_ui_moudle(luaState);
     register_cocostudio_module(luaState);
-    
     luaEngine->executeScriptFile("gui.lua");
     
     float squareSize = director->getVisibleSize().width / 3.0f;
@@ -96,17 +96,35 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto OnHomePressed = [&](cocos2d::EventCustom *)
     {
         auto homescreen = Utils::MakeSceneFromLua("CreateStartscreenScene");
-        auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);
+        auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);  
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();
         director->replaceScene(transition);
     };
     
+    auto OnStorePressed = [&](cocos2d::EventCustom *)
+    {
+        cocos2d::Director *director = cocos2d::Director::getInstance();
+        
+        std::string name;
+        auto currentScene = director->getRunningScene();
+        if (currentScene) {
+            name = currentScene->getName();
+        }
+        
+        auto storeInterface = StoreInterface::create(name);
+        auto transition = cocos2d::TransitionSlideInR::create(0.3f, storeInterface);
+        director->replaceScene(transition);
+    };
+    
     if (scene) {
+        cocos2d::Director *director;
         cocos2d::EventDispatcher *dispatcher;
-        dispatcher = scene->getEventDispatcher();
+        director = cocos2d::Director::getInstance();
+        dispatcher = director->getEventDispatcher();
         dispatcher->addCustomEventListener("StartButtonPressed", OnStartPressed);
         dispatcher->addCustomEventListener("MoveToHomeScreen", OnHomePressed);
+        dispatcher->addCustomEventListener("MoveToStore", OnStorePressed);
         director->runWithScene(scene);
     } else {
         return false;

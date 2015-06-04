@@ -18,6 +18,8 @@ namespace Utils
     void LuaCallVoidFunction(const std::string &funcName, const std::string &passData);
     void LuaSetGlobalInteger(const std::string &varName, int value);
     
+    std::string LuaGetGlobalString(const std::string &varName);
+    
     cocos2d::Layer* MakeLayerFromLua(const std::string &luaFuncName);
     cocos2d::Scene* MakeSceneFromLua(const std::string &luaFuncName);
     cocos2d::Node* MakeNodeFromLua(const std::string &luaFuncName);
