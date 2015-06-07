@@ -36,15 +36,16 @@ void Store::LoadStore(const std::string &filename)
             tinyxml2::XMLElement *elem = node->ToElement();
             std::string name = elem->Name();
             if (name == "Weapon") {
-                Store::WeaponItem weapon;
-                weapon.id = elem->Attribute("id");
-                weapon.price = elem->IntAttribute("price");
-                weapon.damage = elem->FloatAttribute("damage");
-                weapon.speed = elem->FloatAttribute("speed");
-                weapon.desc = elem->Attribute("desc");
-                weapon.icon = elem->Attribute("icon");
-                weapon.name = elem->Attribute("name");
-                _items.push_back(weapon);
+                Equip::Ptr item = EquipWeapon::create();
+                EquipWeapon *weapon = EquipWeapon::cast(item);
+                weapon->id = elem->Attribute("id");
+                weapon->price = elem->IntAttribute("price");
+                weapon->damage = elem->FloatAttribute("damage");
+                weapon->speed = elem->FloatAttribute("speed");
+                weapon->desc = elem->Attribute("desc");
+                weapon->icon = elem->Attribute("icon");
+                weapon->name = elem->Attribute("name");
+                _items.push_back(item);
             } else {
                 CC_ASSERT(false);
             }
@@ -53,19 +54,30 @@ void Store::LoadStore(const std::string &filename)
     }
 }
 
-Store::Item Store::GetItemById(const std::string &id) const
+Equip::Ptr Store::GetItemById(const std::string &id) const
 {
-    for (const Item &info : _items) {
-        if (info.id == id) {
+    for (const auto info : _items) {
+        if (info->id == id) {
             return info;
         }
     }
-    return Item();
+    return Equip::Ptr();
 }
 
 const Store::Items& Store::GetAllItems() const
 {
     return _items;
+}
+
+Store::Items Store::GetWeaponItems() const
+{
+    Items items;
+    for (auto item : _items) {
+        if (item->type == Equip::Type::WEAPON) {
+            items.push_back(item);
+        }
+    }
+    return items;
 }
 
 void Store::Reset()

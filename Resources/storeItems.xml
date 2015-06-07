@@ -4,7 +4,7 @@
         price="0"
         name="Iron Sword"
         desc="Your default weapon"
-        icon="iron_sword_icon.png"
+        icon="icons/icon_iron_sword.png"
         damage="1.0"
         speed="0.33" />
 </Store>

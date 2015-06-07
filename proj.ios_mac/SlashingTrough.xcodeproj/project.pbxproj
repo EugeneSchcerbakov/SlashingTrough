@@ -80,6 +80,14 @@
 		CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
 		CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
+		CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
+		CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
+		CD637E7A1B234458002F98EF /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Equipment.cpp */; };
+		CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Equipment.cpp */; };
+		CD637E7E1B234E75002F98EF /* StoreItemButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */; };
+		CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */; };
+		CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
+		CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -246,6 +254,14 @@
 		CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaminaBarWidget.cpp; sourceTree = "<group>"; };
 		CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaminaBarWidget.h; sourceTree = "<group>"; };
 		CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiConstants.lua; sourceTree = "<group>"; };
+		CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreWeaponWidget.cpp; sourceTree = "<group>"; };
+		CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreWeaponWidget.h; sourceTree = "<group>"; };
+		CD637E781B234458002F98EF /* Equipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Equipment.cpp; sourceTree = "<group>"; };
+		CD637E791B234458002F98EF /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equipment.h; sourceTree = "<group>"; };
+		CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreItemButton.cpp; sourceTree = "<group>"; };
+		CD637E7D1B234E75002F98EF /* StoreItemButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItemButton.h; sourceTree = "<group>"; };
+		CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCategoryButton.cpp; sourceTree = "<group>"; };
+		CD637E811B234F42002F98EF /* StoreCategoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoryButton.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -440,6 +456,14 @@
 				CDC794581B1C1A0000B83EA2 /* Store.h */,
 				CD81E5121B20B439008059C2 /* StoreInterface.cpp */,
 				CD81E5131B20B439008059C2 /* StoreInterface.h */,
+				CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */,
+				CD637E811B234F42002F98EF /* StoreCategoryButton.h */,
+				CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */,
+				CD637E7D1B234E75002F98EF /* StoreItemButton.h */,
+				CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */,
+				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
+				CD637E781B234458002F98EF /* Equipment.cpp */,
+				CD637E791B234458002F98EF /* Equipment.h */,
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
 				CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */,
@@ -692,14 +716,18 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
+				CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
 				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD3E69AB1AD3A593008F7FB0 /* HeroControlKeyboard.cpp in Sources */,
 				CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */,
+				CD637E7A1B234458002F98EF /* Equipment.cpp in Sources */,
 				CD3ECE8C1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				CD5F8C831AD04C9C000CF14A /* PathSector.cpp in Sources */,
+				CD637E7E1B234E75002F98EF /* StoreItemButton.cpp in Sources */,
 				CD4FF0931B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CDA8F4491AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
@@ -724,18 +752,22 @@
 				CD543C111ADA8D8F00DDCF1A /* GameplayObjects.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
+				CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
 				CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD543C161ADA8F9400DDCF1A /* GameplayObjectsWidgets.cpp in Sources */,
 				CDA8F4451AD2F356006A3210 /* Hero.cpp in Sources */,
+				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* HeroControlTouch.cpp in Sources */,
+				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				CD3ECE8D1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD4FF0941B18C794007E7BAA /* EffectEnemyDeath.cpp in Sources */,
+				CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */,
 				CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */,
 				CDA8F44A1AD2F6B8006A3210 /* HeroWidget.cpp in Sources */,
