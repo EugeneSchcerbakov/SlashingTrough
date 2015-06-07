@@ -97,9 +97,11 @@ bool StoreInterface::init()
     _coinsText->setTextColor(cocos2d::Color4B(254, 228, 146, 255));
     _coinsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     _coinsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _coinsText->setPositionX(frameSize.width * 0.5f);
+    _coinsText->setString("0");
+    _coinsText->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
+    _coinsText->setPositionX(coinIcon->getPositionX() +
+                             coinIcon->getContentSize().width * coinIcon->getScale() * 0.5f + 10.0f);
     _coinsText->setPositionY(frameSize.height - 45);
-    _coinsText->setString("123456");
     
     _damageText = cocos2d::ui::Text::create();
     _damageText->setFontName("font_prototype.ttf");
@@ -107,9 +109,11 @@ bool StoreInterface::init()
     _damageText->setTextColor(cocos2d::Color4B(254, 228, 146, 255));
     _damageText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     _damageText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _damageText->setPositionX(frameSize.width * 0.5f + 250.0f);
+    _damageText->setString("0");
+    _damageText->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
+    _damageText->setPositionX(damageIcon->getPositionX() +
+                              damageIcon->getContentSize().width * damageIcon->getScale() * 0.5f + 10.0f);
     _damageText->setPositionY(frameSize.height - 45);
-    _damageText->setString("345");
     
     _scroller = cocos2d::ui::ListView::create();
     _scroller->setItemsMargin(15.0f);

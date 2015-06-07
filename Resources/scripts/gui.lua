@@ -359,17 +359,21 @@ function CreateResultScene()
 	totalGoldPointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
 	totalGoldPointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
 	totalGoldPointsText:setTextColor(cc.c4b(254, 228, 146, 255))
-	totalGoldPointsText:setPositionX(center.x)
-	totalGoldPointsText:setPositionY(frameSize.height - 45.0)
 	totalGoldPointsText:setString(tostring(PlayerTotalGoldPoints))
+	totalGoldPointsText:setAnchorPoint(cc.p(0.0, 0.5))
+	totalGoldPointsText:setPositionX(totalGoldIcon:getPositionX() + 
+									 totalGoldIcon:getContentSize().width * totalGoldIcon:getScale() * 0.5 + 10.0)
+	totalGoldPointsText:setPositionY(frameSize.height - 45.0)
 
 	local totalDamagePointsText = ccui.Text:create("", "font_prototype.ttf", 45)
 	totalDamagePointsText:setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_CENTER)
 	totalDamagePointsText:setTextVerticalAlignment(cc.TEXT_ALIGNMENT_CENTER)
 	totalDamagePointsText:setTextColor(cc.c4b(254, 228, 146, 255))
-	totalDamagePointsText:setPositionX(center.x + 250.0)
-	totalDamagePointsText:setPositionY(frameSize.height - 45.0)
 	totalDamagePointsText:setString(tostring(PlayerTotalDamagePoints))
+	totalDamagePointsText:setAnchorPoint(cc.p(0.0, 0.5))
+	totalDamagePointsText:setPositionX(totalDamageIcon:getPositionX() + 
+									   totalDamageIcon:getContentSize().width * totalDamageIcon:getScale() * 0.5 + 10.0)
+	totalDamagePointsText:setPositionY(frameSize.height - 45.0)
 
 	local function tipEndCallback()
 		allowToContinue = true
