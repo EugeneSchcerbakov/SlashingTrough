@@ -64,8 +64,8 @@ protected:
     float _radius;
     float _staminaDrainPoints;
     
-    int _killPoints;
     int _goldPointsReward;
+    int _killPointsReward;
     int _staminaPointsReward;
     int _scorePointsReward;
     

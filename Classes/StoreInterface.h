@@ -22,6 +22,7 @@ protected:
     virtual ~StoreInterface();
     
     bool init();
+    void update(float dt);
     
 private:
     enum Order

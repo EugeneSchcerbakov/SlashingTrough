@@ -70,6 +70,11 @@ HeroAction& Hero::CurrentAction()
     return _actionSequence.front();
 }
 
+SessionInfo::Score Hero::GetScore() const
+{
+    return _score;
+}
+
 void Hero::IdleUpdate(float dt)
 {
     if (_jumpingBack) {
@@ -106,9 +111,9 @@ void Hero::JumpBack(float duration, float distance)
 
 void Hero::FlushAllRewards()
 {
-    _killPoints = 0;
-    _goldPoints = 0;
-    _scorePoints = 0;
+    _score.coins = 0;
+    _score.kills = 0;
+    _score.score = 0;
 }
 
 void Hero::FinishCurrentAction()
@@ -149,7 +154,7 @@ bool Hero::HasActionToPerform() const
 
 void Hero::AddKillPoints(int killPoints)
 {
-    _killPoints += killPoints;
+    _score.kills += killPoints;
     _killPointToNextDamageUp += killPoints;
     if (_killPointToNextDamageUp >= _damageUpKillPoints) {
         _killPointToNextDamageUp = 0;
@@ -172,12 +177,12 @@ void Hero::AddStaminaPoints(float staminaPoints)
 
 void Hero::AddGoldPoints(int goldPoints)
 {
-    _goldPoints += goldPoints;
+    _score.coins += goldPoints;
 }
 
 void Hero::AddScorePoints(int scorePoints)
 {
-    _scorePoints += scorePoints;
+    _score.score += scorePoints;
 }
 
 float Hero::GetXPosOnRoad() const
@@ -198,21 +203,6 @@ float Hero::GetRunningSpeed() const
 float Hero::GetStaminaPoints() const
 {
     return _staminaPoints;
-}
-
-int Hero::GetKillPoints() const
-{
-    return _killPoints;
-}
-
-int Hero::GetGoldPoints() const
-{
-    return _goldPoints;
-}
-
-int Hero::GetScorePoints() const
-{
-    return _scorePoints;
 }
 
 int Hero::GetDamagePoints() const

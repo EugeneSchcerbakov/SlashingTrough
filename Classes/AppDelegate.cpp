@@ -6,6 +6,7 @@
 #include "StoreInterface.h"
 #include "GameScene.h"
 #include "GameInfo.h"
+#include "SessionInfo.h"
 #include "Store.h"
 #include "Utils.h"
 
@@ -61,6 +62,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
 	GameInfo::Instance().LoadInfo("gameInfo.xml");
+    SessionInfo::Instance().Load("st_save.xml");
     Store::Instance().LoadStore("storeItems.xml");
 
     if (Utils::IsPlatformDesctop()) {
@@ -83,6 +85,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GameInfo::Instance().SetFloat("PATH_RIGHT_BORDER", squareSize * 2.0f);
     GameInfo::Instance().SetInt("CHARACTER_SCORE", 0);
     
+    Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::Instance().GetBestScore().coins);
+    Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::Instance().GetBestScore().kills);
     cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartscreenScene");
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
@@ -95,6 +99,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto OnHomePressed = [&](cocos2d::EventCustom *)
     {
+        Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::Instance().GetBestScore().coins);
+        Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::Instance().GetBestScore().kills);
         auto homescreen = Utils::MakeSceneFromLua("CreateStartscreenScene");
         auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);  
         cocos2d::Director *director;

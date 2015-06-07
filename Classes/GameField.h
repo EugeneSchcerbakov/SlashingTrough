@@ -51,6 +51,8 @@ private:
     };
     
 private:
+    void OnHeroKilled();
+    
     int _sectorsQueueSize;
     int _passedSectors;
     int _difficultIndex;

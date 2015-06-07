@@ -7,6 +7,7 @@
 //
 
 #include "GameField.h"
+#include "SessionInfo.h"
 #include "Utils.h"
 
 GameField* GameField::create(GameInterface *gameInterface)
@@ -117,16 +118,7 @@ void GameField::update(float dt)
     
     if (!_hero->IsAlive())
     {
-        int goldPoints = hero->GetGoldPoints();
-        int killPoints = hero->GetKillPoints();
-        
-        Utils::LuaSetGlobalInteger("PlayerResultGoldPoints", goldPoints);
-        Utils::LuaSetGlobalInteger("PlayerResultKillPoints", killPoints);
-        auto scene = Utils::MakeSceneFromLua("CreateResultScene");
-        
-        cocos2d::Director *director;
-        director = cocos2d::Director::getInstance();
-        director->replaceScene(scene);
+        OnHeroKilled();
         return;
     }
     
@@ -199,8 +191,8 @@ void GameField::UpdateDifficult()
 void GameField::RefreshInterface()
 {
     Hero *hero = Hero::Cast(_hero);
-    _gameInterface->SetGoldPointsLabel(hero->GetGoldPoints());
-    _gameInterface->SetKillPointsLabel(hero->GetKillPoints());
+    _gameInterface->SetGoldPointsLabel(hero->GetScore().coins);
+    _gameInterface->SetKillPointsLabel(hero->GetScore().kills);
     _gameInterface->SetDamagePointsLabel(hero->GetDamagePoints());
     
     int totalHealth = (int)GameInfo::Instance().GetFloat("HERO_HEALTH_POINTS");
@@ -213,3 +205,27 @@ void GameField::RefreshInterface()
     _gameInterface->SetStaminaPoints(curStaminaPoints / maxStaminaPoints);
 }
 
+void GameField::OnHeroKilled()
+{
+    Hero *hero = Hero::Cast(_hero);
+    
+    SessionInfo &session = SessionInfo::Instance();
+    SessionInfo::Score score = hero->GetScore();
+    session.AddCoins(score.coins);
+    if (session.IsBestScore(score)) {
+        session.SetBestScore(score);
+    }
+    
+    Utils::LuaSetGlobalInteger("PlayerTotalGoldPoints", session.GetCoins());
+    Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", session.GetBestScore().coins);
+    Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", session.GetBestScore().kills);
+    Utils::LuaSetGlobalInteger("PlayerResultGoldPoints", score.coins);
+    Utils::LuaSetGlobalInteger("PlayerResultKillPoints", score.kills);
+    auto scene = Utils::MakeSceneFromLua("CreateResultScene");
+    
+    cocos2d::Director *director;
+    director = cocos2d::Director::getInstance();
+    director->replaceScene(scene);
+    
+    session.Save();
+}

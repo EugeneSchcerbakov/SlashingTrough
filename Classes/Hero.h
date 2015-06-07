@@ -14,6 +14,7 @@
 
 #include "HeroAction.h"
 #include "PathSector.h"
+#include "SessionInfo.h"
 
 class Hero : public GameplayObject
 {
@@ -36,6 +37,7 @@ public:
     void SetRunningSpeed(float speed);
     
     HeroAction& CurrentAction();
+    SessionInfo::Score GetScore() const;
     
     bool IsAbleToPerform(const HeroAction &action) const;
     bool IsActionsQueueFull() const;
@@ -50,9 +52,6 @@ public:
     float GetYPosOnRoad() const;
     float GetRunningSpeed() const;
     float GetStaminaPoints() const;
-    int GetKillPoints() const;
-    int GetGoldPoints() const;
-    int GetScorePoints() const;
     int GetDamagePoints() const;
     
 protected:
@@ -62,6 +61,7 @@ protected:
     virtual void Init();
     
     ActionSequence _actionSequence;
+    SessionInfo::Score _score;
     
     float _attackDistance;
     float _damageUpValue;
@@ -81,10 +81,6 @@ protected:
     int _killPointToNextDamageUp;
     int _damageUpKillPoints;
     int _actionsSequenceMaxSize;
-    
-    int _killPoints;
-    int _goldPoints;
-    int _scorePoints;
     
     bool _jumpingBack;
 };

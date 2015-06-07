@@ -8,6 +8,7 @@
 
 #include "StoreInterface.h"
 
+#include "SessionInfo.h"
 #include "Utils.h"
 
 StoreInterface* StoreInterface::create(const std::string &prevSceneName)
@@ -123,6 +124,7 @@ bool StoreInterface::init()
     _scroller->setPositionX(0.0f);
     _scroller->setPositionY(270.0f);
     
+    scheduleUpdate();
     addChild(backging, Order::BACKING);
     addChild(decorTop, Order::DECORATION);
     addChild(decorBtm, Order::DECORATION);
@@ -140,6 +142,15 @@ bool StoreInterface::init()
     _tabButtons[Category::WEAPON]->setSelected(true);
     
     return true;
+}
+
+void StoreInterface::update(float dt)
+{
+    int lastCoins =  std::stoi(_coinsText->getString());
+    int nowCoins = SessionInfo::Instance().GetCoins();
+    if (lastCoins != nowCoins) {
+        _coinsText->setString(std::to_string(nowCoins));
+    }
 }
 
 void StoreInterface::OnBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)

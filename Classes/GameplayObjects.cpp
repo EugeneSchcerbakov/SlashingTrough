@@ -87,7 +87,7 @@ float GameplayObject::GetStaminaDrainPoints() const
 
 int GameplayObject::GetRewardKillPoints() const
 {
-    return _killPoints;
+    return _killPointsReward;
 }
 
 int GameplayObject::GetRewardGoldPoints() const
@@ -130,7 +130,7 @@ Obstacle::Obstacle(const GameInfo::ObstacleType &info, UID uid)
     _damage = info.damage;
     _radius = 150.0f;
     _staminaDrainPoints = info.staminaDrainPoints;
-    _killPoints = info.killPoints;
+    _killPointsReward = info.killPoints;
     _goldPointsReward = info.goldPointsReward;
     _staminaPointsReward = info.staminaPointsReward;
     _scorePointsReward = info.scorePointsReward;
@@ -174,7 +174,7 @@ Enemy::Enemy(const GameInfo::EnemyType &info, UID uid)
     _sprite = info.sprite;
     _damage = info.damage;
     _staminaDrainPoints = info.staminaDrainPoints;
-    _killPoints = info.killPoints;
+    _killPointsReward = info.killPoints;
     _goldPointsReward = info.goldPointsReward;
     _staminaPointsReward = info.staminaPointsReward;
     _scorePointsReward = info.scorePointsReward;
