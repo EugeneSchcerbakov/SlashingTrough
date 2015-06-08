@@ -8,6 +8,8 @@
 
 #include "StoreWeaponWidget.h"
 
+#include "SessionInfo.h"
+
 StoreWeaponWidget* StoreWeaponWidget::create(Equip::WeakPtr item)
 {
     StoreWeaponWidget *widget = new StoreWeaponWidget(item);
@@ -127,6 +129,7 @@ bool StoreWeaponWidget::init()
     _button->setPrice(weapon->price);
     _button->switchState(StoreItemButton::State::BUY);
 
+    scheduleUpdate();
     addChild(_button, 0);
     addChild(iconPanel, 1);
     addChild(damage, 2);
@@ -136,10 +139,40 @@ bool StoreWeaponWidget::init()
     return true;
 }
 
+void StoreWeaponWidget::update(float dt)
+{
+    Equip::Ptr ptr = _item.lock();
+    SessionInfo &save = SessionInfo::Instance();
+    
+    if (save.IsEquipOwned(ptr->id) && !save.IsWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIP))
+    {
+        _button->switchState(StoreItemButton::State::EQUIP);
+    }
+    if (save.IsWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIPPED))
+    {
+        _button->switchState(StoreItemButton::State::EQUIPPED);
+    }
+}
+
 void StoreWeaponWidget::OnBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
+        Equip::Ptr ptr = _item.lock();
+        SessionInfo &profile = SessionInfo::Instance();
+        
+        bool needSave = false;
+        if (!profile.IsEquipOwned(ptr->id)) {
+            Store::Instance().Buy(ptr->id);
+            needSave = true;
+        } else if (!profile.IsWeaponEquipped(ptr->id)) {
+            profile.EquipWeapon(ptr->id);
+            needSave = true;
+        }
+        
+        if (needSave) {
+            profile.Save();
+        }
     }
 }
 

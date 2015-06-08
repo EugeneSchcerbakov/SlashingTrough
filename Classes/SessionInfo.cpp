@@ -50,6 +50,14 @@ void SessionInfo::Load(const std::string &filename)
         tinyxml2::XMLElement *bestScore = root->FirstChildElement("BestScore");
         _bestScore.coins = bestScore->IntAttribute("coins");
         _bestScore.kills = bestScore->IntAttribute("kills");
+        
+        tinyxml2::XMLElement *ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
+        while (ownedEquip) {
+            std::string equipId = ownedEquip->Attribute("id");
+            AddOwnedEquip(equipId);
+            ownedEquip = ownedEquip->NextSiblingElement();
+        };
+        
     }
 }
 
@@ -74,6 +82,14 @@ void SessionInfo::Save()
         bestScore->SetAttribute("coins", cocos2d::StringUtils::toString(_bestScore.coins).c_str());
         bestScore->SetAttribute("kills", cocos2d::StringUtils::toString(_bestScore.kills).c_str());
         root->LinkEndChild(bestScore);
+        
+        tinyxml2::XMLElement *ownedEquip = document.NewElement("OwnedEquip");
+        for (const auto &id : _ownedEquips) {
+            tinyxml2::XMLElement *equip = document.NewElement("Equip");
+            equip->SetAttribute("id", id.c_str());
+            ownedEquip->LinkEndChild(equip);
+        }
+        root->LinkEndChild(ownedEquip);
         
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);

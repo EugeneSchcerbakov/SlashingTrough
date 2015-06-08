@@ -7,6 +7,7 @@
 //
 
 #include "Store.h"
+#include "SessionInfo.h"
 
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
@@ -51,6 +52,19 @@ void Store::LoadStore(const std::string &filename)
             }
             node = node->NextSibling();
         }
+    }
+}
+
+void Store::Buy(const std::string &id)
+{
+    SessionInfo &session = SessionInfo::Instance();
+    
+    Equip::Ptr equip = GetItemById(id);
+    if (equip && equip->price <= session.GetCoins())
+    {
+        session.AddCoins(-equip->price);
+        session.AddOwnedEquip(equip->id);
+        equip->sold = true;
     }
 }
 

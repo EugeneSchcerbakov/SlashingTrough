@@ -22,6 +22,7 @@ protected:
     virtual ~StoreWeaponWidget();
     
     bool init();
+    void update(float dt);
     
 private:
     void OnBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
