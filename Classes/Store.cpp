@@ -53,6 +53,16 @@ void Store::LoadStore(const std::string &filename)
             node = node->NextSibling();
         }
     }
+    
+    SessionInfo &profile = SessionInfo::Instance();
+    
+    std::string equippedWeaponId = profile.GetEquippedWeaponId();
+    if (equippedWeaponId.empty()) {
+        Equip::Ptr wpn = GetItemById("default_sword");
+        CC_ASSERT(wpn != nullptr);
+        profile.AddOwnedEquip(wpn->id);
+        profile.EquipWeapon(wpn);
+    }
 }
 
 void Store::Buy(const std::string &id)

@@ -8,6 +8,7 @@
 
 #include "GameField.h"
 #include "SessionInfo.h"
+#include "Store.h"
 #include "Utils.h"
 
 GameField* GameField::create(GameInterface *gameInterface)
@@ -216,7 +217,11 @@ void GameField::OnHeroKilled()
         session.SetBestScore(score);
     }
     
+    Equip::Ptr ptr = Store::Instance().GetItemById(session.GetEquippedWeaponId());
+    EquipWeapon *wpn = EquipWeapon::cast(ptr);
+    
     Utils::LuaSetGlobalInteger("PlayerTotalGoldPoints", session.GetCoins());
+    Utils::LuaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->damage);
     Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", session.GetBestScore().coins);
     Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", session.GetBestScore().kills);
     Utils::LuaSetGlobalInteger("PlayerResultGoldPoints", score.coins);

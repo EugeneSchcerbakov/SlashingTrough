@@ -166,7 +166,7 @@ void StoreWeaponWidget::OnBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::
             Store::Instance().Buy(ptr->id);
             needSave = true;
         } else if (!profile.IsWeaponEquipped(ptr->id)) {
-            profile.EquipWeapon(ptr->id);
+            profile.EquipWeapon(ptr);
             needSave = true;
         }
         

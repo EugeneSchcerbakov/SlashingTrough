@@ -11,6 +11,8 @@
 
 #include <string>
 
+#include "Equipment.h"
+
 class SessionInfo
 {
 public:
@@ -36,12 +38,16 @@ public:
     
     void AddOwnedEquip(const std::string id);
     void AddCoins(int coins);
+    void EquipWeapon(Equip::WeakPtr weapon);
     void SetBestScore(const Score &score);
     
-    Score GetBestScore();
+    Score GetBestScore() const;
     int GetCoins() const;
     bool IsBestScore(const Score &score) const;
-    bool IsEquipOwned(const std::string &id);
+    bool IsEquipOwned(const std::string &id) const;
+    bool IsWeaponEquipped(const std::string &id) const;
+    
+    const std::string& GetEquippedWeaponId() const;
     
 private:
     typedef std::vector<std::string> OwnedEquipIds;
@@ -51,6 +57,7 @@ private:
     
     OwnedEquipIds _ownedEquips;
     Score _bestScore;
+    std::string _equippedWeaponId;
     std::string _saveFileName;
 };
 

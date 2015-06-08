@@ -146,10 +146,21 @@ bool StoreInterface::init()
 
 void StoreInterface::update(float dt)
 {
+    SessionInfo &session = SessionInfo::Instance();
+    
     int lastCoins =  std::stoi(_coinsText->getString());
-    int nowCoins = SessionInfo::Instance().GetCoins();
+    int nowCoins = session.GetCoins();
     if (lastCoins != nowCoins) {
         _coinsText->setString(std::to_string(nowCoins));
+    }
+    
+    Equip::Ptr ptr = Store::Instance().GetItemById(session.GetEquippedWeaponId());
+    EquipWeapon *wpn = EquipWeapon::cast(ptr);
+    
+    int lastDamage = std::stoi(_damageText->getString());
+    int nowDamage = wpn->damage;
+    if (lastDamage != nowDamage) {
+        _damageText->setString(std::to_string(nowDamage));
     }
 }
 
@@ -157,6 +168,14 @@ void StoreInterface::OnBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
+        SessionInfo &profile = SessionInfo::Instance();
+        Equip::Ptr ptr = Store::Instance().GetItemById(profile.GetEquippedWeaponId());
+        EquipWeapon *wpn = EquipWeapon::cast(ptr);
+        Utils::LuaSetGlobalInteger("PlayerTotalGoldPoints", profile.GetCoins());
+        Utils::LuaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->damage);
+        Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", profile.GetBestScore().coins);
+        Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", profile.GetBestScore().kills);
+        
         cocos2d::Director *director = cocos2d::Director::getInstance();
         std::string startSceneName = Utils::LuaGetGlobalString("StartScreenSceneName");
         std::string resultSceneName = Utils::LuaGetGlobalString("ResultScreenSceneName");

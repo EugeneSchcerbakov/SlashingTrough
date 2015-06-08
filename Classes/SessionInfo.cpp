@@ -19,6 +19,7 @@ SessionInfo& SessionInfo::Instance()
 }
 
 SessionInfo::SessionInfo()
+: _totalCoins(0)
 {
 }
 
@@ -58,6 +59,8 @@ void SessionInfo::Load(const std::string &filename)
             ownedEquip = ownedEquip->NextSiblingElement();
         };
         
+        tinyxml2::XMLElement *equippedWeapon = root->FirstChildElement("EquippedWeapon");
+        _equippedWeaponId = equippedWeapon->Attribute("id");
     }
 }
 
@@ -90,6 +93,10 @@ void SessionInfo::Save()
             ownedEquip->LinkEndChild(equip);
         }
         root->LinkEndChild(ownedEquip);
+    
+        tinyxml2::XMLElement *equippedWeapon = document.NewElement("EquippedWeapon");
+        equippedWeapon->SetAttribute("id", _equippedWeaponId.c_str());
+        root->LinkEndChild(equippedWeapon);
         
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);
@@ -118,12 +125,25 @@ void SessionInfo::AddCoins(int coins)
     }
 }
 
+void SessionInfo::EquipWeapon(Equip::WeakPtr weapon)
+{
+    if (weapon.expired()) {
+        CC_ASSERT(false);
+        return;
+    }
+    
+    class EquipWeapon *ptr = EquipWeapon::cast(weapon.lock());
+    CC_ASSERT(IsEquipOwned(ptr->id));
+
+    _equippedWeaponId = ptr->id;
+}
+
 void SessionInfo::SetBestScore(const SessionInfo::Score &score)
 {
     _bestScore = score;
 }
 
-SessionInfo::Score SessionInfo::GetBestScore()
+SessionInfo::Score SessionInfo::GetBestScore() const
 {
     return _bestScore;
 }
@@ -138,7 +158,7 @@ bool SessionInfo::IsBestScore(const SessionInfo::Score &score) const
     return score.coins > _bestScore.coins;
 }
 
-bool SessionInfo::IsEquipOwned(const std::string &id)
+bool SessionInfo::IsEquipOwned(const std::string &id) const
 {
     for (auto equip : _ownedEquips) {
         if (equip == id) {
@@ -147,3 +167,14 @@ bool SessionInfo::IsEquipOwned(const std::string &id)
     }
     return false;
 }
+
+bool SessionInfo::IsWeaponEquipped(const std::string &id) const
+{
+    return _equippedWeaponId == id;
+}
+
+const std::string& SessionInfo::GetEquippedWeaponId() const
+{
+    return _equippedWeaponId;
+}
+
