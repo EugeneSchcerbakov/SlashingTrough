@@ -82,7 +82,8 @@ bool CategoryButton::OnTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
     cocos2d::Vec2 localPos = convertToNodeSpace(worldPos);
     if (_backing->getBoundingBox().containsPoint(localPos))
     {
-        setScale(_pressedScale);
+        if (!_selected)
+            setScale(_pressedScale);
         return true;
     }
     return false;
@@ -94,10 +95,12 @@ void CategoryButton::OnTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
     cocos2d::Vec2 localPos = convertToNodeSpace(worldPos);
     if (_backing->getBoundingBox().containsPoint(localPos))
     {
-        _selected = !_selected;
+        if (!_selected) {
+            _selected = true;
+            setScale(_normalScale);
+            setSelected(_selected);
+        }
     }
-    setScale(_normalScale);
-    setSelected(_selected);
 }
     
 void CategoryButton::OnTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
