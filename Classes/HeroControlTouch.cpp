@@ -84,7 +84,7 @@ void HeroControlTouch::TouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         {
             const float deltaX = _squareSize;
             const float deltaY = GameInfo::Instance().GetFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = GameInfo::Instance().GetFloat("HERO_SWIPE_DURATION");
+            const float duration = hero->GetWeapon()->speed;
             HeroAction::Type type = HeroAction::Type::SWIPE_RIGHT;
             HeroAction action(type, duration, deltaX, deltaY);
             if (hero->IsAbleToPerform(action)) {
@@ -97,7 +97,7 @@ void HeroControlTouch::TouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         {
             const float deltaX = -_squareSize;
             const float deltaY = GameInfo::Instance().GetFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = GameInfo::Instance().GetFloat("HERO_SWIPE_DURATION");
+            const float duration = hero->GetWeapon()->speed;
             HeroAction::Type type = HeroAction::Type::SWIPE_LEFT;
             HeroAction action(type, duration, deltaX, deltaY);
             if (hero->IsAbleToPerform(action)) {

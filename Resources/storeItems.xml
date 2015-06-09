@@ -5,6 +5,8 @@
         name="Iron Sword"
         desc="Your default weapon"
         icon="icons/icon_iron_sword.png"
+        sprite="gamefield/wpn_iron_sword.png"
         damage="1.0"
-        speed="0.33" />
+        speed="0.33"
+        distance="300.0" />
 </Store>

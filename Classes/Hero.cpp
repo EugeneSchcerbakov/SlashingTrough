@@ -54,6 +54,20 @@ void Hero::AddAction(HeroAction &action)
     _actionSequence.push(action);
 }
 
+void Hero::SetWeapon(Equip::WeakPtr weapon)
+{
+    if (weapon.expired()) {
+        return;
+    }
+    
+    _weapon = weapon;
+    Equip::Ptr ptr = _weapon.lock();
+    EquipWeapon *casted = EquipWeapon::cast(ptr);
+    
+    _damage = casted->damage;
+    _radius = casted->distance;
+}
+
 void Hero::SetPosOnRoad(float x, float y)
 {
     _posOnRoadX = x;
@@ -73,6 +87,14 @@ HeroAction& Hero::CurrentAction()
 SessionInfo::Score Hero::GetScore() const
 {
     return _score;
+}
+
+const EquipWeapon* Hero::GetWeapon() const
+{
+    if (!_weapon.expired()) {
+        return EquipWeapon::cast(_weapon.lock());
+    }
+    return nullptr;
 }
 
 void Hero::IdleUpdate(float dt)
@@ -214,8 +236,8 @@ void Hero::Init()
 {
     GameInfo &gameinfo = GameInfo::Instance();
     
-    _damage = gameinfo.GetFloat("HERO_ATTACK_DAMAGE");
-    _radius = gameinfo.GetFloat("HERO_ATTACK_DISTANCE");
+    _damage = 1.0f;
+    _radius = 0.0f;
     _health = gameinfo.GetFloat("HERO_HEALTH_POINTS");
     _damageUpValue = gameinfo.GetFloat("HERO_DAMAGE_UP_VALUE");
     _damageUpKillPoints = gameinfo.GetInt("HERO_DAMAGE_UP_KP");

@@ -77,7 +77,7 @@ private:
     PathSectorWidget::SectorsSequence *_sectors;
     
     cocos2d::Node *_bodyControlNode; // all rotations performed by this node
-    cocos2d::DrawNode *_sword;
+    cocos2d::Sprite *_sword;
     cocos2d::DrawNode *_body;
     cocos2d::DrawNode *_bodyBorder;
     cocos2d::Sprite *_swordTrail;

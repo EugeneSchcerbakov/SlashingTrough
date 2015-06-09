@@ -43,8 +43,10 @@ void Store::LoadStore(const std::string &filename)
                 weapon->price = elem->IntAttribute("price");
                 weapon->damage = elem->FloatAttribute("damage");
                 weapon->speed = elem->FloatAttribute("speed");
+                weapon->distance = elem->FloatAttribute("distance");
                 weapon->desc = elem->Attribute("desc");
                 weapon->icon = elem->Attribute("icon");
+                weapon->sprite = elem->Attribute("sprite");
                 weapon->name = elem->Attribute("name");
                 _items.push_back(item);
             } else {

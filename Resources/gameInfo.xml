@@ -3,13 +3,10 @@
 	<GlobalVariables>
         <Const name="HERO_DAMAGE_UP_KP" type="int" value="10" />
         <const name="HERO_DAMAGE_UP_VALUE" type="float" value="1.0f" />
-		<Const name="HERO_ATTACK_DAMAGE" type="float" value="1.0" />
-        <Const name="HERO_ATTACK_DISTANCE" type="float" value="300.0" />
 		<Const name="HERO_HEALTH_POINTS" type="float" value="10.0" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="300.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.2" />
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="3.5" />
-        <Const name="HERO_SWIPE_DURATION" type="float" value="0.33" />
 		<Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
         <Const name="HERO_JUMP_BACK_DISTANCE" type="float" value="100.0" />
         <Const name="HERO_JUMP_BACK_DURATION" type="float" value="0.1" />

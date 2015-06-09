@@ -33,11 +33,13 @@ public:
     void FlushAllRewards();
     void FinishCurrentAction();
     void AddAction(HeroAction &action);
+    void SetWeapon(Equip::WeakPtr weapon);
     void SetPosOnRoad(float x, float y);
     void SetRunningSpeed(float speed);
     
     HeroAction& CurrentAction();
     SessionInfo::Score GetScore() const;
+    const EquipWeapon* GetWeapon() const;
     
     bool IsAbleToPerform(const HeroAction &action) const;
     bool IsActionsQueueFull() const;
@@ -62,6 +64,7 @@ protected:
     
     ActionSequence _actionSequence;
     SessionInfo::Score _score;
+    Equip::WeakPtr _weapon;
     
     float _attackDistance;
     float _damageUpValue;

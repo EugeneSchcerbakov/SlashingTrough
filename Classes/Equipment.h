@@ -44,6 +44,8 @@ struct EquipWeapon : public Equip
     
     float damage;
     float speed;
+    float distance;
+    std::string sprite;
 };
 
 

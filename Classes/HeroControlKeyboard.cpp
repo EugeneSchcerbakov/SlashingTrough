@@ -44,7 +44,7 @@ void HeroControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key, coco
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
         const float deltaX = _squareSize;
         const float deltaY = GameInfo::Instance().GetFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = GameInfo::Instance().GetFloat("HERO_SWIPE_DURATION");
+        const float duration = hero->GetWeapon()->speed;
         HeroAction::Type type = HeroAction::Type::SWIPE_RIGHT;
         HeroAction action(type, duration, deltaX, deltaY);
         if (hero->IsAbleToPerform(action)) {
@@ -54,7 +54,7 @@ void HeroControlKeyboard::OnKeyPressed(cocos2d::EventKeyboard::KeyCode key, coco
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
         const float deltaX = -_squareSize;
         const float deltaY = GameInfo::Instance().GetFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = GameInfo::Instance().GetFloat("HERO_SWIPE_DURATION");
+        const float duration = hero->GetWeapon()->speed;
         HeroAction::Type type = HeroAction::Type::SWIPE_LEFT;
         HeroAction action(type, duration, deltaX, deltaY);
         if (hero->IsAbleToPerform(action)) {

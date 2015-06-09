@@ -47,7 +47,9 @@ bool HeroWidget::init()
         return false;
     }
     
-    _sword = cocos2d::DrawNode::create();
+    Hero *heroPtr = Hero::Cast(_hero.lock());
+    
+    _sword = cocos2d::Sprite::create();
     _body = cocos2d::DrawNode::create();
     _bodyBorder = cocos2d::DrawNode::create();
     
@@ -62,7 +64,8 @@ bool HeroWidget::init()
     _body->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), radius, 0.0f, 25, 1.0f, 0.9f, bodyColor);
     _body->addChild(_bodyBorder, 0);
     
-    _sword->drawSegment(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(0.0f, 250.0f), 9.0f, cocos2d::Color4F::BLACK);
+    _sword->setTexture(heroPtr->GetWeapon()->sprite);
+    _sword->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
     _sword->setPosition(_swordRightSideTrans.localPos);
     _sword->setRotation(_swordRightSideTrans.angle);
     

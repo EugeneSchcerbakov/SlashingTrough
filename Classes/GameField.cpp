@@ -82,8 +82,13 @@ bool GameField::init()
     _roadBasis = cocos2d::Node::create();
     _roadBasis->addChild(_effectsGameField, 3);
     
+    std::string wpnId = SessionInfo::Instance().GetEquippedWeaponId();
+    Equip::WeakPtr wpn = Store::Instance().GetItemById(wpnId);
     _hero = Hero::Create();
-    _hero->SetLogicalPos(heroStartX, heroStartY);
+    auto heroPtr = Hero::Cast(_hero);
+    heroPtr->SetLogicalPos(heroStartX, heroStartY);
+    heroPtr->SetWeapon(wpn);
+    
     _heroWidget = HeroWidget::create(_hero, this);
     _heroWidget->setPositionX(_hero->GetLogicalX());
     _heroWidget->setPositionY(_hero->GetLogicalY());

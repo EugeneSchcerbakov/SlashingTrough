@@ -33,5 +33,6 @@ EquipWeapon::EquipWeapon()
 : Equip(Type::WEAPON)
 , damage(0.0f)
 , speed(0.0f)
+, distance(0.0f)
 {
 }
