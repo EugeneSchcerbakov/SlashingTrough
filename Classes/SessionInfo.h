@@ -9,6 +9,7 @@
 #ifndef __SlashingTrough__SessionInfo__
 #define __SlashingTrough__SessionInfo__
 
+#include <vector>
 #include <string>
 
 #include "Equipment.h"

@@ -140,6 +140,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\EffectEnemyDeath.cpp" />
     <ClCompile Include="..\Classes\EffectsLayer.cpp" />
+    <ClCompile Include="..\Classes\Equipment.cpp" />
     <ClCompile Include="..\Classes\GameField.cpp" />
     <ClCompile Include="..\Classes\GameInfo.cpp" />
     <ClCompile Include="..\Classes\GameInterface.cpp" />
@@ -153,7 +154,13 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\HeroWidget.cpp" />
     <ClCompile Include="..\Classes\PathSector.cpp" />
     <ClCompile Include="..\Classes\PathSectorWidget.cpp" />
+    <ClCompile Include="..\Classes\SessionInfo.cpp" />
     <ClCompile Include="..\Classes\StaminaBarWidget.cpp" />
+    <ClCompile Include="..\Classes\Store.cpp" />
+    <ClCompile Include="..\Classes\StoreCategoryButton.cpp" />
+    <ClCompile Include="..\Classes\StoreInterface.cpp" />
+    <ClCompile Include="..\Classes\StoreItemButton.cpp" />
+    <ClCompile Include="..\Classes\StoreWeaponWidget.cpp" />
     <ClCompile Include="..\Classes\Utils.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -161,6 +168,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\EffectEnemyDeath.h" />
     <ClInclude Include="..\Classes\EffectsLayer.h" />
+    <ClInclude Include="..\Classes\Equipment.h" />
     <ClInclude Include="..\Classes\GameField.h" />
     <ClInclude Include="..\Classes\GameInfo.h" />
     <ClInclude Include="..\Classes\GameInterface.h" />
@@ -174,7 +182,13 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\HeroWidget.h" />
     <ClInclude Include="..\Classes\PathSector.h" />
     <ClInclude Include="..\Classes\PathSectorWidget.h" />
+    <ClInclude Include="..\Classes\SessionInfo.h" />
     <ClInclude Include="..\Classes\StaminaBarWidget.h" />
+    <ClInclude Include="..\Classes\Store.h" />
+    <ClInclude Include="..\Classes\StoreCategoryButton.h" />
+    <ClInclude Include="..\Classes\StoreInterface.h" />
+    <ClInclude Include="..\Classes\StoreItemButton.h" />
+    <ClInclude Include="..\Classes\StoreWeaponWidget.h" />
     <ClInclude Include="..\Classes\Utils.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

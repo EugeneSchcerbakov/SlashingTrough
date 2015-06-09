@@ -132,7 +132,7 @@ void SessionInfo::EquipWeapon(Equip::WeakPtr weapon)
         return;
     }
     
-    class EquipWeapon *ptr = EquipWeapon::cast(weapon.lock());
+    struct EquipWeapon *ptr = EquipWeapon::cast(weapon.lock());
     CC_ASSERT(IsEquipOwned(ptr->id));
 
     _equippedWeaponId = ptr->id;
