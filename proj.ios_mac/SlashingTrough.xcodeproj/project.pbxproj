@@ -50,6 +50,8 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		CD1397FC1B29F35600F3F57E /* WeaponAbilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1397FA1B29F35600F3F57E /* WeaponAbilities.cpp */; };
+		CD1397FD1B29F35600F3F57E /* WeaponAbilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1397FA1B29F35600F3F57E /* WeaponAbilities.cpp */; };
 		CD2D182D1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */; };
 		CD2D182E1AD11BCE00F96E8F /* PathSectorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */; };
 		CD2D18321AD1532D00F96E8F /* GameField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2D18301AD1532D00F96E8F /* GameField.cpp */; };
@@ -229,6 +231,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD1397FA1B29F35600F3F57E /* WeaponAbilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeaponAbilities.cpp; sourceTree = "<group>"; };
+		CD1397FB1B29F35600F3F57E /* WeaponAbilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponAbilities.h; sourceTree = "<group>"; };
 		CD2D182B1AD11BCE00F96E8F /* PathSectorWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PathSectorWidget.cpp; sourceTree = "<group>"; };
 		CD2D182C1AD11BCE00F96E8F /* PathSectorWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathSectorWidget.h; sourceTree = "<group>"; };
 		CD2D18301AD1532D00F96E8F /* GameField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameField.cpp; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 				CD5F1CCD1B2457B300D0341A /* SessionInfo.h */,
 				CD637E781B234458002F98EF /* Equipment.cpp */,
 				CD637E791B234458002F98EF /* Equipment.h */,
+				CD1397FA1B29F35600F3F57E /* WeaponAbilities.cpp */,
+				CD1397FB1B29F35600F3F57E /* WeaponAbilities.h */,
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
 				CD4FF0911B18C794007E7BAA /* EffectEnemyDeath.cpp */,
@@ -718,6 +724,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD1397FC1B29F35600F3F57E /* WeaponAbilities.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */,
@@ -770,6 +777,7 @@
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
 				CD2D18331AD1532D00F96E8F /* GameField.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
+				CD1397FD1B29F35600F3F57E /* WeaponAbilities.cpp in Sources */,
 				CD3ECE8D1AD6F08100613ADD /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,

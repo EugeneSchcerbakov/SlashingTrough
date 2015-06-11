@@ -12,6 +12,8 @@
 #include <string>
 #include <memory>
 
+#include "WeaponAbilities.h"
+
 struct Equip
 {
     typedef std::shared_ptr<Equip> Ptr;
@@ -39,6 +41,7 @@ struct EquipWeapon : public Equip
 {
     static Equip::Ptr create();
     static EquipWeapon* cast(Equip::Ptr base);
+    typedef std::vector<WeaponAbility::Ptr> Abilities;
     
     EquipWeapon();
     
@@ -46,6 +49,7 @@ struct EquipWeapon : public Equip
     float speed;
     float distance;
     std::string sprite;
+    Abilities abilities;
 };
 
 

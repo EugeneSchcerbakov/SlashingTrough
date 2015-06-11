@@ -49,6 +49,10 @@ bool HeroWidget::init()
     
     Hero *heroPtr = Hero::Cast(_hero.lock());
     
+    for (auto ability : heroPtr->GetWeapon()->abilities) {
+        ability->Init(_hero);
+    }
+    
     _sword = cocos2d::Sprite::create();
     _body = cocos2d::DrawNode::create();
     _bodyBorder = cocos2d::DrawNode::create();
@@ -163,6 +167,7 @@ void HeroWidget::Attack()
     // pos in the sector space
     cocos2d::Vec2 localPlayer;
     GameplayObject::Ptr heroPtr = _hero.lock();
+    Hero *hero = Hero::Cast(heroPtr);
     
     for (PathSectorWidget *sector : *_sectors)
     {
@@ -187,13 +192,20 @@ void HeroWidget::Attack()
                     auto widget = sector->GetObjectWidget(obj->GetUID());
                     widget->OnDamageReceived(_swordSide);
                     
+                    for (auto ability : hero->GetWeapon()->abilities) {
+                        ability->OnHit(obj);
+                    }
+                    
                     if (!obj->IsAlive())
                     {
-                        Hero *hero = Hero::Cast(heroPtr);
                         hero->AddKillPoints(obj->GetRewardKillPoints());
                         hero->AddGoldPoints(obj->GetRewardGoldPoints());
                         hero->AddStaminaPoints(obj->GetRewardStaminaPoints());
                         hero->AddScorePoints(obj->GetRewardScorePoints());
+                        
+                        for (auto ability : hero->GetWeapon()->abilities) {
+                            ability->OnKill(obj);
+                        }
                     
                         getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
                         
@@ -221,6 +233,9 @@ void HeroWidget::PerformAction(const HeroAction &action)
         Hero *hero = Hero::Cast(ptr);
         hero->FinishCurrentAction();
         hero->SetLogicalPos(getPositionX(), getPositionY());
+        for (auto ability : hero->GetWeapon()->abilities) {
+            ability->OnAttackEnded();
+        }
         _isGameplayActionRunning = false;
     };
     
@@ -265,6 +280,10 @@ void HeroWidget::PerformAction(const HeroAction &action)
     if (attack) {
         resultantAction = cocos2d::Spawn::create(motionWithFinish, attack, nullptr);
         RunEffectSwordTrail(duration);
+        Hero *hero = Hero::Cast(_hero.lock());
+        for (auto ability : hero->GetWeapon()->abilities) {
+            ability->OnAttackStarted();
+        }
     } else {
         resultantAction = motionWithFinish;
     }

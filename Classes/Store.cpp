@@ -48,6 +48,22 @@ void Store::LoadStore(const std::string &filename)
                 weapon->icon = elem->Attribute("icon");
                 weapon->sprite = elem->Attribute("sprite");
                 weapon->name = elem->Attribute("name");
+                tinyxml2::XMLElement *abilitiesRoot = elem->FirstChildElement("Abilities");
+                if (abilitiesRoot) {
+                    tinyxml2::XMLElement *abilityElem = abilitiesRoot->FirstChildElement();
+                    while (abilityElem) {
+                        std::string abilityName = abilityElem->Name();
+                        if (abilityName == "CoinsForMurder") {
+                            int flat = abilityElem->IntAttribute("flat");
+                            int percent = abilityElem->IntAttribute("percentOfEnemyCost");
+                            WeaponAbility::Ptr ability = CoinsForMurder::Create(flat, percent);
+                            weapon->abilities.push_back(ability);
+                        } else {
+                            CC_ASSERT(false);
+                        }
+                        abilityElem = abilityElem->NextSiblingElement();
+                    }
+                }
                 _items.push_back(item);
             } else {
                 CC_ASSERT(false);
