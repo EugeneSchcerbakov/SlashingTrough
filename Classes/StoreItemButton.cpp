@@ -103,7 +103,7 @@ void StoreItemButton::InitEquippedState()
     auto scale_ease0 = cocos2d::EaseSineOut::create(scale0);
     auto scale_ease1 = cocos2d::EaseSineIn::create(scale1);
     auto scale = cocos2d::Sequence::create(scale_ease0, scale_ease1, nullptr);
-    auto effect = cocos2d::Spawn::create(scale, show, nullptr);
+    auto effect = cocos2d::Sequence::create(show, scale, nullptr);
     
     auto mark = cocos2d::Sprite::create("ui/ui_mark_green.png");
     auto clip = cocos2d::ProgressTimer::create(mark);
