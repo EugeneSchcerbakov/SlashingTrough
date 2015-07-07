@@ -10,7 +10,7 @@
 #define __SlashingTrough__HeroWidget__
 
 #include "cocos2d.h"
-#include "CCMotionStreak.h"
+#include "2d/CCMotionStreak.h"
 
 #include "Hero.h"
 #include "PathSectorWidget.h"

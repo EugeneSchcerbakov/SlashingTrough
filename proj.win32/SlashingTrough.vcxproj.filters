@@ -90,6 +90,9 @@
     <ClCompile Include="..\Classes\StoreWeaponWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\WeaponAbilities.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -168,6 +171,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StoreWeaponWidget.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WeaponAbilities.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
