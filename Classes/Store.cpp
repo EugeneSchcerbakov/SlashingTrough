@@ -37,6 +37,8 @@ void Store::LoadStore(const std::string &filename)
             tinyxml2::XMLElement *elem = node->ToElement();
             std::string name = elem->Name();
             if (name == "Weapon") {
+                tinyxml2::XMLElement *trailInfo = elem->FirstChildElement("Trail");
+                tinyxml2::XMLElement *abilitiesRoot = elem->FirstChildElement("Abilities");
                 Equip::Ptr item = EquipWeapon::create();
                 EquipWeapon *weapon = EquipWeapon::cast(item);
                 weapon->id = elem->Attribute("id");
@@ -48,7 +50,13 @@ void Store::LoadStore(const std::string &filename)
                 weapon->icon = elem->Attribute("icon");
                 weapon->sprite = elem->Attribute("sprite");
                 weapon->name = elem->Attribute("name");
-                tinyxml2::XMLElement *abilitiesRoot = elem->FirstChildElement("Abilities");
+                if (trailInfo) {
+                    weapon->trail.length = trailInfo->FloatAttribute("length");
+                    weapon->trail.width = trailInfo->FloatAttribute("width");
+                    weapon->trail.posYCoeff = trailInfo->FloatAttribute("posYCoeff");
+                    weapon->trail.opacity = trailInfo->FloatAttribute("opacity");
+                    weapon->trail.texture = trailInfo->Attribute("texture");
+                }
                 if (abilitiesRoot) {
                     tinyxml2::XMLElement *abilityElem = abilitiesRoot->FirstChildElement();
                     while (abilityElem) {

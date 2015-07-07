@@ -73,12 +73,6 @@ bool HeroWidget::init()
     _sword->setPosition(_swordRightSideTrans.localPos);
     _sword->setRotation(_swordRightSideTrans.angle);
     
-    _swordTrail = cocos2d::Sprite::create("effects/sword_trail.png");
-    _swordTrail->setPositionY(180.0f);
-    _swordTrail->setScale(1.9f);
-    _swordTrail->setOpacity(0);
-    _swordTrail->setVisible(false);
-    
     _swordSide = SwordSide::RIGHT;
     _lastStamina = Hero::Cast(_hero.lock())->GetStaminaPoints();
     
@@ -86,17 +80,23 @@ bool HeroWidget::init()
     _bodyControlNode->addChild(_body, 0);
     _bodyControlNode->addChild(_sword, 1);
     
+    const EquipWeapon &weapon = *heroPtr->GetWeapon();
+    float trailLength = weapon.trail.length;
+    float trailWidth = weapon.trail.width;
+    std::string trailTex = weapon.trail.texture;
+    _trail = cocos2d::MotionStreak::create(trailLength, 1.0f, trailWidth, cocos2d::Color3B::WHITE, trailTex);
+    _trail->setOpacity(0);
+    
     scheduleUpdate();
     addChild(_bodyControlNode, 0);
-    addChild(_swordTrail, 1);
+    addChild(_trail, 1);
     
     return true;
 }
 
 void HeroWidget::update(float dt)
 {
-    GameplayObject::Ptr HeroPtr = _hero.lock();
-    Hero *hero = Hero::Cast(HeroPtr);
+    Hero *hero = Hero::Cast(_hero.lock());
     
     if (hero->HasActionToPerform()) {
         HeroAction *action = &hero->CurrentAction();
@@ -110,6 +110,16 @@ void HeroWidget::update(float dt)
         _lastStamina = hero->GetStaminaPoints();
         getEventDispatcher()->dispatchCustomEvent("RefreshInterface");
     }
+    
+    if (_trail->isVisible())
+    {
+        float x = _sword->getContentSize().width * 0.5f;
+        float y = _sword->getContentSize().height * hero->GetWeapon()->trail.posYCoeff;
+        cocos2d::Vec2 local = cocos2d::Vec2(x, y);
+        cocos2d::Vec2 world = _sword->convertToWorldSpace(local);
+        
+        _trail->setPosition(convertToNodeSpace(world));
+    }
 }
 
 void HeroWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors)
@@ -119,32 +129,37 @@ void HeroWidget::RefreshSectorsSequence(PathSectorWidget::SectorsSequence &secto
 
 void HeroWidget::RunEffectReceiveDamage()
 {
+    /*
     cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.07f, 0.5f);
     cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.2f, 1.0f);
     cocos2d::EaseSineIn *scale_ease0 = cocos2d::EaseSineIn::create(scale0);
     cocos2d::EaseSineOut *scale_ease1 = cocos2d::EaseSineOut::create(scale1);
     cocos2d::Sequence *effect = cocos2d::Sequence::create(scale_ease0, scale_ease1, nullptr);
     runAction(effect);
+    */
 }
 
 void HeroWidget::RunEffectSwordTrail(float duration)
 {
-    auto func_start = [&](){_swordTrail->setVisible(true);};
-    auto func_end = [&](){_swordTrail->setVisible(false);};
+    Hero *hero = Hero::Cast(_hero.lock());
     
-    float timeRef = 0.33f;
-    float fadeinTime = duration * (0.075f / timeRef);
-    float fadeoutTime = duration * (0.13f / timeRef);
-    float delayTime = duration * (0.11f / timeRef);
+    auto func_start = [&](){_trail->setVisible(true);};
+    auto func_end = [&](){_trail->setVisible(true);};
     
-    cocos2d::FadeIn *fadein = cocos2d::FadeIn::create(fadeinTime);
-    cocos2d::FadeOut *fadeout = cocos2d::FadeOut::create(fadeoutTime);
-    cocos2d::DelayTime *dealy = cocos2d::DelayTime::create(delayTime);
+    float fadeinTime = duration * 0.6f;
+    float fadeoutTime = duration * 0.3f;
+    float delayTime = duration * 0.1f;
+    GLubyte opacity = (GLubyte)(255.0f * hero->GetWeapon()->trail.opacity);
+    
     cocos2d::CallFunc *start = cocos2d::CallFunc::create(func_start);
     cocos2d::CallFunc *end = cocos2d::CallFunc::create(func_end);
-    cocos2d::Sequence *effect = cocos2d::Sequence::create(start, dealy, fadein,
-                                                          fadeout, end, nullptr);
-    _swordTrail->runAction(effect);
+    cocos2d::DelayTime *dealy = cocos2d::DelayTime::create(delayTime);
+    cocos2d::FadeTo *fadein = cocos2d::FadeTo::create(fadeinTime, opacity);
+    cocos2d::FadeOut *fadeout = cocos2d::FadeOut::create(fadeoutTime);
+    cocos2d::Sequence *effect = cocos2d::Sequence::create(start, fadein, dealy, fadeout, end, nullptr);
+    
+    _trail->reset();
+    _trail->runAction(effect);
 }
 
 GameplayObject::WeakPtr HeroWidget::GetHero() const

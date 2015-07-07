@@ -8,5 +8,11 @@
         sprite="gamefield/wpn_iron_sword.png"
         damage="1.0"
         speed="0.33"
-        distance="300.0" />
+        distance="300.0">
+        <Trail length="0.1"
+            width="200.0"
+            posYCoeff="0.6"
+            opacity="0.8"
+            texture="effects/trail.png"/>
+    </Weapon>
 </Store>

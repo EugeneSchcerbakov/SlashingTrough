@@ -39,6 +39,15 @@ struct Equip
 
 struct EquipWeapon : public Equip
 {
+    struct TrailInfo
+    {
+        float length;
+        float width;
+        float posYCoeff;
+        float opacity;
+        std::string texture;
+    };
+    
     static Equip::Ptr create();
     static EquipWeapon* cast(Equip::Ptr base);
     typedef std::vector<WeaponAbility::Ptr> Abilities;
@@ -49,6 +58,7 @@ struct EquipWeapon : public Equip
     float speed;
     float distance;
     std::string sprite;
+    TrailInfo trail;
     Abilities abilities;
 };
 

@@ -10,6 +10,7 @@
 #define __SlashingTrough__HeroWidget__
 
 #include "cocos2d.h"
+#include "CCMotionStreak.h"
 
 #include "Hero.h"
 #include "PathSectorWidget.h"
@@ -80,7 +81,7 @@ private:
     cocos2d::Sprite *_sword;
     cocos2d::DrawNode *_body;
     cocos2d::DrawNode *_bodyBorder;
-    cocos2d::Sprite *_swordTrail;
+    cocos2d::MotionStreak *_trail;
     
     SwordSide _swordSide;
     
