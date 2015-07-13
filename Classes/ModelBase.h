@@ -10,6 +10,7 @@
 #define __SlashingTrough__ModelBase__
 
 #include <stdio.h>
+#include <vector>
 
 #include "VariablesSet.h"
 

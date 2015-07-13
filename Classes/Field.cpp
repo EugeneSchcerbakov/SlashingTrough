@@ -197,7 +197,7 @@ void Field::updateDifficult()
     if (_passedSectors >= _difficult.sectors) {
         _passedSectors = 0;
         ++_difficultIndex;
-        if (_difficultIndex < settings.size()) {
+        if ((std::size_t)_difficultIndex < settings.size()) {
             _difficult = settings[_difficultIndex];
         }
     }

@@ -247,7 +247,7 @@ SessionInfo::Score Hero::getScore() const
 
 bool Hero::isActionsQueueFull() const
 {
-    return _actionSequence.size() >= _actionsSequenceMaxSize;
+    return _actionSequence.size() >= (std::size_t)_actionsSequenceMaxSize;
 }
 
 bool Hero::isAbleToPerform(HeroAction *action)
