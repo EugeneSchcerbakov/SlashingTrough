@@ -2,90 +2,75 @@
 //  Hero.h
 //  SlashingTrough
 //
-//  Created by Eugene Shcherbakov on 06/04/15.
+//  Created by Eugene Shcherbakov on 11/07/15.
 //
 //
 
 #ifndef __SlashingTrough__Hero__
 #define __SlashingTrough__Hero__
 
-#include <memory>
+#include <stdio.h>
 #include <queue>
 
+#include "ModelBase.h"
 #include "HeroAction.h"
-#include "PathSector.h"
+#include "Equipment.h"
 #include "SessionInfo.h"
 
-class Hero : public GameplayObject
+class Hero : public Entity
 {
 public:
-    typedef std::shared_ptr<Hero> Ptr;
-    typedef std::weak_ptr<Hero> WeakPtr;
-    
-public:
-    static GameplayObject::Ptr Create();
-    static Hero* Cast(GameplayObject::Ptr object);
-    
     Hero();
     
-    void IdleUpdate(float dt);
-    void JumpBack(float duration, float distance);
-    void FlushAllRewards();
-    void FinishCurrentAction();
-    void AddAction(HeroAction &action);
-    void SetWeapon(Equip::WeakPtr weapon);
-    void SetPosOnRoad(float x, float y);
-    void SetRunningSpeed(float speed);
+    void init();
+    void idleUpdate(float dt) override;
+    void attack();
+    void flushScore();
+    void refreshGoals(Entities *entities);
     
-    HeroAction& CurrentAction();
-    SessionInfo::Score GetScore() const;
-    const EquipWeapon* GetWeapon() const;
+    void addAction(HeroAction *action);
+    void addStamina(float stamina);
+    void addKillsPoint(int killsPoint);
+    void addCoinsPoint(int coinsPoint);
+    void addScorePoint(int scorePoint);
     
-    bool IsAbleToPerform(const HeroAction &action) const;
-    bool IsActionsQueueFull() const;
-    bool HasActionToPerform() const;
+    void setWeapon(Equip::WeakPtr weapon);
+    void setRunningSpeed(float speed);
+    void setRunning(bool running);
+    void setSideBorders(float left, float right);
     
-    void AddStaminaPoints(float staminaPoints);
-    void AddKillPoints(int killPoints);
-    void AddGoldPoints(int goldPoints);
-    void AddScorePoints(int scorePoints);
+    float getStamina() const;
+    HeroAction* getLastAction() const;
+    EquipWeapon* getWeapon() const;
+    SessionInfo::Score getScore() const;
     
-    float GetXPosOnRoad() const;
-    float GetYPosOnRoad() const;
-    float GetRunningSpeed() const;
-    float GetStaminaPoints() const;
-    int GetDamagePoints() const;
+    bool isActionsQueueFull() const;
+    bool isAbleToPerform(HeroAction *action);
     
-protected:
-    typedef std::queue<HeroAction> ActionSequence;
+private:
+    typedef std::queue<HeroAction *> ActionSequence;
     
-protected:
-    virtual void Init();
-    
+private:    
     ActionSequence _actionSequence;
-    SessionInfo::Score _score;
     Equip::WeakPtr _weapon;
+    SessionInfo::Score _score;
+    Entities *_goals;
     
-    float _attackDistance;
-    float _damageUpValue;
     float _runningSpeed;
+    float _damageUpValue;
     float _staminaPoints;
     float _staminaDrainTime;
-    float _staminaDrainTimeCounter;
     float _staminaDrainValue;
-    float _posOnRoadX;
-    float _posOnRoadY;
+    float _staminaDrainTimeCounter;
     
-    float _jumpingBackTime;
-    float _jumpBackDuration;
-    float _jumpBackDistance;
-    float _jumpStartPos, _jumpEndPos;
+    float _leftSideBorder;
+    float _rightSideBorder;
     
     int _killPointToNextDamageUp;
     int _damageUpKillPoints;
     int _actionsSequenceMaxSize;
     
-    bool _jumpingBack;
+    bool _running;
 };
 
 #endif /* defined(__SlashingTrough__Hero__) */

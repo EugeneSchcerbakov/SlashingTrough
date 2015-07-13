@@ -2,53 +2,85 @@
 //  HeroAction.h
 //  SlashingTrough
 //
-//  Created by Eugene Shcherbakov on 09/04/15.
+//  Created by Eugene Shcherbakov on 11/07/15.
 //
 //
 
 #ifndef __SlashingTrough__HeroAction__
 #define __SlashingTrough__HeroAction__
 
+#include "ModelBase.h"
+
+class Hero;
+
 class HeroAction
 {
 public:
-    enum Type
+    enum class Type
     {
         NONE,
-        SWIPE_RIGHT,
-        SWIPE_LEFT,
-        JUMP_BACK
+        ATTACK_MOVE,
+        JUMPBACK,
+        ATTACK
     };
     
-    friend class Hero;
-    
 public:
-    HeroAction(Type type, float duration, float deltaX, float deltaY);
-    HeroAction();
+    HeroAction(Hero *hero, float duration, Type type);
+    virtual ~HeroAction();
     
-    bool IsType(Type type) const;
-    float GetFinishX() const;
-    float GetFinishY() const;
-    float GetDeltaX() const;
-    float GetDeltaY() const;
-    float GetDuration() const;
-    bool IsReady() const;
+    virtual void start();
+    virtual void update(float dt);
+    virtual void setEvent(const Event &event);
+    virtual bool isFinished() const;
+    virtual bool isStarted() const;
     
-    void Start();
-    void Finish();
+    bool isType(Type type) const;
+    const Event& getEvent() const;
+    
+protected:
+    Hero *_hero;
+    Event _event;
+    
+    float _duration;
+    float _localTime;
+    
+    bool _isStarted;
+    bool _isAttacked;
+    bool _isFinished;
+    
+    const Type _type;
+};
+
+class AttackAndMove : public HeroAction
+{
+public:
+    AttackAndMove(Hero *hero, float duration, float deltaX, float deltaY);
+    
+    void update(float dt) override;
+    
+    float getFinishX() const;
+    float getFinishY() const;
     
 private:
-    void SetFinishPosX(float x);
-    void SetFinishPosY(float y);
+    float _startX;
+    float _startY;
+    float _finishX;
+    float _finishY;
+};
+
+class JumpBack : public HeroAction
+{
+public:
+    JumpBack(Hero *hero, float duration, float jumpDist);
     
-    Type _type;
-    float _duration;
-    float _deltaX;
-    float _deltaY;
-    float _finishPosX;
-    float _finishPosY;
-    bool _isProcessing;
-    bool _isFinished;
+    void start() override;
+    void update(float dt) override;
+    
+    float getFinishY() const;
+    
+private:
+    float _startY;
+    float _endY;
 };
 
 #endif /* defined(__SlashingTrough__HeroAction__) */

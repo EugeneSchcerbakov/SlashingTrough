@@ -11,17 +11,17 @@
 
 #include "cocos2d.h"
 
-namespace Utils
+namespace misc
 {
-    bool IsPlatformDesctop();
+    bool isPlatformDesctop();
     
-    void LuaCallVoidFunction(const std::string &funcName, const std::string &passData);
-    void LuaSetGlobalInteger(const std::string &varName, int value);
+    void luaCallVoidFunction(const std::string &funcName, const std::string &passData);
+    void luaSetGlobalInteger(const std::string &varName, int value);
     
-    std::string LuaGetGlobalString(const std::string &varName);
+    std::string luaGetGlobalString(const std::string &varName);
     
-    cocos2d::Layer* MakeLayerFromLua(const std::string &luaFuncName);
-    cocos2d::Scene* MakeSceneFromLua(const std::string &luaFuncName);
+    cocos2d::Layer* makeLayerFromLua(const std::string &luaFuncName);
+    cocos2d::Scene* makeSceneFromLua(const std::string &luaFuncName);
     cocos2d::Node* MakeNodeFromLua(const std::string &luaFuncName);
 }
 
@@ -31,6 +31,15 @@ namespace math
     T lerp(T a, T b, float time) {
         return a+time*(b-a);
     }
+    
+    inline float clampf(float value, float min, float max) {
+        if (min > max) {
+            std::swap(min, max);
+        }
+        return value < min ? min : value < max ? value : max;
+    }
+    
+    const float PI = 3.14159265358979323846f;
 }
 
 #endif /* defined(__SlashingTrough__Utils__) */

@@ -42,11 +42,11 @@ private:
     };
     
 private:
-    void OnBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
-    void OnCategoryChanged(Category tab);
-    void FillScrollerWithWeapons();
-    void FillScrollerWithArmors();
-    void FillScrollerWithBoosters();
+    void onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
+    void onCategoryChanged(Category tab);
+    void fillScrollerWithWeapons();
+    void fillScrollerWithArmors();
+    void fillScrollerWithBoosters();
     
     std::string _prevSceneName;
     std::vector<CategoryButton *> _tabButtons;

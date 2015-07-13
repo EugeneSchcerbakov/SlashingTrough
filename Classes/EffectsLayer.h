@@ -34,7 +34,7 @@ class EffectsLayer : public cocos2d::Layer
 public:
     static EffectsLayer* create();
     
-    void AddEffect(Effect *effect);
+    void addEffect(Effect *effect);
     
 protected:
     EffectsLayer();

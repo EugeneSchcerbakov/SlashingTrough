@@ -10,13 +10,13 @@
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
 
-GameInfo& GameInfo::Instance()
+GameInfo& GameInfo::getInstance()
 {
     static GameInfo gameInfo;
     return gameInfo;
 }
 
-bool GameInfo::LoadInfo(const std::string &filename)
+bool GameInfo::loadInfo(const std::string &filename)
 {
     cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
     std::string path = fileUtils->fullPathForFilename(filename);
@@ -36,13 +36,13 @@ bool GameInfo::LoadInfo(const std::string &filename)
             std::string type = elem->Attribute("type");
             std::string value = elem->Attribute("value");
             if (type == "int") {
-                SetInt(name, atoi(value.c_str()));
+                setInt(name, atoi(value.c_str()));
             } else if (type == "bool") {
-                SetBool(name, value == "true");
+                setBool(name, value == "true");
             } else if (type == "float") {
-                SetFloat(name, atof(value.c_str()));
+                setFloat(name, atof(value.c_str()));
             } else if (type == "string") {
-                SetString(name, value);
+                setString(name, value);
             } else {
                 assert(false);
             }
@@ -116,53 +116,47 @@ bool GameInfo::LoadInfo(const std::string &filename)
     }
 }
 
-int GameInfo::GetInt(const std::string &name, int def) const
+int GameInfo::getInt(const std::string &name, int def) const
 {
-    std::map<std::string, int>::const_iterator it;
-    it = _variablesInt.find(name);
-    return it != _variablesInt.end() ? (*it).second : def;
+    return _variables.getInt(name, def);
 }
 
-bool GameInfo::GetBool(const std::string &name, bool def) const
+bool GameInfo::getBool(const std::string &name, bool def) const
 {
-    return GetInt(name, (int)def) > 0;
+    return _variables.getBool(name, def);
 }
 
-float GameInfo::GetFloat(const std::string &name, float def) const
+float GameInfo::getFloat(const std::string &name, float def) const
 {
-    std::map<std::string, float>::const_iterator it;
-    it = _variablesFloat.find(name);
-    return it != _variablesFloat.end() ? (*it).second : def;
+    return _variables.getFloat(name, def);
 }
 
-std::string GameInfo::GetString(const std::string &name, std::string def) const
+std::string GameInfo::getString(const std::string &name, std::string def) const
 {
-    std::map<std::string, std::string>::const_iterator it;
-    it = _variablesStr.find(name);
-    return it != _variablesStr.end() ? (*it).second : def;
+    return _variables.getString(name, def);
 }
 
-void GameInfo::SetInt(const std::string &name, int value)
+void GameInfo::setInt(const std::string &name, int value)
 {
-    _variablesInt[name] = value;
+    _variables.setInt(name, value);
 }
 
-void GameInfo::SetBool(const std::string &name, bool value)
+void GameInfo::setBool(const std::string &name, bool value)
 {
-    SetInt(name, (int)value);
+    _variables.setBool(name, value);
 }
 
-void GameInfo::SetFloat(const std::string &name, float value)
+void GameInfo::setFloat(const std::string &name, float value)
 {
-    _variablesFloat[name] = value;
+    _variables.setFloat(name, value);
 }
 
-void GameInfo::SetString(const std::string &name, const std::string &value)
+void GameInfo::setString(const std::string &name, const std::string &value)
 {
-    _variablesStr[name] = value;
+    _variables.setString(name, value);
 }
 
-const GameInfo::ObstacleType& GameInfo::GetObstacleInfoByName(const std::string &name) const
+const GameInfo::ObstacleType& GameInfo::getObstacleInfoByName(const std::string &name) const
 {
     ObstaclesSettings::const_iterator it;
     it = _obstaclesSettings.find(name);
@@ -174,7 +168,7 @@ const GameInfo::ObstacleType& GameInfo::GetObstacleInfoByName(const std::string 
     }
 }
 
-const GameInfo::EnemyType& GameInfo::GetEnemyInfoByName(const std::string &name) const
+const GameInfo::EnemyType& GameInfo::getEnemyInfoByName(const std::string &name) const
 {
     EnemiesSettings::const_iterator it;
     it = _enemiesSettings.find(name);
@@ -186,7 +180,7 @@ const GameInfo::EnemyType& GameInfo::GetEnemyInfoByName(const std::string &name)
     }
 }
 
-GameInfo::GameplayObjectsTypes GameInfo::GetObstaclesTypes() const
+GameInfo::GameplayObjectsTypes GameInfo::getObstaclesTypes() const
 {
     GameplayObjectsTypes types;
     types.reserve(_obstaclesSettings.size());
@@ -196,7 +190,7 @@ GameInfo::GameplayObjectsTypes GameInfo::GetObstaclesTypes() const
     return types;
 }
 
-GameInfo::GameplayObjectsTypes GameInfo::GetEnemiesTypes() const
+GameInfo::GameplayObjectsTypes GameInfo::getEnemiesTypes() const
 {
     GameplayObjectsTypes types;
     types.reserve(_obstaclesSettings.size());
@@ -206,7 +200,7 @@ GameInfo::GameplayObjectsTypes GameInfo::GetEnemiesTypes() const
     return types;
 }
 
-const GameInfo::DiffucultSettings& GameInfo::GetDiffucultSettings() const
+const GameInfo::DiffucultSettings& GameInfo::getDiffucultSettings() const
 {
     return _diffucultSettings;
 }

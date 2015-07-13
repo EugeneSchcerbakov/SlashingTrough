@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-SessionInfo& SessionInfo::Instance()
+SessionInfo& SessionInfo::getInstance()
 {
     static SessionInfo instance;
     return instance;
@@ -23,7 +23,7 @@ SessionInfo::SessionInfo()
 {
 }
 
-void SessionInfo::Load(const std::string &filename)
+void SessionInfo::load(const std::string &filename)
 {
     _saveFileName = filename;
     
@@ -33,7 +33,7 @@ void SessionInfo::Load(const std::string &filename)
     
     if (!fileUtils->isFileExist(fullPath))
     {
-        Save();
+        save();
     }
     
     std::string buffer = fileUtils->getStringFromFile(fullPath);
@@ -55,7 +55,7 @@ void SessionInfo::Load(const std::string &filename)
         tinyxml2::XMLElement *ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
         while (ownedEquip) {
             std::string equipId = ownedEquip->Attribute("id");
-            AddOwnedEquip(equipId);
+            addOwnedEquip(equipId);
             ownedEquip = ownedEquip->NextSiblingElement();
         };
         
@@ -64,7 +64,7 @@ void SessionInfo::Load(const std::string &filename)
     }
 }
 
-void SessionInfo::Save()
+void SessionInfo::save()
 {
     auto fileUtils = cocos2d::FileUtils::getInstance();
     std::string path = fileUtils->getWritablePath();
@@ -110,14 +110,14 @@ void SessionInfo::Save()
     }
 }
 
-void SessionInfo::AddOwnedEquip(const std::string id)
+void SessionInfo::addOwnedEquip(const std::string id)
 {
-    if (!IsEquipOwned(id)) {
+    if (!isEquipOwned(id)) {
         _ownedEquips.push_back(id);
     }
 }
 
-void SessionInfo::AddCoins(int coins)
+void SessionInfo::addCoins(int coins)
 {
     _totalCoins += coins;
     if (_totalCoins < 0) {
@@ -125,7 +125,7 @@ void SessionInfo::AddCoins(int coins)
     }
 }
 
-void SessionInfo::EquipWeapon(Equip::WeakPtr weapon)
+void SessionInfo::equipWeapon(Equip::WeakPtr weapon)
 {
     if (weapon.expired()) {
         CC_ASSERT(false);
@@ -133,32 +133,32 @@ void SessionInfo::EquipWeapon(Equip::WeakPtr weapon)
     }
     
     struct EquipWeapon *ptr = EquipWeapon::cast(weapon.lock());
-    CC_ASSERT(IsEquipOwned(ptr->id));
+    CC_ASSERT(isEquipOwned(ptr->id));
 
     _equippedWeaponId = ptr->id;
 }
 
-void SessionInfo::SetBestScore(const SessionInfo::Score &score)
+void SessionInfo::setBestScore(const SessionInfo::Score &score)
 {
     _bestScore = score;
 }
 
-SessionInfo::Score SessionInfo::GetBestScore() const
+SessionInfo::Score SessionInfo::getBestScore() const
 {
     return _bestScore;
 }
 
-int SessionInfo::GetCoins() const
+int SessionInfo::getCoins() const
 {
     return _totalCoins;
 }
 
-bool SessionInfo::IsBestScore(const SessionInfo::Score &score) const
+bool SessionInfo::isBestScore(const SessionInfo::Score &score) const
 {
     return score.coins > _bestScore.coins;
 }
 
-bool SessionInfo::IsEquipOwned(const std::string &id) const
+bool SessionInfo::isEquipOwned(const std::string &id) const
 {
     for (auto equip : _ownedEquips) {
         if (equip == id) {
@@ -168,12 +168,12 @@ bool SessionInfo::IsEquipOwned(const std::string &id) const
     return false;
 }
 
-bool SessionInfo::IsWeaponEquipped(const std::string &id) const
+bool SessionInfo::isWeaponEquipped(const std::string &id) const
 {
     return _equippedWeaponId == id;
 }
 
-const std::string& SessionInfo::GetEquippedWeaponId() const
+const std::string& SessionInfo::getEquippedWeaponId() const
 {
     return _equippedWeaponId;
 }

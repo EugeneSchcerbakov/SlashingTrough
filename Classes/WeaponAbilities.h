@@ -10,7 +10,9 @@
 #define __SlashingTrough__WeaponAbilities__
 
 #include <memory>
-#include "GameplayObjects.h"
+
+class Hero;
+class Entity;
 
 class WeaponAbility
 {
@@ -21,14 +23,12 @@ public:
 public:
     virtual ~WeaponAbility();
     
-    virtual void Init(GameplayObject::WeakPtr hero);
-    virtual void OnAttackStarted();
-    virtual void OnAttackEnded();
-    virtual void OnHit(GameplayObject::WeakPtr enemy);
-    virtual void OnKill(GameplayObject::WeakPtr enemy);
+    virtual void init(Hero *hero);
+    virtual void onHit(Entity *goal);
+    virtual void onKill(Entity *goal);
     
 protected:
-    GameplayObject::WeakPtr _hero;
+    Hero *_hero;
 };
 
 class CoinsForMurder : public WeaponAbility
@@ -38,11 +38,7 @@ public:
     
     CoinsForMurder(int flag, int percentOfEnemyCost);
     
-    void Init(GameplayObject::WeakPtr hero) override;
-    void OnAttackStarted() override;
-    void OnAttackEnded() override;
-    void OnHit(GameplayObject::WeakPtr enemy) override;
-    void OnKill(GameplayObject::WeakPtr enemy) override;
+    void onKill(Entity *goal) override;
     
 private:
     const int _flat;

@@ -28,7 +28,7 @@ template <typename T> T* MakeFromLua(lua_State *state, const std::string &func, 
     return object;
 }
 
-bool Utils::IsPlatformDesctop()
+bool misc::isPlatformDesctop()
 {
     cocos2d::Application::Platform platform;
     platform = cocos2d::Application::getInstance()->getTargetPlatform();
@@ -37,7 +37,7 @@ bool Utils::IsPlatformDesctop()
            platform == cocos2d::Application::Platform::OS_WINDOWS;
 }
 
-void Utils::LuaCallVoidFunction(const std::string &funcName, const std::string &passData)
+void misc::luaCallVoidFunction(const std::string &funcName, const std::string &passData)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     lua_State *L = luaEngine->getLuaStack()->getLuaState();
@@ -47,14 +47,14 @@ void Utils::LuaCallVoidFunction(const std::string &funcName, const std::string &
     lua_call(L, 1, 0);
 }
 
-void Utils::LuaSetGlobalInteger(const std::string &varName, int value)
+void misc::luaSetGlobalInteger(const std::string &varName, int value)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     std::string command = cocos2d::StringUtils::format("%s = %d", varName.c_str(), value);
     luaEngine->executeString(command.c_str());
 }
 
-std::string Utils::LuaGetGlobalString(const std::string &varName)
+std::string misc::luaGetGlobalString(const std::string &varName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     lua_State *L = luaEngine->getLuaStack()->getLuaState();
@@ -66,21 +66,21 @@ std::string Utils::LuaGetGlobalString(const std::string &varName)
     return lua_tostring(L, -1);
 }
 
-cocos2d::Layer* Utils::MakeLayerFromLua(const std::string &luaFuncName)
+cocos2d::Layer* misc::makeLayerFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
     return MakeFromLua<cocos2d::Layer>(luaState, luaFuncName, "cc.Layer");
 }
 
-cocos2d::Scene* Utils::MakeSceneFromLua(const std::string &luaFuncName)
+cocos2d::Scene* misc::makeSceneFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
     return MakeFromLua<cocos2d::Scene>(luaState, luaFuncName, "cc.Scene");
 }
 
-cocos2d::Node* Utils::MakeNodeFromLua(const std::string &luaFuncName)
+cocos2d::Node* misc::MakeNodeFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();
     lua_State *luaState = luaEngine->getLuaStack()->getLuaState();

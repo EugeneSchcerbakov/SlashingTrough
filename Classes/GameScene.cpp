@@ -43,7 +43,7 @@ bool GameScene::init()
     cocos2d::Director *director = cocos2d::Director::getInstance();
     cocos2d::EventDispatcher *dispatcher = director->getEventDispatcher();
     
-    if (Utils::IsPlatformDesctop())
+    if (misc::isPlatformDesctop())
     {
         _mouseListener = cocos2d::EventListenerMouse::create();
         _mouseListener->onMouseScroll = [&](cocos2d::Event *event){OnMouseScroll(event);};
@@ -56,11 +56,10 @@ bool GameScene::init()
     }
     
     _layerGui = GameInterface::create();
-    _layerField = GameField::create(_layerGui);
-    _layerField->setScale(1.0f);
+    _layerField = FieldLayer::create(_layerGui);
     
-    addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     addChild(_layerField, LayerZOrder::GAME_FIELD);
+    addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
     
     return true;
 }
@@ -103,6 +102,6 @@ void GameScene::OnMouseScroll(cocos2d::Event *event)
         cocos2d::Director *director = cocos2d::Director::getInstance();
         cocos2d::Scheduler *scheduler = director->getScheduler();
         scheduler->setTimeScale(_currentTimeScale);
-        _layerGui->SetTimeScaleLabel(_currentTimeScale);
+        _layerGui->setTimeScaleLabel(_currentTimeScale);
     }
 }

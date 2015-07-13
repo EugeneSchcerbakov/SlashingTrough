@@ -30,25 +30,25 @@ public:
     };
     
 public:
-    static SessionInfo& Instance();
+    static SessionInfo& getInstance();
     
     SessionInfo();
     
-    void Load(const std::string &filename);
-    void Save();
+    void load(const std::string &filename);
+    void save();
     
-    void AddOwnedEquip(const std::string id);
-    void AddCoins(int coins);
-    void EquipWeapon(Equip::WeakPtr weapon);
-    void SetBestScore(const Score &score);
+    void addOwnedEquip(const std::string id);
+    void addCoins(int coins);
+    void equipWeapon(Equip::WeakPtr weapon);
+    void setBestScore(const Score &score);
     
-    Score GetBestScore() const;
-    int GetCoins() const;
-    bool IsBestScore(const Score &score) const;
-    bool IsEquipOwned(const std::string &id) const;
-    bool IsWeaponEquipped(const std::string &id) const;
+    Score getBestScore() const;
+    int getCoins() const;
+    bool isBestScore(const Score &score) const;
+    bool isEquipOwned(const std::string &id) const;
+    bool isWeaponEquipped(const std::string &id) const;
     
-    const std::string& GetEquippedWeaponId() const;
+    const std::string& getEquippedWeaponId() const;
     
 private:
     typedef std::vector<std::string> OwnedEquipIds;

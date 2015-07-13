@@ -19,12 +19,12 @@ class GameInterface : public cocos2d::Layer
 public:
     static GameInterface* create();
     
-    void SetTimeScaleLabel(float timeScale);
-    void SetGoldPointsLabel(int value);
-    void SetKillPointsLabel(int value);
-    void SetDamagePointsLabel(int value);
-    void SetHealthPointsLabel(int value);
-    void SetStaminaPoints(float value);
+    void setTimeScaleLabel(float timeScale);
+    void setGoldPointsLabel(int value);
+    void setKillPointsLabel(int value);
+    void setDamagePointsLabel(int value);
+    void setHealthPointsLabel(int value);
+    void setStaminaPoints(float value);
     
 protected:
     GameInterface();

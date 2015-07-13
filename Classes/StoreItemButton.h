@@ -35,8 +35,8 @@ protected:
     bool init();
     
 private:
-    void InitBuyState();
-    void InitEquippedState();
+    void initBuyState();
+    void initEquippedState();
     
     State _state;
     int _price;

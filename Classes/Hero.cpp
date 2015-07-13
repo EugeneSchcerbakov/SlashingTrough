@@ -2,193 +2,165 @@
 //  Hero.cpp
 //  SlashingTrough
 //
-//  Created by Eugene Shcherbakov on 06/04/15.
+//  Created by Eugene Shcherbakov on 11/07/15.
 //
 //
 
 #include "Hero.h"
-
 #include "GameInfo.h"
-#include "Utils.h"
-
-GameplayObject::Ptr Hero::Create()
-{
-    return std::make_shared<Hero>();
-}
-
-Hero* Hero::Cast(GameplayObject::Ptr object)
-{
-    return static_cast<Hero *>(object.get());
-}
+#include "SessionInfo.h"
+#include "Store.h"
 
 Hero::Hero()
-: GameplayObject(Type::HERO, InvalidUID)
-, _killPointToNextDamageUp(0)
-, _staminaDrainTimeCounter(0.0f)
+: Entity(Entity::Type::HERO)
 , _runningSpeed(0.0f)
-, _posOnRoadX(0.0f)
-, _posOnRoadY(0.0f)
-, _jumpBackDuration(0.0f)
-, _jumpingBackTime(0.0f)
-, _jumpStartPos(0.0f)
-, _jumpEndPos(0.0f)
-, _jumpingBack(false)
+, _leftSideBorder(0.0f)
+, _rightSideBorder(0.0f)
+, _staminaDrainTimeCounter(0.0f)
+, _killPointToNextDamageUp(0)
+, _goals(nullptr)
+, _running(false)
 {
-    Init();
-    FlushAllRewards();
+    init();
 }
 
-void Hero::AddAction(HeroAction &action)
+void Hero::init()
 {
-    float finishPosX = _logicalX + action.GetDeltaX();
-    float finishPosY = _logicalY + action.GetDeltaX();
-    if (!_actionSequence.empty()) {
-        // check position by last action
-        const HeroAction &lastAction = _actionSequence.back();
-        finishPosX = lastAction.GetFinishX() + action.GetDeltaX();
-        finishPosY = lastAction.GetFinishY() + action.GetDeltaY();
-    }
-
-    action.SetFinishPosX(finishPosX);
-    action.SetFinishPosY(finishPosY);
-    _actionSequence.push(action);
-}
-
-void Hero::SetWeapon(Equip::WeakPtr weapon)
-{
-    if (weapon.expired()) {
-        return;
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
+    _damage = 1.0f;
+    _radius = 0.0f;
+    _health = gameinfo.getFloat("HERO_HEALTH_POINTS");
+    _damageUpValue = gameinfo.getFloat("HERO_DAMAGE_UP_VALUE");
+    _damageUpKillPoints = gameinfo.getInt("HERO_DAMAGE_UP_KP");
+    _staminaPoints = gameinfo.getFloat("HERO_STAMINA_POINTS");
+    _staminaDrainTime = gameinfo.getFloat("HERO_STAMINA_DRAIN_TIME");
+    _staminaDrainValue = gameinfo.getFloat("HERO_STAMINA_DRAIN_VALUE");
+    _actionsSequenceMaxSize = gameinfo.getInt("HERO_ACTIONS_SEQUENCE_SIZE");
+    
+    std::string weaponId = SessionInfo::getInstance().getEquippedWeaponId();
+    Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
+    setWeapon(weapon);
+    
+    for (auto ability : getWeapon()->abilities) {
+        ability->init(this);
     }
     
-    _weapon = weapon;
-    Equip::Ptr ptr = _weapon.lock();
-    EquipWeapon *casted = EquipWeapon::cast(ptr);
-    
-    _damage = casted->damage;
-    _radius = casted->distance;
+    flushScore();
 }
 
-void Hero::SetPosOnRoad(float x, float y)
+void Hero::idleUpdate(float dt)
 {
-    _posOnRoadX = x;
-    _posOnRoadY = y;
-}
-
-void Hero::SetRunningSpeed(float speed)
-{
-    _runningSpeed = speed;
-}
-
-HeroAction& Hero::CurrentAction()
-{
-    return _actionSequence.front();
-}
-
-SessionInfo::Score Hero::GetScore() const
-{
-    return _score;
-}
-
-const EquipWeapon* Hero::GetWeapon() const
-{
-    if (!_weapon.expired()) {
-        return EquipWeapon::cast(_weapon.lock());
+    if (_running) {
+        _y += _runningSpeed * dt;
     }
-    return nullptr;
-}
-
-void Hero::IdleUpdate(float dt)
-{
-    if (_jumpingBack) {
-        _jumpingBackTime += dt * (1.0f / _jumpBackDuration);
-        _posOnRoadY = math::lerp(_jumpStartPos, _jumpEndPos, _jumpingBackTime);
-        if (_jumpingBackTime >= 1.0f) {
-            _jumpingBackTime = 0.0f;
-            _jumpingBack = 0.0f;
+    
+    if (_actionSequence.size() > 0) {
+        HeroAction *action = _actionSequence.front();
+        if (!action->isFinished()) {
+            if (!action->isStarted()) {
+                action->start();
+                Event event = action->getEvent();
+                if (!event.is("")) {
+                    sendEvent(event);
+                }
+            }
+            action->update(dt);
+        } else {
+            delete action;
+            _actionSequence.pop();
         }
-    } else {
-        _posOnRoadY += _runningSpeed * dt;
     }
     
     _staminaDrainTimeCounter += dt;
     if (_staminaDrainTimeCounter >= _staminaDrainTime) {
         _staminaDrainTimeCounter = 0.0f;
-        AddStaminaPoints(-_staminaDrainValue);
+        addStamina(-_staminaDrainValue);
     }
     
-    if (_staminaPoints <= 0.0f) {
+    if (_staminaPoints <= 0.0f && isAlive()) {
         _staminaPoints = 0.0f;
-        Kill();
+        kill();
     }
 }
 
-void Hero::JumpBack(float duration, float distance)
+void Hero::attack()
 {
-    _jumpBackDuration = duration;
-    _jumpStartPos = _posOnRoadY;
-    _jumpEndPos = _posOnRoadY - distance;
-    _jumpingBackTime = 0.0f;
-    _jumpingBack = true;
+    if (_goals) {
+        float x1 = getPositionX();
+        float y1 = getPositionY();
+        float xface = 0.0f;
+        float yface = 1.0f;
+        for (Entity *entity : *_goals) {
+            if (!entity || !entity->isAlive()) {
+                continue;
+            }
+            float x2 = entity->getPositionX();
+            float y2 = entity->getPositionY();
+            
+            float dx = x2 - x1;
+            float dy = y2 - y1;
+            
+            float len = sqrtf(dx * dx + dy * dy);
+            
+            float n = len;
+            n = 1.0f / n;
+            float nx = dx * n;
+            float ny = dy * n;
+            
+            float dotp = nx * xface + ny * yface;
+            float area = 0.85f;
+            
+            if (len <= _radius && dotp >= area) {
+                entity->addHealth(-_damage);
+                entity->onDamageReceived();
+                
+                for (auto ability : getWeapon()->abilities) {
+                    ability->onHit(entity);
+                }
+                
+                if (!entity->isAlive()) {
+                    Reward *reward = dynamic_cast<Reward *>(entity);
+                    if (reward) {
+                        addKillsPoint(reward->getKillPoints());
+                        addCoinsPoint(reward->getCoinPoints());
+                        addStamina(reward->getStaminaPoints());
+                        addScorePoint(reward->getScorePoints());
+                        
+                        for (auto ability : getWeapon()->abilities) {
+                            ability->onKill(entity);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-void Hero::FlushAllRewards()
+void Hero::flushScore()
 {
     _score.coins = 0;
     _score.kills = 0;
     _score.score = 0;
 }
 
-void Hero::FinishCurrentAction()
+void Hero::refreshGoals(Entities *entities)
 {
-    _actionSequence.pop();
+    if (entities) {
+        _goals = entities;
+    }
 }
 
-bool Hero::IsAbleToPerform(const HeroAction &action) const
+void Hero::addAction(HeroAction *action)
 {
-    float lastPosX = _logicalX;
-    float lastPosY = _logicalY;
-    if (!_actionSequence.empty()) {
-        // check position by last action
-        const HeroAction &lastAction = _actionSequence.back();
-        lastPosX = lastAction.GetFinishX();
-        lastPosY = lastAction.GetFinishY();
-    }
+    _actionSequence.push(action);
+}
+
+void Hero::addStamina(float stamina)
+{
+    _staminaPoints += stamina;
     
-    if (action.IsType(HeroAction::Type::SWIPE_RIGHT)) {
-        return lastPosX <= GameInfo::Instance().GetFloat("PATH_RIGHT_BORDER");
-    } else if (action.IsType(HeroAction::Type::SWIPE_LEFT)) {
-        return lastPosX >= GameInfo::Instance().GetFloat("PATH_LEFT_BORDER");
-    } else if (action.IsType(HeroAction::Type::JUMP_BACK)) {
-        return true;
-    }
-    return false;
-}
-
-bool Hero::IsActionsQueueFull() const
-{
-    return _actionSequence.size() >= _actionsSequenceMaxSize;
-}
-
-bool Hero::HasActionToPerform() const
-{
-    return !_actionSequence.empty();
-}
-
-void Hero::AddKillPoints(int killPoints)
-{
-    _score.kills += killPoints;
-    _killPointToNextDamageUp += killPoints;
-    if (_killPointToNextDamageUp >= _damageUpKillPoints) {
-        _killPointToNextDamageUp = 0;
-        _damage += _damageUpValue;
-    }
-}
-
-void Hero::AddStaminaPoints(float staminaPoints)
-{
-    _staminaPoints += staminaPoints;
-    
-    float max = GameInfo::Instance().GetFloat("HERO_STAMINA_POINTS");
+    float max = GameInfo::getInstance().getFloat("HERO_STAMINA_POINTS");
     if (_staminaPoints > max) {
         _staminaPoints = max;
     }
@@ -197,53 +169,107 @@ void Hero::AddStaminaPoints(float staminaPoints)
     }
 }
 
-void Hero::AddGoldPoints(int goldPoints)
+void Hero::addKillsPoint(int killsPoint)
 {
-    _score.coins += goldPoints;
+    _score.kills += killsPoint;
+    _killPointToNextDamageUp += killsPoint;
+    if (_killPointToNextDamageUp >= _damageUpKillPoints) {
+        _killPointToNextDamageUp = 0;
+        _damage += _damageUpValue;
+    }
 }
 
-void Hero::AddScorePoints(int scorePoints)
+void Hero::addCoinsPoint(int coinsPoint)
 {
-    _score.score += scorePoints;
+    _score.coins += coinsPoint;
 }
 
-float Hero::GetXPosOnRoad() const
+void Hero::addScorePoint(int scorePoint)
 {
-    return _posOnRoadX;
+    _score.score = scorePoint;
 }
 
-float Hero::GetYPosOnRoad() const
+void Hero::setWeapon(Equip::WeakPtr weapon)
 {
-    return _posOnRoadY;
+    if (weapon.expired()) {
+        return;
+    }
+    
+    _weapon = weapon;
+    Equip::Ptr base = _weapon.lock();
+    EquipWeapon *cast = EquipWeapon::cast(base);
+    
+    _damage = cast->damage;
+    _radius = cast->distance;
 }
 
-float Hero::GetRunningSpeed() const
+void Hero::setRunningSpeed(float speed)
 {
-    return _runningSpeed;
+    _runningSpeed = speed;
 }
 
-float Hero::GetStaminaPoints() const
+void Hero::setRunning(bool running)
+{
+    _running = running;
+}
+
+void Hero::setSideBorders(float left, float right)
+{
+    _leftSideBorder = left;
+    _rightSideBorder = right;
+}
+
+float Hero::getStamina() const
 {
     return _staminaPoints;
 }
 
-int Hero::GetDamagePoints() const
+HeroAction* Hero::getLastAction() const
 {
-    return (int)_damage;
+    if (!_actionSequence.empty()) {
+        return _actionSequence.back();
+    }
+    return nullptr;
 }
 
-void Hero::Init()
+EquipWeapon* Hero::getWeapon() const
 {
-    GameInfo &gameinfo = GameInfo::Instance();
+    if (!_weapon.expired()) {
+        return EquipWeapon::cast(_weapon.lock());
+    }
+    return nullptr;
+}
+
+SessionInfo::Score Hero::getScore() const
+{
+    return _score;
+}
+
+bool Hero::isActionsQueueFull() const
+{
+    return _actionSequence.size() >= _actionsSequenceMaxSize;
+}
+
+bool Hero::isAbleToPerform(HeroAction *action)
+{
+    if (!action) {
+        return false;
+    }
     
-    _damage = 1.0f;
-    _radius = 0.0f;
-    _health = gameinfo.GetFloat("HERO_HEALTH_POINTS");
-    _damageUpValue = gameinfo.GetFloat("HERO_DAMAGE_UP_VALUE");
-    _damageUpKillPoints = gameinfo.GetInt("HERO_DAMAGE_UP_KP");
-    _staminaPoints = gameinfo.GetFloat("HERO_STAMINA_POINTS");
-    _staminaDrainTime = gameinfo.GetFloat("HERO_STAMINA_DRAIN_TIME");
-    _staminaDrainValue = gameinfo.GetFloat("HERO_STAMINA_DRAIN_VALUE");
-    _actionsSequenceMaxSize = gameinfo.GetInt("HERO_ACTIONS_SEQUENCE_SIZE");
+    if (action->isType(HeroAction::Type::ATTACK_MOVE))
+    {
+        auto move = dynamic_cast<AttackAndMove *>(action);
+        float x = move->getFinishX();
+        return x < _rightSideBorder && x > _leftSideBorder;
+    }
+    else if (action->isType(HeroAction::Type::JUMPBACK))
+    {
+        return true;
+    }
+    else if (action->isType(HeroAction::Type::ATTACK))
+    {
+        return true;
+    }
+    
+    return false;
 }
-

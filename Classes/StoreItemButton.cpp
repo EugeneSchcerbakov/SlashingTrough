@@ -34,14 +34,14 @@ void StoreItemButton::switchState(State state)
 {
     if (state == State::BUY) {
         _state = state;
-        InitBuyState();
+        initBuyState();
     } else if (state == State::EQUIP) {
         _state = state;
         removeAllChildrenWithCleanup(true);
         loadTextures("ui/ui_shop_item-plate_btn_equip.png", "ui/ui_shop_item-plate_btn_equip_pressed.png");
     } else if (state == State::EQUIPPED) {
         _state = state;
-        InitEquippedState();
+        initEquippedState();
     } else {
         CC_ASSERT(false);
     }
@@ -68,7 +68,7 @@ bool StoreItemButton::init()
     return true;
 }
 
-void StoreItemButton::InitBuyState()
+void StoreItemButton::initBuyState()
 {
     removeAllChildrenWithCleanup(true);
     loadTextures("ui/ui_shop_item-plate_btn_buy.png", "ui/ui_shop_item-plate_btn_buy_pressed.png");
@@ -92,7 +92,7 @@ void StoreItemButton::InitBuyState()
     addChild(price);
 }
 
-void StoreItemButton::InitEquippedState()
+void StoreItemButton::initEquippedState()
 {
     removeAllChildrenWithCleanup(true);
     loadTextures("ui/ui_shop_item-plate_btn_equipped.png", "ui/ui_shop_item-plate_btn_equipped_pressed.png");

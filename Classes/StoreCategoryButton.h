@@ -27,9 +27,9 @@ protected:
 
     bool init(const std::string &icon);
     
-    bool OnTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
-    void OnTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
-    void OnTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event);
+    bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
+    void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
+    void onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event);
 
 private:
     cocos2d::Sprite *_backing;

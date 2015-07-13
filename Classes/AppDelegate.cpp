@@ -61,13 +61,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
     
-	GameInfo::Instance().LoadInfo("gameInfo.xml");
-    SessionInfo::Instance().Load("st_save.xml");
-    Store::Instance().LoadStore("storeItems.xml");
+	GameInfo::getInstance().loadInfo("gameInfo.xml");
+    SessionInfo::getInstance().load("st_save.xml");
+    Store::getInstance().loadStore("storeItems.xml");
 
-    if (Utils::IsPlatformDesctop()) {
+    if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);
-        glview->setFrameZoomFactor(GameInfo::Instance().GetFloat("DESCTOP_FRAME_SCALE", 1.0f));
+        glview->setFrameZoomFactor(GameInfo::getInstance().getFloat("DESCTOP_FRAME_SCALE", 1.0f));
         glview->setFrameSize(frameSize.width, frameSize.height);
     }
     
@@ -80,14 +80,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     luaEngine->executeScriptFile("gui.lua");
     
     float squareSize = director->getVisibleSize().width / 3.0f;
-    GameInfo::Instance().SetFloat("SQUARE_SIZE", squareSize);
-    GameInfo::Instance().SetFloat("PATH_LEFT_BORDER", squareSize);
-    GameInfo::Instance().SetFloat("PATH_RIGHT_BORDER", squareSize * 2.0f);
-    GameInfo::Instance().SetInt("CHARACTER_SCORE", 0);
+    GameInfo::getInstance().setFloat("SQUARE_SIZE", squareSize);
+    GameInfo::getInstance().setInt("CHARACTER_SCORE", 0);
     
-    Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::Instance().GetBestScore().coins);
-    Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::Instance().GetBestScore().kills);
-    cocos2d::Scene *scene = Utils::MakeSceneFromLua("CreateStartscreenScene");
+    misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::getInstance().getBestScore().coins);
+    misc::luaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::getInstance().getBestScore().kills);
+    cocos2d::Scene *scene = misc::makeSceneFromLua("CreateStartscreenScene");
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
     {
@@ -99,9 +97,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto OnHomePressed = [&](cocos2d::EventCustom *)
     {
-        Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::Instance().GetBestScore().coins);
-        Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::Instance().GetBestScore().kills);
-        auto homescreen = Utils::MakeSceneFromLua("CreateStartscreenScene");
+        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::getInstance().getBestScore().coins);
+        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::getInstance().getBestScore().kills);
+        auto homescreen = misc::makeSceneFromLua("CreateStartscreenScene");
         auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);  
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();

@@ -7,31 +7,22 @@
 //
 
 #include "WeaponAbilities.h"
-
 #include "Hero.h"
 
 WeaponAbility::~WeaponAbility()
 {
 }
 
-void WeaponAbility::Init(GameplayObject::WeakPtr hero)
+void WeaponAbility::init(Hero *hero)
 {
     _hero = hero;
 }
 
-void WeaponAbility::OnAttackStarted()
+void WeaponAbility::onHit(Entity *goal)
 {
 }
 
-void WeaponAbility::OnAttackEnded()
-{
-}
-
-void WeaponAbility::OnHit(GameplayObject::WeakPtr enemy)
-{
-}
-
-void WeaponAbility::OnKill(GameplayObject::WeakPtr enemy)
+void WeaponAbility::onKill(Entity *goal)
 {
 }
 
@@ -47,31 +38,15 @@ CoinsForMurder::CoinsForMurder(int flag, int percentOfEnemyCost)
 {
 }
 
-void CoinsForMurder::Init(GameplayObject::WeakPtr hero)
+void CoinsForMurder::onKill(Entity *goal)
 {
-    WeaponAbility::Init(hero);
-}
-
-void CoinsForMurder::OnAttackStarted()
-{
+    if (!_hero || !goal) {
+        return;
+    }
     
-}
-
-void CoinsForMurder::OnAttackEnded()
-{
-    
-}
-
-void CoinsForMurder::OnHit(GameplayObject::WeakPtr enemy)
-{
-    
-}
-
-void CoinsForMurder::OnKill(GameplayObject::WeakPtr enemy)
-{
-    Hero *heroPtr = Hero::Cast(_hero.lock());
-    GameplayObject::Ptr enemyPtr = enemy.lock();
-    
-    int additional = enemyPtr->GetRewardGoldPoints() * _percentOfEnemyCost / 100;
-    heroPtr->AddGoldPoints(_flat + additional);
+    Reward *reward = dynamic_cast<Reward *>(goal);
+    if (reward) {
+        int additional = reward->getCoinPoints() * _percentOfEnemyCost / 100;
+        _hero->addCoinsPoint(_flat + additional);
+    }
 }

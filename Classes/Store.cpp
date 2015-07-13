@@ -12,15 +12,15 @@
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
 
-Store& Store::Instance()
+Store& Store::getInstance()
 {
     static Store singleInstance;
     return singleInstance;
 }
 
-void Store::LoadStore(const std::string &filename)
+void Store::loadStore(const std::string &filename)
 {
-    Reset();
+    reset();
     
     cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
     std::string path = fileUtils->fullPathForFilename(filename);
@@ -80,31 +80,31 @@ void Store::LoadStore(const std::string &filename)
         }
     }
     
-    SessionInfo &profile = SessionInfo::Instance();
+    SessionInfo &profile = SessionInfo::getInstance();
     
-    std::string equippedWeaponId = profile.GetEquippedWeaponId();
+    std::string equippedWeaponId = profile.getEquippedWeaponId();
     if (equippedWeaponId.empty()) {
-        Equip::Ptr wpn = GetItemById("default_sword");
+        Equip::Ptr wpn = getItemById("default_sword");
         CC_ASSERT(wpn != nullptr);
-        profile.AddOwnedEquip(wpn->id);
-        profile.EquipWeapon(wpn);
+        profile.addOwnedEquip(wpn->id);
+        profile.equipWeapon(wpn);
     }
 }
 
-void Store::Buy(const std::string &id)
+void Store::buy(const std::string &id)
 {
-    SessionInfo &session = SessionInfo::Instance();
+    SessionInfo &session = SessionInfo::getInstance();
     
-    Equip::Ptr equip = GetItemById(id);
-    if (equip && equip->price <= session.GetCoins())
+    Equip::Ptr equip = getItemById(id);
+    if (equip && equip->price <= session.getCoins())
     {
-        session.AddCoins(-equip->price);
-        session.AddOwnedEquip(equip->id);
+        session.addCoins(-equip->price);
+        session.addOwnedEquip(equip->id);
         equip->sold = true;
     }
 }
 
-Equip::Ptr Store::GetItemById(const std::string &id) const
+Equip::Ptr Store::getItemById(const std::string &id) const
 {
     for (const auto info : _items) {
         if (info->id == id) {
@@ -114,12 +114,12 @@ Equip::Ptr Store::GetItemById(const std::string &id) const
     return Equip::Ptr();
 }
 
-const Store::Items& Store::GetAllItems() const
+const Store::Items& Store::getAllItems() const
 {
     return _items;
 }
 
-Store::Items Store::GetWeaponItems() const
+Store::Items Store::getWeaponItems() const
 {
     Items items;
     for (auto item : _items) {
@@ -130,7 +130,7 @@ Store::Items Store::GetWeaponItems() const
     return items;
 }
 
-void Store::Reset()
+void Store::reset()
 {
     _items.clear();
 }

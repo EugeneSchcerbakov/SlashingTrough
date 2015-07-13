@@ -56,10 +56,10 @@ bool StoreInterface::init()
     _backBtn->setScale(backBtnScale);
     _backBtn->setPositionX(_backBtn->getContentSize().width * backBtnScale * 0.5f);
     _backBtn->setPositionY(_backBtn->getContentSize().height * backBtnScale * 0.5f);
-    _backBtn->addTouchEventListener(CC_CALLBACK_2(StoreInterface::OnBackPressed, this));
+    _backBtn->addTouchEventListener(CC_CALLBACK_2(StoreInterface::onBackPressed, this));
     
     float tabButtonsY = 190.0f;
-    auto tabCallback = [&](int tab) {OnCategoryChanged((Category)tab);};
+    auto tabCallback = [&](int tab) {onCategoryChanged((Category)tab);};
     
     _tabButtons.resize(Category::AMOUNT);
     _tabButtons[Category::WEAPON] = CategoryButton::create("ui/ui_shop_weapon_tab.png", tabCallback);
@@ -146,15 +146,15 @@ bool StoreInterface::init()
 
 void StoreInterface::update(float dt)
 {
-    SessionInfo &session = SessionInfo::Instance();
+    SessionInfo &session = SessionInfo::getInstance();
     
     int lastCoins =  std::stoi(_coinsText->getString());
-    int nowCoins = session.GetCoins();
+    int nowCoins = session.getCoins();
     if (lastCoins != nowCoins) {
         _coinsText->setString(std::to_string(nowCoins));
     }
     
-    Equip::Ptr ptr = Store::Instance().GetItemById(session.GetEquippedWeaponId());
+    Equip::Ptr ptr = Store::getInstance().getItemById(session.getEquippedWeaponId());
     EquipWeapon *wpn = EquipWeapon::cast(ptr);
     
     int lastDamage = std::stoi(_damageText->getString());
@@ -164,27 +164,27 @@ void StoreInterface::update(float dt)
     }
 }
 
-void StoreInterface::OnBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
+void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
-        SessionInfo &profile = SessionInfo::Instance();
-        Equip::Ptr ptr = Store::Instance().GetItemById(profile.GetEquippedWeaponId());
+        SessionInfo &profile = SessionInfo::getInstance();
+        Equip::Ptr ptr = Store::getInstance().getItemById(profile.getEquippedWeaponId());
         EquipWeapon *wpn = EquipWeapon::cast(ptr);
-        Utils::LuaSetGlobalInteger("PlayerTotalGoldPoints", profile.GetCoins());
-        Utils::LuaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->damage);
-        Utils::LuaSetGlobalInteger("PlayerBestResultGoldPoints", profile.GetBestScore().coins);
-        Utils::LuaSetGlobalInteger("PlayerBestResultKillPoints", profile.GetBestScore().kills);
+        misc::luaSetGlobalInteger("PlayerTotalGoldPoints", profile.getCoins());
+        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->damage);
+        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", profile.getBestScore().coins);
+        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", profile.getBestScore().kills);
         
         cocos2d::Director *director = cocos2d::Director::getInstance();
-        std::string startSceneName = Utils::LuaGetGlobalString("StartScreenSceneName");
-        std::string resultSceneName = Utils::LuaGetGlobalString("ResultScreenSceneName");
+        std::string startSceneName = misc::luaGetGlobalString("StartScreenSceneName");
+        std::string resultSceneName = misc::luaGetGlobalString("ResultScreenSceneName");
         if (_prevSceneName == startSceneName) {
-            auto scene = Utils::MakeSceneFromLua("CreateStartscreenScene");
+            auto scene = misc::makeSceneFromLua("CreateStartscreenScene");
             auto trans = cocos2d::TransitionSlideInL::create(0.3f, scene);
             director->replaceScene(trans);
         } else if (_prevSceneName == resultSceneName) {
-            auto scene = Utils::MakeSceneFromLua("CreateResultScene");
+            auto scene = misc::makeSceneFromLua("CreateResultScene");
             auto trans = cocos2d::TransitionSlideInL::create(0.3f, scene);
             director->replaceScene(trans);
         } else {
@@ -193,7 +193,7 @@ void StoreInterface::OnBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
     }
 }
 
-void StoreInterface::OnCategoryChanged(Category tab)
+void StoreInterface::onCategoryChanged(Category tab)
 {
     for (auto b : _tabButtons) {
         if (b->getTag() != tab) {
@@ -202,13 +202,13 @@ void StoreInterface::OnCategoryChanged(Category tab)
     }
     switch (tab) {
         case Category::WEAPON:
-            FillScrollerWithWeapons();
+            fillScrollerWithWeapons();
             break;
         case Category::ARMOR:
-            FillScrollerWithArmors();
+            fillScrollerWithArmors();
             break;
         case Category::BOOSTERS:
-            FillScrollerWithBoosters();
+            fillScrollerWithBoosters();
             break;
         default:
             _scroller->removeAllItems();
@@ -217,12 +217,12 @@ void StoreInterface::OnCategoryChanged(Category tab)
     }
 }
 
-void StoreInterface::FillScrollerWithWeapons()
+void StoreInterface::fillScrollerWithWeapons()
 {
     _scroller->removeAllItems();
     
-    Store &store = Store::Instance();
-    Store::Items items = store.GetWeaponItems();
+    Store &store = Store::getInstance();
+    Store::Items items = store.getWeaponItems();
     
     for (auto item : items) {
         StoreWeaponWidget *widget = nullptr;
@@ -234,12 +234,12 @@ void StoreInterface::FillScrollerWithWeapons()
     _scroller->jumpToTop();
 }
 
-void StoreInterface::FillScrollerWithArmors()
+void StoreInterface::fillScrollerWithArmors()
 {
     _scroller->removeAllItems();
 }
 
-void StoreInterface::FillScrollerWithBoosters()
+void StoreInterface::fillScrollerWithBoosters()
 {
     _scroller->removeAllItems();
 }

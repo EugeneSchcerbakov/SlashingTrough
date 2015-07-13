@@ -25,8 +25,8 @@ protected:
     void update(float dt);
     
 private:
-    void OnBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
-    static std::string ChooseSpeedLabel(float speed);
+    void onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
+    static std::string chooseSpeedLabel(float speed);
     
     Equip::WeakPtr _item;
     StoreItemButton *_button;

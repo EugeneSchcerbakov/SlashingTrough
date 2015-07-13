@@ -98,7 +98,7 @@ bool StoreWeaponWidget::init()
     damage->addChild(damageIcon);
     damage->addChild(damageText);
     
-    std::string speedLabel = ChooseSpeedLabel(weapon->speed);
+    std::string speedLabel = chooseSpeedLabel(weapon->speed);
     
     auto speed = cocos2d::ui::Text::create();
     speed->setFontName("font_prototype.ttf");
@@ -125,7 +125,7 @@ bool StoreWeaponWidget::init()
     _button = StoreItemButton::create();
     _button->setPositionX(getContentSize().width - _button->getContentSize().width * 0.5f);
     _button->setPositionY(_button->getContentSize().height * 0.5f);
-    _button->addTouchEventListener(CC_CALLBACK_2(StoreWeaponWidget::OnBuyPressed, this));
+    _button->addTouchEventListener(CC_CALLBACK_2(StoreWeaponWidget::onBuyPressed, this));
     _button->setPrice(weapon->price);
     _button->switchState(StoreItemButton::State::BUY);
 
@@ -142,41 +142,41 @@ bool StoreWeaponWidget::init()
 void StoreWeaponWidget::update(float dt)
 {
     Equip::Ptr ptr = _item.lock();
-    SessionInfo &save = SessionInfo::Instance();
+    SessionInfo &save = SessionInfo::getInstance();
     
-    if (save.IsEquipOwned(ptr->id) && !save.IsWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIP))
+    if (save.isEquipOwned(ptr->id) && !save.isWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIP))
     {
         _button->switchState(StoreItemButton::State::EQUIP);
     }
-    if (save.IsWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIPPED))
+    if (save.isWeaponEquipped(ptr->id) && !_button->isState(StoreItemButton::State::EQUIPPED))
     {
         _button->switchState(StoreItemButton::State::EQUIPPED);
     }
 }
 
-void StoreWeaponWidget::OnBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
+void StoreWeaponWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
         Equip::Ptr ptr = _item.lock();
-        SessionInfo &profile = SessionInfo::Instance();
+        SessionInfo &profile = SessionInfo::getInstance();
         
         bool needSave = false;
-        if (!profile.IsEquipOwned(ptr->id)) {
-            Store::Instance().Buy(ptr->id);
+        if (!profile.isEquipOwned(ptr->id)) {
+            Store::getInstance().buy(ptr->id);
             needSave = true;
-        } else if (!profile.IsWeaponEquipped(ptr->id)) {
-            profile.EquipWeapon(ptr);
+        } else if (!profile.isWeaponEquipped(ptr->id)) {
+            profile.equipWeapon(ptr);
             needSave = true;
         }
         
         if (needSave) {
-            profile.Save();
+            profile.save();
         }
     }
 }
 
-std::string StoreWeaponWidget::ChooseSpeedLabel(float speed)
+std::string StoreWeaponWidget::chooseSpeedLabel(float speed)
 {
     const float fast = 0.2f;
     const float medi = 0.45f;

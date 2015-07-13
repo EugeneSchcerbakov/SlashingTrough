@@ -30,7 +30,7 @@ GameInterface::~GameInterface()
 {
 }
 
-void GameInterface::SetTimeScaleLabel(float timeScale)
+void GameInterface::setTimeScaleLabel(float timeScale)
 {
     std::string label = cocos2d::StringUtils::format("x%.1f", timeScale);
     
@@ -51,31 +51,31 @@ void GameInterface::SetTimeScaleLabel(float timeScale)
     }
 }
 
-void GameInterface::SetGoldPointsLabel(int value)
+void GameInterface::setGoldPointsLabel(int value)
 {
     std::string str = cocos2d::StringUtils::format("%d", value);
     _goldPointsText->setString(str);
 }
 
-void GameInterface::SetKillPointsLabel(int value)
+void GameInterface::setKillPointsLabel(int value)
 {
     std::string str = cocos2d::StringUtils::format("%d", value);
     _killPointsText->setString(str);
 }
 
-void GameInterface::SetDamagePointsLabel(int value)
+void GameInterface::setDamagePointsLabel(int value)
 {
     std::string str = cocos2d::StringUtils::format("%d", value);
     _damagePointsText->setString(str);
 }
 
-void GameInterface::SetHealthPointsLabel(int value)
+void GameInterface::setHealthPointsLabel(int value)
 {
     std::string str = cocos2d::StringUtils::format("%d%%", value);
     _healthPointsText->setString(str);
 }
 
-void GameInterface::SetStaminaPoints(float value)
+void GameInterface::setStaminaPoints(float value)
 {
     _staminaBar->setProgress(value);
 }
@@ -182,7 +182,7 @@ bool GameInterface::init()
     _staminaBar = StaminaBarWidget::create();
     _staminaBar->setPositionX(screen.width * 0.5f);
     _staminaBar->setPositionY(_staminaBar->getContentSize().height * 0.5f + 15.0f);
-    _staminaBar->setProgress(0.8f);
+    _staminaBar->setProgress(1.0f);
     
     addChild(_staminaBar);
     addChild(goldPointsBack);
@@ -191,11 +191,13 @@ bool GameInterface::init()
     addChild(healthPointsBack);
     addChild(_timeScaleText);
     
-    goldPointsBack->setVisible(GameInfo::Instance().GetBool("GOLD_POINTS_VISIBILITY"));
-    killPointsBack->setVisible(GameInfo::Instance().GetBool("KILL_POINTS_VISIBILITY"));
-    damagePointsBack->setVisible(GameInfo::Instance().GetBool("DAMAGE_POINTS_VISIBILITY"));
-    healthPointsBack->setVisible(GameInfo::Instance().GetBool("HEALTH_POINTS_VISIBILITY"));
-    _staminaBar->setVisible(GameInfo::Instance().GetBool("STAMINA_BAR_VISIBILITY"));
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
+    goldPointsBack->setVisible(gameinfo.getBool("GOLD_POINTS_VISIBILITY"));
+    killPointsBack->setVisible(gameinfo.getBool("KILL_POINTS_VISIBILITY"));
+    damagePointsBack->setVisible(gameinfo.getBool("DAMAGE_POINTS_VISIBILITY"));
+    healthPointsBack->setVisible(gameinfo.getBool("HEALTH_POINTS_VISIBILITY"));
+    _staminaBar->setVisible(gameinfo.getBool("STAMINA_BAR_VISIBILITY"));
     
     return true;
 }

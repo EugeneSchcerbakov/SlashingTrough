@@ -10,8 +10,8 @@
 #define __SlashingTrough__GameInfo__
 
 #include <vector>
-#include <string>
-#include <map>
+
+#include "VariablesSet.h"
 
 class GameInfo
 {
@@ -80,33 +80,30 @@ public:
     typedef std::map<std::string, EnemyType> EnemiesSettings;
     
 public:
-    static GameInfo& Instance();
+    static GameInfo& getInstance();
     
-    bool LoadInfo(const std::string &filename);
+    bool loadInfo(const std::string &filename);
     
-    int GetInt(const std::string &name, int def = 0) const;
-    bool GetBool(const std::string &name, bool def = false) const;
-    float GetFloat(const std::string &name, float def = 0.0f) const;
-    std::string GetString(const std::string &name, std::string def = "") const;
+    int getInt(const std::string &name, int def = 0) const;
+    bool getBool(const std::string &name, bool def = false) const;
+    float getFloat(const std::string &name, float def = 0.0f) const;
+    std::string getString(const std::string &name, std::string def = "") const;
     
-    void SetInt(const std::string &name, int value);
-    void SetBool(const std::string &name, bool value);
-    void SetFloat(const std::string &name, float value);
-    void SetString(const std::string &name, const std::string &value);
+    void setInt(const std::string &name, int value);
+    void setBool(const std::string &name, bool value);
+    void setFloat(const std::string &name, float value);
+    void setString(const std::string &name, const std::string &value);
     
-    const ObstacleType& GetObstacleInfoByName(const std::string &name) const;
-    const EnemyType& GetEnemyInfoByName(const std::string &name) const;
+    const ObstacleType& getObstacleInfoByName(const std::string &name) const;
+    const EnemyType& getEnemyInfoByName(const std::string &name) const;
     
-    GameplayObjectsTypes GetObstaclesTypes() const;
-    GameplayObjectsTypes GetEnemiesTypes() const;
+    GameplayObjectsTypes getObstaclesTypes() const;
+    GameplayObjectsTypes getEnemiesTypes() const;
     
-    const DiffucultSettings& GetDiffucultSettings() const;
+    const DiffucultSettings& getDiffucultSettings() const;
     
 private:
-    std::map<std::string, int> _variablesInt;
-    std::map<std::string, float> _variablesFloat;
-    std::map<std::string, std::string> _variablesStr;
-    
+    VariablesSet _variables;
     DiffucultSettings _diffucultSettings;
     ObstaclesSettings _obstaclesSettings;
     EnemiesSettings _enemiesSettings;

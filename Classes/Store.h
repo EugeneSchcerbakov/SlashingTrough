@@ -21,18 +21,18 @@ public:
     typedef std::vector<Equip::Ptr> Items;
     
 public:
-    static Store& Instance();
+    static Store& getInstance();
     
-    void LoadStore(const std::string &filename);
-    void Buy(const std::string &id);
+    void loadStore(const std::string &filename);
+    void buy(const std::string &id);
     
-    Equip::Ptr GetItemById(const std::string &id) const;
+    Equip::Ptr getItemById(const std::string &id) const;
     
-    const Items& GetAllItems() const;
-    Items GetWeaponItems() const;
+    const Items& getAllItems() const;
+    Items getWeaponItems() const;
     
 private:
-    void Reset();
+    void reset();
     
     Items _items;
 };

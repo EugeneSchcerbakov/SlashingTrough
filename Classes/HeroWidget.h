@@ -2,53 +2,45 @@
 //  HeroWidget.h
 //  SlashingTrough
 //
-//  Created by Eugene Shcherbakov on 06/04/15.
+//  Created by Eugene Shcherbakov on 11/07/15.
 //
 //
 
 #ifndef __SlashingTrough__HeroWidget__
 #define __SlashingTrough__HeroWidget__
 
-#include "cocos2d.h"
-#include "2d/CCMotionStreak.h"
+#include <cocos2d.h>
 
 #include "Hero.h"
-#include "PathSectorWidget.h"
 
-class GameField;
+enum class SwordSide {
+    LEFT,
+    RIGHT
+};
+
+struct SwordTrans
+{
+    cocos2d::Vec2 pos;
+    float angle;
+    SwordTrans(cocos2d::Vec2 p, float a)
+    : pos(p)
+    , angle(a)
+    {}
+};
 
 class HeroWidget : public cocos2d::Node
 {
 public:
-    enum class SwordSide
-    {
-        LEFT,
-        RIGHT
-    };
-    
-public:
-    static HeroWidget* create(GameplayObject::WeakPtr hero, GameField *gamefield);
-    
-    void RefreshSectorsSequence(PathSectorWidget::SectorsSequence &sectors);
-    void RunEffectReceiveDamage();
-    void RunEffectSwordTrail(float duration);
-    
-    GameplayObject::WeakPtr GetHero() const;
-    
-    SwordSide GetSwordSide() const;
+    static HeroWidget* create(Hero *hero);
     
 protected:
-    HeroWidget(GameplayObject::WeakPtr Hero, GameField *gamefield);
+    HeroWidget(Hero *hero);
     virtual ~HeroWidget();
     
     bool init();
     void update(float dt);
-    
-    void Attack();
-    void PerformAction(const HeroAction &action);
-    
-    cocos2d::FiniteTimeAction* HorizontalMotion(float deltaX, float deltaY, float time);
-    cocos2d::FiniteTimeAction* HorizontalAttack(float attackTime = 0.0f);
+    void runSwordTrailEffect(float duration);
+    void acceptEvent(const Event &event);
     
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeRight(float duration);
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeLeft(float duration);
@@ -56,38 +48,20 @@ protected:
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeLeft(float duration);
     
 private:
-    struct SwordTransform
-    {
-        cocos2d::Vec2 localPos;
-        float angle;
-        
-        SwordTransform(cocos2d::Vec2 p, float a)
-        : localPos(p)
-        , angle(a)
-        {}
-        SwordTransform()
-        {}
-    };
-
-private:
-    static const SwordTransform _swordRightSideTrans;
-    static const SwordTransform _swordLeftSideTrans;
+    static const SwordTrans _swordRightTrans;
+    static const SwordTrans _swordLeftTrans;
     
-    GameField *_gamefield;
-    GameplayObject::WeakPtr _hero;
-    PathSectorWidget::SectorsSequence *_sectors;
+    static void accepter(const Event &event, void *param);
     
-    cocos2d::Node *_bodyControlNode; // all rotations performed by this node
-    cocos2d::Sprite *_sword;
-    cocos2d::DrawNode *_body;
-    cocos2d::DrawNode *_bodyBorder;
-    cocos2d::MotionStreak *_trail;
+    Hero *_hero;
     
     SwordSide _swordSide;
     
-    float _lastStamina;
-    int _attackedRowIndex;
-    bool _isGameplayActionRunning;
+    cocos2d::DrawNode *_body;
+    cocos2d::DrawNode *_bodyBorder;
+    cocos2d::Node *_bodyController;
+    cocos2d::Sprite *_sword;
+    cocos2d::MotionStreak *_swordTrail;
 };
 
 #endif /* defined(__SlashingTrough__HeroWidget__) */

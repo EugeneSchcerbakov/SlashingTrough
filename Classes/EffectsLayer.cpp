@@ -48,7 +48,7 @@ EffectsLayer::EffectsLayer()
 {
 }
 
-void EffectsLayer::AddEffect(Effect *effect)
+void EffectsLayer::addEffect(Effect *effect)
 {
     if (!effect) {
         CC_ASSERT(false);

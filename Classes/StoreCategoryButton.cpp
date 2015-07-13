@@ -60,9 +60,9 @@ bool CategoryButton::init(const std::string &icon)
         
     cocos2d::EventListenerTouchOneByOne *listener;
     listener = cocos2d::EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = CC_CALLBACK_2(CategoryButton::OnTouchBegan, this);
-    listener->onTouchEnded = CC_CALLBACK_2(CategoryButton::OnTouchEnded, this);
-    listener->onTouchCancelled = CC_CALLBACK_2(CategoryButton::OnTouchCancelled, this);
+    listener->onTouchBegan = CC_CALLBACK_2(CategoryButton::onTouchBegan, this);
+    listener->onTouchEnded = CC_CALLBACK_2(CategoryButton::onTouchEnded, this);
+    listener->onTouchCancelled = CC_CALLBACK_2(CategoryButton::onTouchCancelled, this);
         
     auto director = cocos2d::Director::getInstance();
     auto dispatcher = director->getEventDispatcher();
@@ -76,7 +76,7 @@ bool CategoryButton::init(const std::string &icon)
     return true;
 }
     
-bool CategoryButton::OnTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
+bool CategoryButton::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     cocos2d::Vec2 worldPos = touch->getLocation();
     cocos2d::Vec2 localPos = convertToNodeSpace(worldPos);
@@ -89,7 +89,7 @@ bool CategoryButton::OnTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
     return false;
 }
     
-void CategoryButton::OnTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
+void CategoryButton::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     cocos2d::Vec2 worldPos = touch->getLocation();
     cocos2d::Vec2 localPos = convertToNodeSpace(worldPos);
@@ -103,7 +103,7 @@ void CategoryButton::OnTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
     }
 }
     
-void CategoryButton::OnTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
+void CategoryButton::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     setScale(_normalScale);
     _backing->setTexture(_selectTex);
