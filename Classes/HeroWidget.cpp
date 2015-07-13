@@ -137,26 +137,30 @@ void HeroWidget::runSwordTrailEffect(float duration)
 
 void HeroWidget::acceptEvent(const Event &event)
 {
-    if (event.is("SwipeRight")) {
-        float t = event.variables.getFloat("duration");
+	if (event.is("SwipeRight")) {
+		float bias = 0.01f;
+        float time = event.variables.getFloat("duration");
+		time -= time * bias;
         cocos2d::FiniteTimeAction *action;
         if (_swordSide == SwordSide::RIGHT) {
-            action = AnimSwordRightSwipeRight(t);
+			action = AnimSwordRightSwipeRight(time);
         } else if (_swordSide == SwordSide::LEFT) {
-            action = AnimSwordLeftSwipeRight(t);
+			action = AnimSwordLeftSwipeRight(time);
         }
         _bodyController->runAction(action);
-        runSwordTrailEffect(t);
+		runSwordTrailEffect(time);
     } else if (event.is("SwipeLeft")) {
-        float t = event.variables.getFloat("duration");
+		float bias = 0.01f;
+		float time = event.variables.getFloat("duration");
+		time -= time * bias;
         cocos2d::FiniteTimeAction *action;
         if (_swordSide == SwordSide::RIGHT) {
-            action = AnimSwordRightSwipeLeft(t);
+			action = AnimSwordRightSwipeLeft(time);
         } else if (_swordSide == SwordSide::LEFT) {
-            action = AnimSwordLeftSwipeLeft(t);
+			action = AnimSwordLeftSwipeLeft(time);
         }
         _bodyController->runAction(action);
-        runSwordTrailEffect(t);
+        runSwordTrailEffect(time);
     } else if (event.is("JumpBack")) {
 
     } else {
