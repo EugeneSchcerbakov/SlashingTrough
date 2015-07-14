@@ -14,9 +14,9 @@
 class HealthBar : public cocos2d::Node
 {
 public:
-    static HealthBar* create()
+    static HealthBar* create(int maxHp)
     {
-        HealthBar *widget = new HealthBar();
+        HealthBar *widget = new HealthBar(maxHp);
         if (widget && widget->init()) {
             widget->autorelease();
         } else {
@@ -26,30 +26,24 @@ public:
         return widget;
     }
     
+    static const float MAX_WIDTH_PX;
+    
     void refresh(int healthPoints)
     {
-        _healthPoints = healthPoints;
+        _curHealthPoints = healthPoints;
         
-        cocos2d::Color4F barColor(0.75f, 0.0f, 0.0f, 1.0f);
+        float coeff = (float)_curHealthPoints / (float)_maxHealthPoints;
+        float width = MAX_WIDTH_PX * coeff;
         
-        float radius = 15.0f;
-        float w = radius * 2.0f;
-        float shiftX = 10.0f;
-        float totalWidth = w * healthPoints + shiftX * (healthPoints - 1);
-        float offset = (totalWidth - w) * 0.5f;
-        
-        _bar->clear();
-        
-        for (int k = 0; k < _healthPoints; ++k) {
-            float w = radius * 2.0f;
-            float x = w * k + shiftX * k;
-            _bar->drawSolidCircle(cocos2d::Vec2(x - offset, 0.0f), radius, 0.0f, 10, 1.0f, 1.0f, barColor);
-        }
+        auto *scale = cocos2d::ScaleTo::create(0.15f, width, 1.0f);
+        auto *ease = cocos2d::EaseSineInOut::create(scale);
+        _bar->runAction(ease);
     }
     
 protected:
-    HealthBar()
-    : _healthPoints(0)
+    HealthBar(int maxHp)
+    : _curHealthPoints(maxHp)
+    , _maxHealthPoints(maxHp)
     {
     }
     
@@ -63,17 +57,31 @@ protected:
             return false;
         }
         
+        const float barHeightPx = 16.0f;
+        
         _bar = cocos2d::DrawNode::create();
+        _bar->drawSolidRect(cocos2d::Vec2::ZERO, cocos2d::Vec2(1.0f, barHeightPx), cocos2d::Color4F::RED);
+        
         addChild(_bar);
+        scheduleUpdate();
         
         return true;
+    }
+    
+    void update(float dt)
+    {
+        float s = _bar->getScaleX();
+        setPositionX(-(s * 0.5f));
     }
     
 private:
     cocos2d::DrawNode *_bar;
     
-    int _healthPoints;
+    int _curHealthPoints;
+    const int _maxHealthPoints;
 };
+
+const float HealthBar::MAX_WIDTH_PX = 180.0f;
 
 // EnemyWidget implementation
 
@@ -116,7 +124,7 @@ bool EnemyWidget::init()
     _blood->setVisible(false);
     
     float healthBarYShift = 80.0f;
-    _healhBar = HealthBar::create();
+    _healhBar = HealthBar::create(_enemy->getHealth());
     _healhBar->refresh(_enemy->getHealth());
     _healhBar->setPositionY(healthBarYShift);
     
