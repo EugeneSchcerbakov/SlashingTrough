@@ -39,6 +39,7 @@ public:
     void setRunning(bool running);
     void setSideBorders(float left, float right);
     
+    float getSpeed() const;
     float getStamina() const;
     HeroAction* getLastAction() const;
     EquipWeapon* getWeapon() const;

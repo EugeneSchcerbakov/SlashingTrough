@@ -173,7 +173,6 @@ void HeroWidget::accepter(const Event &event, void *param)
     static_cast<HeroWidget *>(param)->acceptEvent(event);
 }
 
-
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)
 {
     // sword anim

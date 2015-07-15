@@ -17,6 +17,8 @@
 #include "ModelBase.h"
 #include "GameInfo.h"
 
+class Field;
+
 struct Square
 {
     int x;
@@ -41,7 +43,7 @@ public:
 public:
     FieldSector();
     
-    Entities generate(int squaresByHeight, const GameInfo::DifficultInfo difficult);
+    Entities generate(int squaresByHeight, const GameInfo::DifficultInfo difficult, Field *field);
     
     void reset();
     void setX(float x);

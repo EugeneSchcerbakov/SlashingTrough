@@ -41,6 +41,15 @@ public:
         {}
     };
     
+    struct ProjectileType
+    {
+        float healthDamage;
+        float staminaDamage;
+        float speed;
+        float lifeTime;
+        std::string texture;
+    };
+    
     struct ObstacleType
     {
         float health;
@@ -60,6 +69,18 @@ public:
     
     struct EnemyType
     {
+        struct RangeAttack
+        {
+            float distance;
+            float recoveryTime;
+            bool allowed;
+            ProjectileType projectile;
+            
+            RangeAttack()
+            : allowed(false)
+            {}
+        };
+        
         float damage;
         float health;
         float staminaDrainPoints;
@@ -69,9 +90,14 @@ public:
         int scorePointsReward;
         int staminaPointsReward;
         
+        bool allowRangeAttack;
+        
+        RangeAttack rangeAttack;
+        
         std::string sprite;
         
-        EnemyType() {}
+        EnemyType()
+        {}
     };
     
     typedef std::vector<DifficultInfo> DiffucultSettings;

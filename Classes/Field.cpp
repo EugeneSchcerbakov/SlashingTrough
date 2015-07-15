@@ -140,7 +140,7 @@ void Field::pushFrontSector(bool empty)
     }
     
     FieldSector::Ptr sector = FieldSector::create();
-    auto content = sector->generate(_sectorSquaresByY, difficult);
+    auto content = sector->generate(_sectorSquaresByY, difficult, this);
     
     // place sector to field
     float ypos = 0.0f;

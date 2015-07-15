@@ -94,6 +94,7 @@ bool GameInfo::loadInfo(const std::string &filename)
                 std::string name = elem->Attribute("name");
                 _obstaclesSettings[name] = info;
             } else if (type == "Enemy") {
+                tinyxml2::XMLElement *rangeAttackInfo = elem->FirstChildElement("AttackRanged");
                 EnemyType info;
                 info.damage = elem->FloatAttribute("damage");
                 info.health = elem->FloatAttribute("health");
@@ -104,6 +105,16 @@ bool GameInfo::loadInfo(const std::string &filename)
                 info.scorePointsReward = elem->IntAttribute("scorePointsReward");
                 info.sprite = elem->Attribute("sprite");
                 std::string name = elem->Attribute("name");
+                if (rangeAttackInfo) {
+                    info.rangeAttack.distance = rangeAttackInfo->FloatAttribute("distance");
+                    info.rangeAttack.recoveryTime = rangeAttackInfo->FloatAttribute("recoveryTime");
+                    info.rangeAttack.projectile.healthDamage = rangeAttackInfo->FloatAttribute("healthDamage");
+                    info.rangeAttack.projectile.staminaDamage = rangeAttackInfo->FloatAttribute("staminaDamage");
+                    info.rangeAttack.projectile.speed = rangeAttackInfo->FloatAttribute("projectileSpeed");
+                    info.rangeAttack.projectile.lifeTime = rangeAttackInfo->FloatAttribute("projectileLifeTime");
+                    info.rangeAttack.projectile.texture = rangeAttackInfo->Attribute("projectileTexture");
+                    info.rangeAttack.allowed = true;
+                }
                 _enemiesSettings[name] = info;
             } else {
                 CC_ASSERT(false);

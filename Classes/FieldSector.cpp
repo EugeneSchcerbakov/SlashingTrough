@@ -9,6 +9,7 @@
 #include "FieldSector.h"
 #include "Obstacle.h"
 #include "Enemy.h"
+#include "Field.h"
 
 FieldSector::Ptr FieldSector::create()
 {
@@ -26,7 +27,7 @@ FieldSector::FieldSector()
 {
 }
 
-Entities FieldSector::generate(int squaresByHeight, const GameInfo::DifficultInfo difficult)
+Entities FieldSector::generate(int squaresByHeight, const GameInfo::DifficultInfo difficult, Field *field)
 {
     GameInfo &gameinfo = GameInfo::getInstance();
     
@@ -62,7 +63,7 @@ Entities FieldSector::generate(int squaresByHeight, const GameInfo::DifficultInf
                 entity = new Obstacle(gameinfo.getObstacleInfoByName(info.name));
                 break;
             case Entity::Type::ENEMY:
-                entity = new Enemy(gameinfo.getEnemyInfoByName(info.name));
+                entity = new Enemy(gameinfo.getEnemyInfoByName(info.name), field);
                 break;
             default:
                 break;

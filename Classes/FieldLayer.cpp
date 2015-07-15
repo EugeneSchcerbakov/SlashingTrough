@@ -134,6 +134,10 @@ void FieldLayer::acceptEvent(const Event &event)
                 auto enemy = dynamic_cast<Enemy *>(entity);
                 auto widget = EnemyWidget::create(enemy, _effectsOnField);
                 _fieldScroller->addChild(widget, 2, uid);
+            } else if (type == Entity::Type::PROJECTILE) {
+                auto proj = dynamic_cast<Projectile *>(entity);
+                auto widget = ProjectileWidget::create(proj);
+                _fieldScroller->addChild(widget, 10, uid);
             }
         } else {
             CC_ASSERT(false);

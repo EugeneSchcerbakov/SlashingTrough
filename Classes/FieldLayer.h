@@ -15,6 +15,7 @@
 
 #include "FieldSectorWidget.h"
 #include "HeroWidget.h"
+#include "ProjectileWidget.h"
 #include "ObstacleWidget.h"
 #include "EnemyWidget.h"
 

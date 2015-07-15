@@ -219,6 +219,11 @@ void Hero::setSideBorders(float left, float right)
     _rightSideBorder = right;
 }
 
+float Hero::getSpeed() const
+{
+    return _runningSpeed;
+}
+
 float Hero::getStamina() const
 {
     return _staminaPoints;

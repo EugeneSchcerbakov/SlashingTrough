@@ -126,6 +126,10 @@
 		CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC8811F1B516C2300030818 /* HeroWidget.cpp */; };
 		CDC881251B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
 		CDC881261B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
+		CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
+		CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
+		CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
+		CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
@@ -308,6 +312,10 @@
 		CDC881201B516C2300030818 /* HeroWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroWidget.h; sourceTree = "<group>"; };
 		CDC881231B51808300030818 /* HeroAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroAction.cpp; sourceTree = "<group>"; };
 		CDC881241B51808300030818 /* HeroAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAction.h; sourceTree = "<group>"; };
+		CDC9DE751B557F55006F53F6 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		CDC9DE761B557F55006F53F6 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
+		CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileWidget.cpp; sourceTree = "<group>"; };
+		CDC9DE7A1B558478006F53F6 /* ProjectileWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileWidget.h; sourceTree = "<group>"; };
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -546,6 +554,8 @@
 				CD637E791B234458002F98EF /* Equipment.h */,
 				CDC520861B54238700732FD0 /* WeaponAbilities.cpp */,
 				CDC520871B54238700732FD0 /* WeaponAbilities.h */,
+				CDC9DE751B557F55006F53F6 /* Projectile.cpp */,
+				CDC9DE761B557F55006F53F6 /* Projectile.h */,
 				CDC5E6201B52930F000756EB /* Obstacle.cpp */,
 				CDC5E6211B52930F000756EB /* Obstacle.h */,
 				CDC5E6291B52D564000756EB /* Enemy.cpp */,
@@ -586,6 +596,8 @@
 		CDC880F91B513BEE00030818 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */,
+				CDC9DE7A1B558478006F53F6 /* ProjectileWidget.h */,
 				CDC5E6241B529EB8000756EB /* ObstacleWidget.cpp */,
 				CDC5E6251B529EB8000756EB /* ObstacleWidget.h */,
 				CDC5E62D1B52D735000756EB /* EnemyWidget.cpp */,
@@ -808,6 +820,7 @@
 				CDC8810D1B514AAA00030818 /* FieldLayer.cpp in Sources */,
 				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC881151B5155F700030818 /* ModelBase.cpp in Sources */,
+				CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */,
@@ -821,6 +834,7 @@
 				CDC520841B54214100732FD0 /* EffectEnemyDeath.cpp in Sources */,
 				CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CDC881211B516C2300030818 /* HeroWidget.cpp in Sources */,
+				CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
@@ -846,6 +860,7 @@
 				CDC8811A1B515A2100030818 /* FieldSectorWidget.cpp in Sources */,
 				CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
 				CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
+				CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */,
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
@@ -856,6 +871,7 @@
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
+				CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDC8811E1B51664800030818 /* Hero.cpp in Sources */,
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,

@@ -17,7 +17,7 @@
 class Entity;
 
 typedef unsigned int Uid;
-typedef std::vector<Entity *> Entities;
+typedef std::list<Entity *> Entities;
 
 class Event
 {
@@ -61,7 +61,8 @@ public:
         NONE,
         HERO,
         ENEMY,
-        OBSTACLE
+        OBSTACLE,
+        PROJECTILE
     };
     
 public:
