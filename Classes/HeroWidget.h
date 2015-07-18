@@ -39,6 +39,7 @@ protected:
     
     bool init();
     void update(float dt);
+	void removeAllAnimations();
     void runSwordTrailEffect(float duration);
     void acceptEvent(const Event &event);
     
@@ -46,6 +47,8 @@ protected:
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeLeft(float duration);
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeRight(float duration);
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeLeft(float duration);
+	cocos2d::FiniteTimeAction *AnimBodySwipeRight(float duration);
+	cocos2d::FiniteTimeAction *AnimBodySwipeLeft(float duration);
     
 private:
     static const SwordTrans _swordRightTrans;
@@ -56,6 +59,7 @@ private:
     Hero *_hero;
     
     SwordSide _swordSide;
+	SwordSide _nextSwordSide;
     
     cocos2d::DrawNode *_body;
     cocos2d::DrawNode *_bodyBorder;

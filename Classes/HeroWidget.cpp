@@ -75,6 +75,7 @@ bool HeroWidget::init()
     _swordTrail->setOpacity(0);
     
     _swordSide = SwordSide::RIGHT;
+	_nextSwordSide = _swordSide;
     
     addChild(_bodyController, 0);
     addChild(_swordTrail, 1);
@@ -104,6 +105,17 @@ void HeroWidget::update(float dt)
         
         _swordTrail->setPosition(convertToNodeSpace(world));
     }
+}
+
+void HeroWidget::removeAllAnimations()
+{
+	auto actionMgr = cocos2d::Director::getInstance()->getActionManager();
+	if (actionMgr->getNumberOfRunningActionsInTarget(_bodyController) > 0){
+		actionMgr->removeAllActionsFromTarget(_bodyController);
+	}
+	if (actionMgr->getNumberOfRunningActionsInTarget(_sword) > 0) {
+		actionMgr->removeAllActionsFromTarget(_sword);
+	}
 }
 
 void HeroWidget::runSwordTrailEffect(float duration)
@@ -138,29 +150,41 @@ void HeroWidget::runSwordTrailEffect(float duration)
 void HeroWidget::acceptEvent(const Event &event)
 {
 	if (event.is("SwipeRight")) {
-		float bias = 0.01f;
-        float time = event.variables.getFloat("duration");
-		time -= time * bias;
-        cocos2d::FiniteTimeAction *action;
+		removeAllAnimations();
+		if (_swordSide != _nextSwordSide) {
+			_swordSide = _nextSwordSide;
+		}
+		float time = event.variables.getFloat("duration");
         if (_swordSide == SwordSide::RIGHT) {
-			action = AnimSwordRightSwipeRight(time);
+			auto bodyAction = AnimBodySwipeRight(time);
+			auto swordAction = AnimSwordRightSwipeRight(time);
+			_sword->runAction(swordAction);
+			_bodyController->runAction(bodyAction);
+			_nextSwordSide = SwordSide::RIGHT;
         } else if (_swordSide == SwordSide::LEFT) {
-			action = AnimSwordLeftSwipeRight(time);
+			auto swordAction = AnimSwordLeftSwipeRight(time);
+			_sword->runAction(swordAction);
+			_nextSwordSide = SwordSide::RIGHT;
         }
-        _bodyController->runAction(action);
 		runSwordTrailEffect(time);
     } else if (event.is("SwipeLeft")) {
-		float bias = 0.01f;
+		removeAllAnimations();
+		if (_swordSide != _nextSwordSide) {
+			_swordSide = _nextSwordSide;
+		}
 		float time = event.variables.getFloat("duration");
-		time -= time * bias;
-        cocos2d::FiniteTimeAction *action;
         if (_swordSide == SwordSide::RIGHT) {
-			action = AnimSwordRightSwipeLeft(time);
+			auto swordAction = AnimSwordRightSwipeLeft(time);
+			_sword->runAction(swordAction);
+			_nextSwordSide = SwordSide::LEFT;
         } else if (_swordSide == SwordSide::LEFT) {
-			action = AnimSwordLeftSwipeLeft(time);
+			auto bodyAction = AnimBodySwipeLeft(time);
+			auto swordAction = AnimSwordLeftSwipeLeft(time);
+			_sword->runAction(swordAction);
+			_bodyController->runAction(bodyAction);
+			_nextSwordSide = SwordSide::LEFT;
         }
-        _bodyController->runAction(action);
-        runSwordTrailEffect(time);
+		runSwordTrailEffect(time);
     } else if (event.is("JumpBack")) {
 
     } else {
@@ -176,61 +200,56 @@ void HeroWidget::accepter(const Event &event, void *param)
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)
 {
     // sword anim
-    cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
-    cocos2d::RotateBy *sword_rotate1 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);
-    cocos2d::Sequence *sword_rotate = cocos2d::Sequence::create(sword_rotate0, sword_rotate1, nullptr);
-    _sword->runAction(sword_rotate);
-    // body anim
-    cocos2d::RotateBy *rotate = cocos2d::RotateBy::create(duration, -360.0f);
-    cocos2d::EaseSineInOut *rotate_ease = cocos2d::EaseSineInOut::create(rotate);
-    cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT;});
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(rotate_ease, func, nullptr);
-    return anim;
+	auto sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
+	auto sword_rotate1 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);
+	auto sword_rotate = cocos2d::Sequence::create(sword_rotate0, sword_rotate1, nullptr);
+    return sword_rotate;
 }
 
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeLeft(float duration)
 {
     // sword anim
-    cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordLeftTrans.pos);
-    cocos2d::RotateBy *sword_rotate = cocos2d::RotateBy::create(duration, -320.0f);
-    cocos2d::EaseSineInOut *sword_move_ease = cocos2d::EaseSineInOut::create(sword_move);
-    cocos2d::EaseSineInOut *sword_rotate_ease = cocos2d::EaseSineInOut::create(sword_rotate);
-    cocos2d::Spawn *sword_anim = cocos2d::Spawn::create(sword_move_ease, sword_rotate_ease, nullptr);
-    _sword->runAction(sword_anim);
-    // no body anim
-    cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::LEFT;});
-    cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(wait, func, nullptr);
-    return anim;
+	auto sword_move = cocos2d::MoveTo::create(duration, _swordLeftTrans.pos);
+	auto sword_rotate = cocos2d::RotateBy::create(duration, -320.0f);
+	auto sword_move_ease = cocos2d::EaseSineInOut::create(sword_move);
+	auto sword_rotate_ease = cocos2d::EaseSineInOut::create(sword_rotate);
+	auto sword_anim = cocos2d::Spawn::create(sword_move_ease, sword_rotate_ease, nullptr);
+    return sword_anim;
 }
 
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeRight(float duration)
 {
     // sword anim
-    cocos2d::MoveTo *sword_move = cocos2d::MoveTo::create(duration, _swordRightTrans.pos);
-    cocos2d::RotateBy *sword_rotate = cocos2d::RotateBy::create(duration, 320.0f);
-    cocos2d::EaseSineInOut *sword_move_ease = cocos2d::EaseSineInOut::create(sword_move);
-    cocos2d::EaseSineInOut *sword_rotate_ease = cocos2d::EaseSineInOut::create(sword_rotate);
-    cocos2d::Spawn *sword_anim = cocos2d::Spawn::create(sword_move_ease, sword_rotate_ease, nullptr);
-    _sword->runAction(sword_anim);
-    // no body anim
-    cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT;});
-    cocos2d::DelayTime *wait = cocos2d::DelayTime::create(duration);
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(wait, func, nullptr);
-    return anim;
+	auto sword_move = cocos2d::MoveTo::create(duration, _swordRightTrans.pos);
+	auto sword_rotate = cocos2d::RotateBy::create(duration, 320.0f);
+	auto sword_move_ease = cocos2d::EaseSineInOut::create(sword_move);
+	auto sword_rotate_ease = cocos2d::EaseSineInOut::create(sword_rotate);
+	auto sword_anim = cocos2d::Spawn::create(sword_move_ease, sword_rotate_ease, nullptr);
+    return sword_anim;
 }
 
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
 {
-    // sword anim
-    cocos2d::RotateBy *sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);
-    cocos2d::RotateBy *sword_rotate1 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
-    cocos2d::Sequence *sword_rotate = cocos2d::Sequence::create(sword_rotate0, sword_rotate1, nullptr);
-    _sword->runAction(sword_rotate);
-    // body anim
-    cocos2d::RotateBy *rotate = cocos2d::RotateBy::create(duration, 360.0f);
-    cocos2d::EaseSineInOut *rotate_ease = cocos2d::EaseSineInOut::create(rotate);
-    cocos2d::CallFunc *func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::LEFT;});
-    cocos2d::Sequence *anim = cocos2d::Sequence::create(rotate_ease, func, nullptr);
-    return anim;
+	auto sword_rotate0 = cocos2d::RotateBy::create(duration*0.5f, 60.0f);
+	auto sword_rotate1 = cocos2d::RotateBy::create(duration*0.5f, -60.0f);
+	auto sword_rotate = cocos2d::Sequence::create(sword_rotate0, sword_rotate1, nullptr);
+    return sword_rotate;
+}
+
+cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeRight(float duration)
+{
+	auto rotate = cocos2d::RotateBy::create(duration, -360.0f);
+	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+	auto func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT; });
+	auto anim = cocos2d::Sequence::create(rotate_ease, nullptr);
+	return anim;
+}
+
+cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeLeft(float duration)
+{
+	auto rotate = cocos2d::RotateBy::create(duration, 360.0f);
+	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+	auto func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::LEFT; });
+	auto anim = cocos2d::Sequence::create(rotate_ease, nullptr);
+	return anim;
 }
