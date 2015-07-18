@@ -11,6 +11,9 @@
 #include "Enemy.h"
 #include "Field.h"
 
+#include <stdlib.h>
+#include <math.h>
+
 FieldSector::Ptr FieldSector::create()
 {
     return std::make_shared<FieldSector>();

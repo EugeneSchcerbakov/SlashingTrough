@@ -9,6 +9,8 @@
 #include "Obstacle.h"
 #include "Hero.h"
 
+#include <math.h>
+
 Obstacle::Obstacle(const GameInfo::ObstacleType &type)
 : Entity(Entity::Type::OBSTACLE)
 , Reward(type.killPoints, type.goldPointsReward,

@@ -9,6 +9,8 @@
 #include "Projectile.h"
 #include "Hero.h"
 
+#include <math.h>
+
 Projectile::Projectile(const GameInfo::ProjectileType &projectile, float x, float y, float dx, float dy)
 : Entity(Entity::Type::PROJECTILE)
 , _dx(dx)

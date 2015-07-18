@@ -11,6 +11,8 @@
 #include "Field.h"
 #include "Projectile.h"
 
+#include <math.h>
+
 Enemy::Enemy(const GameInfo::EnemyType &type, Field *field)
 : Entity(Entity::Type::ENEMY)
 , Reward(type.killPoints, type.goldPointsReward,

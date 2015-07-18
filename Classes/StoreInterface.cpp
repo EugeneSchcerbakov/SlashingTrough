@@ -148,19 +148,19 @@ void StoreInterface::update(float dt)
 {
     SessionInfo &session = SessionInfo::getInstance();
     
-    int lastCoins =  std::stoi(_coinsText->getString());
+    int lastCoins =  atoi(_coinsText->getString().c_str());
     int nowCoins = session.getCoins();
     if (lastCoins != nowCoins) {
-        _coinsText->setString(std::to_string(nowCoins));
+        _coinsText->setString(cocos2d::StringUtils::toString(nowCoins));
     }
     
     Equip::Ptr ptr = Store::getInstance().getItemById(session.getEquippedWeaponId());
     EquipWeapon *wpn = EquipWeapon::cast(ptr);
     
-    int lastDamage = std::stoi(_damageText->getString());
+    int lastDamage = atoi(_damageText->getString().c_str());
     int nowDamage = wpn->damage;
     if (lastDamage != nowDamage) {
-        _damageText->setString(std::to_string(nowDamage));
+        _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
     }
 }
 

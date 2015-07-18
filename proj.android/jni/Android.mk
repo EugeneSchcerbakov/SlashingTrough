@@ -12,23 +12,38 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/Utils.cpp \
+                   ../../Classes/ControlKeyboard.cpp \
+                   ../../Classes/ControlTouch.cpp \
+                   ../../Classes/EffectEnemyDeath.cpp \
+                   ../../Classes/EffectsLayer.cpp \
+                   ../../Classes/Enemy.cpp \
+                   ../../Classes/EnemyWidget.cpp \
+                   ../../Classes/Equipment.cpp \
+                   ../../Classes/Field.cpp \
+                   ../../Classes/FieldLayer.cpp \
+                   ../../Classes/FieldSector.cpp \
+                   ../../Classes/FieldSectorWidget.cpp \
                    ../../Classes/GameInfo.cpp \
-                   ../../Classes/GameScene.cpp \
                    ../../Classes/GameInterface.cpp \
-                   ../../Classes/GameField.cpp \
-                   ../../Classes/GameplayObjects.cpp \
-                   ../../Classes/GameplayObjectsWidgets.cpp \
-                   ../../Classes/PathSector.cpp \
-                   ../../Classes/PathSectorWidget.cpp \
+                   ../../Classes/GameScene.cpp \
                    ../../Classes/Hero.cpp \
                    ../../Classes/HeroAction.cpp \
                    ../../Classes/HeroWidget.cpp \
-                   ../../Classes/HeroControlKeyboard.cpp \
-                   ../../Classes/HeroControlTouch.cpp \
+                   ../../Classes/ModelBase.cpp \
+                   ../../Classes/Obstacle.cpp \
+                   ../../Classes/ObstacleWidget.cpp \
+                   ../../Classes/Projectile.cpp \
+                   ../../Classes/ProjectileWidget.cpp \
+                   ../../Classes/SessionInfo.cpp \
                    ../../Classes/StaminaBarWidget.cpp \
-                   ../../Classes/EffectsLayer.cpp \
-                   ../../Classes/EffectEnemyDeath.cpp
+                   ../../Classes/Store.cpp \
+                   ../../Classes/StoreCategoryButton.cpp \
+                   ../../Classes/StoreInterface.cpp \
+                   ../../Classes/StoreItemButton.cpp \
+                   ../../Classes/StoreWeaponWidget.cpp \
+                   ../../Classes/Utils.cpp \
+                   ../../Classes/VariablesSet.cpp \
+                   ../../Classes/WeaponAbilities.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../cocos2d/scripting/lua-bindings/manual \

@@ -240,7 +240,6 @@ cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeRight(float duration)
 {
 	auto rotate = cocos2d::RotateBy::create(duration, -360.0f);
 	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
-	auto func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::RIGHT; });
 	auto anim = cocos2d::Sequence::create(rotate_ease, nullptr);
 	return anim;
 }
@@ -249,7 +248,6 @@ cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeLeft(float duration)
 {
 	auto rotate = cocos2d::RotateBy::create(duration, 360.0f);
 	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
-	auto func = cocos2d::CallFunc::create([&](){_swordSide = SwordSide::LEFT; });
 	auto anim = cocos2d::Sequence::create(rotate_ease, nullptr);
 	return anim;
 }

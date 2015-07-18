@@ -11,6 +11,8 @@
 #include "SessionInfo.h"
 #include "Store.h"
 
+#include <math.h>
+
 Hero::Hero()
 : Entity(Entity::Type::HERO)
 , _runningSpeed(0.0f)
