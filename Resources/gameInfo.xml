@@ -86,7 +86,17 @@
             goldPointsReward="5"
             staminaPointsReward="20"
             scorePointsReward="10"
-            sprite="gamefield/creep_0.png" />
+            sprite="gamefield/creep_0.png" >
+            <MelleAttack condition="left_side"
+                recoveryTime="2.0f"
+                areaWidth="0.7"
+                areaHeight="1.2"
+                dmgHealth="0.0"
+                dmgStamina="30.0"
+                showHighlightRange="800.0"
+                showHighlightTime="0.8"
+                mustShowHighlight="true" />
+        </Enemy>
         <Enemy name="enemy-B"
             damage="0.0"
             health="2.0"
@@ -95,7 +105,15 @@
             goldPointsReward="50"
             staminaPointsReward="20"
             scorePointsReward="20"
-            sprite="gamefield/creep_1.png" />
+            sprite="gamefield/creep_1.png" >
+            <RangeAttack distance="750.0"
+                recoveryTime="20.3"
+                healthDamage="0.0"
+                staminaDamage="20.0"
+                projectileTexture="gamefield/projectile_0.png"
+                projectileSpeed="800.0"
+                projectileLifeTime="0.8" />
+        </Enemy>
         <Enemy name="enemy-C"
             damage="0.0"
             health="3.0"
@@ -104,8 +122,10 @@
             goldPointsReward="75"
             staminaPointsReward="50"
             scorePointsReward="30"
-            sprite="gamefield/creep_2.png" />
-         <Enemy name="enemy-D"
+            sprite="gamefield/creep_2.png" >
+            
+        </Enemy>
+        <Enemy name="enemy-D"
             damage="0.0"
             health="4.0"
             killPoints="1"
@@ -113,8 +133,9 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="gamefield/creep_3.png" />
-         <Enemy name="enemy-E"
+            sprite="gamefield/creep_3.png" >
+        </Enemy>
+        <Enemy name="enemy-E"
             damage="0.0"
             health="5.0"
             killPoints="1"
@@ -122,6 +143,7 @@
             goldPointsReward="50"
             staminaPointsReward="50"
             scorePointsReward="50"
-            sprite="gamefield/creep_4.png" />            
+            sprite="gamefield/creep_4.png" >
+        </Enemy>
     </GameplayObjects>
 </GameInfo>
