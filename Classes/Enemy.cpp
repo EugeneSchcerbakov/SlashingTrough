@@ -137,9 +137,11 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
             _melleAttack.allowed = false;
             return;
         }
-        Event e("ShowMelleHighlight");
-        e.variables.setFloat("ShowTime", _melleAttack.showHighlightTime);
-        sendEvent(e);
+        if (_melleAttack.mustShowHighlight) {
+            Event e("ShowMelleHighlight");
+            e.variables.setFloat("ShowTime", _melleAttack.showHighlightTime);
+            sendEvent(e);
+        }
         _melleAttacked = false;
     } else if (isState(State::MELLE_ATTACK_BEGIN) && _nextState != State::MELLE_ATTACK_END) {
         _nextState = State::MELLE_ATTACK_END;

@@ -343,18 +343,19 @@ void EnemyWidget::acceptEvent(const Event &event)
         auto motion = cocos2d::Spawn::create(transparency, rotate_ease, nullptr);
         auto action = cocos2d::Sequence::create(motion, end_call, nullptr);
         
-        auto zone_end = [&](){_hitZoneWidget->setVisible(false);};
-        auto zone_hide = cocos2d::FadeOut::create(0.25f);
-        auto zone_wait = cocos2d::DelayTime::create(showTime);
-        auto zone_call = cocos2d::CallFunc::create(zone_end);
-        auto zone_action = cocos2d::Sequence::create(zone_wait, zone_hide, zone_call, nullptr);
+        if (_hitZoneWidget->isVisible()) {
+            auto zone_end = [&](){_hitZoneWidget->setVisible(false);};
+            auto zone_hide = cocos2d::FadeOut::create(0.25f);
+            auto zone_wait = cocos2d::DelayTime::create(showTime);
+            auto zone_call = cocos2d::CallFunc::create(zone_end);
+            auto zone_action = cocos2d::Sequence::create(zone_wait, zone_hide, zone_call, nullptr);
+            _hitZoneWidget->runAction(zone_action);
+        }
         
         _weapon->setVisible(true);
         _weapon->setOpacity(0);
         _weapon->setRotation(-30.0f * sideCoeff);
         _weapon->runAction(action);
-        
-        _hitZoneWidget->runAction(zone_action);
     }
 }
 
