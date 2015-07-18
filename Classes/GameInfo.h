@@ -103,6 +103,8 @@ public:
             
             MelleAttack()
             : allowed(false)
+			, areaWidth(0.0f)
+			, areaHeight(0.0f)
             {}
         };
         

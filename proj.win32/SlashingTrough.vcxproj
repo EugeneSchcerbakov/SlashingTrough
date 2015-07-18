@@ -158,6 +158,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\ModelBase.cpp" />
     <ClCompile Include="..\Classes\Obstacle.cpp" />
     <ClCompile Include="..\Classes\ObstacleWidget.cpp" />
+    <ClCompile Include="..\Classes\Projectile.cpp" />
+    <ClCompile Include="..\Classes\ProjectileWidget.cpp" />
     <ClCompile Include="..\Classes\SessionInfo.cpp" />
     <ClCompile Include="..\Classes\StaminaBarWidget.cpp" />
     <ClCompile Include="..\Classes\Store.cpp" />
@@ -192,6 +194,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\ModelBase.h" />
     <ClInclude Include="..\Classes\Obstacle.h" />
     <ClInclude Include="..\Classes\ObstacleWidget.h" />
+    <ClInclude Include="..\Classes\Projectile.h" />
+    <ClInclude Include="..\Classes\ProjectileWidget.h" />
     <ClInclude Include="..\Classes\SessionInfo.h" />
     <ClInclude Include="..\Classes\StaminaBarWidget.h" />
     <ClInclude Include="..\Classes\Store.h" />
