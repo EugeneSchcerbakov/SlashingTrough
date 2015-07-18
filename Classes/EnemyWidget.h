@@ -15,6 +15,7 @@
 #include "Enemy.h"
 
 class HealthBar;
+class MelleHitZone;
 
 class EnemyWidget : public cocos2d::Node
 {
@@ -40,7 +41,9 @@ private:
     
     cocos2d::Sprite *_sprite;
     cocos2d::Sprite *_blood;
+    cocos2d::Sprite *_weapon;
     HealthBar *_healhBar;
+    MelleHitZone *_hitZoneWidget;
 };
 
 #endif /* defined(__SlashingTrough__EnemyWidget__) */

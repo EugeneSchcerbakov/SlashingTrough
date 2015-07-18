@@ -69,6 +69,13 @@ public:
     
     struct EnemyType
     {
+        enum Melle
+        {
+            SAME_LINE,
+            LEFT_LINE,
+            RIGHT_LINE
+        };
+        
         struct RangeAttack
         {
             float distance;
@@ -77,6 +84,24 @@ public:
             ProjectileType projectile;
             
             RangeAttack()
+            : allowed(false)
+            {}
+        };
+        
+        struct MelleAttack
+        {
+            Melle condition;
+            float areaWidth;
+            float areaHeight;
+            float dmgHealth;
+            float dmgStamina;
+            float showHighlightRange;
+            float showHighlightTime;
+            float recoveryTime;
+            bool mustShowHighlight;
+            bool allowed;
+            
+            MelleAttack()
             : allowed(false)
             {}
         };
@@ -90,9 +115,8 @@ public:
         int scorePointsReward;
         int staminaPointsReward;
         
-        bool allowRangeAttack;
-        
         RangeAttack rangeAttack;
+        MelleAttack melleAttack;
         
         std::string sprite;
         

@@ -94,7 +94,8 @@ bool GameInfo::loadInfo(const std::string &filename)
                 std::string name = elem->Attribute("name");
                 _obstaclesSettings[name] = info;
             } else if (type == "Enemy") {
-                tinyxml2::XMLElement *rangeAttackInfo = elem->FirstChildElement("AttackRanged");
+                auto rangeAttackInfo = elem->FirstChildElement("RangeAttack");
+                auto melleAttackInfo = elem->FirstChildElement("MelleAttack");
                 EnemyType info;
                 info.damage = elem->FloatAttribute("damage");
                 info.health = elem->FloatAttribute("health");
@@ -114,6 +115,27 @@ bool GameInfo::loadInfo(const std::string &filename)
                     info.rangeAttack.projectile.lifeTime = rangeAttackInfo->FloatAttribute("projectileLifeTime");
                     info.rangeAttack.projectile.texture = rangeAttackInfo->Attribute("projectileTexture");
                     info.rangeAttack.allowed = true;
+                }
+                if (melleAttackInfo) {
+                    std::string condition = melleAttackInfo->Attribute("condition");
+                    if (condition == "same_side") {
+                        info.melleAttack.condition = EnemyType::Melle::SAME_LINE;
+                    } else if (condition == "left_side") {
+                        info.melleAttack.condition = EnemyType::Melle::LEFT_LINE;
+                    } else if (condition == "right_side") {
+                        info.melleAttack.condition = EnemyType::Melle::RIGHT_LINE;
+                    } else {
+                        CC_ASSERT(false);
+                    }
+                    info.melleAttack.areaWidth = melleAttackInfo->FloatAttribute("areaWidth");
+                    info.melleAttack.areaHeight = melleAttackInfo->FloatAttribute("areaHeight");
+                    info.melleAttack.dmgHealth = melleAttackInfo->FloatAttribute("dmgHealth");
+                    info.melleAttack.dmgStamina = melleAttackInfo->FloatAttribute("dmgStamina");
+                    info.melleAttack.showHighlightRange = melleAttackInfo->FloatAttribute("showHighlightRange");
+                    info.melleAttack.showHighlightTime = melleAttackInfo->FloatAttribute("showHighlightTime");
+                    info.melleAttack.recoveryTime = melleAttackInfo->FloatAttribute("recoveryTime");
+                    info.melleAttack.mustShowHighlight = melleAttackInfo->BoolAttribute("mustShowHighlight");
+                    info.melleAttack.allowed = true;
                 }
                 _enemiesSettings[name] = info;
             } else {

@@ -83,6 +83,134 @@ private:
 
 const float HealthBar::MAX_WIDTH_PX = 180.0f;
 
+// MelleHitZone implementation
+
+class MelleHitZone : public cocos2d::Node
+{
+public:
+    static MelleHitZone* create(const cocos2d::Size &size)
+    {
+        MelleHitZone *zone = new MelleHitZone(size);
+        if (zone && zone->init()) {
+            zone->autorelease();
+        } else {
+            delete zone;
+            zone = nullptr;
+        }
+        return zone;
+    }
+    
+    void setOpacity(GLubyte opacity) override
+    {
+        Node::setOpacity(opacity);
+        
+        float transparency = (float)opacity / 255.0f;
+        redrawArea(transparency);
+    }
+    
+protected:
+    MelleHitZone(const cocos2d::Size &size)
+    : _size(size)
+    , _zoneOpacity(0.7f)
+    {
+    }
+    
+    virtual ~MelleHitZone()
+    {
+    }
+    
+    bool init() override
+    {
+        if (!cocos2d::Node::init()) {
+            return false;
+        }
+        
+        _zone = cocos2d::DrawNode::create();
+        _dotline = cocos2d::DrawNode::create();
+        
+        addChild(_zone, 0);
+        addChild(_dotline, 1);
+        setContentSize(_size);
+        
+        redrawArea(1.0f);
+        
+        return true;
+    }
+    
+private:
+    void redrawArea(float opacity)
+    {
+        cocos2d::Color4F zoneColor(1.0f, 0.0f, 1.0f, _zoneOpacity * opacity);
+        cocos2d::Color4F frameColor(0.0f, 0.0f, 0.0f, opacity);
+        
+        cocos2d::Vec2 origin(-_size.width * 0.5f, -_size.height * 0.5f);
+        cocos2d::Vec2 destin(_size.width * 0.5f, _size.height * 0.5f);
+        
+        // draw zone
+        _zone->clear();
+        _zone->drawSolidRect(origin, destin, zoneColor);
+        
+        // draw frame
+        _dotline->clear();
+        cocos2d::Vec2 p0, p1, next, last;
+        float step = 20.0f;
+        int counter = 0;
+        
+        // left side
+        p0 = cocos2d::Vec2(origin.x, origin.y); p1 = cocos2d::Vec2(origin.x, destin.y);
+        next = cocos2d::Vec2(p0.x, p0.y + step); last = p0;
+        while (next.y < p1.y) {
+            if (counter % 2 == 0) {
+                _dotline->drawLine(last, next, frameColor);
+                last.y += step * 2.0f;
+                next.y += step * 2.0f;
+            }
+            counter++;
+        }
+        
+        // top side
+        p0 = cocos2d::Vec2(origin.x, destin.y); p1 = cocos2d::Vec2(destin.x, destin.y);
+        next = cocos2d::Vec2(p0.x + step, p0.y); last = p0;
+        while (next.x < p1.x) {
+            if (counter % 2 == 0) {
+                _dotline->drawLine(last, next, frameColor);
+                last.x += step * 2.0f;
+                next.x += step * 2.0f;
+            }
+            counter++;
+        }
+        
+        // right side
+        p0 = cocos2d::Vec2(destin.x, destin.y); p1 = cocos2d::Vec2(destin.x, origin.y);
+        next = cocos2d::Vec2(p0.x, p0.y - step); last = p0;
+        while (next.y > p1.y) {
+            if (counter % 2 == 0) {
+                _dotline->drawLine(last, next, frameColor);
+                last.y -= step * 2.0f;
+                next.y -= step * 2.0f;
+            }
+            counter++;
+        }
+        
+        // bottom side
+        p0 = cocos2d::Vec2(destin.x, origin.y); p1 = cocos2d::Vec2(origin.x, origin.y);
+        next = cocos2d::Vec2(p0.x - step, p0.y); last = p0;
+        while (next.x > p1.x) {
+            if (counter % 2 == 0) {
+                _dotline->drawLine(last, next, frameColor);
+                last.x -= step * 2.0f;
+                next.x -= step * 2.0f;
+            }
+            counter++;
+        }
+    }
+    
+    cocos2d::DrawNode *_zone;
+    cocos2d::DrawNode *_dotline;
+    const cocos2d::Size _size;
+    const float _zoneOpacity;
+};
+
 // EnemyWidget implementation
 
 EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *effects)
@@ -128,9 +256,22 @@ bool EnemyWidget::init()
     _healhBar->refresh(_enemy->getHealth());
     _healhBar->setPositionY(healthBarYShift);
     
-    addChild(_sprite, 0);
-    addChild(_blood, 1);
-    addChild(_healhBar, 2);
+    float zoneWidth = _enemy->getMelleAreaWidth();
+    float zoneHeight = _enemy->getMelleAreaHeight();
+    
+    _hitZoneWidget = MelleHitZone::create(cocos2d::Size(zoneWidth, zoneHeight));
+    _hitZoneWidget->setOpacity(0);
+    _hitZoneWidget->setVisible(false);
+    
+    _weapon = cocos2d::Sprite::create("gamefield/wpn_iron_sword.png");
+    _weapon->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
+    _weapon->setVisible(false);
+    
+    addChild(_hitZoneWidget, 0);
+    addChild(_weapon, 1);
+    addChild(_sprite, 2);
+    addChild(_blood, 3);
+    addChild(_healhBar, 4);
     scheduleUpdate();
     setPositionX(_enemy->getPositionX());
     setPositionY(_enemy->getPositionY());
@@ -171,6 +312,49 @@ void EnemyWidget::acceptEvent(const Event &event)
             auto *effect = EffectEnemyDeath::create(_enemy->getSpriteFilename(), getPosition());
             _effects->addEffect(effect);
         }
+    } else if (event.is("ShowMelleHighlight")) {
+        float showTime = event.variables.getFloat("ShowTime");
+        float zoneX = _enemy->getMelleAreaCenterX() - _enemy->getPositionX();
+        float zoneY = _enemy->getMelleAreaCenterY() - _enemy->getPositionY();
+
+        auto fadein = cocos2d::FadeIn::create(showTime);
+        
+        _hitZoneWidget->setVisible(true);
+        _hitZoneWidget->setPosition(zoneX, zoneY);
+        _hitZoneWidget->runAction(fadein);
+    } else if (event.is("ShowMelleAttack")) {
+        float showTime = event.variables.getFloat("ShowTime");
+        float sideCoeff = 0.0f;
+        if (_enemy->isMelleType(GameInfo::EnemyType::Melle::SAME_LINE)) {
+            sideCoeff = 4.0f;
+        } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::LEFT_LINE)) {
+            sideCoeff = 1.0f;
+        } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::RIGHT_LINE)) {
+            sideCoeff = 7.0f;
+        }
+        
+        auto func_end = [&](){_weapon->setVisible(false);};
+        auto end_call = cocos2d::CallFunc::create(func_end);
+        auto fadein = cocos2d::FadeIn::create(showTime * 0.5f);
+        auto fadeout = cocos2d::FadeOut::create(showTime * 0.5f);
+        auto rotate = cocos2d::RotateBy::create(showTime, -120.0f);
+        auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+        auto transparency = cocos2d::Sequence::create(fadein, fadeout, nullptr);
+        auto motion = cocos2d::Spawn::create(transparency, rotate_ease, nullptr);
+        auto action = cocos2d::Sequence::create(motion, end_call, nullptr);
+        
+        auto zone_end = [&](){_hitZoneWidget->setVisible(false);};
+        auto zone_hide = cocos2d::FadeOut::create(0.25f);
+        auto zone_wait = cocos2d::DelayTime::create(showTime);
+        auto zone_call = cocos2d::CallFunc::create(zone_end);
+        auto zone_action = cocos2d::Sequence::create(zone_wait, zone_hide, zone_call, nullptr);
+        
+        _weapon->setVisible(true);
+        _weapon->setOpacity(0);
+        _weapon->setRotation(-30.0f * sideCoeff);
+        _weapon->runAction(action);
+        
+        _hitZoneWidget->runAction(zone_action);
     }
 }
 
