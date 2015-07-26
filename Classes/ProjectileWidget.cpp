@@ -31,7 +31,7 @@ ProjectileWidget::~ProjectileWidget()
 
 bool ProjectileWidget::init()
 {
-    if (!cocos2d::Node::init()) {
+    if (!cocos2d::BillBoard::init()) {
         return false;
     }
     
@@ -43,6 +43,7 @@ bool ProjectileWidget::init()
     
     addChild(_sprite);
     scheduleUpdate();
+    setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     
     if (_projectile) {
         float x = _projectile->getPositionX();
@@ -64,7 +65,7 @@ void ProjectileWidget::update(float dt)
     float rotationSpeed = 700.0f;
     float angle = getRotation();
     angle += rotationSpeed * dt * _rotationDir;
-    setRotation(angle);
+    _sprite->setRotation(angle);
 }
 
 

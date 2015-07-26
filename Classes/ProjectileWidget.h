@@ -13,7 +13,7 @@
 
 #include "Projectile.h"
 
-class ProjectileWidget : public cocos2d::Node
+class ProjectileWidget : public cocos2d::BillBoard
 {
 public:
     static ProjectileWidget* create(Projectile *projectile);

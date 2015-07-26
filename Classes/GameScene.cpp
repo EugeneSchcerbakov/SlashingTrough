@@ -40,8 +40,8 @@ bool GameScene::init()
         return false;
     }
 
-    cocos2d::Director *director = cocos2d::Director::getInstance();
-    cocos2d::EventDispatcher *dispatcher = director->getEventDispatcher();
+    auto director = cocos2d::Director::getInstance();
+    auto dispatcher = director->getEventDispatcher();
     
     if (misc::isPlatformDesctop())
     {

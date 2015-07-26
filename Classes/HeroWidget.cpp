@@ -8,8 +8,8 @@
 
 #include "HeroWidget.h"
 
-const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(60.0f, 0.0f), 160.0f);
-const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-60.0f, 0.0f), 160.0f);
+const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
+const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
 HeroWidget* HeroWidget::create(Hero *hero)
 {
@@ -34,42 +34,33 @@ HeroWidget::~HeroWidget()
 
 bool HeroWidget::init()
 {
-    if (!cocos2d::Node::init()) {
+    if (!cocos2d::BillBoard::init()) {
         return false;
     }
     
     _hero->setupAccepter(accepter, static_cast<void *>(this));
-    
-    cocos2d::Color4F bodyColor(0.0f, 0.7f, 1.0f, 0.4f);
-    cocos2d::Color4F borderColor(0.0f, 0.0f, 1.0f, 1.0f);
-    float radius = 80.0f;
+    EquipWeapon *weapon = _hero->getWeapon();
+    float trailLen = 0.0f, trailWidth = 0.0f;
+    std::string trailTex;
+    if (weapon) {
+        trailLen = weapon->trail.length;
+        trailWidth = weapon->trail.width;
+        trailTex = weapon->trail.texture;
+    } else {
+        CC_ASSERT(weapon);
+    }
     
     _bodyController = cocos2d::Node::create();
-    
-    _bodyBorder = cocos2d::DrawNode::create();
-    _bodyBorder->setPosition(0.0f, 0.0f);
-    _bodyBorder->drawCircle(cocos2d::Vec2(0.0f, 0.0f), radius, 0.0f, 25, false, 1.0f, 0.9f, borderColor);
-    
-    _body = cocos2d::DrawNode::create();
-    _body->setPosition(0.0f, 0.0f);
-    _body->drawSolidCircle(cocos2d::Vec2(0.0f, 0.0f), radius, 0.0f, 25, 1.0f, 0.9f, bodyColor);
-    _body->addChild(_bodyBorder);
-    
-    EquipWeapon *weapon = _hero->getWeapon();
-    CC_ASSERT(weapon);
-    
+    _body = cocos2d::Sprite::create("gamefield/hero.png");
     _sword = cocos2d::Sprite::create();
     _sword->setTexture(weapon->sprite);
     _sword->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
     _sword->setPosition(_swordRightTrans.pos);
     _sword->setRotation(_swordRightTrans.angle);
+    _sword->setScale(0.7f);
     
     _bodyController->addChild(_body, 0);
     _bodyController->addChild(_sword, 1);
-    
-    float trailLen = weapon->trail.length;
-    float trailWidth = weapon->trail.width;
-    std::string trailTex = weapon->trail.texture;
     
     _swordTrail = cocos2d::MotionStreak::create(trailLen, 1.0f, trailWidth, cocos2d::Color3B::WHITE, trailTex);
     _swordTrail->setOpacity(0);
@@ -77,6 +68,8 @@ bool HeroWidget::init()
     _swordSide = SwordSide::RIGHT;
 	_nextSwordSide = _swordSide;
     
+    setPositionZ(_body->getTexture()->getContentSize().height * 0.5f);
+    setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     addChild(_bodyController, 0);
     addChild(_swordTrail, 1);
     scheduleUpdate();
@@ -86,6 +79,9 @@ bool HeroWidget::init()
 
 void HeroWidget::update(float dt)
 {
+    setPositionX(_hero->getPositionX());
+    setPositionY(_hero->getPositionY());
+    
     if (_swordTrail->isVisible())
     {
         float posXCoeff = 0.5f;
@@ -187,6 +183,11 @@ void HeroWidget::acceptEvent(const Event &event)
 		runSwordTrailEffect(time);
     } else if (event.is("JumpBack")) {
 
+    } else if (event.is("DamageReceived")) {
+        auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
+        auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
+        auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
+        _body->runAction(effect);
     } else {
         CC_ASSERT(false);
     }
@@ -236,7 +237,7 @@ cocos2d::FiniteTimeAction* HeroWidget::AnimSwordLeftSwipeLeft(float duration)
     return sword_rotate;
 }
 
-cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeRight(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::AnimBodySwipeRight(float duration)
 {
 	auto rotate = cocos2d::RotateBy::create(duration, -360.0f);
 	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
@@ -244,7 +245,7 @@ cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeRight(float duration)
 	return anim;
 }
 
-cocos2d::FiniteTimeAction *HeroWidget::AnimBodySwipeLeft(float duration)
+cocos2d::FiniteTimeAction* HeroWidget::AnimBodySwipeLeft(float duration)
 {
 	auto rotate = cocos2d::RotateBy::create(duration, 360.0f);
 	auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);

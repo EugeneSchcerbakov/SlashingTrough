@@ -32,13 +32,15 @@ ObstacleWidget::~ObstacleWidget()
 
 bool ObstacleWidget::init()
 {
-    if (!cocos2d::Sprite::init()) {
+    if (!cocos2d::BillBoard::init()) {
         return false;
     }
     
     setTexture(_obstacle->getSpriteFilename());
+    setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     setPositionX(_obstacle->getPositionX());
     setPositionY(_obstacle->getPositionY());
+    setPositionZ(getTexture()->getContentSize().height * 0.5f);
     
     return true;
 }

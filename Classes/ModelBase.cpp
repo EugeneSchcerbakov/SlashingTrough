@@ -81,6 +81,10 @@ void Entity::addHealth(float health)
     if (_health < 0.0f) {
         _health = 0.0f;
     }
+    
+    if (health < 0.0f) {
+        onDamageReceived();
+    }
 }
 
 void Entity::onDamageReceived()

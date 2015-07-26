@@ -7,7 +7,6 @@
 //
 
 #include "EnemyWidget.h"
-#include "EffectEnemyDeath.h"
 
 // HealthBar implementation
 
@@ -126,10 +125,8 @@ protected:
         }
         
         _zone = cocos2d::DrawNode::create();
-        _dotline = cocos2d::DrawNode::create();
         
         addChild(_zone, 0);
-        addChild(_dotline, 1);
         setContentSize(_size);
         
         redrawArea(1.0f);
@@ -141,7 +138,6 @@ private:
     void redrawArea(float opacity)
     {
         cocos2d::Color4F zoneColor(1.0f, 0.0f, 1.0f, _zoneOpacity * opacity);
-        cocos2d::Color4F frameColor(0.0f, 0.0f, 0.0f, opacity);
         
         cocos2d::Vec2 origin(-_size.width * 0.5f, -_size.height * 0.5f);
         cocos2d::Vec2 destin(_size.width * 0.5f, _size.height * 0.5f);
@@ -149,73 +145,18 @@ private:
         // draw zone
         _zone->clear();
         _zone->drawSolidRect(origin, destin, zoneColor);
-        
-        // draw frame
-        _dotline->clear();
-        cocos2d::Vec2 p0, p1, next, last;
-        float step = 20.0f;
-        int counter = 0;
-        
-        // left side
-        p0 = cocos2d::Vec2(origin.x, origin.y); p1 = cocos2d::Vec2(origin.x, destin.y);
-        next = cocos2d::Vec2(p0.x, p0.y + step); last = p0;
-        while (next.y < p1.y) {
-            if (counter % 2 == 0) {
-                _dotline->drawLine(last, next, frameColor);
-                last.y += step * 2.0f;
-                next.y += step * 2.0f;
-            }
-            counter++;
-        }
-        
-        // top side
-        p0 = cocos2d::Vec2(origin.x, destin.y); p1 = cocos2d::Vec2(destin.x, destin.y);
-        next = cocos2d::Vec2(p0.x + step, p0.y); last = p0;
-        while (next.x < p1.x) {
-            if (counter % 2 == 0) {
-                _dotline->drawLine(last, next, frameColor);
-                last.x += step * 2.0f;
-                next.x += step * 2.0f;
-            }
-            counter++;
-        }
-        
-        // right side
-        p0 = cocos2d::Vec2(destin.x, destin.y); p1 = cocos2d::Vec2(destin.x, origin.y);
-        next = cocos2d::Vec2(p0.x, p0.y - step); last = p0;
-        while (next.y > p1.y) {
-            if (counter % 2 == 0) {
-                _dotline->drawLine(last, next, frameColor);
-                last.y -= step * 2.0f;
-                next.y -= step * 2.0f;
-            }
-            counter++;
-        }
-        
-        // bottom side
-        p0 = cocos2d::Vec2(destin.x, origin.y); p1 = cocos2d::Vec2(origin.x, origin.y);
-        next = cocos2d::Vec2(p0.x - step, p0.y); last = p0;
-        while (next.x > p1.x) {
-            if (counter % 2 == 0) {
-                _dotline->drawLine(last, next, frameColor);
-                last.x -= step * 2.0f;
-                next.x -= step * 2.0f;
-            }
-            counter++;
-        }
     }
     
     cocos2d::DrawNode *_zone;
-    cocos2d::DrawNode *_dotline;
     const cocos2d::Size _size;
     const float _zoneOpacity;
 };
 
 // EnemyWidget implementation
 
-EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *effects)
+EnemyWidget* EnemyWidget::create(Enemy *enemy)
 {
-    EnemyWidget *widget = new EnemyWidget(enemy, effects);
+    EnemyWidget *widget = new EnemyWidget(enemy);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -225,9 +166,9 @@ EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *effects)
     return widget;
 }
 
-EnemyWidget::EnemyWidget(Enemy *enemy, EffectsLayer *effects)
+EnemyWidget::EnemyWidget(Enemy *enemy)
 : _enemy(enemy)
-, _effects(effects)
+, _allowDeletion(false)
 {
     CC_ASSERT(_enemy);
 }
@@ -236,9 +177,14 @@ EnemyWidget::~EnemyWidget()
 {
 }
 
+bool EnemyWidget::isDeletionAllowed() const
+{
+    return _allowDeletion;
+}
+
 bool EnemyWidget::init()
 {
-    if (!cocos2d::Node::init()) {
+    if (!cocos2d::BillBoard::init()) {
         return false;
     }
     
@@ -258,10 +204,13 @@ bool EnemyWidget::init()
     
     float zoneWidth = _enemy->getMelleAreaWidth();
     float zoneHeight = _enemy->getMelleAreaHeight();
+    float zoneXAngle = GameInfo::getInstance().getFloat("CAMERA_VIEW_ANGLE");
     
     _hitZoneWidget = MelleHitZone::create(cocos2d::Size(zoneWidth, zoneHeight));
     _hitZoneWidget->setOpacity(0);
     _hitZoneWidget->setVisible(false);
+    _hitZoneWidget->setRotation3D(cocos2d::Vec3(-zoneXAngle, 0.0f, 0.0f));
+    _hitZoneWidget->setPositionZ(-_sprite->getTexture()->getContentSize().height * 0.5f);
     
     _weapon = cocos2d::Sprite::create("gamefield/wpn_iron_sword.png");
     _weapon->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
@@ -275,6 +224,8 @@ bool EnemyWidget::init()
     scheduleUpdate();
     setPositionX(_enemy->getPositionX());
     setPositionY(_enemy->getPositionY());
+    setPositionZ(_sprite->getTexture()->getContentSize().height * 0.5f);
+    setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     
     return true;
 }
@@ -309,9 +260,14 @@ void EnemyWidget::acceptEvent(const Event &event)
         if (_enemy->isAlive()) {
             runHitAccentEffect();
         } else {
-            auto *effect = EffectEnemyDeath::create(_enemy->getSpriteFilename(), getPosition());
-            _effects->addEffect(effect);
+            auto func = [this](){_allowDeletion = true;};
+            auto fade = cocos2d::FadeOut::create(0.2f);
+            auto call = cocos2d::CallFunc::create(func);
+            auto effect = cocos2d::Sequence::create(fade, call, nullptr);
+            _sprite->runAction(effect);
         }
+    } else if (event.is("FatalDamageReceived")) {
+        _allowDeletion = true;
     } else if (event.is("ShowMelleHighlight")) {
         float showTime = event.variables.getFloat("ShowTime");
         float zoneX = _enemy->getMelleAreaCenterX() - _enemy->getPositionX();

@@ -28,7 +28,7 @@ struct SwordTrans
     {}
 };
 
-class HeroWidget : public cocos2d::Node
+class HeroWidget : public cocos2d::BillBoard
 {
 public:
     static HeroWidget* create(Hero *hero);
@@ -47,8 +47,8 @@ protected:
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeLeft(float duration);
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeRight(float duration);
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeLeft(float duration);
-	cocos2d::FiniteTimeAction *AnimBodySwipeRight(float duration);
-	cocos2d::FiniteTimeAction *AnimBodySwipeLeft(float duration);
+	cocos2d::FiniteTimeAction* AnimBodySwipeRight(float duration);
+	cocos2d::FiniteTimeAction* AnimBodySwipeLeft(float duration);
     
 private:
     static const SwordTrans _swordRightTrans;
@@ -61,10 +61,9 @@ private:
     SwordSide _swordSide;
 	SwordSide _nextSwordSide;
     
-    cocos2d::DrawNode *_body;
-    cocos2d::DrawNode *_bodyBorder;
-    cocos2d::Node *_bodyController;
+    cocos2d::Sprite *_body;
     cocos2d::Sprite *_sword;
+    cocos2d::Node *_bodyController;
     cocos2d::MotionStreak *_swordTrail;
 };
 

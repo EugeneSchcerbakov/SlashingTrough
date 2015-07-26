@@ -92,8 +92,6 @@
 		CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
-		CDC520841B54214100732FD0 /* EffectEnemyDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520821B54214100732FD0 /* EffectEnemyDeath.cpp */; };
-		CDC520851B54214100732FD0 /* EffectEnemyDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520821B54214100732FD0 /* EffectEnemyDeath.cpp */; };
 		CDC520881B54238700732FD0 /* WeaponAbilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520861B54238700732FD0 /* WeaponAbilities.cpp */; };
 		CDC520891B54238700732FD0 /* WeaponAbilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520861B54238700732FD0 /* WeaponAbilities.cpp */; };
 		CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6201B52930F000756EB /* Obstacle.cpp */; };
@@ -279,8 +277,6 @@
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
-		CDC520821B54214100732FD0 /* EffectEnemyDeath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectEnemyDeath.cpp; sourceTree = "<group>"; };
-		CDC520831B54214100732FD0 /* EffectEnemyDeath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectEnemyDeath.h; sourceTree = "<group>"; };
 		CDC520861B54238700732FD0 /* WeaponAbilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeaponAbilities.cpp; sourceTree = "<group>"; };
 		CDC520871B54238700732FD0 /* WeaponAbilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponAbilities.h; sourceTree = "<group>"; };
 		CDC5E6201B52930F000756EB /* Obstacle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Obstacle.cpp; sourceTree = "<group>"; };
@@ -459,7 +455,7 @@
 				CDC880F71B513BDD00030818 /* Model */,
 				CDC880F91B513BEE00030818 /* View */,
 				CDC880FA1B513BF400030818 /* Control */,
-				CDC880F81B513BE600030818 /* Interface */,
+				CDC880F81B513BE600030818 /* GUI */,
 				CDC5E6281B529ECF000756EB /* Effects */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
@@ -539,8 +535,6 @@
 			children = (
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
-				CDC520821B54214100732FD0 /* EffectEnemyDeath.cpp */,
-				CDC520831B54214100732FD0 /* EffectEnemyDeath.h */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -574,7 +568,7 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		CDC880F81B513BE600030818 /* Interface */ = {
+		CDC880F81B513BE600030818 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
 				CD7503511AFF6BED00DBD732 /* GameInterface.cpp */,
@@ -590,7 +584,7 @@
 				CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */,
 				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
 			);
-			name = Interface;
+			name = GUI;
 			sourceTree = "<group>";
 		};
 		CDC880F91B513BEE00030818 /* View */ = {
@@ -831,7 +825,6 @@
 				CD637E7E1B234E75002F98EF /* StoreItemButton.cpp in Sources */,
 				CDC881011B5142DF00030818 /* Field.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
-				CDC520841B54214100732FD0 /* EffectEnemyDeath.cpp in Sources */,
 				CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CDC881211B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */,
@@ -877,7 +870,6 @@
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				CDC881261B51808300030818 /* HeroAction.cpp in Sources */,
 				CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
-				CDC520851B54214100732FD0 /* EffectEnemyDeath.cpp in Sources */,
 				CDC8810A1B5149BC00030818 /* VariablesSet.cpp in Sources */,
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */,

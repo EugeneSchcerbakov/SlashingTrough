@@ -32,6 +32,7 @@ void Obstacle::idleUpdate(float dt)
             if (_goal->isType(Entity::Type::HERO)) {
                 Hero *hero = dynamic_cast<Hero *>(_goal);
                 hero->addStamina(-_staminaDrainPoints);
+                hero->onDamageReceived();
             }
             kill();
         }

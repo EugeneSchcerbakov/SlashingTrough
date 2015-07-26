@@ -13,7 +13,7 @@
 
 #include "FieldSector.h"
 
-class FieldSectorWidget : public cocos2d::Node
+class FieldSectorWidget : public cocos2d::Sprite3D
 {
 public:
     static FieldSectorWidget* create(FieldSector::Ptr sector);
@@ -31,8 +31,7 @@ private:
     
     FieldSector::Ptr _sector;
     
-    cocos2d::DrawNode *_ground;
-    cocos2d::DrawNode *_debugGrid;
+    cocos2d::Mesh *_mesh;
 };
 
 #endif /* defined(__SlashingTrough__FieldSectorWidget__) */

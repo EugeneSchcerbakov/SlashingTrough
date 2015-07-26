@@ -44,6 +44,7 @@ void Projectile::idleUpdate(float dt)
             if (_goal->isType(Entity::Type::HERO)) {
                 auto hero = dynamic_cast<Hero *>(_goal);
                 hero->addStamina(-_staminaDmg);
+                hero->onDamageReceived();
             }
             kill();
         }

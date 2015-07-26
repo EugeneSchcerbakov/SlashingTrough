@@ -13,7 +13,7 @@
 
 #include "Obstacle.h"
 
-class ObstacleWidget : public cocos2d::Sprite
+class ObstacleWidget : public cocos2d::BillBoard
 {
 public:
     static ObstacleWidget* create(Obstacle *obstacle);

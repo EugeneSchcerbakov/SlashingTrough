@@ -86,6 +86,11 @@ void Hero::idleUpdate(float dt)
     }
 }
 
+void Hero::onDamageReceived()
+{
+    sendEvent(Event("DamageReceived"));
+}
+
 void Hero::attack()
 {
     if (_goals) {
@@ -115,7 +120,6 @@ void Hero::attack()
             
             if (len <= _radius && dotp >= area) {
                 entity->addHealth(-_damage);
-                entity->onDamageReceived();
                 
                 for (auto ability : getWeapon()->abilities) {
                     ability->onHit(entity);

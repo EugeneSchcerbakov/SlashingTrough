@@ -28,7 +28,6 @@ class FieldLayer : public cocos2d::Layer
 {
 public:
     static FieldLayer* create(GameInterface *gameInterface);
-    static const float heroYOffsetOnScreen; // offset from bottom of the screen
     
 protected:
     FieldLayer(GameInterface *gameInterface);
@@ -41,27 +40,22 @@ protected:
     void acceptEvent(const Event &event);
     
 private:
-    enum DrawOrder
-    {
-        GROUND = 0,
-        OBSTACLES,
-        ENEMIES,
-        PROJECTILES,
-        HERO
-    };
-    
-private:
     static void accepter(const Event &event, void *param);
 
     Field _field;
     
-    GameInterface *_gameInterface;
-    EffectsLayer *_effectsOnField;
+    std::vector<EnemyWidget *> _enemiesWidgets;
+    
     cocos2d::Node *_fieldScroller;
+    cocos2d::Camera *_fieldCamera;
+    
+    GameInterface *_gameInterface;
     HeroWidget *_heroWidget;
     
     ControlTouch::Ptr _controlTouch;
     ControlKeyboard::Ptr _controlKeyboard;
+    
+    float _cameraYOffset;
 };
 
 #endif /* defined(__SlashingTrough__FieldLayer__) */

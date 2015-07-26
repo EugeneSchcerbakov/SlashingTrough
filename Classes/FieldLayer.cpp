@@ -11,8 +11,6 @@
 #include "SessionInfo.h"
 #include "Utils.h"
 
-const float FieldLayer::heroYOffsetOnScreen = 250.0f;
-
 FieldLayer* FieldLayer::create(GameInterface *gameInterface)
 {
     FieldLayer *layer = new FieldLayer(gameInterface);
@@ -43,26 +41,43 @@ bool FieldLayer::init()
         return false;
     }
     
-    _fieldScroller = cocos2d::Node::create();
+    auto gameinfo = GameInfo::getInstance();
+    auto director = cocos2d::Director::getInstance();
+    auto winSize = director->getWinSize();
     
-    _effectsOnField = EffectsLayer::create();
-    _fieldScroller->addChild(_effectsOnField, 3);
+    _cameraYOffset = gameinfo.getFloat("CAMERA_Y_OFFSET", -850.0f);
+    float viewAngle = gameinfo.getFloat("CAMERA_VIEW_ANGLE", 50);
+    float viewHeight = gameinfo.getFloat("CAMERA_VIEW_HEIGHT", 1100.0f);
+    float squareSize = gameinfo.getFloat("SQUARE_SIZE");
+    float viewPosX = squareSize * 3.0f * 0.5f;
+    float aspect = winSize.width / winSize.height;
+    float fov = gameinfo.getFloat("CAMERA_FIELD_OF_VIEW", 50.0f);
+    float zfar = gameinfo.getFloat("CAMERA_FAR_Z_CLIP_PLANE", 1000.0f);
+    
+    _fieldCamera = cocos2d::Camera::createPerspective(fov, aspect, 0.1f, zfar);
+    _fieldCamera->setCameraFlag(cocos2d::CameraFlag::USER1);
+    _fieldCamera->setPosition3D(cocos2d::Vec3(viewPosX, 0.0f, viewHeight));
+    _fieldCamera->setRotation3D(cocos2d::Vec3(viewAngle, 0.0f, 0.0f));
+    
+    _fieldScroller = cocos2d::Node::create();
+    _fieldScroller->setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
+    _fieldScroller->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
+    _fieldScroller->addChild(_fieldCamera);
     
     _field.setupAccepter(accepter, static_cast<void *>(this));
     _field.initialize();
     
-    Hero *hero = _field.getHero();
     _heroWidget = HeroWidget::create(_field.getHero());
-    _heroWidget->setPositionX(hero->getPositionX());
-    _heroWidget->setPositionY(heroYOffsetOnScreen);
+    _heroWidget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
     
     auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
     
     _controlTouch = ControlTouch::create(_field.getHero(), dispatcher, this);
     _controlKeyboard = ControlKeyboard::create(_field.getHero(), dispatcher, this);
     
-    addChild(_fieldScroller, DrawOrder::GROUND);
-    addChild(_heroWidget, DrawOrder::HERO);
+    _fieldScroller->addChild(_heroWidget);
+    
+    addChild(_fieldScroller);
     scheduleUpdate();
     
     return true;
@@ -72,11 +87,16 @@ void FieldLayer::update(float dt)
 {
     _field.idleUpdate(dt);
     
-    Hero *hero = _field.getHero();
-    if (hero) {
-        float posx = hero->getPositionX();
-        _heroWidget->setPositionX(posx);
-        _fieldScroller->setPositionY(-hero->getPositionY() + heroYOffsetOnScreen);
+    _fieldCamera->setPositionY(_heroWidget->getPositionY() + _cameraYOffset);
+    
+    for (auto it = _enemiesWidgets.begin(); it != _enemiesWidgets.end(); ) {
+        EnemyWidget *widget = (*it);
+        if (widget && widget->isDeletionAllowed()) {
+            _fieldScroller->removeChild(widget);
+            it = _enemiesWidgets.erase(it);
+        } else {
+            ++it;
+        }
     }
     
     refreshInterface();
@@ -116,6 +136,7 @@ void FieldLayer::acceptEvent(const Event &event)
             FieldSectorWidget *widget = FieldSectorWidget::create(sector);
             widget->setPositionX(sector->getX());
             widget->setPositionY(sector->getY());
+            widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
             _fieldScroller->addChild(widget, 0, uid);
         }
     } else if (event.is("SectorDeleted")) {
@@ -129,14 +150,18 @@ void FieldLayer::acceptEvent(const Event &event)
             if (type == Entity::Type::OBSTACLE) {
                 auto obstacle = dynamic_cast<Obstacle *>(entity);
                 auto widget = ObstacleWidget::create(obstacle);
+                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
                 _fieldScroller->addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
-                auto widget = EnemyWidget::create(enemy, _effectsOnField);
+                auto widget = EnemyWidget::create(enemy);
+                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
                 _fieldScroller->addChild(widget, 2, uid);
+                _enemiesWidgets.push_back(widget);
             } else if (type == Entity::Type::PROJECTILE) {
                 auto proj = dynamic_cast<Projectile *>(entity);
                 auto widget = ProjectileWidget::create(proj);
+                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
                 _fieldScroller->addChild(widget, 10, uid);
             }
         } else {
@@ -144,7 +169,10 @@ void FieldLayer::acceptEvent(const Event &event)
         }
     } else if (event.is("EntityDeleted")) {
         Uid uid = event.variables.getInt("uid");
-        _fieldScroller->removeChildByTag(uid, true);
+        auto entity = _field.getEntityByUid(uid);
+        if (entity && !entity->isType(Entity::Type::ENEMY)) {
+            _fieldScroller->removeChildByTag(uid, true);
+        }
     } else if (event.is("HeroKilled")) {
         Hero *hero = _field.getHero();
         
