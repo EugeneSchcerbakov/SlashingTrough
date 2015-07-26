@@ -14,7 +14,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/ControlKeyboard.cpp \
                    ../../Classes/ControlTouch.cpp \
-                   ../../Classes/EffectEnemyDeath.cpp \
                    ../../Classes/EffectsLayer.cpp \
                    ../../Classes/Enemy.cpp \
                    ../../Classes/EnemyWidget.cpp \
