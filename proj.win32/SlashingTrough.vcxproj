@@ -140,7 +140,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\ControlKeyboard.cpp" />
     <ClCompile Include="..\Classes\ControlTouch.cpp" />
-    <ClCompile Include="..\Classes\EffectEnemyDeath.cpp" />
     <ClCompile Include="..\Classes\EffectsLayer.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EnemyWidget.cpp" />
@@ -176,7 +175,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\ControlKeyboard.h" />
     <ClInclude Include="..\Classes\ControlTouch.h" />
-    <ClInclude Include="..\Classes\EffectEnemyDeath.h" />
     <ClInclude Include="..\Classes\EffectsLayer.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EnemyWidget.h" />

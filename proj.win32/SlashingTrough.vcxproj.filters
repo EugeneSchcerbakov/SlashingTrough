@@ -24,9 +24,6 @@
     <ClCompile Include="..\Classes\ControlTouch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EffectEnemyDeath.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\EffectsLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -126,9 +123,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ControlTouch.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EffectEnemyDeath.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\EffectsLayer.h">
