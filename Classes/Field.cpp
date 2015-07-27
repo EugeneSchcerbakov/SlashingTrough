@@ -31,11 +31,11 @@ void Field::initialize()
         _difficult = gameinfo.getDiffucultSettings()[_difficultIndex];
     }
     
-    _sectorSquaresByY = gameinfo.getInt("SEСTOR_SQUARES_COUNT");
+    _defaultSectorYSquares = gameinfo.getInt("DEFAULT_SEСTOR_SQUARES_COUNT");
     _squareSize = gameinfo.getFloat("SQUARE_SIZE");
 
     float heroStartX = _squareSize * 3.0f * 0.5f;
-    float heroStartY = _sectorSquaresByY * _squareSize; // leave one sector behind
+    float heroStartY = _defaultSectorYSquares * _squareSize; // leave one sector behind
     
     _hero = new Hero();
     _hero->setPosition(heroStartX, heroStartY);
@@ -107,7 +107,7 @@ void Field::idleUpdate(float dt)
     {
         Entity *entity = (*iter);
         if (entity->isAlive()) {
-            int sectorHeight = _sectorSquaresByY * _squareSize;
+            int sectorHeight = _defaultSectorYSquares * _squareSize;
             float entityY = entity->getPositionY();
             float heroY = _hero->getPositionY();
             if (entityY + sectorHeight < heroY) {
@@ -139,15 +139,20 @@ void Field::pushFrontSector(bool empty)
         difficult.enemiesPerSector.clear();
     }
     
+    int squareCount = difficult.squaresCount;
+    if (squareCount <= 0) {
+        squareCount = _defaultSectorYSquares;
+    }
+    
     FieldSector::Ptr sector = FieldSector::create();
-    auto content = sector->generate(_sectorSquaresByY, difficult, this);
+    auto content = sector->generate(squareCount, difficult, this);
     
     // place sector to field
     float ypos = 0.0f;
     if (!_sectors.empty()) {
         SectorsSequence::const_iterator last = --_sectors.end();
         float lastYPos = (*last)->getY();
-        ypos = lastYPos + sector->getHeight();
+        ypos = lastYPos + (*last)->getHeight();
     }
     
     sector->setX(0.0f);
@@ -194,7 +199,7 @@ void Field::updateDifficult()
 {
     GameInfo &gameinfo = GameInfo::getInstance();
     const GameInfo::DiffucultSettings &settings = gameinfo.getDiffucultSettings();
-    if (_passedSectors >= _difficult.sectors) {
+    if (_passedSectors >= _difficult.sectorsCount) {
         _passedSectors = 0;
         ++_difficultIndex;
         if ((std::size_t)_difficultIndex < settings.size()) {

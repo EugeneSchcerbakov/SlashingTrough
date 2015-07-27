@@ -47,7 +47,7 @@ private:
     
     int _passedSectors;
     int _difficultIndex;
-    int _sectorSquaresByY;
+    int _defaultSectorYSquares;
     int _squareSize;
 };
 

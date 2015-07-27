@@ -34,10 +34,12 @@ public:
         SpawnList enemiesPerSector;
         SpawnList obstaclesPerSector;
         float speed;
-        int sectors;
+        int squaresCount;
+        int sectorsCount;
         
         DifficultInfo()
-        : sectors(0)
+        : sectorsCount(0)
+        , squaresCount(0)
         {}
     };
     

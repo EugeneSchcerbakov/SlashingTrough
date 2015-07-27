@@ -54,7 +54,8 @@ bool GameInfo::loadInfo(const std::string &filename)
         while (diffSettingsNode) {
             tinyxml2::XMLElement *elem = diffSettingsNode->ToElement();
             GameInfo::DifficultInfo difficult;
-            difficult.sectors = elem->IntAttribute("sectors");
+            difficult.sectorsCount = elem->IntAttribute("sectors");
+            difficult.squaresCount = elem->IntAttribute("squaresCount");
             difficult.speed = elem->FloatAttribute("runningSpeed");
             tinyxml2::XMLNode *spawnInfoNode = diffSettingsNode->FirstChild();
             while (spawnInfoNode) {
