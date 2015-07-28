@@ -27,10 +27,17 @@ void SessionInfo::load(const std::string &filename)
 {
     _saveFileName = filename;
     
-    auto fileUtils = cocos2d::FileUtils::getInstance();
-    std::string path = fileUtils->getWritablePath();
-    std::string fullPath = path + _saveFileName;
-    
+	std::string path, fullPath;
+
+	auto fileUtils = cocos2d::FileUtils::getInstance();
+	auto platform = cocos2d::Application::getInstance()->getTargetPlatform();
+	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
+		path = "";
+	} else {
+		path = fileUtils->getWritablePath();
+	}
+	fullPath = path + _saveFileName;
+
     if (!fileUtils->isFileExist(fullPath))
     {
         save();
@@ -66,11 +73,19 @@ void SessionInfo::load(const std::string &filename)
 
 void SessionInfo::save()
 {
+	std::string path, fullPath;
+
     auto fileUtils = cocos2d::FileUtils::getInstance();
-    std::string path = fileUtils->getWritablePath();
-    std::string fullPath = path + _saveFileName;
+	auto platform = cocos2d::Application::getInstance()->getTargetPlatform();
+	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
+		path = ""; // save in the same folder with exe if running under windows
+	} else {
+		path = fileUtils->getWritablePath();
+	}
+
+	fullPath = path + _saveFileName;
     
-    FILE *file = fopen(fullPath.c_str(), "w");
+	FILE *file = fopen(fullPath.c_str(), "w");
     if (file)
     {
         tinyxml2::XMLDocument document;
