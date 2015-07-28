@@ -44,6 +44,7 @@ bool ProjectileWidget::init()
     addChild(_sprite);
     scheduleUpdate();
     setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
+	setPositionZ(_sprite->getTexture()->getContentSize().height);
     
     if (_projectile) {
         float x = _projectile->getPositionX();
