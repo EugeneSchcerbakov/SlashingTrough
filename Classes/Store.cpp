@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
 
+const std::string Store::DEFAULT_WEAPON_ID = "default_sword";
+
 Store& Store::getInstance()
 {
     static Store singleInstance;
@@ -84,7 +86,7 @@ void Store::loadStore(const std::string &filename)
     
     std::string equippedWeaponId = profile.getEquippedWeaponId();
     if (equippedWeaponId.empty()) {
-        Equip::Ptr wpn = getItemById("default_sword");
+        Equip::Ptr wpn = getItemById(Store::DEFAULT_WEAPON_ID);
         CC_ASSERT(wpn != nullptr);
         profile.addOwnedEquip(wpn->id);
         profile.equipWeapon(wpn);

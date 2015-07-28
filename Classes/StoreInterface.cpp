@@ -155,12 +155,15 @@ void StoreInterface::update(float dt)
     }
     
     Equip::Ptr ptr = Store::getInstance().getItemById(session.getEquippedWeaponId());
-    EquipWeapon *wpn = EquipWeapon::cast(ptr);
-    
-    int lastDamage = atoi(_damageText->getString().c_str());
-    int nowDamage = wpn->damage;
-    if (lastDamage != nowDamage) {
-        _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
+    if (ptr) {
+        EquipWeapon *wpn = EquipWeapon::cast(ptr);
+        int lastDamage = atoi(_damageText->getString().c_str());
+        int nowDamage = wpn->damage;
+        if (lastDamage != nowDamage) {
+            _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
+        }
+    } else {
+        CC_ASSERT(false);
     }
 }
 

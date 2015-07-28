@@ -39,7 +39,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
         const float deltaX = _squareSize;
         const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = _hero->getWeapon()->speed;
+        const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
         
         HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
@@ -54,7 +54,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
         const float deltaX = -_squareSize;
         const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = _hero->getWeapon()->speed;
+        const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
         
         HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))

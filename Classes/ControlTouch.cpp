@@ -79,7 +79,7 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         if (scalar >= 0.8) {
             const float deltaX = _squareSize;
             const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = _hero->getWeapon()->speed;
+            const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
             if (_hero->isAbleToPerform(action))
@@ -96,7 +96,7 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         {
             const float deltaX = -_squareSize;
             const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = _hero->getWeapon()->speed;
+            const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
             if (_hero->isAbleToPerform(action))

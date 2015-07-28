@@ -44,8 +44,10 @@ void Hero::init()
     Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
     setWeapon(weapon);
     
-    for (auto ability : getWeapon()->abilities) {
-        ability->init(this);
+    if (getWeapon()) {
+        for (auto ability : getWeapon()->abilities) {
+            ability->init(this);
+        }
     }
     
     flushScore();
@@ -121,8 +123,10 @@ void Hero::attack()
             if (len <= _radius && dotp >= area) {
                 entity->addHealth(-_damage);
                 
-                for (auto ability : getWeapon()->abilities) {
-                    ability->onHit(entity);
+                if (getWeapon()) {
+                    for (auto ability : getWeapon()->abilities) {
+                        ability->onHit(entity);
+                    }
                 }
                 
                 if (!entity->isAlive()) {
@@ -133,8 +137,10 @@ void Hero::attack()
                         addStamina(reward->getStaminaPoints());
                         addScorePoint(reward->getScorePoints());
                         
-                        for (auto ability : getWeapon()->abilities) {
-                            ability->onKill(entity);
+                        if (getWeapon()) {
+                            for (auto ability : getWeapon()->abilities) {
+                                ability->onKill(entity);
+                            }
                         }
                     }
                 }

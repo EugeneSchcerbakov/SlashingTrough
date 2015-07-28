@@ -7,6 +7,7 @@
 //
 
 #include "HeroWidget.h"
+#include "Store.h"
 
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
@@ -41,19 +42,27 @@ bool HeroWidget::init()
     _hero->setupAccepter(accepter, static_cast<void *>(this));
     EquipWeapon *weapon = _hero->getWeapon();
     float trailLen = 0.0f, trailWidth = 0.0f;
-    std::string trailTex;
+    std::string trailTex, swordTex;
     if (weapon) {
         trailLen = weapon->trail.length;
         trailWidth = weapon->trail.width;
         trailTex = weapon->trail.texture;
+        swordTex = weapon->sprite;
     } else {
         CC_ASSERT(weapon);
+        // trying to stay stable
+        Equip::WeakPtr default_ptr = Store::getInstance().getItemById(Store::DEFAULT_WEAPON_ID);
+        EquipWeapon *default_wpn = EquipWeapon::cast(default_ptr.lock());
+        trailLen = default_wpn->trail.length;
+        trailWidth = default_wpn->trail.width;
+        trailTex = default_wpn->trail.texture;
+        swordTex = default_wpn->sprite;
     }
     
     _bodyController = cocos2d::Node::create();
     _body = cocos2d::Sprite::create("gamefield/hero.png");
     _sword = cocos2d::Sprite::create();
-    _sword->setTexture(weapon->sprite);
+    _sword->setTexture(swordTex);
     _sword->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
     _sword->setPosition(_swordRightTrans.pos);
     _sword->setRotation(_swordRightTrans.angle);
@@ -91,6 +100,7 @@ void HeroWidget::update(float dt)
             posYCoeff = weapon->trail.posYCoeff;
         } else {
             CC_ASSERT(false);
+            posYCoeff = 0.0f;
         }
         
         float x = _sword->getContentSize().width * posXCoeff;

@@ -20,6 +20,8 @@ class Store
 public:
     typedef std::vector<Equip::Ptr> Items;
     
+    static const std::string DEFAULT_WEAPON_ID;
+    
 public:
     static Store& getInstance();
     
