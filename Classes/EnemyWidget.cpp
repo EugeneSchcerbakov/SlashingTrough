@@ -61,6 +61,10 @@ protected:
         _bar = cocos2d::DrawNode::create();
         _bar->drawSolidRect(cocos2d::Vec2::ZERO, cocos2d::Vec2(1.0f, barHeightPx), cocos2d::Color4F::RED);
         
+        float coeff = (float)_curHealthPoints / (float)_maxHealthPoints;
+        float width = MAX_WIDTH_PX * coeff;
+        _bar->setScaleX(width);
+        
         addChild(_bar);
         scheduleUpdate();
         
