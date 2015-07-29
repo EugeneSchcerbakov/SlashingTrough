@@ -6,7 +6,7 @@
         desc="Your default weapon"
         icon="icons/icon_iron_sword.png"
         sprite="gamefield/wpn_iron_sword.png"
-        damage="1.0"
+        damage="10.0"
         speed="0.33"
         distance="300.0">
         <Trail length="0.1"
@@ -14,5 +14,50 @@
             posYCoeff="0.6"
             opacity="0.8"
             texture="effects/trail.png"/>
-    </Weapon>
+			</Weapon>
+			<Weapon id="ice_sword"
+					 price="100"
+					 name="Frozen blade"
+					 desc="Chilled and light"
+					 icon="icons/icon_ice_sword.png"
+					 sprite="gamefield/wpn_iron_sword.png"
+					 damage="15.0"
+					 speed="0.31"
+					 distance="350.0">
+						<Trail length="0.1"
+							 width="200.0"
+							 posYCoeff="0.6"
+							 opacity="0.8"
+							 texture="effects/trail.png"/>
+				</Weapon>
+				<Weapon id="noble_sword"
+						 price="300"
+						 name="Noble Sword"
+						 desc="Looks expencive"
+						 icon="icons/icon_noble_sword.png"
+						 sprite="gamefield/wpn_iron_sword.png"
+						 damage="20.0"
+						 speed="0.33"
+						 distance="350.0">
+							<Trail length="0.1"
+								 width="200.0"
+								 posYCoeff="0.6"
+								 opacity="0.8"
+								 texture="effects/trail.png"/>
+					</Weapon>
+					<Weapon id="lava_sword"
+							 price="1000"
+							 name="Lava Sword"
+							 desc="It's hot!"
+							 icon="icons/icon_lava_sword.png"
+							 sprite="gamefield/wpn_iron_sword.png"
+							 damage="25.0"
+							 speed="0.33"
+							 distance="350.0">
+								<Trail length="0.1"
+									 width="200.0"
+									 posYCoeff="0.6"
+									 opacity="0.8"
+									 texture="effects/trail.png"/>
+						</Weapon>
 </Store>
