@@ -32,6 +32,8 @@ void AppDelegate::initGLContextAttrs()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    srand(time(nullptr));
+    
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
