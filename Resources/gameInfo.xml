@@ -34,6 +34,8 @@
 	</GlobalVariables>
 
 	<DifficultProgress>
+        <Stage sectors="1" runningSpeed="460" squaresCount="5">
+        </Stage>
         <Stage sectors="1" runningSpeed="460" squaresCount="3">
             <Enemy name="enemy-A" amount="1" />
             <Enemy name="enemy-B" amount="0" />
