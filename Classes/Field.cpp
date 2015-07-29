@@ -10,7 +10,7 @@
 
 Field::Field()
 : ModelBase()
-, _passedSectors(0)
+, _generatedSectors(0)
 , _difficultIndex(0)
 , _hero(nullptr)
 {
@@ -46,6 +46,7 @@ void Field::initialize()
     int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
         pushFrontSector();
+        updateDifficult();
     }
 }
 
@@ -94,7 +95,6 @@ void Field::idleUpdate(float dt)
             e.variables.setInt("uid", sector->getUid());
             sendEvent(e);
             
-            ++_passedSectors;
             iter = _sectors.erase(iter);
             pushFrontSector();
             updateDifficult();
@@ -149,6 +149,7 @@ void Field::pushFrontSector()
     sector->setY(ypos);
     
     _sectors.push_back(sector);
+    ++_generatedSectors;
     
     Event e("SectorAdded");
     e.variables.setInt("uid", sector->getUid());
@@ -189,8 +190,8 @@ void Field::updateDifficult()
 {
     GameInfo &gameinfo = GameInfo::getInstance();
     const GameInfo::DiffucultSettings &settings = gameinfo.getDiffucultSettings();
-    if (_passedSectors >= _difficult.sectorsCount) {
-        _passedSectors = 0;
+    if (_generatedSectors >= _difficult.sectorsCount) {
+        _generatedSectors = 0;
         ++_difficultIndex;
         if ((std::size_t)_difficultIndex < settings.size()) {
             _difficult = settings[_difficultIndex];

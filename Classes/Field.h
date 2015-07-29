@@ -45,7 +45,7 @@ private:
     Entities _entities;
     GameInfo::DifficultInfo _difficult;
     
-    int _passedSectors;
+    int _generatedSectors;
     int _difficultIndex;
     int _defaultSectorYSquares;
     int _squareSize;
