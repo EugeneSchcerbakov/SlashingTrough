@@ -48,35 +48,7 @@ bool GameInfo::loadInfo(const std::string &filename)
             }
             globVarNode = globVarNode->NextSibling();
         }
-        tinyxml2::XMLNode *diffSettings = globVar->NextSibling();
-        tinyxml2::XMLNode *diffSettingsNode = diffSettings->FirstChild();
-        _diffucultSettings.clear();
-        while (diffSettingsNode) {
-            tinyxml2::XMLElement *elem = diffSettingsNode->ToElement();
-            GameInfo::DifficultInfo difficult;
-            difficult.sectorsCount = elem->IntAttribute("sectors");
-            difficult.squaresCount = elem->IntAttribute("squaresCount");
-            difficult.speed = elem->FloatAttribute("runningSpeed");
-            tinyxml2::XMLNode *spawnInfoNode = diffSettingsNode->FirstChild();
-            while (spawnInfoNode) {
-                tinyxml2::XMLElement *spawnInfoElem = spawnInfoNode->ToElement();
-                SpawnInfo spawnInfo;
-                spawnInfo.name = spawnInfoElem->Attribute("name");
-                spawnInfo.amount = spawnInfoElem->IntAttribute("amount");
-                std::string type = spawnInfoElem->Name();
-                if (type == "Enemy") {
-                    difficult.enemiesPerSector.push_back(spawnInfo);
-                } else if (type == "Obstacle") {
-                    difficult.obstaclesPerSector.push_back(spawnInfo);
-                } else {
-                    CC_ASSERT(false);
-                }
-                spawnInfoNode = spawnInfoNode->NextSibling();
-            }
-            _diffucultSettings.push_back(difficult);
-            diffSettingsNode = diffSettingsNode->NextSibling();
-        }
-        tinyxml2::XMLNode *objects = diffSettings->NextSibling();
+        tinyxml2::XMLNode *objects = globVar->NextSibling();
         tinyxml2::XMLNode *objectsNode = objects->FirstChild();
         while (objectsNode) {
             tinyxml2::XMLElement *elem = objectsNode->ToElement();
@@ -147,6 +119,49 @@ bool GameInfo::loadInfo(const std::string &filename)
         return true;
     } else {
         return false;
+    }
+}
+
+bool GameInfo::loadSectors(const std::string &filename)
+{
+    cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
+    std::string path = fileUtils->fullPathForFilename(filename);
+    std::string buff = fileUtils->getStringFromFile(path);
+    
+    tinyxml2::XMLDocument document;
+    tinyxml2::XMLError result = document.Parse(buff.c_str());
+    
+    if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
+    {
+        tinyxml2::XMLNode *root = document.RootElement();
+        tinyxml2::XMLNode *node = root->FirstChild();
+        
+        _diffucultSettings.clear();
+        while (node) {
+            tinyxml2::XMLElement *elem = node->ToElement();
+            GameInfo::DifficultInfo difficult;
+            difficult.sectorsCount = elem->IntAttribute("sectors");
+            difficult.squaresCount = elem->IntAttribute("squaresCount");
+            difficult.speed = elem->FloatAttribute("runningSpeed");
+            tinyxml2::XMLNode *spawnInfoNode = node->FirstChild();
+            while (spawnInfoNode) {
+                tinyxml2::XMLElement *spawnInfoElem = spawnInfoNode->ToElement();
+                SpawnInfo spawnInfo;
+                spawnInfo.name = spawnInfoElem->Attribute("name");
+                spawnInfo.amount = spawnInfoElem->IntAttribute("amount");
+                std::string type = spawnInfoElem->Name();
+                if (type == "Enemy") {
+                    difficult.enemiesPerSector.push_back(spawnInfo);
+                } else if (type == "Obstacle") {
+                    difficult.obstaclesPerSector.push_back(spawnInfo);
+                } else {
+                    CC_ASSERT(false);
+                }
+                spawnInfoNode = spawnInfoNode->NextSibling();
+            }
+            _diffucultSettings.push_back(difficult);
+            node = node->NextSibling();
+        }
     }
 }
 

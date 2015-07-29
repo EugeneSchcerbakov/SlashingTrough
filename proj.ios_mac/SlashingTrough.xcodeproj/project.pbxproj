@@ -124,6 +124,8 @@
 		CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC8811F1B516C2300030818 /* HeroWidget.cpp */; };
 		CDC881251B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
 		CDC881261B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
+		CDC93AB21B694372009A9A92 /* sectors.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC93AB11B694372009A9A92 /* sectors.xml */; };
+		CDC93AB31B694372009A9A92 /* sectors.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC93AB11B694372009A9A92 /* sectors.xml */; };
 		CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
 		CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
 		CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
@@ -308,6 +310,7 @@
 		CDC881201B516C2300030818 /* HeroWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroWidget.h; sourceTree = "<group>"; };
 		CDC881231B51808300030818 /* HeroAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroAction.cpp; sourceTree = "<group>"; };
 		CDC881241B51808300030818 /* HeroAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAction.h; sourceTree = "<group>"; };
+		CDC93AB11B694372009A9A92 /* sectors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sectors.xml; sourceTree = "<group>"; };
 		CDC9DE751B557F55006F53F6 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
 		CDC9DE761B557F55006F53F6 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileWidget.cpp; sourceTree = "<group>"; };
@@ -444,6 +447,7 @@
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
+				CDC93AB11B694372009A9A92 /* sectors.xml */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -754,6 +758,7 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				CDC93AB21B694372009A9A92 /* sectors.xml in Resources */,
 				CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
@@ -786,6 +791,7 @@
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
+				CDC93AB31B694372009A9A92 /* sectors.xml in Resources */,
 				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,

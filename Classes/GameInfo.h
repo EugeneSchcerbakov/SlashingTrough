@@ -137,6 +137,7 @@ public:
     static GameInfo& getInstance();
     
     bool loadInfo(const std::string &filename);
+    bool loadSectors(const std::string &filename);
     
     int getInt(const std::string &name, int def = 0) const;
     bool getBool(const std::string &name, bool def = false) const;
