@@ -3,17 +3,18 @@
 	<GlobalVariables>
         <Const name="HERO_DAMAGE_UP_KP" type="int" value="0" />
         <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
-				<Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
+				
+        <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
-				<Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
+        <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
         <Const name="HERO_JUMP_BACK_DISTANCE" type="float" value="200.0" />
         <Const name="HERO_JUMP_BACK_DURATION" type="float" value="0.15" />
-				<Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
+        <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
-				<Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
-				<Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="6" />
+        <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
+        <Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="6" />
         <Const name="TOUCH_SWIPE_DISTANCE" type="float" value="30.0" />
 
         <Const name="CAMERA_Y_OFFSET" type="float" value="-650.0" />
@@ -33,23 +34,23 @@
 	</GlobalVariables>
 
 	<DifficultProgress>
-				<Stage sectors="1" runningSpeed="460" squaresCount="3">
+        <Stage sectors="1" runningSpeed="460" squaresCount="3">
             <Enemy name="enemy-A" amount="1" />
             <Enemy name="enemy-B" amount="0" />
             <Obstacle name="Box" amount="0" />
         </Stage>
-				<Stage sectors="1" runningSpeed="460" squaresCount="2">
-						<Enemy name="enemy-A" amount="0" />
-						<Enemy name="enemy-B" amount="0" />
-						<Obstacle name="Box" amount="0" />
-				</Stage>
-				<Stage sectors="1" runningSpeed="460" squaresCount="3">
-						<Enemy name="enemy-A" amount="1" />
-						<Enemy name="enemy-B" amount="0" />
-						<Obstacle name="Box" amount="0" />
-				</Stage>
+        <Stage sectors="1" runningSpeed="460" squaresCount="2">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Obstacle name="Box" amount="0" />
+            </Stage>
+        <Stage sectors="1" runningSpeed="460" squaresCount="3">
+            <Enemy name="enemy-A" amount="1" />
+            <Enemy name="enemy-B" amount="0" />
+            <Obstacle name="Box" amount="0" />
+        </Stage>
 		<Stage sectors="2" runningSpeed="470" squaresCount="6">
-						<Enemy name="enemy-A" amount="2" />
+            <Enemy name="enemy-A" amount="2" />
             <Enemy name="enemy-B" amount="0" />
             <Obstacle name="Box" amount="1" />
         </Stage>
@@ -59,86 +60,86 @@
             <Obstacle name="Box" amount="1" />
         </Stage>
         <Stage sectors="3" runningSpeed="490" squaresCount="6">
-					  <Enemy name="enemy-A" amount="1" />
+            <Enemy name="enemy-A" amount="1" />
             <Enemy name="enemy-B" amount="2" />
             <Enemy name="enemy-C" amount="0" />
             <Enemy name="enemy-D" amount="0" />
             <Obstacle name="Box" amount="1" />
         </Stage>
         <Stage sectors="3" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="2" />
-					<Enemy name="enemy-B" amount="3" />
-					<Enemy name="enemy-C" amount="0" />
-					<Enemy name="enemy-D" amount="0" />
-					<Obstacle name="Box" amount="2" />
+            <Enemy name="enemy-A" amount="2" />
+            <Enemy name="enemy-B" amount="3" />
+            <Enemy name="enemy-C" amount="0" />
+            <Enemy name="enemy-D" amount="0" />
+        <Obstacle name="Box" amount="2" />
         </Stage>
-				<Stage sectors="3" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="2" />
-					<Enemy name="enemy-B" amount="3" />
-					<Enemy name="enemy-C" amount="1" />
-					<Enemy name="enemy-D" amount="0" />
-					<Obstacle name="Box" amount="2" />
+        <Stage sectors="3" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="2" />
+            <Enemy name="enemy-B" amount="3" />
+            <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="0" />
+            <Obstacle name="Box" amount="2" />
         </Stage>
-				<Stage sectors="4" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="1" />
-					<Enemy name="enemy-B" amount="3" />
-					<Enemy name="enemy-C" amount="2" />
-					<Enemy name="enemy-D" amount="0" />
-					<Obstacle name="Box" amount="3" />
+            <Stage sectors="4" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="1" />
+            <Enemy name="enemy-B" amount="3" />
+            <Enemy name="enemy-C" amount="2" />
+            <Enemy name="enemy-D" amount="0" />
+            <Obstacle name="Box" amount="3" />
         </Stage>
-				<Stage sectors="4" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="1" />
-					<Enemy name="enemy-B" amount="2" />
-					<Enemy name="enemy-C" amount="3" />
-					<Enemy name="enemy-D" amount="1" />
-					<Obstacle name="Box" amount="2" />
+            <Stage sectors="4" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="1" />
+            <Enemy name="enemy-B" amount="2" />
+            <Enemy name="enemy-C" amount="3" />
+            <Enemy name="enemy-D" amount="1" />
+            <Obstacle name="Box" amount="2" />
         </Stage>
-				<Stage sectors="5" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="1" />
-					<Enemy name="enemy-C" amount="2" />
-					<Enemy name="enemy-D" amount="2" />
-					<Obstacle name="Box" amount="2" />
-				</Stage>
-				<Stage sectors="5" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="0" />
-					<Enemy name="enemy-C" amount="2" />
-					<Enemy name="enemy-D" amount="4" />
-					<Obstacle name="Box" amount="3" />
-				</Stage>
-				<Stage sectors="6" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="0" />
-					<Enemy name="enemy-C" amount="1" />
-					<Enemy name="enemy-D" amount="3" />
-					<Enemy name="enemy-E" amount="1" />
-					<Obstacle name="Box" amount="2" />
-				</Stage>
-				<Stage sectors="6" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="0" />
-					<Enemy name="enemy-C" amount="1" />
-					<Enemy name="enemy-D" amount="2" />
-					<Enemy name="enemy-E" amount="2" />
-					<Obstacle name="Box" amount="3" />
-				</Stage>
-				<Stage sectors="7" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="0" />
-					<Enemy name="enemy-C" amount="1" />
-					<Enemy name="enemy-D" amount="2" />
-					<Enemy name="enemy-E" amount="4" />
-					<Obstacle name="Box" amount="2" />
-				</Stage>
-				<Stage sectors="8" runningSpeed="500" squaresCount="10">
-					<Enemy name="enemy-A" amount="0" />
-					<Enemy name="enemy-B" amount="0" />
-					<Enemy name="enemy-C" amount="3" />
-					<Enemy name="enemy-D" amount="2" />
-					<Enemy name="enemy-E" amount="4" />
-					<Obstacle name="Box" amount="3" />
-				</Stage>
+            <Stage sectors="5" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="1" />
+            <Enemy name="enemy-C" amount="2" />
+            <Enemy name="enemy-D" amount="2" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>
+            <Stage sectors="5" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Enemy name="enemy-C" amount="2" />
+            <Enemy name="enemy-D" amount="4" />
+            <Obstacle name="Box" amount="3" />
+        </Stage>
+            <Stage sectors="6" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="3" />
+            <Enemy name="enemy-E" amount="1" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>
+        <Stage sectors="6" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="2" />
+            <Enemy name="enemy-E" amount="2" />
+            <Obstacle name="Box" amount="3" />
+        </Stage>
+            <Stage sectors="7" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Enemy name="enemy-C" amount="1" />
+            <Enemy name="enemy-D" amount="2" />
+            <Enemy name="enemy-E" amount="4" />
+            <Obstacle name="Box" amount="2" />
+        </Stage>
+        <Stage sectors="8" runningSpeed="500" squaresCount="10">
+            <Enemy name="enemy-A" amount="0" />
+            <Enemy name="enemy-B" amount="0" />
+            <Enemy name="enemy-C" amount="3" />
+            <Enemy name="enemy-D" amount="2" />
+            <Enemy name="enemy-E" amount="4" />
+            <Obstacle name="Box" amount="3" />
+        </Stage>
 	</DifficultProgress>
     <GameplayObjects>
         <Obstacle name="Box"
@@ -152,23 +153,23 @@
             scorePointsReward="0"
             sprite="gamefield/obstacle_0.png" />
         <Enemy name="enemy-A"
-                    health="5.0"
-                    damage="5.0"
-					   staminaDrainPoints="0"
-					   staminaPointsReward="0"
-					   goldPointsReward="1"
-					   scorePointsReward="0"
-					   killPoints="1"
+            health="5.0"
+            damage="5.0"
+                staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="1"
+                scorePointsReward="0"
+                killPoints="1"
             sprite="gamefield/creep_0.png">
         </Enemy>
         <Enemy name="enemy-B"
-					 health="10.0"
-                     damage="5.0"
-                     staminaDrainPoints="0"
-						 staminaPointsReward="0"
-						 goldPointsReward="2"
-						 scorePointsReward="0"
-						 killPoints="1"
+            health="10.0"
+            damage="5.0"
+            staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="2"
+                scorePointsReward="0"
+                killPoints="1"
             sprite="gamefield/creep_1.png" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
@@ -179,41 +180,40 @@
                 projectileLifeTime="0.8" />
         </Enemy>
         <Enemy name="enemy-C"
-				 health="12.0"
-				 damage="10.0"
-						 staminaDrainPoints="0"
-						 staminaPointsReward="0"
-						 goldPointsReward="3"
-						 scorePointsReward="0"
-						 killPoints="1"
+            health="12.0"
+            damage="10.0"
+                staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="3"
+                scorePointsReward="0"
+                killPoints="1"
             sprite="gamefield/creep_2.png" >
-
         </Enemy>
         <Enemy name="enemy-D"
-					 health="17.0"
-					 damage="10.0"
-						 staminaDrainPoints="0"
-						 staminaPointsReward="0"
-						 goldPointsReward="5"
-						 scorePointsReward="0"
-						 killPoints="1"
+            health="17.0"
+            damage="10.0"
+                staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="5"
+                scorePointsReward="0"
+                killPoints="1"
             sprite="gamefield/creep_3.png" >
-						<RangeAttack distance="750.0"
-							 recoveryTime="20.3"
-							 healthDamage="20.0"
-							 staminaDamage="0.0"
-							 projectileTexture="gamefield/projectile_0.png"
-							 projectileSpeed="850.0"
-							 projectileLifeTime="0.8" />
+            <RangeAttack distance="750.0"
+                recoveryTime="20.3"
+                healthDamage="20.0"
+                staminaDamage="0.0"
+                projectileTexture="gamefield/projectile_0.png"
+                projectileSpeed="850.0"
+                projectileLifeTime="0.8" />
         </Enemy>
         <Enemy name="enemy-E"
-					 health="22.0"
-					 damage="10.0"
-						 staminaDrainPoints="0"
-						 staminaPointsReward="0"
-						 goldPointsReward="7"
-						 scorePointsReward="0"
-						 killPoints="1"
+            health="22.0"
+            damage="10.0"
+                staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="7"
+                scorePointsReward="0"
+                killPoints="1"
             sprite="gamefield/creep_4.png" >
         </Enemy>
     </GameplayObjects>
