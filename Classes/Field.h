@@ -27,7 +27,7 @@ public:
     
     void idleUpdate(float dt);
     
-    void pushFrontSector(bool empty = false);
+    void pushFrontSector();
     void popBackSector();
     void addEntity(Entity *entity);
     void updateDifficult();

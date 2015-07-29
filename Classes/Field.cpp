@@ -35,7 +35,7 @@ void Field::initialize()
     _squareSize = gameinfo.getFloat("SQUARE_SIZE");
 
     float heroStartX = _squareSize * 3.0f * 0.5f;
-    float heroStartY = _defaultSectorYSquares * _squareSize; // leave one sector behind
+    float heroStartY = 0.0f;
     
     _hero = new Hero();
     _hero->setPosition(heroStartX, heroStartY);
@@ -45,8 +45,7 @@ void Field::initialize()
     
     int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
-        bool empty = k <= 1;
-        pushFrontSector(empty);
+        pushFrontSector();
     }
 }
 
@@ -128,24 +127,15 @@ void Field::idleUpdate(float dt)
     }
 }
 
-void Field::pushFrontSector(bool empty)
+void Field::pushFrontSector()
 {
-    GameInfo::DifficultInfo difficult;
-    if (!empty) {
-        difficult = _difficult;
-    } else {
-        // make empty
-        difficult.obstaclesPerSector.clear();
-        difficult.enemiesPerSector.clear();
-    }
-    
-    int squareCount = difficult.squaresCount;
+    int squareCount = _difficult.squaresCount;
     if (squareCount <= 0) {
         squareCount = _defaultSectorYSquares;
     }
     
     FieldSector::Ptr sector = FieldSector::create();
-    auto content = sector->generate(squareCount, difficult, this);
+    auto content = sector->generate(squareCount, _difficult, this);
     
     // place sector to field
     float ypos = 0.0f;
