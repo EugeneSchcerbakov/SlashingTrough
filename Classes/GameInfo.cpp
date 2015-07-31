@@ -165,7 +165,10 @@ bool GameInfo::loadSectors(const std::string &filename)
             _diffucultSettings.push_back(difficult);
             node = node->NextSibling();
         }
+		return true;
     }
+
+	return false;
 }
 
 int GameInfo::getInt(const std::string &name, int def) const
