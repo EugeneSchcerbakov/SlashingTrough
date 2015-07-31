@@ -10,6 +10,7 @@
 
 Field::Field()
 : ModelBase()
+, _passedSectors(0)
 , _generatedSectors(0)
 , _difficultIndex(0)
 , _hero(nullptr)
@@ -42,6 +43,7 @@ void Field::initialize()
     _hero->setRunning(true);
     _hero->setRunningSpeed(_difficult.speed);
     _hero->setSideBorders(0.0f, _squareSize * 3.0f);
+    _heroLastYPos = _hero->getPositionY();
     
     int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
@@ -87,8 +89,13 @@ void Field::idleUpdate(float dt)
     {
         FieldSector::Ptr sector = (*iter);
         float heroY = _hero->getPositionY();
-        float sectorY = sector->getY() + sector->getHeight() * 2.0f;
-        if (sectorY < heroY)
+        float sectorH = sector->getHeight();
+        float sectorY = sector->getY();
+        if (sectorY < heroY && sectorY > _heroLastYPos) {
+            _heroLastYPos = heroY;
+            _passedSectors++;
+        }
+        if ((sectorY + sectorH * 2.0f) < heroY)
         {
             // first of all delete sector widget
             Event e("SectorDeleted");
@@ -222,4 +229,9 @@ Entity* Field::getEntityByUid(Uid uid)
 Hero* Field::getHero() const
 {
     return _hero;
+}
+
+int Field::getPassedSectors() const
+{
+    return _passedSectors;
 }

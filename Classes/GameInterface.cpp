@@ -9,6 +9,7 @@
 #include "GameInterface.h"
 
 #include "GameInfo.h"
+#include "Utils.h"
 
 GameInterface* GameInterface::create()
 {
@@ -32,22 +33,38 @@ GameInterface::~GameInterface()
 
 void GameInterface::setTimeScaleLabel(float timeScale)
 {
-    std::string label = cocos2d::StringUtils::format("x%.1f", timeScale);
+    if (misc::isPlatformDesctop()) {
+        std::string label = cocos2d::StringUtils::format("x%.1f", timeScale);
     
-    _timeScaleText->setVisible(true);
-    _timeScaleText->setString(label);
-    _timeScaleText->stopAllActions();
+        _timeScaleText->setVisible(true);
+        _timeScaleText->setString(label);
+        _timeScaleText->stopAllActions();
     
-    if (timeScale == 1.0f)
-    {
-        std::function<void()> func = [&]() {
-            _timeScaleText->setVisible(false);
-        };
+        if (timeScale == 1.0f)
+        {
+            std::function<void()> func = [&]() {
+                _timeScaleText->setVisible(false);
+            };
         
-        cocos2d::DelayTime *delay = cocos2d::DelayTime::create(2.0f);
-        cocos2d::CallFunc *callback = cocos2d::CallFunc::create(func);
-        cocos2d::Sequence *seq = cocos2d::Sequence::create(delay, callback, nullptr);
-        _timeScaleText->runAction(seq);
+            cocos2d::DelayTime *delay = cocos2d::DelayTime::create(2.0f);
+            cocos2d::CallFunc *callback = cocos2d::CallFunc::create(func);
+            cocos2d::Sequence *seq = cocos2d::Sequence::create(delay, callback, nullptr);
+            _timeScaleText->runAction(seq);
+        }
+    }
+}
+
+void GameInterface::setDifficultLable(const std::string &text)
+{
+    if (misc::isPlatformDesctop()) {
+        cocos2d::Director *director;
+        director = cocos2d::Director::getInstance();
+    
+        cocos2d::Vec2 origin = director->getVisibleOrigin();
+        cocos2d::Size screen = director->getVisibleSize();
+        _difficultText->setString(text);
+        _difficultText->setPositionX(origin.x + _difficultText->getContentSize().width * 0.5f);
+        _difficultText->setPositionY(screen.height - _difficultText->getContentSize().height * 0.5f);
     }
 }
 
@@ -92,16 +109,31 @@ bool GameInterface::init()
     cocos2d::Vec2 origin = director->getVisibleOrigin();
     cocos2d::Size screen = director->getVisibleSize();
     
-    _timeScaleText = cocos2d::ui::Text::create();
-    _timeScaleText->setFontName("font_prototype.ttf");
-    _timeScaleText->setFontSize(150);
-    _timeScaleText->setString("");
-    _timeScaleText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _timeScaleText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    const float timeScaleTextShift = -400.0f;
-    _timeScaleText->setPositionX(origin.x + screen.width * 0.5f);
-    _timeScaleText->setPositionY(origin.y + screen.height * 0.5f + timeScaleTextShift);
-    _timeScaleText->setVisible(false);
+    if (misc::isPlatformDesctop())
+    {
+        _timeScaleText = cocos2d::ui::Text::create();
+        _timeScaleText->setFontName("font_prototype.ttf");
+        _timeScaleText->setFontSize(150);
+        _timeScaleText->setString("");
+        _timeScaleText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
+        _timeScaleText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
+        const float timeScaleTextShift = -400.0f;
+        _timeScaleText->setPositionX(origin.x + screen.width * 0.5f);
+        _timeScaleText->setPositionY(origin.y + screen.height * 0.5f + timeScaleTextShift);
+        _timeScaleText->setVisible(false);
+        
+        _difficultText = cocos2d::ui::Text::create();
+        _difficultText->setFontName("arial");
+        _difficultText->setFontSize(30);
+        _difficultText->setString("2");
+        _difficultText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
+        _difficultText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
+        _difficultText->setPositionX(origin.x + _difficultText->getContentSize().width * 0.5f);
+        _difficultText->setPositionY(screen.height - _difficultText->getContentSize().height * 0.5f);
+        
+        addChild(_timeScaleText);
+        addChild(_difficultText);
+    }
     
     cocos2d::Color4F backingColor(0.2f, 0.2f, 0.2f, 0.7f);
     
@@ -189,7 +221,6 @@ bool GameInterface::init()
     addChild(killPointsBack);
     addChild(damagePointsBack);
     addChild(healthPointsBack);
-    addChild(_timeScaleText);
     
     GameInfo &gameinfo = GameInfo::getInstance();
     

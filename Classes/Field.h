@@ -35,6 +35,7 @@ public:
     FieldSector::Ptr getSectorByUid(Uid uid);
     Entity* getEntityByUid(Uid uid);
     Hero* getHero() const;
+    int getPassedSectors() const;
     
 private:
     typedef std::list<FieldSector::Ptr> SectorsSequence;
@@ -45,6 +46,9 @@ private:
     Entities _entities;
     GameInfo::DifficultInfo _difficult;
     
+    float  _heroLastYPos;
+    
+    int _passedSectors;
     int _generatedSectors;
     int _difficultIndex;
     int _defaultSectorYSquares;

@@ -36,6 +36,7 @@ public:
         float speed;
         int squaresCount;
         int sectorsCount;
+        std::string id;
         
         DifficultInfo()
         : sectorsCount(0)
@@ -156,6 +157,8 @@ public:
     GameplayObjectsTypes getEnemiesTypes() const;
     
     const DiffucultSettings& getDiffucultSettings() const;
+    
+    DifficultInfo getDifficultForSector(int sector) const;
     
 private:
     VariablesSet _variables;

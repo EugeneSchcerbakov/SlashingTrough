@@ -1,111 +1,111 @@
 <?xml version="1.0"?>
 <DifficultProgress>
-    <Stage sectors="1" runningSpeed="460" squaresCount="5">
-    </Stage>
-    <Stage sectors="1" runningSpeed="460" squaresCount="3">
+    <Stage-0 sectors="1" runningSpeed="460" squaresCount="5">
+    </Stage-0>
+    <Stage-1 sectors="1" runningSpeed="460" squaresCount="3">
         <Enemy name="enemy-A" amount="1" />
         <Enemy name="enemy-B" amount="0" />
         <Obstacle name="Box" amount="0" />
-    </Stage>
-    <Stage sectors="1" runningSpeed="460" squaresCount="2">
+    </Stage-1>
+    <Stage-2 sectors="1" runningSpeed="460" squaresCount="2">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Obstacle name="Box" amount="0" />
-    </Stage>
-    <Stage sectors="1" runningSpeed="460" squaresCount="3">
+    </Stage-2>
+    <Stage-3 sectors="1" runningSpeed="460" squaresCount="3">
         <Enemy name="enemy-A" amount="1" />
         <Enemy name="enemy-B" amount="0" />
         <Obstacle name="Box" amount="0" />
-    </Stage>
-    <Stage sectors="2" runningSpeed="470" squaresCount="6">
+    </Stage-3>
+    <Stage-4 sectors="2" runningSpeed="470" squaresCount="6">
         <Enemy name="enemy-A" amount="2" />
         <Enemy name="enemy-B" amount="0" />
         <Obstacle name="Box" amount="1" />
-    </Stage>
-    <Stage sectors="2" runningSpeed="480" squaresCount="6">
+    </Stage-4>
+    <Stage-5 sectors="2" runningSpeed="480" squaresCount="6">
         <Enemy name="enemy-A" amount="2" />
         <Enemy name="enemy-B" amount="1" />
         <Obstacle name="Box" amount="1" />
-    </Stage>
-    <Stage sectors="3" runningSpeed="490" squaresCount="6">
+    </Stage-5>
+    <Stage-6 sectors="3" runningSpeed="490" squaresCount="6">
         <Enemy name="enemy-A" amount="1" />
         <Enemy name="enemy-B" amount="2" />
         <Enemy name="enemy-C" amount="0" />
         <Enemy name="enemy-D" amount="0" />
         <Obstacle name="Box" amount="1" />
-    </Stage>
-    <Stage sectors="3" runningSpeed="500" squaresCount="10">
+    </Stage-6>
+    <Stage-7 sectors="3" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="2" />
         <Enemy name="enemy-B" amount="3" />
         <Enemy name="enemy-C" amount="0" />
         <Enemy name="enemy-D" amount="0" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="3" runningSpeed="500" squaresCount="10">
+    </Stage-7>
+    <Stage-8 sectors="3" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="2" />
         <Enemy name="enemy-B" amount="3" />
         <Enemy name="enemy-C" amount="1" />
         <Enemy name="enemy-D" amount="0" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="4" runningSpeed="500" squaresCount="10">
+    </Stage-8>
+    <Stage-9 sectors="4" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="1" />
         <Enemy name="enemy-B" amount="3" />
         <Enemy name="enemy-C" amount="2" />
         <Enemy name="enemy-D" amount="0" />
         <Obstacle name="Box" amount="3" />
-    </Stage>
-    <Stage sectors="4" runningSpeed="500" squaresCount="10">
+    </Stage-9>
+    <Stage-10 sectors="4" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="1" />
         <Enemy name="enemy-B" amount="2" />
         <Enemy name="enemy-C" amount="3" />
         <Enemy name="enemy-D" amount="1" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="5" runningSpeed="500" squaresCount="10">
+    </Stage-10>
+    <Stage-11 sectors="5" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="1" />
         <Enemy name="enemy-C" amount="2" />
         <Enemy name="enemy-D" amount="2" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="5" runningSpeed="500" squaresCount="10">
+    </Stage-11>
+    <Stage-12 sectors="5" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="2" />
         <Enemy name="enemy-D" amount="4" />
         <Obstacle name="Box" amount="3" />
-    </Stage>
-    <Stage sectors="6" runningSpeed="500" squaresCount="10">
+    </Stage-12>
+    <Stage-13 sectors="6" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="1" />
         <Enemy name="enemy-D" amount="3" />
         <Enemy name="enemy-E" amount="1" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="6" runningSpeed="500" squaresCount="10">
+    </Stage-13>
+    <Stage-14 sectors="6" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="1" />
         <Enemy name="enemy-D" amount="2" />
         <Enemy name="enemy-E" amount="2" />
         <Obstacle name="Box" amount="3" />
-    </Stage>
-    <Stage sectors="7" runningSpeed="500" squaresCount="10">
+    </Stage-14>
+    <Stage-15 sectors="7" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="1" />
         <Enemy name="enemy-D" amount="2" />
         <Enemy name="enemy-E" amount="4" />
         <Obstacle name="Box" amount="2" />
-    </Stage>
-    <Stage sectors="8" runningSpeed="500" squaresCount="10">
+    </Stage-15>
+    <Stage-16 sectors="8" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="3" />
         <Enemy name="enemy-D" amount="2" />
         <Enemy name="enemy-E" amount="4" />
         <Obstacle name="Box" amount="3" />
-    </Stage>
+    </Stage-16>
 </DifficultProgress>

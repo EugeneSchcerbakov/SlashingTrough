@@ -124,6 +124,11 @@ void FieldLayer::refreshInterface()
         float curStaminaPoints = hero->getStamina();
         
         _gameInterface->setStaminaPoints(curStaminaPoints / maxStaminaPoints);
+        
+        int passedSectors = _field.getPassedSectors();
+        auto difficult = GameInfo::getInstance().getDifficultForSector(passedSectors);
+        std::string difficultText = cocos2d::StringUtils::format("%s", difficult.id.c_str());
+        _gameInterface->setDifficultLable(difficultText);
     }
 }
 

@@ -20,6 +20,8 @@ public:
     static GameInterface* create();
     
     void setTimeScaleLabel(float timeScale);
+    void setDifficultLable(const std::string &text);
+    
     void setGoldPointsLabel(int value);
     void setKillPointsLabel(int value);
     void setDamagePointsLabel(int value);
@@ -37,7 +39,10 @@ private:
     cocos2d::ui::Text *_killPointsText;
     cocos2d::ui::Text *_damagePointsText;
     cocos2d::ui::Text *_healthPointsText;
+    
+    // debug output
     cocos2d::ui::Text *_timeScaleText;
+    cocos2d::ui::Text *_difficultText;
     
     StaminaBarWidget *_staminaBar;
 };
