@@ -124,6 +124,8 @@ public:
         MelleAttack melleAttack;
         
         std::string sprite;
+        std::string model;
+        int colorR, colorG, colorB;
         
         EnemyType()
         {}

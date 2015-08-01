@@ -39,11 +39,13 @@ private:
     
     Enemy *_enemy;
     
-    cocos2d::Sprite *_sprite;
+    cocos2d::Node *_sprite;
     cocos2d::Sprite *_blood;
     cocos2d::Sprite *_weapon;
     HealthBar *_healhBar;
     MelleHitZone *_hitZoneWidget;
+    
+    float _scale;
     
     bool _allowDeletion;
 };

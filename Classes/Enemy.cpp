@@ -221,6 +221,11 @@ bool Enemy::isMelleType(GameInfo::EnemyType::Melle type) const
     return _melleAttack.allowed ? type == _melleAttack.condition : false;
 }
 
+const std::string& Enemy::getModelFilename() const
+{
+    return _modelFilename;
+}
+
 void Enemy::init(const GameInfo::EnemyType &type)
 {
     _health = type.health;
@@ -230,6 +235,10 @@ void Enemy::init(const GameInfo::EnemyType &type)
     _staminaDrainPoints = type.staminaDrainPoints;
     _rangeAttack = type.rangeAttack;
     _melleAttack = type.melleAttack;
+    _modelFilename = type.model;
+    _r = type.colorR;
+    _g = type.colorG;
+    _b = type.colorB;
     
     const float squareSize = GameInfo::getInstance().getFloat("SQUARE_SIZE");
     

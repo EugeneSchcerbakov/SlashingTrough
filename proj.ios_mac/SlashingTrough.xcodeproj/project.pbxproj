@@ -90,6 +90,8 @@
 		CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
 		CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
+		CDB37C1D1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
+		CDB37C1E1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
 		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDC520881B54238700732FD0 /* WeaponAbilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520861B54238700732FD0 /* WeaponAbilities.cpp */; };
@@ -278,6 +280,7 @@
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
 		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
+		CDB37C1C1B6CCB2F00138775 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
 		CDC520861B54238700732FD0 /* WeaponAbilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeaponAbilities.cpp; sourceTree = "<group>"; };
 		CDC520871B54238700732FD0 /* WeaponAbilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponAbilities.h; sourceTree = "<group>"; };
@@ -444,6 +447,7 @@
 			children = (
 				CD7503591AFF9AF000DBD732 /* fonts */,
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
+				CDB37C1C1B6CCB2F00138775 /* models */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
@@ -774,6 +778,7 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				CDB37C1D1B6CCB2F00138775 /* models in Resources */,
 				CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */,
 				CDC7945C1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
@@ -787,6 +792,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */,
+				CDB37C1E1B6CCB2F00138775 /* models in Resources */,
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,

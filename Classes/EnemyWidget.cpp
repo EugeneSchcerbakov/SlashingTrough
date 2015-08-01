@@ -194,14 +194,48 @@ bool EnemyWidget::init()
     
     _enemy->setupAccepter(accepter, static_cast<void *>(this));
     
-    _sprite = cocos2d::Sprite::create(_enemy->getSpriteFilename());
+    float spriteHeght = 0.0f;
+    float healthBarYShift = 80.0f;
+    
+    std::string modelFilename = _enemy->getModelFilename();
+    if (!modelFilename.empty())
+    {
+        _scale = 10.0f;
+        healthBarYShift = 140.0;
+        
+        _sprite = cocos2d::Sprite3D::create(modelFilename);
+        _sprite->setScale(_scale);
+        _sprite->setRotation3D(cocos2d::Vec3(-45.0f, 180.0f, 0.0f));
+        
+        cocos2d::Color3B color;
+        color.r = (GLubyte)_enemy->getColorR();
+        color.g = (GLubyte)_enemy->getColorG();
+        color.b = (GLubyte)_enemy->getColorB();
+        _sprite->setColor(color);
+        
+        auto animation = cocos2d::Animation3D::create(modelFilename);
+        auto state = cocos2d::Animate3D::create(animation);
+        
+        float anim_speed = state->getSpeed() * 0.5 * CCRANDOM_0_1();
+        bool reverse = CCRANDOM_0_1() > 0.5f;
+        
+        state->setSpeed(reverse ? -anim_speed : anim_speed);
+        auto animate = cocos2d::RepeatForever::create(state);
+        _sprite->runAction(animate);
+    }
+    else
+    {
+        _scale = 1.0f;
+        _sprite = cocos2d::Sprite::create(_enemy->getSpriteFilename());
+        auto cast = dynamic_cast<cocos2d::Sprite *>(_sprite);
+        spriteHeght = cast->getTexture()->getContentSize().height;
+    }
     
     _blood = cocos2d::Sprite::create("effects/blood_sprite.png");
     _blood->setScale(2.0f);
     _blood->setOpacity(0);
     _blood->setVisible(false);
-    
-    float healthBarYShift = 80.0f;
+
     _healhBar = HealthBar::create(_enemy->getHealth());
     _healhBar->refresh(_enemy->getHealth());
     _healhBar->setPositionY(healthBarYShift);
@@ -214,7 +248,7 @@ bool EnemyWidget::init()
     _hitZoneWidget->setOpacity(0);
     _hitZoneWidget->setVisible(false);
     _hitZoneWidget->setRotation3D(cocos2d::Vec3(-zoneXAngle, 0.0f, 0.0f));
-    _hitZoneWidget->setPositionZ(-_sprite->getTexture()->getContentSize().height * 0.5f);
+    _hitZoneWidget->setPositionZ(-spriteHeght * 0.5f);
     
     _weapon = cocos2d::Sprite::create("gamefield/wpn_iron_sword.png");
     _weapon->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));
@@ -228,7 +262,7 @@ bool EnemyWidget::init()
     scheduleUpdate();
     setPositionX(_enemy->getPositionX());
     setPositionY(_enemy->getPositionY());
-    setPositionZ(_sprite->getTexture()->getContentSize().height * 0.5f);
+    setPositionZ(spriteHeght * 0.5f);
     setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     
     return true;
@@ -250,8 +284,8 @@ void EnemyWidget::runHitAccentEffect()
     cocos2d::Sequence *bloodEffect = cocos2d::Sequence::create(start_func, fadein, fadeout, finish_func, nullptr);
     _blood->runAction(bloodEffect);
     
-    cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.1f, 0.9f);
-    cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.1f, 1.0f);
+    cocos2d::ScaleTo *scale0 = cocos2d::ScaleTo::create(0.1f, _scale * 0.9f);
+    cocos2d::ScaleTo *scale1 = cocos2d::ScaleTo::create(0.1f, _scale);
     cocos2d::Sequence *effect = cocos2d::Sequence::create(scale0, scale1, nullptr);
     _sprite->runAction(effect);
 }

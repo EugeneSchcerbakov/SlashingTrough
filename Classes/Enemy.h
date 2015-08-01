@@ -43,6 +43,12 @@ public:
     bool isState(State state) const;
     bool isMelleType(GameInfo::EnemyType::Melle type) const;
     
+    const std::string& getModelFilename() const;
+    
+    inline int getColorR() const {return _r;}
+    inline int getColorG() const {return _g;}
+    inline int getColorB() const {return _b;}
+    
 protected:
     virtual void processRangeAttack(Hero *hero, float dt, float len);
     virtual void processMelleAttack(Hero *hero, float dt, float len);
@@ -54,6 +60,9 @@ private:
     State _state;
     State _nextState;
     Field *_field;
+    
+    std::string _modelFilename;
+    int _r, _g, _b; // color of the model
     
     GameInfo::EnemyType::RangeAttack _rangeAttack;
     GameInfo::EnemyType::MelleAttack _melleAttack;

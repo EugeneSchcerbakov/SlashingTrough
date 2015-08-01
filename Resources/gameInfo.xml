@@ -52,7 +52,9 @@
                 goldPointsReward="1"
                 scorePointsReward="0"
                 killPoints="1"
-            sprite="gamefield/creep_0.png">
+            sprite="gamefield/creep_0.png"
+            model="models/orc.c3t"
+            R="255" G="127" B="0">
         </Enemy>
         <Enemy name="enemy-B"
             health="10.0"
@@ -62,7 +64,9 @@
                 goldPointsReward="2"
                 scorePointsReward="0"
                 killPoints="1"
-            sprite="gamefield/creep_1.png" >
+            sprite="gamefield/creep_1.png"
+            model="models/orc.c3t"
+            R="255" G="0" B="255" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="10.0"
@@ -79,7 +83,9 @@
                 goldPointsReward="3"
                 scorePointsReward="0"
                 killPoints="1"
-            sprite="gamefield/creep_2.png" >
+            sprite="gamefield/creep_2.png"
+            model="models/orc.c3t"
+            R="0" G="255" B="0" >
         </Enemy>
         <Enemy name="enemy-D"
             health="17.0"
@@ -89,7 +95,9 @@
                 goldPointsReward="5"
                 scorePointsReward="0"
                 killPoints="1"
-            sprite="gamefield/creep_3.png" >
+            sprite="gamefield/creep_3.png"
+            model="models/orc.c3t"
+            R="255" G="0" B="0" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="20.0"
@@ -106,7 +114,9 @@
                 goldPointsReward="7"
                 scorePointsReward="0"
                 killPoints="1"
-            sprite="gamefield/creep_4.png" >
+            sprite="gamefield/creep_4.png"
+            model="models/orc.c3t"
+            R="0" G="0" B="255" >
         </Enemy>
     </GameplayObjects>
 </GameInfo>

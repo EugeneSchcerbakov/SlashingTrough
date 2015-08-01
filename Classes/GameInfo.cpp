@@ -78,6 +78,10 @@ bool GameInfo::loadInfo(const std::string &filename)
                 info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");
                 info.scorePointsReward = elem->IntAttribute("scorePointsReward");
                 info.sprite = elem->Attribute("sprite");
+                info.model = elem->Attribute("model") ? elem->Attribute("model") : "";
+                info.colorR = elem->IntAttribute("R");
+                info.colorG = elem->IntAttribute("G");
+                info.colorB = elem->IntAttribute("B");
                 std::string name = elem->Attribute("name");
                 if (rangeAttackInfo) {
                     info.rangeAttack.distance = rangeAttackInfo->FloatAttribute("distance");
