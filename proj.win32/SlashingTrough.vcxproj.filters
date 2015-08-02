@@ -111,6 +111,12 @@
     <ClCompile Include="..\Classes\ProjectileWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\StoreArmorWidget.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StoreItemBaseWidget.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -210,6 +216,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ProjectileWidget.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StoreArmorWidget.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StoreItemBaseWidget.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
