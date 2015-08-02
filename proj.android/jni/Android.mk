@@ -39,7 +39,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/StoreCategoryButton.cpp \
                    ../../Classes/StoreInterface.cpp \
                    ../../Classes/StoreItemButton.cpp \
+                   ../../Classes/StoreItemBaseWidget.cpp \
                    ../../Classes/StoreWeaponWidget.cpp \
+                   ../../Classes/StoreArmorWidget.cpp \
                    ../../Classes/Utils.cpp \
                    ../../Classes/VariablesSet.cpp \
                    ../../Classes/WeaponAbilities.cpp
