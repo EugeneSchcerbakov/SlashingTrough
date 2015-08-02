@@ -132,6 +132,10 @@
 		CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
 		CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
 		CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
+		CDCDEA711B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA6F1B6E2BE600B0820C /* StoreItemBaseWidget.cpp */; };
+		CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA6F1B6E2BE600B0820C /* StoreItemBaseWidget.cpp */; };
+		CDCDEA751B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */; };
+		CDCDEA761B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */; };
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
@@ -318,6 +322,10 @@
 		CDC9DE761B557F55006F53F6 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileWidget.cpp; sourceTree = "<group>"; };
 		CDC9DE7A1B558478006F53F6 /* ProjectileWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileWidget.h; sourceTree = "<group>"; };
+		CDCDEA6F1B6E2BE600B0820C /* StoreItemBaseWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreItemBaseWidget.cpp; sourceTree = "<group>"; };
+		CDCDEA701B6E2BE600B0820C /* StoreItemBaseWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItemBaseWidget.h; sourceTree = "<group>"; };
+		CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreArmorWidget.cpp; sourceTree = "<group>"; };
+		CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreArmorWidget.h; sourceTree = "<group>"; };
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -589,8 +597,12 @@
 				CD637E811B234F42002F98EF /* StoreCategoryButton.h */,
 				CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */,
 				CD637E7D1B234E75002F98EF /* StoreItemButton.h */,
+				CDCDEA6F1B6E2BE600B0820C /* StoreItemBaseWidget.cpp */,
+				CDCDEA701B6E2BE600B0820C /* StoreItemBaseWidget.h */,
 				CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */,
 				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
+				CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */,
+				CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -815,6 +827,7 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDC8811D1B51664800030818 /* Hero.cpp in Sources */,
 				CDC5E62F1B52D735000756EB /* EnemyWidget.cpp in Sources */,
+				CDCDEA711B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				CDC881091B5149BC00030818 /* VariablesSet.cpp in Sources */,
 				CDC520881B54238700732FD0 /* WeaponAbilities.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -838,6 +851,7 @@
 				CDC881011B5142DF00030818 /* Field.cpp in Sources */,
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
+				CDCDEA751B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,
 				CDC881211B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
@@ -871,8 +885,10 @@
 				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,
 				CDC881161B5155F700030818 /* ModelBase.cpp in Sources */,
+				CDCDEA761B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,
 				CDC8810E1B514AAA00030818 /* FieldLayer.cpp in Sources */,
 				CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */,
+				CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */,

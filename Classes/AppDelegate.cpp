@@ -65,8 +65,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
 	GameInfo::getInstance().loadInfo("gameInfo.xml");
     GameInfo::getInstance().loadSectors("sectors.xml");
-    SessionInfo::getInstance().load("st_save.xml");
     Store::getInstance().loadStore("storeItems.xml");
+    SessionInfo::getInstance().load("st_save.xml");
 
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);

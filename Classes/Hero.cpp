@@ -44,6 +44,10 @@ void Hero::init()
     Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
     setWeapon(weapon);
     
+    std::string armorId = SessionInfo::getInstance().getEquippeArmorId();
+    Equip::WeakPtr armor = Store::getInstance().getItemById(armorId);
+    setArmor(armor);
+    
     if (getWeapon()) {
         for (auto ability : getWeapon()->abilities) {
             ability->init(this);
@@ -215,6 +219,21 @@ void Hero::setWeapon(Equip::WeakPtr weapon)
     _radius = cast->distance;
 }
 
+void Hero::setArmor(Equip::WeakPtr armor)
+{
+    if (armor.expired()) {
+        return;
+    }
+    
+    _armor = armor;
+    Equip::Ptr base = _armor.lock();
+    EquipArmor *cast = EquipArmor::cast(base);
+    
+    float baseHealth = GameInfo::getInstance().getFloat("HERO_HEALTH_POINTS");
+    
+    _health = baseHealth + cast->addHealth;
+}
+
 void Hero::setRunningSpeed(float speed)
 {
     _runningSpeed = speed;
@@ -253,6 +272,14 @@ EquipWeapon* Hero::getWeapon() const
 {
     if (!_weapon.expired()) {
         return EquipWeapon::cast(_weapon.lock());
+    }
+    return nullptr;
+}
+
+EquipArmor* Hero::getArmor() const
+{
+    if (!_armor.expired()) {
+        return EquipArmor::cast(_armor.lock());
     }
     return nullptr;
 }

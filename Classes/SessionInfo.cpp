@@ -7,9 +7,10 @@
 //
 
 #include "SessionInfo.h"
+#include "Store.h"
+
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
-
 #include <stdio.h>
 
 SessionInfo& SessionInfo::getInstance()
@@ -48,6 +49,8 @@ void SessionInfo::load(const std::string &filename)
     tinyxml2::XMLDocument document;
     tinyxml2::XMLError result = document.Parse(buffer.c_str());
     
+    Store &store = Store::getInstance();
+    
     if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
     {
         tinyxml2::XMLNode *root = document.RootElement();
@@ -62,12 +65,29 @@ void SessionInfo::load(const std::string &filename)
         tinyxml2::XMLElement *ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
         while (ownedEquip) {
             std::string equipId = ownedEquip->Attribute("id");
-            addOwnedEquip(equipId);
+            addOwnedEquip(store.getItemById(equipId));
             ownedEquip = ownedEquip->NextSiblingElement();
         };
         
         tinyxml2::XMLElement *equippedWeapon = root->FirstChildElement("EquippedWeapon");
         _equippedWeaponId = equippedWeapon->Attribute("id");
+        
+        tinyxml2::XMLElement *equippedArmor = root->FirstChildElement("EquippedArmor");
+        _equippedArmorId = equippedArmor->Attribute("id");
+    }
+    
+    if (_equippedWeaponId.empty()) {
+        Equip::Ptr weapon = store.getItemById(Store::DEFAULT_WEAPON_ID);
+        CC_ASSERT(weapon != nullptr);
+        addOwnedEquip(weapon);
+        equip(weapon);
+    }
+    
+    if (_equippedArmorId.empty()) {
+        Equip::Ptr armor = store.getItemById(Store::DEFAULT_ARMOR_ID);
+        CC_ASSERT(armor != nullptr);
+        addOwnedEquip(armor);
+        equip(armor);
     }
 }
 
@@ -113,6 +133,10 @@ void SessionInfo::save()
         equippedWeapon->SetAttribute("id", _equippedWeaponId.c_str());
         root->LinkEndChild(equippedWeapon);
         
+        tinyxml2::XMLElement *equippedArmor = document.NewElement("EquippedArmor");
+        equippedArmor->SetAttribute("id", _equippedArmorId.c_str());
+        root->LinkEndChild(equippedArmor);
+        
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);
         
@@ -125,10 +149,10 @@ void SessionInfo::save()
     }
 }
 
-void SessionInfo::addOwnedEquip(const std::string id)
+void SessionInfo::addOwnedEquip(Equip::Ptr item)
 {
-    if (!isEquipOwned(id)) {
-        _ownedEquips.push_back(id);
+    if (!isEquipOwned(item)) {
+        _ownedEquips.push_back(item->id);
     }
 }
 
@@ -140,17 +164,22 @@ void SessionInfo::addCoins(int coins)
     }
 }
 
-void SessionInfo::equipWeapon(Equip::WeakPtr weapon)
+void SessionInfo::equip(Equip::Ptr item)
 {
-    if (weapon.expired()) {
+    if (!item) {
         CC_ASSERT(false);
         return;
     }
     
-    struct EquipWeapon *ptr = EquipWeapon::cast(weapon.lock());
-    CC_ASSERT(isEquipOwned(ptr->id));
-
-    _equippedWeaponId = ptr->id;
+    CC_ASSERT(isEquipOwned(item));
+    
+    if (item->type == Equip::Type::WEAPON) {
+        _equippedWeaponId = item->id;
+    } else if (item->type == Equip::Type::ARMOR) {
+        _equippedArmorId = item->id;
+    } else {
+        CC_ASSERT(false);
+    }
 }
 
 void SessionInfo::setBestScore(const SessionInfo::Score &score)
@@ -173,19 +202,35 @@ bool SessionInfo::isBestScore(const SessionInfo::Score &score) const
     return score.coins > _bestScore.coins;
 }
 
-bool SessionInfo::isEquipOwned(const std::string &id) const
+bool SessionInfo::isEquipOwned(Equip::Ptr item) const
 {
+    if (!item) {
+        CC_ASSERT(false);
+        return false;
+    }
+    
     for (auto equip : _ownedEquips) {
-        if (equip == id) {
+        if (equip == item->id) {
             return true;
         }
     }
     return false;
 }
 
-bool SessionInfo::isWeaponEquipped(const std::string &id) const
+bool SessionInfo::isEquipped(Equip::Ptr item) const
 {
-    return _equippedWeaponId == id;
+    if (!item) {
+        CC_ASSERT(false);
+        return false;
+    }
+    
+    if (item->type == Equip::Type::WEAPON) {
+        return _equippedWeaponId == item->id;
+    } else if (item->type == Equip::Type::ARMOR) {
+        return _equippedArmorId == item->id;
+    } else {
+        CC_ASSERT(false);
+    }
 }
 
 const std::string& SessionInfo::getEquippedWeaponId() const
@@ -193,3 +238,7 @@ const std::string& SessionInfo::getEquippedWeaponId() const
     return _equippedWeaponId;
 }
 
+const std::string& SessionInfo::getEquippeArmorId() const
+{
+    return _equippedArmorId;
+}

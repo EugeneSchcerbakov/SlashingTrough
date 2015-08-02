@@ -36,6 +36,7 @@ public:
     void addScorePoint(int scorePoint);
     
     void setWeapon(Equip::WeakPtr weapon);
+    void setArmor(Equip::WeakPtr armor);
     void setRunningSpeed(float speed);
     void setRunning(bool running);
     void setSideBorders(float left, float right);
@@ -44,6 +45,7 @@ public:
     float getStamina() const;
     HeroAction* getLastAction() const;
     EquipWeapon* getWeapon() const;
+    EquipArmor* getArmor() const;
     SessionInfo::Score getScore() const;
     
     bool isActionsQueueFull() const;
@@ -55,6 +57,7 @@ private:
 private:    
     ActionSequence _actionSequence;
     Equip::WeakPtr _weapon;
+    Equip::WeakPtr _armor;
     SessionInfo::Score _score;
     Entities *_goals;
     

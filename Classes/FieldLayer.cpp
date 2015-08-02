@@ -114,11 +114,9 @@ void FieldLayer::refreshInterface()
         _gameInterface->setKillPointsLabel(score.kills);
         _gameInterface->setDamagePointsLabel(hero->getDamage());
         
-        int totalHealth = (int)GameInfo::getInstance().getFloat("HERO_HEALTH_POINTS");
         int currentHealth = (int)hero->getHealth();
-        int percentHealth = (currentHealth * 100) / totalHealth;
         
-        _gameInterface->setHealthPointsLabel(percentHealth);
+        _gameInterface->setHealthPointsLabel(currentHealth);
         
         float maxStaminaPoints = GameInfo::getInstance().getFloat("HERO_STAMINA_POINTS");
         float curStaminaPoints = hero->getStamina();

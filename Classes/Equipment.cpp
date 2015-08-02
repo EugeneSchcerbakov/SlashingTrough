@@ -36,3 +36,19 @@ EquipWeapon::EquipWeapon()
 , distance(0.0f)
 {
 }
+
+Equip::Ptr EquipArmor::create()
+{
+    return std::make_shared<EquipArmor>();
+}
+
+EquipArmor* EquipArmor::cast(Equip::Ptr base)
+{
+    return dynamic_cast<EquipArmor *>(base.get());
+}
+
+EquipArmor::EquipArmor()
+: Equip(Type::ARMOR)
+, addHealth(0.0f)
+{
+}

@@ -21,6 +21,7 @@ public:
     typedef std::vector<Equip::Ptr> Items;
     
     static const std::string DEFAULT_WEAPON_ID;
+    static const std::string DEFAULT_ARMOR_ID;
     
 public:
     static Store& getInstance();
@@ -32,6 +33,7 @@ public:
     
     const Items& getAllItems() const;
     Items getWeaponItems() const;
+    Items getArmorItems() const;
     
 private:
     void reset();

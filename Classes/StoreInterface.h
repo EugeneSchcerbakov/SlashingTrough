@@ -10,6 +10,7 @@
 #define __SlashingTrough__StoreInterface__
 
 #include "StoreWeaponWidget.h"
+#include "StoreArmorWidget.h"
 #include "StoreCategoryButton.h"
 
 class StoreInterface : public cocos2d::Scene

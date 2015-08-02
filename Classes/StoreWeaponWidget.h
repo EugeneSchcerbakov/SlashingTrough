@@ -10,9 +10,9 @@
 #define __SlashingTrough__StoreItemWidget__
 
 #include "Store.h"
-#include "StoreItemButton.h"
+#include "StoreItemBaseWidget.h"
 
-class StoreWeaponWidget : public cocos2d::ui::Layout
+class StoreWeaponWidget : public StoreItemBaseWidget
 {
 public:
     static StoreWeaponWidget* create(Equip::WeakPtr item);
@@ -22,14 +22,9 @@ protected:
     virtual ~StoreWeaponWidget();
     
     bool init();
-    void update(float dt);
     
 private:
-    void onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
     static std::string chooseSpeedLabel(float speed);
-    
-    Equip::WeakPtr _item;
-    StoreItemButton *_button;
 };
 
 #endif /* defined(__SlashingTrough__StoreItemWidget__) */

@@ -240,6 +240,18 @@ void StoreInterface::fillScrollerWithWeapons()
 void StoreInterface::fillScrollerWithArmors()
 {
     _scroller->removeAllItems();
+    
+    Store &store = Store::getInstance();
+    Store::Items items = store.getArmorItems();
+    
+    for (auto item : items) {
+        StoreArmorWidget *widget = nullptr;
+        widget = StoreArmorWidget::create(item);
+        _scroller->pushBackCustomItem(widget);
+    }
+    
+    _scroller->refreshView();
+    _scroller->jumpToTop();
 }
 
 void StoreInterface::fillScrollerWithBoosters()

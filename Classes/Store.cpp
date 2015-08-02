@@ -13,6 +13,7 @@
 #include "tinyxml2/tinyxml2.h"
 
 const std::string Store::DEFAULT_WEAPON_ID = "default_sword";
+const std::string Store::DEFAULT_ARMOR_ID = "default_armor";
 
 Store& Store::getInstance()
 {
@@ -75,33 +76,35 @@ void Store::loadStore(const std::string &filename)
                     }
                 }
                 _items.push_back(item);
+            } else if (name == "Armor") {
+                Equip::Ptr item = EquipArmor::create();
+                EquipArmor *armor = EquipArmor::cast(item);
+                armor->id = elem->Attribute("id");
+                armor->price = elem->IntAttribute("price");
+                armor->addHealth = elem->FloatAttribute("addHealth");
+                armor->desc = elem->Attribute("desc");
+                armor->icon = elem->Attribute("icon");
+                armor->sprite = elem->Attribute("sprite");
+                armor->name = elem->Attribute("name");
+                _items.push_back(item);
             } else {
                 CC_ASSERT(false);
             }
             node = node->NextSibling();
         }
     }
-    
-    SessionInfo &profile = SessionInfo::getInstance();
-    
-    std::string equippedWeaponId = profile.getEquippedWeaponId();
-    if (equippedWeaponId.empty()) {
-        Equip::Ptr wpn = getItemById(Store::DEFAULT_WEAPON_ID);
-        CC_ASSERT(wpn != nullptr);
-        profile.addOwnedEquip(wpn->id);
-        profile.equipWeapon(wpn);
-    }
 }
 
 void Store::buy(const std::string &id)
 {
+    // don't use store in the ctor, in may no be loaded yet
     SessionInfo &session = SessionInfo::getInstance();
     
     Equip::Ptr equip = getItemById(id);
     if (equip && equip->price <= session.getCoins())
     {
         session.addCoins(-equip->price);
-        session.addOwnedEquip(equip->id);
+        session.addOwnedEquip(equip);
         equip->sold = true;
     }
 }
@@ -126,6 +129,17 @@ Store::Items Store::getWeaponItems() const
     Items items;
     for (auto item : _items) {
         if (item->type == Equip::Type::WEAPON) {
+            items.push_back(item);
+        }
+    }
+    return items;
+}
+
+Store::Items Store::getArmorItems() const
+{
+    Items items;
+    for (auto item : _items) {
+        if (item->type == Equip::Type::ARMOR) {
             items.push_back(item);
         }
     }

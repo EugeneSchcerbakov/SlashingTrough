@@ -24,6 +24,7 @@ struct Equip
     {
         NONE,
         WEAPON,
+        ARMOR
     };
     
     Equip(Type t);
@@ -61,6 +62,17 @@ struct EquipWeapon : public Equip
     std::string sprite;
     TrailInfo trail;
     Abilities abilities;
+};
+
+struct EquipArmor : public Equip
+{
+    static Equip::Ptr create();
+    static EquipArmor* cast(Equip::Ptr base);
+    
+    EquipArmor();
+    
+    float addHealth;
+    std::string sprite;
 };
 
 

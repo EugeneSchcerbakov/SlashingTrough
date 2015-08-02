@@ -37,18 +37,19 @@ public:
     void load(const std::string &filename);
     void save();
     
-    void addOwnedEquip(const std::string id);
+    void addOwnedEquip(Equip::Ptr item);
     void addCoins(int coins);
-    void equipWeapon(Equip::WeakPtr weapon);
+    void equip(Equip::Ptr item);
     void setBestScore(const Score &score);
     
     Score getBestScore() const;
     int getCoins() const;
     bool isBestScore(const Score &score) const;
-    bool isEquipOwned(const std::string &id) const;
-    bool isWeaponEquipped(const std::string &id) const;
+    bool isEquipOwned(Equip::Ptr item) const;
+    bool isEquipped(Equip::Ptr item) const;
     
     const std::string& getEquippedWeaponId() const;
+    const std::string& getEquippeArmorId() const;
     
 private:
     typedef std::vector<std::string> OwnedEquipIds;
@@ -59,6 +60,7 @@ private:
     OwnedEquipIds _ownedEquips;
     Score _bestScore;
     std::string _equippedWeaponId;
+    std::string _equippedArmorId;
     std::string _saveFileName;
 };
 

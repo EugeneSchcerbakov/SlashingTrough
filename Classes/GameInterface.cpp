@@ -88,7 +88,7 @@ void GameInterface::setDamagePointsLabel(int value)
 
 void GameInterface::setHealthPointsLabel(int value)
 {
-    std::string str = cocos2d::StringUtils::format("%d%%", value);
+    std::string str = cocos2d::StringUtils::format("%d%", value);
     _healthPointsText->setString(str);
 }
 
