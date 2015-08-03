@@ -69,28 +69,28 @@
         sprite=""
         addHealth="0">
     </Armor>
-		<Armor id="leather_armor"
-				 price="150"
-				 name="Lether Armor"
-				 desc="Made from best cows"
-				 icon="icons/icon_arm_leather.png"
-				 sprite=""
-				 addHealth="10">
-		</Armor>
-		<Armor id="noble_armor"
-				 price="500"
-				 name="Noble Chestplate"
-				 desc="Shiny, isn't it?"
-				 icon="icons/icon_arm_noble.png"
-				 sprite=""
-				 addHealth="25">
-		</Armor>
-		<Armor id="black_armor"
-				 price="1500"
-				 name="Black Knight"
-				 desc="Total Badass Thingy"
-				 icon="icons/icon_arm_black.png"
-				 sprite=""
-				 addHealth="50">
-		</Armor>
+    <Armor id="leather_armor"
+        price="150"
+        name="Lether Armor"
+        desc="Made from best cows"
+        icon="icons/icon_arm_leather.png"
+        sprite=""
+        addHealth="10">
+    </Armor>
+    <Armor id="noble_armor"
+        price="500"
+        name="Noble Chestplate"
+        desc="Shiny, isn't it?"
+        icon="icons/icon_arm_noble.png"
+        sprite=""
+        addHealth="25">
+    </Armor>
+    <Armor id="black_armor"
+        price="1500"
+        name="Black Knight"
+        desc="Total Badass Thingy"
+        icon="icons/icon_arm_black.png"
+        sprite=""
+        addHealth="50">
+    </Armor>
 </Store>
