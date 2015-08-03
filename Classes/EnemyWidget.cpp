@@ -75,6 +75,9 @@ protected:
     {
         float s = _bar->getScaleX();
         setPositionX(-(s * 0.5f));
+        
+        bool flag = _curHealthPoints < _maxHealthPoints && _curHealthPoints > 0;
+        setVisible(flag);
     }
     
 private:
