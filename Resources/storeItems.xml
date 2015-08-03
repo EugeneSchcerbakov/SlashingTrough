@@ -4,11 +4,11 @@
         price="0"
         name="Iron Sword"
         desc="Your default weapon"
-        icon="icons/icon_iron_sword.png"
+        icon="icons/icon_wpn_iron-sword.png"
         sprite="gamefield/wpn_iron_sword.png"
         damage="10.0"
         speed="0.33"
-        distance="300.0">
+        distance="450.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -19,11 +19,11 @@
         price="100"
         name="Frozen blade"
         desc="Chilled and light"
-        icon="icons/icon_ice_sword.png"
+        icon="icons/icon_wpn_ice-sword.png"
         sprite="gamefield/wpn_iron_sword.png"
         damage="15.0"
         speed="0.31"
-        distance="350.0">
+        distance="450.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -34,11 +34,11 @@
         price="300"
         name="Noble Sword"
         desc="Looks expencive"
-        icon="icons/icon_noble_sword.png"
+        icon="icons/icon_wpn_noble-sword.png"
         sprite="gamefield/wpn_iron_sword.png"
         damage="20.0"
         speed="0.33"
-        distance="350.0">
+        distance="450.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -49,18 +49,18 @@
         price="1000"
         name="Lava Sword"
         desc="It's hot!"
-        icon="icons/icon_lava_sword.png"
+        icon="icons/icon_wpn_lava-sword.png"
         sprite="gamefield/wpn_iron_sword.png"
         damage="25.0"
         speed="0.33"
-        distance="350.0">
+        distance="450.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
             opacity="0.8"
             texture="effects/trail.png"/>
     </Weapon>
-    
+
     <Armor id="default_armor"
         price="0"
         name="Jacket"
@@ -69,4 +69,28 @@
         sprite=""
         addHealth="0">
     </Armor>
+		<Armor id="leather_armor"
+				 price="150"
+				 name="Lether Armor"
+				 desc="Made from best cows"
+				 icon="icons/icon_arm_leather.png"
+				 sprite=""
+				 addHealth="10">
+		</Armor>
+		<Armor id="noble_armor"
+				 price="500"
+				 name="Noble Chestplate"
+				 desc="Shiny, isn't it?"
+				 icon="icons/icon_arm_noble.png"
+				 sprite=""
+				 addHealth="25">
+		</Armor>
+		<Armor id="black_armor"
+				 price="1500"
+				 name="Black Knight"
+				 desc="Total Badass Thingy"
+				 icon="icons/icon_arm_black.png"
+				 sprite=""
+				 addHealth="50">
+		</Armor>
 </Store>

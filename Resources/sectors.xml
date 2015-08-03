@@ -100,7 +100,7 @@
         <Enemy name="enemy-E" amount="4" />
         <Obstacle name="Box" amount="2" />
     </Stage-15>
-    <Stage-16 sectors="8" runningSpeed="500" squaresCount="10">
+    <Stage-16 sectors="16" runningSpeed="500" squaresCount="10">
         <Enemy name="enemy-A" amount="0" />
         <Enemy name="enemy-B" amount="0" />
         <Enemy name="enemy-C" amount="3" />
