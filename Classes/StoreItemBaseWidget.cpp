@@ -108,6 +108,7 @@ void StoreItemBaseWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget
         bool needSave = false;
         if (!profile.isEquipOwned(ptr)) {
             Store::getInstance().buy(ptr->id);
+            profile.equip(ptr);
             needSave = true;
         } else if (!profile.isEquipped(ptr)) {
             profile.equip(ptr);
