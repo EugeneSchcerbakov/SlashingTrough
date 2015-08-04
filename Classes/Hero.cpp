@@ -33,6 +33,7 @@ void Hero::init()
     _damage = 1.0f;
     _radius = 0.0f;
     _health = gameinfo.getFloat("HERO_HEALTH_POINTS");
+    _attackArea = gameinfo.getFloat("HERO_ATTACK_AREA");
     _damageUpValue = gameinfo.getFloat("HERO_DAMAGE_UP_VALUE");
     _damageUpKillPoints = gameinfo.getInt("HERO_DAMAGE_UP_KP");
     _staminaPoints = gameinfo.getFloat("HERO_STAMINA_POINTS");
@@ -122,9 +123,8 @@ void Hero::attack()
             float ny = dy * n;
             
             float dotp = nx * xface + ny * yface;
-            float area = 0.85f;
             
-            if (len <= _radius && dotp >= area) {
+            if (len <= _radius && dotp >= _attackArea) {
                 entity->addHealth(-_damage);
                 
                 if (getWeapon()) {

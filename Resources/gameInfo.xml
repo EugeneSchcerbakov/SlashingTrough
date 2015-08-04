@@ -5,6 +5,7 @@
         <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
 				
         <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
+        <Const name="HERO_ATTACK_AREA" type="float" value="0.85" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
@@ -29,7 +30,6 @@
         <Const name="STAMINA_BAR_VISIBILITY" type="bool" value="false" />
         <Const name="HEALTH_POINTS_VISIBILITY" type="bool" value="true" />
 
-		<Const name="DRAW_DEBUG_GRID" type="bool" value="true" />
 		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.55" />
 	</GlobalVariables>
 

@@ -62,6 +62,7 @@ private:
     Entities *_goals;
     
     float _runningSpeed;
+    float _attackArea;
     float _damageUpValue;
     float _staminaPoints;
     float _staminaDrainTime;
