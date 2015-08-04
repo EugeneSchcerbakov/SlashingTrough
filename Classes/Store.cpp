@@ -95,7 +95,7 @@ void Store::loadStore(const std::string &filename)
     }
 }
 
-void Store::buy(const std::string &id)
+bool Store::buy(const std::string &id)
 {
     // don't use store in the ctor, in may no be loaded yet
     SessionInfo &session = SessionInfo::getInstance();
@@ -107,6 +107,8 @@ void Store::buy(const std::string &id)
         session.addOwnedEquip(equip);
         equip->sold = true;
     }
+    
+    return equip->sold;
 }
 
 Equip::Ptr Store::getItemById(const std::string &id) const

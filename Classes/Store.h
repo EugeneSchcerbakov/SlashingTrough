@@ -27,7 +27,7 @@ public:
     static Store& getInstance();
     
     void loadStore(const std::string &filename);
-    void buy(const std::string &id);
+    bool buy(const std::string &id);
     
     Equip::Ptr getItemById(const std::string &id) const;
     
