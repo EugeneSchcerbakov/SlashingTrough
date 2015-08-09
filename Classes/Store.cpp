@@ -8,6 +8,7 @@
 
 #include "Store.h"
 #include "SessionInfo.h"
+#include "Log.h"
 
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
@@ -88,10 +89,16 @@ void Store::loadStore(const std::string &filename)
                 armor->name = elem->Attribute("name");
                 _items.push_back(item);
             } else {
+                WRITE_WARN("Unknown item in store description");
                 CC_ASSERT(false);
             }
             node = node->NextSibling();
         }
+        WRITE_INIT("Store description loaded successfully.");
+    }
+    else
+    {
+        WRITE_ERR("Failed to load score description.");
     }
 }
 
@@ -106,6 +113,7 @@ bool Store::buy(const std::string &id)
         session.addCoins(-equip->price);
         session.addOwnedEquip(equip);
         equip->sold = true;
+        WRITE_LOG("Bought item " + id);
     }
     
     return equip->sold;

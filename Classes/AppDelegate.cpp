@@ -10,6 +10,7 @@
 #include "FieldSector.h"
 #include "Store.h"
 #include "Utils.h"
+#include "Log.h"
 
 USING_NS_CC;
 
@@ -33,6 +34,8 @@ void AppDelegate::initGLContextAttrs()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    WRITE_INIT("Slashing Through started.");
+    
     srand(time(nullptr));
     
     // initialize director

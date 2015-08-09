@@ -10,6 +10,7 @@
 #include "Field.h"
 #include "GameInfo.h"
 #include "Utils.h"
+#include "Log.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -71,6 +72,11 @@ void PresetsLoader::load(const std::string &filename)
                 _links.push_back(preset);
             }
         }
+        WRITE_INIT("Presets loaded successfully.");
+    }
+    else
+    {
+        WRITE_ERR("Failed to load presets.");
     }
 }
 

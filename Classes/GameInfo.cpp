@@ -7,6 +7,7 @@
 //
 
 #include "GameInfo.h"
+#include "Log.h"
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
 
@@ -116,12 +117,15 @@ bool GameInfo::loadInfo(const std::string &filename)
                 }
                 _enemiesSettings[name] = info;
             } else {
+                WRITE_WARN("Unknown entity in GameInfo");
                 CC_ASSERT(false);
             }
             objectsNode = objectsNode->NextSibling();
         }
+        WRITE_INIT("GameInfo successfully crated.");
         return true;
     } else {
+        WRITE_ERR("Failed to read GameInfo");
         return false;
     }
 }
@@ -173,7 +177,7 @@ const GameInfo::ObstacleType& GameInfo::getObstacleInfoByName(const std::string 
     if (it != _obstaclesSettings.end()) {
         return (*it).second;
     } else {
-        CC_ASSERT(false);
+        WRITE_WARN("Failed to get entity: " + name);
         return (*_obstaclesSettings.end()).second;
     }
 }
@@ -185,7 +189,7 @@ const GameInfo::EnemyType& GameInfo::getEnemyInfoByName(const std::string &name)
     if (it != _enemiesSettings.end()) {
         return (*it).second;
     } else {
-        CC_ASSERT(false);
+        WRITE_WARN("Failed to get enemy: " + name);
         return (*_enemiesSettings.end()).second;
     }
 }

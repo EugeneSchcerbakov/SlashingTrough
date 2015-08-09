@@ -8,6 +8,7 @@
 
 #include "SessionInfo.h"
 #include "Store.h"
+#include "Log.h"
 
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
@@ -41,6 +42,7 @@ void SessionInfo::load(const std::string &filename)
 
     if (!fileUtils->isFileExist(fullPath))
     {
+        WRITE_INIT("Default save file created.");
         save();
     }
     
@@ -74,6 +76,12 @@ void SessionInfo::load(const std::string &filename)
         
         tinyxml2::XMLElement *equippedArmor = root->FirstChildElement("EquippedArmor");
         _equippedArmorId = equippedArmor->Attribute("id");
+        
+        WRITE_INIT("Save file successfully loaded.");
+    }
+    else
+    {
+        WRITE_ERR("Failed to read save file.");
     }
     
     if (_equippedWeaponId.empty()) {
@@ -142,6 +150,8 @@ void SessionInfo::save()
         
         document.SaveFile(file, false);
         fclose(file);
+        
+        WRITE_LOG("Save completed successfully.");
     }
     else
     {
@@ -178,6 +188,7 @@ void SessionInfo::equip(Equip::Ptr item)
     } else if (item->type == Equip::Type::ARMOR) {
         _equippedArmorId = item->id;
     } else {
+        WRITE_WARN("Failed to equip entity of unknown type.");
         CC_ASSERT(false);
     }
 }

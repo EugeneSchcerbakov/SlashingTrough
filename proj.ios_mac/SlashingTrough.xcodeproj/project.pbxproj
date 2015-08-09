@@ -56,6 +56,10 @@
 		CD0EB17C1B75F2F500267CEA /* presets.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17A1B75F2F500267CEA /* presets.xml */; };
 		CD0EB17E1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
+		CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
+		CD2AE6331B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
+		CD2AE6371B77AB2C001DF4B7 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */; };
+		CD2AE6381B77AB2C001DF4B7 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */; };
 		CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */; };
@@ -92,8 +96,6 @@
 		CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
-		CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
-		CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */; };
 		CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDB37C1D1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
@@ -259,6 +261,9 @@
 		CD0EB1771B75E50600267CEA /* FieldLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldLevel.h; sourceTree = "<group>"; };
 		CD0EB17A1B75F2F500267CEA /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
 		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
+		CD2AE6301B779FD4001DF4B7 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
+		CD2AE6311B779FD4001DF4B7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectsLayer.cpp; sourceTree = "<group>"; };
 		CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsLayer.h; sourceTree = "<group>"; };
 		CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlKeyboard.cpp; sourceTree = "<group>"; };
@@ -290,7 +295,6 @@
 		CD81E5131B20B439008059C2 /* StoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInterface.h; sourceTree = "<group>"; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
-		CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CDB37C1C1B6CCB2F00138775 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
@@ -464,8 +468,8 @@
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
 				CDB37C1C1B6CCB2F00138775 /* models */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
-				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
+				CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */,
 				CD0EB17A1B75F2F500267CEA /* presets.xml */,
 				CD0EB17D1B76086E00267CEA /* levels.xml */,
 			);
@@ -485,6 +489,8 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */,
 				CDD8F7B91ACBBCE9002ADCCE /* Utils.h */,
+				CD2AE6301B779FD4001DF4B7 /* Log.cpp */,
+				CD2AE6311B779FD4001DF4B7 /* Log.h */,
 				CDC881071B5149BC00030818 /* VariablesSet.cpp */,
 				CDC881081B5149BC00030818 /* VariablesSet.h */,
 				CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */,
@@ -788,7 +794,7 @@
 				CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
-				CD89CC601ACC538C008C1E06 /* gameInfo.xml in Resources */,
+				CD2AE6371B77AB2C001DF4B7 /* gameInfo.xml in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
@@ -815,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD0EB17C1B75F2F500267CEA /* presets.xml in Resources */,
+				CD2AE6381B77AB2C001DF4B7 /* gameInfo.xml in Resources */,
 				CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				CDB37C1E1B6CCB2F00138775 /* models in Resources */,
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
@@ -825,7 +832,6 @@
 				CD0EB17F1B76086E00267CEA /* levels.xml in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
-				CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +845,7 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDC8811D1B51664800030818 /* Hero.cpp in Sources */,
 				CDC5E62F1B52D735000756EB /* EnemyWidget.cpp in Sources */,
+				CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */,
 				CDCDEA711B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				CDC881091B5149BC00030818 /* VariablesSet.cpp in Sources */,
 				CDC520881B54238700732FD0 /* WeaponAbilities.cpp in Sources */,
@@ -916,6 +923,7 @@
 				CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */,
 				CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */,
 				CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
+				CD2AE6331B779FD4001DF4B7 /* Log.cpp in Sources */,
 				CD5F1CCF1B2457B300D0341A /* SessionInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
