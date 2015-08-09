@@ -146,6 +146,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Equipment.cpp" />
     <ClCompile Include="..\Classes\Field.cpp" />
     <ClCompile Include="..\Classes\FieldLayer.cpp" />
+    <ClCompile Include="..\Classes\FieldLevel.cpp" />
     <ClCompile Include="..\Classes\FieldSector.cpp" />
     <ClCompile Include="..\Classes\FieldSectorWidget.cpp" />
     <ClCompile Include="..\Classes\GameInfo.cpp" />
@@ -183,6 +184,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Equipment.h" />
     <ClInclude Include="..\Classes\Field.h" />
     <ClInclude Include="..\Classes\FieldLayer.h" />
+    <ClInclude Include="..\Classes\FieldLevel.h" />
     <ClInclude Include="..\Classes\FieldSector.h" />
     <ClInclude Include="..\Classes\FieldSectorWidget.h" />
     <ClInclude Include="..\Classes\GameInfo.h" />
