@@ -50,6 +50,12 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		CD0EB1781B75E50600267CEA /* FieldLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0EB1761B75E50600267CEA /* FieldLevel.cpp */; };
+		CD0EB1791B75E50600267CEA /* FieldLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0EB1761B75E50600267CEA /* FieldLevel.cpp */; };
+		CD0EB17B1B75F2F500267CEA /* presets.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17A1B75F2F500267CEA /* presets.xml */; };
+		CD0EB17C1B75F2F500267CEA /* presets.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17A1B75F2F500267CEA /* presets.xml */; };
+		CD0EB17E1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
+		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */; };
@@ -126,8 +132,6 @@
 		CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC8811F1B516C2300030818 /* HeroWidget.cpp */; };
 		CDC881251B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
 		CDC881261B51808300030818 /* HeroAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC881231B51808300030818 /* HeroAction.cpp */; };
-		CDC93AB21B694372009A9A92 /* sectors.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC93AB11B694372009A9A92 /* sectors.xml */; };
-		CDC93AB31B694372009A9A92 /* sectors.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDC93AB11B694372009A9A92 /* sectors.xml */; };
 		CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
 		CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE751B557F55006F53F6 /* Projectile.cpp */; };
 		CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */; };
@@ -251,6 +255,10 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD0EB1761B75E50600267CEA /* FieldLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldLevel.cpp; sourceTree = "<group>"; };
+		CD0EB1771B75E50600267CEA /* FieldLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldLevel.h; sourceTree = "<group>"; };
+		CD0EB17A1B75F2F500267CEA /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
+		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
 		CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectsLayer.cpp; sourceTree = "<group>"; };
 		CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsLayer.h; sourceTree = "<group>"; };
 		CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlKeyboard.cpp; sourceTree = "<group>"; };
@@ -317,7 +325,6 @@
 		CDC881201B516C2300030818 /* HeroWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroWidget.h; sourceTree = "<group>"; };
 		CDC881231B51808300030818 /* HeroAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeroAction.cpp; sourceTree = "<group>"; };
 		CDC881241B51808300030818 /* HeroAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAction.h; sourceTree = "<group>"; };
-		CDC93AB11B694372009A9A92 /* sectors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sectors.xml; sourceTree = "<group>"; };
 		CDC9DE751B557F55006F53F6 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
 		CDC9DE761B557F55006F53F6 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
 		CDC9DE791B558478006F53F6 /* ProjectileWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileWidget.cpp; sourceTree = "<group>"; };
@@ -459,7 +466,8 @@
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CD89CC5F1ACC538C008C1E06 /* gameInfo.xml */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
-				CDC93AB11B694372009A9A92 /* sectors.xml */,
+				CD0EB17A1B75F2F500267CEA /* presets.xml */,
+				CD0EB17D1B76086E00267CEA /* levels.xml */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -576,6 +584,8 @@
 				CDC881241B51808300030818 /* HeroAction.h */,
 				CDC880FB1B513D8700030818 /* FieldSector.cpp */,
 				CDC880FC1B513D8700030818 /* FieldSector.h */,
+				CD0EB1761B75E50600267CEA /* FieldLevel.cpp */,
+				CD0EB1771B75E50600267CEA /* FieldLevel.h */,
 				CDC880FF1B5142DF00030818 /* Field.cpp */,
 				CDC881001B5142DF00030818 /* Field.h */,
 				CDC794571B1C1A0000B83EA2 /* Store.cpp */,
@@ -773,8 +783,8 @@
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				CD0EB17B1B75F2F500267CEA /* presets.xml in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
-				CDC93AB21B694372009A9A92 /* sectors.xml in Resources */,
 				CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
@@ -793,6 +803,7 @@
 				CDB37C1D1B6CCB2F00138775 /* models in Resources */,
 				CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */,
 				CDC7945C1B1C202D00B83EA2 /* storeItems.xml in Resources */,
+				CD0EB17E1B76086E00267CEA /* levels.xml in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -803,14 +814,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD0EB17C1B75F2F500267CEA /* presets.xml in Resources */,
 				CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				CDB37C1E1B6CCB2F00138775 /* models in Resources */,
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
-				CDC93AB31B694372009A9A92 /* sectors.xml in Resources */,
 				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
+				CD0EB17F1B76086E00267CEA /* levels.xml in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				CD89CC611ACC538C008C1E06 /* gameInfo.xml in Resources */,
@@ -836,6 +848,7 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
 				CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
+				CD0EB1781B75E50600267CEA /* FieldLevel.cpp in Sources */,
 				CDC8810D1B514AAA00030818 /* FieldLayer.cpp in Sources */,
 				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC881151B5155F700030818 /* ModelBase.cpp in Sources */,
@@ -886,6 +899,7 @@
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,
 				CDC881161B5155F700030818 /* ModelBase.cpp in Sources */,
 				CDCDEA761B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,
+				CD0EB1791B75E50600267CEA /* FieldLevel.cpp in Sources */,
 				CDC8810E1B514AAA00030818 /* FieldLayer.cpp in Sources */,
 				CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,

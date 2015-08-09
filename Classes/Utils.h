@@ -20,6 +20,8 @@ namespace misc
     
     std::string luaGetGlobalString(const std::string &varName);
     
+    int random(int min, int max);
+    
     cocos2d::Layer* makeLayerFromLua(const std::string &luaFuncName);
     cocos2d::Scene* makeSceneFromLua(const std::string &luaFuncName);
     cocos2d::Node* MakeNodeFromLua(const std::string &luaFuncName);

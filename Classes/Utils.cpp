@@ -66,6 +66,11 @@ std::string misc::luaGetGlobalString(const std::string &varName)
     return lua_tostring(L, -1);
 }
 
+int misc::random(int min, int max)
+{
+    return cocos2d::random(min, max);
+}
+
 cocos2d::Layer* misc::makeLayerFromLua(const std::string &luaFuncName)
 {
     cocos2d::LuaEngine *luaEngine = cocos2d::LuaEngine::getInstance();

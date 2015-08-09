@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "GameInfo.h"
 #include "SessionInfo.h"
+#include "FieldSector.h"
 #include "Store.h"
 #include "Utils.h"
 
@@ -64,7 +65,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
 	GameInfo::getInstance().loadInfo("gameInfo.xml");
-    GameInfo::getInstance().loadSectors("sectors.xml");
+    PresetsLoader::getInstance().load("presets.xml");
     Store::getInstance().loadStore("storeItems.xml");
     SessionInfo::getInstance().load("st_save.xml");
 

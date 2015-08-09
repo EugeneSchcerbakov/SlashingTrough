@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Levels>
+    <Level id="level">
+        <Speed value="450"/>
+        <LinkRand/>
+        <Speed value="460"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <LinkRand/>
+        <Speed value="550"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <Preset dif="1-2"/>
+        <LinkRand/>
+    </Level>
+</Levels>

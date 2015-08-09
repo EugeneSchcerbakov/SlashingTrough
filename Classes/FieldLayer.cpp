@@ -64,8 +64,21 @@ bool FieldLayer::init()
     _fieldScroller->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
     _fieldScroller->addChild(_fieldCamera);
     
+    FieldLevel::Ptr level = FieldLevel::create();
+    
+    cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
+    std::string path = fileUtils->fullPathForFilename("levels.xml");
+    std::string buff = fileUtils->getStringFromFile(path);
+    tinyxml2::XMLDocument document;
+    tinyxml2::XMLError result = document.Parse(buff.c_str());
+    if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR) {
+        auto root = document.RootElement();
+        auto node = root->FirstChild();
+        level->initFromXml(node);
+    }
+    
     _field.setupAccepter(accepter, static_cast<void *>(this));
-    _field.initialize();
+    _field.initialize(level);
     
     _heroWidget = HeroWidget::create(_field.getHero());
     _heroWidget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
@@ -123,9 +136,8 @@ void FieldLayer::refreshInterface()
         
         _gameInterface->setStaminaPoints(curStaminaPoints / maxStaminaPoints);
         
-        int passedSectors = _field.getPassedSectors();
-        auto difficult = GameInfo::getInstance().getDifficultForSector(passedSectors);
-        std::string difficultText = cocos2d::StringUtils::format("%s", difficult.id.c_str());
+        auto sector = _field.getCurrentSector();
+        std::string difficultText = cocos2d::StringUtils::format("preset id: %s", sector->getPresetId().c_str());
         _gameInterface->setDifficultLable(difficultText);
     }
 }

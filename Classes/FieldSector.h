@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 #include <functional>
+#include "tinyxml2/tinyxml2.h"
 
 #include "ModelBase.h"
 #include "GameInfo.h"
@@ -23,13 +24,56 @@ struct Square
 {
     int x;
     int y;
-    bool free;
+    Entity::Type type;
+    std::string name;
+    
     Square()
     : x(-1)
     , y(-1)
-    , free(true)
+    , type(Entity::Type::NONE)
     {
     }
+};
+
+struct Preset
+{
+    std::vector<Square> map;
+    std::string id;
+    int difficult;
+    int squaresByWidth;
+    int squaresByHeight;
+    
+    Preset()
+    : difficult(0)
+    , squaresByWidth(0)
+    , squaresByHeight(0)
+    {
+    }
+};
+
+class PresetsLoader
+{
+public:
+    static PresetsLoader& getInstance();
+    
+    void load(const std::string &filename);
+    
+    Preset getPresetById(const std::string &id) const;
+    Preset getRandomPresetWithDif(int difficut) const;
+    
+    Preset getLinkById(const std::string &id) const;
+    Preset getRandomLink() const;
+    
+private:
+    static const std::string EMPTY_SQUARE;
+    static Entity::Type name2type(const std::string &name);
+    
+private:
+    int calcPresetWidth(tinyxml2::XMLElement *elem) const;
+    int calcPresetHeight(tinyxml2::XMLElement *elem) const;
+    
+    std::multimap<int, Preset> _presets;
+    std::vector<Preset> _links;
 };
 
 class FieldSector : public ModelBase
@@ -43,45 +87,31 @@ public:
 public:
     FieldSector();
     
-    Entities generate(int squaresByHeight, const GameInfo::DifficultInfo difficult, Field *field);
+    void init(const Preset &preset, float runningSpeed);
     
-    void reset();
     void setX(float x);
     void setY(float y);
-    void setSquareFree(int x, int y, bool flag);
-    
-    Square getSquareByLogicXY(float x, float y) const;
-    Square getSquareByIndexXY(int x, int y) const;
     
     float getWidth() const;
     float getHeight() const;
     float getX() const;
     float getY() const;
+    float getRunningSpeed() const;
     int getSquaresNumByX() const;
     int getSquaresNumByY() const;
     
-    bool isValidSquareAddress(int x, int y) const;
-    bool isValidRow(int row) const;
+    const std::vector<Square>& getContent() const;
+    const std::string& getPresetId() const;
     
 private:
-    struct ConstructionInfo {
-        Square square;
-        Entity::Type type;
-        std::string name;
-    };
-    
-    typedef std::vector<Square> Grid;
-    typedef std::vector<ConstructionInfo> ConstructionMap;
-    
-private:
-    void generateConstructionMap(ConstructionMap &map, const GameInfo::SpawnInfo &spawn, Entity::Type type);
-    
-    Grid _grid;
+    std::vector<Square> _content;
+    std::string _presetId;
     
     float _width;
     float _height;
     float _logicX; // bottom left corner
     float _logicY;
+    float _runningSpeed;
     
     int _squareSize;
     int _squaresByWidth;

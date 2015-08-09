@@ -126,55 +126,6 @@ bool GameInfo::loadInfo(const std::string &filename)
     }
 }
 
-bool GameInfo::loadSectors(const std::string &filename)
-{
-    cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
-    std::string path = fileUtils->fullPathForFilename(filename);
-    std::string buff = fileUtils->getStringFromFile(path);
-    
-    tinyxml2::XMLDocument document;
-    tinyxml2::XMLError result = document.Parse(buff.c_str());
-    
-    if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
-    {
-        tinyxml2::XMLNode *root = document.RootElement();
-        tinyxml2::XMLNode *node = root->FirstChild();
-        
-        _diffucultSettings.clear();
-        while (node) {
-            tinyxml2::XMLElement *elem = node->ToElement();
-            GameInfo::DifficultInfo difficult;
-            difficult.id = elem->Name();
-            difficult.sectorsCount = elem->IntAttribute("sectors");
-            difficult.squaresCount = elem->IntAttribute("squaresCount");
-            difficult.speed = elem->FloatAttribute("runningSpeed");
-            tinyxml2::XMLNode *spawnInfoNode = node->FirstChild();
-            while (spawnInfoNode) {
-                tinyxml2::XMLElement *spawnInfoElem = spawnInfoNode->ToElement();
-                SpawnInfo spawnInfo;
-                spawnInfo.name = spawnInfoElem->Attribute("name");
-                spawnInfo.amount = spawnInfoElem->IntAttribute("amount");
-                std::string type = spawnInfoElem->Name();
-                if (spawnInfo.amount > 0) {
-                    if (type == "Enemy") {
-                        difficult.enemiesPerSector.push_back(spawnInfo);
-                    } else if (type == "Obstacle") {
-                        difficult.obstaclesPerSector.push_back(spawnInfo);
-                    } else {
-                        CC_ASSERT(false);
-                    }
-                }
-                spawnInfoNode = spawnInfoNode->NextSibling();
-            }
-            _diffucultSettings.push_back(difficult);
-            node = node->NextSibling();
-        }
-		return true;
-    }
-
-	return false;
-}
-
 int GameInfo::getInt(const std::string &name, int def) const
 {
     return _variables.getInt(name, def);
@@ -259,20 +210,4 @@ GameInfo::GameplayObjectsTypes GameInfo::getEnemiesTypes() const
     return types;
 }
 
-const GameInfo::DiffucultSettings& GameInfo::getDiffucultSettings() const
-{
-    return _diffucultSettings;
-}
-
-GameInfo::DifficultInfo GameInfo::getDifficultForSector(int sector) const
-{
-    int remainng = sector + 1;
-    for (auto info : _diffucultSettings) {
-        remainng -= info.sectorsCount;
-        if (remainng <= 0) {
-            return info;
-        }
-    }
-    return GameInfo::DifficultInfo();
-}
 

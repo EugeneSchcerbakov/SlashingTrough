@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<Presets>
+    <Preset id="p0" dif="1">
+        <row>E1----</row>
+        <row>------</row>
+        <row>----E1</row>
+        <row>------</row>
+        <row>E1----</row>
+    </Preset>
+    <Preset id="p2" dif="1">
+        <row>E1----</row>
+        <row>------</row>
+        <row>------</row>
+        <row>--E1--</row>
+        <row>------</row>
+    </Preset>
+    <Preset id="p3" dif="1">
+        <row>------</row>
+        <row>------</row>
+        <row>E1----</row>
+        <row>------</row>
+        <row>----E1</row>
+    </Preset>
+    <Preset id="p4" dif="2">
+        <row>--E1--</row>
+        <row>------</row>
+        <row>E2----</row>
+        <row>------</row>
+        <row>------</row>
+    </Preset>
+    <Preset id="p5" dif="2">
+        <row>------</row>
+        <row>E2----</row>
+        <row>------</row>
+        <row>--E2--</row>
+        <row>------</row>
+    </Preset>
+    <Preset id="p6" dif="2">
+        <row>E2----</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>----E1</row>
+    </Preset>
+    
+    <Link id="l0">
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>--O1--</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+    <Link id="l1">
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>O1----</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+    <Link id="l2">
+        <row>------</row>
+        <row>----O1</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+    <Link id="l3">
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>O1----</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+    <Link id="l4">
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>--O1--</row>
+        <row>------</row>
+    </Link>
+    <Link id="l5">
+        <row>------</row>
+        <row>--O1--</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+</Presets>

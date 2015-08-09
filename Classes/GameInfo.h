@@ -16,34 +16,6 @@
 class GameInfo
 {
 public:
-    struct SpawnInfo
-    {
-        std::string name;
-        int amount;
-        
-        SpawnInfo()
-        : name("")
-        , amount(0)
-        {}
-    };
-    
-    struct DifficultInfo
-    {
-        typedef std::vector<SpawnInfo> SpawnList;
-        
-        SpawnList enemiesPerSector;
-        SpawnList obstaclesPerSector;
-        float speed;
-        int squaresCount;
-        int sectorsCount;
-        std::string id;
-        
-        DifficultInfo()
-        : sectorsCount(0)
-        , squaresCount(0)
-        {}
-    };
-    
     struct ProjectileType
     {
         float healthDamage;
@@ -131,7 +103,6 @@ public:
         {}
     };
     
-    typedef std::vector<DifficultInfo> DiffucultSettings;
     typedef std::vector<std::string> GameplayObjectsTypes;
     typedef std::map<std::string, ObstacleType> ObstaclesSettings;
     typedef std::map<std::string, EnemyType> EnemiesSettings;
@@ -140,7 +111,6 @@ public:
     static GameInfo& getInstance();
     
     bool loadInfo(const std::string &filename);
-    bool loadSectors(const std::string &filename);
     
     int getInt(const std::string &name, int def = 0) const;
     bool getBool(const std::string &name, bool def = false) const;
@@ -158,13 +128,8 @@ public:
     GameplayObjectsTypes getObstaclesTypes() const;
     GameplayObjectsTypes getEnemiesTypes() const;
     
-    const DiffucultSettings& getDiffucultSettings() const;
-    
-    DifficultInfo getDifficultForSector(int sector) const;
-    
 private:
     VariablesSet _variables;
-    DiffucultSettings _diffucultSettings;
     ObstaclesSettings _obstaclesSettings;
     EnemiesSettings _enemiesSettings;
 };

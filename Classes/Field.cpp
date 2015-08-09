@@ -7,12 +7,12 @@
 //
 
 #include "Field.h"
+#include "Obstacle.h"
+#include "Enemy.h"
 
 Field::Field()
 : ModelBase()
 , _passedSectors(0)
-, _generatedSectors(0)
-, _difficultIndex(0)
 , _hero(nullptr)
 {
     
@@ -23,14 +23,15 @@ Field::~Field()
     finalize();
 }
 
-void Field::initialize()
+void Field::initialize(FieldLevel::WeakPtr level)
 {
-    GameInfo &gameinfo = GameInfo::getInstance();
-    
-    if (!gameinfo.getDiffucultSettings().empty()) {
-        _difficultIndex = 0;
-        _difficult = gameinfo.getDiffucultSettings()[_difficultIndex];
+    if (level.expired()) {
+        return;
     }
+    
+    _level = level.lock();
+    
+    GameInfo &gameinfo = GameInfo::getInstance();
     
     _defaultSectorYSquares = gameinfo.getInt("DEFAULT_SEСTOR_SQUARES_COUNT");
     _squareSize = gameinfo.getFloat("SQUARE_SIZE");
@@ -41,14 +42,13 @@ void Field::initialize()
     _hero = new Hero();
     _hero->setPosition(heroStartX, heroStartY);
     _hero->setRunning(true);
-    _hero->setRunningSpeed(_difficult.speed);
+    //_hero->setRunningSpeed(0.0f);
     _hero->setSideBorders(0.0f, _squareSize * 3.0f);
     _heroLastYPos = _hero->getPositionY();
     
     int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
         pushFrontSector();
-        updateDifficult();
     }
 }
 
@@ -83,7 +83,11 @@ void Field::idleUpdate(float dt)
     
     _hero->idleUpdate(dt);
     _hero->refreshGoals(&_entities);
-    _hero->setRunningSpeed(_difficult.speed);
+    if (_level->getSectorByIndex(_passedSectors)) {
+        auto sector = _level->getSectorByIndex(_passedSectors);
+        float speed = sector->getRunningSpeed();
+        _hero->setRunningSpeed(speed);
+    }
     
     for (auto iter = _sectors.begin(); iter != _sectors.end();)
     {
@@ -104,7 +108,6 @@ void Field::idleUpdate(float dt)
             
             iter = _sectors.erase(iter);
             pushFrontSector();
-            updateDifficult();
         } else
             ++iter;
     }
@@ -136,39 +139,39 @@ void Field::idleUpdate(float dt)
 
 void Field::pushFrontSector()
 {
-    int squareCount = _difficult.squaresCount;
-    if (squareCount <= 0) {
-        squareCount = _defaultSectorYSquares;
-    }
+    auto sector = _level->getNextSector();
     
-    FieldSector::Ptr sector = FieldSector::create();
-    auto content = sector->generate(squareCount, _difficult, this);
+    if (sector)
+    {
+        GameInfo &gameinfo = GameInfo::getInstance();
+        
+        auto content = sector->getContent();
+        // initialize entities
+        for (auto info : content) {
+            Entity *entity = nullptr;
+            switch (info.type) {
+                case Entity::Type::OBSTACLE:
+                    entity = new Obstacle(gameinfo.getObstacleInfoByName(info.name));
+                    break;
+                case Entity::Type::ENEMY:
+                    entity = new Enemy(gameinfo.getEnemyInfoByName(info.name), this);
+                    break;
+                default:
+                    break;
+            }
+            if (entity) {
+                entity->setPositionX(info.x * _squareSize + _squareSize * 0.5f);
+                entity->setPositionY(info.y * _squareSize + _squareSize * 0.5f + sector->getY());
+                entity->setGoal(_hero);
+                addEntity(entity);
+            }
+        }
     
-    // place sector to field
-    float ypos = 0.0f;
-    if (!_sectors.empty()) {
-        SectorsSequence::const_iterator last = --_sectors.end();
-        float lastYPos = (*last)->getY();
-        ypos = lastYPos + (*last)->getHeight();
-    }
+        _sectors.push_back(sector);
     
-    sector->setX(0.0f);
-    sector->setY(ypos);
-    
-    _sectors.push_back(sector);
-    ++_generatedSectors;
-    
-    Event e("SectorAdded");
-    e.variables.setInt("uid", sector->getUid());
-    sendEvent(e);
-    
-    // initialize entities
-    for (auto entity : content) {
-        // convert pos from sector to field space
-        float y = entity->getPositionY();
-        entity->setPositionY(ypos + y);
-        entity->setGoal(_hero);
-        addEntity(entity);
+        Event e("SectorAdded");
+        e.variables.setInt("uid", sector->getUid());
+        sendEvent(e);
     }
 }
 
@@ -193,19 +196,6 @@ void Field::addEntity(Entity *entity)
     }
 }
 
-void Field::updateDifficult()
-{
-    GameInfo &gameinfo = GameInfo::getInstance();
-    const GameInfo::DiffucultSettings &settings = gameinfo.getDiffucultSettings();
-    if (_generatedSectors >= _difficult.sectorsCount) {
-        _generatedSectors = 0;
-        ++_difficultIndex;
-        if ((std::size_t)_difficultIndex < settings.size()) {
-            _difficult = settings[_difficultIndex];
-        }
-    }
-}
-
 FieldSector::Ptr Field::getSectorByUid(Uid uid)
 {
     for (const auto sector : _sectors) {
@@ -214,6 +204,11 @@ FieldSector::Ptr Field::getSectorByUid(Uid uid)
         }
     }
     return FieldSector::Ptr();
+}
+
+FieldSector::Ptr Field::getCurrentSector()
+{
+    return _level->getSectorByIndex(_passedSectors);
 }
 
 Entity* Field::getEntityByUid(Uid uid)

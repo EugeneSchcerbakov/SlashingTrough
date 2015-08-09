@@ -13,7 +13,7 @@
 #include <list>
 
 #include "GameInfo.h"
-#include "FieldSector.h"
+#include "FieldLevel.h"
 #include "Hero.h"
 
 class Field : public ModelBase
@@ -22,7 +22,7 @@ public:
     Field();
     ~Field();
     
-    void initialize();
+    void initialize(FieldLevel::WeakPtr level);
     void finalize();
     
     void idleUpdate(float dt);
@@ -30,9 +30,9 @@ public:
     void pushFrontSector();
     void popBackSector();
     void addEntity(Entity *entity);
-    void updateDifficult();
     
     FieldSector::Ptr getSectorByUid(Uid uid);
+    FieldSector::Ptr getCurrentSector();
     Entity* getEntityByUid(Uid uid);
     Hero* getHero() const;
     int getPassedSectors() const;
@@ -41,16 +41,14 @@ private:
     typedef std::list<FieldSector::Ptr> SectorsSequence;
     
 private:
+    FieldLevel::Ptr _level;
     SectorsSequence _sectors;
     Hero *_hero;
     Entities _entities;
-    GameInfo::DifficultInfo _difficult;
     
     float  _heroLastYPos;
     
     int _passedSectors;
-    int _generatedSectors;
-    int _difficultIndex;
     int _defaultSectorYSquares;
     int _squareSize;
 };

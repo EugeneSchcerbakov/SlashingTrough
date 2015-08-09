@@ -34,7 +34,7 @@
 	</GlobalVariables>
 
     <GameplayObjects>
-        <Obstacle name="Box"
+        <Obstacle name="O1"
             destructible="false"
             health="1.0"
             damage="5.0"
@@ -44,7 +44,7 @@
             staminaPointsReward="0"
             scorePointsReward="0"
             sprite="gamefield/obstacle_0.png" />
-        <Enemy name="enemy-A"
+        <Enemy name="E1"
             health="5.0"
             damage="5.0"
                 staminaDrainPoints="0"
@@ -56,7 +56,7 @@
             model="models/orc.c3t"
             R="255" G="127" B="0">
         </Enemy>
-        <Enemy name="enemy-B"
+        <Enemy name="E2"
             health="10.0"
             damage="5.0"
             staminaDrainPoints="0"
@@ -75,7 +75,7 @@
                 projectileSpeed="800.0"
                 projectileLifeTime="0.8" />
         </Enemy>
-        <Enemy name="enemy-C"
+        <Enemy name="E3"
             health="12.0"
             damage="10.0"
                 staminaDrainPoints="0"
@@ -87,7 +87,7 @@
             model="models/orc.c3t"
             R="0" G="255" B="0" >
         </Enemy>
-        <Enemy name="enemy-D"
+        <Enemy name="E4"
             health="17.0"
             damage="10.0"
                 staminaDrainPoints="0"
@@ -106,7 +106,7 @@
                 projectileSpeed="850.0"
                 projectileLifeTime="0.8" />
         </Enemy>
-        <Enemy name="enemy-E"
+        <Enemy name="E5"
             health="22.0"
             damage="10.0"
                 staminaDrainPoints="0"
