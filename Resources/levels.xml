@@ -4,18 +4,28 @@
         <Speed value="450"/>
         <LinkRand/>
         <Speed value="460"/>
+        <Preset dif="1-1"/>
         <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <LinkRand/>
+        <Speed value="470"/>
+        <Preset dif="2-2"/>
+        <Speed value="480"/>   
+        <Preset dif="2-3"/>
+        <Speed value="490"/>
+        <Preset dif="2-4"/>
+        <Speed value="500"/>
+        <Preset dif="3-4"/>
+        <Speed value="510"/>
+        <Preset dif="3-5"/>
+        <Speed value="520"/>
+        <Preset dif="4-5"/>
+        <Speed value="530"/>
+        <Preset dif="4-6"/>
+        <Speed value="540"/>
+        <Preset dif="5-7"/>
         <Speed value="550"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
-        <Preset dif="1-2"/>
+        <Preset dif="6-7"/>
+        <Speed value="560"/>
+        <Preset dif="7-7"/>
         <LinkRand/>
     </Level>
 </Levels>
