@@ -120,6 +120,9 @@
     <ClCompile Include="..\Classes\FieldLevel.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -228,6 +231,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FieldLevel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Log.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
