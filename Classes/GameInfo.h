@@ -11,6 +11,7 @@
 
 #include <vector>
 
+#include "ModelBase.h"
 #include "VariablesSet.h"
 
 class GameInfo
@@ -121,6 +122,8 @@ public:
     void setBool(const std::string &name, bool value);
     void setFloat(const std::string &name, float value);
     void setString(const std::string &name, const std::string &value);
+    
+    Entity::Type getTypeById(const std::string &id) const;
     
     const ObstacleType& getObstacleInfoByName(const std::string &name) const;
     const EnemyType& getEnemyInfoByName(const std::string &name) const;

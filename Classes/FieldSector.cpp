@@ -25,13 +25,15 @@ PresetsLoader& PresetsLoader::getInstance()
 
 void PresetsLoader::load(const std::string &filename)
 {
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
     cocos2d::FileUtils *fileUtils = cocos2d::FileUtils::getInstance();
     std::string path = fileUtils->fullPathForFilename(filename);
     std::string buff = fileUtils->getStringFromFile(path);
     
     tinyxml2::XMLDocument document;
     tinyxml2::XMLError result = document.Parse(buff.c_str());
-    
+
     if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
     {
         auto root = document.RootElement();
@@ -50,7 +52,7 @@ void PresetsLoader::load(const std::string &filename)
                 for (int k=0;k<preset.squaresByWidth;k++) {
                     std::string name = desc.substr(k*2, 2);
                     if (name != EMPTY_SQUARE) {
-                        Entity::Type type = name2type(name);
+                        Entity::Type type = gameinfo.getTypeById(name);
                         if (type != Entity::Type::NONE) {
                             Square square;
                             square.x = k;
@@ -77,6 +79,8 @@ void PresetsLoader::load(const std::string &filename)
     else
     {
         WRITE_ERR("Failed to load presets.");
+        WRITE_ERR(document.GetErrorStr1());
+        WRITE_ERR(document.GetErrorStr2());
     }
 }
 
@@ -100,25 +104,6 @@ int PresetsLoader::calcPresetHeight(tinyxml2::XMLElement *elem) const
         height++;
     }
     return height;
-}
-
-Entity::Type PresetsLoader::name2type(const std::string &name)
-{
-    if (!name.empty()) {
-        int index = (int)name.at(0);
-        switch (index) {
-            case (int)'E':
-                return Entity::Type::ENEMY;
-                break;
-            case (int)'O':
-                return Entity::Type::OBSTACLE;
-                break;
-            default:
-                return Entity::Type::NONE;
-                break;
-        }
-    }
-    return Entity::Type::NONE;
 }
 
 Preset PresetsLoader::getPresetById(const std::string &id) const

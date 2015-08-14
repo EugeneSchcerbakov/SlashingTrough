@@ -170,6 +170,20 @@ void GameInfo::setString(const std::string &name, const std::string &value)
     _variables.setString(name, value);
 }
 
+Entity::Type GameInfo::getTypeById(const std::string &id) const
+{
+    auto oit = _obstaclesSettings.find(id);
+    if (oit != _obstaclesSettings.end()) {
+        return Entity::Type::OBSTACLE;
+    }
+    auto eit = _enemiesSettings.find(id);
+    if (eit != _enemiesSettings.end()) {
+        return Entity::Type::ENEMY;
+    }
+    
+    return Entity::Type::NONE;
+}
+
 const GameInfo::ObstacleType& GameInfo::getObstacleInfoByName(const std::string &name) const
 {
     ObstaclesSettings::const_iterator it;

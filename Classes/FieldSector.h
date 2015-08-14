@@ -66,7 +66,6 @@ public:
     
 private:
     static const std::string EMPTY_SQUARE;
-    static Entity::Type name2type(const std::string &name);
     
 private:
     int calcPresetWidth(tinyxml2::XMLElement *elem) const;
