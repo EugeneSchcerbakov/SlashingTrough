@@ -1,12 +1,12 @@
 //
-//  SessionInfo.cpp
+//  PlayerInfo.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 07/06/15.
 //
 //
 
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "Store.h"
 #include "Log.h"
 
@@ -14,18 +14,18 @@
 #include "tinyxml2/tinyxml2.h"
 #include <stdio.h>
 
-SessionInfo& SessionInfo::getInstance()
+PlayerInfo& PlayerInfo::getInstance()
 {
-    static SessionInfo instance;
+    static PlayerInfo instance;
     return instance;
 }
 
-SessionInfo::SessionInfo()
+PlayerInfo::PlayerInfo()
 : _totalCoins(0)
 {
 }
 
-void SessionInfo::load(const std::string &filename)
+void PlayerInfo::load(const std::string &filename)
 {
     _saveFileName = filename;
     
@@ -99,7 +99,7 @@ void SessionInfo::load(const std::string &filename)
     }
 }
 
-void SessionInfo::save()
+void PlayerInfo::save()
 {
 	std::string path, fullPath;
 
@@ -159,14 +159,14 @@ void SessionInfo::save()
     }
 }
 
-void SessionInfo::addOwnedEquip(Equip::Ptr item)
+void PlayerInfo::addOwnedEquip(Equip::Ptr item)
 {
     if (!isEquipOwned(item)) {
         _ownedEquips.push_back(item->id);
     }
 }
 
-void SessionInfo::addCoins(int coins)
+void PlayerInfo::addCoins(int coins)
 {
     _totalCoins += coins;
     if (_totalCoins < 0) {
@@ -174,7 +174,7 @@ void SessionInfo::addCoins(int coins)
     }
 }
 
-void SessionInfo::equip(Equip::Ptr item)
+void PlayerInfo::equip(Equip::Ptr item)
 {
     if (!item) {
         CC_ASSERT(false);
@@ -193,27 +193,27 @@ void SessionInfo::equip(Equip::Ptr item)
     }
 }
 
-void SessionInfo::setBestScore(const SessionInfo::Score &score)
+void PlayerInfo::setBestScore(const PlayerInfo::Score &score)
 {
     _bestScore = score;
 }
 
-SessionInfo::Score SessionInfo::getBestScore() const
+PlayerInfo::Score PlayerInfo::getBestScore() const
 {
     return _bestScore;
 }
 
-int SessionInfo::getCoins() const
+int PlayerInfo::getCoins() const
 {
     return _totalCoins;
 }
 
-bool SessionInfo::isBestScore(const SessionInfo::Score &score) const
+bool PlayerInfo::isBestScore(const PlayerInfo::Score &score) const
 {
     return score.coins > _bestScore.coins;
 }
 
-bool SessionInfo::isEquipOwned(Equip::Ptr item) const
+bool PlayerInfo::isEquipOwned(Equip::Ptr item) const
 {
     if (!item) {
         CC_ASSERT(false);
@@ -228,7 +228,7 @@ bool SessionInfo::isEquipOwned(Equip::Ptr item) const
     return false;
 }
 
-bool SessionInfo::isEquipped(Equip::Ptr item) const
+bool PlayerInfo::isEquipped(Equip::Ptr item) const
 {
     if (!item) {
         CC_ASSERT(false);
@@ -244,12 +244,12 @@ bool SessionInfo::isEquipped(Equip::Ptr item) const
     }
 }
 
-const std::string& SessionInfo::getEquippedWeaponId() const
+const std::string& PlayerInfo::getEquippedWeaponId() const
 {
     return _equippedWeaponId;
 }
 
-const std::string& SessionInfo::getEquippeArmorId() const
+const std::string& PlayerInfo::getEquippeArmorId() const
 {
     return _equippedArmorId;
 }

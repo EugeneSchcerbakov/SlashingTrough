@@ -70,8 +70,8 @@
 		CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
 		CD44C6FE1AE9503E008569F6 /* ControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */; };
 		CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */; };
-		CD5F1CCE1B2457B300D0341A /* SessionInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* SessionInfo.cpp */; };
-		CD5F1CCF1B2457B300D0341A /* SessionInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* SessionInfo.cpp */; };
+		CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */; };
+		CD5F1CCF1B2457B300D0341A /* PlayerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */; };
 		CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
@@ -272,8 +272,8 @@
 		CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2dConstants.lua; sourceTree = "<group>"; };
 		CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTouch.cpp; sourceTree = "<group>"; };
 		CD44C6FD1AE9503E008569F6 /* ControlTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTouch.h; sourceTree = "<group>"; };
-		CD5F1CCC1B2457B300D0341A /* SessionInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SessionInfo.cpp; sourceTree = "<group>"; };
-		CD5F1CCD1B2457B300D0341A /* SessionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionInfo.h; sourceTree = "<group>"; };
+		CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerInfo.cpp; sourceTree = "<group>"; };
+		CD5F1CCD1B2457B300D0341A /* PlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfo.h; sourceTree = "<group>"; };
 		CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		CD5F8C7D1AD03DB8000CF14A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaminaBarWidget.cpp; sourceTree = "<group>"; };
@@ -495,8 +495,8 @@
 				CDC881081B5149BC00030818 /* VariablesSet.h */,
 				CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */,
 				CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */,
-				CD5F1CCC1B2457B300D0341A /* SessionInfo.cpp */,
-				CD5F1CCD1B2457B300D0341A /* SessionInfo.h */,
+				CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */,
+				CD5F1CCD1B2457B300D0341A /* PlayerInfo.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -877,7 +877,7 @@
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
-				CD5F1CCE1B2457B300D0341A /* SessionInfo.cpp in Sources */,
+				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD44C6FE1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
 				CDC881251B51808300030818 /* HeroAction.cpp in Sources */,
@@ -924,7 +924,7 @@
 				CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */,
 				CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CD2AE6331B779FD4001DF4B7 /* Log.cpp in Sources */,
-				CD5F1CCF1B2457B300D0341A /* SessionInfo.cpp in Sources */,
+				CD5F1CCF1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #include "FieldLayer.h"
 #include "GameInfo.h"
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "Utils.h"
 
 FieldLayer* FieldLayer::create(GameInterface *gameInterface)
@@ -121,7 +121,7 @@ void FieldLayer::refreshInterface()
     
     if (hero)
     {
-        SessionInfo::Score score = hero->getScore();
+        PlayerInfo::Score score = hero->getScore();
         
         _gameInterface->setGoldPointsLabel(score.coins);
         _gameInterface->setKillPointsLabel(score.kills);
@@ -191,17 +191,17 @@ void FieldLayer::acceptEvent(const Event &event)
     } else if (event.is("HeroKilled")) {
         Hero *hero = _field.getHero();
         
-        SessionInfo &session = SessionInfo::getInstance();
-        SessionInfo::Score score = hero->getScore();
-        session.addCoins(score.coins);
-        if (session.isBestScore(score)) {
-            session.setBestScore(score);
+        PlayerInfo &player = PlayerInfo::getInstance();
+        PlayerInfo::Score score = hero->getScore();
+        player.addCoins(score.coins);
+        if (player.isBestScore(score)) {
+            player.setBestScore(score);
         }
         
-        misc::luaSetGlobalInteger("PlayerTotalGoldPoints", session.getCoins());
+        misc::luaSetGlobalInteger("PlayerTotalGoldPoints", player.getCoins());
         misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)hero->getWeapon()->damage);
-        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", session.getBestScore().coins);
-        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", session.getBestScore().kills);
+        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", player.getBestScore().coins);
+        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", player.getBestScore().kills);
         misc::luaSetGlobalInteger("PlayerResultGoldPoints", score.coins);
         misc::luaSetGlobalInteger("PlayerResultKillPoints", score.kills);
         auto scene = misc::makeSceneFromLua("CreateResultScene");
@@ -210,7 +210,7 @@ void FieldLayer::acceptEvent(const Event &event)
         director = cocos2d::Director::getInstance();
         director->replaceScene(scene);
         
-        session.save();
+        player.save();
     }
 }
 

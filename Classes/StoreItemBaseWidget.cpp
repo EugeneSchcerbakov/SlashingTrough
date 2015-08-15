@@ -8,7 +8,7 @@
 
 #include "StoreItemBaseWidget.h"
 
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 
 StoreItemBaseWidget::StoreItemBaseWidget(Equip::WeakPtr item)
 : _item(item)
@@ -86,7 +86,7 @@ bool StoreItemBaseWidget::init()
 void StoreItemBaseWidget::update(float dt)
 {
     Equip::Ptr ptr = _item.lock();
-    SessionInfo &save = SessionInfo::getInstance();
+    PlayerInfo &save = PlayerInfo::getInstance();
     
     if (save.isEquipOwned(ptr) && !save.isEquipped(ptr) && !_button->isState(StoreItemButton::State::EQUIP))
     {
@@ -103,7 +103,7 @@ void StoreItemBaseWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
         Equip::Ptr ptr = _item.lock();
-        SessionInfo &profile = SessionInfo::getInstance();
+        PlayerInfo &profile = PlayerInfo::getInstance();
         
         bool needSave = false;
         if (!profile.isEquipOwned(ptr)) {

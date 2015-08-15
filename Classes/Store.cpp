@@ -7,7 +7,7 @@
 //
 
 #include "Store.h"
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "Log.h"
 
 #include "cocos2d.h"
@@ -105,7 +105,7 @@ void Store::loadStore(const std::string &filename)
 bool Store::buy(const std::string &id)
 {
     // don't use store in the ctor, in may no be loaded yet
-    SessionInfo &session = SessionInfo::getInstance();
+    PlayerInfo &session = PlayerInfo::getInstance();
     
     Equip::Ptr equip = getItemById(id);
     if (equip && equip->price <= session.getCoins())

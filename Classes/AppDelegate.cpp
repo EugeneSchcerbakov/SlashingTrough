@@ -6,7 +6,7 @@
 #include "StoreInterface.h"
 #include "GameScene.h"
 #include "GameInfo.h"
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "FieldSector.h"
 #include "Store.h"
 #include "Utils.h"
@@ -70,7 +70,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	GameInfo::getInstance().loadInfo("gameInfo.xml");
     PresetsLoader::getInstance().load("presets.xml");
     Store::getInstance().loadStore("storeItems.xml");
-    SessionInfo::getInstance().load("st_save.xml");
+    PlayerInfo::getInstance().load("st_save.xml");
 
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);
@@ -90,8 +90,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GameInfo::getInstance().setFloat("SQUARE_SIZE", squareSize);
     GameInfo::getInstance().setInt("CHARACTER_SCORE", 0);
     
-    misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::getInstance().getBestScore().coins);
-    misc::luaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::getInstance().getBestScore().kills);
+    misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", PlayerInfo::getInstance().getBestScore().coins);
+    misc::luaSetGlobalInteger("PlayerBestResultKillPoints", PlayerInfo::getInstance().getBestScore().kills);
     cocos2d::Scene *scene = misc::makeSceneFromLua("CreateStartscreenScene");
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
@@ -104,8 +104,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto OnHomePressed = [&](cocos2d::EventCustom *)
     {
-        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", SessionInfo::getInstance().getBestScore().coins);
-        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", SessionInfo::getInstance().getBestScore().kills);
+        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", PlayerInfo::getInstance().getBestScore().coins);
+        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", PlayerInfo::getInstance().getBestScore().kills);
         auto homescreen = misc::makeSceneFromLua("CreateStartscreenScene");
         auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);  
         cocos2d::Director *director;

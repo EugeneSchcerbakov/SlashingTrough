@@ -8,7 +8,7 @@
 
 #include "Hero.h"
 #include "GameInfo.h"
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "Store.h"
 
 #include <math.h>
@@ -41,11 +41,11 @@ void Hero::init()
     _staminaDrainValue = gameinfo.getFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.getInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
-    std::string weaponId = SessionInfo::getInstance().getEquippedWeaponId();
+    std::string weaponId = PlayerInfo::getInstance().getEquippedWeaponId();
     Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
     setWeapon(weapon);
     
-    std::string armorId = SessionInfo::getInstance().getEquippeArmorId();
+    std::string armorId = PlayerInfo::getInstance().getEquippeArmorId();
     Equip::WeakPtr armor = Store::getInstance().getItemById(armorId);
     setArmor(armor);
     
@@ -284,7 +284,7 @@ EquipArmor* Hero::getArmor() const
     return nullptr;
 }
 
-SessionInfo::Score Hero::getScore() const
+PlayerInfo::Score Hero::getScore() const
 {
     return _score;
 }

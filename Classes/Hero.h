@@ -15,7 +15,7 @@
 #include "ModelBase.h"
 #include "HeroAction.h"
 #include "Equipment.h"
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 
 class Hero : public Entity
 {
@@ -46,7 +46,7 @@ public:
     HeroAction* getLastAction() const;
     EquipWeapon* getWeapon() const;
     EquipArmor* getArmor() const;
-    SessionInfo::Score getScore() const;
+    PlayerInfo::Score getScore() const;
     
     bool isActionsQueueFull() const;
     bool isAbleToPerform(HeroAction *action);
@@ -58,7 +58,7 @@ private:
     ActionSequence _actionSequence;
     Equip::WeakPtr _weapon;
     Equip::WeakPtr _armor;
-    SessionInfo::Score _score;
+    PlayerInfo::Score _score;
     Entities *_goals;
     
     float _runningSpeed;

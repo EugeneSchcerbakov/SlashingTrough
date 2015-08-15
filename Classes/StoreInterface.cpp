@@ -8,7 +8,7 @@
 
 #include "StoreInterface.h"
 
-#include "SessionInfo.h"
+#include "PlayerInfo.h"
 #include "Utils.h"
 
 StoreInterface* StoreInterface::create(const std::string &prevSceneName)
@@ -146,7 +146,7 @@ bool StoreInterface::init()
 
 void StoreInterface::update(float dt)
 {
-    SessionInfo &session = SessionInfo::getInstance();
+    PlayerInfo &session = PlayerInfo::getInstance();
     
     int lastCoins =  atoi(_coinsText->getString().c_str());
     int nowCoins = session.getCoins();
@@ -171,7 +171,7 @@ void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
-        SessionInfo &profile = SessionInfo::getInstance();
+        PlayerInfo &profile = PlayerInfo::getInstance();
         Equip::Ptr ptr = Store::getInstance().getItemById(profile.getEquippedWeaponId());
         EquipWeapon *wpn = EquipWeapon::cast(ptr);
         misc::luaSetGlobalInteger("PlayerTotalGoldPoints", profile.getCoins());

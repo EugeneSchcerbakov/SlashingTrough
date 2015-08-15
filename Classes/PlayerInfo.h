@@ -1,20 +1,20 @@
 //
-//  SessionInfo.h
+//  PlayerInfo.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 07/06/15.
 //
 //
 
-#ifndef __SlashingTrough__SessionInfo__
-#define __SlashingTrough__SessionInfo__
+#ifndef __SlashingTrough__PlayerInfo__
+#define __SlashingTrough__PlayerInfo__
 
 #include <vector>
 #include <string>
 
 #include "Equipment.h"
 
-class SessionInfo
+class PlayerInfo
 {
 public:
     struct Score
@@ -30,9 +30,9 @@ public:
     };
     
 public:
-    static SessionInfo& getInstance();
+    static PlayerInfo& getInstance();
     
-    SessionInfo();
+    PlayerInfo();
     
     void load(const std::string &filename);
     void save();
@@ -64,4 +64,4 @@ private:
     std::string _saveFileName;
 };
 
-#endif /* defined(__SlashingTrough__SessionInfo__) */
+#endif /* defined(__SlashingTrough__PlayerInfo__) */
