@@ -11,7 +11,6 @@
 #include "Log.h"
 
 #include "cocos2d.h"
-#include "tinyxml2/tinyxml2.h"
 
 const std::string Store::DEFAULT_WEAPON_ID = "default_sword";
 const std::string Store::DEFAULT_ARMOR_ID = "default_armor";
@@ -41,8 +40,8 @@ void Store::loadStore(const std::string &filename)
             tinyxml2::XMLElement *elem = node->ToElement();
             std::string name = elem->Name();
             if (name == "Weapon") {
-                tinyxml2::XMLElement *trailInfo = elem->FirstChildElement("Trail");
-                tinyxml2::XMLElement *abilitiesRoot = elem->FirstChildElement("Abilities");
+                auto trailInfo = elem->FirstChildElement("Trail");
+                auto featuresRoot = elem->FirstChildElement("Features");
                 Equip::Ptr item = EquipWeapon::create();
                 EquipWeapon *weapon = EquipWeapon::cast(item);
                 weapon->id = elem->Attribute("id");
@@ -61,23 +60,10 @@ void Store::loadStore(const std::string &filename)
                     weapon->trail.opacity = trailInfo->FloatAttribute("opacity");
                     weapon->trail.texture = trailInfo->Attribute("texture");
                 }
-                if (abilitiesRoot) {
-                    tinyxml2::XMLElement *abilityElem = abilitiesRoot->FirstChildElement();
-                    while (abilityElem) {
-                        std::string abilityName = abilityElem->Name();
-                        if (abilityName == "CoinsForMurder") {
-                            int flat = abilityElem->IntAttribute("flat");
-                            int percent = abilityElem->IntAttribute("percentOfEnemyCost");
-                            WeaponAbility::Ptr ability = CoinsForMurder::Create(flat, percent);
-                            weapon->abilities.push_back(ability);
-                        } else {
-                            CC_ASSERT(false);
-                        }
-                        abilityElem = abilityElem->NextSiblingElement();
-                    }
-                }
+                parseEquipFeature(item, featuresRoot);
                 _items.push_back(item);
             } else if (name == "Armor") {
+                auto featuresRoot = elem->FirstChildElement("Features");
                 Equip::Ptr item = EquipArmor::create();
                 EquipArmor *armor = EquipArmor::cast(item);
                 armor->id = elem->Attribute("id");
@@ -87,6 +73,7 @@ void Store::loadStore(const std::string &filename)
                 armor->icon = elem->Attribute("icon");
                 armor->sprite = elem->Attribute("sprite");
                 armor->name = elem->Attribute("name");
+                parseEquipFeature(item, featuresRoot);
                 _items.push_back(item);
             } else {
                 WRITE_WARN("Unknown item in store description");
@@ -99,6 +86,35 @@ void Store::loadStore(const std::string &filename)
     else
     {
         WRITE_ERR("Failed to load score description.");
+    }
+}
+
+void Store::parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root)
+{
+    if (equip.expired() || !root) {
+        return;
+    }
+    
+    auto equip_ptr = equip.lock();
+    auto elem = root->FirstChildElement();
+    
+    while (elem) {
+        std::string name = elem->Name();
+        if (name == "CoinsForMurder") {
+            int flat = elem->IntAttribute("flat");
+            int percent = elem->IntAttribute("percentOfEnemyCost");
+            auto feature = CoinsForMurder::create(flat, percent);
+            equip_ptr->features.push_back(feature);
+        } else if (name == "Backsliding") {
+            float cooldown = elem->FloatAttribute("cooldown");
+            float distance = elem->FloatAttribute("distance");
+            float duration = elem->FloatAttribute("duration");
+            auto feature = Backsliding::create(cooldown, distance, duration);
+            equip_ptr->features.push_back(feature);
+        } else {
+            CC_ASSERT(false);
+        }
+        elem = elem->NextSiblingElement();
     }
 }
 

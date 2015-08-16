@@ -49,11 +49,8 @@ void Hero::init()
     Equip::WeakPtr armor = Store::getInstance().getItemById(armorId);
     setArmor(armor);
     
-    if (getWeapon()) {
-        for (auto ability : getWeapon()->abilities) {
-            ability->init(this);
-        }
-    }
+    getWeapon()->featuresInit(this);
+    getArmor()->featuresInit(this);
     
     flushScore();
 }
@@ -77,7 +74,7 @@ void Hero::idleUpdate(float dt)
             action->update(dt);
         } else {
             delete action;
-            _actionSequence.pop();
+            _actionSequence.pop_front();
         }
     }
     
@@ -91,6 +88,9 @@ void Hero::idleUpdate(float dt)
         _staminaPoints = 0.0f;
         kill();
     }
+    
+    getWeapon()->featuresUpdate(dt);
+    getArmor()->featuresUpdate(dt);
 }
 
 void Hero::onDamageReceived()
@@ -127,11 +127,7 @@ void Hero::attack()
             if (len <= _radius && dotp >= _attackArea) {
                 entity->addHealth(-_damage);
                 
-                if (getWeapon()) {
-                    for (auto ability : getWeapon()->abilities) {
-                        ability->onHit(entity);
-                    }
-                }
+                getWeapon()->featuresOnHit(entity);
                 
                 if (!entity->isAlive()) {
                     Reward *reward = dynamic_cast<Reward *>(entity);
@@ -141,11 +137,7 @@ void Hero::attack()
                         addStamina(reward->getStaminaPoints());
                         addScorePoint(reward->getScorePoints());
                         
-                        if (getWeapon()) {
-                            for (auto ability : getWeapon()->abilities) {
-                                ability->onKill(entity);
-                            }
-                        }
+                        getWeapon()->featuresOnKill(entity);
                     }
                 }
             }
@@ -167,9 +159,27 @@ void Hero::refreshGoals(Entities *entities)
     }
 }
 
+void Hero::onSwipeLeft()
+{
+    getWeapon()->featuresOnSwipeLeft();
+    getArmor()->featuresOnSwipeLeft();
+}
+
+void Hero::onSwipeRight()
+{
+    getWeapon()->featuresOnSwipeRight();
+    getArmor()->featuresOnSwipeRight();
+}
+
+void Hero::onSwipeBack()
+{
+    getWeapon()->featuresOnSwipeBack();
+    getArmor()->featuresOnSwipeBack();
+}
+
 void Hero::addAction(HeroAction *action)
 {
-    _actionSequence.push(action);
+    _actionSequence.push_back(action);
 }
 
 void Hero::addStamina(float stamina)
@@ -215,8 +225,8 @@ void Hero::setWeapon(Equip::WeakPtr weapon)
     Equip::Ptr base = _weapon.lock();
     EquipWeapon *cast = EquipWeapon::cast(base);
     
-    _damage = cast->damage;
-    _radius = cast->distance;
+    _damage = cast->getDamage();
+    _radius = cast->getDistance();
 }
 
 void Hero::setArmor(Equip::WeakPtr armor)
@@ -231,7 +241,7 @@ void Hero::setArmor(Equip::WeakPtr armor)
     
     float baseHealth = GameInfo::getInstance().getFloat("HERO_HEALTH_POINTS");
     
-    _health = baseHealth + cast->addHealth;
+    _health = baseHealth + cast->getExtraHealth();
 }
 
 void Hero::setRunningSpeed(float speed)
@@ -315,5 +325,19 @@ bool Hero::isAbleToPerform(HeroAction *action)
         return true;
     }
     
+    return false;
+}
+
+bool Hero::isActionInQueue(const std::string &tag) const
+{
+    if (tag.empty()) {
+        return false;
+    }
+    for (auto it = _actionSequence.begin(); it != _actionSequence.end(); ++it) {
+        HeroAction *action = (*it);
+        if (action && (*it)->isTag(tag)) {
+            return true;
+        }
+    }
     return false;
 }

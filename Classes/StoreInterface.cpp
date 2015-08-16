@@ -158,7 +158,7 @@ void StoreInterface::update(float dt)
     if (ptr) {
         EquipWeapon *wpn = EquipWeapon::cast(ptr);
         int lastDamage = atoi(_damageText->getString().c_str());
-        int nowDamage = wpn->damage;
+        int nowDamage = wpn->getDamage();
         if (lastDamage != nowDamage) {
             _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
         }
@@ -175,7 +175,7 @@ void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
         Equip::Ptr ptr = Store::getInstance().getItemById(profile.getEquippedWeaponId());
         EquipWeapon *wpn = EquipWeapon::cast(ptr);
         misc::luaSetGlobalInteger("PlayerTotalGoldPoints", profile.getCoins());
-        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->damage);
+        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->getDamage());
         misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", profile.getBestScore().coins);
         misc::luaSetGlobalInteger("PlayerBestResultKillPoints", profile.getBestScore().kills);
         

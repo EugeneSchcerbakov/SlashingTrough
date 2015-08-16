@@ -39,7 +39,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
         const float deltaX = _squareSize;
         const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
+        const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
         
         HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
@@ -50,11 +50,12 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
             
             _hero->addAction(action);
         }
+        _hero->onSwipeRight();
     }
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
         const float deltaX = -_squareSize;
         const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-        const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
+        const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
         
         HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
@@ -65,20 +66,10 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
             
             _hero->addAction(action);
         }
+        _hero->onSwipeLeft();
     }
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
-        float deltaY = gameinfo.getFloat("HERO_JUMP_BACK_DISTANCE");
-        float duration = gameinfo.getFloat("HERO_JUMP_BACK_DURATION");
-        
-        HeroAction *action = new JumpBack(_hero, duration, -deltaY);
-        if (_hero->isAbleToPerform(action))
-        {
-            Event e("JumpBack");
-            e.variables.setFloat("duration", duration);
-            action->setEvent(e);
-            
-            _hero->addAction(action);
-        }
+        _hero->onSwipeBack();
     }
 }
 

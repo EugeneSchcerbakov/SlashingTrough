@@ -32,7 +32,7 @@ bool StoreItemBaseWidget::init()
     setContentSize(getBackGroundImageTextureSize());
     setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     
-    auto *itemIcon = cocos2d::Sprite::create(item->icon);
+    auto *itemIcon = cocos2d::Sprite::create(item->getIcon());
     itemIcon->setScale(1.4f);
     
     auto itemName = cocos2d::ui::Text::create();
@@ -41,7 +41,7 @@ bool StoreItemBaseWidget::init()
     itemName->setTextColor(cocos2d::Color4B::BLACK);
     itemName->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     itemName->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    itemName->setString(item->name);
+    itemName->setString(item->getName());
     
     auto *iconPanel = cocos2d::ui::Layout::create();
     iconPanel->setBackGroundImage("ui/ui_shop_item-plate_item-icon_background.png");
@@ -63,7 +63,7 @@ bool StoreItemBaseWidget::init()
     desc->setTextColor(cocos2d::Color4B(150, 87, 38, 255));
     desc->setTextHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     desc->setTextVerticalAlignment(cocos2d::TextVAlignment::TOP);
-    desc->setString(item->desc);
+    desc->setString(item->getDesc());
     desc->setPositionX(getContentSize().width * 0.5f - 45.0f);
     desc->setPositionY(115.0f);
     desc->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
@@ -72,7 +72,7 @@ bool StoreItemBaseWidget::init()
     _button->setPositionX(getContentSize().width - _button->getContentSize().width * 0.5f);
     _button->setPositionY(_button->getContentSize().height * 0.5f);
     _button->addTouchEventListener(CC_CALLBACK_2(StoreItemBaseWidget::onBuyPressed, this));
-    _button->setPrice(item->price);
+    _button->setPrice(item->getPrice());
     _button->switchState(StoreItemButton::State::BUY);
     
     scheduleUpdate();
@@ -107,7 +107,7 @@ void StoreItemBaseWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget
         
         bool needSave = false;
         if (!profile.isEquipOwned(ptr)) {
-            if (Store::getInstance().buy(ptr->id)) {
+            if (Store::getInstance().buy(ptr->getId())) {
                 profile.equip(ptr);
                 needSave = true;
             }

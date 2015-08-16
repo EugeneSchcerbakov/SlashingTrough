@@ -1,38 +1,36 @@
 //
-//  WeaponAbilities.cpp
+//  WeaponFeature.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 11/06/15.
 //
 //
 
-#include "WeaponAbilities.h"
+#include "WeaponFeature.h"
 #include "Hero.h"
 
-WeaponAbility::~WeaponAbility()
+WeaponFeature::WeaponFeature()
+: EquipFeature()
 {
 }
 
-void WeaponAbility::init(Hero *hero)
-{
-    _hero = hero;
-}
-
-void WeaponAbility::onHit(Entity *goal)
+void WeaponFeature::onHit(Entity *goal)
 {
 }
 
-void WeaponAbility::onKill(Entity *goal)
+void WeaponFeature::onKill(Entity *goal)
 {
 }
 
-WeaponAbility::Ptr CoinsForMurder::Create(int flat, int percentOfEnemyCost)
+// CoinsForMurder
+
+EquipFeature::Ptr CoinsForMurder::create(int flat, int percentOfEnemyCost)
 {
     return std::make_shared<CoinsForMurder>(flat, percentOfEnemyCost);
 }
 
 CoinsForMurder::CoinsForMurder(int flag, int percentOfEnemyCost)
-: WeaponAbility()
+: WeaponFeature()
 , _flat(flag)
 , _percentOfEnemyCost(percentOfEnemyCost)
 {
@@ -40,13 +38,13 @@ CoinsForMurder::CoinsForMurder(int flag, int percentOfEnemyCost)
 
 void CoinsForMurder::onKill(Entity *goal)
 {
-    if (!_hero || !goal) {
+    if (!_owner || !goal) {
         return;
     }
     
     Reward *reward = dynamic_cast<Reward *>(goal);
     if (reward) {
         int additional = reward->getCoinPoints() * _percentOfEnemyCost / 100;
-        _hero->addCoinsPoint(_flat + additional);
+        _owner->addCoinsPoint(_flat + additional);
     }
 }

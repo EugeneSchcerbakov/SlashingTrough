@@ -162,7 +162,7 @@ void PlayerInfo::save()
 void PlayerInfo::addOwnedEquip(Equip::Ptr item)
 {
     if (!isEquipOwned(item)) {
-        _ownedEquips.push_back(item->id);
+        _ownedEquips.push_back(item->getId());
     }
 }
 
@@ -183,10 +183,10 @@ void PlayerInfo::equip(Equip::Ptr item)
     
     CC_ASSERT(isEquipOwned(item));
     
-    if (item->type == Equip::Type::WEAPON) {
-        _equippedWeaponId = item->id;
-    } else if (item->type == Equip::Type::ARMOR) {
-        _equippedArmorId = item->id;
+    if (item->isType(Equip::Type::WEAPON)) {
+        _equippedWeaponId = item->getId();
+    } else if (item->isType(Equip::Type::ARMOR)) {
+        _equippedArmorId = item->getId();
     } else {
         WRITE_WARN("Failed to equip entity of unknown type.");
         CC_ASSERT(false);
@@ -221,7 +221,7 @@ bool PlayerInfo::isEquipOwned(Equip::Ptr item) const
     }
     
     for (auto equip : _ownedEquips) {
-        if (equip == item->id) {
+        if (equip == item->getId()) {
             return true;
         }
     }
@@ -235,10 +235,10 @@ bool PlayerInfo::isEquipped(Equip::Ptr item) const
         return false;
     }
     
-    if (item->type == Equip::Type::WEAPON) {
-        return _equippedWeaponId == item->id;
-    } else if (item->type == Equip::Type::ARMOR) {
-        return _equippedArmorId == item->id;
+    if (item->isType(Equip::Type::WEAPON)) {
+        return _equippedWeaponId == item->getId();
+    } else if (item->isType(Equip::Type::ARMOR)) {
+        return _equippedArmorId == item->getId();
     } else {
         CC_ASSERT(false);
     }

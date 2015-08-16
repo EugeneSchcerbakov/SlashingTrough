@@ -59,7 +59,7 @@ bool StoreArmorWidget::init()
     defenceText->setTextColor(cocos2d::Color4B::BLACK);
     defenceText->setTextHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     defenceText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    defenceText->setString(cocos2d::StringUtils::format("   +%d", (int)floorf(armor->addHealth)));
+    defenceText->setString(cocos2d::StringUtils::format("   +%d", (int)floorf(armor->getExtraHealth())));
     defenceText->setPositionX(defenceIcon->getPositionX() + defenceIcon->getContentSize().width);
     defenceText->setPositionY(defenceText->getContentSize().height * 0.5f);
     

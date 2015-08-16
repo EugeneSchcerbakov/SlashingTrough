@@ -9,8 +9,7 @@
 #ifndef __SlashingTrough__Hero__
 #define __SlashingTrough__Hero__
 
-#include <stdio.h>
-#include <queue>
+#include <list>
 
 #include "ModelBase.h"
 #include "HeroAction.h"
@@ -28,6 +27,9 @@ public:
     void attack();
     void flushScore();
     void refreshGoals(Entities *entities);
+    void onSwipeLeft();
+    void onSwipeRight();
+    void onSwipeBack();
     
     void addAction(HeroAction *action);
     void addStamina(float stamina);
@@ -50,9 +52,10 @@ public:
     
     bool isActionsQueueFull() const;
     bool isAbleToPerform(HeroAction *action);
+    bool isActionInQueue(const std::string &tag) const;
     
 private:
-    typedef std::queue<HeroAction *> ActionSequence;
+    typedef std::list<HeroAction *> ActionSequence;
     
 private:    
     ActionSequence _actionSequence;

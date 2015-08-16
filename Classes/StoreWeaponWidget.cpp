@@ -59,14 +59,14 @@ bool StoreWeaponWidget::init()
     damageText->setTextColor(cocos2d::Color4B::BLACK);
     damageText->setTextHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     damageText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    damageText->setString(cocos2d::StringUtils::format("   %d", (int)floorf(weapon->damage)));
+    damageText->setString(cocos2d::StringUtils::format("   %d", (int)floorf(weapon->getDamage())));
     damageText->setPositionX(damageIcon->getPositionX() + damageIcon->getContentSize().width);
     damageText->setPositionY(damageText->getContentSize().height * 0.5f);
     
     damage->addChild(damageIcon);
     damage->addChild(damageText);
     
-    std::string speedLabel = chooseSpeedLabel(weapon->speed);
+    std::string speedLabel = chooseSpeedLabel(weapon->getSpeed());
     
     auto speed = cocos2d::ui::Text::create();
     speed->setFontName("font_prototype.ttf");

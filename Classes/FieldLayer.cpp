@@ -199,7 +199,7 @@ void FieldLayer::acceptEvent(const Event &event)
         }
         
         misc::luaSetGlobalInteger("PlayerTotalGoldPoints", player.getCoins());
-        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)hero->getWeapon()->damage);
+        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)hero->getWeapon()->getDamage());
         misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", player.getBestScore().coins);
         misc::luaSetGlobalInteger("PlayerBestResultKillPoints", player.getBestScore().kills);
         misc::luaSetGlobalInteger("PlayerResultGoldPoints", score.coins);

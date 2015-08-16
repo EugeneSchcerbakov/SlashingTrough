@@ -79,7 +79,7 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         if (scalar >= 0.8) {
             const float deltaX = _squareSize;
             const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
+            const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
             if (_hero->isAbleToPerform(action))
@@ -91,12 +91,13 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
                 _hero->addAction(action);
                 _isSwipingNow = false;
             }
+            _hero->onSwipeRight();
         }
         if (scalar <= -0.8f)
         {
             const float deltaX = -_squareSize;
             const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
-            const float duration = _hero->getWeapon() ? _hero->getWeapon()->speed : 0.0f;
+            const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
             if (_hero->isAbleToPerform(action))
@@ -108,22 +109,11 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
                 _hero->addAction(action);
                 _isSwipingNow = false;
             }
+            _hero->onSwipeLeft();
         }
         // swipe down
         if (scalar >= -0.3f && scalar <= 0.3 && touch->getDelta().y < 0.0f) {
-            float deltaY = gameinfo.getFloat("HERO_JUMP_BACK_DISTANCE");
-            float duration = gameinfo.getFloat("HERO_JUMP_BACK_DURATION");
-            
-            HeroAction *action = new JumpBack(_hero, duration, -deltaY);
-            if (_hero->isAbleToPerform(action))
-            {
-                Event e("JumpBack");
-                e.variables.setFloat("duration", duration);
-                action->setEvent(e);
-                
-                _hero->addAction(action);
-                _isSwipingNow = false;
-            }
+            _hero->onSwipeBack();
         }
     }
 }

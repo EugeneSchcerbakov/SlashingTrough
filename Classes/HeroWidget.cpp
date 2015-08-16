@@ -44,19 +44,19 @@ bool HeroWidget::init()
     float trailLen = 0.0f, trailWidth = 0.0f;
     std::string trailTex, swordTex;
     if (weapon) {
-        trailLen = weapon->trail.length;
-        trailWidth = weapon->trail.width;
-        trailTex = weapon->trail.texture;
-        swordTex = weapon->sprite;
+        trailLen = weapon->getTrailInfo().length;
+        trailWidth = weapon->getTrailInfo().width;
+        trailTex = weapon->getTrailInfo().texture;
+        swordTex = weapon->getSprite();
     } else {
         CC_ASSERT(weapon);
         // trying to stay stable
         Equip::WeakPtr default_ptr = Store::getInstance().getItemById(Store::DEFAULT_WEAPON_ID);
         EquipWeapon *default_wpn = EquipWeapon::cast(default_ptr.lock());
-        trailLen = default_wpn->trail.length;
-        trailWidth = default_wpn->trail.width;
-        trailTex = default_wpn->trail.texture;
-        swordTex = default_wpn->sprite;
+        trailLen = default_wpn->getTrailInfo().length;
+        trailWidth = default_wpn->getTrailInfo().width;
+        trailTex = default_wpn->getTrailInfo().texture;
+        swordTex = default_wpn->getSprite();
     }
     
     _bodyController = cocos2d::Node::create();
@@ -97,7 +97,7 @@ void HeroWidget::update(float dt)
         float posYCoeff = 1.0f;
         EquipWeapon *weapon = _hero->getWeapon();
         if (weapon) {
-            posYCoeff = weapon->trail.posYCoeff;
+            posYCoeff = weapon->getTrailInfo().posYCoeff;
         } else {
             CC_ASSERT(false);
             posYCoeff = 0.0f;
@@ -132,7 +132,7 @@ void HeroWidget::runSwordTrailEffect(float duration)
     float opacityCoeff = 1.0f;
     EquipWeapon *weapon = _hero->getWeapon();
     if (weapon) {
-        opacityCoeff = weapon->trail.opacity;
+        opacityCoeff = weapon->getTrailInfo().opacity;
     } else {
         CC_ASSERT(false);
     }

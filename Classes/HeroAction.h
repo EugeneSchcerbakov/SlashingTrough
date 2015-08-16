@@ -35,11 +35,15 @@ public:
     virtual bool isStarted() const;
     
     bool isType(Type type) const;
+    bool isTag(const std::string &tag) const;
+    
     const Event& getEvent() const;
+    void setTag(const std::string &tag);
     
 protected:
     Hero *_hero;
     Event _event;
+    std::string _tag;
     
     float _duration;
     float _localTime;

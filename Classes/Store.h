@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "tinyxml2/tinyxml2.h"
 
 #include "Equipment.h"
 
@@ -36,6 +37,8 @@ public:
     Items getArmorItems() const;
     
 private:
+    void parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root);
+    
     void reset();
     
     Items _items;

@@ -62,9 +62,19 @@ bool HeroAction::isType(HeroAction::Type type) const
     return _type == type;
 }
 
+bool HeroAction::isTag(const std::string &tag) const
+{
+    return _tag == tag;
+}
+
 const Event& HeroAction::getEvent() const
 {
     return _event;
+}
+
+void HeroAction::setTag(const std::string &tag)
+{
+    _tag = tag;
 }
 
 // HeroActionMove

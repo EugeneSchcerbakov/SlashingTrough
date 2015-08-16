@@ -13,10 +13,12 @@
 #include <memory>
 #include <vector>
 
-#include "WeaponAbilities.h"
+#include "EquipFeature.h"
+#include "WeaponFeature.h"
 
-struct Equip
+class Equip
 {
+public:
     typedef std::shared_ptr<Equip> Ptr;
     typedef std::weak_ptr<Equip> WeakPtr;
     
@@ -27,9 +29,30 @@ struct Equip
         ARMOR
     };
     
+public:
     Equip(Type t);
     virtual ~Equip();
     
+    virtual void featuresInit(Hero *owner);
+    virtual void featuresUpdate(float dt);
+    virtual void featuresOnSwipeRight();
+    virtual void featuresOnSwipeLeft();
+    virtual void featuresOnSwipeBack();
+    
+    void setSold(bool flag);
+
+    int getPrice() const;
+    Type getType() const;
+    
+    const std::string& getId() const;
+    const std::string& getDesc() const;
+    const std::string& getIcon() const;
+    const std::string& getName() const;
+    
+    bool isSold() const;
+    bool isType(Type t) const;
+    
+protected:
     bool sold;
     int price;
     std::string id;
@@ -37,10 +60,15 @@ struct Equip
     std::string icon;
     std::string name;
     const Type type;
+    
+    EquipFeature::Features features;
+    
+    friend class Store;
 };
 
-struct EquipWeapon : public Equip
+class EquipWeapon : public Equip
 {
+public:
     struct TrailInfo
     {
         float length;
@@ -52,27 +80,47 @@ struct EquipWeapon : public Equip
     
     static Equip::Ptr create();
     static EquipWeapon* cast(Equip::Ptr base);
-    typedef std::vector<WeaponAbility::Ptr> Abilities;
     
+public:
     EquipWeapon();
     
+    virtual void featuresOnHit(Entity *goal);
+    virtual void featuresOnKill(Entity *goal);
+    
+    float getDamage() const;
+    float getSpeed() const;
+    float getDistance() const;
+    
+    const std::string& getSprite() const;
+    const TrailInfo& getTrailInfo() const;
+    
+protected:
     float damage;
     float speed;
     float distance;
     std::string sprite;
     TrailInfo trail;
-    Abilities abilities;
+    
+    friend class Store;
 };
 
-struct EquipArmor : public Equip
+class EquipArmor : public Equip
 {
+public:
     static Equip::Ptr create();
     static EquipArmor* cast(Equip::Ptr base);
     
+public:
     EquipArmor();
     
+    float getExtraHealth() const;
+    const std::string& getSprite() const;
+    
+protected:
     float addHealth;
     std::string sprite;
+    
+    friend class Store;
 };
 
 
