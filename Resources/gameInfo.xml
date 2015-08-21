@@ -10,8 +10,6 @@
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
         <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
-        <Const name="HERO_JUMP_BACK_DISTANCE" type="float" value="200.0" />
-        <Const name="HERO_JUMP_BACK_DURATION" type="float" value="0.15" />
         <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
         <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
@@ -97,9 +95,9 @@
                 areaHeight="1.2"
                 dmgHealth="10.0"
                 dmgStamina="0.0"
-                showHeighlightRange="800.0"
+                showHighlightRange="800.0"
                 showHeighlightTime="0.8"
-                mustShowHeighlight="True" />
+                mustShowHeighlight="true" />
         </Enemy>
         <Enemy name="M2"
             health="30.0"
@@ -118,9 +116,9 @@
                 areaHeight="1.2"
                 dmgHealth="30.0"
                 dmgStamina="0.0"
-                showHeighlightRange="800.0"
+                showHighlightRange="800.0"
                 showHeighlightTime="0.8"
-                mustShowHeighlight="True" />
+                mustShowHeighlight="true" />
         </Enemy>
                 <Enemy name="M3"
             health="100.0"
@@ -139,9 +137,9 @@
                 areaHeight="1.2"
                 dmgHealth="100.0"
                 dmgStamina="0.0"
-                showHeighlightRange="800.0"
+                showHighlightRange="800.0"
                 showHeighlightTime="0.8"
-                mustShowHeighlight="True" />            
+                mustShowHeighlight="true" />
         </Enemy>
                 <Enemy name="R1"
             health="10.0"

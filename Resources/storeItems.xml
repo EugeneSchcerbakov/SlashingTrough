@@ -68,6 +68,9 @@
         icon="ui/ui_shop_armor_tab.png"
         sprite=""
         addHealth="0">
+        <Features>
+            <BackslidingShield cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
+        </Features>
     </Armor>
     <Armor id="leather_armor"
         price="150"
