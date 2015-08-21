@@ -10,6 +10,8 @@
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
         <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
         <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
+        <Const name="HERO_JUMP_BACK_DISTANCE" type="float" value="200.0" />
+        <Const name="HERO_JUMP_BACK_DURATION" type="float" value="0.15" />
         <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
         <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
@@ -52,7 +54,7 @@
                 killPoints="1"
             sprite="gamefield/creep_0.png"
             model="models/orc.c3t"
-            R="255" G="127" B="0">
+            R="250" G="242" B="27" >
         </Enemy>
         <Enemy name="B2"
             health="15.0"
@@ -64,14 +66,7 @@
                 killPoints="5"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
-            R="255" G="0" B="255" >
-            <RangeAttack distance="750.0"
-                recoveryTime="20.3"
-                healthDamage="10.0"
-                staminaDamage="0.0"
-                projectileTexture="gamefield/projectile_0.png"
-                projectileSpeed="800.0"
-                projectileLifeTime="0.8" />
+            R="168" G="166" B="3" >
         </Enemy>
         <Enemy name="B3"
             health="50.0"
@@ -83,7 +78,7 @@
                 killPoints="15"
             sprite="gamefield/creep_2.png"
             model="models/orc.c3t"
-            R="0" G="255" B="0" >
+            R="168" G="166" B="3" >
         </Enemy>
         <Enemy name="M1"
             health="10.0"
@@ -95,7 +90,7 @@
                 killPoints="10"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
-            R="255" G="0" B="255" >
+            R="245" G="106" B="47" >
             <MelleAttack condition="same_side"
                 recoveryTime="2.0f"
                 areaWidth="0.7"
@@ -116,7 +111,7 @@
                 killPoints="30"
             sprite="gamefield/creep_4.png"
             model="models/orc.c3t"
-            R="0" G="0" B="255" >
+            R="156" G="47" B="0" >
             <MelleAttack condition="same_side"
                 recoveryTime="2.0f"
                 areaWidth="0.7"
@@ -137,7 +132,7 @@
                 killPoints="100"
             sprite="gamefield/creep_4.png"
             model="models/orc.c3t"
-            R="0" G="0" B="255" >
+            R="156" G="47" B="0" >
             <MelleAttack condition="same_side"
                 recoveryTime="2.0f"
                 areaWidth="0.7"
@@ -158,7 +153,7 @@
                 killPoints="10"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
-            R="255" G="0" B="255" >
+            R="61" G="173" B="242" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="10.0"
@@ -177,7 +172,7 @@
                 killPoints="30"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
-            R="255" G="0" B="255" >
+            R="0" G="93" B="150" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="30.0"
@@ -196,7 +191,7 @@
                 killPoints="100"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
-            R="255" G="0" B="255" >
+            R="0" G="93" B="150" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="100.0"

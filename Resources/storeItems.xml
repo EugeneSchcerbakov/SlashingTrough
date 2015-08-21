@@ -14,10 +14,6 @@
             posYCoeff="0.6"
             opacity="0.8"
             texture="effects/trail.png"/>
-        <Features>
-            <CoinsForMurder flat="100" percentOfEnemyCost="10" />
-            <Backsliding cooldown="1.0" distance="200" duration="0.15" />
-        </Features>
     </Weapon>
     <Weapon id="ice_sword"
         price="100"
@@ -72,9 +68,6 @@
         icon="ui/ui_shop_armor_tab.png"
         sprite=""
         addHealth="0">
-        <Features>
-            <Backsliding cooldown="0.5" distance="200" duration="0.15" />
-        </Features>
     </Armor>
     <Armor id="leather_armor"
         price="150"
