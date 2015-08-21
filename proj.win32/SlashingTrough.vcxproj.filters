@@ -75,9 +75,6 @@
     <ClCompile Include="..\Classes\ObstacleWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SessionInfo.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StaminaBarWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
     <ClCompile Include="..\Classes\VariablesSet.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\WeaponAbilities.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Projectile.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -123,6 +117,9 @@
     <ClCompile Include="..\Classes\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PlayerInfo.cpp" />
+    <ClCompile Include="..\Classes\EquipFeature.cpp" />
+    <ClCompile Include="..\Classes\WeaponFeature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -188,9 +185,6 @@
     <ClInclude Include="..\Classes\ObstacleWidget.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SessionInfo.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\StaminaBarWidget.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -215,9 +209,6 @@
     <ClInclude Include="..\Classes\VariablesSet.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\WeaponAbilities.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Projectile.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -236,6 +227,9 @@
     <ClInclude Include="..\Classes\Log.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\PlayerInfo.h" />
+    <ClInclude Include="..\Classes\EquipFeature.h" />
+    <ClInclude Include="..\Classes\WeaponFeature.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
