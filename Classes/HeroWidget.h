@@ -63,6 +63,7 @@ private:
     
     cocos2d::Sprite *_body;
     cocos2d::Sprite *_sword;
+    cocos2d::Sprite *_shield;
     cocos2d::Node *_bodyController;
     cocos2d::MotionStreak *_swordTrail;
 };

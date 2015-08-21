@@ -147,9 +147,6 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
     } else if (isState(State::MELLE_ATTACK_BEGIN) && _nextState != State::MELLE_ATTACK_END) {
         _nextState = State::MELLE_ATTACK_END;
         _stateTimer = _melleDuration;
-        Event e("ShowMelleAttack");
-        e.variables.setFloat("ShowTime", _melleDuration);
-        sendEvent(e);
     } else if (isState(State::MELLE_ATTACK_END)) {
         _state = State::IDLE;
         _nextState = State::IDLE;
@@ -164,6 +161,9 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
         float y = hero->getPositionY();
         if (checkMelleZone(x, y)) {
             _state = State::MELLE_ATTACK_BEGIN;
+            Event e("ShowMelleAttack");
+            e.variables.setFloat("ShowTime", _melleDuration);
+            sendEvent(e);
         }
     }
     
@@ -189,6 +189,17 @@ void Enemy::kill()
 {
     Entity::kill();
     sendEvent(Event("FatalDamageReceived"));
+}
+
+void Enemy::discardMelleAttack()
+{
+    _state = State::IDLE;
+    _nextState = State::IDLE;
+    _melleAttackTimer = _melleAttack.recoveryTime;
+    _stateTimer = 0.0f;
+    if (_melleAttackTimer <= 0.0f) {
+        _melleAttack.allowed = false;
+    }
 }
 
 float Enemy::getMelleAreaCenterX() const

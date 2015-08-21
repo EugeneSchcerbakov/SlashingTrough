@@ -68,6 +68,11 @@ bool HeroWidget::init()
     _sword->setRotation(_swordRightTrans.angle);
     _sword->setScale(0.7f);
     
+    _shield = cocos2d::Sprite::create("gamefield/shield.png");
+    _shield->setPositionY(100.0f);
+    _shield->setScale(1.5f);
+    _shield->setVisible(false);
+    
     _bodyController->addChild(_body, 0);
     _bodyController->addChild(_sword, 1);
     
@@ -81,6 +86,7 @@ bool HeroWidget::init()
     setMode(cocos2d::BillBoard::Mode::VIEW_PLANE_ORIENTED);
     addChild(_bodyController, 0);
     addChild(_swordTrail, 1);
+    addChild(_shield, 2);
     scheduleUpdate();
     
     return true;
@@ -191,8 +197,24 @@ void HeroWidget::acceptEvent(const Event &event)
 			_nextSwordSide = SwordSide::LEFT;
         }
 		runSwordTrailEffect(time);
-    } else if (event.is("JumpBack")) {
-
+    } else if (event.is("JumpBackStart")) {
+        if (event.variables.getBool("showShield", false) && !_shield->isVisible()) {
+            _shield->setVisible(true);
+            _shield->setOpacity(0);
+            _shield->runAction(cocos2d::FadeIn::create(0.1f));
+        }
+    } else if (event.is("JumpBackEnd")) {
+    } else if (event.is("HideShield")) {
+        auto func = [this](){_shield->setVisible(false);};
+        auto fade = cocos2d::FadeOut::create(0.05f);
+        auto call = cocos2d::CallFunc::create(func);
+        auto eff = cocos2d::Sequence::create(fade, call, nullptr);
+        _shield->runAction(eff);
+    } else if (event.is("ShieldDamageReceived")) {
+        auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
+        auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
+        auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
+        _shield->runAction(effect);
     } else if (event.is("DamageReceived")) {
         auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
         auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);

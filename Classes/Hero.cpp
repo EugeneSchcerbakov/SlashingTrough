@@ -299,6 +299,11 @@ PlayerInfo::Score Hero::getScore() const
     return _score;
 }
 
+const Entities* Hero::getGoals() const
+{
+    return _goals;
+}
+
 bool Hero::isActionsQueueFull() const
 {
     return _actionSequence.size() >= (std::size_t)_actionsSequenceMaxSize;

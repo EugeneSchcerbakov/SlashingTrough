@@ -34,6 +34,7 @@ public:
     void idleUpdate(float dt) override;
     void onDamageReceived() override;
     void kill() override;
+    void discardMelleAttack();
     
     float getMelleAreaCenterX() const;
     float getMelleAreaCenterY() const;

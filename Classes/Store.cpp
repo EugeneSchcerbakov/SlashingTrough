@@ -111,6 +111,13 @@ void Store::parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root)
             float duration = elem->FloatAttribute("duration");
             auto feature = Backsliding::create(cooldown, distance, duration);
             equip_ptr->features.push_back(feature);
+        } else if (name == "BackslidingShield") {
+            float cooldown = elem->FloatAttribute("cooldown");
+            float distance = elem->FloatAttribute("distance");
+            float duration = elem->FloatAttribute("duration");
+            float shieldTime = elem->FloatAttribute("shieldTime");
+            auto feature = BackslidingShield::create(cooldown, distance, duration, shieldTime);
+            equip_ptr->features.push_back(feature);
         } else {
             CC_ASSERT(false);
         }
