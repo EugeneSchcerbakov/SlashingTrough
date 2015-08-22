@@ -9,15 +9,34 @@
 #include "FieldLevel.h"
 
 #include "Utils.h"
+#include "Log.h"
 
 FieldLevel::FieldLevel()
 : _lastSectorIndex(0)
+, _status(Status::LOCKED)
+, _posOnMapX(0.0f)
+, _posOnMapY(0.0f)
+, _coinRewardForCompletition(0)
 {
 }
 
 FieldLevel::Ptr FieldLevel::create()
 {
     return std::make_shared<FieldLevel>();
+}
+
+FieldLevel::Status FieldLevel::stringToStatus(const std::string &str)
+{
+    if (str == "locked") {
+        return Status::LOCKED;
+    } else if (str == "unlocked") {
+        return Status::UNLOCKED;
+    } else if (str == "completed") {
+        return Status::COMPLETED;
+    } else {
+        WRITE_WARN("Unknown level status");
+        return Status::UNLOCKED;
+    }
 }
 
 void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
@@ -27,8 +46,44 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
     float speed = 0.0f;
     
     auto head = node->ToElement();
-    auto elem = head->FirstChildElement();
+    auto reward = head->FirstChildElement("Rewards");
+    auto unlocks = head->FirstChildElement("Unlocks");
+    auto description = head->FirstChildElement("Description");
+    
     _id = head->Attribute("id");
+    _status = stringToStatus(head->Attribute("status"));
+    _posOnMapX = head->FloatAttribute("mapX");
+    _posOnMapY = head->FloatAttribute("mapY");
+    
+    if (reward) {
+        _drops.clear();
+        _coinRewardForCompletition = reward->IntAttribute("coins");
+        auto elem = reward->FirstChildElement();
+        while (elem) {
+            Drop drop;
+            drop.itemId = elem->Attribute("itemId");
+            drop.chance = elem->IntAttribute("dropChance");
+            drop.once = elem->BoolAttribute("dropOnce");
+            _drops.push_back(drop);
+            elem = elem->NextSiblingElement();
+        }
+    }
+    
+    if (unlocks) {
+        _unlocks.clear();
+        auto elem = unlocks->FirstChildElement();
+        while (elem) {
+            std::string levelId = elem->Attribute("id");
+            _unlocks.push_back(levelId);
+            elem = elem->NextSiblingElement();
+        }
+    }
+    
+    tinyxml2::XMLElement *elem = nullptr;
+    if (description) {
+        elem = description->FirstChildElement();
+    }
+    
     while (elem) {
         std::string type = elem->Name();
         if (type == "Preset") {
@@ -90,9 +145,24 @@ FieldSector::Ptr FieldLevel::getSectorByIndex(int index)
     return FieldSector::Ptr();
 }
 
+float FieldLevel::getPosOnMapX() const
+{
+    return _posOnMapX;
+}
+
+float FieldLevel::getPosOnMapY() const
+{
+    return _posOnMapY;
+}
+
 const std::string& FieldLevel::getId() const
 {
     return _id;
+}
+
+bool FieldLevel::isStatus(Status status)
+{
+    return _status == status;
 }
 
 void FieldLevel::addSector(const Preset &preset, float speed)
