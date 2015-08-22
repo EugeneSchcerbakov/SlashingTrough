@@ -13,14 +13,14 @@
             width="200.0"
             posYCoeff="0.6"
             opacity="0.8"
-            texture="effects/trail.png"/>
+            texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="ice_sword"
         price="100"
         name="Frozen blade"
         desc="Chilled and light"
         icon="icons/icon_wpn_ice-sword.png"
-        sprite="gamefield/wpn_iron_sword.png"
+        sprite="gamefield/wpn_ice_sword.png"
         damage="15.0"
         speed="0.31"
         distance="450.0">
@@ -28,14 +28,14 @@
             width="200.0"
             posYCoeff="0.6"
             opacity="0.8"
-            texture="effects/trail.png"/>
+            texture="effects/trail_2.png"/>
     </Weapon>
     <Weapon id="noble_sword"
         price="300"
         name="Noble Sword"
         desc="Looks expencive"
         icon="icons/icon_wpn_noble-sword.png"
-        sprite="gamefield/wpn_iron_sword.png"
+        sprite="gamefield/wpn_noble_sword.png"
         damage="20.0"
         speed="0.33"
         distance="450.0">
@@ -43,14 +43,14 @@
             width="200.0"
             posYCoeff="0.6"
             opacity="0.8"
-            texture="effects/trail.png"/>
+            texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="lava_sword"
         price="1000"
         name="Lava Sword"
         desc="It's hot!"
         icon="icons/icon_wpn_lava-sword.png"
-        sprite="gamefield/wpn_iron_sword.png"
+        sprite="gamefield/wpn_lava_sword.png"
         damage="25.0"
         speed="0.33"
         distance="450.0">
@@ -58,7 +58,7 @@
             width="200.0"
             posYCoeff="0.6"
             opacity="0.8"
-            texture="effects/trail.png"/>
+            texture="effects/trail_3.png"/>
     </Weapon>
 
     <Armor id="default_armor"
