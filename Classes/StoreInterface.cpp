@@ -8,6 +8,7 @@
 
 #include "StoreInterface.h"
 
+#include "StartInterface.h"
 #include "PlayerInfo.h"
 #include "Utils.h"
 
@@ -183,7 +184,7 @@ void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
         std::string startSceneName = misc::luaGetGlobalString("StartScreenSceneName");
         std::string resultSceneName = misc::luaGetGlobalString("ResultScreenSceneName");
         if (_prevSceneName == startSceneName) {
-            auto scene = misc::makeSceneFromLua("CreateStartscreenScene");
+            auto scene = StartInterface::create();
             auto trans = cocos2d::TransitionSlideInL::create(0.3f, scene);
             director->replaceScene(trans);
         } else if (_prevSceneName == resultSceneName) {

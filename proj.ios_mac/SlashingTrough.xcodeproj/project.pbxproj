@@ -50,6 +50,8 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		CD0AB2BF1B89E03A00139A03 /* StartInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */; };
+		CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */; };
 		CD0EB1781B75E50600267CEA /* FieldLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0EB1761B75E50600267CEA /* FieldLevel.cpp */; };
 		CD0EB1791B75E50600267CEA /* FieldLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0EB1761B75E50600267CEA /* FieldLevel.cpp */; };
 		CD0EB17B1B75F2F500267CEA /* presets.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17A1B75F2F500267CEA /* presets.xml */; };
@@ -259,6 +261,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartInterface.cpp; sourceTree = "<group>"; };
+		CD0AB2BE1B89E03A00139A03 /* StartInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartInterface.h; sourceTree = "<group>"; };
 		CD0EB1761B75E50600267CEA /* FieldLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldLevel.cpp; sourceTree = "<group>"; };
 		CD0EB1771B75E50600267CEA /* FieldLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldLevel.h; sourceTree = "<group>"; };
 		CD0EB17A1B75F2F500267CEA /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
@@ -609,6 +613,8 @@
 		CDC880F81B513BE600030818 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */,
+				CD0AB2BE1B89E03A00139A03 /* StartInterface.h */,
 				CD7503511AFF6BED00DBD732 /* GameInterface.cpp */,
 				CD7503521AFF6BED00DBD732 /* GameInterface.h */,
 				CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */,
@@ -881,6 +887,7 @@
 				CDCDEA751B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,
 				CDC881211B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */,
+				CD0AB2BF1B89E03A00139A03 /* StartScreen.cpp in Sources */,
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
@@ -909,6 +916,7 @@
 				CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */,
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
+				CD0AB2C01B89E03A00139A03 /* StartScreen.cpp in Sources */,
 				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,
 				CDC881161B5155F700030818 /* ModelBase.cpp in Sources */,

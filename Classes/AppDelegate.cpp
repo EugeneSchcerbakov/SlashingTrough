@@ -4,6 +4,7 @@
 #include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
 
 #include "StoreInterface.h"
+#include "StartInterface.h"
 #include "GameScene.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -90,9 +91,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GameInfo::getInstance().setFloat("SQUARE_SIZE", squareSize);
     GameInfo::getInstance().setInt("CHARACTER_SCORE", 0);
     
-    misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", PlayerInfo::getInstance().getBestScore().coins);
-    misc::luaSetGlobalInteger("PlayerBestResultKillPoints", PlayerInfo::getInstance().getBestScore().kills);
-    cocos2d::Scene *scene = misc::makeSceneFromLua("CreateStartscreenScene");
+    cocos2d::Scene *scene = StartInterface::create();
     
     auto OnStartPressed = [&](cocos2d::EventCustom *)
     {
@@ -104,9 +103,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto OnHomePressed = [&](cocos2d::EventCustom *)
     {
-        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", PlayerInfo::getInstance().getBestScore().coins);
-        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", PlayerInfo::getInstance().getBestScore().kills);
-        auto homescreen = misc::makeSceneFromLua("CreateStartscreenScene");
+        auto homescreen = StartInterface::create();
         auto transition = cocos2d::TransitionFadeUp::create(0.8f, homescreen);  
         cocos2d::Director *director;
         director = cocos2d::Director::getInstance();
