@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Levels>
-    <Level id="level" status="unlocked" mapX="0.0" mapY="0.0">
+    <Level id="level_1" status="unlocked">
         <Rewards coins="2000">
             <Drop itemId="item"
             dropChance="50"
@@ -77,6 +77,26 @@
             <Preset dif="11-12"/>
             <Preset dif="11-12"/>
             <Preset dif="11-12"/>
+            <LinkRand/>
+        </Description>
+    </Level>
+    <Level id="level_2" status="unlocked">
+        <Rewards coins="1000">
+            <Drop itemId="item"
+            dropChance="50"
+            dropOnce="true"/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_id" />
+        </Unlocks>
+        <Description>
+            <Speed value="450"/>
+            <LinkRand/>
+            <Speed value="460"/>
+            <Preset dif="1-1"/>
+            <Preset dif="1-1"/>
+            <Preset dif="1-2"/>
+            <Preset dif="1-2"/>
             <LinkRand/>
         </Description>
     </Level>

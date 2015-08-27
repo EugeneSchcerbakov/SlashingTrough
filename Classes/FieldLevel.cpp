@@ -14,8 +14,6 @@
 FieldLevel::FieldLevel()
 : _lastSectorIndex(0)
 , _status(Status::LOCKED)
-, _posOnMapX(0.0f)
-, _posOnMapY(0.0f)
 , _coinRewardForCompletition(0)
 {
 }
@@ -41,7 +39,7 @@ FieldLevel::Status FieldLevel::stringToStatus(const std::string &str)
 
 void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
 {
-    PresetsLoader &presets = PresetsLoader::getInstance();
+    release();
     
     float speed = 0.0f;
     
@@ -52,8 +50,6 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
     
     _id = head->Attribute("id");
     _status = stringToStatus(head->Attribute("status"));
-    _posOnMapX = head->FloatAttribute("mapX");
-    _posOnMapY = head->FloatAttribute("mapY");
     
     if (reward) {
         _drops.clear();
@@ -89,7 +85,7 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
         if (type == "Preset") {
             if (elem->Attribute("id")) {
                 std::string id = elem->Attribute("id");
-                addSector(presets.getPresetById(id), speed);
+                _construction.push_back(ConstructionInfo(type, id, 0, 0, speed));
             } else if (elem->Attribute("dif")) {
                 std::string dif = elem->Attribute("dif");
                 std::size_t pos = dif.find("-");
@@ -100,20 +96,21 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
                     int lower = atoi(s0.c_str());
                     int upper = atoi(s1.c_str());
                     if (lower > upper) {std::swap(lower, upper);}
-                    int difficult = misc::random(lower, upper);
-                    addSector(presets.getRandomPresetWithDif(difficult), speed);
+                    _construction.push_back(ConstructionInfo(type, "", lower, upper, speed));
                 } else {
                     int difficult = atoi(dif.c_str());
-                    addSector(presets.getRandomPresetWithDif(difficult), speed);
+                    _construction.push_back(ConstructionInfo(type, "", difficult, difficult, speed));
                 }
             }
         } else if (type == "Link") {
             std::string id = elem->Attribute("id");
-            addSector(presets.getLinkById(id), speed);
+            _construction.push_back(ConstructionInfo(type, id, 0, 0, speed));
         } else if (type == "LinkRand") {
-            addSector(presets.getRandomLink(), speed);
+            _construction.push_back(ConstructionInfo(type, "", 0, 0, speed));
         } else if (type == "Speed") {
             speed = elem->FloatAttribute("value");
+        } else {
+            WRITE_WARN("Unknown level entity: " + type);
         }
         elem = elem->NextSiblingElement();
     }
@@ -122,8 +119,32 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
 void FieldLevel::release()
 {
     _sectors.clear();
+    _construction.clear();
     _id.clear();
     _lastSectorIndex = 0;
+}
+
+void FieldLevel::rebuild()
+{
+    _lastSectorIndex = 0;
+    _sectors.clear();
+    
+    PresetsLoader &presets = PresetsLoader::getInstance();
+    
+    for (auto info : _construction) {
+        if (info.type == "Preset") {
+            if (info.id.empty()) {
+                int difficult = misc::random(info.diffLower, info.diffUpper);
+                addSector(presets.getRandomPresetWithDif(difficult), info.speed);
+            } else {
+                addSector(presets.getPresetById(info.id), info.speed);
+            }
+        } else if (info.type == "Link") {
+            addSector(presets.getLinkById(info.id), info.speed);
+        } else if (info.type == "LinkRand") {
+            addSector(presets.getRandomLink(), info.speed);
+        }
+    }
 }
 
 FieldSector::Ptr FieldLevel::getNextSector()
@@ -143,16 +164,6 @@ FieldSector::Ptr FieldLevel::getSectorByIndex(int index)
         return _sectors[index];
     }
     return FieldSector::Ptr();
-}
-
-float FieldLevel::getPosOnMapX() const
-{
-    return _posOnMapX;
-}
-
-float FieldLevel::getPosOnMapY() const
-{
-    return _posOnMapY;
 }
 
 const std::string& FieldLevel::getId() const

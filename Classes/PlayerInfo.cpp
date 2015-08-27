@@ -208,6 +208,18 @@ int PlayerInfo::getCoins() const
     return _totalCoins;
 }
 
+int PlayerInfo::getDamage() const
+{
+    Equip::Ptr equip = Store::getInstance().getItemById(getEquippedWeaponId());
+    if (equip) {
+        EquipWeapon *weapon = EquipWeapon::cast(equip);
+        return floorf(weapon->getDamage());
+    } else {
+        return 0.0f;
+        WRITE_WARN("Failed to cast to weapon.");
+    }
+}
+
 bool PlayerInfo::isBestScore(const PlayerInfo::Score &score) const
 {
     return score.coins > _bestScore.coins;

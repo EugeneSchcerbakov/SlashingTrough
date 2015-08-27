@@ -22,7 +22,7 @@ bool Log::isFirstLife = true;
 static std::mutex InstanceMutex;
 static std::mutex FilestreamMutex;
 
-static const std::string HTML_HEADER = "<html><head><title>The We Game Log</title>"
+static const std::string HTML_HEADER = "<html><head><title>Slashing Trough Game Log</title>"
 "<style>"
 ".init{color:green}"
 ".log{color:black}"

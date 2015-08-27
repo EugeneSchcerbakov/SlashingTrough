@@ -16,10 +16,10 @@
 class StoreInterface : public cocos2d::Scene
 {
 public:
-    static StoreInterface* create(const std::string &prevSceneName);
+    static StoreInterface* create();
     
 protected:
-    StoreInterface(const std::string &prevSceneName);
+    StoreInterface();
     virtual ~StoreInterface();
     
     bool init();
@@ -49,7 +49,6 @@ private:
     void fillScrollerWithArmors();
     void fillScrollerWithBoosters();
     
-    std::string _prevSceneName;
     std::vector<CategoryButton *> _tabButtons;
 
     cocos2d::ui::Text *_coinsText;

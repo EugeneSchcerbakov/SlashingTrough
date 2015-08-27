@@ -11,10 +11,10 @@
 #include "GameInfo.h"
 #include "Utils.h"
 
-GameScene* GameScene::create()
+GameScene* GameScene::create(const std::string &levelId)
 {
     GameScene *gamescene = new GameScene();
-    if (gamescene && gamescene->init()) {
+    if (gamescene && gamescene->init(levelId)) {
         gamescene->autorelease();
     } else {
         delete gamescene;
@@ -34,7 +34,7 @@ GameScene::~GameScene()
 {
 }
 
-bool GameScene::init()
+bool GameScene::init(const std::string &levelId)
 {
     if (!cocos2d::Scene::init()) {
         return false;
@@ -56,7 +56,7 @@ bool GameScene::init()
     }
     
     _layerGui = GameInterface::create();
-    _layerField = FieldLayer::create(_layerGui);
+    _layerField = FieldLayer::create(levelId, _layerGui);
     
     addChild(_layerField, LayerZOrder::GAME_FIELD);
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);

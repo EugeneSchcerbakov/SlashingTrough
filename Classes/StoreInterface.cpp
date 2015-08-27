@@ -8,13 +8,14 @@
 
 #include "StoreInterface.h"
 
+#include "ScreenChanger.h"
 #include "StartInterface.h"
 #include "PlayerInfo.h"
 #include "Utils.h"
 
-StoreInterface* StoreInterface::create(const std::string &prevSceneName)
+StoreInterface* StoreInterface::create()
 {
-    StoreInterface *object = new StoreInterface(prevSceneName);
+    StoreInterface *object = new StoreInterface();
     if (object && object->init()) {
         object->autorelease();
     } else {
@@ -24,8 +25,7 @@ StoreInterface* StoreInterface::create(const std::string &prevSceneName)
     return object;
 }
 
-StoreInterface::StoreInterface(const std::string &prevSceneName)
-: _prevSceneName(prevSceneName)
+StoreInterface::StoreInterface()
 {
 }
 
@@ -155,16 +155,10 @@ void StoreInterface::update(float dt)
         _coinsText->setString(cocos2d::StringUtils::toString(nowCoins));
     }
     
-    Equip::Ptr ptr = Store::getInstance().getItemById(session.getEquippedWeaponId());
-    if (ptr) {
-        EquipWeapon *wpn = EquipWeapon::cast(ptr);
-        int lastDamage = atoi(_damageText->getString().c_str());
-        int nowDamage = wpn->getDamage();
-        if (lastDamage != nowDamage) {
-            _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
-        }
-    } else {
-        CC_ASSERT(false);
+    int lastDamage = atoi(_damageText->getString().c_str());
+    int nowDamage = session.getDamage();
+    if (lastDamage != nowDamage) {
+        _damageText->setString(cocos2d::StringUtils::toString(nowDamage));
     }
 }
 
@@ -172,28 +166,7 @@ void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
-        PlayerInfo &profile = PlayerInfo::getInstance();
-        Equip::Ptr ptr = Store::getInstance().getItemById(profile.getEquippedWeaponId());
-        EquipWeapon *wpn = EquipWeapon::cast(ptr);
-        misc::luaSetGlobalInteger("PlayerTotalGoldPoints", profile.getCoins());
-        misc::luaSetGlobalInteger("PlayerTotalDamagePoints", (int)wpn->getDamage());
-        misc::luaSetGlobalInteger("PlayerBestResultGoldPoints", profile.getBestScore().coins);
-        misc::luaSetGlobalInteger("PlayerBestResultKillPoints", profile.getBestScore().kills);
-        
-        cocos2d::Director *director = cocos2d::Director::getInstance();
-        std::string startSceneName = misc::luaGetGlobalString("StartScreenSceneName");
-        std::string resultSceneName = misc::luaGetGlobalString("ResultScreenSceneName");
-        if (_prevSceneName == startSceneName) {
-            auto scene = StartInterface::create();
-            auto trans = cocos2d::TransitionSlideInL::create(0.3f, scene);
-            director->replaceScene(trans);
-        } else if (_prevSceneName == resultSceneName) {
-            auto scene = misc::makeSceneFromLua("CreateResultScene");
-            auto trans = cocos2d::TransitionSlideInL::create(0.3f, scene);
-            director->replaceScene(trans);
-        } else {
-            CC_ASSERT(false);
-        }
+        ScreenChanger::changeScreen(ScreenChanger::MAP);
     }
 }
 

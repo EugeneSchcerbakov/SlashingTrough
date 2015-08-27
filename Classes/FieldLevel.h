@@ -45,22 +45,39 @@ public:
     
     void initFromXml(tinyxml2::XMLNode *node);
     void release();
+    void rebuild();
     
     FieldSector::Ptr getNextSector();
     FieldSector::Ptr getSectorByIndex(int index);
     
-    float getPosOnMapX() const;
-    float getPosOnMapY() const;
     const std::string& getId() const;
     const std::vector<std::string> getUnlocks() const;
     
     bool isStatus(Status status);
     
 private:
-    void addSector(const Preset &preset, float speed);
+    struct ConstructionInfo
+    {
+        std::string type;
+        std::string id;
+        int diffLower;
+        int diffUpper;
+        float speed;
+        // if id is empty, will be taken random
+        // preset with specified difficult
+        
+        ConstructionInfo() = default;
+        ConstructionInfo(const std::string &t, const std::string &iD, int lower, int upper, float spd)
+        : type(t)
+        , id(iD)
+        , diffLower(lower)
+        , diffUpper(upper)
+        , speed(spd)
+        {}
+    };
     
-    float _posOnMapX;
-    float _posOnMapY;
+private:
+    void addSector(const Preset &preset, float speed);
     
     int _lastSectorIndex;
     int _coinRewardForCompletition;
@@ -69,6 +86,7 @@ private:
     
     std::string _id;
     std::vector<FieldSector::Ptr> _sectors;
+    std::vector<ConstructionInfo> _construction;
     std::vector<std::string> _unlocks; // id's of unlocked levels after complete
     std::vector<Drop> _drops;
 };

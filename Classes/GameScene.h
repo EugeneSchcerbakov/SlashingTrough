@@ -17,13 +17,13 @@
 class GameScene : public cocos2d::Scene
 {
 public:
-    static GameScene* create();
+    static GameScene* create(const std::string &levelId);
     
 protected:
     GameScene();
     virtual ~GameScene();
     
-    bool init() override;
+    bool init(const std::string &levelId);
     
 private:
     enum LayerZOrder

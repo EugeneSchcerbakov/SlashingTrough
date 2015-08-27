@@ -12,6 +12,7 @@
         <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
         <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
+        <Const name="SQUARE_SIZE" type="float" value="213.0" />
         <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
         <Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="6" />
         <Const name="TOUCH_SWIPE_DISTANCE" type="float" value="5.0" />

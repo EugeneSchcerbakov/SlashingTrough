@@ -9,6 +9,7 @@
 #include "Field.h"
 #include "Obstacle.h"
 #include "Enemy.h"
+#include "Log.h"
 
 Field::Field()
 : ModelBase()
@@ -26,10 +27,12 @@ Field::~Field()
 void Field::initialize(FieldLevel::WeakPtr level)
 {
     if (level.expired()) {
+        WRITE_WARN("Failed to start game with invalid level");
         return;
     }
     
     _level = level.lock();
+    _level->rebuild();
     
     GameInfo &gameinfo = GameInfo::getInstance();
     
@@ -50,6 +53,8 @@ void Field::initialize(FieldLevel::WeakPtr level)
     for (int k = 0; k < sectorsQueueSize; ++k) {
         pushFrontSector();
     }
+    
+    WRITE_LOG("Game started with level:" + _level->getId());
 }
 
 void Field::finalize()

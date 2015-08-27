@@ -27,13 +27,13 @@
 class FieldLayer : public cocos2d::Layer
 {
 public:
-    static FieldLayer* create(GameInterface *gameInterface);
+    static FieldLayer* create(const std::string &levelId, GameInterface *gameInterface);
     
 protected:
     FieldLayer(GameInterface *gameInterface);
     virtual ~FieldLayer();
     
-    bool init() override;
+    bool init(const std::string &levelId);
     void update(float dt) override;
     void refreshInterface();
     

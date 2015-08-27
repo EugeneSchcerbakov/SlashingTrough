@@ -8,6 +8,8 @@
 
 #include "StartInterface.h"
 
+#include "ScreenChanger.h"
+
 StartInterface* StartInterface::create()
 {
     StartInterface *startscreen = new StartInterface();
@@ -45,8 +47,8 @@ bool StartInterface::init()
     background->setPosition(0.0f, 0.0f);
     background->setScale(1.5f);
     
-    float knighScale = 1.8f;
-    float knightYOffset = -80.0f;
+    float knighScale = 1.3f;
+    float knightYOffset = -70.0f;
     auto knight = cocos2d::Sprite::create("ui/ui_startscreen_knight.png");
     knight->setScale(knighScale);
     knight->setPositionX(origin.x + size.width * 0.5f);
@@ -58,7 +60,7 @@ bool StartInterface::init()
     settings->setPositionX(origin.x + settings->getContentSize().width * settingsScale * 0.5f + 20.0f);
     settings->setPositionY(origin.y + size.height - settings->getContentSize().height * settingsScale * 0.5f - 20.0f);
     
-    float titleYOffset = -200.0f;
+    float titleYOffset = -220.0f;
     auto titleText = cocos2d::ui::Text::create("Slashing Trough", "font_prototype.ttf", 70);
     titleText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     titleText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
@@ -99,9 +101,6 @@ bool StartInterface::init()
 
 bool StartInterface::onTouch(cocos2d::Touch *touch, cocos2d::Event *e)
 {
-    auto director = cocos2d::Director::getInstance();
-    auto dispatcher = director->getEventDispatcher();
-    dispatcher->dispatchCustomEvent("StartButtonPressed");
-    
+    ScreenChanger::changeScreen(ScreenChanger::MAP);
     return true;
 }

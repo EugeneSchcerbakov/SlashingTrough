@@ -44,6 +44,7 @@ public:
     
     Score getBestScore() const;
     int getCoins() const;
+    int getDamage() const;
     bool isBestScore(const Score &score) const;
     bool isEquipOwned(Equip::Ptr item) const;
     bool isEquipped(Equip::Ptr item) const;

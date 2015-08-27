@@ -122,7 +122,7 @@ bool GameInfo::loadInfo(const std::string &filename)
             }
             objectsNode = objectsNode->NextSibling();
         }
-        WRITE_INIT("GameInfo successfully crated.");
+        WRITE_INIT("GameInfo successfully created.");
         return true;
     } else {
         WRITE_ERR("Failed to read GameInfo");
