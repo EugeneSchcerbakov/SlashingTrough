@@ -10,6 +10,7 @@
 #define __SlashingTrough__FieldLevel__
 
 #include "FieldSector.h"
+#include "VictoryCondition.h"
 
 #include "tinyxml2/tinyxml2.h"
 
@@ -44,8 +45,9 @@ public:
     FieldLevel();
     
     void initFromXml(tinyxml2::XMLNode *node);
+    void prepearForRun(Hero *hero);
+    void update(float dt);
     void release();
-    void rebuild();
     
     FieldSector::Ptr getNextSector();
     FieldSector::Ptr getSectorByIndex(int index);
@@ -53,7 +55,11 @@ public:
     const std::string& getId() const;
     const std::vector<std::string> getUnlocks() const;
     
+    int getSectorsAmount() const;
     bool isStatus(Status status);
+    bool isFinished() const;
+    
+    VictoryCondition::WeakPtr getVictoryCondition() const;
     
 private:
     struct ConstructionInfo
@@ -83,6 +89,8 @@ private:
     int _coinRewardForCompletition;
     
     Status _status;
+    
+    VictoryCondition::Ptr _victoryCondition;
     
     std::string _id;
     std::vector<FieldSector::Ptr> _sectors;

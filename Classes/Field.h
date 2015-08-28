@@ -51,6 +51,8 @@ private:
     int _passedSectors;
     int _defaultSectorYSquares;
     int _squareSize;
+    
+    bool _finished;
 };
 
 #endif /* defined(__SlashingTrough__Field__) */

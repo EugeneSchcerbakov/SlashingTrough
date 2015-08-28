@@ -94,6 +94,8 @@
 		CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */; };
 		CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
 		CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
+		CD6517F11B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
+		CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
 		CD680A971B7F629C009618CC /* EquipFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* EquipFeature.cpp */; };
 		CD680A981B7F629C009618CC /* EquipFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* EquipFeature.cpp */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
@@ -311,6 +313,8 @@
 		CD637E7D1B234E75002F98EF /* StoreItemButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItemButton.h; sourceTree = "<group>"; };
 		CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCategoryButton.cpp; sourceTree = "<group>"; };
 		CD637E811B234F42002F98EF /* StoreCategoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoryButton.h; sourceTree = "<group>"; };
+		CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VictoryCondition.cpp; sourceTree = "<group>"; };
+		CD6517F01B8F78B6000181E5 /* VictoryCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryCondition.h; sourceTree = "<group>"; };
 		CD680A951B7F629C009618CC /* EquipFeature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EquipFeature.cpp; sourceTree = "<group>"; };
 		CD680A961B7F629C009618CC /* EquipFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipFeature.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 				CDC8811C1B51664800030818 /* Hero.h */,
 				CDC881231B51808300030818 /* HeroAction.cpp */,
 				CDC881241B51808300030818 /* HeroAction.h */,
+				CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */,
+				CD6517F01B8F78B6000181E5 /* VictoryCondition.h */,
 				CDC880FB1B513D8700030818 /* FieldSector.cpp */,
 				CDC880FC1B513D8700030818 /* FieldSector.h */,
 				CD0EB1761B75E50600267CEA /* FieldLevel.cpp */,
@@ -922,6 +928,7 @@
 				CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */,
 				CD9D04DE1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */,
 				CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
+				CD6517F11B8F78B6000181E5 /* VictoryCondition.cpp in Sources */,
 				CDCDEA751B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,
 				CDC881211B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDC9DE771B557F55006F53F6 /* Projectile.cpp in Sources */,
@@ -961,6 +968,7 @@
 				CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
 				CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */,
 				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
+				CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */,
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,
 				CDC881161B5155F700030818 /* ModelBase.cpp in Sources */,
 				CDCDEA761B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */,

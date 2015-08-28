@@ -177,7 +177,7 @@ void FieldLayer::acceptEvent(const Event &event)
         if (entity && !entity->isType(Entity::Type::ENEMY)) {
             _fieldScroller->removeChildByTag(uid, true);
         }
-    } else if (event.is("HeroKilled")) {
+    } else if (event.is("LevelFinished")) {
         Hero *hero = _field.getHero();
         
         PlayerInfo &player = PlayerInfo::getInstance();

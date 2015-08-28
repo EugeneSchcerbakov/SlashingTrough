@@ -15,6 +15,7 @@ Field::Field()
 : ModelBase()
 , _passedSectors(0)
 , _hero(nullptr)
+, _finished(false)
 {
     
 }
@@ -31,9 +32,6 @@ void Field::initialize(FieldLevel::WeakPtr level)
         return;
     }
     
-    _level = level.lock();
-    _level->rebuild();
-    
     GameInfo &gameinfo = GameInfo::getInstance();
     
     _defaultSectorYSquares = gameinfo.getInt("DEFAULT_SEСTOR_SQUARES_COUNT");
@@ -48,6 +46,9 @@ void Field::initialize(FieldLevel::WeakPtr level)
     //_hero->setRunningSpeed(0.0f);
     _hero->setSideBorders(0.0f, _squareSize * 3.0f);
     _heroLastYPos = _hero->getPositionY();
+    
+    _level = level.lock();
+    _level->prepearForRun(_hero);
     
     int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
@@ -75,17 +76,16 @@ void Field::finalize()
 
 void Field::idleUpdate(float dt)
 {
-    if (_hero && !_hero->isAlive()) {
-        // first of all delete hero widget
-        Event e("HeroKilled");
+    if (!_finished && (!_hero->isAlive() || _level->isFinished())) {
+        auto finishCondition = _level->getVictoryCondition().lock();
+        Event e("LevelFinished");
         e.variables.setInt("uid", _hero->getUid());
+        e.variables.setBool("victory", finishCondition->isResult(VictoryCondition::Result::VIRTORY));
         sendEvent(e);
-        
-        delete _hero;
-        _hero = nullptr;
-        return;
+        _finished = true;
     }
     
+    _level->update(dt);
     _hero->idleUpdate(dt);
     _hero->refreshGoals(&_entities);
     if (_level->getSectorByIndex(_passedSectors)) {

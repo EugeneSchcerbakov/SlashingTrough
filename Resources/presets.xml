@@ -697,14 +697,31 @@
         <row>------</row>        
     </Preset>        
     <Link id="l0">
- <row>------</row>
- <row>------</row>
- <row>------</row>
- <row>------</row>
- <row>--O1--</row>
- <row>------</row>
- <row>------</row>
- <row>------</row>
- <row>------</row>
- </Link>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>--O1--</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
+    <Link id="finish">
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+        <row>------</row>
+    </Link>
 </Presets>

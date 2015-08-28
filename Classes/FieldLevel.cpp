@@ -51,6 +51,13 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
     _id = head->Attribute("id");
     _status = stringToStatus(head->Attribute("status"));
     
+    std::string condition = head->Attribute("condition");
+    if (condition == "classic") {
+        _victoryCondition = ClassicCondition::create(this);
+    } else {
+        WRITE_ERR("Unknown level victory condition: " + condition);
+    }
+    
     if (reward) {
         _drops.clear();
         _coinRewardForCompletition = reward->IntAttribute("coins");
@@ -116,18 +123,11 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
     }
 }
 
-void FieldLevel::release()
-{
-    _sectors.clear();
-    _construction.clear();
-    _id.clear();
-    _lastSectorIndex = 0;
-}
-
-void FieldLevel::rebuild()
+void FieldLevel::prepearForRun(Hero *hero)
 {
     _lastSectorIndex = 0;
     _sectors.clear();
+    _victoryCondition->init(hero);
     
     PresetsLoader &presets = PresetsLoader::getInstance();
     
@@ -145,6 +145,19 @@ void FieldLevel::rebuild()
             addSector(presets.getRandomLink(), info.speed);
         }
     }
+}
+
+void FieldLevel::update(float dt)
+{
+    _victoryCondition->update(dt);
+}
+
+void FieldLevel::release()
+{
+    _sectors.clear();
+    _construction.clear();
+    _id.clear();
+    _lastSectorIndex = 0;
 }
 
 FieldSector::Ptr FieldLevel::getNextSector()
@@ -171,9 +184,24 @@ const std::string& FieldLevel::getId() const
     return _id;
 }
 
+int FieldLevel::getSectorsAmount() const
+{
+    return (int)_sectors.size();
+}
+
 bool FieldLevel::isStatus(Status status)
 {
     return _status == status;
+}
+
+bool FieldLevel::isFinished() const
+{
+    return !_victoryCondition->isResult(VictoryCondition::Result::NONE);
+}
+
+VictoryCondition::WeakPtr FieldLevel::getVictoryCondition() const
+{
+    return _victoryCondition;
 }
 
 void FieldLevel::addSector(const Preset &preset, float speed)
