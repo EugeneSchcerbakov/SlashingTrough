@@ -12,6 +12,7 @@
 #include "Utils.h"
 #include "LevelsCache.h"
 #include "ScreenChanger.h"
+#include "Log.h"
 
 FieldLayer* FieldLayer::create(const std::string &levelId, GameInterface *gameInterface)
 {
@@ -181,10 +182,47 @@ void FieldLayer::acceptEvent(const Event &event)
         Hero *hero = _field.getHero();
         
         PlayerInfo &player = PlayerInfo::getInstance();
+        LevelsCache &levelsCache = LevelsCache::getInstance();
+        
         PlayerInfo::Score score = hero->getScore();
         player.addCoins(score.coins);
         if (player.isBestScore(score)) {
             player.setBestScore(score);
+        }
+        
+        if (event.variables.getBool("victory", false))
+        {
+            std::string levelId = event.variables.getString("levelId");
+            FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
+            if (!level_ptr.expired()) {
+                FieldLevel::Ptr level = level_ptr.lock();
+            
+                // do it once, only then level completed
+                if (!level->isStatus(FieldLevel::Status::COMPLETED)) {
+                    level->setStatus(FieldLevel::Status::COMPLETED);
+                    WRITE_LOG("Level completed: " + levelId);
+                    
+                    // give coins
+                    player.addCoins(level->getCoinsReward());
+                    
+                    // unlock levels
+                    auto unlocks = level->getUnlocks();
+                    for (auto id : unlocks) {
+                        FieldLevel::WeakPtr inst_ptr = levelsCache.getLevelById(id);
+                        if (!inst_ptr.expired()) {
+                            FieldLevel::Ptr inst = inst_ptr.lock();
+                            inst->setStatus(FieldLevel::Status::UNLOCKED);
+                            WRITE_LOG("Level unlocked: " + id);
+                        } else {
+                            WRITE_WARN("Failed to unlock null level with id: " + id);
+                        }
+                    }
+                }
+            
+                // drop stuff here
+            } else {
+                WRITE_ERR("Failed to get result from null level with id:" + levelId);
+            }
         }
         
         player.save();

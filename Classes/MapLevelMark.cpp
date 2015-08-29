@@ -8,6 +8,8 @@
 
 #include "MapLevelMark.h"
 
+#include "Log.h"
+
 MapLevelMark* MapLevelMark::create(FieldLevel::WeakPtr level)
 {
     MapLevelMark *mark = new MapLevelMark();
@@ -60,6 +62,7 @@ bool MapLevelMark::init(FieldLevel::WeakPtr level)
     }
     
     _level = level.lock();
+    _lastStatus = _level->getStatus();
     
     _mark = cocos2d::Sprite::create("map/map_level_unlocked.png");
     _mark->setScale(1.5f);
@@ -70,9 +73,36 @@ bool MapLevelMark::init(FieldLevel::WeakPtr level)
     _text->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
     _text->setString("0");
     
+    _mark->setTexture(makeIconForStatus(_lastStatus));
+    _text->setVisible(!_level->isStatus(FieldLevel::Status::LOCKED));
+    
     addChild(_mark, 0);
     addChild(_text, 1);
     setContentSize(_mark->getContentSize() * 1.5f);
+    scheduleUpdate();
     
     return true;
+}
+
+void MapLevelMark::update(float dt)
+{
+    if (_lastStatus != _level->getStatus()) {
+        _lastStatus = _level->getStatus();
+        _mark->setTexture(makeIconForStatus(_lastStatus));
+        _text->setVisible(!_level->isStatus(FieldLevel::Status::LOCKED));
+    }
+}
+
+std::string MapLevelMark::makeIconForStatus(FieldLevel::Status status) const
+{
+    if (status == FieldLevel::Status::LOCKED) {
+        return "map/map_level_locked.png";
+    } else if (status == FieldLevel::Status::UNLOCKED) {
+        return "map/map_level_unlocked.png";
+    } else if (status == FieldLevel::Status::COMPLETED) {
+        return "map/map_level_unlocked.png";
+    } else {
+        return "map/map_level_unlocked.png";
+        WRITE_WARN("Unknown level status.");
+    }
 }

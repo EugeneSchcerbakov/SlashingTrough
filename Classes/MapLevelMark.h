@@ -30,9 +30,13 @@ protected:
     virtual ~MapLevelMark();
     
     bool init(FieldLevel::WeakPtr level);
+    void update(float dt);
     
 protected:
+    std::string makeIconForStatus(FieldLevel::Status status) const;
+    
     FieldLevel::Ptr _level;
+    FieldLevel::Status _lastStatus;
     
     cocos2d::ui::Text *_text;
     cocos2d::Sprite *_mark;

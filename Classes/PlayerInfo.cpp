@@ -8,6 +8,7 @@
 
 #include "PlayerInfo.h"
 #include "Store.h"
+#include "LevelsCache.h"
 #include "Log.h"
 
 #include "cocos2d.h"
@@ -55,27 +56,60 @@ void PlayerInfo::load(const std::string &filename)
     
     if (result == tinyxml2::XMLError::XML_SUCCESS || result == tinyxml2::XMLError::XML_NO_ERROR)
     {
-        tinyxml2::XMLNode *root = document.RootElement();
+        auto root = document.RootElement();
         
-        tinyxml2::XMLElement *coins = root->FirstChildElement("Coins");
+        auto coins = root->FirstChildElement("Coins");
         _totalCoins = coins->IntAttribute("amount");
         
-        tinyxml2::XMLElement *bestScore = root->FirstChildElement("BestScore");
+        auto bestScore = root->FirstChildElement("BestScore");
         _bestScore.coins = bestScore->IntAttribute("coins");
         _bestScore.kills = bestScore->IntAttribute("kills");
         
-        tinyxml2::XMLElement *ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
+        auto ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
         while (ownedEquip) {
             std::string equipId = ownedEquip->Attribute("id");
             addOwnedEquip(store.getItemById(equipId));
             ownedEquip = ownedEquip->NextSiblingElement();
         };
         
-        tinyxml2::XMLElement *equippedWeapon = root->FirstChildElement("EquippedWeapon");
+        auto equippedWeapon = root->FirstChildElement("EquippedWeapon");
         _equippedWeaponId = equippedWeapon->Attribute("id");
         
-        tinyxml2::XMLElement *equippedArmor = root->FirstChildElement("EquippedArmor");
+        auto equippedArmor = root->FirstChildElement("EquippedArmor");
         _equippedArmorId = equippedArmor->Attribute("id");
+        
+        LevelsCache &levelsCache = LevelsCache::getInstance();
+        
+        auto levelsProgress = root->FirstChildElement("LevelsProgress");
+        auto levelElem = levelsProgress->FirstChildElement();
+        while (levelElem)
+        {
+            std::string levelId = levelElem->Attribute("id");
+            
+            FieldLevel::SaveData data;
+            data.status = FieldLevel::stringToStatus(levelElem->Attribute("status"));
+            
+            auto drops = levelElem->FirstChildElement("OccurredDrops");
+            auto dropElem = drops->FirstChildElement();
+            while (dropElem)
+            {
+                FieldLevel::SaveData::DropFact fact;
+                fact.first = dropElem->Attribute("itemId");
+                fact.second = dropElem->BoolAttribute("dropped");
+                data.occurredDrop.push_back(fact);
+                dropElem = dropElem->NextSiblingElement();
+            }
+            
+            FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
+            if (!level_ptr.expired()) {
+                FieldLevel::Ptr level = level_ptr.lock();
+                level->restore(data);
+            } else {
+                WRITE_WARN("Failed to restore level with id: " + levelId);
+            }
+            
+            levelElem = levelElem->NextSiblingElement();
+        }
         
         WRITE_INIT("Save file successfully loaded.");
     }
@@ -117,33 +151,63 @@ void PlayerInfo::save()
     if (file)
     {
         tinyxml2::XMLDocument document;
-        tinyxml2::XMLDeclaration *declaration = document.NewDeclaration();
-        tinyxml2::XMLElement *root = document.NewElement("Save");
+        auto declaration = document.NewDeclaration();
+        auto root = document.NewElement("Save");
         
-        tinyxml2::XMLElement *coins = document.NewElement("Coins");
+        auto coins = document.NewElement("Coins");
         coins->SetAttribute("amount", cocos2d::StringUtils::toString(_totalCoins).c_str());
         root->LinkEndChild(coins);
         
-        tinyxml2::XMLElement *bestScore = document.NewElement("BestScore");
+        auto bestScore = document.NewElement("BestScore");
         bestScore->SetAttribute("coins", cocos2d::StringUtils::toString(_bestScore.coins).c_str());
         bestScore->SetAttribute("kills", cocos2d::StringUtils::toString(_bestScore.kills).c_str());
         root->LinkEndChild(bestScore);
         
-        tinyxml2::XMLElement *ownedEquip = document.NewElement("OwnedEquip");
+        auto ownedEquip = document.NewElement("OwnedEquip");
         for (const auto &id : _ownedEquips) {
-            tinyxml2::XMLElement *equip = document.NewElement("Equip");
+            auto equip = document.NewElement("Equip");
             equip->SetAttribute("id", id.c_str());
             ownedEquip->LinkEndChild(equip);
         }
         root->LinkEndChild(ownedEquip);
     
-        tinyxml2::XMLElement *equippedWeapon = document.NewElement("EquippedWeapon");
+        auto equippedWeapon = document.NewElement("EquippedWeapon");
         equippedWeapon->SetAttribute("id", _equippedWeaponId.c_str());
         root->LinkEndChild(equippedWeapon);
         
-        tinyxml2::XMLElement *equippedArmor = document.NewElement("EquippedArmor");
+        auto equippedArmor = document.NewElement("EquippedArmor");
         equippedArmor->SetAttribute("id", _equippedArmorId.c_str());
         root->LinkEndChild(equippedArmor);
+        
+        LevelsCache &levelsCache = LevelsCache::getInstance();
+        auto levelsProgress = document.NewElement("LevelsProgress");
+        for (int k = 0; k < levelsCache.getLevelsAmount(); k++)
+        {
+            FieldLevel::WeakPtr level_ptr = levelsCache.getLevelByIndex(k);
+            if (!level_ptr.expired())
+            {
+                FieldLevel::Ptr level = level_ptr.lock();
+                FieldLevel::SaveData data = level->getSaveData();
+                
+                auto node = document.NewElement("Level");
+                node->SetAttribute("id", level->getId().c_str());
+                node->SetAttribute("status", FieldLevel::statusToString(data.status).c_str());
+                
+                auto dropNode = document.NewElement("OccurredDrops");
+                for (auto drop : data.occurredDrop) {
+                    auto child = document.NewElement("Drop");
+                    child->SetAttribute("itemId", drop.first.c_str());
+                    child->SetAttribute("dropped", drop.second);
+                    dropNode->LinkEndChild(child);
+                }
+                
+                node->LinkEndChild(dropNode);
+                
+                levelsProgress->LinkEndChild(node);
+            }
+        }
+        
+        root->LinkEndChild(levelsProgress);
         
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);

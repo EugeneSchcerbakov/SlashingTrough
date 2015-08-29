@@ -61,7 +61,7 @@ FieldLevel::WeakPtr LevelsCache::getLevelById(const std::string &id)
 
 FieldLevel::WeakPtr LevelsCache::getLevelByIndex(int index)
 {
-    if (index > 0 && index < getLevelsAmount()) {
+    if (index >= 0 && index < getLevelsAmount()) {
         int current = 0;
         for (auto it = _levels.begin(); it != _levels.end(); ++it) {
             if (current == index) {

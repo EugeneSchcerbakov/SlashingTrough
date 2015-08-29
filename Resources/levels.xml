@@ -7,7 +7,7 @@
             dropOnce="true"/>
         </Rewards>
         <Unlocks>
-            <Unlock id="level_id" />
+            <Unlock id="level_2" />
         </Unlocks>
         <Description>
             <Speed value="450"/>
@@ -80,7 +80,27 @@
             <Link id="finish"/>
         </Description>
     </Level>
-    <Level id="level_2" status="unlocked" condition="classic">
+    <Level id="level_2" status="locked" condition="classic">
+        <Rewards coins="1000">
+            <Drop itemId="item"
+            dropChance="50"
+            dropOnce="true"/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_3" />
+        </Unlocks>
+        <Description>
+            <Speed value="450"/>
+            <LinkRand/>
+            <Speed value="460"/>
+            <Preset dif="1-1"/>
+            <Preset dif="1-1"/>
+            <Preset dif="1-2"/>
+            <Preset dif="1-2"/>
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_3" status="locked" condition="classic">
         <Rewards coins="1000">
             <Drop itemId="item"
             dropChance="50"

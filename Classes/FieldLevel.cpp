@@ -32,8 +32,22 @@ FieldLevel::Status FieldLevel::stringToStatus(const std::string &str)
     } else if (str == "completed") {
         return Status::COMPLETED;
     } else {
-        WRITE_WARN("Unknown level status");
+        WRITE_WARN("Unknown level status: " + str);
         return Status::UNLOCKED;
+    }
+}
+
+std::string FieldLevel::statusToString(Status status)
+{
+    if (status == Status::LOCKED) {
+        return "locked";
+    } else if (status == Status::UNLOCKED) {
+        return "unlocked";
+    } else if (status == Status::COMPLETED) {
+        return "completed";
+    } else {
+        WRITE_WARN("Unknown level status");
+        return "unlocked";
     }
 }
 
@@ -147,6 +161,18 @@ void FieldLevel::prepearForRun(Hero *hero)
     }
 }
 
+void FieldLevel::restore(const SaveData &saveData)
+{
+    _status = saveData.status;
+    for (Drop &drop : _drops) {
+        for (const auto &fact : saveData.occurredDrop) {
+            if (fact.first == drop.itemId) {
+                drop.droped = fact.second;
+            }
+        }
+    }
+}
+
 void FieldLevel::update(float dt)
 {
     _victoryCondition->update(dt);
@@ -158,6 +184,11 @@ void FieldLevel::release()
     _construction.clear();
     _id.clear();
     _lastSectorIndex = 0;
+}
+
+void FieldLevel::setStatus(FieldLevel::Status status)
+{
+    _status = status;
 }
 
 FieldSector::Ptr FieldLevel::getNextSector()
@@ -182,6 +213,32 @@ FieldSector::Ptr FieldLevel::getSectorByIndex(int index)
 const std::string& FieldLevel::getId() const
 {
     return _id;
+}
+
+const std::vector<std::string> FieldLevel::getUnlocks() const
+{
+    return _unlocks;
+}
+
+FieldLevel::Status FieldLevel::getStatus() const
+{
+    return _status;
+}
+
+int FieldLevel::getCoinsReward() const
+{
+    return _coinRewardForCompletition;
+}
+
+FieldLevel::SaveData FieldLevel::getSaveData() const
+{
+    SaveData data;
+    data.status = _status;
+    for (const Drop &drop : _drops) {
+        auto fact = SaveData::DropFact(drop.itemId, drop.droped);
+        data.occurredDrop.push_back(fact);
+    }
+    return data;
 }
 
 int FieldLevel::getSectorsAmount() const

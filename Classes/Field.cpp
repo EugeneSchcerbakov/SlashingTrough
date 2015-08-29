@@ -80,6 +80,7 @@ void Field::idleUpdate(float dt)
         auto finishCondition = _level->getVictoryCondition().lock();
         Event e("LevelFinished");
         e.variables.setInt("uid", _hero->getUid());
+        e.variables.setString("levelId", _level->getId());
         e.variables.setBool("victory", finishCondition->isResult(VictoryCondition::Result::VIRTORY));
         sendEvent(e);
         _finished = true;

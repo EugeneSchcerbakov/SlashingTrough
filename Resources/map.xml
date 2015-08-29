@@ -2,4 +2,5 @@
 <Map>
     <LevelMark levelId="level_1" x="230.0" y="133.0" text="0"/>
     <LevelMark levelId="level_2" x="360.0" y="177.0" text="1"/>
+    <LevelMark levelId="level_3" x="460.0" y="237.0" text="2"/>
 </Map>

@@ -123,8 +123,13 @@ void MapWidget::touchEnded(cocos2d::Touch *touch, cocos2d::Event *e)
     cocos2d::Vec2 p = _map->convertTouchToNodeSpace(touch);
     for (auto mark : _levelMarkers) {
         if (mark->getBoundingBox().containsPoint(p)) {
-            ScreenChanger::beginRunAndSlash(mark->getLevelId());
-            break;
+            auto level = mark->getLevel().lock();
+            if (level->isStatus(FieldLevel::Status::UNLOCKED)) {
+                ScreenChanger::beginRunAndSlash(mark->getLevelId());
+                break;
+            } else {
+                // shop pop up text
+            }
         }
     }
 }

@@ -32,22 +32,38 @@ public:
         std::string itemId;
         int chance;
         bool once;
+        bool droped;
         Drop()
         : chance(0)
         , once(true)
+        , droped(false)
         {}
+    };
+    
+    struct SaveData
+    {
+        // item, flag
+        typedef std::pair<std::string, bool> DropFact;
+        
+        Status status;
+        std::vector<DropFact> occurredDrop;
+        
+        SaveData() = default;
     };
     
     static FieldLevel::Ptr create();
     static Status stringToStatus(const std::string &str);
+    static std::string statusToString(Status status);
     
 public:
     FieldLevel();
     
     void initFromXml(tinyxml2::XMLNode *node);
     void prepearForRun(Hero *hero);
+    void restore(const SaveData &saveData);
     void update(float dt);
     void release();
+    void setStatus(Status status);
     
     FieldSector::Ptr getNextSector();
     FieldSector::Ptr getSectorByIndex(int index);
@@ -55,6 +71,9 @@ public:
     const std::string& getId() const;
     const std::vector<std::string> getUnlocks() const;
     
+    Status getStatus() const;
+    SaveData getSaveData() const;
+    int getCoinsReward() const;
     int getSectorsAmount() const;
     bool isStatus(Status status);
     bool isFinished() const;
