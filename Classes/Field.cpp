@@ -43,12 +43,14 @@ void Field::initialize(FieldLevel::WeakPtr level)
     _hero = new Hero();
     _hero->setPosition(heroStartX, heroStartY);
     _hero->setRunning(true);
-    //_hero->setRunningSpeed(0.0f);
     _hero->setSideBorders(0.0f, _squareSize * 3.0f);
     _heroLastYPos = _hero->getPositionY();
     
     _level = level.lock();
     _level->prepearForRun(_hero);
+    if (_level->isStatus(FieldLevel::Status::LOCKED)) {
+        WRITE_WARN("Trying to start locked level.");
+    }
     
     int sectorsQueueSize = gameinfo.getConstInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {

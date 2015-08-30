@@ -9,6 +9,8 @@
 #include "StartInterface.h"
 
 #include "ScreenChanger.h"
+#include "PlayerInfo.h"
+#include "LevelsCache.h"
 
 StartInterface* StartInterface::create()
 {
@@ -101,6 +103,10 @@ bool StartInterface::init()
 
 bool StartInterface::onTouch(cocos2d::Touch *touch, cocos2d::Event *e)
 {
-    ScreenChanger::changeScreen(ScreenChanger::MAP);
+    std::string levelId = PlayerInfo::getInstance().getLastIncompletedLevelId();
+    if (levelId.empty()) {
+        levelId = LevelsCache::getInstance().getLevelByIndex(0).lock()->getId();
+    }
+    ScreenChanger::beginRunAndSlash(levelId);
     return true;
 }

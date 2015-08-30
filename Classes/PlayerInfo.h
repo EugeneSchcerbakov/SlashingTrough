@@ -42,7 +42,8 @@ public:
     void equip(Equip::Ptr item);
     void setBestScore(const Score &score);
     void setLastCompletedLevelId(const std::string &id);
-    
+    void setLastIncompletedLevelId(const std::string &id);
+
     Score getBestScore() const;
     int getCoins() const;
     int getDamage() const;
@@ -51,6 +52,7 @@ public:
     bool isEquipped(Equip::Ptr item) const;
     
     const std::string& getLastCompletedLevelId() const;
+    const std::string& getLastIncompletedLevelId() const;
     const std::string& getEquippedWeaponId() const;
     const std::string& getEquippeArmorId() const;
     
@@ -64,6 +66,7 @@ private:
     Score _bestScore;
     
     std::string _lastCompletedLevelId;
+    std::string _lastIncompletedLevelId;
     std::string _equippedWeaponId;
     std::string _equippedArmorId;
     std::string _saveFileName;

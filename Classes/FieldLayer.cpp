@@ -190,9 +190,10 @@ void FieldLayer::acceptEvent(const Event &event)
             player.setBestScore(score);
         }
         
+        std::string levelId = event.variables.getString("levelId");
+        
         if (event.variables.getBool("victory", false))
         {
-            std::string levelId = event.variables.getString("levelId");
             FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
             if (!level_ptr.expired()) {
                 FieldLevel::Ptr level = level_ptr.lock();
@@ -224,11 +225,13 @@ void FieldLayer::acceptEvent(const Event &event)
             } else {
                 WRITE_ERR("Failed to get result from null level with id:" + levelId);
             }
+        } else {
+            player.setLastIncompletedLevelId(levelId);
         }
         
         player.save();
         
-        ScreenChanger::changeScreen(ScreenChanger::START);
+        ScreenChanger::changeScreen(ScreenChanger::MAP);
     }
 }
 
