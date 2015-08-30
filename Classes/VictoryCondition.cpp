@@ -24,6 +24,8 @@ VictoryCondition::~VictoryCondition()
 
 void VictoryCondition::init(Hero *hero)
 {
+    _result = Result::NONE;
+    
     if (hero) {
         _hero = hero;
     }
