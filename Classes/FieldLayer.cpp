@@ -48,14 +48,14 @@ bool FieldLayer::init(const std::string &levelId)
     auto director = cocos2d::Director::getInstance();
     auto winSize = director->getWinSize();
     
-    _cameraYOffset = gameinfo.getFloat("CAMERA_Y_OFFSET", -850.0f);
-    float viewAngle = gameinfo.getFloat("CAMERA_VIEW_ANGLE", 50);
-    float viewHeight = gameinfo.getFloat("CAMERA_VIEW_HEIGHT", 1100.0f);
-    float squareSize = gameinfo.getFloat("SQUARE_SIZE");
+    _cameraYOffset = gameinfo.getConstFloat("CAMERA_Y_OFFSET", -850.0f);
+    float viewAngle = gameinfo.getConstFloat("CAMERA_VIEW_ANGLE", 50);
+    float viewHeight = gameinfo.getConstFloat("CAMERA_VIEW_HEIGHT", 1100.0f);
+    float squareSize = gameinfo.getConstFloat("SQUARE_SIZE");
     float viewPosX = squareSize * 3.0f * 0.5f;
     float aspect = winSize.width / winSize.height;
-    float fov = gameinfo.getFloat("CAMERA_FIELD_OF_VIEW", 50.0f);
-    float zfar = gameinfo.getFloat("CAMERA_FAR_Z_CLIP_PLANE", 1000.0f);
+    float fov = gameinfo.getConstFloat("CAMERA_FIELD_OF_VIEW", 50.0f);
+    float zfar = gameinfo.getConstFloat("CAMERA_FAR_Z_CLIP_PLANE", 1000.0f);
     
     _fieldCamera = cocos2d::Camera::createPerspective(fov, aspect, 0.1f, zfar);
     _fieldCamera->setCameraFlag(cocos2d::CameraFlag::USER1);
@@ -121,7 +121,7 @@ void FieldLayer::refreshInterface()
         
         _gameInterface->setHealthPointsLabel(currentHealth);
         
-        float maxStaminaPoints = GameInfo::getInstance().getFloat("HERO_STAMINA_POINTS");
+        float maxStaminaPoints = GameInfo::getInstance().getConstFloat("HERO_STAMINA_POINTS");
         float curStaminaPoints = hero->getStamina();
         
         _gameInterface->setStaminaPoints(curStaminaPoints / maxStaminaPoints);

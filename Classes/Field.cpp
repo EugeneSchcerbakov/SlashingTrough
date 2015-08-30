@@ -34,8 +34,8 @@ void Field::initialize(FieldLevel::WeakPtr level)
     
     GameInfo &gameinfo = GameInfo::getInstance();
     
-    _defaultSectorYSquares = gameinfo.getInt("DEFAULT_SEСTOR_SQUARES_COUNT");
-    _squareSize = gameinfo.getFloat("SQUARE_SIZE");
+    _defaultSectorYSquares = gameinfo.getConstInt("DEFAULT_SEСTOR_SQUARES_COUNT");
+    _squareSize = gameinfo.getConstFloat("SQUARE_SIZE");
 
     float heroStartX = _squareSize * 3.0f * 0.5f;
     float heroStartY = 0.0f;
@@ -50,7 +50,7 @@ void Field::initialize(FieldLevel::WeakPtr level)
     _level = level.lock();
     _level->prepearForRun(_hero);
     
-    int sectorsQueueSize = gameinfo.getInt("SECTORS_SEQUENCE_MAX_SIZE");
+    int sectorsQueueSize = gameinfo.getConstInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
         pushFrontSector();
     }

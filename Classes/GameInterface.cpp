@@ -224,11 +224,11 @@ bool GameInterface::init()
     
     GameInfo &gameinfo = GameInfo::getInstance();
     
-    goldPointsBack->setVisible(gameinfo.getBool("GOLD_POINTS_VISIBILITY"));
-    killPointsBack->setVisible(gameinfo.getBool("KILL_POINTS_VISIBILITY"));
-    damagePointsBack->setVisible(gameinfo.getBool("DAMAGE_POINTS_VISIBILITY"));
-    healthPointsBack->setVisible(gameinfo.getBool("HEALTH_POINTS_VISIBILITY"));
-    _staminaBar->setVisible(gameinfo.getBool("STAMINA_BAR_VISIBILITY"));
+    goldPointsBack->setVisible(gameinfo.getConstBool("GOLD_POINTS_VISIBILITY"));
+    killPointsBack->setVisible(gameinfo.getConstBool("KILL_POINTS_VISIBILITY"));
+    damagePointsBack->setVisible(gameinfo.getConstBool("DAMAGE_POINTS_VISIBILITY"));
+    healthPointsBack->setVisible(gameinfo.getConstBool("HEALTH_POINTS_VISIBILITY"));
+    _staminaBar->setVisible(gameinfo.getConstBool("STAMINA_BAR_VISIBILITY"));
     
     return true;
 }

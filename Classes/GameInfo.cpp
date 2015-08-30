@@ -37,13 +37,13 @@ bool GameInfo::loadInfo(const std::string &filename)
             std::string type = elem->Attribute("type");
             std::string value = elem->Attribute("value");
             if (type == "int") {
-                setInt(name, atoi(value.c_str()));
+                _constants.setInt(name, atoi(value.c_str()));
             } else if (type == "bool") {
-                setBool(name, value == "true");
+                _constants.setBool(name, value == "true");
             } else if (type == "float") {
-                setFloat(name, atof(value.c_str()));
+                _constants.setFloat(name, atof(value.c_str()));
             } else if (type == "string") {
-                setString(name, value);
+                _constants.setString(name, value);
             } else {
                 assert(false);
             }
@@ -130,44 +130,64 @@ bool GameInfo::loadInfo(const std::string &filename)
     }
 }
 
-int GameInfo::getInt(const std::string &name, int def) const
+int GameInfo::getConstInt(const std::string &name, int def) const
 {
-    return _variables.getInt(name, def);
+    return _constants.getInt(name, def);
 }
 
-bool GameInfo::getBool(const std::string &name, bool def) const
+bool GameInfo::getConstBool(const std::string &name, bool def) const
 {
-    return _variables.getBool(name, def);
+    return _constants.getBool(name, def);
 }
 
-float GameInfo::getFloat(const std::string &name, float def) const
+float GameInfo::getConstFloat(const std::string &name, float def) const
 {
-    return _variables.getFloat(name, def);
+    return _constants.getFloat(name, def);
 }
 
-std::string GameInfo::getString(const std::string &name, std::string def) const
+std::string GameInfo::getConstString(const std::string &name, std::string def) const
 {
-    return _variables.getString(name, def);
+    return _constants.getString(name, def);
 }
 
-void GameInfo::setInt(const std::string &name, int value)
+int GameInfo::getGlobalInt(const std::string &name, int def) const
 {
-    _variables.setInt(name, value);
+    return _globals.getInt(name, def);
 }
 
-void GameInfo::setBool(const std::string &name, bool value)
+bool GameInfo::getGlobalBool(const std::string &name, bool def) const
 {
-    _variables.setBool(name, value);
+    return _globals.getBool(name, def);
 }
 
-void GameInfo::setFloat(const std::string &name, float value)
+float GameInfo::getGlobalFloat(const std::string &name, float def) const
 {
-    _variables.setFloat(name, value);
+    return _globals.getFloat(name, def);
 }
 
-void GameInfo::setString(const std::string &name, const std::string &value)
+std::string GameInfo::getGlobalString(const std::string &name, std::string def) const
 {
-    _variables.setString(name, value);
+    return _globals.getString(name, def);
+}
+
+void GameInfo::setGlobalInt(const std::string &name, int value)
+{
+    _globals.setInt(name, value);
+}
+
+void GameInfo::setGlobalBool(const std::string &name, bool value)
+{
+    _globals.setBool(name, value);
+}
+
+void GameInfo::setGlobalFloat(const std::string &name, float value)
+{
+    _globals.setFloat(name, value);
+}
+
+void GameInfo::setGlobalString(const std::string &name, const std::string &value)
+{
+    _globals.setString(name, value);
 }
 
 Entity::Type GameInfo::getTypeById(const std::string &id) const

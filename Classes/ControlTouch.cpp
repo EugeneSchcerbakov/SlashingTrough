@@ -18,8 +18,8 @@ ControlTouch::ControlTouch(Hero *hero, cocos2d::EventDispatcher *dispatcher, coc
 : _hero(hero)
 , _dispatcher(dispatcher)
 , _listener(nullptr)
-, _squareSize(GameInfo::getInstance().getFloat("SQUARE_SIZE"))
-, _swipeDistance(GameInfo::getInstance().getFloat("TOUCH_SWIPE_DISTANCE"))
+, _squareSize(GameInfo::getInstance().getConstFloat("SQUARE_SIZE"))
+, _swipeDistance(GameInfo::getInstance().getConstFloat("TOUCH_SWIPE_DISTANCE"))
 , _isSwipingNow(false)
 {
     init(node);
@@ -78,7 +78,7 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         
         if (scalar >= 0.8) {
             const float deltaX = _squareSize;
-            const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
+            const float deltaY = gameinfo.getConstFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
             const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
@@ -96,7 +96,7 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
         if (scalar <= -0.8f)
         {
             const float deltaX = -_squareSize;
-            const float deltaY = gameinfo.getFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
+            const float deltaY = gameinfo.getConstFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
             const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
             
             HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);

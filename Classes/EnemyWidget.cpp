@@ -245,7 +245,7 @@ bool EnemyWidget::init()
     
     float zoneWidth = _enemy->getMelleAreaWidth();
     float zoneHeight = _enemy->getMelleAreaHeight();
-    float zoneXAngle = GameInfo::getInstance().getFloat("CAMERA_VIEW_ANGLE");
+    float zoneXAngle = GameInfo::getInstance().getConstFloat("CAMERA_VIEW_ANGLE");
     
     _hitZoneWidget = MelleHitZone::create(cocos2d::Size(zoneWidth, zoneHeight));
     _hitZoneWidget->setOpacity(0);

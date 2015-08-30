@@ -32,14 +32,14 @@ void Hero::init()
     
     _damage = 1.0f;
     _radius = 0.0f;
-    _health = gameinfo.getFloat("HERO_HEALTH_POINTS");
-    _attackArea = gameinfo.getFloat("HERO_ATTACK_AREA");
-    _damageUpValue = gameinfo.getFloat("HERO_DAMAGE_UP_VALUE");
-    _damageUpKillPoints = gameinfo.getInt("HERO_DAMAGE_UP_KP");
-    _staminaPoints = gameinfo.getFloat("HERO_STAMINA_POINTS");
-    _staminaDrainTime = gameinfo.getFloat("HERO_STAMINA_DRAIN_TIME");
-    _staminaDrainValue = gameinfo.getFloat("HERO_STAMINA_DRAIN_VALUE");
-    _actionsSequenceMaxSize = gameinfo.getInt("HERO_ACTIONS_SEQUENCE_SIZE");
+    _health = gameinfo.getConstFloat("HERO_HEALTH_POINTS");
+    _attackArea = gameinfo.getConstFloat("HERO_ATTACK_AREA");
+    _damageUpValue = gameinfo.getConstFloat("HERO_DAMAGE_UP_VALUE");
+    _damageUpKillPoints = gameinfo.getConstInt("HERO_DAMAGE_UP_KP");
+    _staminaPoints = gameinfo.getConstFloat("HERO_STAMINA_POINTS");
+    _staminaDrainTime = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_TIME");
+    _staminaDrainValue = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_VALUE");
+    _actionsSequenceMaxSize = gameinfo.getConstInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
     std::string weaponId = PlayerInfo::getInstance().getEquippedWeaponId();
     Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
@@ -186,7 +186,7 @@ void Hero::addStamina(float stamina)
 {
     _staminaPoints += stamina;
     
-    float max = GameInfo::getInstance().getFloat("HERO_STAMINA_POINTS");
+    float max = GameInfo::getInstance().getConstFloat("HERO_STAMINA_POINTS");
     if (_staminaPoints > max) {
         _staminaPoints = max;
     }
@@ -239,7 +239,7 @@ void Hero::setArmor(Equip::WeakPtr armor)
     Equip::Ptr base = _armor.lock();
     EquipArmor *cast = EquipArmor::cast(base);
     
-    float baseHealth = GameInfo::getInstance().getFloat("HERO_HEALTH_POINTS");
+    float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
     
     _health = baseHealth + cast->getExtraHealth();
 }

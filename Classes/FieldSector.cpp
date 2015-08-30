@@ -179,7 +179,7 @@ void FieldSector::init(const Preset &preset, float runningSpeed)
     _content = preset.map;
     _squaresByWidth = preset.squaresByWidth;
     _squaresByHeight = preset.squaresByHeight;
-    _squareSize = gameinfo.getFloat("SQUARE_SIZE");
+    _squareSize = gameinfo.getConstFloat("SQUARE_SIZE");
     _width = _squaresByWidth * _squareSize;
     _height = _squaresByHeight * _squareSize;
     _runningSpeed = runningSpeed;

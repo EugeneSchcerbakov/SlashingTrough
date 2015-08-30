@@ -113,15 +113,20 @@ public:
     
     bool loadInfo(const std::string &filename);
     
-    int getInt(const std::string &name, int def = 0) const;
-    bool getBool(const std::string &name, bool def = false) const;
-    float getFloat(const std::string &name, float def = 0.0f) const;
-    std::string getString(const std::string &name, std::string def = "") const;
+    int getConstInt(const std::string &name, int def = 0) const;
+    bool getConstBool(const std::string &name, bool def = false) const;
+    float getConstFloat(const std::string &name, float def = 0.0f) const;
+    std::string getConstString(const std::string &name, std::string def = "") const;
     
-    void setInt(const std::string &name, int value);
-    void setBool(const std::string &name, bool value);
-    void setFloat(const std::string &name, float value);
-    void setString(const std::string &name, const std::string &value);
+    int getGlobalInt(const std::string &name, int def = 0) const;
+    bool getGlobalBool(const std::string &name, bool def = false) const;
+    float getGlobalFloat(const std::string &name, float def = 0.0f) const;
+    std::string getGlobalString(const std::string &name, std::string def = "") const;
+    
+    void setGlobalInt(const std::string &name, int value);
+    void setGlobalBool(const std::string &name, bool value);
+    void setGlobalFloat(const std::string &name, float value);
+    void setGlobalString(const std::string &name, const std::string &value);
     
     Entity::Type getTypeById(const std::string &id) const;
     
@@ -132,7 +137,8 @@ public:
     GameplayObjectsTypes getEnemiesTypes() const;
     
 private:
-    VariablesSet _variables;
+    VariablesSet _constants;
+    VariablesSet _globals;
     ObstaclesSettings _obstaclesSettings;
     EnemiesSettings _enemiesSettings;
 };

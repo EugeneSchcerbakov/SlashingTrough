@@ -75,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);
-        glview->setFrameZoomFactor(GameInfo::getInstance().getFloat("DESCTOP_FRAME_SCALE", 1.0f));
+        glview->setFrameZoomFactor(GameInfo::getInstance().getConstFloat("DESCTOP_FRAME_SCALE", 1.0f));
         glview->setFrameSize(frameSize.width, frameSize.height);
     }
     

@@ -133,7 +133,7 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
             default:
                 break;
         }
-        const float squareSize = GameInfo::getInstance().getFloat("SQUARE_SIZE");
+        const float squareSize = GameInfo::getInstance().getConstFloat("SQUARE_SIZE");
         if (_melleAreaCenterX < 0.0f || _melleAreaCenterX > (squareSize * 3.0f)) {
             _melleAttack.allowed = false;
             return;
@@ -251,7 +251,7 @@ void Enemy::init(const GameInfo::EnemyType &type)
     _g = type.colorG;
     _b = type.colorB;
     
-    const float squareSize = GameInfo::getInstance().getFloat("SQUARE_SIZE");
+    const float squareSize = GameInfo::getInstance().getConstFloat("SQUARE_SIZE");
     
     _melleAreaCenterX = _x;
     _melleAreaCenterY = _y;
