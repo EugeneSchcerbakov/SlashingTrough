@@ -215,7 +215,7 @@ void PlayerInfo::save()
         document.SaveFile(file, false);
         fclose(file);
         
-        WRITE_LOG("Save completed successfully.");
+        WRITE_INIT("Save completed successfully.");
     }
     else
     {
@@ -247,10 +247,14 @@ void PlayerInfo::equip(Equip::Ptr item)
     
     CC_ASSERT(isEquipOwned(item));
     
+    std::string itemId = item->getId();
+    
     if (item->isType(Equip::Type::WEAPON)) {
-        _equippedWeaponId = item->getId();
+        _equippedWeaponId = itemId;
+        WRITE_LOG("Equiped weapon with id: " + itemId);
     } else if (item->isType(Equip::Type::ARMOR)) {
-        _equippedArmorId = item->getId();
+        _equippedArmorId = itemId;
+        WRITE_LOG("Equiped armor with id: " + itemId);
     } else {
         WRITE_WARN("Failed to equip entity of unknown type.");
         CC_ASSERT(false);
