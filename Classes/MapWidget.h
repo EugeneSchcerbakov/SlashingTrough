@@ -10,6 +10,7 @@
 #define __SlashingTrough__MapWidget__
 
 #include "MapLevelMark.h"
+#include "MapPlayerMark.h"
 
 class MapWidget : public cocos2d::ui::ScrollView
 {
@@ -30,6 +31,7 @@ private:
     void touchCanceled(cocos2d::Touch *touch, cocos2d::Event *e);
     
     cocos2d::Sprite *_map;
+    MapPlayerMark *_playerMark;
     
     std::vector<MapLevelMark *> _levelMarkers;
 };

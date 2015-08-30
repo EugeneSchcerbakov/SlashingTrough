@@ -15,6 +15,8 @@ FieldLevel::FieldLevel()
 : _lastSectorIndex(0)
 , _status(Status::LOCKED)
 , _coinRewardForCompletition(0)
+, _posOnMapX(0.0f)
+, _posOnMapY(0.0f)
 {
 }
 
@@ -191,6 +193,12 @@ void FieldLevel::setStatus(FieldLevel::Status status)
     _status = status;
 }
 
+void FieldLevel::setPosOnMap(float x, float y)
+{
+    _posOnMapX = x;
+    _posOnMapY = y;
+}
+
 FieldSector::Ptr FieldLevel::getNextSector()
 {
     if (_lastSectorIndex < _sectors.size()) {
@@ -244,6 +252,16 @@ FieldLevel::SaveData FieldLevel::getSaveData() const
 int FieldLevel::getSectorsAmount() const
 {
     return (int)_sectors.size();
+}
+
+float FieldLevel::getMapX() const
+{
+    return _posOnMapX;
+}
+
+float FieldLevel::getMapY() const
+{
+    return _posOnMapY;
 }
 
 bool FieldLevel::isStatus(Status status)

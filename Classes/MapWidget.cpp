@@ -52,6 +52,9 @@ bool MapWidget::init(const std::string &mapDesc)
         return false;
     }
     
+    _playerMark = MapPlayerMark::create();
+    _map->addChild(_playerMark, 1);
+    
     auto input = cocos2d::EventListenerTouchOneByOne::create();
     input->onTouchBegan = CC_CALLBACK_2(MapWidget::touchBegan, this);
     input->onTouchEnded = CC_CALLBACK_2(MapWidget::touchEnded, this);
@@ -95,7 +98,7 @@ bool MapWidget::initLevelMarkers(const std::string &mapFile)
                 MapLevelMark *mark = MapLevelMark::create(level);
                 mark->setLevelText(text);
                 mark->setPosition(cocos2d::Vec2(x, y));
-                _map->addChild(mark);
+                _map->addChild(mark, 0);
                 _levelMarkers.push_back(mark);
             } else {
                 WRITE_WARN("Unknown map element: " + name);
@@ -124,7 +127,7 @@ void MapWidget::touchEnded(cocos2d::Touch *touch, cocos2d::Event *e)
     for (auto mark : _levelMarkers) {
         if (mark->getBoundingBox().containsPoint(p)) {
             auto level = mark->getLevel().lock();
-            if (level->isStatus(FieldLevel::Status::UNLOCKED)) {
+            if (!level->isStatus(FieldLevel::Status::LOCKED)) {
                 ScreenChanger::beginRunAndSlash(mark->getLevelId());
                 break;
             } else {

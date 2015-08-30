@@ -41,6 +41,7 @@ public:
     void addCoins(int coins);
     void equip(Equip::Ptr item);
     void setBestScore(const Score &score);
+    void setLastCompletedLevelId(const std::string &id);
     
     Score getBestScore() const;
     int getCoins() const;
@@ -49,6 +50,7 @@ public:
     bool isEquipOwned(Equip::Ptr item) const;
     bool isEquipped(Equip::Ptr item) const;
     
+    const std::string& getLastCompletedLevelId() const;
     const std::string& getEquippedWeaponId() const;
     const std::string& getEquippeArmorId() const;
     
@@ -60,6 +62,8 @@ private:
     
     OwnedEquipIds _ownedEquips;
     Score _bestScore;
+    
+    std::string _lastCompletedLevelId;
     std::string _equippedWeaponId;
     std::string _equippedArmorId;
     std::string _saveFileName;

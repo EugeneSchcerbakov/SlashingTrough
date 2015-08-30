@@ -23,7 +23,9 @@ public:
     
     FieldLevel::WeakPtr getLevel() const;
     const std::string& getLevelId() const;
+    
     virtual cocos2d::Rect getBoundingBox() const override;
+    virtual void setPosition(const cocos2d::Vec2& position) override;
     
 protected:
     MapLevelMark();

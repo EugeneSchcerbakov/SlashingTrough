@@ -47,6 +47,15 @@ cocos2d::Rect MapLevelMark::getBoundingBox() const
     return RectApplyAffineTransform(rect, getNodeToParentAffineTransform());
 }
 
+void MapLevelMark::setPosition(const cocos2d::Vec2& position)
+{
+    float x = position.x - getContentSize().width * 0.5f;
+    float y = position.y - getContentSize().height * 0.5f;
+    _level->setPosOnMap(x, y);
+    
+    cocos2d::ui::Widget::setPosition(position);
+}
+
 MapLevelMark::MapLevelMark()
 {
 }

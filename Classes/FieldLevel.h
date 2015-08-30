@@ -64,6 +64,7 @@ public:
     void update(float dt);
     void release();
     void setStatus(Status status);
+    void setPosOnMap(float x, float y);
     
     FieldSector::Ptr getNextSector();
     FieldSector::Ptr getSectorByIndex(int index);
@@ -75,6 +76,8 @@ public:
     SaveData getSaveData() const;
     int getCoinsReward() const;
     int getSectorsAmount() const;
+    float getMapX() const;
+    float getMapY() const;
     bool isStatus(Status status);
     bool isFinished() const;
     
@@ -106,6 +109,8 @@ private:
     
     int _lastSectorIndex;
     int _coinRewardForCompletition;
+    float _posOnMapX;
+    float _posOnMapY;
     
     Status _status;
     

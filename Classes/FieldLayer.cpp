@@ -200,6 +200,7 @@ void FieldLayer::acceptEvent(const Event &event)
                 // do it once, only then level completed
                 if (!level->isStatus(FieldLevel::Status::COMPLETED)) {
                     level->setStatus(FieldLevel::Status::COMPLETED);
+                    player.setLastCompletedLevelId(levelId);
                     WRITE_LOG("Level completed: " + levelId);
                     
                     // give coins

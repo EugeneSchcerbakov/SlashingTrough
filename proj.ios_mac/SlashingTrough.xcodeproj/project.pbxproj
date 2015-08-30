@@ -163,6 +163,8 @@
 		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
+		CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDE676B51B93030100233FFB /* MapPlayerMark.cpp */; };
+		CDE676B81B93030100233FFB /* MapPlayerMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDE676B51B93030100233FFB /* MapPlayerMark.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -375,6 +377,8 @@
 		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		CDE676B51B93030100233FFB /* MapPlayerMark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapPlayerMark.cpp; sourceTree = "<group>"; };
+		CDE676B61B93030100233FFB /* MapPlayerMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPlayerMark.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -649,6 +653,8 @@
 			children = (
 				CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */,
 				CD0AB2BE1B89E03A00139A03 /* StartInterface.h */,
+				CDE676B51B93030100233FFB /* MapPlayerMark.cpp */,
+				CDE676B61B93030100233FFB /* MapPlayerMark.h */,
 				CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */,
 				CD9D04DD1B8B8F4400FFE0F3 /* MapLevelMark.h */,
 				CD0AB2C91B8A31C200139A03 /* MapWidget.cpp */,
@@ -936,6 +942,7 @@
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
+				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
@@ -984,6 +991,7 @@
 				CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDC8811E1B51664800030818 /* Hero.cpp in Sources */,
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
+				CDE676B81B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				CDC881261B51808300030818 /* HeroAction.cpp in Sources */,
 				CD9D04DF1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */,

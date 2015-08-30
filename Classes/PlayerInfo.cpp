@@ -78,6 +78,9 @@ void PlayerInfo::load(const std::string &filename)
         auto equippedArmor = root->FirstChildElement("EquippedArmor");
         _equippedArmorId = equippedArmor->Attribute("id");
         
+        auto lastCompletedLevel = root->FirstChildElement("LastCompletedLevel");
+        _lastCompletedLevelId = lastCompletedLevel->Attribute("id");
+        
         LevelsCache &levelsCache = LevelsCache::getInstance();
         
         auto levelsProgress = root->FirstChildElement("LevelsProgress");
@@ -179,6 +182,10 @@ void PlayerInfo::save()
         equippedArmor->SetAttribute("id", _equippedArmorId.c_str());
         root->LinkEndChild(equippedArmor);
         
+        auto lastCompletedLevel = document.NewElement("LastCompletedLevel");
+        lastCompletedLevel->SetAttribute("id", _lastCompletedLevelId.c_str());
+        root->LinkEndChild(lastCompletedLevel);
+        
         LevelsCache &levelsCache = LevelsCache::getInstance();
         auto levelsProgress = document.NewElement("LevelsProgress");
         for (int k = 0; k < levelsCache.getLevelsAmount(); k++)
@@ -266,6 +273,11 @@ void PlayerInfo::setBestScore(const PlayerInfo::Score &score)
     _bestScore = score;
 }
 
+void PlayerInfo::setLastCompletedLevelId(const std::string &id)
+{
+    _lastCompletedLevelId = id;
+}
+
 PlayerInfo::Score PlayerInfo::getBestScore() const
 {
     return _bestScore;
@@ -322,6 +334,11 @@ bool PlayerInfo::isEquipped(Equip::Ptr item) const
     } else {
         CC_ASSERT(false);
     }
+}
+
+const std::string& PlayerInfo::getLastCompletedLevelId() const
+{
+    return _lastCompletedLevelId;
 }
 
 const std::string& PlayerInfo::getEquippedWeaponId() const
