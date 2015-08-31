@@ -67,11 +67,13 @@ void MapPlayerMark::refreshPosition()
         if (!prev.empty() && lastCompleted != prev) {
             auto prevLevel = levels.getLevelById(prev).lock();
             cocos2d::Vec2 p0(prevLevel->getMapX(), prevLevel->getMapY());
-            cocos2d::Vec2 p1(level->getMapX(), level->getMapY());
             setPosition(p0);
-            auto move = cocos2d::MoveTo::create(2.0f, p1);
-            runAction(move);
-            gameinfo.setGlobalString("LAST_COMPLETED_LEVEL", lastCompleted);
+            if (!level->getUnlocks().empty()) {
+                cocos2d::Vec2 p1(level->getMapX(), level->getMapY());
+                auto move = cocos2d::MoveTo::create(2.0f, p1);
+                runAction(move);
+                gameinfo.setGlobalString("LAST_COMPLETED_LEVEL", lastCompleted);
+            }
         } else {
             setPosition(cocos2d::Vec2(level->getMapX(), level->getMapY()));
             gameinfo.setGlobalString("LAST_COMPLETED_LEVEL", lastCompleted);
