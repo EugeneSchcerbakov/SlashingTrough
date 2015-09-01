@@ -26,8 +26,10 @@ static void changeScene(cocos2d::Scene *scene, ScreenChanger::Screen screen)
     std::string log = "";
     scene->setName(screen);
     
+    auto trans = cocos2d::TransitionFade::create(0.5f, scene, cocos2d::Color3B::BLACK);
+    
     if (director->getRunningScene()) {
-        director->replaceScene(scene);
+        director->replaceScene(trans);
         
         std::string prev = director->getRunningScene()->getName();
         log = cocos2d::StringUtils::format("%s changed to %s.", prev.c_str(), screen.c_str());
