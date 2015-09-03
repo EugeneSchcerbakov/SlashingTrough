@@ -103,10 +103,6 @@ bool StartInterface::init()
 
 bool StartInterface::onTouch(cocos2d::Touch *touch, cocos2d::Event *e)
 {
-    std::string levelId = PlayerInfo::getInstance().getLastIncompletedLevelId();
-    if (levelId.empty()) {
-        levelId = LevelsCache::getInstance().getLevelByIndex(0).lock()->getId();
-    }
-    ScreenChanger::beginRunAndSlash(levelId);
+    ScreenChanger::changeScreen(ScreenChanger::MAP);
     return true;
 }
