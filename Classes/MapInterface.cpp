@@ -8,7 +8,9 @@
 
 #include "MapInterface.h"
 
+#include "MissionStartPopup.h"
 #include "ScreenChanger.h"
+#include "LevelsCache.h"
 #include "PlayerInfo.h"
 
 MapInterface* MapInterface::create()
@@ -45,6 +47,13 @@ bool MapInterface::init()
     _background = cocos2d::LayerColor::create(cocos2d::Color4B::BLACK);
     _guiLayer = cocos2d::Layer::create();
     _mapWidget = MapWidget::create("map.xml");
+    _mapWidget->setSwallowTouches(false);
+    
+    auto input = cocos2d::EventListenerTouchOneByOne::create();
+    input->onTouchBegan = CC_CALLBACK_2(MapInterface::mapTouchBegan, this);
+    input->onTouchEnded = CC_CALLBACK_2(MapInterface::mapTouchEnded, this);
+    input->onTouchCancelled = CC_CALLBACK_2(MapInterface::mapTouchCanceled, this);
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(input, _guiLayer);
     
     cocos2d::Sprite *coinIcon = cocos2d::Sprite::create("icons/icon_coin.png");
     coinIcon->setScale(1.8f);
@@ -105,9 +114,64 @@ bool MapInterface::init()
     _guiLayer->addChild(shopButton);
     _guiLayer->addChild(settings);
     
-    addChild(_background, 0);
-    addChild(_mapWidget, 1);
-    addChild(_guiLayer, 2);
+    addChild(_background, Order::COLOR);
+    addChild(_mapWidget, Order::MAP);
+    addChild(_guiLayer, Order::CONTROLS);
     
     return true;
+}
+
+void MapInterface::showMissionPopup(const std::string &levelId, const std::string &title)
+{
+    LevelsCache &levelsCache = LevelsCache::getInstance();
+    
+    FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
+    MissionStartPopup *popup = MissionStartPopup::create(levelId, title);
+    popup->startShowEffect();
+    
+    _guiLayer->setSwallowsTouches(true);
+    _mapWidget->setSwallowTouches(true);
+    
+    addChild(popup, Order::POPUP, "MissionStartPopup");
+}
+
+void MapInterface::hideMissionPopup()
+{
+    auto popup = getChildByName<MissionStartPopup *>("MissionStartPopup");
+    if (popup) {
+        popup->startHideEffect([this](){removeChildByName("MissionStartPopup");});
+    }
+}
+
+bool MapInterface::mapTouchBegan(cocos2d::Touch *touch, cocos2d::Event *e)
+{
+    auto popup = getChildByName<MissionStartPopup *>("MissionStartPopup");
+    if (popup) {
+        cocos2d::Vec2 pt = popup->convertTouchToNodeSpace(touch);
+        if (!popup->hitTest(pt)) {
+            hideMissionPopup();
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+void MapInterface::mapTouchEnded(cocos2d::Touch *touch, cocos2d::Event *e)
+{
+    cocos2d::Vec2 location = touch->getLocation();
+    MapLevelMark *mark = _mapWidget->getLevelUnderPoint(location);
+    if (mark)
+    {
+        auto level = mark->getLevel().lock();
+        if (!level->isStatus(FieldLevel::Status::LOCKED)) {
+            showMissionPopup(level->getId(), "Mission " + mark->getLevelText());
+        } else {
+            // shop pop up text
+        }
+    }
+}
+
+void MapInterface::mapTouchCanceled(cocos2d::Touch *touch, cocos2d::Event *e)
+{
 }

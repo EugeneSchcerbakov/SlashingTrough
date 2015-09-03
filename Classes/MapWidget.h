@@ -17,6 +17,8 @@ class MapWidget : public cocos2d::ui::ScrollView
 public:
     static MapWidget* create(const std::string &mapDesc);
     
+    MapLevelMark* getLevelUnderPoint(cocos2d::Vec2 point);
+    
 protected:
     MapWidget();
     virtual ~MapWidget();
@@ -25,10 +27,6 @@ protected:
     
 private:
     bool initLevelMarkers(const std::string &mapFile);
-    
-    bool touchBegan(cocos2d::Touch *touch, cocos2d::Event *e);
-    void touchEnded(cocos2d::Touch *touch, cocos2d::Event *e);
-    void touchCanceled(cocos2d::Touch *touch, cocos2d::Event *e);
     
     cocos2d::Sprite *_map;
     MapPlayerMark *_playerMark;

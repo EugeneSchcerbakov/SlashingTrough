@@ -16,6 +16,9 @@ class MapInterface : public cocos2d::Scene
 public:
     static MapInterface* create();
     
+    void showMissionPopup(const std::string &levelId, const std::string &title);
+    void hideMissionPopup();
+    
 protected:
     MapInterface();
     virtual ~MapInterface();
@@ -23,6 +26,18 @@ protected:
     bool init();
     
 private:
+    bool mapTouchBegan(cocos2d::Touch *touch, cocos2d::Event *e);
+    void mapTouchEnded(cocos2d::Touch *touch, cocos2d::Event *e);
+    void mapTouchCanceled(cocos2d::Touch *touch, cocos2d::Event *e);
+    
+    enum Order
+    {
+        COLOR = 0,
+        MAP,
+        POPUP,
+        CONTROLS
+    };
+    
     cocos2d::LayerColor *_background;
     cocos2d::Layer *_guiLayer;
     MapWidget *_mapWidget;

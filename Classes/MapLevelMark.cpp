@@ -39,6 +39,11 @@ const std::string& MapLevelMark::getLevelId() const
     return _level->getId();
 }
 
+const std::string& MapLevelMark::getLevelText() const
+{
+    return _text->getString();
+}
+
 cocos2d::Rect MapLevelMark::getBoundingBox() const
 {
     float w = _contentSize.width;

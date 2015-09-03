@@ -32,6 +32,26 @@ MapWidget::~MapWidget()
 {
 }
 
+MapLevelMark* MapWidget::getLevelUnderPoint(cocos2d::Vec2 point)
+{
+    cocos2d::Vec2 p = _map->convertToNodeSpace(point);
+    for (auto mark : _levelMarkers) {
+        if (mark->getBoundingBox().containsPoint(p)) {
+            return mark;
+            /*
+            auto level = mark->getLevel().lock();
+            if (!level->isStatus(FieldLevel::Status::LOCKED)) {
+                ScreenChanger::beginRunAndSlash(mark->getLevelId());
+                break;
+            } else {
+                // shop pop up text
+            }
+            */
+        }
+    }
+    return nullptr;
+}
+
 bool MapWidget::init(const std::string &mapDesc)
 {
     if (!cocos2d::ui::ScrollView::init()) {
@@ -54,12 +74,6 @@ bool MapWidget::init(const std::string &mapDesc)
     
     _playerMark = MapPlayerMark::create();
     _map->addChild(_playerMark, 1);
-    
-    auto input = cocos2d::EventListenerTouchOneByOne::create();
-    input->onTouchBegan = CC_CALLBACK_2(MapWidget::touchBegan, this);
-    input->onTouchEnded = CC_CALLBACK_2(MapWidget::touchEnded, this);
-    input->onTouchCancelled = CC_CALLBACK_2(MapWidget::touchCanceled, this);
-    getEventDispatcher()->addEventListenerWithSceneGraphPriority(input, _map);
     
     setDirection(cocos2d::ui::ScrollView::Direction::BOTH);
     setContentSize(size);
@@ -114,30 +128,4 @@ bool MapWidget::initLevelMarkers(const std::string &mapFile)
         WRITE_ERR("Failed to read map file");
         return false;
     }
-}
-
-bool MapWidget::touchBegan(cocos2d::Touch *touch, cocos2d::Event *e)
-{
-    return true;
-}
-
-void MapWidget::touchEnded(cocos2d::Touch *touch, cocos2d::Event *e)
-{
-    cocos2d::Vec2 p = _map->convertTouchToNodeSpace(touch);
-    for (auto mark : _levelMarkers) {
-        if (mark->getBoundingBox().containsPoint(p)) {
-            auto level = mark->getLevel().lock();
-            if (!level->isStatus(FieldLevel::Status::LOCKED)) {
-                ScreenChanger::beginRunAndSlash(mark->getLevelId());
-                break;
-            } else {
-                // shop pop up text
-            }
-        }
-    }
-}
-
-void MapWidget::touchCanceled(cocos2d::Touch *touch, cocos2d::Event *e)
-{
-    
 }

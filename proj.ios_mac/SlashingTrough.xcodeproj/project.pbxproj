@@ -50,6 +50,8 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */; };
+		CD00C30B1B9617C40017D771 /* MissionStartPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */; };
 		CD0AB2BF1B89E03A00139A03 /* StartInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */; };
 		CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */; };
 		CD0AB2C71B89FC1200139A03 /* MapInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0AB2C51B89FC1200139A03 /* MapInterface.cpp */; };
@@ -277,6 +279,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MissionStartPopup.cpp; sourceTree = "<group>"; };
+		CD00C3091B9617C40017D771 /* MissionStartPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionStartPopup.h; sourceTree = "<group>"; };
 		CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartInterface.cpp; sourceTree = "<group>"; };
 		CD0AB2BE1B89E03A00139A03 /* StartInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartInterface.h; sourceTree = "<group>"; };
 		CD0AB2C51B89FC1200139A03 /* MapInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapInterface.cpp; sourceTree = "<group>"; };
@@ -653,6 +657,8 @@
 			children = (
 				CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */,
 				CD0AB2BE1B89E03A00139A03 /* StartInterface.h */,
+				CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */,
+				CD00C3091B9617C40017D771 /* MissionStartPopup.h */,
 				CDE676B51B93030100233FFB /* MapPlayerMark.cpp */,
 				CDE676B61B93030100233FFB /* MapPlayerMark.h */,
 				CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */,
@@ -942,6 +948,7 @@
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
+				CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
@@ -985,6 +992,7 @@
 				CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				CD00C30B1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
 				CD680A981B7F629C009618CC /* EquipFeature.cpp in Sources */,
