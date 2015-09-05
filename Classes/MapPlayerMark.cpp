@@ -55,7 +55,7 @@ void MapPlayerMark::refreshPosition()
     LevelsCache &levels = LevelsCache::getInstance();
     PlayerInfo &player = PlayerInfo::getInstance();
     
-    std::string lastCompleted = player.getLastCompletedLevelId();
+    std::string lastCompleted = player.variables.getString("LastCompletedLevel");
     
     if (lastCompleted.empty()) {
         // probably player doesn't complete any level by now

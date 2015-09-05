@@ -25,7 +25,9 @@ public:
     void setFloat(const std::string &name, float value);
     void setString(const std::string &name, const std::string &value);
     
-private:
+    friend class PlayerInfo;
+    
+protected:
     std::map<std::string, int> _variablesInt;
     std::map<std::string, float> _variablesFloat;
     std::map<std::string, std::string> _variablesStr;

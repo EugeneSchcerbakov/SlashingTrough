@@ -179,16 +179,8 @@ void FieldLayer::acceptEvent(const Event &event)
             _fieldScroller->removeChildByTag(uid, true);
         }
     } else if (event.is("LevelFinished")) {
-        Hero *hero = _field.getHero();
-        
         PlayerInfo &player = PlayerInfo::getInstance();
         LevelsCache &levelsCache = LevelsCache::getInstance();
-        
-        PlayerInfo::Score score = hero->getScore();
-        player.addCoins(score.coins);
-        if (player.isBestScore(score)) {
-            player.setBestScore(score);
-        }
         
         std::string levelId = event.variables.getString("levelId");
         
@@ -201,7 +193,7 @@ void FieldLayer::acceptEvent(const Event &event)
                 // do it once, only then level completed
                 if (!level->isStatus(FieldLevel::Status::COMPLETED)) {
                     level->setStatus(FieldLevel::Status::COMPLETED);
-                    player.setLastCompletedLevelId(levelId);
+                    player.variables.setString("LastCompletedLevel", levelId);
                     WRITE_LOG("Level completed: " + levelId);
                     
                     // give coins
@@ -226,7 +218,7 @@ void FieldLayer::acceptEvent(const Event &event)
                 WRITE_ERR("Failed to get result from null level with id:" + levelId);
             }
         } else {
-            player.setLastIncompletedLevelId(levelId);
+            player.variables.setString("LastIncompletedLevel", levelId);
         }
         
         player.save();

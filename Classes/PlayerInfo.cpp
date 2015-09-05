@@ -15,6 +15,10 @@
 #include "tinyxml2/tinyxml2.h"
 #include <stdio.h>
 
+const std::string PlayerInfo::VarKeyCoins = "Coins";
+const std::string PlayerInfo::VarKeyEquipWpn = "EquipedWeapon";
+const std::string PlayerInfo::VarKeyEquipArm = "EquipedArmor";
+
 PlayerInfo& PlayerInfo::getInstance()
 {
     static PlayerInfo instance;
@@ -22,7 +26,6 @@ PlayerInfo& PlayerInfo::getInstance()
 }
 
 PlayerInfo::PlayerInfo()
-: _totalCoins(0)
 {
 }
 
@@ -58,12 +61,23 @@ void PlayerInfo::load(const std::string &filename)
     {
         auto root = document.RootElement();
         
-        auto coins = root->FirstChildElement("Coins");
-        _totalCoins = coins->IntAttribute("amount");
-        
-        auto bestScore = root->FirstChildElement("BestScore");
-        _bestScore.coins = bestScore->IntAttribute("coins");
-        _bestScore.kills = bestScore->IntAttribute("kills");
+        auto vars = root->FirstChildElement("Variables");
+        auto elem = vars->FirstChildElement();
+        while (elem) {
+            std::string name = elem->Attribute("name");
+            std::string type = elem->Attribute("type");
+            std::string data = elem->Attribute("data");
+            if (type == "int") {
+                variables.setInt(name, atoi(data.c_str()));
+            } else if (type == "float") {
+                variables.setFloat(name, atof(data.c_str()));
+            } else if (type == "string") {
+                variables.setString(name, data);
+            } else {
+                WRITE_WARN("Unknown save file data leem type:" + type);
+            }
+            elem = elem->NextSiblingElement();
+        }
         
         auto ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
         while (ownedEquip) {
@@ -71,18 +85,6 @@ void PlayerInfo::load(const std::string &filename)
             addOwnedEquip(store.getItemById(equipId));
             ownedEquip = ownedEquip->NextSiblingElement();
         };
-        
-        auto equippedWeapon = root->FirstChildElement("EquippedWeapon");
-        _equippedWeaponId = equippedWeapon->Attribute("id");
-        
-        auto equippedArmor = root->FirstChildElement("EquippedArmor");
-        _equippedArmorId = equippedArmor->Attribute("id");
-        
-        auto lastCompletedLevel = root->FirstChildElement("LastCompletedLevel");
-        _lastCompletedLevelId = lastCompletedLevel->Attribute("id");
-        
-        auto lastIncompletedLevel = root->FirstChildElement("LastIncompletedLevel");
-        _lastIncompletedLevelId = lastIncompletedLevel->Attribute("id");
         
         LevelsCache &levelsCache = LevelsCache::getInstance();
         
@@ -124,14 +126,14 @@ void PlayerInfo::load(const std::string &filename)
         WRITE_ERR("Failed to read save file.");
     }
     
-    if (_equippedWeaponId.empty()) {
+    if (variables.getString(VarKeyEquipWpn).empty()) {
         Equip::Ptr weapon = store.getItemById(Store::DEFAULT_WEAPON_ID);
         CC_ASSERT(weapon != nullptr);
         addOwnedEquip(weapon);
         equip(weapon);
     }
     
-    if (_equippedArmorId.empty()) {
+    if (variables.getString(VarKeyEquipArm).empty()) {
         Equip::Ptr armor = store.getItemById(Store::DEFAULT_ARMOR_ID);
         CC_ASSERT(armor != nullptr);
         addOwnedEquip(armor);
@@ -160,14 +162,29 @@ void PlayerInfo::save()
         auto declaration = document.NewDeclaration();
         auto root = document.NewElement("Save");
         
-        auto coins = document.NewElement("Coins");
-        coins->SetAttribute("amount", cocos2d::StringUtils::toString(_totalCoins).c_str());
-        root->LinkEndChild(coins);
-        
-        auto bestScore = document.NewElement("BestScore");
-        bestScore->SetAttribute("coins", cocos2d::StringUtils::toString(_bestScore.coins).c_str());
-        bestScore->SetAttribute("kills", cocos2d::StringUtils::toString(_bestScore.kills).c_str());
-        root->LinkEndChild(bestScore);
+        auto vars = document.NewElement("Variables");
+        for (auto pair : variables._variablesInt) {
+            auto data = document.NewElement("DataElem");
+            data->SetAttribute("name", pair.first.c_str());
+            data->SetAttribute("type", "int");
+            data->SetAttribute("data", pair.second);
+            vars->LinkEndChild(data);
+        }
+        for (auto pair : variables._variablesFloat) {
+            auto data = document.NewElement("DataElem");
+            data->SetAttribute("name", pair.first.c_str());
+            data->SetAttribute("type", "float");
+            data->SetAttribute("data", pair.second);
+            vars->LinkEndChild(data);
+        }
+        for (auto pair : variables._variablesStr) {
+            auto data = document.NewElement("DataElem");
+            data->SetAttribute("name", pair.first.c_str());
+            data->SetAttribute("type", "string");
+            data->SetAttribute("data", pair.second.c_str());
+            vars->LinkEndChild(data);
+        }
+        root->LinkEndChild(vars);
         
         auto ownedEquip = document.NewElement("OwnedEquip");
         for (const auto &id : _ownedEquips) {
@@ -176,22 +193,6 @@ void PlayerInfo::save()
             ownedEquip->LinkEndChild(equip);
         }
         root->LinkEndChild(ownedEquip);
-    
-        auto equippedWeapon = document.NewElement("EquippedWeapon");
-        equippedWeapon->SetAttribute("id", _equippedWeaponId.c_str());
-        root->LinkEndChild(equippedWeapon);
-        
-        auto equippedArmor = document.NewElement("EquippedArmor");
-        equippedArmor->SetAttribute("id", _equippedArmorId.c_str());
-        root->LinkEndChild(equippedArmor);
-        
-        auto lastCompletedLevel = document.NewElement("LastCompletedLevel");
-        lastCompletedLevel->SetAttribute("id", _lastCompletedLevelId.c_str());
-        root->LinkEndChild(lastCompletedLevel);
-        
-        auto lastIncompletedLevel = document.NewElement("LastIncompletedLevel");
-        lastIncompletedLevel->SetAttribute("id", _lastIncompletedLevelId.c_str());
-        root->LinkEndChild(lastIncompletedLevel);
         
         LevelsCache &levelsCache = LevelsCache::getInstance();
         auto levelsProgress = document.NewElement("LevelsProgress");
@@ -246,10 +247,13 @@ void PlayerInfo::addOwnedEquip(Equip::Ptr item)
 
 void PlayerInfo::addCoins(int coins)
 {
-    _totalCoins += coins;
-    if (_totalCoins < 0) {
-        _totalCoins = 0;
+    int total = variables.getInt(VarKeyCoins);
+    total = total + coins;
+    if (total < 0) {
+        total = 0;
+        WRITE_WARN("Negative coins amount");
     }
+    variables.setInt(VarKeyCoins, total);
 }
 
 void PlayerInfo::equip(Equip::Ptr item)
@@ -264,10 +268,10 @@ void PlayerInfo::equip(Equip::Ptr item)
     std::string itemId = item->getId();
     
     if (item->isType(Equip::Type::WEAPON)) {
-        _equippedWeaponId = itemId;
+        variables.setString(VarKeyEquipWpn, itemId);
         WRITE_LOG("Equiped weapon with id: " + itemId);
     } else if (item->isType(Equip::Type::ARMOR)) {
-        _equippedArmorId = itemId;
+        variables.setString(VarKeyEquipArm, itemId);
         WRITE_LOG("Equiped armor with id: " + itemId);
     } else {
         WRITE_WARN("Failed to equip entity of unknown type.");
@@ -275,34 +279,14 @@ void PlayerInfo::equip(Equip::Ptr item)
     }
 }
 
-void PlayerInfo::setBestScore(const PlayerInfo::Score &score)
-{
-    _bestScore = score;
-}
-
-void PlayerInfo::setLastCompletedLevelId(const std::string &id)
-{
-    _lastCompletedLevelId = id;
-}
-
-void PlayerInfo::setLastIncompletedLevelId(const std::string &id)
-{
-    _lastIncompletedLevelId = id;
-}
-
-PlayerInfo::Score PlayerInfo::getBestScore() const
-{
-    return _bestScore;
-}
-
 int PlayerInfo::getCoins() const
 {
-    return _totalCoins;
+    return 0;//_totalCoins;
 }
 
 int PlayerInfo::getDamage() const
 {
-    Equip::Ptr equip = Store::getInstance().getItemById(getEquippedWeaponId());
+    Equip::Ptr equip = Store::getInstance().getItemById("");
     if (equip) {
         EquipWeapon *weapon = EquipWeapon::cast(equip);
         return floorf(weapon->getDamage());
@@ -310,11 +294,6 @@ int PlayerInfo::getDamage() const
         return 0.0f;
         WRITE_WARN("Failed to cast to weapon.");
     }
-}
-
-bool PlayerInfo::isBestScore(const PlayerInfo::Score &score) const
-{
-    return score.coins > _bestScore.coins;
 }
 
 bool PlayerInfo::isEquipOwned(Equip::Ptr item) const
@@ -340,30 +319,10 @@ bool PlayerInfo::isEquipped(Equip::Ptr item) const
     }
     
     if (item->isType(Equip::Type::WEAPON)) {
-        return _equippedWeaponId == item->getId();
+        return variables.getString(VarKeyEquipWpn) == item->getId();
     } else if (item->isType(Equip::Type::ARMOR)) {
-        return _equippedArmorId == item->getId();
+        return variables.getString(VarKeyEquipArm) == item->getId();
     } else {
         CC_ASSERT(false);
     }
-}
-
-const std::string& PlayerInfo::getLastCompletedLevelId() const
-{
-    return _lastCompletedLevelId;
-}
-
-const std::string& PlayerInfo::getLastIncompletedLevelId() const
-{
-    return _lastIncompletedLevelId;
-}
-
-const std::string& PlayerInfo::getEquippedWeaponId() const
-{
-    return _equippedWeaponId;
-}
-
-const std::string& PlayerInfo::getEquippeArmorId() const
-{
-    return _equippedArmorId;
 }

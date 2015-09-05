@@ -41,11 +41,11 @@ void Hero::init()
     _staminaDrainValue = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.getConstInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
-    std::string weaponId = PlayerInfo::getInstance().getEquippedWeaponId();
+    std::string weaponId = PlayerInfo::getInstance().variables.getString(PlayerInfo::VarKeyEquipWpn);
     Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
     setWeapon(weapon);
     
-    std::string armorId = PlayerInfo::getInstance().getEquippeArmorId();
+    std::string armorId = PlayerInfo::getInstance().variables.getString(PlayerInfo::VarKeyEquipArm);
     Equip::WeakPtr armor = Store::getInstance().getItemById(armorId);
     setArmor(armor);
     
