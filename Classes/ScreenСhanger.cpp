@@ -12,11 +12,13 @@
 #include "StartInterface.h"
 #include "StoreInterface.h"
 #include "MapInterface.h"
+#include "StatisticsInterface.h"
 #include "Log.h"
 
 ScreenChanger::Screen ScreenChanger::START = "StartScreen";
 ScreenChanger::Screen ScreenChanger::STORE = "StoreScreen";
 ScreenChanger::Screen ScreenChanger::MAP = "MapScreen";
+ScreenChanger::Screen ScreenChanger::STATISTICS = "StatisticsScreen";
 ScreenChanger::Screen ScreenChanger::GAME = "GameScreen";
 
 static void changeScene(cocos2d::Scene *scene, ScreenChanger::Screen screen)
@@ -65,8 +67,14 @@ void ScreenChanger::changeScreen(ScreenChanger::Screen screen)
     changeScene(scene, screen);
 }
 
-void ScreenChanger::beginRunAndSlash(const std::string &level)
+void ScreenChanger::beginRunAndSlash(const std::string &levelId)
 {
-    auto scene = GameScene::create(level);
+    auto scene = GameScene::create(levelId);
     changeScene(scene, ScreenChanger::GAME);
+}
+
+void ScreenChanger::showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory)
+{
+    auto scene = StaticticsInterface::create(level, score, victory);
+    changeScene(scene, ScreenChanger::STATISTICS);
 }

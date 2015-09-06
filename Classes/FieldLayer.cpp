@@ -181,49 +181,24 @@ void FieldLayer::acceptEvent(const Event &event)
     } else if (event.is("LevelFinished")) {
         PlayerInfo &player = PlayerInfo::getInstance();
         LevelsCache &levelsCache = LevelsCache::getInstance();
-        
+    
+        bool victory = event.variables.getBool("victory", false);
         std::string levelId = event.variables.getString("levelId");
-        
-        if (event.variables.getBool("victory", false))
-        {
-            FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
-            if (!level_ptr.expired()) {
-                FieldLevel::Ptr level = level_ptr.lock();
-            
-                // do it once, only then level completed
-                if (!level->isStatus(FieldLevel::Status::COMPLETED)) {
-                    level->setStatus(FieldLevel::Status::COMPLETED);
-                    player.variables.setString("LastCompletedLevel", levelId);
-                    WRITE_LOG("Level completed: " + levelId);
-                    
-                    // give coins
-                    player.addCoins(level->getCoinsReward());
-                    
-                    // unlock levels
-                    auto unlocks = level->getUnlocks();
-                    for (auto id : unlocks) {
-                        FieldLevel::WeakPtr inst_ptr = levelsCache.getLevelById(id);
-                        if (!inst_ptr.expired()) {
-                            FieldLevel::Ptr inst = inst_ptr.lock();
-                            inst->setStatus(FieldLevel::Status::UNLOCKED);
-                            WRITE_LOG("Level unlocked: " + id);
-                        } else {
-                            WRITE_WARN("Failed to unlock null level with id: " + id);
-                        }
-                    }
-                }
-            
-                // drop stuff here
-            } else {
-                WRITE_ERR("Failed to get result from null level with id:" + levelId);
-            }
-        } else {
-            player.variables.setString("LastIncompletedLevel", levelId);
+        FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
+        FieldLevel::Ptr level = level_ptr.lock();
+    
+        if (level_ptr.expired()) {
+            WRITE_WARN("Failed to get result from invalid level: " + levelId);
         }
         
-        player.save();
+        bool completitionFact = victory && !level->isStatus(FieldLevel::Status::COMPLETED);
         
-        ScreenChanger::changeScreen(ScreenChanger::MAP);
+        if (victory) {
+            makeLevelComplete(level_ptr);
+        }
+            
+        ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), completitionFact);
+        player.save();
     }
 }
 
@@ -231,3 +206,41 @@ void FieldLayer::accepter(const Event &event, void *param)
 {
     static_cast<FieldLayer *>(param)->acceptEvent(event);
 }
+
+void FieldLayer::makeLevelComplete(FieldLevel::WeakPtr levelPtr)
+{
+    if (levelPtr.expired()) {
+        WRITE_WARN("Failed to complete invalid level");
+        return;
+    }
+    
+    FieldLevel::Ptr level = levelPtr.lock();
+    if (!level->isStatus(FieldLevel::Status::COMPLETED))
+    {
+        PlayerInfo &player = PlayerInfo::getInstance();
+        LevelsCache &levelsCache = LevelsCache::getInstance();
+        
+        std::string id = level->getId();
+        
+        level->setStatus(FieldLevel::Status::COMPLETED);
+        player.variables.setString("LastCompletedLevel", id);
+        WRITE_LOG("Level completed: " + id);
+            
+        // give coins
+        player.addCoins(level->getCoinsReward());
+            
+        // unlock levels
+        auto unlocks = level->getUnlocks();
+        for (auto id : unlocks) {
+            FieldLevel::WeakPtr inst_ptr = levelsCache.getLevelById(id);
+            if (!inst_ptr.expired()) {
+                FieldLevel::Ptr inst = inst_ptr.lock();
+                inst->setStatus(FieldLevel::Status::UNLOCKED);
+                WRITE_LOG("Level unlocked: " + id);
+            } else {
+                WRITE_WARN("Failed to unlock null level with id: " + id);
+            }
+        }
+    }
+}
+

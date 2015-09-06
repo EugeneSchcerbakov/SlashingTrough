@@ -11,17 +11,22 @@
 
 #include <cocos2d.h>
 
+#include "FieldLevel.h"
+#include "PlayerInfo.h"
+
 class ScreenChanger
 {
 public:
     typedef const std::string Screen;
     
     static void changeScreen(Screen screen);
-    static void beginRunAndSlash(const std::string &level);
+    static void beginRunAndSlash(const std::string &levelId);
+    static void showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory);
     
     static Screen START;
     static Screen STORE;
     static Screen MAP;
+    static Screen STATISTICS;
     static Screen GAME;
 };
 

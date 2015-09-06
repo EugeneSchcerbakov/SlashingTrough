@@ -66,6 +66,8 @@
 		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
 		CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
+		CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
+		CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
 		CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
 		CD2AE6331B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
 		CD2AE6371B77AB2C001DF4B7 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */; };
@@ -293,6 +295,8 @@
 		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
 		CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ScreenСhanger.cpp"; sourceTree = "<group>"; };
 		CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenChanger.h; sourceTree = "<group>"; };
+		CD255B261B9B27A80062223A /* StatisticsInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StatisticsInterface.cpp; sourceTree = "<group>"; };
+		CD255B271B9B27A80062223A /* StatisticsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsInterface.h; sourceTree = "<group>"; };
 		CD2AE6301B779FD4001DF4B7 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
 		CD2AE6311B779FD4001DF4B7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
@@ -657,6 +661,8 @@
 			children = (
 				CD0AB2BD1B89E03A00139A03 /* StartInterface.cpp */,
 				CD0AB2BE1B89E03A00139A03 /* StartInterface.h */,
+				CD255B261B9B27A80062223A /* StatisticsInterface.cpp */,
+				CD255B271B9B27A80062223A /* StatisticsInterface.h */,
 				CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */,
 				CD00C3091B9617C40017D771 /* MissionStartPopup.h */,
 				CDE676B51B93030100233FFB /* MapPlayerMark.cpp */,
@@ -954,6 +960,7 @@
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
 				CD0AB2CB1B8A31C200139A03 /* MapWidget.cpp in Sources */,
+				CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CD9D04E51B8B9B7100FFE0F3 /* LevelsCache.cpp in Sources */,
 				CD44C6FE1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
 				CDC881251B51808300030818 /* HeroAction.cpp in Sources */,
@@ -968,6 +975,7 @@
 				CDC880FE1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC5E62C1B52D564000756EB /* Enemy.cpp in Sources */,
+				CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CDC520891B54238700732FD0 /* WeaponFeature.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,

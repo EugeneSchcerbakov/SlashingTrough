@@ -42,6 +42,8 @@ protected:
 private:
     static void accepter(const Event &event, void *param);
 
+    void makeLevelComplete(FieldLevel::WeakPtr levelPtr);
+    
     Field _field;
     
     std::vector<EnemyWidget *> _enemiesWidgets;
