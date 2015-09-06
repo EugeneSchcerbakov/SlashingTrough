@@ -12,15 +12,47 @@
 #include <vector>
 #include <string>
 
-#include "Equipment.h"
+#include "Item.h"
 #include "VariablesSet.h"
+
+class PlayerInventory
+{
+public:
+    struct PlayerItem
+    {
+        Item::Ptr item;
+        int amount;
+        
+        PlayerItem() = default;
+    };
+    
+public:
+    void add(Item::WeakPtr item, int amount = 1);
+    void remove(Item::WeakPtr item);
+    
+    int getAmount(const std::string &id) const;
+    int getAmount(Item::WeakPtr item) const;
+    
+    bool owned(const std::string &id) const;
+    bool owned(Item::WeakPtr item) const;
+    
+    PlayerItem& operator[](const std::string &id);
+    
+    friend class PlayerInfo;
+    
+private:
+    std::map<std::string, PlayerItem> _items;
+};
 
 class PlayerInfo
 {
 public:
     static const std::string VarKeyCoins;
-    static const std::string VarKeyEquipWpn;
-    static const std::string VarKeyEquipArm;
+    static const std::string VarKeyItemWpn;
+    static const std::string VarKeyItemArm;
+    
+    static const std::string DEFAULT_WEAPON_ID;
+    static const std::string DEFAULT_ARMOR_ID;
     
 public:
     struct Score
@@ -43,16 +75,15 @@ public:
     void load(const std::string &filename);
     void save();
     
-    void addOwnedEquip(Equip::Ptr item);
     void addCoins(int coins);
-    void equip(Equip::Ptr item);
+    void equip(Item::Ptr item);
+    bool equipped(Item::Ptr item) const;
 
     int getCoins() const;
     int getDamage() const;
-    bool isEquipOwned(Equip::Ptr item) const;
-    bool isEquipped(Equip::Ptr item) const;
     
     VariablesSet variables;
+    PlayerInventory Inventory;
     
 private:
     std::vector<std::string> _ownedEquips;

@@ -1,42 +1,42 @@
 //
-//  EquipFeature.cpp
+//  ItemFeature.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 15/08/15.
 //
 //
 
-#include "EquipFeature.h"
+#include "ItemFeature.h"
 #include "Hero.h"
 #include "Enemy.h"
 
-EquipFeature::EquipFeature()
+ItemFeature::ItemFeature()
 : _owner(nullptr)
 {
 }
 
-EquipFeature::~EquipFeature()
+ItemFeature::~ItemFeature()
 {
 }
 
-void EquipFeature::init(Hero *owner)
+void ItemFeature::init(Hero *owner)
 {
     _owner = owner;
 }
 
-void EquipFeature::update(float dt)
+void ItemFeature::update(float dt)
 {
 }
 
-void EquipFeature::onSwipeBack()
+void ItemFeature::onSwipeBack()
 {
 }
 
-void EquipFeature::onSwipeRight()
+void ItemFeature::onSwipeRight()
 {
 }
 
-void EquipFeature::onSwipeLeft()
+void ItemFeature::onSwipeLeft()
 {
 }
 
@@ -45,7 +45,7 @@ void EquipFeature::onSwipeLeft()
 const std::string Backsliding::TAG = "BackslidngAction";
 
 Backsliding::Backsliding(float cooldown, float distance, float duration)
-: EquipFeature()
+: ItemFeature()
 , _cooldown(cooldown)
 , _distance(distance)
 , _duration(duration)
@@ -61,12 +61,12 @@ Backsliding::Ptr Backsliding::create(float cooldown, float distance, float durat
 
 void Backsliding::init(Hero *owner)
 {
-    EquipFeature::init(owner);
+    ItemFeature::init(owner);
 }
 
 void Backsliding::update(float dt)
 {
-    EquipFeature::update(dt);
+    ItemFeature::update(dt);
     
     if (!_allow && !_owner->isActionInQueue(TAG)) {
         _time += dt;
@@ -79,7 +79,7 @@ void Backsliding::update(float dt)
 
 void Backsliding::onSwipeBack()
 {
-    EquipFeature::onSwipeBack();
+    ItemFeature::onSwipeBack();
     
     if (_allow)
     {
@@ -113,7 +113,7 @@ BackslidingShield::BackslidingShield(float cooldown, float distance, float durat
 
 void BackslidingShield::update(float dt)
 {
-    EquipFeature::update(dt);
+    ItemFeature::update(dt);
     
     if (_shieldShown) {
         if (_shieldTimer > 0.0f) {
@@ -140,7 +140,7 @@ void BackslidingShield::update(float dt)
 
 void BackslidingShield::onSwipeBack()
 {
-    EquipFeature::onSwipeBack();
+    ItemFeature::onSwipeBack();
     
     if (_allow)
     {
@@ -214,4 +214,46 @@ bool BackslidingShield::isPointUnderBarrier(float x, float y) const
     float dotp = nx * xface + ny * yface;
     
     return len <= barrierRadius && dotp >= 0.5f;
+}
+
+// WeaponFeature
+
+WeaponFeature::WeaponFeature()
+: ItemFeature()
+{
+}
+
+void WeaponFeature::onHit(Entity *goal)
+{
+}
+
+void WeaponFeature::onKill(Entity *goal)
+{
+}
+
+// CoinsForMurder
+
+ItemFeature::Ptr CoinsForMurder::create(int flat, int percentOfEnemyCost)
+{
+    return std::make_shared<CoinsForMurder>(flat, percentOfEnemyCost);
+}
+
+CoinsForMurder::CoinsForMurder(int flag, int percentOfEnemyCost)
+: WeaponFeature()
+, _flat(flag)
+, _percentOfEnemyCost(percentOfEnemyCost)
+{
+}
+
+void CoinsForMurder::onKill(Entity *goal)
+{
+    if (!_owner || !goal) {
+        return;
+    }
+    
+    Reward *reward = dynamic_cast<Reward *>(goal);
+    if (reward) {
+        int additional = reward->getCoinPoints() * _percentOfEnemyCost / 100;
+        _owner->addCoinsPoint(_flat + additional);
+    }
 }

@@ -12,9 +12,6 @@
 
 #include "cocos2d.h"
 
-const std::string Store::DEFAULT_WEAPON_ID = "default_sword";
-const std::string Store::DEFAULT_ARMOR_ID = "default_armor";
-
 Store& Store::getInstance()
 {
     static Store singleInstance;
@@ -41,9 +38,9 @@ void Store::loadStore(const std::string &filename)
             std::string name = elem->Name();
             if (name == "Weapon") {
                 auto trailInfo = elem->FirstChildElement("Trail");
-                auto featuresRoot = elem->FirstChildElement("Features");
-                Equip::Ptr item = EquipWeapon::create();
-                EquipWeapon *weapon = EquipWeapon::cast(item);
+                //auto featuresRoot = elem->FirstChildElement("Features");
+                Item::Ptr item = ItemWeapon::create();
+                ItemWeapon *weapon = ItemWeapon::cast(item);
                 weapon->id = elem->Attribute("id");
                 weapon->price = elem->IntAttribute("price");
                 weapon->damage = elem->FloatAttribute("damage");
@@ -60,12 +57,12 @@ void Store::loadStore(const std::string &filename)
                     weapon->trail.opacity = trailInfo->FloatAttribute("opacity");
                     weapon->trail.texture = trailInfo->Attribute("texture");
                 }
-                parseEquipFeature(item, featuresRoot);
+                //parseEquipFeature(item, featuresRoot);
                 _items.push_back(item);
             } else if (name == "Armor") {
-                auto featuresRoot = elem->FirstChildElement("Features");
-                Equip::Ptr item = EquipArmor::create();
-                EquipArmor *armor = EquipArmor::cast(item);
+                //auto featuresRoot = elem->FirstChildElement("Features");
+                Item::Ptr item = ItemArmor::create();
+                ItemArmor *armor = ItemArmor::cast(item);
                 armor->id = elem->Attribute("id");
                 armor->price = elem->IntAttribute("price");
                 armor->addHealth = elem->FloatAttribute("addHealth");
@@ -73,7 +70,7 @@ void Store::loadStore(const std::string &filename)
                 armor->icon = elem->Attribute("icon");
                 armor->sprite = elem->Attribute("sprite");
                 armor->name = elem->Attribute("name");
-                parseEquipFeature(item, featuresRoot);
+                //parseEquipFeature(item, featuresRoot);
                 _items.push_back(item);
             } else {
                 WRITE_WARN("Unknown item in store description");
@@ -89,6 +86,7 @@ void Store::loadStore(const std::string &filename)
     }
 }
 
+/*
 void Store::parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root)
 {
     if (equip.expired() || !root) {
@@ -124,32 +122,33 @@ void Store::parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root)
         elem = elem->NextSiblingElement();
     }
 }
+*/
 
 bool Store::buy(const std::string &id)
 {
     // don't use store in the ctor, in may no be loaded yet
-    PlayerInfo &session = PlayerInfo::getInstance();
+    PlayerInfo &player = PlayerInfo::getInstance();
     
-    Equip::Ptr equip = getItemById(id);
-    if (equip && equip->price <= session.getCoins())
+    Item::Ptr equip = getItemById(id);
+    if (equip && equip->price <= player.getCoins())
     {
-        session.addCoins(-equip->price);
-        session.addOwnedEquip(equip);
-        equip->sold = true;
+        player.addCoins(-equip->price);
+        player.Inventory.add(equip);
         WRITE_LOG("Bought item " + id);
+        return true;
     }
     
-    return equip->sold;
+    return false;
 }
 
-Equip::Ptr Store::getItemById(const std::string &id) const
+Item::Ptr Store::getItemById(const std::string &id) const
 {
     for (const auto info : _items) {
         if (info->id == id) {
             return info;
         }
     }
-    return Equip::Ptr();
+    return Item::Ptr();
 }
 
 const Store::Items& Store::getAllItems() const
@@ -161,7 +160,7 @@ Store::Items Store::getWeaponItems() const
 {
     Items items;
     for (auto item : _items) {
-        if (item->type == Equip::Type::WEAPON) {
+        if (item->type == Item::Type::WEAPON) {
             items.push_back(item);
         }
     }
@@ -172,7 +171,7 @@ Store::Items Store::getArmorItems() const
 {
     Items items;
     for (auto item : _items) {
-        if (item->type == Equip::Type::ARMOR) {
+        if (item->type == Item::Type::ARMOR) {
             items.push_back(item);
         }
     }

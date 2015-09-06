@@ -1,26 +1,25 @@
 //
-//  Equipment.h
+//  Item.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 06/06/15.
 //
 //
 
-#ifndef __SlashingTrough__Equipment__
-#define __SlashingTrough__Equipment__
+#ifndef __SlashingTrough__Item__
+#define __SlashingTrough__Item__
 
 #include <string>
 #include <memory>
 #include <vector>
 
-#include "EquipFeature.h"
-#include "WeaponFeature.h"
+#include "ItemFeature.h"
 
-class Equip
+class Item
 {
 public:
-    typedef std::shared_ptr<Equip> Ptr;
-    typedef std::weak_ptr<Equip> WeakPtr;
+    typedef std::shared_ptr<Item> Ptr;
+    typedef std::weak_ptr<Item> WeakPtr;
     
     enum class Type
     {
@@ -30,16 +29,8 @@ public:
     };
     
 public:
-    Equip(Type t);
-    virtual ~Equip();
-    
-    virtual void featuresInit(Hero *owner);
-    virtual void featuresUpdate(float dt);
-    virtual void featuresOnSwipeRight();
-    virtual void featuresOnSwipeLeft();
-    virtual void featuresOnSwipeBack();
-    
-    void setSold(bool flag);
+    Item(Type t);
+    virtual ~Item();
 
     int getPrice() const;
     Type getType() const;
@@ -48,12 +39,10 @@ public:
     const std::string& getDesc() const;
     const std::string& getIcon() const;
     const std::string& getName() const;
-    
-    bool isSold() const;
+
     bool isType(Type t) const;
     
 protected:
-    bool sold;
     int price;
     std::string id;
     std::string desc;
@@ -61,12 +50,10 @@ protected:
     std::string name;
     const Type type;
     
-    EquipFeature::Features features;
-    
     friend class Store;
 };
 
-class EquipWeapon : public Equip
+class ItemWeapon : public Item
 {
 public:
     struct TrailInfo
@@ -78,14 +65,11 @@ public:
         std::string texture;
     };
     
-    static Equip::Ptr create();
-    static EquipWeapon* cast(Equip::Ptr base);
+    static Item::Ptr create();
+    static ItemWeapon* cast(Item::Ptr base);
     
 public:
-    EquipWeapon();
-    
-    virtual void featuresOnHit(Entity *goal);
-    virtual void featuresOnKill(Entity *goal);
+    ItemWeapon();
     
     float getDamage() const;
     float getSpeed() const;
@@ -104,14 +88,14 @@ protected:
     friend class Store;
 };
 
-class EquipArmor : public Equip
+class ItemArmor : public Item
 {
 public:
-    static Equip::Ptr create();
-    static EquipArmor* cast(Equip::Ptr base);
+    static Item::Ptr create();
+    static ItemArmor* cast(Item::Ptr base);
     
 public:
-    EquipArmor();
+    ItemArmor();
     
     float getExtraHealth() const;
     const std::string& getSprite() const;
@@ -124,4 +108,4 @@ protected:
 };
 
 
-#endif /* defined(__SlashingTrough__Equipment__) */
+#endif /* defined(__SlashingTrough__Item__) */

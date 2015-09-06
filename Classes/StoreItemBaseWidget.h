@@ -17,7 +17,7 @@
 class StoreItemBaseWidget : public cocos2d::ui::Layout
 {
 protected:
-    StoreItemBaseWidget(Equip::WeakPtr item);
+    StoreItemBaseWidget(Item::WeakPtr item);
     virtual ~StoreItemBaseWidget();
     
     virtual bool init();
@@ -25,7 +25,7 @@ protected:
     
     virtual void onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
     
-    Equip::WeakPtr _item;
+    Item::WeakPtr _item;
     StoreItemButton *_button;
 };
 

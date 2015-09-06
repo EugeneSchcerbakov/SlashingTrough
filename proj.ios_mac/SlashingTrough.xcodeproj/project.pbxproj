@@ -92,16 +92,16 @@
 		CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
 		CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
-		CD637E7A1B234458002F98EF /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Equipment.cpp */; };
-		CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Equipment.cpp */; };
+		CD637E7A1B234458002F98EF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Item.cpp */; };
+		CD637E7B1B234458002F98EF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Item.cpp */; };
 		CD637E7E1B234E75002F98EF /* StoreItemButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */; };
 		CD637E7F1B234E75002F98EF /* StoreItemButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */; };
 		CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
 		CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
 		CD6517F11B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
 		CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
-		CD680A971B7F629C009618CC /* EquipFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* EquipFeature.cpp */; };
-		CD680A981B7F629C009618CC /* EquipFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* EquipFeature.cpp */; };
+		CD680A971B7F629C009618CC /* ItemFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* ItemFeature.cpp */; };
+		CD680A981B7F629C009618CC /* ItemFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* ItemFeature.cpp */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -124,8 +124,6 @@
 		CDB37C1E1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
 		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
-		CDC520881B54238700732FD0 /* WeaponFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520861B54238700732FD0 /* WeaponFeature.cpp */; };
-		CDC520891B54238700732FD0 /* WeaponFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC520861B54238700732FD0 /* WeaponFeature.cpp */; };
 		CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6201B52930F000756EB /* Obstacle.cpp */; };
 		CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6201B52930F000756EB /* Obstacle.cpp */; };
 		CDC5E6261B529EB8000756EB /* ObstacleWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6241B529EB8000756EB /* ObstacleWidget.cpp */; };
@@ -317,16 +315,16 @@
 		CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiConstants.lua; sourceTree = "<group>"; };
 		CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreWeaponWidget.cpp; sourceTree = "<group>"; };
 		CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreWeaponWidget.h; sourceTree = "<group>"; };
-		CD637E781B234458002F98EF /* Equipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Equipment.cpp; sourceTree = "<group>"; };
-		CD637E791B234458002F98EF /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equipment.h; sourceTree = "<group>"; };
+		CD637E781B234458002F98EF /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		CD637E791B234458002F98EF /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		CD637E7C1B234E75002F98EF /* StoreItemButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreItemButton.cpp; sourceTree = "<group>"; };
 		CD637E7D1B234E75002F98EF /* StoreItemButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItemButton.h; sourceTree = "<group>"; };
 		CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCategoryButton.cpp; sourceTree = "<group>"; };
 		CD637E811B234F42002F98EF /* StoreCategoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoryButton.h; sourceTree = "<group>"; };
 		CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VictoryCondition.cpp; sourceTree = "<group>"; };
 		CD6517F01B8F78B6000181E5 /* VictoryCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryCondition.h; sourceTree = "<group>"; };
-		CD680A951B7F629C009618CC /* EquipFeature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EquipFeature.cpp; sourceTree = "<group>"; };
-		CD680A961B7F629C009618CC /* EquipFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipFeature.h; sourceTree = "<group>"; };
+		CD680A951B7F629C009618CC /* ItemFeature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemFeature.cpp; sourceTree = "<group>"; };
+		CD680A961B7F629C009618CC /* ItemFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFeature.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -343,8 +341,6 @@
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CDB37C1C1B6CCB2F00138775 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
-		CDC520861B54238700732FD0 /* WeaponFeature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeaponFeature.cpp; sourceTree = "<group>"; };
-		CDC520871B54238700732FD0 /* WeaponFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponFeature.h; sourceTree = "<group>"; };
 		CDC5E6201B52930F000756EB /* Obstacle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Obstacle.cpp; sourceTree = "<group>"; };
 		CDC5E6211B52930F000756EB /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		CDC5E6241B529EB8000756EB /* ObstacleWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObstacleWidget.cpp; sourceTree = "<group>"; };
@@ -626,12 +622,10 @@
 			children = (
 				CDC881131B5155F700030818 /* ModelBase.cpp */,
 				CDC881141B5155F700030818 /* ModelBase.h */,
-				CD637E781B234458002F98EF /* Equipment.cpp */,
-				CD637E791B234458002F98EF /* Equipment.h */,
-				CD680A951B7F629C009618CC /* EquipFeature.cpp */,
-				CD680A961B7F629C009618CC /* EquipFeature.h */,
-				CDC520861B54238700732FD0 /* WeaponFeature.cpp */,
-				CDC520871B54238700732FD0 /* WeaponFeature.h */,
+				CD637E781B234458002F98EF /* Item.cpp */,
+				CD637E791B234458002F98EF /* Item.h */,
+				CD680A951B7F629C009618CC /* ItemFeature.cpp */,
+				CD680A961B7F629C009618CC /* ItemFeature.h */,
 				CDC9DE751B557F55006F53F6 /* Projectile.cpp */,
 				CDC9DE761B557F55006F53F6 /* Projectile.h */,
 				CDC5E6201B52930F000756EB /* Obstacle.cpp */,
@@ -920,10 +914,9 @@
 				CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */,
 				CDCDEA711B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				CDC881091B5149BC00030818 /* VariablesSet.cpp in Sources */,
-				CDC520881B54238700732FD0 /* WeaponFeature.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CDC881191B515A2100030818 /* FieldSectorWidget.cpp in Sources */,
-				CD680A971B7F629C009618CC /* EquipFeature.cpp in Sources */,
+				CD680A971B7F629C009618CC /* ItemFeature.cpp in Sources */,
 				CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
@@ -936,7 +929,7 @@
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
 				CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */,
-				CD637E7A1B234458002F98EF /* Equipment.cpp in Sources */,
+				CD637E7A1B234458002F98EF /* Item.cpp in Sources */,
 				CDC5E62B1B52D564000756EB /* Enemy.cpp in Sources */,
 				CD0AB2C71B89FC1200139A03 /* MapInterface.cpp in Sources */,
 				CDC5E6261B529EB8000756EB /* ObstacleWidget.cpp in Sources */,
@@ -976,7 +969,6 @@
 				CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC5E62C1B52D564000756EB /* Enemy.cpp in Sources */,
 				CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
-				CDC520891B54238700732FD0 /* WeaponFeature.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
@@ -989,7 +981,7 @@
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
 				CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */,
-				CD637E7B1B234458002F98EF /* Equipment.cpp in Sources */,
+				CD637E7B1B234458002F98EF /* Item.cpp in Sources */,
 				CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */,
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,
 				CDC881161B5155F700030818 /* ModelBase.cpp in Sources */,
@@ -1003,7 +995,7 @@
 				CD00C30B1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
-				CD680A981B7F629C009618CC /* EquipFeature.cpp in Sources */,
+				CD680A981B7F629C009618CC /* ItemFeature.cpp in Sources */,
 				CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDC8811E1B51664800030818 /* Hero.cpp in Sources */,
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,

@@ -13,7 +13,7 @@
 
 #include "ModelBase.h"
 #include "HeroAction.h"
-#include "Equipment.h"
+#include "Item.h"
 #include "PlayerInfo.h"
 
 class Hero : public Entity
@@ -37,8 +37,8 @@ public:
     void addCoinsPoint(int coinsPoint);
     void addScorePoint(int scorePoint);
     
-    void setWeapon(Equip::WeakPtr weapon);
-    void setArmor(Equip::WeakPtr armor);
+    void setWeapon(Item::WeakPtr weapon);
+    void setArmor(Item::WeakPtr armor);
     void setRunningSpeed(float speed);
     void setRunning(bool running);
     void setSideBorders(float left, float right);
@@ -46,8 +46,8 @@ public:
     float getSpeed() const;
     float getStamina() const;
     HeroAction* getLastAction() const;
-    EquipWeapon* getWeapon() const;
-    EquipArmor* getArmor() const;
+    ItemWeapon* getWeapon() const;
+    ItemArmor* getArmor() const;
     PlayerInfo::Score getScore() const;
     const Entities* getGoals() const;
     
@@ -60,8 +60,8 @@ private:
     
 private:    
     ActionSequence _actionSequence;
-    Equip::WeakPtr _weapon;
-    Equip::WeakPtr _armor;
+    Item::WeakPtr _weapon;
+    Item::WeakPtr _armor;
     PlayerInfo::Score _score;
     Entities *_goals;
     

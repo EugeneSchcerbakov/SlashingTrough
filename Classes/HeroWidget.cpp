@@ -40,7 +40,7 @@ bool HeroWidget::init()
     }
     
     _hero->setupAccepter(accepter, static_cast<void *>(this));
-    EquipWeapon *weapon = _hero->getWeapon();
+    ItemWeapon *weapon = _hero->getWeapon();
     float trailLen = 0.0f, trailWidth = 0.0f;
     std::string trailTex, swordTex;
     if (weapon) {
@@ -51,8 +51,8 @@ bool HeroWidget::init()
     } else {
         CC_ASSERT(weapon);
         // trying to stay stable
-        Equip::WeakPtr default_ptr = Store::getInstance().getItemById(Store::DEFAULT_WEAPON_ID);
-        EquipWeapon *default_wpn = EquipWeapon::cast(default_ptr.lock());
+        Item::WeakPtr default_ptr = Store::getInstance().getItemById(PlayerInfo::DEFAULT_WEAPON_ID);
+        ItemWeapon *default_wpn = ItemWeapon::cast(default_ptr.lock());
         trailLen = default_wpn->getTrailInfo().length;
         trailWidth = default_wpn->getTrailInfo().width;
         trailTex = default_wpn->getTrailInfo().texture;
@@ -101,7 +101,7 @@ void HeroWidget::update(float dt)
     {
         float posXCoeff = 0.5f;
         float posYCoeff = 1.0f;
-        EquipWeapon *weapon = _hero->getWeapon();
+        ItemWeapon *weapon = _hero->getWeapon();
         if (weapon) {
             posYCoeff = weapon->getTrailInfo().posYCoeff;
         } else {
@@ -136,7 +136,7 @@ void HeroWidget::runSwordTrailEffect(float duration)
     auto func_end = [&](){_swordTrail->setVisible(true);};
     
     float opacityCoeff = 1.0f;
-    EquipWeapon *weapon = _hero->getWeapon();
+    ItemWeapon *weapon = _hero->getWeapon();
     if (weapon) {
         opacityCoeff = weapon->getTrailInfo().opacity;
     } else {

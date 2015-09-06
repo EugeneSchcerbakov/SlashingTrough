@@ -14,15 +14,12 @@
 #include <memory>
 #include "tinyxml2/tinyxml2.h"
 
-#include "Equipment.h"
+#include "Item.h"
 
 class Store
 {
 public:
-    typedef std::vector<Equip::Ptr> Items;
-    
-    static const std::string DEFAULT_WEAPON_ID;
-    static const std::string DEFAULT_ARMOR_ID;
+    typedef std::vector<Item::Ptr> Items;
     
 public:
     static Store& getInstance();
@@ -30,15 +27,13 @@ public:
     void loadStore(const std::string &filename);
     bool buy(const std::string &id);
     
-    Equip::Ptr getItemById(const std::string &id) const;
+    Item::Ptr getItemById(const std::string &id) const;
     
     const Items& getAllItems() const;
     Items getWeaponItems() const;
     Items getArmorItems() const;
     
-private:
-    void parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root);
-    
+private:    
     void reset();
     
     Items _items;

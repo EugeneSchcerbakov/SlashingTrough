@@ -41,16 +41,11 @@ void Hero::init()
     _staminaDrainValue = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.getConstInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
-    std::string weaponId = PlayerInfo::getInstance().variables.getString(PlayerInfo::VarKeyEquipWpn);
-    Equip::WeakPtr weapon = Store::getInstance().getItemById(weaponId);
-    setWeapon(weapon);
-    
-    std::string armorId = PlayerInfo::getInstance().variables.getString(PlayerInfo::VarKeyEquipArm);
-    Equip::WeakPtr armor = Store::getInstance().getItemById(armorId);
-    setArmor(armor);
-    
-    getWeapon()->featuresInit(this);
-    getArmor()->featuresInit(this);
+    PlayerInfo &player = PlayerInfo::getInstance();
+    std::string weaponId = player.variables.getString(PlayerInfo::VarKeyItemWpn);
+    std::string armorId = player.variables.getString(PlayerInfo::VarKeyItemArm);
+    setWeapon(player.Inventory[weaponId].item);
+    setArmor(player.Inventory[armorId].item);
     
     flushScore();
 }
@@ -88,9 +83,6 @@ void Hero::idleUpdate(float dt)
         _staminaPoints = 0.0f;
         kill();
     }
-    
-    getWeapon()->featuresUpdate(dt);
-    getArmor()->featuresUpdate(dt);
 }
 
 void Hero::onDamageReceived()
@@ -127,8 +119,6 @@ void Hero::attack()
             if (len <= _radius && dotp >= _attackArea) {
                 entity->addHealth(-_damage);
                 
-                getWeapon()->featuresOnHit(entity);
-                
                 if (!entity->isAlive()) {
                     Reward *reward = dynamic_cast<Reward *>(entity);
                     if (reward) {
@@ -136,8 +126,6 @@ void Hero::attack()
                         addCoinsPoint(reward->getCoinPoints());
                         addStamina(reward->getStaminaPoints());
                         addScorePoint(reward->getScorePoints());
-                        
-                        getWeapon()->featuresOnKill(entity);
                     }
                 }
             }
@@ -161,20 +149,14 @@ void Hero::refreshGoals(Entities *entities)
 
 void Hero::onSwipeLeft()
 {
-    getWeapon()->featuresOnSwipeLeft();
-    getArmor()->featuresOnSwipeLeft();
 }
 
 void Hero::onSwipeRight()
 {
-    getWeapon()->featuresOnSwipeRight();
-    getArmor()->featuresOnSwipeRight();
 }
 
 void Hero::onSwipeBack()
 {
-    getWeapon()->featuresOnSwipeBack();
-    getArmor()->featuresOnSwipeBack();
 }
 
 void Hero::addAction(HeroAction *action)
@@ -215,29 +197,29 @@ void Hero::addScorePoint(int scorePoint)
     _score.score = scorePoint;
 }
 
-void Hero::setWeapon(Equip::WeakPtr weapon)
+void Hero::setWeapon(Item::WeakPtr weapon)
 {
     if (weapon.expired()) {
         return;
     }
     
     _weapon = weapon;
-    Equip::Ptr base = _weapon.lock();
-    EquipWeapon *cast = EquipWeapon::cast(base);
+    Item::Ptr base = _weapon.lock();
+    ItemWeapon *cast = ItemWeapon::cast(base);
     
     _damage = cast->getDamage();
     _radius = cast->getDistance();
 }
 
-void Hero::setArmor(Equip::WeakPtr armor)
+void Hero::setArmor(Item::WeakPtr armor)
 {
     if (armor.expired()) {
         return;
     }
     
     _armor = armor;
-    Equip::Ptr base = _armor.lock();
-    EquipArmor *cast = EquipArmor::cast(base);
+    Item::Ptr base = _armor.lock();
+    ItemArmor *cast = ItemArmor::cast(base);
     
     float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
     
@@ -278,18 +260,18 @@ HeroAction* Hero::getLastAction() const
     return nullptr;
 }
 
-EquipWeapon* Hero::getWeapon() const
+ItemWeapon* Hero::getWeapon() const
 {
     if (!_weapon.expired()) {
-        return EquipWeapon::cast(_weapon.lock());
+        return ItemWeapon::cast(_weapon.lock());
     }
     return nullptr;
 }
 
-EquipArmor* Hero::getArmor() const
+ItemArmor* Hero::getArmor() const
 {
     if (!_armor.expired()) {
-        return EquipArmor::cast(_armor.lock());
+        return ItemArmor::cast(_armor.lock());
     }
     return nullptr;
 }

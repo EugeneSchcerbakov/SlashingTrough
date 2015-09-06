@@ -15,9 +15,84 @@
 #include "tinyxml2/tinyxml2.h"
 #include <stdio.h>
 
+// PlayerInventory
+
+void PlayerInventory::add(Item::WeakPtr item, int amount)
+{
+    if (item.expired()) {
+        WRITE_WARN("Failed to add invalid item.");
+    }
+    
+    Item::Ptr pointer = item.lock();
+    auto it = _items.find(pointer->getId());
+    if (it != _items.end()) {
+        (*it).second.amount += amount;
+    } else{
+        PlayerItem newItem;
+        newItem.item = pointer;
+        newItem.amount = amount;
+        
+        auto pair = std::pair<std::string, PlayerItem>(pointer->getId(), newItem);
+        _items.insert(pair);
+    }
+}
+
+void PlayerInventory::remove(Item::WeakPtr item)
+{
+    if (item.expired()) {
+        WRITE_WARN("Failed to remove invalid item.");
+    }
+    
+    Item::Ptr pointer = item.lock();
+    auto it = _items.find(pointer->getId());
+    if (it != _items.end()) {
+        _items.erase(it);
+    } else {
+        WRITE_WARN("Trying to remove unexisted item.");
+    }
+}
+
+int PlayerInventory::getAmount(const std::string &id) const
+{
+    auto it = _items.find(id);
+    return it != _items.end() ? (*it).second.amount : 0;
+}
+
+int PlayerInventory::getAmount(Item::WeakPtr item) const
+{
+    if (item.expired()) {
+        WRITE_WARN("Failed to get amount if invalid item.");
+        return 0;
+    }
+    
+    Item::Ptr pointer = item.lock();
+    return getAmount(pointer->getId());
+}
+
+bool PlayerInventory::owned(const std::string &id) const
+{
+    return getAmount(id) > 0;
+}
+
+bool PlayerInventory::owned(Item::WeakPtr item) const
+{
+    return getAmount(item) > 0;
+}
+
+PlayerInventory::PlayerItem& PlayerInventory::operator[](const std::string &id)
+{
+    auto it = _items.find(id);
+    return it != _items.end() ? (*it).second : (*_items.begin()).second;
+}
+
+// PlayerInfo
+
 const std::string PlayerInfo::VarKeyCoins = "Coins";
-const std::string PlayerInfo::VarKeyEquipWpn = "EquipedWeapon";
-const std::string PlayerInfo::VarKeyEquipArm = "EquipedArmor";
+const std::string PlayerInfo::VarKeyItemWpn = "EquipedWeapon";
+const std::string PlayerInfo::VarKeyItemArm = "EquipedArmor";
+
+const std::string PlayerInfo::DEFAULT_WEAPON_ID = "default_sword";
+const std::string PlayerInfo::DEFAULT_ARMOR_ID = "default_armor";
 
 PlayerInfo& PlayerInfo::getInstance()
 {
@@ -79,11 +154,13 @@ void PlayerInfo::load(const std::string &filename)
             elem = elem->NextSiblingElement();
         }
         
-        auto ownedEquip = root->FirstChildElement("OwnedEquip")->FirstChildElement();
-        while (ownedEquip) {
-            std::string equipId = ownedEquip->Attribute("id");
-            addOwnedEquip(store.getItemById(equipId));
-            ownedEquip = ownedEquip->NextSiblingElement();
+        auto inventory = root->FirstChildElement("Inventory");
+        auto equip = inventory->FirstChildElement();
+        while (equip) {
+            std::string id = equip->Attribute("id");
+            int amount = equip->IntAttribute("amount");
+            Inventory.add(store.getItemById(id), amount);
+            equip = equip->NextSiblingElement();
         };
         
         LevelsCache &levelsCache = LevelsCache::getInstance();
@@ -126,18 +203,19 @@ void PlayerInfo::load(const std::string &filename)
         WRITE_ERR("Failed to read save file.");
     }
     
-    if (variables.getString(VarKeyEquipWpn).empty()) {
-        Equip::Ptr weapon = store.getItemById(Store::DEFAULT_WEAPON_ID);
-        CC_ASSERT(weapon != nullptr);
-        addOwnedEquip(weapon);
-        equip(weapon);
+    if (Inventory.getAmount(PlayerInfo::DEFAULT_WEAPON_ID) <= 0) {
+        Inventory.add(store.getItemById(PlayerInfo::DEFAULT_WEAPON_ID));
+    }
+    if (Inventory.getAmount(PlayerInfo::DEFAULT_ARMOR_ID) <= 0) {
+        Inventory.add(store.getItemById(PlayerInfo::DEFAULT_ARMOR_ID));
     }
     
-    if (variables.getString(VarKeyEquipArm).empty()) {
-        Equip::Ptr armor = store.getItemById(Store::DEFAULT_ARMOR_ID);
-        CC_ASSERT(armor != nullptr);
-        addOwnedEquip(armor);
-        equip(armor);
+    if (variables.getString(VarKeyItemWpn).empty()) {
+        equip(Inventory[PlayerInfo::DEFAULT_WEAPON_ID].item);
+    }
+    
+    if (variables.getString(VarKeyItemArm).empty()) {
+        equip(Inventory[PlayerInfo::DEFAULT_ARMOR_ID].item);
     }
 }
 
@@ -186,14 +264,15 @@ void PlayerInfo::save()
         }
         root->LinkEndChild(vars);
         
-        auto ownedEquip = document.NewElement("OwnedEquip");
-        for (const auto &id : _ownedEquips) {
-            auto equip = document.NewElement("Equip");
-            equip->SetAttribute("id", id.c_str());
-            ownedEquip->LinkEndChild(equip);
+        auto inventory = document.NewElement("Inventory");
+        for (const auto &pair : Inventory._items) {
+            auto equip = document.NewElement("Item");
+            equip->SetAttribute("id", pair.first.c_str());
+            equip->SetAttribute("amount", pair.second.amount);
+            inventory->LinkEndChild(equip);
         }
-        root->LinkEndChild(ownedEquip);
-        
+        root->LinkEndChild(inventory);
+    
         LevelsCache &levelsCache = LevelsCache::getInstance();
         auto levelsProgress = document.NewElement("LevelsProgress");
         for (int k = 0; k < levelsCache.getLevelsAmount(); k++)
@@ -238,13 +317,6 @@ void PlayerInfo::save()
     }
 }
 
-void PlayerInfo::addOwnedEquip(Equip::Ptr item)
-{
-    if (!isEquipOwned(item)) {
-        _ownedEquips.push_back(item->getId());
-    }
-}
-
 void PlayerInfo::addCoins(int coins)
 {
     int total = variables.getInt(VarKeyCoins);
@@ -256,22 +328,22 @@ void PlayerInfo::addCoins(int coins)
     variables.setInt(VarKeyCoins, total);
 }
 
-void PlayerInfo::equip(Equip::Ptr item)
+void PlayerInfo::equip(Item::Ptr item)
 {
     if (!item) {
         CC_ASSERT(false);
         return;
     }
     
-    CC_ASSERT(isEquipOwned(item));
+    CC_ASSERT(Inventory.owned(item));
     
     std::string itemId = item->getId();
     
-    if (item->isType(Equip::Type::WEAPON)) {
-        variables.setString(VarKeyEquipWpn, itemId);
+    if (item->isType(Item::Type::WEAPON)) {
+        variables.setString(VarKeyItemWpn, itemId);
         WRITE_LOG("Equiped weapon with id: " + itemId);
-    } else if (item->isType(Equip::Type::ARMOR)) {
-        variables.setString(VarKeyEquipArm, itemId);
+    } else if (item->isType(Item::Type::ARMOR)) {
+        variables.setString(VarKeyItemArm, itemId);
         WRITE_LOG("Equiped armor with id: " + itemId);
     } else {
         WRITE_WARN("Failed to equip entity of unknown type.");
@@ -281,14 +353,14 @@ void PlayerInfo::equip(Equip::Ptr item)
 
 int PlayerInfo::getCoins() const
 {
-    return 0;//_totalCoins;
+    return variables.getInt(VarKeyCoins);
 }
 
 int PlayerInfo::getDamage() const
 {
-    Equip::Ptr equip = Store::getInstance().getItemById("");
+    Item::Ptr equip = Store::getInstance().getItemById("");
     if (equip) {
-        EquipWeapon *weapon = EquipWeapon::cast(equip);
+        ItemWeapon *weapon = ItemWeapon::cast(equip);
         return floorf(weapon->getDamage());
     } else {
         return 0.0f;
@@ -296,32 +368,17 @@ int PlayerInfo::getDamage() const
     }
 }
 
-bool PlayerInfo::isEquipOwned(Equip::Ptr item) const
+bool PlayerInfo::equipped(Item::Ptr item) const
 {
     if (!item) {
         CC_ASSERT(false);
         return false;
     }
     
-    for (auto equip : _ownedEquips) {
-        if (equip == item->getId()) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool PlayerInfo::isEquipped(Equip::Ptr item) const
-{
-    if (!item) {
-        CC_ASSERT(false);
-        return false;
-    }
-    
-    if (item->isType(Equip::Type::WEAPON)) {
-        return variables.getString(VarKeyEquipWpn) == item->getId();
-    } else if (item->isType(Equip::Type::ARMOR)) {
-        return variables.getString(VarKeyEquipArm) == item->getId();
+    if (item->isType(Item::Type::WEAPON)) {
+        return variables.getString(VarKeyItemWpn) == item->getId();
+    } else if (item->isType(Item::Type::ARMOR)) {
+        return variables.getString(VarKeyItemArm) == item->getId();
     } else {
         CC_ASSERT(false);
     }

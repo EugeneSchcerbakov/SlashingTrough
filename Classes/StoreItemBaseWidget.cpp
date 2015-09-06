@@ -10,7 +10,7 @@
 
 #include "PlayerInfo.h"
 
-StoreItemBaseWidget::StoreItemBaseWidget(Equip::WeakPtr item)
+StoreItemBaseWidget::StoreItemBaseWidget(Item::WeakPtr item)
 : _item(item)
 {
 }
@@ -25,7 +25,7 @@ bool StoreItemBaseWidget::init()
         return false;
     }
     
-    Equip::Ptr item = _item.lock();
+    Item::Ptr item = _item.lock();
     
     setBackGroundImageScale9Enabled(false);
     setBackGroundImage("ui/ui_shop_item-plate.png");
@@ -85,14 +85,14 @@ bool StoreItemBaseWidget::init()
 
 void StoreItemBaseWidget::update(float dt)
 {
-    Equip::Ptr ptr = _item.lock();
-    PlayerInfo &save = PlayerInfo::getInstance();
+    Item::Ptr ptr = _item.lock();
+    PlayerInfo &player = PlayerInfo::getInstance();
     
-    if (save.isEquipOwned(ptr) && !save.isEquipped(ptr) && !_button->isState(StoreItemButton::State::EQUIP))
+    if (player.Inventory.owned(ptr) && !player.equipped(ptr) && !_button->isState(StoreItemButton::State::EQUIP))
     {
         _button->switchState(StoreItemButton::State::EQUIP);
     }
-    if (save.isEquipped(ptr) && !_button->isState(StoreItemButton::State::EQUIPPED))
+    if (player.equipped(ptr) && !_button->isState(StoreItemButton::State::EQUIPPED))
     {
         _button->switchState(StoreItemButton::State::EQUIPPED);
     }
@@ -102,22 +102,22 @@ void StoreItemBaseWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
-        Equip::Ptr ptr = _item.lock();
-        PlayerInfo &profile = PlayerInfo::getInstance();
+        Item::Ptr ptr = _item.lock();
+        PlayerInfo &player = PlayerInfo::getInstance();
         
         bool needSave = false;
-        if (!profile.isEquipOwned(ptr)) {
+        if (!player.Inventory.owned(ptr)) {
             if (Store::getInstance().buy(ptr->getId())) {
-                profile.equip(ptr);
+                player.equip(ptr);
                 needSave = true;
             }
-        } else if (!profile.isEquipped(ptr)) {
-            profile.equip(ptr);
+        } else if (!player.equipped(ptr)) {
+            player.equip(ptr);
             needSave = true;
         }
         
         if (needSave) {
-            profile.save();
+            player.save();
         }
     }
 }

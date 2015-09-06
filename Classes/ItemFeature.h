@@ -1,13 +1,13 @@
 //
-//  EquipFeature.h
+//  ItemFeature.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 15/08/15.
 //
 //
 
-#ifndef __SlashingTrough__EquipFeature__
-#define __SlashingTrough__EquipFeature__
+#ifndef __SlashingTrough__ItemFeature__
+#define __SlashingTrough__ItemFeature__
 
 #include <memory>
 #include <vector>
@@ -15,16 +15,16 @@
 class Hero;
 class Entity;
 
-class EquipFeature
+class ItemFeature
 {
 public:
-    typedef std::shared_ptr<EquipFeature> Ptr;
-    typedef std::weak_ptr<EquipFeature> WeakPtr;
-    typedef std::vector<EquipFeature::Ptr> Features;
+    typedef std::shared_ptr<ItemFeature> Ptr;
+    typedef std::weak_ptr<ItemFeature> WeakPtr;
+    typedef std::vector<ItemFeature::Ptr> Features;
     
 public:
-    EquipFeature();
-    virtual ~EquipFeature();
+    ItemFeature();
+    virtual ~ItemFeature();
     
 public:
     virtual void init(Hero *owner);
@@ -38,7 +38,7 @@ protected:
     Hero *_owner;
 };
 
-class Backsliding : public EquipFeature
+class Backsliding : public ItemFeature
 {
 public:
     static Ptr create(float cooldown, float distance, float duration);
@@ -81,4 +81,28 @@ protected:
     const float _shieldLiveTime;
 };
 
-#endif /* defined(__SlashingTrough__EquipFeature__) */
+class WeaponFeature : public ItemFeature
+{
+public:
+    WeaponFeature();
+    
+    virtual void onHit(Entity *goal);
+    virtual void onKill(Entity *goal);
+};
+
+class CoinsForMurder : public WeaponFeature
+{
+public:
+    static Ptr create(int flat, int percentOfEnemyCost);
+    
+public:
+    CoinsForMurder(int flag, int percentOfEnemyCost);
+    
+    void onKill(Entity *goal) override;
+    
+private:
+    const int _flat;
+    const int _percentOfEnemyCost;
+};
+
+#endif /* defined(__SlashingTrough__ItemFeature__) */

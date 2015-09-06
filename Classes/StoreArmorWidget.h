@@ -15,10 +15,10 @@
 class StoreArmorWidget : public StoreItemBaseWidget
 {
 public:
-    static StoreArmorWidget* create(Equip::WeakPtr item);
+    static StoreArmorWidget* create(Item::WeakPtr item);
     
 protected:
-    StoreArmorWidget(Equip::WeakPtr item);
+    StoreArmorWidget(Item::WeakPtr item);
     virtual ~StoreArmorWidget();
     
     bool init();

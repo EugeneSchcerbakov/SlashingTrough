@@ -8,7 +8,7 @@
 
 #include "StoreWeaponWidget.h"
 
-StoreWeaponWidget* StoreWeaponWidget::create(Equip::WeakPtr item)
+StoreWeaponWidget* StoreWeaponWidget::create(Item::WeakPtr item)
 {
     StoreWeaponWidget *widget = new StoreWeaponWidget(item);
     if (widget && widget->init()) {
@@ -20,7 +20,7 @@ StoreWeaponWidget* StoreWeaponWidget::create(Equip::WeakPtr item)
     return widget;
 }
 
-StoreWeaponWidget::StoreWeaponWidget(Equip::WeakPtr item)
+StoreWeaponWidget::StoreWeaponWidget(Item::WeakPtr item)
 : StoreItemBaseWidget(item)
 {
 }
@@ -35,7 +35,7 @@ bool StoreWeaponWidget::init()
         return false;
     }
     
-    EquipWeapon *weapon = EquipWeapon::cast(_item.lock());
+    ItemWeapon *weapon = ItemWeapon::cast(_item.lock());
     
     auto damage = cocos2d::ui::Text::create();
     damage->setFontName("font_prototype.ttf");
