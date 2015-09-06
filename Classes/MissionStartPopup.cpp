@@ -136,34 +136,26 @@ bool MissionStartPopup::init(const std::string &levelId, const std::string &titl
     _play->addTouchEventListener(onPlay);
     
     // texts
-    auto titleText = cocos2d::ui::Text::create(title, "font_prototype.ttf", 25);
+    auto titleText = cocos2d::ui::Text::create("Mission", "font_prototype.ttf", 23);
     titleText->setTextColor(cocos2d::Color4B::YELLOW);
-    titleText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    titleText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    float titleTextXOffset = 25.0f;
-    float titleTextX = _panel->getContentSize().width * panelScale * 0.5f -
-        titleText->getContentSize().width *panelScale * 0.5f + titleTextXOffset;
-    float titleTextY = _panel->getContentSize().height * panelScale * 0.5f;
-    titleText->setPositionX(titleTextX);
-    titleText->setPositionY(titleTextY);
+    titleText->setPositionX(_panel->getContentSize().width * 0.5f);
+    titleText->setPositionY(_panel->getContentSize().height - titleText->getContentSize().height * 0.5f - 5.0f);
     
-    auto rewardText = cocos2d::ui::Text::create("Reward:", "font_prototype.ttf", 25);
-    rewardText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    rewardText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    rewardText->setPositionX(55.0f);
-    rewardText->setPositionY(_panel->getContentSize().height * panelScale * 0.5f - 50.0f);
+    auto rewardText = cocos2d::ui::Text::create("Reward:", "font_prototype.ttf", 23);
+    rewardText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_RIGHT);
+    rewardText->setPositionX(95.0f);
+    rewardText->setPositionY(_panel->getContentSize().height * 0.5f + 40.0f);
+    
+    auto rewardNum = cocos2d::ui::Text::create("", "font_prototype.ttf", 23);
+    rewardNum->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
+    rewardNum->setString(cocos2d::StringUtils::format("%d", _level->getCoinsReward()));
+    rewardNum->setPositionX(_panel->getContentSize().width * 0.5f - 5.0f);
+    rewardNum->setPositionY(_panel->getContentSize().height * 0.5f + 40.0f);
     
     auto rewardIcon = cocos2d::Sprite::create("icons/icon_coin.png");
-    
-    auto rewardNum = cocos2d::ui::Text::create("", "font_prototype.ttf", 25);
-    rewardNum->setString(cocos2d::StringUtils::format("%d", _level->getCoinsReward()));
-    rewardNum->setPositionX(200.0f);
-    rewardNum->setPositionY(_panel->getContentSize().height * panelScale * 0.5f - 50.0f);
-    rewardNum->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    rewardNum->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    rewardNum->addChild(rewardIcon);
     rewardIcon->setPositionX(-rewardIcon->getContentSize().width * 0.5f - 5.0f);
     rewardIcon->setPositionY(rewardNum->getContentSize().height * 0.5f);
+    rewardNum->addChild(rewardIcon);
     
     _panel->addChild(titleText);
     _panel->addChild(rewardText);
