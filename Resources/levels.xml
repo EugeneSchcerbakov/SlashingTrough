@@ -2,9 +2,12 @@
 <Levels>
     <Level id="level_1" status="unlocked" condition="classic">
         <Rewards coins="2000">
-            <Drop itemId="item"
+            <Drop itemId="lava_sword"
             dropChance="50"
             dropOnce="true"/>
+            <Drop itemId="black_armor"
+            dropChance="10"
+            dropOnce="false"/>
         </Rewards>
         <Unlocks>
             <Unlock id="level_2" />
@@ -82,9 +85,12 @@
     </Level>
     <Level id="level_2" status="locked" condition="classic">
         <Rewards coins="1000">
-            <Drop itemId="item"
+            <Drop itemId="lava_sword"
             dropChance="50"
             dropOnce="true"/>
+            <Drop itemId="black_armor"
+            dropChance="10"
+            dropOnce="false"/>
         </Rewards>
         <Unlocks>
             <Unlock id="level_3" />
@@ -102,9 +108,12 @@
     </Level>
     <Level id="level_3" status="locked" condition="classic">
         <Rewards coins="1000">
-            <Drop itemId="item"
+            <Drop itemId="lava_sword"
             dropChance="50"
             dropOnce="true"/>
+            <Drop itemId="black_armor"
+            dropChance="10"
+            dropOnce="false"/>
         </Rewards>
         <Unlocks>
             <Unlock id="level_id" />

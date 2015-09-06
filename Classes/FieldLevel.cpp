@@ -223,9 +223,43 @@ const std::string& FieldLevel::getId() const
     return _id;
 }
 
-const std::vector<std::string> FieldLevel::getUnlocks() const
+const std::vector<std::string>& FieldLevel::getUnlocks() const
 {
     return _unlocks;
+}
+
+std::vector<std::string> FieldLevel::getPossibleLoot() const
+{
+    std::vector<std::string> loot;
+    
+    for (const Drop &drop : _drops) {
+        if (drop.chance > 0) {
+            if (drop.once && drop.droped) {
+                continue;
+            }
+            loot.push_back(drop.itemId);
+        }
+    }
+    
+    return loot;
+}
+
+std::vector<std::string> FieldLevel::dropLoot()
+{
+    std::vector<std::string> loot;
+    
+    for (Drop &drop : _drops) {
+        if (drop.once && drop.droped) {
+            continue;
+        }
+        bool droped = misc::random(0, 100) <= drop.chance;
+        if (droped) {
+            loot.push_back(drop.itemId);
+            drop.droped = true;
+        }
+    }
+    
+    return loot;
 }
 
 FieldLevel::Status FieldLevel::getStatus() const

@@ -21,7 +21,7 @@ public:
     
     static void changeScreen(Screen screen);
     static void beginRunAndSlash(const std::string &levelId);
-    static void showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory);
+    static void showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory, bool complete);
     
     static Screen START;
     static Screen STORE;

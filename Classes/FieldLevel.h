@@ -11,6 +11,7 @@
 
 #include "FieldSector.h"
 #include "VictoryCondition.h"
+#include "Item.h"
 
 #include "tinyxml2/tinyxml2.h"
 
@@ -70,7 +71,10 @@ public:
     FieldSector::Ptr getSectorByIndex(int index);
     
     const std::string& getId() const;
-    const std::vector<std::string> getUnlocks() const;
+    const std::vector<std::string>& getUnlocks() const;
+    
+    std::vector<std::string> getPossibleLoot() const;
+    std::vector<std::string> dropLoot();
     
     Status getStatus() const;
     SaveData getSaveData() const;

@@ -148,6 +148,7 @@ Item::Ptr Store::getItemById(const std::string &id) const
             return info;
         }
     }
+    WRITE_WARN("Invalid item required: " + id);
     return Item::Ptr();
 }
 

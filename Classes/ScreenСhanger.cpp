@@ -73,8 +73,8 @@ void ScreenChanger::beginRunAndSlash(const std::string &levelId)
     changeScene(scene, ScreenChanger::GAME);
 }
 
-void ScreenChanger::showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory)
+void ScreenChanger::showStatistics(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory, bool complete)
 {
-    auto scene = StaticticsInterface::create(level, score, victory);
+    auto scene = StaticticsInterface::create(level, score, victory, complete);
     changeScene(scene, ScreenChanger::STATISTICS);
 }

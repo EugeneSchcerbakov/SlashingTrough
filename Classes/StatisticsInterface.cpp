@@ -8,13 +8,15 @@
 
 #include "StatisticsInterface.h"
 
+#include "PlayerInfo.h"
+#include "Store.h"
 #include "ScreenChanger.h"
 #include "Log.h"
 
-StaticticsInterface* StaticticsInterface::create(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory)
+StaticticsInterface* StaticticsInterface::create(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory, bool complete)
 {
     StaticticsInterface *screen = new StaticticsInterface();
-    if (screen && screen->init(level, score, victory)) {
+    if (screen && screen->init(level, score, victory, complete)) {
         screen->autorelease();
     } else {
         delete screen;
@@ -31,7 +33,7 @@ StaticticsInterface::~StaticticsInterface()
 {
 }
 
-bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory)
+bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory, bool complete)
 {
     if (level.expired()) {
         WRITE_ERR("Failed to init statistics screen with invalid level.");
@@ -42,7 +44,7 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
         return false;
     }
     
-    FieldLevel::Ptr level_ptr = level.lock();
+    _level = level.lock();
     
     auto director = cocos2d::Director::getInstance();
     auto dispatcher = director->getEventDispatcher();
@@ -58,36 +60,36 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     // panel
     float panelScale = 1.75f;
     float panelYOffset = 150.0f;
-    auto panel = cocos2d::Sprite::create("ui/ui_statistics_panel.png");
-    panel->setScale(panelScale);
-    panel->setPositionX(size.width - panel->getContentSize().width * panelScale * 0.5f);
-    panel->setPositionY(size.height * 0.5f + panelYOffset);
+    _panel = cocos2d::Sprite::create("ui/ui_statistics_panel.png");
+    _panel->setScale(panelScale);
+    _panel->setPositionX(size.width - _panel->getContentSize().width * panelScale * 0.5f);
+    _panel->setPositionY(size.height * 0.5f + panelYOffset);
     
     // texts
     auto titleText = cocos2d::ui::Text::create("Mission", "font_prototype.ttf", 23);
     titleText->setTextColor(cocos2d::Color4B::YELLOW);
-    titleText->setPositionX(panel->getContentSize().width * 0.5f);
-    titleText->setPositionY(panel->getContentSize().height - titleText->getContentSize().height * 0.5f - 5.0f);
+    titleText->setPositionX(_panel->getContentSize().width * 0.5f);
+    titleText->setPositionY(_panel->getContentSize().height - titleText->getContentSize().height * 0.5f - 5.0f);
     
     auto rewardText = cocos2d::ui::Text::create("Reward:", "font_prototype.ttf", 23);
     rewardText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_RIGHT);
     rewardText->setPositionX(95.0f);
-    rewardText->setPositionY(panel->getContentSize().height * 0.5f + 55.0f);
+    rewardText->setPositionY(_panel->getContentSize().height * 0.5f + 55.0f);
     
     auto scoreText = cocos2d::ui::Text::create("Score:", "font_prototype.ttf", 23);
     scoreText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_RIGHT);
     scoreText->setPositionX(95.0f);
-    scoreText->setPositionY(panel->getContentSize().height * 0.5f);
+    scoreText->setPositionY(_panel->getContentSize().height * 0.5f);
     
     int rewardValue = score.coins;
-    if (victory) {
-        rewardValue += level_ptr->getCoinsReward();
+    if (complete) {
+        rewardValue += _level->getCoinsReward();
     }
     auto rewardNum = cocos2d::ui::Text::create("", "font_prototype.ttf", 23);
     rewardNum->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
     rewardNum->setString(cocos2d::StringUtils::format("%d", rewardValue));
-    rewardNum->setPositionX(panel->getContentSize().width * 0.5f - 5.0f);
-    rewardNum->setPositionY(panel->getContentSize().height * 0.5f + 55.0f);
+    rewardNum->setPositionX(_panel->getContentSize().width * 0.5f - 5.0f);
+    rewardNum->setPositionY(_panel->getContentSize().height * 0.5f + 55.0f);
     
     auto rewardIcon = cocos2d::Sprite::create("icons/icon_coin.png");
     rewardIcon->setPositionX(-rewardIcon->getContentSize().width * 0.5f - 5.0f);
@@ -97,14 +99,18 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     auto scoreNum = cocos2d::ui::Text::create("", "font_prototype.ttf", 23);
     scoreNum->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
     scoreNum->setString(cocos2d::StringUtils::format("%d", score.score));
-    scoreNum->setPositionX(panel->getContentSize().width * 0.5f - 5.0f);
-    scoreNum->setPositionY(panel->getContentSize().height * 0.5f);
+    scoreNum->setPositionX(_panel->getContentSize().width * 0.5f - 5.0f);
+    scoreNum->setPositionY(_panel->getContentSize().height * 0.5f);
     
-    panel->addChild(titleText);
-    panel->addChild(rewardText);
-    panel->addChild(scoreText);
-    panel->addChild(rewardNum);
-    panel->addChild(scoreNum);
+    _panel->addChild(titleText);
+    _panel->addChild(rewardText);
+    _panel->addChild(scoreText);
+    _panel->addChild(rewardNum);
+    _panel->addChild(scoreNum);
+    
+    if (victory) {
+        initLootPanel();
+    }
     
     auto continueText = cocos2d::ui::Text::create("Tap to continue", "font_prototype.ttf", 40);
     continueText->setTextColor(cocos2d::Color4B::WHITE);
@@ -126,10 +132,48 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     dispatcher->addEventListenerWithSceneGraphPriority(input, this);
     
     addChild(background, 0);
-    addChild(panel, 1);
+    addChild(_panel, 1);
     addChild(continueText, 1);
     
     return true;
+}
+
+void StaticticsInterface::initLootPanel()
+{
+    std::vector<std::string> loot = _level->dropLoot();
+    
+    if (!loot.empty())
+    {
+        Store &store = Store::getInstance();
+        PlayerInfo &player = PlayerInfo::getInstance();
+        
+        cocos2d::Vec2 xy(165.0f, 50.0f);
+        
+        for (const std::string &id : loot) {
+            Item::WeakPtr ptr = store.getItemById(id);
+            if (ptr.expired()) {continue;}
+            Item::Ptr item = ptr.lock();
+            
+            player.Inventory.add(item);
+            
+            float scale = 0.6f;
+            auto sprite = cocos2d::Sprite::create(item->getIcon());
+            sprite->setPosition(xy);
+            sprite->setScale(scale);
+            _panel->addChild(sprite);
+            
+            xy.x += sprite->getContentSize().width * scale;
+        }
+        
+        auto lootText = cocos2d::ui::Text::create("Loot:", "font_prototype.ttf", 23);
+        lootText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_RIGHT);
+        lootText->setPositionX(95.0f);
+        lootText->setPositionY(_panel->getContentSize().height * 0.5f - 55.0f);
+        
+        _panel->addChild(lootText);
+        
+        player.save();
+    }
 }
 
 bool StaticticsInterface::onTouch(cocos2d::Touch *touch, cocos2d::Event *e)

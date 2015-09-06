@@ -197,7 +197,7 @@ void FieldLayer::acceptEvent(const Event &event)
             makeLevelComplete(level_ptr);
         }
             
-        ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), completitionFact);
+        ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), victory, completitionFact);
         player.save();
     }
 }

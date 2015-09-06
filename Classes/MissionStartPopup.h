@@ -33,6 +33,8 @@ protected:
     bool onBoardTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
 
 private:
+    void initLootPanel();
+    
     cocos2d::Sprite *_panel;
     cocos2d::Sprite *_tint;
     cocos2d::ui::Button *_play;

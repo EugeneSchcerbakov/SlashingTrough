@@ -8,6 +8,7 @@
 
 #include "MissionStartPopup.h"
 
+#include "Store.h"
 #include "ScreenChanger.h"
 #include "LevelsCache.h"
 #include "Log.h"
@@ -161,9 +162,42 @@ bool MissionStartPopup::init(const std::string &levelId, const std::string &titl
     _panel->addChild(rewardText);
     _panel->addChild(rewardNum);
     
+    initLootPanel();
+    
     addChild(_tint, 0);
     addChild(_panel, 1);
     addChild(_play, 1);
     
     return true;
+}
+
+void MissionStartPopup::initLootPanel()
+{
+    std::vector<std::string> loot = _level->getPossibleLoot();
+    
+    if (!loot.empty()) {
+        Store &store = Store::getInstance();
+        cocos2d::Vec2 xy(165.0f, 50.0f);
+    
+        for (const std::string &id : loot) {
+            Item::WeakPtr ptr = store.getItemById(id);
+            if (ptr.expired()) {continue;}
+            Item::Ptr item = ptr.lock();
+        
+            float scale = 0.6f;
+            auto sprite = cocos2d::Sprite::create(item->getIcon());
+            sprite->setPosition(xy);
+            sprite->setScale(scale);
+            _panel->addChild(sprite);
+        
+            xy.x += sprite->getContentSize().width * scale;
+        }
+        
+        auto lootText = cocos2d::ui::Text::create("Loot:", "font_prototype.ttf", 23);
+        lootText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_RIGHT);
+        lootText->setPositionX(95.0f);
+        lootText->setPositionY(_panel->getContentSize().height * 0.5f);
+        
+        _panel->addChild(lootText);
+    }
 }
