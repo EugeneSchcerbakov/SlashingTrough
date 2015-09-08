@@ -381,5 +381,6 @@ bool PlayerInfo::equipped(Item::Ptr item) const
         return variables.getString(VarKeyItemArm) == item->getId();
     } else {
         CC_ASSERT(false);
+		return false;
     }
 }

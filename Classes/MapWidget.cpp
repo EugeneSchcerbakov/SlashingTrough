@@ -38,15 +38,6 @@ MapLevelMark* MapWidget::getLevelUnderPoint(cocos2d::Vec2 point)
     for (auto mark : _levelMarkers) {
         if (mark->getBoundingBox().containsPoint(p)) {
             return mark;
-            /*
-            auto level = mark->getLevel().lock();
-            if (!level->isStatus(FieldLevel::Status::LOCKED)) {
-                ScreenChanger::beginRunAndSlash(mark->getLevelId());
-                break;
-            } else {
-                // shop pop up text
-            }
-            */
         }
     }
     return nullptr;

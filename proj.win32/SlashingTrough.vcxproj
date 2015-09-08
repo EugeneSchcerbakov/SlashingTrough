@@ -143,8 +143,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\EffectsLayer.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EnemyWidget.cpp" />
-    <ClCompile Include="..\Classes\EquipFeature.cpp" />
-    <ClCompile Include="..\Classes\Equipment.cpp" />
     <ClCompile Include="..\Classes\Field.cpp" />
     <ClCompile Include="..\Classes\FieldLayer.cpp" />
     <ClCompile Include="..\Classes\FieldLevel.cpp" />
@@ -156,14 +154,25 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Hero.cpp" />
     <ClCompile Include="..\Classes\HeroAction.cpp" />
     <ClCompile Include="..\Classes\HeroWidget.cpp" />
+    <ClCompile Include="..\Classes\Item.cpp" />
+    <ClCompile Include="..\Classes\ItemFeature.cpp" />
+    <ClCompile Include="..\Classes\LevelsCache.cpp" />
     <ClCompile Include="..\Classes\Log.cpp" />
+    <ClCompile Include="..\Classes\MapInterface.cpp" />
+    <ClCompile Include="..\Classes\MapLevelMark.cpp" />
+    <ClCompile Include="..\Classes\MapPlayerMark.cpp" />
+    <ClCompile Include="..\Classes\MapWidget.cpp" />
+    <ClCompile Include="..\Classes\MissionStartPopup.cpp" />
     <ClCompile Include="..\Classes\ModelBase.cpp" />
     <ClCompile Include="..\Classes\Obstacle.cpp" />
     <ClCompile Include="..\Classes\ObstacleWidget.cpp" />
     <ClCompile Include="..\Classes\PlayerInfo.cpp" />
     <ClCompile Include="..\Classes\Projectile.cpp" />
     <ClCompile Include="..\Classes\ProjectileWidget.cpp" />
+    <ClCompile Include="..\Classes\ScreenСhanger.cpp" />
     <ClCompile Include="..\Classes\StaminaBarWidget.cpp" />
+    <ClCompile Include="..\Classes\StartInterface.cpp" />
+    <ClCompile Include="..\Classes\StatisticsInterface.cpp" />
     <ClCompile Include="..\Classes\Store.cpp" />
     <ClCompile Include="..\Classes\StoreArmorWidget.cpp" />
     <ClCompile Include="..\Classes\StoreCategoryButton.cpp" />
@@ -173,7 +182,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\StoreWeaponWidget.cpp" />
     <ClCompile Include="..\Classes\Utils.cpp" />
     <ClCompile Include="..\Classes\VariablesSet.cpp" />
-    <ClCompile Include="..\Classes\WeaponFeature.cpp" />
+    <ClCompile Include="..\Classes\VictoryCondition.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,8 +192,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\EffectsLayer.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EnemyWidget.h" />
-    <ClInclude Include="..\Classes\EquipFeature.h" />
-    <ClInclude Include="..\Classes\Equipment.h" />
     <ClInclude Include="..\Classes\Field.h" />
     <ClInclude Include="..\Classes\FieldLayer.h" />
     <ClInclude Include="..\Classes\FieldLevel.h" />
@@ -196,14 +203,25 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroAction.h" />
     <ClInclude Include="..\Classes\HeroWidget.h" />
+    <ClInclude Include="..\Classes\Item.h" />
+    <ClInclude Include="..\Classes\ItemFeature.h" />
+    <ClInclude Include="..\Classes\LevelsCache.h" />
     <ClInclude Include="..\Classes\Log.h" />
+    <ClInclude Include="..\Classes\MapInterface.h" />
+    <ClInclude Include="..\Classes\MapLevelMark.h" />
+    <ClInclude Include="..\Classes\MapPlayerMark.h" />
+    <ClInclude Include="..\Classes\MapWidget.h" />
+    <ClInclude Include="..\Classes\MissionStartPopup.h" />
     <ClInclude Include="..\Classes\ModelBase.h" />
     <ClInclude Include="..\Classes\Obstacle.h" />
     <ClInclude Include="..\Classes\ObstacleWidget.h" />
     <ClInclude Include="..\Classes\PlayerInfo.h" />
     <ClInclude Include="..\Classes\Projectile.h" />
     <ClInclude Include="..\Classes\ProjectileWidget.h" />
+    <ClInclude Include="..\Classes\ScreenChanger.h" />
     <ClInclude Include="..\Classes\StaminaBarWidget.h" />
+    <ClInclude Include="..\Classes\StartInterface.h" />
+    <ClInclude Include="..\Classes\StatisticsInterface.h" />
     <ClInclude Include="..\Classes\Store.h" />
     <ClInclude Include="..\Classes\StoreArmorWidget.h" />
     <ClInclude Include="..\Classes\StoreCategoryButton.h" />
@@ -213,7 +231,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\StoreWeaponWidget.h" />
     <ClInclude Include="..\Classes\Utils.h" />
     <ClInclude Include="..\Classes\VariablesSet.h" />
-    <ClInclude Include="..\Classes\WeaponFeature.h" />
+    <ClInclude Include="..\Classes\VictoryCondition.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
