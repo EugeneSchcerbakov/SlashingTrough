@@ -47,7 +47,7 @@ void MissionStartPopup::startShowEffect()
     auto director = cocos2d::Director::getInstance();
     cocos2d::Size size = director->getVisibleSize();
     
-    float time = 0.2;
+    float time = 0.2f;
     float panelDeltaX = _panel->getContentSize().width * _panel->getScale() * 0.5f;
     float playDeltaX = _play->getContentSize().width * _play->getScale() * 0.5f;
     
@@ -70,7 +70,7 @@ void MissionStartPopup::startHideEffect(std::function<void()> func)
         return;
     }
     
-    float time = 0.1;
+    float time = 0.1f;
     float panelDeltaX = _panel->getContentSize().width * _panel->getScale() * 0.5f;
     float playDeltaX = _play->getContentSize().width * _play->getScale() * 0.5f;
     

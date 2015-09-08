@@ -128,10 +128,7 @@ void MapInterface::showMissionPopup(const std::string &levelId, const std::strin
     FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
     MissionStartPopup *popup = MissionStartPopup::create(levelId, title);
     popup->startShowEffect();
-    
-    _guiLayer->setSwallowsTouches(true);
-    _mapWidget->setSwallowTouches(true);
-    
+        
     addChild(popup, Order::POPUP, "MissionStartPopup");
 }
 
