@@ -8,10 +8,11 @@
 
 #include "StoreCategoryButton.h"
 
-CategoryButton* CategoryButton::create(const std::string &icon, const std::function<void(int)> &func)
+CategoryButton* CategoryButton::create(const std::string &normal, const std::string &pressed,
+                                       const std::function<void(int)> &func)
 {
-    CategoryButton *button = new CategoryButton(func);
-    if (button && button->init(icon)) {
+    CategoryButton *button = new CategoryButton(normal, pressed, func);
+    if (button && button->init()) {
         button->autorelease();
     } else {
         delete button;
@@ -30,16 +31,18 @@ void CategoryButton::setSelected(bool flag)
     _selected = flag;
     std::string texture = _selected ? _selectTex : _normalTex;
     _backing->setTexture(texture);
+    setContentSize(_backing->getContentSize() * _normalScale);
     if (_selected) {
         _callback(getTag());
     }
 }
 
-CategoryButton::CategoryButton(const std::function<void(int)> &func)
-: _normalTex("ui/ui_shop_tab_category.png")
-, _selectTex("ui/ui_shop_tab_category_selected.png")
-, _normalScale(1.0f)
-, _pressedScale(1.1f)
+CategoryButton::CategoryButton(const std::string &normal, const std::string &pressed,
+                               const std::function<void(int)> &func)
+: _normalTex(normal)
+, _selectTex(pressed)
+, _normalScale(1.8f)
+, _pressedScale(1.9f)
 , _selected(false)
 , _callback(func)
 {
@@ -49,14 +52,14 @@ CategoryButton::~CategoryButton()
 {
 }
     
-bool CategoryButton::init(const std::string &icon)
+bool CategoryButton::init()
 {
     if (!cocos2d::Node::init()) {
         return false;
     }
         
     _backing = cocos2d::Sprite::create();
-    _icon = cocos2d::Sprite::create(icon);
+    _backing->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
         
     cocos2d::EventListenerTouchOneByOne *listener;
     listener = cocos2d::EventListenerTouchOneByOne::create();
@@ -71,7 +74,6 @@ bool CategoryButton::init(const std::string &icon)
     setSelected(_selected);
     setScale(_normalScale);
     addChild(_backing, 0);
-    addChild(_icon, 1);
         
     return true;
 }

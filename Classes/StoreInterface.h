@@ -52,7 +52,6 @@ private:
     std::vector<CategoryButton *> _tabButtons;
 
     cocos2d::ui::Text *_coinsText;
-    cocos2d::ui::Text *_damageText;
     cocos2d::ui::Button *_coinsShopBtn;
     cocos2d::ui::Button *_backBtn;
     cocos2d::ui::ListView *_scroller;

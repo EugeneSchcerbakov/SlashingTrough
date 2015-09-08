@@ -37,36 +37,32 @@ bool StoreArmorWidget::init()
     
     ItemArmor *armor = ItemArmor::cast(_item.lock());
     
-    auto defence = cocos2d::ui::Text::create();
-    defence->setFontName("font_prototype.ttf");
-    defence->setFontSize(33);
-    defence->setTextColor(cocos2d::Color4B::BLACK);
-    defence->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    defence->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    defence->setString("Defence...........");
-    defence->setPositionX(getContentSize().width * 0.5f - 45.0f);
-    defence->setPositionY(220.0f);
-    defence->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
+    int price = armor->getPrice();
+    if (price > 0)
+    {
+        auto priceIcon = cocos2d::Sprite::create("icons/icon_coin.png");
+        priceIcon->setScale(1.8f);
+        
+        std::string priceString = cocos2d::StringUtils::format("%d", price);
+        auto priceText = cocos2d::ui::Text::create(priceString, "font_prototype.ttf", 53);
+        priceText->setTextColor(cocos2d::Color4B(76, 17, 49, 255));
+        priceText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
+        priceText->setPositionX(getContentSize().width * 0.5f - 60.0f);
+        priceText->setPositionY(priceText->getContentSize().height * 0.5f + 20.0f);
+        priceText->addChild(priceIcon);
+        priceIcon->setPositionX(-priceIcon->getContentSize().width * 1.8f * 0.5f);
+        priceIcon->setPositionY(priceIcon->getContentSize().height * 1.8f * 0.5f);
+        
+        addChild(priceText);
+    }
     
-    auto defenceIcon = cocos2d::Sprite::create("icons/icon_health.png");
-    defenceIcon->setScale(1.0f);
-    defenceIcon->setPositionX(defence->getContentSize().width + defenceIcon->getContentSize().width * 1.5f * 0.5f);
-    defenceIcon->setPositionY(defenceIcon->getContentSize().height * 0.5f);
+    std::string protectStr = cocos2d::StringUtils::format("%d", (int)armor->getExtraHealth());
+    auto protectText = cocos2d::ui::Text::create(protectStr, "font_prototype.ttf", 40);
+    protectText->setTextColor(cocos2d::Color4B(76, 17, 49, 255));
+    protectText->setPositionX(protectText->getContentSize().width * 0.5f + 13.0f);
+    protectText->setPositionY(getContentSize().height - protectText->getContentSize().height * 0.5f - 10.0f);
     
-    auto defenceText = cocos2d::ui::Text::create();
-    defenceText->setFontName("font_prototype.ttf");
-    defenceText->setFontSize(45);
-    defenceText->setTextColor(cocos2d::Color4B::BLACK);
-    defenceText->setTextHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    defenceText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    defenceText->setString(cocos2d::StringUtils::format("   +%d", (int)floorf(armor->getExtraHealth())));
-    defenceText->setPositionX(defenceIcon->getPositionX() + defenceIcon->getContentSize().width);
-    defenceText->setPositionY(defenceText->getContentSize().height * 0.5f);
-    
-    defence->addChild(defenceIcon);
-    defence->addChild(defenceText);
-    
-    addChild(defence, 2);
+    addChild(protectText, 1);
     
     return true;
 }

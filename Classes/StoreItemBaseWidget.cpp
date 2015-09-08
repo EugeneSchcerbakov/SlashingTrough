@@ -28,57 +28,38 @@ bool StoreItemBaseWidget::init()
     Item::Ptr item = _item.lock();
     
     setBackGroundImageScale9Enabled(false);
-    setBackGroundImage("ui/ui_shop_item-plate.png");
+    setBackGroundImage("ui/ui_shop_item_panel.png");
     setContentSize(getBackGroundImageTextureSize());
     setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     
+    float iconScale = 1.1f;
     auto *itemIcon = cocos2d::Sprite::create(item->getIcon());
-    itemIcon->setScale(1.4f);
+    itemIcon->setScale(iconScale);
+    itemIcon->setPositionX(itemIcon->getContentSize().width * iconScale * 0.5f + 18.0f);
+    itemIcon->setPositionY(getContentSize().height * 0.5f);
     
     auto itemName = cocos2d::ui::Text::create();
     itemName->setFontName("font_prototype.ttf");
-    itemName->setFontSize(27);
-    itemName->setTextColor(cocos2d::Color4B::BLACK);
-    itemName->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    itemName->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
+    itemName->setFontSize(43);
+    itemName->setTextColor(cocos2d::Color4B(240, 193, 51, 255));
     itemName->setString(item->getName());
+    itemName->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
+    itemName->setPositionX(getContentSize().width * 0.5f - 110.0f);
+    itemName->setPositionY(getContentSize().height - itemName->getContentSize().height * 0.5f - 13.0f);
     
-    auto *iconPanel = cocos2d::ui::Layout::create();
-    iconPanel->setBackGroundImage("ui/ui_shop_item-plate_item-icon_background.png");
-    iconPanel->setContentSize(iconPanel->getBackGroundImageTextureSize());
-    iconPanel->setPositionX(iconPanel->getContentSize().width * 0.5f);
-    iconPanel->setPositionY(iconPanel->getContentSize().height * 0.5f);
-    iconPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    iconPanel->addChild(itemIcon);
-    iconPanel->addChild(itemName);
-    
-    itemIcon->setPositionX(iconPanel->getContentSize().width * 0.5f);
-    itemIcon->setPositionY(iconPanel->getContentSize().height * 0.5f + 20.0f);
-    itemName->setPositionX(iconPanel->getContentSize().width * 0.5f);
-    itemName->setPositionY(40.0f);
-    
-    auto desc = cocos2d::ui::Text::create();
-    desc->setFontName("font_prototype.ttf");
-    desc->setFontSize(25);
-    desc->setTextColor(cocos2d::Color4B(150, 87, 38, 255));
-    desc->setTextHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    desc->setTextVerticalAlignment(cocos2d::TextVAlignment::TOP);
-    desc->setString(item->getDesc());
-    desc->setPositionX(getContentSize().width * 0.5f - 45.0f);
-    desc->setPositionY(115.0f);
-    desc->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
-    
+    float buttonScale = 1.8f;
     _button = StoreItemButton::create();
-    _button->setPositionX(getContentSize().width - _button->getContentSize().width * 0.5f);
-    _button->setPositionY(_button->getContentSize().height * 0.5f);
+    _button->setScale(buttonScale);
+    _button->setPositionX(getContentSize().width - _button->getContentSize().width * buttonScale * 0.5f - 15.0f);
+    _button->setPositionY(_button->getContentSize().height * buttonScale * 0.5f + 15.0f);
     _button->addTouchEventListener(CC_CALLBACK_2(StoreItemBaseWidget::onBuyPressed, this));
     _button->setPrice(item->getPrice());
     _button->switchState(StoreItemButton::State::BUY);
     
     scheduleUpdate();
     addChild(_button, 0);
-    addChild(iconPanel, 1);
-    addChild(desc, 2);
+    addChild(itemName, 0);
+    addChild(itemIcon, 0);
     
     return true;
 }

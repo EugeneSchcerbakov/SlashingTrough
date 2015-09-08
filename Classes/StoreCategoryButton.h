@@ -16,16 +16,17 @@
 class CategoryButton : public cocos2d::Node
 {
 public:
-    static CategoryButton* create(const std::string &icon, const std::function<void(int)> &func);
+    static CategoryButton* create(const std::string &normal, const std::string &pressed,
+                                  const std::function<void(int)> &func);
     
     bool isSelected() const;
     void setSelected(bool flag);
     
 protected:
-    CategoryButton(const std::function<void(int)> &func);
+    CategoryButton(const std::string &normal, const std::string &pressed, const std::function<void(int)> &func);
     virtual ~CategoryButton();
 
-    bool init(const std::string &icon);
+    bool init();
     
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
     void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
@@ -33,7 +34,6 @@ protected:
 
 private:
     cocos2d::Sprite *_backing;
-    cocos2d::Sprite *_icon;
     
     bool _selected;
     

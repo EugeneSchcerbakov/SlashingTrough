@@ -65,7 +65,7 @@
         price="0"
         name="Jacket"
         desc="Your default armor"
-        icon="ui/ui_shop_armor_tab.png"
+        icon="icons/icon_arm_jaket.png"
         sprite=""
         addHealth="0">
         <Features>

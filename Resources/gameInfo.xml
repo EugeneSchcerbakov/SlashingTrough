@@ -4,7 +4,7 @@
         <Const name="HERO_DAMAGE_UP_KP" type="int" value="0" />
         <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
 				
-        <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
+        <Const name="HERO_HEALTH_POINTS" type="float" value="5000.0" />
         <Const name="HERO_ATTACK_AREA" type="float" value="0.85" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
