@@ -57,35 +57,21 @@ bool MapInterface::init()
     
     cocos2d::Sprite *coinIcon = cocos2d::Sprite::create("icons/icon_coin.png");
     coinIcon->setScale(1.8f);
-    coinIcon->setPositionX(size.width * 0.5f - 120.0f);
-    coinIcon->setPositionY(size.height - coinIcon->getContentSize().height * 1.8f * 0.5f - 20.0f);
-    
-    cocos2d::Sprite *damageIcon = cocos2d::Sprite::create("icons/icon_dmg.png");
-    damageIcon->setScale(1.8f);
-    damageIcon->setPositionX(size.width * 0.5f + 170.0f);
-    damageIcon->setPositionY(size.height - damageIcon->getContentSize().height * 1.8f * 0.5f - 20.0f);
+    float coinsIconWidth = coinIcon->getContentSize().width * coinIcon->getScale();
     
     std::string coinsString = cocos2d::StringUtils::format("%d", player.getCoins());
     _coinsText = cocos2d::ui::Text::create("", "font_prototype.ttf", 45);
+    _coinsText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
     _coinsText->setTextColor(cocos2d::Color4B(254, 228, 146, 255));
     _coinsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     _coinsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
     _coinsText->setString(coinsString);
     _coinsText->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
-    _coinsText->setPositionX(coinIcon->getPositionX() +
-                             coinIcon->getContentSize().width * coinIcon->getScale() * 0.5f + 10.0f);
+    _coinsText->setPositionX(size.width * 0.5f - _coinsText->getContentSize().width * 0.5f + coinsIconWidth * 0.5f);
     _coinsText->setPositionY(size.height - 45);
     
-    std::string damageString = cocos2d::StringUtils::format("%d", player.getDamage());
-    _damageText = cocos2d::ui::Text::create("", "font_prototype.ttf", 45);
-    _damageText->setTextColor(cocos2d::Color4B(254, 228, 146, 255));
-    _damageText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _damageText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _damageText->setString(damageString);
-    _damageText->setAnchorPoint(cocos2d::Vec2(0.0f, 0.5f));
-    _damageText->setPositionX(damageIcon->getPositionX() +
-                              damageIcon->getContentSize().width * damageIcon->getScale() * 0.5f + 10.0f);
-    _damageText->setPositionY(size.height - 45);
+    coinIcon->setPositionX(_coinsText->getPositionX() - coinsIconWidth * 0.5f);
+    coinIcon->setPositionY(size.height - coinIcon->getContentSize().height * 1.8f * 0.5f - 20.0f);
     
     auto onShopPressed = [](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
@@ -108,9 +94,7 @@ bool MapInterface::init()
     settings->setPositionY(origin.y + size.height - settings->getContentSize().height * settingsScale * 0.5f - 20.0f);
     
     _guiLayer->addChild(coinIcon);
-    _guiLayer->addChild(damageIcon);
     _guiLayer->addChild(_coinsText);
-    _guiLayer->addChild(_damageText);
     _guiLayer->addChild(shopButton);
     _guiLayer->addChild(settings);
     

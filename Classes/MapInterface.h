@@ -43,7 +43,6 @@ private:
     MapWidget *_mapWidget;
     
     cocos2d::ui::Text *_coinsText;
-    cocos2d::ui::Text *_damageText;
 };
 
 #endif /* defined(__SlashingTrough__MapInterface__) */
