@@ -85,6 +85,10 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     if (complete) {
         rewardValue += _level->getCoinsReward();
     }
+    
+    // give coins
+    PlayerInfo::getInstance().addCoins(rewardValue);
+    
     auto rewardNum = cocos2d::ui::Text::create("", "font_prototype.ttf", 23);
     rewardNum->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
     rewardNum->setString(cocos2d::StringUtils::format("%d", rewardValue));
@@ -111,6 +115,8 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     if (victory) {
         initLootPanel();
     }
+    
+    PlayerInfo::getInstance().save();
     
     auto continueText = cocos2d::ui::Text::create("Tap to continue", "font_prototype.ttf", 40);
     continueText->setTextColor(cocos2d::Color4B::WHITE);
@@ -171,8 +177,6 @@ void StaticticsInterface::initLootPanel()
         lootText->setPositionY(_panel->getContentSize().height * 0.5f - 55.0f);
         
         _panel->addChild(lootText);
-        
-        player.save();
     }
 }
 

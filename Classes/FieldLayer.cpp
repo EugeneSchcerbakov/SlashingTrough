@@ -198,7 +198,6 @@ void FieldLayer::acceptEvent(const Event &event)
         }
             
         ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), victory, completitionFact);
-        player.save();
     }
 }
 
@@ -225,9 +224,6 @@ void FieldLayer::makeLevelComplete(FieldLevel::WeakPtr levelPtr)
         level->setStatus(FieldLevel::Status::COMPLETED);
         player.variables.setString("LastCompletedLevel", id);
         WRITE_LOG("Level completed: " + id);
-            
-        // give coins
-        player.addCoins(level->getCoinsReward());
             
         // unlock levels
         auto unlocks = level->getUnlocks();
