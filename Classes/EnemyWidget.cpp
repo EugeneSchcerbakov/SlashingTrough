@@ -251,7 +251,6 @@ bool EnemyWidget::init()
     _hitZoneWidget->setOpacity(0);
     _hitZoneWidget->setVisible(false);
     _hitZoneWidget->setRotation3D(cocos2d::Vec3(-zoneXAngle, 0.0f, 0.0f));
-    _hitZoneWidget->setPositionZ(-spriteHeght * 0.5f);
     
     _weapon = cocos2d::Sprite::create("gamefield/wpn_iron_sword.png");
     _weapon->setAnchorPoint(cocos2d::Vec2(0.5f, 0.0f));

@@ -4,7 +4,7 @@
         <Const name="HERO_DAMAGE_UP_KP" type="int" value="0" />
         <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
 				
-        <Const name="HERO_HEALTH_POINTS" type="float" value="5000.0" />
+        <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
         <Const name="HERO_ATTACK_AREA" type="float" value="0.85" />
         <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
         <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
@@ -97,8 +97,8 @@
                 dmgHealth="10.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
-                showHeighlightTime="0.8"
-                mustShowHeighlight="true" />
+                showHighlightTime="0.8"
+                mustShowHighlight="true" />
         </Enemy>
         <Enemy name="M2"
             health="30.0"
@@ -118,8 +118,8 @@
                 dmgHealth="30.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
-                showHeighlightTime="0.8"
-                mustShowHeighlight="true" />
+                showHighlightTime="0.8"
+                mustShowHighlight="true" />
         </Enemy>
                 <Enemy name="M3"
             health="100.0"
@@ -139,8 +139,8 @@
                 dmgHealth="100.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
-                showHeighlightTime="0.8"
-                mustShowHeighlight="true" />
+                showHighlightTime="0.8"
+                mustShowHighlight="true" />
         </Enemy>
                 <Enemy name="R1"
             health="10.0"
