@@ -13,6 +13,7 @@
 
 #include "FieldLayer.h"
 #include "GameInterface.h"
+#include "PauseMenu.h"
 
 class GameScene : public cocos2d::Scene
 {
@@ -31,12 +32,17 @@ private:
         GAME_FIELD,
         EFFECTS_GAMEFIELD,
         GAME_INTERFACE,
+        PAUSE_MENU,
         EFFECTS_ABSOLUTE
     };
     
 private:
+    void pauseRecursive(cocos2d::Node *node);
+    void resumeRecursive(cocos2d::Node *node);
+    
     FieldLayer *_layerField;
     GameInterface *_layerGui;
+    PauseMenu *_layerPause;
     
     void OnKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
     void OnKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);

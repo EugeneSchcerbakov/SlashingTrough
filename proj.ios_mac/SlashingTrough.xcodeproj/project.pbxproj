@@ -66,6 +66,8 @@
 		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
 		CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
+		CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
+		CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
 		CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
 		CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
@@ -293,6 +295,8 @@
 		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
 		CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ScreenСhanger.cpp"; sourceTree = "<group>"; };
 		CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenChanger.h; sourceTree = "<group>"; };
+		CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenu.cpp; sourceTree = "<group>"; };
+		CD1B69D01BA1E72500DF8CD1 /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenu.h; sourceTree = "<group>"; };
 		CD255B261B9B27A80062223A /* StatisticsInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StatisticsInterface.cpp; sourceTree = "<group>"; };
 		CD255B271B9B27A80062223A /* StatisticsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsInterface.h; sourceTree = "<group>"; };
 		CD2AE6301B779FD4001DF4B7 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
@@ -669,6 +673,8 @@
 				CD0AB2C61B89FC1200139A03 /* MapInterface.h */,
 				CD7503511AFF6BED00DBD732 /* GameInterface.cpp */,
 				CD7503521AFF6BED00DBD732 /* GameInterface.h */,
+				CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */,
+				CD1B69D01BA1E72500DF8CD1 /* PauseMenu.h */,
 				CD81E5121B20B439008059C2 /* StoreInterface.cpp */,
 				CD81E5131B20B439008059C2 /* StoreInterface.h */,
 				CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */,
@@ -947,6 +953,7 @@
 				CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */,
 				CDC880FD1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
+				CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
@@ -981,6 +988,7 @@
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
 				CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */,
+				CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD637E7B1B234458002F98EF /* Item.cpp in Sources */,
 				CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */,
 				CDC881021B5142DF00030818 /* Field.cpp in Sources */,

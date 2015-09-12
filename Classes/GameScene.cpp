@@ -10,6 +10,7 @@
 
 #include "GameInfo.h"
 #include "Utils.h"
+#include "Log.h"
 
 GameScene* GameScene::create(const std::string &levelId)
 {
@@ -32,6 +33,11 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
+    auto director = cocos2d::Director::getInstance();
+    auto dispatcher = director->getEventDispatcher();
+    
+    dispatcher->removeCustomEventListeners("PauseGame");
+    dispatcher->removeCustomEventListeners("ResumeGame");
 }
 
 bool GameScene::init(const std::string &levelId)
@@ -55,13 +61,48 @@ bool GameScene::init(const std::string &levelId)
         dispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
     }
     
+    auto funcOnPause = [this](cocos2d::EventCustom *e)
+    {
+        pauseRecursive(_layerField);
+        _layerGui->setVisible(false);
+        WRITE_LOG("Game paused.");
+    };
+    
+    auto funcOnResume = [this](cocos2d::EventCustom *e)
+    {
+        resumeRecursive(_layerField);
+        _layerGui->setVisible(true);
+        WRITE_LOG("Game resumed.");
+    };
+    
+    dispatcher->addCustomEventListener("PauseGame", funcOnPause);
+    dispatcher->addCustomEventListener("ResumeGame", funcOnResume);
+    
     _layerGui = GameInterface::create();
     _layerField = FieldLayer::create(levelId, _layerGui);
+    _layerPause = PauseMenu::create();
     
     addChild(_layerField, LayerZOrder::GAME_FIELD);
     addChild(_layerGui, LayerZOrder::GAME_INTERFACE);
+    addChild(_layerPause, LayerZOrder::PAUSE_MENU);
     
     return true;
+}
+
+void GameScene::pauseRecursive(cocos2d::Node *node)
+{
+    node->pause();
+    for (auto child : node->getChildren()) {
+        pauseRecursive(child);
+    }
+}
+
+void GameScene::resumeRecursive(cocos2d::Node *node)
+{
+    node->resume();
+    for (auto child : node->getChildren()) {
+        resumeRecursive(child);
+    }
 }
 
 void GameScene::OnKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
@@ -105,3 +146,4 @@ void GameScene::OnMouseScroll(cocos2d::Event *event)
         _layerGui->setTimeScaleLabel(_currentTimeScale);
     }
 }
+

@@ -63,8 +63,8 @@ void GameInterface::setDifficultLable(const std::string &text)
         cocos2d::Vec2 origin = director->getVisibleOrigin();
         cocos2d::Size screen = director->getVisibleSize();
         _difficultText->setString(text);
-        _difficultText->setPositionX(origin.x + _difficultText->getContentSize().width * 0.5f);
-        _difficultText->setPositionY(screen.height - _difficultText->getContentSize().height * 0.5f);
+        _difficultText->setPositionX(origin.x + screen.width - _difficultText->getContentSize().width * 0.5f);
+        _difficultText->setPositionY(origin.y + _difficultText->getContentSize().height * 0.5f);
     }
 }
 
@@ -124,12 +124,12 @@ bool GameInterface::init()
         
         _difficultText = cocos2d::ui::Text::create();
         _difficultText->setFontName("arial");
-        _difficultText->setFontSize(30);
+        _difficultText->setFontSize(25);
         _difficultText->setString("2");
         _difficultText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
         _difficultText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-        _difficultText->setPositionX(origin.x + _difficultText->getContentSize().width * 0.5f);
-        _difficultText->setPositionY(screen.height - _difficultText->getContentSize().height * 0.5f);
+        _difficultText->setPositionX(origin.x + screen.width - _difficultText->getContentSize().width * 0.5f);
+        _difficultText->setPositionY(origin.y + _difficultText->getContentSize().height * 0.5f);
         
         addChild(_timeScaleText);
         addChild(_difficultText);
