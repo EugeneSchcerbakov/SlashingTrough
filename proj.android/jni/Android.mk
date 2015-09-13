@@ -17,10 +17,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/EffectsLayer.cpp \
                    ../../Classes/Enemy.cpp \
                    ../../Classes/EnemyWidget.cpp \
-                   ../../Classes/Equipment.cpp \
                    ../../Classes/Field.cpp \
                    ../../Classes/FieldLayer.cpp \
                    ../../Classes/FieldSector.cpp \
+                   ../../Classes/FieldLevel.cpp \
                    ../../Classes/FieldSectorWidget.cpp \
                    ../../Classes/GameInfo.cpp \
                    ../../Classes/GameInterface.cpp \
@@ -33,18 +33,30 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/ObstacleWidget.cpp \
                    ../../Classes/Projectile.cpp \
                    ../../Classes/ProjectileWidget.cpp \
-                   ../../Classes/SessionInfo.cpp \
-                   ../../Classes/StaminaBarWidget.cpp \
+                   ../../Classes/PlayerInfo.cpp \
                    ../../Classes/Store.cpp \
+                   ../../Classes/StartInterface.cpp \
+                   ../../Classes/StatisticsInterface.cpp \
+                   ../../Classes/MissionStartPopup.cpp \
+                   ../../Classes/MapPlayerMark.cpp \
+                   ../../Classes/MapLevelMark.cpp \
+                   ../../Classes/MapWidget.cpp \
+                   ../../Classes/MapInterface.cpp \
+                   ../../Classes/PauseMenu.cpp \
                    ../../Classes/StoreCategoryButton.cpp \
                    ../../Classes/StoreInterface.cpp \
                    ../../Classes/StoreItemButton.cpp \
                    ../../Classes/StoreItemBaseWidget.cpp \
                    ../../Classes/StoreWeaponWidget.cpp \
                    ../../Classes/StoreArmorWidget.cpp \
+                   ../../Classes/LevelsCache.cpp \
+                   ../../Classes/ScreenChanger.cpp \
                    ../../Classes/Utils.cpp \
+                   ../../Classes/Log.cpp \
                    ../../Classes/VariablesSet.cpp \
-                   ../../Classes/WeaponAbilities.cpp
+                   ../../Classes/Item.cpp \
+                   ../../Classes/ItemFeature.cpp \
+                   ../../Classes/VictoryCondition.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../cocos2d/scripting/lua-bindings/manual \

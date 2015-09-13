@@ -9,6 +9,9 @@
 #ifndef __SlashingTrough__Utils__
 #define __SlashingTrough__Utils__
 
+#include <math.h>
+#include <utility>
+
 namespace misc
 {
     bool isPlatformDesctop();

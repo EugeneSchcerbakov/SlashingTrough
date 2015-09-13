@@ -12,6 +12,7 @@
 #include "Utils.h"
 #include "Log.h"
 
+#include "cocos2d.h"
 #include <stdlib.h>
 #include <math.h>
 

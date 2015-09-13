@@ -9,6 +9,7 @@
 #include "ItemFeature.h"
 #include "Hero.h"
 #include "Enemy.h"
+#include "Utils.h"
 
 ItemFeature::ItemFeature()
 : _owner(nullptr)
