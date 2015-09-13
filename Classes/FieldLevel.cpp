@@ -201,7 +201,7 @@ void FieldLevel::setPosOnMap(float x, float y)
 
 FieldSector::Ptr FieldLevel::getNextSector()
 {
-    if (_lastSectorIndex < _sectors.size()) {
+    if ((std::size_t)_lastSectorIndex < _sectors.size()) {
         int index = _lastSectorIndex;
         _lastSectorIndex++;
         return _sectors[index];
@@ -212,7 +212,7 @@ FieldSector::Ptr FieldLevel::getNextSector()
 
 FieldSector::Ptr FieldLevel::getSectorByIndex(int index)
 {
-    if (index >= 0 && index < _sectors.size()) {
+	if (index >= 0 && (std::size_t)index < _sectors.size()) {
         return _sectors[index];
     }
     return FieldSector::Ptr();

@@ -72,9 +72,6 @@
     <ClCompile Include="..\Classes\ObstacleWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StaminaBarWidget.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Store.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -138,9 +135,6 @@
     <ClCompile Include="..\Classes\MissionStartPopup.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ScreenСhanger.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StartInterface.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -151,6 +145,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PlayerInfo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PauseMenu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ScreenChanger.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -213,9 +213,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ObstacleWidget.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StaminaBarWidget.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Store.h">
@@ -294,6 +291,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PlayerInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseMenu.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
