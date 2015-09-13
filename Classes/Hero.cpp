@@ -224,6 +224,7 @@ void Hero::setArmor(Item::WeakPtr armor)
     float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
     
     _health = baseHealth + cast->getExtraHealth();
+    _maxHealth = _health;
 }
 
 void Hero::setRunningSpeed(float speed)

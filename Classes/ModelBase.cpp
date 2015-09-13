@@ -62,6 +62,7 @@ Entity::Entity(Entity::Type type)
 , _y(0.0f)
 , _radius(0.0f)
 , _health(0.0f)
+, _maxHealth(0.0f)
 , _damage(0.0f)
 , _goal(nullptr)
 {
@@ -140,6 +141,11 @@ float Entity::getDamage() const
 float Entity::getHealth() const
 {
     return _health;
+}
+
+float Entity::getMaxHealth() const
+{
+    return _maxHealth;
 }
 
 bool Entity::isAlive() const

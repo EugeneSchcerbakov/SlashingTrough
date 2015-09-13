@@ -76,25 +76,20 @@ void GameInterface::setGoldPointsLabel(int value)
 
 void GameInterface::setKillPointsLabel(int value)
 {
-    std::string str = cocos2d::StringUtils::format("%d", value);
-    _killPointsText->setString(str);
 }
 
 void GameInterface::setDamagePointsLabel(int value)
 {
-    std::string str = cocos2d::StringUtils::format("%d", value);
-    _damagePointsText->setString(str);
 }
 
-void GameInterface::setHealthPointsLabel(int value)
+void GameInterface::setHealthPointsLabel(float value)
 {
-    std::string str = cocos2d::StringUtils::format("%d%", value);
-    _healthPointsText->setString(str);
+    value = math::clampf(value, 0.0f, 100.0f);
+    _hpBar->setPercentage(value);
 }
 
 void GameInterface::setStaminaPoints(float value)
 {
-    _staminaBar->setProgress(value);
 }
 
 bool GameInterface::init()
@@ -135,100 +130,79 @@ bool GameInterface::init()
         addChild(_difficultText);
     }
     
-    cocos2d::Color4F backingColor(0.2f, 0.2f, 0.2f, 0.7f);
+    _hpBack = cocos2d::Sprite::create("ui/ui_hp_back.png");
+    _hpBack->setPositionX(origin.x + screen.width - _hpBack->getContentSize().width * 0.5f - 8.0f);
+    _hpBack->setPositionY(origin.y + screen.height - _hpBack->getContentSize().height * 0.5f - 15.0f);
     
-    _goldPointsText = cocos2d::ui::Text::create();
-    _goldPointsText->setFontName("font_prototype.ttf");
-    _goldPointsText->setFontSize(36);
-    _goldPointsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _goldPointsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
+    auto hpSprite = cocos2d::Sprite::create("ui/ui_hp_full.png");
+    _hpBar = cocos2d::ProgressTimer::create(hpSprite);
+    _hpBar->setType(cocos2d::ProgressTimer::Type::BAR);
+    _hpBar->setPositionX(_hpBack->getPositionX());// + _hpBack->getContentSize().width * 0.5f);
+    _hpBar->setPositionY(_hpBack->getPositionY() + 1.0f);// + _hpBack->getContentSize().height * 0.5f + 1.0f);
+    _hpBar->setBarChangeRate(cocos2d::Vec2(1.0f, 0.0f));
+    _hpBar->setMidpoint(cocos2d::Vec2(0.0f, 0.5f));
+    _hpBar->setPercentage(100.0f);
+    
+    //_hpBack->addChild(_hpBar);
+    
+    addChild(_hpBar);
+    addChild(_hpBack);
+    
+    _coinsIcon = cocos2d::Sprite::create("icons/icon_coin.png");
+    _coinsIcon->setScale(1.8f);
+    _coinsIcon->setPositionX(-_coinsIcon->getContentSize().width * _coinsIcon->getScale() * 0.5f);
+    _coinsIcon->setPositionY(_coinsIcon->getContentSize().height);
+    
+    _goldPointsText = cocos2d::ui::Text::create("", "font_prototype.ttf", 53);
+    _goldPointsText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
     _goldPointsText->setPosition(cocos2d::Vec2(116.0f, 28.0f));
     _goldPointsText->setTextColor(cocos2d::Color4B::YELLOW);
+    _goldPointsText->setPositionY(screen.height - 60.0f);
+    _goldPointsText->addChild(_coinsIcon);
     
-    _killPointsText = cocos2d::ui::Text::create();
-    _killPointsText->setFontName("font_prototype.ttf");
-    _killPointsText->setFontSize(36);
-    _killPointsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _killPointsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _killPointsText->setPosition(cocos2d::Vec2(90.0f, 28.0f));
-    
-    _damagePointsText = cocos2d::ui::Text::create();
-    _damagePointsText->setFontName("font_prototype.ttf");
-    _damagePointsText->setFontSize(36);
-    _damagePointsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _damagePointsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _damagePointsText->setPosition(cocos2d::Vec2(90.0f, 28.0f));
-    
-    _healthPointsText = cocos2d::ui::Text::create();
-    _healthPointsText->setFontName("font_prototype.ttf");
-    _healthPointsText->setFontSize(36);
-    _healthPointsText->setTextHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
-    _healthPointsText->setTextVerticalAlignment(cocos2d::TextVAlignment::CENTER);
-    _healthPointsText->setPosition(cocos2d::Vec2(105.0f, 28.0f));
-    _healthPointsText->setTextColor(cocos2d::Color4B::RED);
-
-    cocos2d::Sprite *goldIcon = cocos2d::Sprite::create("icons/icon_coin.png");
-    cocos2d::Sprite *killIcon = cocos2d::Sprite::create("icons/icon_kills.png");
-    cocos2d::Sprite *damageIcon = cocos2d::Sprite::create("icons/icon_dmg.png");
-    cocos2d::Sprite *healthIcon = cocos2d::Sprite::create("icons/icon_health.png");
-    goldIcon->setPosition(27.0f, 28.0f);
-    goldIcon->setScale(1.3f);
-    killIcon->setPosition(27.0f, 28.0f);
-    killIcon->setScale(1.3f);
-    damageIcon->setPosition(27.0f, 28.0f);
-    damageIcon->setScale(1.3f);
-    healthIcon->setPosition(27.0f, 28.0f);
-    
-    cocos2d::Size goldPointsBackSize(190.0f, 60.0f);
-    cocos2d::DrawNode *goldPointsBack = cocos2d::DrawNode::create();
-    goldPointsBack->drawSolidRect(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(goldPointsBackSize), backingColor);
-    goldPointsBack->setPositionX(screen.width - goldPointsBackSize.width - 10.0f);
-    goldPointsBack->setPositionY(screen.height - goldPointsBackSize.height - 10.0f);
-    goldPointsBack->addChild(_goldPointsText);
-    goldPointsBack->addChild(goldIcon);
-    
-    cocos2d::Size killPointsBackSize(160.0f, 60.0f);
-    cocos2d::DrawNode *killPointsBack = cocos2d::DrawNode::create();
-    killPointsBack->drawSolidRect(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(killPointsBackSize), backingColor);
-    killPointsBack->setPositionX(screen.width - killPointsBackSize.width - 10.0f);
-    killPointsBack->setPositionY(goldPointsBack->getPositionY() - goldPointsBackSize.height - 10.0f);
-    killPointsBack->addChild(killIcon);
-    killPointsBack->addChild(_killPointsText);
-    
-    cocos2d::Size damagePointsBackSize(160.0f, 60.0f);
-    cocos2d::DrawNode *damagePointsBack = cocos2d::DrawNode::create();
-    damagePointsBack->drawSolidRect(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(damagePointsBackSize), backingColor);
-    damagePointsBack->setPositionX(screen.width - killPointsBackSize.width - 10.0f);
-    damagePointsBack->setPositionY(killPointsBack->getPositionY() - damagePointsBackSize.height - 10.0f);
-    damagePointsBack->addChild(damageIcon);
-    damagePointsBack->addChild(_damagePointsText);
-    
-    cocos2d::Size healthPointsBackSize(160.0f, 60.0f);
-    cocos2d::DrawNode *healthPointsBack = cocos2d::DrawNode::create();
-    healthPointsBack->drawSolidRect(cocos2d::Vec2(0.0f, 0.0f), cocos2d::Vec2(healthPointsBackSize), backingColor);
-    healthPointsBack->setPositionX(screen.width - killPointsBackSize.width - 10.0f);
-    healthPointsBack->setPositionY(damagePointsBack->getPositionY() - healthPointsBackSize.height - 10.0f);
-    healthPointsBack->addChild(healthIcon);
-    healthPointsBack->addChild(_healthPointsText);
-    
-    _staminaBar = StaminaBarWidget::create();
-    _staminaBar->setPositionX(screen.width * 0.5f);
-    _staminaBar->setPositionY(_staminaBar->getContentSize().height * 0.5f + 15.0f);
-    _staminaBar->setProgress(1.0f);
-    
-    addChild(_staminaBar);
-    addChild(goldPointsBack);
-    addChild(killPointsBack);
-    addChild(damagePointsBack);
-    addChild(healthPointsBack);
-    
-    GameInfo &gameinfo = GameInfo::getInstance();
-    
-    goldPointsBack->setVisible(gameinfo.getConstBool("GOLD_POINTS_VISIBILITY"));
-    killPointsBack->setVisible(gameinfo.getConstBool("KILL_POINTS_VISIBILITY"));
-    damagePointsBack->setVisible(gameinfo.getConstBool("DAMAGE_POINTS_VISIBILITY"));
-    healthPointsBack->setVisible(gameinfo.getConstBool("HEALTH_POINTS_VISIBILITY"));
-    _staminaBar->setVisible(gameinfo.getConstBool("STAMINA_BAR_VISIBILITY"));
+    addChild(_goldPointsText);
+    scheduleUpdate();
     
     return true;
+}
+
+void GameInterface::update(float dt)
+{
+    cocos2d::Director *director;
+    director = cocos2d::Director::getInstance();
+    
+    cocos2d::Vec2 origin = director->getVisibleOrigin();
+    cocos2d::Size screen = director->getVisibleSize();
+    
+    float frame_half = screen.width * 0.5f;
+    float label_half = _goldPointsText->getContentSize().width * 0.5f;
+    float coins_half = _coinsIcon->getContentSize().width * _coinsIcon->getScale() * 0.5f;
+    
+    _goldPointsText->setPositionX(frame_half - label_half + coins_half);
+    
+    if (_hpBar->getPercentage() < 20.0f && _hpBack->getNumberOfRunningActions() <= 0)
+    {
+        _hpBack->runAction(cretePulsationWithColor());
+        _hpBar->runAction(cretePulsationWithColor());
+    }
+}
+
+cocos2d::FiniteTimeAction* GameInterface::cretePulsationWithColor() const
+{
+    auto scale0 = cocos2d::ScaleTo::create(0.5f, 1.2f);
+    auto scale1 = cocos2d::ScaleTo::create(0.5f, 1.0f);
+    auto scaleEase1 = cocos2d::EaseSineIn::create(scale0);
+    auto scaleEase2 = cocos2d::EaseSineOut::create(scale1);
+    auto scaleSeq = cocos2d::Sequence::create(scaleEase1, scaleEase2, nullptr);
+    
+    auto tint0 = cocos2d::TintTo::create(0.5f, 255, 0, 0);
+    auto tint1 = cocos2d::TintTo::create(0.5f, 255, 255, 255);
+    auto tintEase0 = cocos2d::EaseSineIn::create(tint0);
+    auto tintEase1 = cocos2d::EaseSineOut::create(tint1);
+    auto tintSeq = cocos2d::Sequence::create(tintEase0, tintEase1, nullptr);
+
+    auto both = cocos2d::Spawn::create(scaleSeq, tintSeq, nullptr);
+    auto effect = cocos2d::RepeatForever::create(both);
+    
+    return effect;
 }

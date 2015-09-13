@@ -240,6 +240,7 @@ const std::string& Enemy::getModelFilename() const
 void Enemy::init(const GameInfo::EnemyType &type)
 {
     _health = type.health;
+    _maxHealth = _health;
     _damage = type.damage;
     _sprite = type.sprite;
     _radius = 150.0f;

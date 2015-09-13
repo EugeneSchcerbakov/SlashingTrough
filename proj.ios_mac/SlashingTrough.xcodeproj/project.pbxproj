@@ -88,8 +88,6 @@
 		CD5F1CCF1B2457B300D0341A /* PlayerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */; };
 		CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
-		CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
-		CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */; };
 		CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
@@ -314,8 +312,6 @@
 		CD5F1CCD1B2457B300D0341A /* PlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfo.h; sourceTree = "<group>"; };
 		CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		CD5F8C7D1AD03DB8000CF14A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StaminaBarWidget.cpp; sourceTree = "<group>"; };
-		CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaminaBarWidget.h; sourceTree = "<group>"; };
 		CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiConstants.lua; sourceTree = "<group>"; };
 		CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreWeaponWidget.cpp; sourceTree = "<group>"; };
 		CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreWeaponWidget.h; sourceTree = "<group>"; };
@@ -687,8 +683,6 @@
 				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
 				CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */,
 				CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */,
-				CD6184C31B00A1B7000271D0 /* StaminaBarWidget.cpp */,
-				CD6184C41B00A1B8000271D0 /* StaminaBarWidget.h */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -929,7 +923,6 @@
 				CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
 				CD0EB1781B75E50600267CEA /* FieldLevel.cpp in Sources */,
 				CDC8810D1B514AAA00030818 /* FieldLayer.cpp in Sources */,
-				CD6184C51B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC881151B5155F700030818 /* ModelBase.cpp in Sources */,
 				CDC9DE7B1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
@@ -973,7 +966,6 @@
 			files = (
 				CDC5E6271B529EB8000756EB /* ObstacleWidget.cpp in Sources */,
 				CDC880FE1B513D8700030818 /* FieldSector.cpp in Sources */,
-				CD6184C61B00A1B8000271D0 /* StaminaBarWidget.cpp in Sources */,
 				CDC5E62C1B52D564000756EB /* Enemy.cpp in Sources */,
 				CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,

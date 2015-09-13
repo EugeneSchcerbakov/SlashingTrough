@@ -86,6 +86,7 @@ public:
     virtual float getPositionY() const;
     virtual float getDamage() const;
     virtual float getHealth() const;
+    virtual float getMaxHealth() const;
 
     virtual bool isAlive() const;
     virtual bool isType(Entity::Type type) const;
@@ -101,6 +102,7 @@ protected:
     float _y;
     float _radius;
     float _health;
+    float _maxHealth;
     float _damage;
 };
 

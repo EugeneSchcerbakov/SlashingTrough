@@ -12,8 +12,6 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
-#include "StaminaBarWidget.h"
-
 class GameInterface : public cocos2d::Layer
 {
 public:
@@ -25,7 +23,7 @@ public:
     void setGoldPointsLabel(int value);
     void setKillPointsLabel(int value);
     void setDamagePointsLabel(int value);
-    void setHealthPointsLabel(int value);
+    void setHealthPointsLabel(float value);
     void setStaminaPoints(float value);
     
 protected:
@@ -33,18 +31,19 @@ protected:
     virtual ~GameInterface();
     
     bool init();
+    void update(float dt);
     
 private:
+    cocos2d::FiniteTimeAction* cretePulsationWithColor() const;
+    
+    cocos2d::ProgressTimer *_hpBar;
+    cocos2d::Sprite *_hpBack;
+    cocos2d::Sprite *_coinsIcon;
     cocos2d::ui::Text *_goldPointsText;
-    cocos2d::ui::Text *_killPointsText;
-    cocos2d::ui::Text *_damagePointsText;
-    cocos2d::ui::Text *_healthPointsText;
     
     // debug output
     cocos2d::ui::Text *_timeScaleText;
     cocos2d::ui::Text *_difficultText;
-    
-    StaminaBarWidget *_staminaBar;
 };
 
 #endif /* defined(__SlashingTrough__GameInterface__) */
