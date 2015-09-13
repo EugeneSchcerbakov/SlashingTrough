@@ -133,6 +133,7 @@ bool GameInterface::init()
     _hpBack = cocos2d::Sprite::create("ui/ui_hp_back.png");
     _hpBack->setPositionX(origin.x + screen.width - _hpBack->getContentSize().width * 0.5f - 8.0f);
     _hpBack->setPositionY(origin.y + screen.height - _hpBack->getContentSize().height * 0.5f - 15.0f);
+	_hpBack->setColor(cocos2d::Color3B(42, 119, 228));
     
     auto hpSprite = cocos2d::Sprite::create("ui/ui_hp_full.png");
     _hpBar = cocos2d::ProgressTimer::create(hpSprite);
@@ -142,8 +143,7 @@ bool GameInterface::init()
     _hpBar->setBarChangeRate(cocos2d::Vec2(1.0f, 0.0f));
     _hpBar->setMidpoint(cocos2d::Vec2(0.0f, 0.5f));
     _hpBar->setPercentage(100.0f);
-    
-    //_hpBack->addChild(_hpBar);
+	_hpBar->setColor(cocos2d::Color3B(42, 119, 228));
     
     addChild(_hpBar);
     addChild(_hpBack);
@@ -180,7 +180,7 @@ void GameInterface::update(float dt)
     
     _goldPointsText->setPositionX(frame_half - label_half + coins_half);
     
-    if (_hpBar->getPercentage() < 20.0f && _hpBack->getNumberOfRunningActions() <= 0)
+    if (_hpBar->getPercentage() < 30.0f && _hpBack->getNumberOfRunningActions() <= 0)
     {
         _hpBack->runAction(cretePulsationWithColor());
         _hpBar->runAction(cretePulsationWithColor());
@@ -196,7 +196,7 @@ cocos2d::FiniteTimeAction* GameInterface::cretePulsationWithColor() const
     auto scaleSeq = cocos2d::Sequence::create(scaleEase1, scaleEase2, nullptr);
     
     auto tint0 = cocos2d::TintTo::create(0.5f, 255, 0, 0);
-    auto tint1 = cocos2d::TintTo::create(0.5f, 255, 255, 255);
+	auto tint1 = cocos2d::TintTo::create(0.5f, 42, 119, 228);
     auto tintEase0 = cocos2d::EaseSineIn::create(tint0);
     auto tintEase1 = cocos2d::EaseSineOut::create(tint1);
     auto tintSeq = cocos2d::Sequence::create(tintEase0, tintEase1, nullptr);
