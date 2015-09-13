@@ -64,8 +64,8 @@
 		CD0EB17C1B75F2F500267CEA /* presets.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17A1B75F2F500267CEA /* presets.xml */; };
 		CD0EB17E1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
-		CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
-		CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */; };
+		CD10C8C01B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */; };
+		CD10C8C11B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */; };
 		CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
@@ -291,7 +291,7 @@
 		CD0EB1771B75E50600267CEA /* FieldLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldLevel.h; sourceTree = "<group>"; };
 		CD0EB17A1B75F2F500267CEA /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
 		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
-		CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ScreenСhanger.cpp"; sourceTree = "<group>"; };
+		CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenChanger.cpp; sourceTree = "<group>"; };
 		CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenChanger.h; sourceTree = "<group>"; };
 		CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenu.cpp; sourceTree = "<group>"; };
 		CD1B69D01BA1E72500DF8CD1 /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenu.h; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 				CD5F1CCD1B2457B300D0341A /* PlayerInfo.h */,
 				CD9D04E31B8B9B7100FFE0F3 /* LevelsCache.cpp */,
 				CD9D04E41B8B9B7100FFE0F3 /* LevelsCache.h */,
-				CD10C8BE1B8E1A6800E56DC9 /* ScreenСhanger.cpp */,
+				CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */,
 				CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */,
 			);
 			name = Classes;
@@ -951,7 +951,7 @@
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
-				CD10C8C01B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
+				CD10C8C01B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */,
 				CD0AB2CB1B8A31C200139A03 /* MapWidget.cpp in Sources */,
 				CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CD9D04E51B8B9B7100FFE0F3 /* LevelsCache.cpp in Sources */,
@@ -978,7 +978,7 @@
 				CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */,
 				CDC7945A1B1C1A0000B83EA2 /* Store.cpp in Sources */,
-				CD10C8C11B8E1A6800E56DC9 /* ScreenСhanger.cpp in Sources */,
+				CD10C8C11B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */,
 				CD0AB2C01B89E03A00139A03 /* StartInterface.cpp in Sources */,
 				CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD637E7B1B234458002F98EF /* Item.cpp in Sources */,

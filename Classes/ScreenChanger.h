@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef __SlashingTrough__ScreenСhanger__
-#define __SlashingTrough__ScreenСhanger__
+#ifndef __SlashingTrough__ScreenChanger__
+#define __SlashingTrough__ScreenChanger__
 
 #include <cocos2d.h>
 
@@ -30,4 +30,4 @@ public:
     static Screen GAME;
 };
 
-#endif /* defined(__SlashingTrough__ScreenСhanger__) */
+#endif /* defined(__SlashingTrough__ScreenChanger__) */
