@@ -32,11 +32,13 @@ bool StoreItemBaseWidget::init()
     setContentSize(getBackGroundImageTextureSize());
     setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     
+    const cocos2d::Size iconArea(183.0f, 174.0f);
+    
     float iconScale = 1.1f;
     auto *itemIcon = cocos2d::Sprite::create(item->getIcon());
     itemIcon->setScale(iconScale);
-    itemIcon->setPositionX(itemIcon->getContentSize().width * iconScale * 0.5f + 18.0f);
-    itemIcon->setPositionY(getContentSize().height * 0.5f);
+    itemIcon->setPositionX(iconArea.width * 0.5f);
+    itemIcon->setPositionY(getContentSize().height - iconArea.height * 0.5f);
     
     auto itemName = cocos2d::ui::Text::create();
     itemName->setFontName("font_prototype.ttf");
