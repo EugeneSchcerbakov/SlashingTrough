@@ -57,4 +57,19 @@ protected:
     const float _shieldLiveTime;
 };
 
+class Crit : public Ability
+{
+public:
+    static Ptr create(float multiplier, int chance);
+    
+public:
+    Crit(float multiplier, int chance);
+    
+    virtual void hit(Entity *entity) override;
+    
+protected:
+    float _multiplier;
+    int _chance;
+};
+
 #endif /* defined(__SlashingTrough__Abilities__) */

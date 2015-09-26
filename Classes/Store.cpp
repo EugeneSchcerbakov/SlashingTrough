@@ -40,6 +40,10 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
         float duration = elem->FloatAttribute("duration");
         float shieldTime = elem->FloatAttribute("shieldTime");
         ability = BackDashShield::create(cooldown, distance, duration, shieldTime);
+    } else if (name == "Crit") {
+        float mult = elem->FloatAttribute("damage");
+        int chance = elem->IntAttribute("chance");
+        ability = Crit::create(mult, chance);
     } else {
         WRITE_WARN("Unknown ability.");
     }

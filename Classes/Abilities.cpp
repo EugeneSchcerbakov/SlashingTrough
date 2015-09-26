@@ -187,3 +187,30 @@ bool BackDashShield::isPointUnderBarrier(float x, float y) const
     
     return len <= barrierRadius && dotp >= 0.5f;
 }
+
+Ability::Ptr Crit::create(float multiplier, int chance)
+{
+    return std::make_shared<Crit>(multiplier, chance);
+}
+
+Crit::Crit(float multiplier, int chance)
+: Ability()
+, _multiplier(multiplier)
+, _chance(chance)
+{
+}
+
+void Crit::hit(Entity *entity)
+{
+    if (entity && entity->isType(Entity::Type::ENEMY))
+    {
+        bool passed = misc::random(0, 100) <= _chance;
+        if (passed)
+        {
+            float damage = _hero->getDamage();
+            float critic = std::max(0.0f, damage * _multiplier);
+            float result = std::max(0.0f, critic - damage);
+            entity->addHealth(-result);
+        }
+    }
+}

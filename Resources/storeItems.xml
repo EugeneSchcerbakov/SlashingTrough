@@ -95,6 +95,7 @@
     </Armor>
     
     <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />
+    <Shard id="crit_shard" icon="icons/icon_crystal_2.png" />
     
     <Crystall id="back_dash_crystall"
         name="Back Dash"
@@ -109,5 +110,24 @@
             desc="Swipe back to make back dash. And use mahic shield">
             <Ability name="BackDashShield" cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
         </Tier2>
+    </Crystall>
+    <Crystall id="crit_crystall"
+        name="Crit"
+        kind="weapon" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_2.png"
+            desc="Do 1.5x damage with 20% chance.">
+            <Ability name="Crit" damage="1.5" chance="20" />
+        </Tier1>
+        <Tier2 shards="7"
+            icon="icons/icon_crystal_2.png"
+            desc="Do 1.5x damage with 25% chance.">
+            <Ability name="Crit" damage="1.5" chance="25" />
+        </Tier2>
+        <Tier3 shards="10"
+            icon="icons/icon_crystal_2.png"
+            desc="Do 2.0x damage with 30% chance.">
+            <Ability name="Crit" damage="2.0" chance="30" />
+        </Tier3>
     </Crystall>
 </Store>
