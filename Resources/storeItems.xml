@@ -68,9 +68,6 @@
         icon="icons/icon_arm_jaket.png"
         sprite=""
         addHealth="0">
-        <Features>
-            <BackslidingShield cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
-        </Features>
     </Armor>
     <Armor id="leather_armor"
         price="150"
@@ -96,4 +93,21 @@
         sprite=""
         addHealth="50">
     </Armor>
+    
+    <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />
+    
+    <Crystall id="back_dash_crystall"
+        name="Back Dash"
+        kind="armor" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_1.png"
+            desc="Swipe back to make back dash.">
+            <Ability name="BackDash" cooldown="0.3" distance="200" duration="0.15" />
+        </Tier1>
+        <Tier2 shards="7"
+            icon="icons/icon_crystal_1.png"
+            desc="Swipe back to make back dash. And use mahic shield">
+            <Ability name="BackDashShield" cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
+        </Tier2>
+    </Crystall>
 </Store>

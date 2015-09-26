@@ -84,7 +84,7 @@ void GameInterface::setDamagePointsLabel(int value)
 
 void GameInterface::setHealthPointsLabel(float value)
 {
-    value = math::clampf(value, 0.0f, 100.0f);
+    value = math::clamp(value, 0.0f, 100.0f);
     _hpBar->setPercentage(value);
 }
 

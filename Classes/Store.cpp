@@ -8,6 +8,7 @@
 
 #include "Store.h"
 #include "PlayerInfo.h"
+#include "Abilities.h"
 #include "Log.h"
 
 #include "cocos2d.h"
@@ -16,6 +17,34 @@ Store& Store::getInstance()
 {
     static Store singleInstance;
     return singleInstance;
+}
+
+static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
+{
+    if (!elem) {
+        WRITE_ERR("Ability xml description is missed.");
+        return Ability::Ptr();
+    }
+    
+    Ability::Ptr ability;
+    
+    std::string name = elem->Attribute("name");
+    if (name == "BackDash") {
+        float cooldown = elem->FloatAttribute("cooldown");
+        float distance = elem->FloatAttribute("distance");
+        float duration = elem->FloatAttribute("duration");
+        ability = BackDash::create(cooldown, distance, duration);
+    } else if (name == "BackDashShield") {
+        float cooldown = elem->FloatAttribute("cooldown");
+        float distance = elem->FloatAttribute("distance");
+        float duration = elem->FloatAttribute("duration");
+        float shieldTime = elem->FloatAttribute("shieldTime");
+        ability = BackDashShield::create(cooldown, distance, duration, shieldTime);
+    } else {
+        WRITE_WARN("Unknown ability.");
+    }
+    
+    return ability;
 }
 
 void Store::loadStore(const std::string &filename)
@@ -38,7 +67,6 @@ void Store::loadStore(const std::string &filename)
             std::string name = elem->Name();
             if (name == "Weapon") {
                 auto trailInfo = elem->FirstChildElement("Trail");
-                //auto featuresRoot = elem->FirstChildElement("Features");
                 Item::Ptr item = ItemWeapon::create();
                 ItemWeapon *weapon = ItemWeapon::cast(item);
                 weapon->id = elem->Attribute("id");
@@ -57,10 +85,8 @@ void Store::loadStore(const std::string &filename)
                     weapon->trail.opacity = trailInfo->FloatAttribute("opacity");
                     weapon->trail.texture = trailInfo->Attribute("texture");
                 }
-                //parseEquipFeature(item, featuresRoot);
                 _items.push_back(item);
             } else if (name == "Armor") {
-                //auto featuresRoot = elem->FirstChildElement("Features");
                 Item::Ptr item = ItemArmor::create();
                 ItemArmor *armor = ItemArmor::cast(item);
                 armor->id = elem->Attribute("id");
@@ -70,7 +96,45 @@ void Store::loadStore(const std::string &filename)
                 armor->icon = elem->Attribute("icon");
                 armor->sprite = elem->Attribute("sprite");
                 armor->name = elem->Attribute("name");
-                //parseEquipFeature(item, featuresRoot);
+                _items.push_back(item);
+            } else if (name == "Crystall") {
+                Item::Ptr item = Crystall::create();
+                Crystall *crystall = Crystall::cast(item);
+                crystall->id = elem->Attribute("id");
+                crystall->name = elem->Attribute("name");
+                
+                std::string kind = elem->Attribute("kind");
+                if (kind == "weapon") {
+                    crystall->kind = Crystall::Kind::WEAPON;
+                } else if (kind == "armor") {
+                    crystall->kind = Crystall::Kind::ARMOR;
+                } else {
+                    WRITE_WARN("Unknown crystall kind: " + kind);
+                }
+                
+                // find tiers info
+                int tierIndex = 1;
+                std::string query = "Tier" + cocos2d::StringUtils::toString(tierIndex);
+                auto tier = elem->FirstChildElement(query.c_str());
+                while (tier)
+                {
+                    Crystall::TierData data;
+                    data.shards = tier->IntAttribute("shards");
+                    data.icon = tier->Attribute("icon");
+                    data.desc = tier->Attribute("desc");
+                    data.ability = createAbility(tier->FirstChildElement("Ability"));
+                    crystall->tiersData.push_back(data);
+                    
+                    tierIndex++;
+                    query = "Tier" + cocos2d::StringUtils::toString(tierIndex);
+                    tier = elem->FirstChildElement(query.c_str());
+                }
+                _items.push_back(item);
+            } else if (name == "Shard") {
+                Item::Ptr item = Crystall::Shard::create();
+                Crystall::Shard *shard = Crystall::Shard::cast(item);
+                shard->id = elem->Attribute("id");
+                shard->icon = elem->Attribute("icon");
                 _items.push_back(item);
             } else {
                 WRITE_WARN("Unknown item in store description");
@@ -85,44 +149,6 @@ void Store::loadStore(const std::string &filename)
         WRITE_ERR("Failed to load score description.");
     }
 }
-
-/*
-void Store::parseEquipFeature(Equip::WeakPtr equip, tinyxml2::XMLElement *root)
-{
-    if (equip.expired() || !root) {
-        return;
-    }
-    
-    auto equip_ptr = equip.lock();
-    auto elem = root->FirstChildElement();
-    
-    while (elem) {
-        std::string name = elem->Name();
-        if (name == "CoinsForMurder") {
-            int flat = elem->IntAttribute("flat");
-            int percent = elem->IntAttribute("percentOfEnemyCost");
-            auto feature = CoinsForMurder::create(flat, percent);
-            equip_ptr->features.push_back(feature);
-        } else if (name == "Backsliding") {
-            float cooldown = elem->FloatAttribute("cooldown");
-            float distance = elem->FloatAttribute("distance");
-            float duration = elem->FloatAttribute("duration");
-            auto feature = Backsliding::create(cooldown, distance, duration);
-            equip_ptr->features.push_back(feature);
-        } else if (name == "BackslidingShield") {
-            float cooldown = elem->FloatAttribute("cooldown");
-            float distance = elem->FloatAttribute("distance");
-            float duration = elem->FloatAttribute("duration");
-            float shieldTime = elem->FloatAttribute("shieldTime");
-            auto feature = BackslidingShield::create(cooldown, distance, duration, shieldTime);
-            equip_ptr->features.push_back(feature);
-        } else {
-            CC_ASSERT(false);
-        }
-        elem = elem->NextSiblingElement();
-    }
-}
-*/
 
 bool Store::buy(const std::string &id)
 {
@@ -157,22 +183,11 @@ const Store::Items& Store::getAllItems() const
     return _items;
 }
 
-Store::Items Store::getWeaponItems() const
+Store::Items Store::getItemsWithType(Item::Type type) const
 {
     Items items;
     for (auto item : _items) {
-        if (item->type == Item::Type::WEAPON) {
-            items.push_back(item);
-        }
-    }
-    return items;
-}
-
-Store::Items Store::getArmorItems() const
-{
-    Items items;
-    for (auto item : _items) {
-        if (item->type == Item::Type::ARMOR) {
+        if (item->isType(type)) {
             items.push_back(item);
         }
     }

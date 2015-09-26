@@ -10,6 +10,7 @@
 #include "GameInfo.h"
 #include "PlayerInfo.h"
 #include "Store.h"
+#include "Log.h"
 
 #include <math.h>
 
@@ -41,11 +42,22 @@ void Hero::init()
     _staminaDrainValue = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.getConstInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
+    float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
+    
     PlayerInfo &player = PlayerInfo::getInstance();
-    std::string weaponId = player.variables.getString(PlayerInfo::VarKeyItemWpn);
-    std::string armorId = player.variables.getString(PlayerInfo::VarKeyItemArm);
-    setWeapon(player.Inventory[weaponId].item);
-    setArmor(player.Inventory[armorId].item);
+    
+    _equip = player.getEquipment();
+    
+    _damage = _equip.weapon->getDamage();
+    _radius = _equip.weapon->getDistance();
+    _health = baseHealth + _equip.armor->getExtraHealth();
+    _maxHealth = _health;
+    
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onInit(this);
+        }
+    }
     
     flushScore();
 }
@@ -83,6 +95,12 @@ void Hero::idleUpdate(float dt)
         _staminaPoints = 0.0f;
         kill();
     }
+    
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onUpdate(dt);
+        }
+    }
 }
 
 void Hero::onDamageReceived()
@@ -119,6 +137,12 @@ void Hero::attack()
             if (len <= _radius && dotp >= _attackArea) {
                 entity->addHealth(-_damage);
                 
+                for (auto crystall : _equip.crystalls) {
+                    if (crystall) {
+                        crystall->onHit(entity);
+                    }
+                }
+                
                 if (!entity->isAlive()) {
                     Reward *reward = dynamic_cast<Reward *>(entity);
                     if (reward) {
@@ -126,6 +150,12 @@ void Hero::attack()
                         addCoinsPoint(reward->getCoinPoints());
                         addStamina(reward->getStaminaPoints());
                         addScorePoint(reward->getScorePoints());
+                    }
+                    
+                    for (auto crystall : _equip.crystalls) {
+                        if (crystall) {
+                            crystall->onKill(entity);
+                        }
                     }
                 }
             }
@@ -149,14 +179,29 @@ void Hero::refreshGoals(Entities *entities)
 
 void Hero::onSwipeLeft()
 {
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onSwipeLeft();
+        }
+    }
 }
 
 void Hero::onSwipeRight()
 {
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onSwipeRight();
+        }
+    }
 }
 
 void Hero::onSwipeBack()
 {
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onSwipeBack();
+        }
+    }
 }
 
 void Hero::addAction(HeroAction *action)
@@ -197,36 +242,6 @@ void Hero::addScorePoint(int scorePoint)
     _score.score = scorePoint;
 }
 
-void Hero::setWeapon(Item::WeakPtr weapon)
-{
-    if (weapon.expired()) {
-        return;
-    }
-    
-    _weapon = weapon;
-    Item::Ptr base = _weapon.lock();
-    ItemWeapon *cast = ItemWeapon::cast(base);
-    
-    _damage = cast->getDamage();
-    _radius = cast->getDistance();
-}
-
-void Hero::setArmor(Item::WeakPtr armor)
-{
-    if (armor.expired()) {
-        return;
-    }
-    
-    _armor = armor;
-    Item::Ptr base = _armor.lock();
-    ItemArmor *cast = ItemArmor::cast(base);
-    
-    float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
-    
-    _health = baseHealth + cast->getExtraHealth();
-    _maxHealth = _health;
-}
-
 void Hero::setRunningSpeed(float speed)
 {
     _runningSpeed = speed;
@@ -263,18 +278,12 @@ HeroAction* Hero::getLastAction() const
 
 ItemWeapon* Hero::getWeapon() const
 {
-    if (!_weapon.expired()) {
-        return ItemWeapon::cast(_weapon.lock());
-    }
-    return nullptr;
+    return _equip.weapon;
 }
 
 ItemArmor* Hero::getArmor() const
 {
-    if (!_armor.expired()) {
-        return ItemArmor::cast(_armor.lock());
-    }
-    return nullptr;
+    return _equip.armor;
 }
 
 PlayerInfo::Score Hero::getScore() const

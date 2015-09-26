@@ -11,6 +11,7 @@
 
 #include "StoreWeaponWidget.h"
 #include "StoreArmorWidget.h"
+#include "StoreCystallWidget.h"
 #include "StoreCategoryButton.h"
 
 class StoreInterface : public cocos2d::Scene
@@ -38,7 +39,7 @@ private:
     {
         WEAPON = 0,
         ARMOR,
-        BOOSTERS,
+        CRYSTALL,
         AMOUNT
     };
     
@@ -47,7 +48,7 @@ private:
     void onCategoryChanged(Category tab);
     void fillScrollerWithWeapons();
     void fillScrollerWithArmors();
-    void fillScrollerWithBoosters();
+    void fillScrollerWithCrystalls();
     
     std::vector<CategoryButton *> _tabButtons;
 

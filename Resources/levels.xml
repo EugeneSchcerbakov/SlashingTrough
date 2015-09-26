@@ -8,6 +8,9 @@
             <Drop itemId="black_armor"
             dropChance="10"
             dropOnce="false"/>
+            <Drop itemId="back_dash_shard"
+            dropChance="10"
+            dropOnce="false"/>
         </Rewards>
         <Unlocks>
             <Unlock id="level_2" />
@@ -85,11 +88,14 @@
     </Level>
     <Level id="level_2" status="locked" condition="classic">
         <Rewards coins="1000">
-            <Drop itemId="lava_sword"
-            dropChance="50"
-            dropOnce="true"/>
-            <Drop itemId="black_armor"
-            dropChance="10"
+            <Drop itemId="back_dash_shard"
+            dropChance="100"
+            dropOnce="false"/>
+            <Drop itemId="back_dash_shard"
+            dropChance="100"
+            dropOnce="false"/>
+            <Drop itemId="back_dash_shard"
+            dropChance="100"
             dropOnce="false"/>
         </Rewards>
         <Unlocks>
@@ -112,6 +118,9 @@
             dropChance="50"
             dropOnce="true"/>
             <Drop itemId="black_armor"
+            dropChance="10"
+            dropOnce="false"/>
+            <Drop itemId="back_dash_shard"
             dropChance="10"
             dropOnce="false"/>
         </Rewards>

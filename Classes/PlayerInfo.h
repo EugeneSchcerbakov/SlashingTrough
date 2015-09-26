@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include <array>
 
 #include "Item.h"
 #include "VariablesSet.h"
@@ -50,9 +51,20 @@ public:
     static const std::string VarKeyCoins;
     static const std::string VarKeyItemWpn;
     static const std::string VarKeyItemArm;
+    static const std::string VarKeyCrystallWpn;
+    static const std::string VarKeyCrystallArm;
     
     static const std::string DEFAULT_WEAPON_ID;
     static const std::string DEFAULT_ARMOR_ID;
+    
+    struct Equipment
+    {
+        ItemWeapon *weapon;
+        ItemArmor *armor;
+        std::array<Crystall*, 2> crystalls;
+        
+        Equipment() = default;
+    };
     
 public:
     struct Score
@@ -81,6 +93,7 @@ public:
 
     int getCoins() const;
     int getDamage() const;
+    Equipment getEquipment();
     
     VariablesSet variables;
     PlayerInventory Inventory;

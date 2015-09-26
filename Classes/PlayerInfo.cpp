@@ -90,6 +90,8 @@ PlayerInventory::PlayerItem& PlayerInventory::operator[](const std::string &id)
 const std::string PlayerInfo::VarKeyCoins = "Coins";
 const std::string PlayerInfo::VarKeyItemWpn = "EquipedWeapon";
 const std::string PlayerInfo::VarKeyItemArm = "EquipedArmor";
+const std::string PlayerInfo::VarKeyCrystallWpn = "EquippedWeaponCrystall";
+const std::string PlayerInfo::VarKeyCrystallArm = "EquippedArmorCrystall";
 
 const std::string PlayerInfo::DEFAULT_WEAPON_ID = "default_sword";
 const std::string PlayerInfo::DEFAULT_ARMOR_ID = "default_armor";
@@ -331,11 +333,14 @@ void PlayerInfo::addCoins(int coins)
 void PlayerInfo::equip(Item::Ptr item)
 {
     if (!item) {
-        CC_ASSERT(false);
+        WRITE_WARN("Trying to equip invalid item.");
         return;
     }
     
-    CC_ASSERT(Inventory.owned(item));
+    // crystalls is always owned
+    if (!item->isType(Item::Type::CRYSTALL) && Inventory.owned(item)) {
+        WRITE_WARN("Truing to equip unowned item.");
+    }
     
     std::string itemId = item->getId();
     
@@ -345,9 +350,24 @@ void PlayerInfo::equip(Item::Ptr item)
     } else if (item->isType(Item::Type::ARMOR)) {
         variables.setString(VarKeyItemArm, itemId);
         WRITE_LOG("Equiped armor with id: " + itemId);
+    } else if (item->isType(Item::Type::CRYSTALL)) {
+        Crystall *c = Crystall::cast(item);
+        
+        std::string key;
+        if (c->isKind(Crystall::Kind::WEAPON)) {
+            key = PlayerInfo::VarKeyCrystallWpn;
+            WRITE_LOG("Equiped weapon crystall with id: " + itemId);
+        } else if (c->isKind(Crystall::Kind::ARMOR)) {
+            key = PlayerInfo::VarKeyCrystallArm;
+            WRITE_LOG("Equiped armor crystall with id: " + itemId);
+        } else {
+            WRITE_WARN("Unknown crystall kind");
+            return;
+        }
+        
+        variables.setString(key, itemId);
     } else {
         WRITE_WARN("Failed to equip entity of unknown type.");
-        CC_ASSERT(false);
     }
 }
 
@@ -368,6 +388,39 @@ int PlayerInfo::getDamage() const
     }
 }
 
+PlayerInfo::Equipment PlayerInfo::getEquipment()
+{
+    Equipment e;
+    
+    std::string weaponId = variables.getString(VarKeyItemWpn);
+    std::string armorId = variables.getString(VarKeyItemArm);
+    std::string crystWpnId = variables.getString(VarKeyCrystallWpn);
+    std::string crystArmId = variables.getString(VarKeyCrystallArm);
+    
+    Item::Ptr weapon = Inventory[weaponId].item;
+    Item::Ptr armor = Inventory[armorId].item;
+    Item::Ptr crystall_w = Store::getInstance().getItemById(crystWpnId);
+    Item::Ptr crystall_h = Store::getInstance().getItemById(crystArmId);
+    
+    if (!weapon || !armor) {
+        WRITE_ERR("Trying to equip invalid equipment.");
+        return Equipment();
+    }
+    
+    e.weapon = ItemWeapon::cast(weapon);
+    e.armor = ItemArmor::cast(armor);
+    e.crystalls[Crystall::Kind::WEAPON] = Crystall::cast(crystall_w);
+    e.crystalls[Crystall::Kind::ARMOR] = Crystall::cast(crystall_h);
+    
+    for (auto crystall : e.crystalls) {
+        if (crystall) {
+            crystall->refreshState();
+        }
+    }
+    
+    return e;
+}
+
 bool PlayerInfo::equipped(Item::Ptr item) const
 {
     if (!item) {
@@ -379,6 +432,17 @@ bool PlayerInfo::equipped(Item::Ptr item) const
         return variables.getString(VarKeyItemWpn) == item->getId();
     } else if (item->isType(Item::Type::ARMOR)) {
         return variables.getString(VarKeyItemArm) == item->getId();
+    } else if (item->isType(Item::Type::CRYSTALL)) {
+        Crystall *c = Crystall::cast(item);
+        std::string key;
+        if (c->isKind(Crystall::Kind::WEAPON)) {
+            return variables.getString(VarKeyCrystallWpn) == item->getId();
+        } else if (c->isKind(Crystall::Kind::ARMOR)) {
+            return variables.getString(PlayerInfo::VarKeyCrystallArm) == item->getId();
+        } else {
+            WRITE_WARN("Unknown crystall kind");
+            return false;
+        }
     } else {
         CC_ASSERT(false);
 		return false;

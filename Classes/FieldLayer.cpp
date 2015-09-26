@@ -181,7 +181,6 @@ void FieldLayer::acceptEvent(const Event &event)
             _fieldScroller->removeChildByTag(uid, true);
         }
     } else if (event.is("LevelFinished")) {
-        PlayerInfo &player = PlayerInfo::getInstance();
         LevelsCache &levelsCache = LevelsCache::getInstance();
     
         bool victory = event.variables.getBool("victory", false);
@@ -241,4 +240,3 @@ void FieldLayer::makeLevelComplete(FieldLevel::WeakPtr levelPtr)
         }
     }
 }
-

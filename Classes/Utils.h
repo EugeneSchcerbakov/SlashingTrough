@@ -26,7 +26,8 @@ namespace math
         return a+time*(b-a);
     }
     
-    inline float clampf(float value, float min, float max) {
+    template <class T>
+    inline T clamp(T value, T min, T max) {
         if (min > max) {
             std::swap(min, max);
         }

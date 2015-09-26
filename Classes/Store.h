@@ -30,8 +30,7 @@ public:
     Item::Ptr getItemById(const std::string &id) const;
     
     const Items& getAllItems() const;
-    Items getWeaponItems() const;
-    Items getArmorItems() const;
+    Items getItemsWithType(Item::Type type) const;
     
 private:    
     void reset();

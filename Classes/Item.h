@@ -13,7 +13,8 @@
 #include <memory>
 #include <vector>
 
-#include "ItemFeature.h"
+class Hero;
+class Entity;
 
 class Item
 {
@@ -25,7 +26,9 @@ public:
     {
         NONE,
         WEAPON,
-        ARMOR
+        ARMOR,
+        CRYSTALL,
+        SHARD
     };
     
 public:
@@ -35,10 +38,10 @@ public:
     int getPrice() const;
     Type getType() const;
     
-    const std::string& getId() const;
-    const std::string& getDesc() const;
-    const std::string& getIcon() const;
-    const std::string& getName() const;
+    virtual const std::string& getId() const;
+    virtual const std::string& getDesc() const;
+    virtual const std::string& getIcon() const;
+    virtual const std::string& getName() const;
 
     bool isType(Type t) const;
     
@@ -107,5 +110,106 @@ protected:
     friend class Store;
 };
 
+class Ability
+{
+public:
+    typedef std::shared_ptr<Ability> Ptr;
+    typedef std::weak_ptr<Ability> WeakPtr;
+    
+public:
+    Ability();
+    
+    virtual void init(Hero *p);
+    virtual void update(float dt);
+    
+    virtual void swipeLeft();
+    virtual void swipeRight();
+    virtual void swipeBack();
+    virtual void swipeForward();
+    
+    virtual void hit(Entity *e);
+    virtual void kill(Entity *e);
+    virtual void damage();
+    
+protected:
+    Hero *_hero;
+};
+
+class Crystall : public Item
+{
+public:
+    static Item::Ptr create();
+    static Crystall* cast(Item::Ptr base);
+    static const int LockTier;
+    
+    enum Kind
+    {
+        NONE = -1,
+        WEAPON = 0,
+        ARMOR = 1
+    };
+    
+    struct TierData
+    {
+        Ability::Ptr ability;
+        std::string desc;
+        std::string icon;
+        int shards;
+    };
+    
+    class Shard : public Item
+    {
+    public:
+        static Item::Ptr create();
+        static Shard* cast(Item::Ptr base);
+        
+    public:
+        Shard();
+    };
+    
+public:
+    Crystall();
+    
+    void onInit(Hero *hero);
+    void onUpdate(float dt);
+    
+    void onSwipeLeft();
+    void onSwipeRight();
+    void onSwipeBack();
+    void onSwipeForward();
+    
+    void onHit(Entity *entity);
+    void onKill(Entity *entity);
+    void onDamage();
+    
+    const std::string& getDesc() const override;
+    const std::string& getIcon() const override;
+    
+    void refreshState();
+    
+    TierData getCurrentTierData() const;
+    std::string getShardId() const;
+    int getShardsToNextTier() const;
+    int getMaxTier() const;
+    int getTier() const;
+    
+    Crystall::Kind getKind() const;
+    
+    bool isKind(Crystall::Kind which) const;
+    bool isUnlocked() const;
+    
+protected:
+    void nextTier();
+    
+    int tier;
+    Kind kind;
+    
+    std::vector<TierData> tiersData;
+    
+private:
+    Hero *_hero;
+    
+    friend class Store;
+};
 
 #endif /* defined(__SlashingTrough__Item__) */

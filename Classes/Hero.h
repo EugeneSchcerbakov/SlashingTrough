@@ -37,8 +37,6 @@ public:
     void addCoinsPoint(int coinsPoint);
     void addScorePoint(int scorePoint);
     
-    void setWeapon(Item::WeakPtr weapon);
-    void setArmor(Item::WeakPtr armor);
     void setRunningSpeed(float speed);
     void setRunning(bool running);
     void setSideBorders(float left, float right);
@@ -60,8 +58,7 @@ private:
     
 private:    
     ActionSequence _actionSequence;
-    Item::WeakPtr _weapon;
-    Item::WeakPtr _armor;
+    PlayerInfo::Equipment _equip;
     PlayerInfo::Score _score;
     Entities *_goals;
     

@@ -67,20 +67,20 @@ bool StoreInterface::init()
     
     _tabButtons.resize(Category::AMOUNT);
     
-    _tabButtons[Category::BOOSTERS] = CategoryButton::create("ui/ui_tab_crystals_inactive.png",
+    _tabButtons[Category::CRYSTALL] = CategoryButton::create("ui/ui_tab_crystals_inactive.png",
                                                              "ui/ui_tab_crystals_active.png", tabCallback);
     _tabButtons[Category::ARMOR] = CategoryButton::create("ui/ui_tab_armor_inactive.png",
                                                           "ui/ui_tab_armor_active.png", tabCallback);
     _tabButtons[Category::WEAPON] = CategoryButton::create("ui/ui_tab_weapons_inactive.png",
                                                            "ui/ui_tab_weapons_active.png", tabCallback);
 
-    float width0 = _tabButtons[Category::BOOSTERS]->getContentSize().width;
+    float width0 = _tabButtons[Category::CRYSTALL]->getContentSize().width;
     float width1 = _tabButtons[Category::ARMOR]->getContentSize().width;
     float width2 = _tabButtons[Category::WEAPON]->getContentSize().width;
     
-    _tabButtons[Category::BOOSTERS]->setPositionX(frameSize.width - (width0 * 0.5f + 10.0f));
-    _tabButtons[Category::BOOSTERS]->setPositionY(tabButtonsY);
-    _tabButtons[Category::BOOSTERS]->setTag(Category::BOOSTERS);
+    _tabButtons[Category::CRYSTALL]->setPositionX(frameSize.width - (width0 * 0.5f + 10.0f));
+    _tabButtons[Category::CRYSTALL]->setPositionY(tabButtonsY);
+    _tabButtons[Category::CRYSTALL]->setTag(Category::CRYSTALL);
     
     _tabButtons[Category::ARMOR]->setPositionX(frameSize.width - (width0 + width1 * 0.5f + 20.0f));
     _tabButtons[Category::ARMOR]->setPositionY(tabButtonsY);
@@ -114,7 +114,7 @@ bool StoreInterface::init()
     addChild(settings, Order::CONTROLS);
     addChild(_tabButtons[Category::WEAPON], Order::CONTROLS);
     addChild(_tabButtons[Category::ARMOR], Order::CONTROLS);
-    addChild(_tabButtons[Category::BOOSTERS], Order::CONTROLS);
+    addChild(_tabButtons[Category::CRYSTALL], Order::CONTROLS);
     addChild(_coinsText, Order::CONTROLS);
     addChild(_coinsShopBtn, Order::CONTROLS);
     
@@ -164,8 +164,8 @@ void StoreInterface::onCategoryChanged(Category tab)
         case Category::ARMOR:
             fillScrollerWithArmors();
             break;
-        case Category::BOOSTERS:
-            fillScrollerWithBoosters();
+        case Category::CRYSTALL:
+            fillScrollerWithCrystalls();
             break;
         default:
             _scroller->removeAllItems();
@@ -179,7 +179,7 @@ void StoreInterface::fillScrollerWithWeapons()
     _scroller->removeAllItems();
     
     Store &store = Store::getInstance();
-    Store::Items items = store.getWeaponItems();
+    Store::Items items = store.getItemsWithType(Item::Type::WEAPON);
     
     for (auto item : items) {
         StoreWeaponWidget *widget = nullptr;
@@ -196,7 +196,7 @@ void StoreInterface::fillScrollerWithArmors()
     _scroller->removeAllItems();
     
     Store &store = Store::getInstance();
-    Store::Items items = store.getArmorItems();
+    Store::Items items = store.getItemsWithType(Item::Type::ARMOR);
     
     for (auto item : items) {
         StoreArmorWidget *widget = nullptr;
@@ -208,9 +208,19 @@ void StoreInterface::fillScrollerWithArmors()
     _scroller->jumpToTop();
 }
 
-void StoreInterface::fillScrollerWithBoosters()
+void StoreInterface::fillScrollerWithCrystalls()
 {
     _scroller->removeAllItems();
+    
+    Store &store = Store::getInstance();
+    Store::Items items = store.getItemsWithType(Item::Type::CRYSTALL);
+    
+    for (auto item : items) {
+        StoreCrystallWidget *widget = nullptr;
+        widget = StoreCrystallWidget::create(item);
+        _scroller->pushBackCustomItem(widget);
+    }
+    
+    _scroller->refreshView();
+    _scroller->jumpToTop();
 }
-
-

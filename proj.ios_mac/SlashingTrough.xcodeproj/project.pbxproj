@@ -100,8 +100,8 @@
 		CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E801B234F42002F98EF /* StoreCategoryButton.cpp */; };
 		CD6517F11B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
 		CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
-		CD680A971B7F629C009618CC /* ItemFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* ItemFeature.cpp */; };
-		CD680A981B7F629C009618CC /* ItemFeature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* ItemFeature.cpp */; };
+		CD680A971B7F629C009618CC /* Abilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* Abilities.cpp */; };
+		CD680A981B7F629C009618CC /* Abilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* Abilities.cpp */; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -112,6 +112,8 @@
 		CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
+		CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */; };
+		CD9C6C641BAC632200EE383C /* StoreCystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */; };
 		CD9D04DE1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */; };
 		CD9D04DF1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */; };
 		CD9D04E11B8B949400FFE0F3 /* map.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD9D04E01B8B949400FFE0F3 /* map.xml */; };
@@ -323,8 +325,8 @@
 		CD637E811B234F42002F98EF /* StoreCategoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoryButton.h; sourceTree = "<group>"; };
 		CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VictoryCondition.cpp; sourceTree = "<group>"; };
 		CD6517F01B8F78B6000181E5 /* VictoryCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryCondition.h; sourceTree = "<group>"; };
-		CD680A951B7F629C009618CC /* ItemFeature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemFeature.cpp; sourceTree = "<group>"; };
-		CD680A961B7F629C009618CC /* ItemFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFeature.h; sourceTree = "<group>"; };
+		CD680A951B7F629C009618CC /* Abilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Abilities.cpp; sourceTree = "<group>"; };
+		CD680A961B7F629C009618CC /* Abilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abilities.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -333,6 +335,8 @@
 		CD81E5131B20B439008059C2 /* StoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInterface.h; sourceTree = "<group>"; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
+		CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCystallWidget.cpp; sourceTree = "<group>"; };
+		CD9C6C621BAC632200EE383C /* StoreCystallWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCystallWidget.h; sourceTree = "<group>"; };
 		CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapLevelMark.cpp; sourceTree = "<group>"; };
 		CD9D04DD1B8B8F4400FFE0F3 /* MapLevelMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLevelMark.h; sourceTree = "<group>"; };
 		CD9D04E01B8B949400FFE0F3 /* map.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.xml; sourceTree = "<group>"; };
@@ -624,8 +628,8 @@
 				CDC881141B5155F700030818 /* ModelBase.h */,
 				CD637E781B234458002F98EF /* Item.cpp */,
 				CD637E791B234458002F98EF /* Item.h */,
-				CD680A951B7F629C009618CC /* ItemFeature.cpp */,
-				CD680A961B7F629C009618CC /* ItemFeature.h */,
+				CD680A951B7F629C009618CC /* Abilities.cpp */,
+				CD680A961B7F629C009618CC /* Abilities.h */,
 				CDC9DE751B557F55006F53F6 /* Projectile.cpp */,
 				CDC9DE761B557F55006F53F6 /* Projectile.h */,
 				CDC5E6201B52930F000756EB /* Obstacle.cpp */,
@@ -683,6 +687,8 @@
 				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
 				CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */,
 				CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */,
+				CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */,
+				CD9C6C621BAC632200EE383C /* StoreCystallWidget.h */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -916,7 +922,7 @@
 				CDC881091B5149BC00030818 /* VariablesSet.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CDC881191B515A2100030818 /* FieldSectorWidget.cpp in Sources */,
-				CD680A971B7F629C009618CC /* ItemFeature.cpp in Sources */,
+				CD680A971B7F629C009618CC /* Abilities.cpp in Sources */,
 				CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				CD637E821B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
@@ -948,6 +954,7 @@
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
 				CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
+				CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
@@ -968,6 +975,7 @@
 				CDC880FE1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E62C1B52D564000756EB /* Enemy.cpp in Sources */,
 				CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
+				CD9C6C641BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,
@@ -995,7 +1003,7 @@
 				CD00C30B1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */,
-				CD680A981B7F629C009618CC /* ItemFeature.cpp in Sources */,
+				CD680A981B7F629C009618CC /* Abilities.cpp in Sources */,
 				CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDC8811E1B51664800030818 /* Hero.cpp in Sources */,
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,

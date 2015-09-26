@@ -110,7 +110,7 @@ void AttackAndMove::update(float dt)
     
     float t = 0.0f;
     t = -0.5f * (cosf(math::PI * _localTime) - 1.0f); // tween sine in out
-    t = math::clampf(t, 0.0f, 1.0f);
+    t = math::clamp(t, 0.0f, 1.0f);
 
     if (_finishX - _startX != 0.0f) {
         float x = math::lerp(_startX, _finishX, t);
@@ -160,7 +160,7 @@ void JumpBack::update(float dt)
     
     float t = 0.0f;
     t = -0.5f * (cosf(math::PI * _localTime) - 1.0f); // tween sine in out
-    t = math::clampf(t, 0.0f, 1.0f);
+    t = math::clamp(t, 0.0f, 1.0f);
     
     float y = math::lerp(_startY, _endY, t);
     
