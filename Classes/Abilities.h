@@ -57,6 +57,24 @@ protected:
     const float _shieldLiveTime;
 };
 
+class Vampirism : public Ability
+{
+public:
+    static Ptr create(float healthDrain, float healthReturn);
+    
+public:
+    Vampirism(float healthDrain, float healthReturn);
+    
+    virtual void update(float dt) override;
+    virtual void hit(Entity *entity) override;
+    
+protected:
+    float _localTime;
+    
+    const float _healthDrain;
+    const float _healthReturn;
+};
+
 class Crit : public Ability
 {
 public:

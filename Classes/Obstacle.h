@@ -20,7 +20,7 @@ public:
     Obstacle(const GameInfo::ObstacleType &type);
     
     void idleUpdate(float dt) override;
-    void addHealth(float health) override;
+    void addHealth(float health, bool callDamageReceived = true) override;
     
 private:
     void init(const GameInfo::ObstacleType &type);

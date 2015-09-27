@@ -57,7 +57,7 @@ void Projectile::idleUpdate(float dt)
     }
 }
 
-void Projectile::addHealth(float health)
+void Projectile::addHealth(float health, bool callDamageReceived)
 {
     // just nothing
 }

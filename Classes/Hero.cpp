@@ -108,6 +108,15 @@ void Hero::onDamageReceived()
     sendEvent(Event("DamageReceived"));
 }
 
+void Hero::addHealth(float health, bool callDamageReceived)
+{
+    Entity::addHealth(health, callDamageReceived);
+    
+    if (_health > _maxHealth) {
+        _health = _maxHealth;
+    }
+}
+
 void Hero::attack()
 {
     if (_goals) {

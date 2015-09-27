@@ -188,6 +188,41 @@ bool BackDashShield::isPointUnderBarrier(float x, float y) const
     return len <= barrierRadius && dotp >= 0.5f;
 }
 
+Ability::Ptr Vampirism::create(float healthDrain, float healthReturn)
+{
+    return std::make_shared<Vampirism>(healthDrain, healthReturn);
+}
+
+Vampirism::Vampirism(float healthDrain, float healthReturn)
+: Ability()
+, _healthDrain(healthDrain)
+, _healthReturn(healthReturn / 100.0f)
+{
+    _localTime = healthDrain;
+}
+
+void Vampirism::update(float dt)
+{
+    if (_localTime <= 0.0f) {
+        _hero->addHealth(-_healthDrain, false);
+        _localTime = 1.0f;
+    } else {
+        _localTime -= dt;
+    }
+}
+
+void Vampirism::hit(Entity *entity)
+{
+    if (entity && entity->isType(Entity::Type::ENEMY))
+    {
+        float damaged = _hero->getDamage();
+        float returns = ceilf(damaged * _healthReturn);
+        returns = std::max(1.0f, returns);
+        
+        _hero->addHealth(returns);
+    }
+}
+
 Ability::Ptr Crit::create(float multiplier, int chance)
 {
     return std::make_shared<Crit>(multiplier, chance);

@@ -138,8 +138,8 @@ bool GameInterface::init()
     auto hpSprite = cocos2d::Sprite::create("ui/ui_hp_full.png");
     _hpBar = cocos2d::ProgressTimer::create(hpSprite);
     _hpBar->setType(cocos2d::ProgressTimer::Type::BAR);
-    _hpBar->setPositionX(_hpBack->getPositionX());// + _hpBack->getContentSize().width * 0.5f);
-    _hpBar->setPositionY(_hpBack->getPositionY() + 1.0f);// + _hpBack->getContentSize().height * 0.5f + 1.0f);
+    _hpBar->setPositionX(_hpBack->getPositionX());
+    _hpBar->setPositionY(_hpBack->getPositionY() + 1.0f);
     _hpBar->setBarChangeRate(cocos2d::Vec2(1.0f, 0.0f));
     _hpBar->setMidpoint(cocos2d::Vec2(0.0f, 0.5f));
     _hpBar->setPercentage(100.0f);
@@ -184,6 +184,17 @@ void GameInterface::update(float dt)
     {
         _hpBack->runAction(cretePulsationWithColor());
         _hpBar->runAction(cretePulsationWithColor());
+    }
+    if (_hpBar->getPercentage() > 30.0 && _hpBack->getNumberOfRunningActions() > 0)
+    {
+        _hpBack->stopAllActions();
+        _hpBar->stopAllActions();
+        
+        _hpBack->setScale(1.0f);
+        _hpBar->setScale(1.0f);
+        
+        _hpBack->setColor(cocos2d::Color3B(42, 119, 228));
+        _hpBar->setColor(cocos2d::Color3B(42, 119, 228));
     }
 }
 

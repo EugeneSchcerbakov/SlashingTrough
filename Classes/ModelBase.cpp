@@ -76,14 +76,15 @@ void Entity::idleUpdate(float dt)
 {
 }
 
-void Entity::addHealth(float health)
+void Entity::addHealth(float health, bool callDamageReceived)
 {
     _health += health;
     if (_health < 0.0f) {
         _health = 0.0f;
     }
     
-    if (health < 0.0f) {
+    if (health < 0.0f && callDamageReceived)
+    {
         onDamageReceived();
     }
 }

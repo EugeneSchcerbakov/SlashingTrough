@@ -44,6 +44,10 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
         float mult = elem->FloatAttribute("damage");
         int chance = elem->IntAttribute("chance");
         ability = Crit::create(mult, chance);
+    } else if (name == "Vampirism") {
+        float drain = elem->FloatAttribute("healthDrain");
+        float returns = elem->FloatAttribute("healthReturn");
+        ability = Vampirism::create(drain, returns);
     } else {
         WRITE_WARN("Unknown ability.");
     }

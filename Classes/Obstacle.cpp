@@ -39,7 +39,7 @@ void Obstacle::idleUpdate(float dt)
     }
 }
 
-void Obstacle::addHealth(float health)
+void Obstacle::addHealth(float health, bool callDamageReceived)
 {
     if (health < 0.0f && !_destructible) {
         return;

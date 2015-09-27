@@ -96,6 +96,7 @@
     
     <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />
     <Shard id="crit_shard" icon="icons/icon_crystal_2.png" />
+    <Shard id="vampirism_shard" icon="icons/icon_crystal_3.png" />
     
     <Crystall id="back_dash_crystall"
         name="Back Dash"
@@ -111,6 +112,27 @@
             <Ability name="BackDashShield" cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
         </Tier2>
     </Crystall>
+    
+    <Crystall id="vampirism_crystall"
+        name="Vampirism"
+        kind="weapon" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_3.png"
+            desc="Vamirism I.">
+            <Ability name="Vampirism" healthDrain="1.0" healthReturn="15" />
+        </Tier1>
+        <Tier2 shards="5"
+            icon="icons/icon_crystal_3.png"
+            desc="Vampirism II.">
+            <Ability name="Vampirism" healthDrain="1.0" healthReturn="20" />
+        </Tier2>
+        <Tier3 shards="10"
+            icon="icons/icon_crystal_3.png"
+            desc="Vampirism III.">
+            <Ability name="Vampirism" healthDrain="1.0" healthReturn="30" />
+        </Tier3>
+    </Crystall>
+    
     <Crystall id="crit_crystall"
         name="Crit"
         kind="weapon" >

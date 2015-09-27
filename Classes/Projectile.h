@@ -20,7 +20,7 @@ public:
     Projectile(const GameInfo::ProjectileType &projectile, float x, float y, float dx, float dy);
     
     void idleUpdate(float dt) override;
-    void addHealth(float health) override;
+    void addHealth(float health, bool callDamageReceived = true) override;
     
 private:
     const float _dx, _dy;

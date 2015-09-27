@@ -71,7 +71,7 @@ public:
     virtual ~Entity();
     
     virtual void idleUpdate(float dt);
-    virtual void addHealth(float health);
+    virtual void addHealth(float health, bool callDamageReceived = true);
     virtual void onDamageReceived();
     virtual void kill();
     
