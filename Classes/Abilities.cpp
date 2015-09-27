@@ -223,6 +223,61 @@ void Vampirism::hit(Entity *entity)
     }
 }
 
+Ability::Ptr BurningAura::create(float damage, float frequency, float radius)
+{
+    return std::make_shared<BurningAura>(damage, frequency, radius);
+}
+
+BurningAura::BurningAura(float damage, float frequency, float radius)
+: Ability()
+, _damage(damage)
+, _frequency(frequency)
+, _radius(radius)
+, _localTime(0.0f)
+{
+}
+
+void BurningAura::update(float dt)
+{
+    if (_localTime < _frequency) {
+        _localTime += dt;
+    } else {
+        performBurning();
+        _localTime = 0.0f;
+    }
+}
+
+void BurningAura::performBurning()
+{
+    if (_hero->getGoals())
+    {
+        Entities& entities = *_hero->getGoals();
+        for (auto it = entities.begin(); it != entities.end(); ++it)
+        {
+            Entity *entity = (*it);
+            
+            if (entity && entity->isAlive() && entity->isType(Entity::Type::ENEMY))
+            {
+                float x1 = _hero->getPositionX();
+                float y1 = _hero->getPositionY();
+                
+                float x2 = entity->getPositionX();
+                float y2 = entity->getPositionY();
+                
+                float dx = x2 - x1;
+                float dy = y2 - y1;
+                
+                float len = sqrtf(dx * dx + dy * dy);
+                
+                if (len <= _radius)
+                {
+                    entity->addHealth(-_damage);
+                }
+            }
+        }
+    }
+}
+
 Ability::Ptr Crit::create(float multiplier, int chance)
 {
     return std::make_shared<Crit>(multiplier, chance);

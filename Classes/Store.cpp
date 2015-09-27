@@ -48,6 +48,11 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
         float drain = elem->FloatAttribute("healthDrain");
         float returns = elem->FloatAttribute("healthReturn");
         ability = Vampirism::create(drain, returns);
+    } else if (name == "BurningAura") {
+        float damage = elem->FloatAttribute("damage");
+        float frequency =  elem->FloatAttribute("frequency");
+        float radius = elem->FloatAttribute("radius");
+        ability = BurningAura::create(damage, frequency, radius);
     } else if (name == "ExtendedRange") {
         float increase = elem->FloatAttribute("increase");
         ability = ExtendedRange::create(increase);

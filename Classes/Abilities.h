@@ -75,6 +75,26 @@ protected:
     const float _healthReturn;
 };
 
+class BurningAura : public Ability
+{
+public:
+    static Ptr create(float damage, float frequency, float radius);
+    
+public:
+    BurningAura(float damage, float frequency, float radius);
+    
+    virtual void update(float dt) override;
+    
+protected:
+    void performBurning();
+    
+    float _localTime;
+    
+    const float _damage;
+    const float _frequency;
+    const float _radius;
+};
+
 class Crit : public Ability
 {
 public:

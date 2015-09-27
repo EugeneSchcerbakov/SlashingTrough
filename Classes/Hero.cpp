@@ -152,15 +152,8 @@ void Hero::attack()
                     }
                 }
                 
-                if (!entity->isAlive()) {
-                    Reward *reward = dynamic_cast<Reward *>(entity);
-                    if (reward) {
-                        addKillsPoint(reward->getKillPoints());
-                        addCoinsPoint(reward->getCoinPoints());
-                        addStamina(reward->getStaminaPoints());
-                        addScorePoint(reward->getScorePoints());
-                    }
-                    
+                if (!entity->isAlive())
+                {
                     for (auto crystall : _equip.crystalls) {
                         if (crystall) {
                             crystall->onKill(entity);
@@ -300,7 +293,7 @@ PlayerInfo::Score Hero::getScore() const
     return _score;
 }
 
-const Entities* Hero::getGoals() const
+Entities* Hero::getGoals()
 {
     return _goals;
 }

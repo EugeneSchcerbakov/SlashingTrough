@@ -48,7 +48,8 @@ public:
     ItemWeapon* getWeapon() const;
     ItemArmor* getArmor() const;
     PlayerInfo::Score getScore() const;
-    const Entities* getGoals() const;
+    
+    Entities* getGoals();
     
     bool isActionsQueueFull() const;
     bool isAbleToPerform(HeroAction *action);

@@ -97,6 +97,7 @@
     <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />
     <Shard id="crit_shard" icon="icons/icon_crystal_2.png" />
     <Shard id="vampirism_shard" icon="icons/icon_crystal_3.png" />
+    <Shard id="burning_aura_shard" icon="icons/icon_crystal_4.png" />
     <Shard id="extend_range_shard" icon="icons/icon_crystal_2.png" />
     <Shard id="regeneration_shard" icon="icons/icon_crystal_1.png" />
     
@@ -132,6 +133,26 @@
             icon="icons/icon_crystal_3.png"
             desc="Vampirism III.">
             <Ability name="Vampirism" healthDrain="1.0" healthReturn="30" />
+        </Tier3>
+    </Crystall>
+    
+    <Crystall id="burning_aura_crystall"
+        name="Burning Aura"
+        kind="armor" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_4.png"
+            desc="Burn enemies around with 1 point damage.">
+            <Ability name="BurningAura" damage="1.0" frequency="1.0" radius="350.0"/>
+        </Tier1>
+        <Tier2 shards="7"
+            icon="icons/icon_crystal_4.png"
+            desc="Burn more enemies around with 2 point damage.">
+            <Ability name="BurningAura" damage="2.0" frequency="1.0" radius="450.0"/>
+        </Tier2>
+        <Tier3 shards="10"
+            icon="icons/icon_crystal_4.png"
+            desc="Burn even more enemies around with 3 point damage.">
+            <Ability name="BurningAura" damage="3.0" frequency="1.0" radius="1050.0"/>
         </Tier3>
     </Crystall>
     

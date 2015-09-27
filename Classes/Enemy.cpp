@@ -183,6 +183,16 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
 void Enemy::onDamageReceived()
 {
     sendEvent(Event("DamageReceived"));
+    
+    if (!isAlive() && _goal->isType(Entity::Type::HERO))
+    {
+        Hero *hero = dynamic_cast<Hero *>(_goal);
+            
+        hero->addKillsPoint(getKillPoints());
+        hero->addCoinsPoint(getCoinPoints());
+        hero->addStamina(getStaminaPoints());
+        hero->addScorePoint(getScorePoints());
+    }
 }
 
 void Enemy::kill()
