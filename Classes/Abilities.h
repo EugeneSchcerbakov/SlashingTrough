@@ -90,4 +90,18 @@ protected:
     int _chance;
 };
 
+class ExtendedRange : public Ability
+{
+public:
+    static Ptr create(float increase);
+    
+public:
+    ExtendedRange(float increase);
+    
+    virtual void init(Hero *hero) override;
+    
+protected:
+    float _increase;
+};
+
 #endif /* defined(__SlashingTrough__Abilities__) */

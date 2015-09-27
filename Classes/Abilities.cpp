@@ -249,3 +249,20 @@ void Crit::hit(Entity *entity)
         }
     }
 }
+
+Ability::Ptr ExtendedRange::create(float increase)
+{
+    return std::make_shared<ExtendedRange>(increase);
+}
+
+ExtendedRange::ExtendedRange(float increase)
+: Ability()
+, _increase(increase)
+{
+}
+
+void ExtendedRange::init(Hero *hero)
+{
+    Ability::init(hero);
+    hero->extendRadius(_increase);
+}

@@ -89,6 +89,11 @@ void Entity::addHealth(float health, bool callDamageReceived)
     }
 }
 
+void Entity::extendRadius(float increase)
+{
+    _radius = std::max(0.0f, _radius + increase);
+}
+
 void Entity::onDamageReceived()
 {
 }

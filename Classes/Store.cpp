@@ -48,6 +48,9 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
         float drain = elem->FloatAttribute("healthDrain");
         float returns = elem->FloatAttribute("healthReturn");
         ability = Vampirism::create(drain, returns);
+    } else if (name == "ExtendedRange") {
+        float increase = elem->FloatAttribute("increase");
+        ability = ExtendedRange::create(increase);
     } else {
         WRITE_WARN("Unknown ability.");
     }
