@@ -104,4 +104,20 @@ protected:
     float _increase;
 };
 
+class Regeneration : public Ability
+{
+public:
+    static Ptr create(float healthPerSecond);
+    
+public:
+    Regeneration(float healthPerSecond);
+    
+    virtual void update(float dt) override;
+    
+protected:
+    float _localTime;
+    
+    const float _healthPerSecond;
+};
+
 #endif /* defined(__SlashingTrough__Abilities__) */

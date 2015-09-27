@@ -98,6 +98,7 @@
     <Shard id="crit_shard" icon="icons/icon_crystal_2.png" />
     <Shard id="vampirism_shard" icon="icons/icon_crystal_3.png" />
     <Shard id="extend_range_shard" icon="icons/icon_crystal_2.png" />
+    <Shard id="regeneration_shard" icon="icons/icon_crystal_1.png" />
     
     <Crystall id="back_dash_crystall"
         name="Back Dash"
@@ -171,6 +172,26 @@
             icon="icons/icon_crystal_2.png"
             desc="Weapon attack range extended by 10">
             <Ability name="ExtendedRange" increase="10.0" />
+        </Tier3>
+    </Crystall>
+    
+    <Crystall id="regeneration_crystall"
+        name="Regeneration"
+        kind="armor" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_1.png"
+            desc="Restore 1 health point every second.">
+            <Ability name="Regeneration" healthPerSec="1.0" />
+        </Tier1>
+        <Tier2 shards="7"
+            icon="icons/icon_crystal_2.png"
+            desc="Restore 2 health point every second.">
+            <Ability name="Regeneration" healthPerSec="2.0" />
+        </Tier2>
+        <Tier3 shards="10"
+            icon="icons/icon_crystal_2.png"
+            desc="Restore 3 health point every second.">
+            <Ability name="Regeneration" healthPerSec="3.0" />
         </Tier3>
     </Crystall>
 </Store>

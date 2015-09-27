@@ -266,3 +266,25 @@ void ExtendedRange::init(Hero *hero)
     Ability::init(hero);
     hero->extendRadius(_increase);
 }
+
+Ability::Ptr Regeneration::create(float healthPerSecond)
+{
+    return std::make_shared<Regeneration>(healthPerSecond);
+}
+
+Regeneration::Regeneration(float healthPerSecond)
+: Ability()
+, _healthPerSecond(healthPerSecond)
+, _localTime(0.0f)
+{
+}
+
+void Regeneration::update(float dt)
+{
+    if (_localTime < 1.0f) {
+        _localTime += dt;
+    } else {
+        _hero->addHealth(_healthPerSecond);
+        _localTime = 0.0f;
+    }
+}

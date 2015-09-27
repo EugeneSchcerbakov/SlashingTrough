@@ -51,6 +51,9 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
     } else if (name == "ExtendedRange") {
         float increase = elem->FloatAttribute("increase");
         ability = ExtendedRange::create(increase);
+    } else if (name == "Regeneration") {
+        float healthPerSec = elem->FloatAttribute("healthPerSec");
+        ability = Regeneration::create(healthPerSec);
     } else {
         WRITE_WARN("Unknown ability.");
     }
