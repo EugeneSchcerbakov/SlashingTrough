@@ -178,9 +178,10 @@ void Ability::kill(Entity *e)
     if (!_hero) {WRITE_ERR("Failed to perform alility with invalid owner.");}
 }
 
-void Ability::damage()
+float Ability::damage(float receivedDamage)
 {
     if (!_hero) {WRITE_ERR("Failed to perform alility with invalid owner.");}
+    return receivedDamage;
 }
 
 // Crystall
@@ -279,11 +280,12 @@ void Crystall::onKill(Entity *entity)
     }
 }
 
-void Crystall::onDamage()
+float Crystall::onDamage(float receivedDamage)
 {
     if (isUnlocked()) {
-        tiersData[tier].ability->damage();
+        return tiersData[tier].ability->damage(receivedDamage);
     }
+    return receivedDamage;
 }
 
 const std::string& Crystall::getDesc() const

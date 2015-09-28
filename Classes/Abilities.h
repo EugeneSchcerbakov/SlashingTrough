@@ -95,6 +95,20 @@ protected:
     const float _radius;
 };
 
+class MagicShield : public Ability
+{
+public:
+    static Ptr create(float absorb);
+    
+public:
+    MagicShield(float absorb);
+    
+    virtual float damage(float receivedDamage);
+    
+protected:
+    const float _absorb;
+};
+
 class Crit : public Ability
 {
 public:

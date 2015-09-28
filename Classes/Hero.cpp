@@ -110,7 +110,23 @@ void Hero::onDamageReceived()
 
 void Hero::addHealth(float health, bool callDamageReceived)
 {
-    Entity::addHealth(health, callDamageReceived);
+    float actual = health;
+    
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            actual = crystall->onDamage(actual);
+        }
+    }
+    
+    _health += actual;
+    if (_health < 0.0f) {
+        _health = 0.0f;
+    }
+    
+    if (actual < 0.0f && callDamageReceived)
+    {
+        onDamageReceived();
+    }
     
     if (_health > _maxHealth) {
         _health = _maxHealth;

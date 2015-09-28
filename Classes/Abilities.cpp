@@ -278,6 +278,23 @@ void BurningAura::performBurning()
     }
 }
 
+Ability::Ptr MagicShield::create(float absorb)
+{
+    return std::make_shared<MagicShield>(absorb);
+}
+
+MagicShield::MagicShield(float absorb)
+: Ability()
+, _absorb(absorb)
+{
+}
+
+float MagicShield::damage(float receivedDamage)
+{
+    float actual = math::clamp(receivedDamage + _absorb, receivedDamage, 0.0f);
+    return actual;
+}
+
 Ability::Ptr Crit::create(float multiplier, int chance)
 {
     return std::make_shared<Crit>(multiplier, chance);

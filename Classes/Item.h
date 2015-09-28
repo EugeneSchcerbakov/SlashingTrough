@@ -129,7 +129,7 @@ public:
     
     virtual void hit(Entity *e);
     virtual void kill(Entity *e);
-    virtual void damage();
+    virtual float damage(float receivedDamage);
     
 protected:
     Hero *_hero;
@@ -180,7 +180,7 @@ public:
     
     void onHit(Entity *entity);
     void onKill(Entity *entity);
-    void onDamage();
+    float onDamage(float receivedDamage);
     
     const std::string& getDesc() const override;
     const std::string& getIcon() const override;

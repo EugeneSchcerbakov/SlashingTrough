@@ -59,6 +59,9 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
     } else if (name == "Regeneration") {
         float healthPerSec = elem->FloatAttribute("healthPerSec");
         ability = Regeneration::create(healthPerSec);
+    } else if (name == "MagicShield") {
+        float absorb = elem->FloatAttribute("absorb");
+        ability = MagicShield::create(absorb);
     } else {
         WRITE_WARN("Unknown ability.");
     }
