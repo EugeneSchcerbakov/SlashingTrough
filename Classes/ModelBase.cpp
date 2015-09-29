@@ -8,6 +8,8 @@
 
 #include "ModelBase.h"
 
+#include "Utils.h"
+
 Event::Event()
 : _name("")
 {

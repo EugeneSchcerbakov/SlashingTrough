@@ -114,9 +114,6 @@
     <ClCompile Include="..\Classes\Item.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ItemFeature.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LevelsCache.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -153,6 +150,10 @@
     <ClCompile Include="..\Classes\ScreenChanger.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Abilities.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StoreCystallWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -257,9 +258,6 @@
     <ClInclude Include="..\Classes\Item.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ItemFeature.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LevelsCache.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -296,6 +294,10 @@
     <ClInclude Include="..\Classes\PauseMenu.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Abilities.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StoreCystallWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
