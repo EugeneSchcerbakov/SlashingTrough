@@ -95,6 +95,41 @@ protected:
     const float _radius;
 };
 
+class ProjectileAbsorb : public Ability
+{
+public:
+    static Ptr create();
+    
+public:
+    ProjectileAbsorb();
+    
+    virtual void update(float dt) override;
+    virtual void swipeLeft() override;
+    virtual void swipeRight() override;
+    
+protected:
+    virtual void updateAbsorber();
+    
+    bool isPointInArea(float x, float y) const;
+    
+    float _attackTime;
+    float _totalTime;
+    
+    const float _radius;
+};
+
+class ProjectileReflect : public ProjectileAbsorb
+{
+public:
+    static Ptr create();
+    
+public:
+    ProjectileReflect();
+    
+protected:
+    virtual void updateAbsorber() override;
+};
+
 class MagicShield : public Ability
 {
 public:

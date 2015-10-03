@@ -22,13 +22,27 @@ public:
     void idleUpdate(float dt) override;
     void addHealth(float health, bool callDamageReceived = true) override;
     
+    void setSpeed(float speed);
+    void setDirection(float dx, float dy);
+    void setReflected(bool reflected);
+    
+    float getSpeed() const;
+    float getDirX() const;
+    float getDirY() const;
+    
+    bool isReflected() const;
+    
 private:
-    const float _dx, _dy;
-    const float _speed;
+    void tryDamage(Entity *goal);
+    
+    float _dx, _dy;
+    float _speed;
+    float _localTime;
+    
+    bool _reflected;
+    
     const float _lifeTime;
     const float _healthDmg, _staminaDmg;
-    
-    float _localTime;
 };
 
 #endif /* defined(__SlashingTrough__Projectile__) */

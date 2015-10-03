@@ -20,6 +20,7 @@ Projectile::Projectile(const GameInfo::ProjectileType &projectile, float x, floa
 , _healthDmg(projectile.healthDamage)
 , _staminaDmg(projectile.staminaDamage)
 , _localTime(0.0f)
+, _reflected(false)
 {
     _x = x;
     _y = y;
@@ -30,29 +31,35 @@ Projectile::Projectile(const GameInfo::ProjectileType &projectile, float x, floa
 
 void Projectile::idleUpdate(float dt)
 {
-    if (_goal && _goal->isType(Entity::Type::HERO)) {
-        _x += _dx * _speed * dt;
-        _y += _dy * _speed * dt;
-        
-        float dx = _goal->getPositionX() - _x;
-        float dy = _goal->getPositionY() - _y;
-        
-        float len = sqrtf(dx * dx + dy * dy);
-        
-        if (len < 80.0f) {
-            _goal->addHealth(-_healthDmg);
-            if (_goal->isType(Entity::Type::HERO)) {
-                auto hero = dynamic_cast<Hero *>(_goal);
-                hero->addStamina(-_staminaDmg);
-                hero->onDamageReceived();
+    _x += _dx * _speed * dt;
+    _y += _dy * _speed * dt;
+    
+    _localTime += dt;
+    if (_localTime > _lifeTime) {
+        _localTime = 0.0;
+        kill();
+    }
+    
+    if (_goal)
+    {
+        if (_reflected && _goal->isType(Entity::Type::HERO))
+        {
+            Hero *hero = dynamic_cast<Hero *>(_goal);
+            Entities& entities = *hero->getGoals();
+            
+            for (auto it = entities.begin(); it != entities.end(); ++it)
+            {
+                Entity *entity = (*it);
+                
+                if (entity && entity->isAlive() && !entity->isType(Entity::Type::PROJECTILE))
+                {
+                    tryDamage(entity);
+                }
             }
-            kill();
         }
-        
-        _localTime += dt;
-        if (_localTime > _lifeTime) {
-            _localTime = 0.0;
-            kill();
+        else
+        {
+            tryDamage(_goal);
         }
     }
 }
@@ -60,4 +67,65 @@ void Projectile::idleUpdate(float dt)
 void Projectile::addHealth(float health, bool callDamageReceived)
 {
     // just nothing
+}
+
+void Projectile::tryDamage(Entity *goal)
+{
+    if (!goal) {
+        return;
+    }
+    
+    float dx = goal->getPositionX() - _x;
+    float dy = goal->getPositionY() - _y;
+    
+    float len = sqrtf(dx * dx + dy * dy);
+    
+    if (len < 80.0f)
+    {
+        goal->addHealth(-_healthDmg);
+        if (goal->isType(Entity::Type::HERO))
+        {
+            auto hero = dynamic_cast<Hero *>(goal);
+            hero->addStamina(-_staminaDmg);
+            hero->onDamageReceived();
+        }
+        
+        kill();
+    }
+}
+
+void Projectile::setSpeed(float speed)
+{
+    _speed = speed;
+}
+
+void Projectile::setDirection(float dx, float dy)
+{
+    _dx = dx;
+    _dy = dy;
+}
+
+void Projectile::setReflected(bool reflected)
+{
+    _reflected = reflected;
+}
+
+float Projectile::getSpeed() const
+{
+    return _speed;
+}
+
+float Projectile::getDirX() const
+{
+    return _dx;
+}
+
+float Projectile::getDirY() const
+{
+    return _dy;
+}
+
+bool Projectile::isReflected() const
+{
+    return _reflected;
 }

@@ -9,6 +9,7 @@
 #include "Abilities.h"
 #include "Hero.h"
 #include "Enemy.h"
+#include "Projectile.h"
 #include "Utils.h"
 #include "Log.h"
 
@@ -273,6 +274,142 @@ void BurningAura::performBurning()
                 {
                     entity->addHealth(-_damage);
                 }
+            }
+        }
+    }
+}
+
+Ability::Ptr ProjectileAbsorb::create()
+{
+    return std::make_shared<ProjectileAbsorb>();
+}
+
+ProjectileAbsorb::ProjectileAbsorb()
+: Ability()
+, _attackTime(0.0f)
+, _totalTime(0.0f)
+, _radius(250.0f)
+{
+}
+
+void ProjectileAbsorb::update(float dt)
+{
+    if (_attackTime > 0.0f) {
+        _attackTime -= dt;
+        
+        float lower = math::lerp(0.0f, _totalTime, 0.2f);
+        float upper = math::lerp(0.0f, _totalTime, 0.8f);
+        
+        if (_attackTime >= lower && _attackTime <= upper)
+        {
+            updateAbsorber();
+        }
+    }
+}
+
+void ProjectileAbsorb::swipeLeft()
+{
+    _totalTime = _hero->getWeapon()->getSpeed();
+    _attackTime = _totalTime;
+}
+
+void ProjectileAbsorb::swipeRight()
+{
+    _totalTime = _hero->getWeapon()->getSpeed();
+    _attackTime = _totalTime;
+}
+
+void ProjectileAbsorb::updateAbsorber()
+{
+    Entities& entities = *_hero->getGoals();
+    for (auto it = entities.begin(); it != entities.end(); ++it)
+    {
+        Entity *entity = (*it);
+        
+        if (entity && entity->isAlive() && entity->isType(Entity::Type::PROJECTILE))
+        {
+            float x = entity->getPositionX();
+            float y = entity->getPositionY();
+            
+            if (isPointInArea(x, y))
+            {
+                entity->kill();
+            }
+        }
+    }
+}
+
+bool ProjectileAbsorb::isPointInArea(float x, float y) const
+{
+    float x1 = _hero->getPositionX();
+    float y1 = _hero->getPositionY();
+    
+    float dx = x - x1;
+    float dy = y - y1;
+    
+    float len = sqrtf(dx * dx + dy * dy);
+    
+    return len <= _radius;
+}
+
+Ability::Ptr ProjectileReflect::create()
+{
+    return std::make_shared<ProjectileReflect>();
+}
+
+ProjectileReflect::ProjectileReflect()
+: ProjectileAbsorb()
+{
+}
+
+void ProjectileReflect::updateAbsorber()
+{
+    Entities& entities = *_hero->getGoals();
+    for (auto it = entities.begin(); it != entities.end(); ++it)
+    {
+        Entity *entity = (*it);
+        
+        if (entity && entity->isAlive() && entity->isType(Entity::Type::PROJECTILE))
+        {
+            Projectile *projectile = dynamic_cast<Projectile *>(entity);
+            
+            if (projectile->isReflected()) {
+                continue;
+            }
+            
+            float x1 = _hero->getPositionX();
+            float y1 = _hero->getPositionY();
+            
+            float x2 = projectile->getPositionX();
+            float y2 = projectile->getPositionY();
+            
+            float dx = x2 - x1;
+            float dy = y2 - y1;
+            
+            float len = sqrtf(dx * dx + dy * dy);
+            
+            float n = len;
+            n = 1.0f / n;
+            float nx = dx * n;
+            float ny = dy * n;
+            
+            float xface = 0.0f;
+            float yface = 1.0f;
+            float dotf = nx * xface + ny * yface;
+            
+            if (len <= _radius && dotf >= 0.9f)
+            {
+                float dirx = projectile->getDirX();
+                float diry = projectile->getDirY();
+                
+                float dotp = nx * dirx + ny * diry;
+                
+                float rx = dirx - 2.0f * nx * dotp;
+                float ry = diry - 2.0f * ny * dotp;
+                
+                projectile->setDirection(rx, ry);
+                projectile->setReflected(true);
+                projectile->setSpeed(projectile->getSpeed() * 1.5f);
             }
         }
     }

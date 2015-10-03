@@ -62,6 +62,10 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
     } else if (name == "MagicShield") {
         float absorb = elem->FloatAttribute("absorb");
         ability = MagicShield::create(absorb);
+    } else if (name == "ProjectileAbsorb") {
+        ability = ProjectileAbsorb::create();
+    } else if (name == "ProjectileReflect") {
+        ability = ProjectileReflect::create();
     } else {
         WRITE_WARN("Unknown ability.");
     }

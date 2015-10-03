@@ -97,6 +97,7 @@
     <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />
     <Shard id="crit_shard" icon="icons/icon_crystal_2.png" />
     <Shard id="vampirism_shard" icon="icons/icon_crystal_3.png" />
+    <Shard id="proj_defence_shard" icon="icons/icon_crystal_5.png" />
     <Shard id="burning_aura_shard" icon="icons/icon_crystal_4.png" />
     <Shard id="extend_range_shard" icon="icons/icon_crystal_2.png" />
     <Shard id="regeneration_shard" icon="icons/icon_crystal_1.png" />
@@ -135,6 +136,21 @@
             desc="Vampirism III.">
             <Ability name="Vampirism" healthDrain="1.0" healthReturn="30" />
         </Tier3>
+    </Crystall>
+    
+    <Crystall id="proj_defence_crystall"
+        name="Projectile defence"
+        kind="weapon" >
+        <Tier1 shards="3"
+            icon="icons/icon_crystal_5.png"
+            desc="Destroy all projectiles collided with weapon trail.">
+            <Ability name="ProjectileAbsorb" />
+        </Tier1>
+        <Tier2 shards="7"
+            icon="icons/icon_crystal_5.png"
+            desc="Reflect all projectiles collided with weapon trail.">
+            <Ability name="ProjectileReflect" />
+        </Tier2>
     </Crystall>
     
     <Crystall id="burning_aura_crystall"
