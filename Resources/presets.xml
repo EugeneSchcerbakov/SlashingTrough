@@ -10,10 +10,10 @@
     </Preset>
     <Preset id="p2" dif="1">
         <row>------</row>
-        <row>E1----</row>
+        <row>B1----</row>
         <row>------</row>
         <row>------</row>
-        <row>--E1--</row>
+        <row>--B1--</row>
         <row>------</row>
     </Preset>
     <Preset id="p3" dif="1">
@@ -99,7 +99,7 @@
     <Preset id="p13" dif="3">
         <row>--B1--</row>
         <row>------</row>
-        <row>----M1</row>
+        <row>----R1</row>
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>        
@@ -108,7 +108,7 @@
         <row>--B1--</row>
         <row>------</row>
         <row>B1----</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
@@ -116,21 +116,21 @@
         <row>------</row>
         <row>----B1</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>B1----</row>
         <row>------</row>        
     </Preset>
     <Preset id="p16" dif="3">
         <row>--B1--</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p17" dif="3">
         <row>------</row>
-        <row>B1M1--</row>
+        <row>B1R1--</row>
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>
@@ -139,7 +139,7 @@
     <Preset id="p18" dif="3">
         <row>------</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>B1----</row>
         <row>----B1</row>
         <row>------</row>        
@@ -147,39 +147,39 @@
     <Preset id="p19" dif="4">
         <row>--B1--</row>
         <row>------</row>
-        <row>----M1</row>
+        <row>----R1</row>
         <row>B1----</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
     <Preset id="p20" dif="4">
         <row>------</row>
-        <row>----M1</row>
+        <row>----R1</row>
         <row>B1----</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p21" dif="4">
         <row>------</row>
-        <row>----M1</row>
-        <row>M1----</row>
+        <row>----R1</row>
+        <row>R1----</row>
         <row>--B1--</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
     <Preset id="p22" dif="4">
         <row>------</row>
-        <row>M1----</row>
-        <row>--M1--</row>
+        <row>R1----</row>
+        <row>--R1--</row>
         <row>----B1</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
     <Preset id="p23" dif="4">
         <row>------</row>
-        <row>----M1</row>
-        <row>--M1--</row>
+        <row>----R1</row>
+        <row>--R1--</row>
         <row>----B1</row>
         <row>------</row>
         <row>------</row>        
@@ -187,10 +187,10 @@
     <Preset id="p24" dif="4">
         <row>------</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>--B1--</row>
-        <row>----M1</row>        
+        <row>----R1</row>        
     </Preset>
     <Preset id="p25" dif="5">
         <row>------</row>
@@ -244,22 +244,22 @@
         <row>--B1--</row>
         <row>----R1</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
     <Preset id="p32" dif="6">
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>----B1</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>--B1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p33" dif="6">
         <row>R1----</row>
         <row>------</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>--B1--</row>
         <row>------</row>
         <row>--B1--</row>        
@@ -267,14 +267,14 @@
     <Preset id="p34" dif="6">
         <row>----B1</row>
         <row>------</row>
-        <row>M1--R1</row>
+        <row>R1--R1</row>
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p35" dif="6">
         <row>--R1--</row>
-        <row>----M1</row>
+        <row>----R1</row>
         <row>------</row>
         <row>------</row>
         <row>B1----</row>
@@ -285,12 +285,12 @@
         <row>--R1--</row>
         <row>------</row>
         <row>--B1--</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p37" dif="7">
         <row>------</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>----R1</row>
         <row>--B1--</row>
         <row>----B1</row>
@@ -298,7 +298,7 @@
     </Preset>
     <Preset id="p38" dif="7">
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>----B1</row>
         <row>R1----</row>
         <row>--B1--</row>
@@ -310,12 +310,12 @@
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>
-        <row>--M1--</row>        
+        <row>--R1--</row>        
     </Preset>
     <Preset id="p40" dif="7">
         <row>B1----</row>
         <row>--R1--</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>--B1--</row>
         <row>------</row>
         <row>----B1</row>        
@@ -324,14 +324,14 @@
         <row>------</row>
         <row>R1B1--</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>----B1</row>
         <row>------</row>        
     </Preset>
     <Preset id="p42" dif="7">
         <row>R1----</row>
         <row>------</row>
-        <row>B1M1--</row>
+        <row>B1R1--</row>
         <row>------</row>
         <row>--B1--</row>
         <row>------</row>        
@@ -341,12 +341,12 @@
         <row>--R1--</row>
         <row>------</row>
         <row>--B2--</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p37" dif="7">
         <row>------</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>----R1</row>
         <row>--B2--</row>
         <row>----B2</row>
@@ -354,7 +354,7 @@
     </Preset>
     <Preset id="p38" dif="7">
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>----B2</row>
         <row>R1----</row>
         <row>--B2--</row>
@@ -366,12 +366,12 @@
         <row>------</row>
         <row>--B2--</row>
         <row>------</row>
-        <row>--M1--</row>        
+        <row>--R1--</row>        
     </Preset>
     <Preset id="p40" dif="7">
         <row>B2----</row>
         <row>--R1--</row>
-        <row>M1----</row>
+        <row>R1----</row>
         <row>--B2--</row>
         <row>------</row>
         <row>----B2</row>        
@@ -380,14 +380,14 @@
         <row>------</row>
         <row>R1B2--</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>----B2</row>
         <row>------</row>        
     </Preset>
     <Preset id="p42" dif="7">
         <row>R1----</row>
         <row>------</row>
-        <row>B2M1--</row>
+        <row>B2R1--</row>
         <row>------</row>
         <row>--B2--</row>
         <row>------</row>        
@@ -491,7 +491,7 @@
     <Preset id="p55" dif="9">
         <row>--B2--</row>
         <row>------</row>
-        <row>----M1</row>
+        <row>----R1</row>
         <row>------</row>
         <row>--B2--</row>
         <row>------</row>        
@@ -500,7 +500,7 @@
         <row>--B2--</row>
         <row>------</row>
         <row>B2----</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>------</row>        
     </Preset>
@@ -508,21 +508,21 @@
         <row>------</row>
         <row>----B2</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>B2----</row>
         <row>------</row>        
     </Preset>
     <Preset id="p58" dif="9">
         <row>--B2--</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>------</row>
         <row>--B2--</row>
         <row>------</row>        
     </Preset>
     <Preset id="p59" dif="9">
         <row>------</row>
-        <row>B2M1--</row>
+        <row>B2R1--</row>
         <row>------</row>
         <row>--B2--</row>
         <row>------</row>
@@ -531,7 +531,7 @@
     <Preset id="p60" dif="9">
         <row>------</row>
         <row>------</row>
-        <row>--M1--</row>
+        <row>--R1--</row>
         <row>B2----</row>
         <row>----B2</row>
         <row>------</row>        

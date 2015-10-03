@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <Map>
-    <LevelMark levelId="level_1" x="230.0" y="133.0" text="0"/>
-    <LevelMark levelId="level_2" x="360.0" y="177.0" text="1"/>
-    <LevelMark levelId="level_3" x="460.0" y="237.0" text="2"/>
+    <LevelMark levelId="level_1" x="230.0" y="133.0" text="1"/>
+    <LevelMark levelId="level_2" x="360.0" y="177.0" text="2"/>
+    <LevelMark levelId="level_3" x="460.0" y="237.0" text="3"/>
+    <LevelMark levelId="level_4" x="350.0" y="290.0" text="4"/>
+    <LevelMark levelId="level_5" x="240.0" y="320.0" text="5"/>
+    <LevelMark levelId="level_6" x="200.0" y="360.0" text="6"/>
+    <LevelMark levelId="level_7" x="350.0" y="420.0" text="7"/>
+    <LevelMark levelId="level_8" x="470.0" y="430.0" text="8"/>
+    <LevelMark levelId="level_9" x="450.0" y="460.0" text="9"/>
+    <LevelMark levelId="level_10" x="500.0" y="500.0" text="10"/>
 </Map>
