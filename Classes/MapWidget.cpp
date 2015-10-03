@@ -99,6 +99,7 @@ bool MapWidget::initLevelMarkers(const std::string &mapFile)
                 std::string text = node->Attribute("text");
                 float x = node->FloatAttribute("x");
                 float y = node->FloatAttribute("y");
+                y = _map->getContentSize().height - y;
                 FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
                 MapLevelMark *mark = MapLevelMark::create(level);
                 mark->setLevelText(text);
