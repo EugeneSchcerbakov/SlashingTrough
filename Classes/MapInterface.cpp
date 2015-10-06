@@ -8,7 +8,6 @@
 
 #include "MapInterface.h"
 
-#include "MissionStartPopup.h"
 #include "ScreenChanger.h"
 #include "LevelsCache.h"
 #include "PlayerInfo.h"
@@ -35,7 +34,7 @@ MapInterface::~MapInterface()
 
 bool MapInterface::init()
 {
-    if (!cocos2d::Scene::init()) {
+    if (!PopupCarrier::init()) {
         return false;
     }
     
@@ -102,39 +101,13 @@ bool MapInterface::init()
     addChild(_mapWidget, Order::MAP);
     addChild(_guiLayer, Order::CONTROLS);
     
-    return true;
-}
-
-void MapInterface::showMissionPopup(const std::string &levelId, const std::string &title)
-{
-    LevelsCache &levelsCache = LevelsCache::getInstance();
+    attachHandlerWithZOrder(Order::CONTROLS);
     
-    FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
-    MissionStartPopup *popup = MissionStartPopup::create(levelId, title);
-    popup->startShowEffect();
-        
-    addChild(popup, Order::POPUP, "MissionStartPopup");
-}
-
-void MapInterface::hideMissionPopup()
-{
-    auto popup = getChildByName<MissionStartPopup *>("MissionStartPopup");
-    if (popup) {
-        popup->startHideEffect([this](){removeChildByName("MissionStartPopup");});
-    }
+    return true;
 }
 
 bool MapInterface::mapTouchBegan(cocos2d::Touch *touch, cocos2d::Event *e)
 {
-    auto popup = getChildByName<MissionStartPopup *>("MissionStartPopup");
-    if (popup) {
-        cocos2d::Vec2 pt = popup->convertTouchToNodeSpace(touch);
-        if (!popup->hitTest(pt)) {
-            hideMissionPopup();
-            return false;
-        }
-    }
-    
     return true;
 }
 
@@ -146,7 +119,15 @@ void MapInterface::mapTouchEnded(cocos2d::Touch *touch, cocos2d::Event *e)
     {
         auto level = mark->getLevel().lock();
         if (!level->isStatus(FieldLevel::Status::LOCKED)) {
-            showMissionPopup(level->getId(), "Mission " + mark->getLevelText());
+            std::string levelId = level->getId();
+            std::string title = "Mission " + mark->getLevelText();
+            
+            LevelsCache &levelsCache = LevelsCache::getInstance();
+            
+            FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
+            MissionStartPopup *popup = MissionStartPopup::create(levelId, title);
+            
+            pushPopup(popup, Order::POPUP, "MissionStartPopup");
         } else {
             // shop pop up text
         }

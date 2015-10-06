@@ -12,17 +12,18 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
+#include "PopupCore.h"
 #include "FieldLevel.h"
 
-class MissionStartPopup : public cocos2d::ui::Layout
+class MissionStartPopup : public Popup
 {
 public:
     static MissionStartPopup* create(const std::string &levelId, const std::string &title);
     
     bool hitTest(const cocos2d::Vec2 &pt) override;
     
-    void startShowEffect();
-    void startHideEffect(std::function<void()> func);
+    virtual void showEffect() override;
+    virtual float hideEffect() override; // return effect duration
     
 protected:
     MissionStartPopup();

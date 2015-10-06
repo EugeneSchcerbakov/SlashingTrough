@@ -9,15 +9,13 @@
 #ifndef __SlashingTrough__MapInterface__
 #define __SlashingTrough__MapInterface__
 
+#include "MissionStartPopup.h"
 #include "MapWidget.h"
 
-class MapInterface : public cocos2d::Scene
+class MapInterface : public PopupCarrier
 {
 public:
     static MapInterface* create();
-    
-    void showMissionPopup(const std::string &levelId, const std::string &title);
-    void hideMissionPopup();
     
 protected:
     MapInterface();

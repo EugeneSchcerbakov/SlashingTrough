@@ -26,6 +26,7 @@ MissionStartPopup* MissionStartPopup::create(const std::string &levelId, const s
 }
 
 MissionStartPopup::MissionStartPopup()
+: Popup()
 {
 }
 
@@ -38,7 +39,7 @@ bool MissionStartPopup::hitTest(const cocos2d::Vec2 &pt)
     return _play->hitTest(pt) || _panel->getBoundingBox().containsPoint(pt);
 }
 
-void MissionStartPopup::startShowEffect()
+void MissionStartPopup::showEffect()
 {
     if (_tint->getNumberOfRunningActions() > 0) {
         return;
@@ -64,10 +65,10 @@ void MissionStartPopup::startShowEffect()
     _tint->runAction(fadein);
 }
 
-void MissionStartPopup::startHideEffect(std::function<void()> func)
+float MissionStartPopup::hideEffect()
 {
     if (_tint->getNumberOfRunningActions() > 0) {
-        return;
+        return 0.0f;
     }
     
     float time = 0.1f;
@@ -81,14 +82,14 @@ void MissionStartPopup::startHideEffect(std::function<void()> func)
     _play->runAction(playMove);
     
     auto fadeout = cocos2d::FadeOut::create(time);
-    auto call = cocos2d::CallFunc::create(func);
-    auto seq = cocos2d::Sequence::create(fadeout, call, nullptr);
-    _tint->runAction(seq);
+    _tint->runAction(fadeout);
+    
+    return time;
 }
 
 bool MissionStartPopup::init(const std::string &levelId, const std::string &title)
 {
-    if (!cocos2d::ui::Layout::init()) {
+    if (!Popup::init()) {
         return false;
     }
     
@@ -123,8 +124,8 @@ bool MissionStartPopup::init(const std::string &levelId, const std::string &titl
     
     auto onPlay = [&](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType e) {
         if (e == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            startHideEffect([](){});
-            ScreenChanger::beginRunAndSlash(levelId);
+            setClose(true);
+            ScreenChanger::beginRunAndSlash(_level->getId());
         }
     };
     
