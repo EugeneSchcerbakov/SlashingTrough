@@ -95,11 +95,13 @@ void PopupCarrier::pushPopup(Popup *popup, int zOrder, std::string name)
         WRITE_WARN("Trying to add same popup twice.");
         return;
     }
-    
+
     popup->showEffect();
     
     addChild(popup, zOrder, name);
     _activePopups.push(popup);
+    
+    WRITE_LOG("Pushed popup: " + name);
 }
 
 bool PopupCarrier::init()
@@ -120,6 +122,7 @@ void PopupCarrier::update(float dt)
         if (popup && popup->isClosing()) {
             removePopup(popup);
             popup->setClose(false);
+            WRITE_LOG("Removed popup: " + popup->getName());
         }
     }
 }
@@ -132,6 +135,7 @@ void PopupCarrier::removePopup(Popup *popup)
     auto func = [&]() {
         Popup *front = _activePopups.front();
         if (front) {
+            WRITE_LOG("Removed popup: " + front->getName());
             removeChild(front);
             _activePopups.pop();
         }
