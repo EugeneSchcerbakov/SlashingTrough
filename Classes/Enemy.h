@@ -32,7 +32,7 @@ public:
     Enemy(const GameInfo::EnemyType &type, Field *field);
     
     void idleUpdate(float dt) override;
-    void onDamageReceived() override;
+    void onDamageReceived(float damage) override;
     void kill() override;
     void discardMelleAttack();
     

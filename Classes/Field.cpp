@@ -7,6 +7,7 @@
 //
 
 #include "Field.h"
+#include "DailyMissions.h"
 #include "Obstacle.h"
 #include "Enemy.h"
 #include "Log.h"
@@ -56,6 +57,8 @@ void Field::initialize(FieldLevel::WeakPtr level)
     for (int k = 0; k < sectorsQueueSize; ++k) {
         pushFrontSector();
     }
+    
+    DailyMissions::getInstance().prepareForLevel(_level->getId());
     
     WRITE_LOG("Game started with level:" + _level->getId());
 }

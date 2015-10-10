@@ -87,7 +87,6 @@ void Projectile::tryDamage(Entity *goal)
         {
             auto hero = dynamic_cast<Hero *>(goal);
             hero->addStamina(-_staminaDmg);
-            hero->onDamageReceived();
         }
         
         kill();

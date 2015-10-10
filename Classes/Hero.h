@@ -23,7 +23,7 @@ public:
     
     void init();
     void idleUpdate(float dt) override;
-    void onDamageReceived() override;
+    void onDamageReceived(float damage) override;
     void addHealth(float health, bool callDamageReceived = true) override;
     void attack();
     void flushScore();

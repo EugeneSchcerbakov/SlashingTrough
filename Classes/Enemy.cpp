@@ -7,6 +7,7 @@
 //
 
 #include "Enemy.h"
+#include "DailyMissions.h"
 #include "Hero.h"
 #include "Field.h"
 #include "Projectile.h"
@@ -50,7 +51,6 @@ void Enemy::idleUpdate(float dt)
             if (_goal->isType(Entity::Type::HERO)) {
                 Hero *hero = dynamic_cast<Hero *>(_goal);
                 hero->addStamina(-_staminaDrainPoints);
-                hero->onDamageReceived();
             }
             kill();
         }
@@ -174,24 +174,30 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
         if (checkMelleZone(x, y)) {
             hero->addHealth(-_melleAttack.dmgHealth);
             hero->addStamina(-_melleAttack.dmgStamina);
-            hero->onDamageReceived();
             _melleAttacked = true;
         }
     }
 }
 
-void Enemy::onDamageReceived()
+void Enemy::onDamageReceived(float damage)
 {
     sendEvent(Event("DamageReceived"));
     
     if (!isAlive() && _goal->isType(Entity::Type::HERO))
     {
+        DailyMissions &daily = DailyMissions::getInstance();
+        
         Hero *hero = dynamic_cast<Hero *>(_goal);
             
         hero->addKillsPoint(getKillPoints());
         hero->addCoinsPoint(getCoinPoints());
         hero->addStamina(getStaminaPoints());
         hero->addScorePoint(getScorePoints());
+        
+        daily.statistics.incInt(Tracking::TotalEnemiesKilled, 1);
+        daily.statistics.incInt(Tracking::KillsForSingleRun, 1);
+        daily.statistics.incInt(Tracking::TotalCoinsRewarded, getCoinPoints());
+        daily.statistics.incInt(Tracking::CoinsForSingleRun, getCoinPoints());
     }
 }
 

@@ -171,6 +171,8 @@
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDE676B51B93030100233FFB /* MapPlayerMark.cpp */; };
 		CDE676B81B93030100233FFB /* MapPlayerMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDE676B51B93030100233FFB /* MapPlayerMark.cpp */; };
+		CDF743211BC5753500BF84DC /* DailyMissions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF7431F1BC5753500BF84DC /* DailyMissions.cpp */; settings = {ASSET_TAGS = (); }; };
+		CDF743221BC5753500BF84DC /* DailyMissions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF7431F1BC5753500BF84DC /* DailyMissions.cpp */; settings = {ASSET_TAGS = (); }; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -391,6 +393,8 @@
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		CDE676B51B93030100233FFB /* MapPlayerMark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapPlayerMark.cpp; sourceTree = "<group>"; };
 		CDE676B61B93030100233FFB /* MapPlayerMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPlayerMark.h; sourceTree = "<group>"; };
+		CDF7431F1BC5753500BF84DC /* DailyMissions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DailyMissions.cpp; sourceTree = "<group>"; };
+		CDF743201BC5753500BF84DC /* DailyMissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMissions.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -654,6 +658,8 @@
 				CDC881001B5142DF00030818 /* Field.h */,
 				CDC794571B1C1A0000B83EA2 /* Store.cpp */,
 				CDC794581B1C1A0000B83EA2 /* Store.h */,
+				CDF7431F1BC5753500BF84DC /* DailyMissions.cpp */,
+				CDF743201BC5753500BF84DC /* DailyMissions.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -966,6 +972,7 @@
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C01B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */,
+				CDF743211BC5753500BF84DC /* DailyMissions.cpp in Sources */,
 				CD0AB2CB1B8A31C200139A03 /* MapWidget.cpp in Sources */,
 				CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CD9D04E51B8B9B7100FFE0F3 /* LevelsCache.cpp in Sources */,
@@ -1016,6 +1023,7 @@
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
 				CDE676B81B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
+				CDF743221BC5753500BF84DC /* DailyMissions.cpp in Sources */,
 				CD26715F1BC2E62900BD5B43 /* PopupCore.cpp in Sources */,
 				CDC881261B51808300030818 /* HeroAction.cpp in Sources */,
 				CD9D04DF1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */,

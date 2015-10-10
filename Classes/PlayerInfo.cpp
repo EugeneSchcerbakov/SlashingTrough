@@ -8,11 +8,11 @@
 
 #include "PlayerInfo.h"
 #include "Store.h"
+#include "DailyMissions.h"
 #include "LevelsCache.h"
 #include "Log.h"
 
 #include "cocos2d.h"
-#include "tinyxml2/tinyxml2.h"
 #include <stdio.h>
 
 // PlayerInventory
@@ -139,22 +139,7 @@ void PlayerInfo::load(const std::string &filename)
         auto root = document.RootElement();
         
         auto vars = root->FirstChildElement("Variables");
-        auto elem = vars->FirstChildElement();
-        while (elem) {
-            std::string name = elem->Attribute("name");
-            std::string type = elem->Attribute("type");
-            std::string data = elem->Attribute("data");
-            if (type == "int") {
-                variables.setInt(name, atoi(data.c_str()));
-            } else if (type == "float") {
-                variables.setFloat(name, atof(data.c_str()));
-            } else if (type == "string") {
-                variables.setString(name, data);
-            } else {
-                WRITE_WARN("Unknown save file data leem type:" + type);
-            }
-            elem = elem->NextSiblingElement();
-        }
+        variablesSetFromXml(variables, vars);
         
         auto inventory = root->FirstChildElement("Inventory");
         auto equip = inventory->FirstChildElement();
@@ -197,6 +182,9 @@ void PlayerInfo::load(const std::string &filename)
             
             levelElem = levelElem->NextSiblingElement();
         }
+        
+        auto dailyStat = root->FirstChildElement("DailyInfo");
+        variablesSetFromXml(DailyMissions::getInstance().statistics, dailyStat);
         
         WRITE_INIT("Save file successfully loaded.");
     }
@@ -243,27 +231,7 @@ void PlayerInfo::save()
         auto root = document.NewElement("Save");
         
         auto vars = document.NewElement("Variables");
-        for (auto pair : variables._variablesInt) {
-            auto data = document.NewElement("DataElem");
-            data->SetAttribute("name", pair.first.c_str());
-            data->SetAttribute("type", "int");
-            data->SetAttribute("data", pair.second);
-            vars->LinkEndChild(data);
-        }
-        for (auto pair : variables._variablesFloat) {
-            auto data = document.NewElement("DataElem");
-            data->SetAttribute("name", pair.first.c_str());
-            data->SetAttribute("type", "float");
-            data->SetAttribute("data", pair.second);
-            vars->LinkEndChild(data);
-        }
-        for (auto pair : variables._variablesStr) {
-            auto data = document.NewElement("DataElem");
-            data->SetAttribute("name", pair.first.c_str());
-            data->SetAttribute("type", "string");
-            data->SetAttribute("data", pair.second.c_str());
-            vars->LinkEndChild(data);
-        }
+        variablesSetToXml(variables, document, vars);
         root->LinkEndChild(vars);
         
         auto inventory = document.NewElement("Inventory");
@@ -304,6 +272,10 @@ void PlayerInfo::save()
         }
         
         root->LinkEndChild(levelsProgress);
+        
+        auto dailyStat = document.NewElement("DailyInfo");
+        variablesSetToXml(DailyMissions::getInstance().statistics, document, dailyStat);
+        root->LinkEndChild(dailyStat);
         
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);
@@ -446,5 +418,50 @@ bool PlayerInfo::equipped(Item::Ptr item) const
     } else {
         CC_ASSERT(false);
 		return false;
+    }
+}
+
+void PlayerInfo::variablesSetToXml(const VariablesSet &variables, tinyxml2::XMLDocument &document, tinyxml2::XMLElement *root)
+{
+    for (auto pair : variables._variablesInt) {
+        auto data = document.NewElement("DataElem");
+        data->SetAttribute("name", pair.first.c_str());
+        data->SetAttribute("type", "int");
+        data->SetAttribute("data", pair.second);
+        root->LinkEndChild(data);
+    }
+    for (auto pair : variables._variablesFloat) {
+        auto data = document.NewElement("DataElem");
+        data->SetAttribute("name", pair.first.c_str());
+        data->SetAttribute("type", "float");
+        data->SetAttribute("data", pair.second);
+        root->LinkEndChild(data);
+    }
+    for (auto pair : variables._variablesStr) {
+        auto data = document.NewElement("DataElem");
+        data->SetAttribute("name", pair.first.c_str());
+        data->SetAttribute("type", "string");
+        data->SetAttribute("data", pair.second.c_str());
+        root->LinkEndChild(data);
+    }
+}
+
+void PlayerInfo::variablesSetFromXml(VariablesSet &variables, tinyxml2::XMLElement *root)
+{
+    auto elem = root->FirstChildElement();
+    while (elem) {
+        std::string name = elem->Attribute("name");
+        std::string type = elem->Attribute("type");
+        std::string data = elem->Attribute("data");
+        if (type == "int") {
+            variables.setInt(name, atoi(data.c_str()));
+        } else if (type == "float") {
+            variables.setFloat(name, atof(data.c_str()));
+        } else if (type == "string") {
+            variables.setString(name, data);
+        } else {
+            WRITE_WARN("Unknown save file data with type:" + type);
+        }
+        elem = elem->NextSiblingElement();
     }
 }

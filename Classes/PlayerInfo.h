@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <array>
+#include "tinyxml2/tinyxml2.h"
 
 #include "Item.h"
 #include "VariablesSet.h"
@@ -99,6 +100,9 @@ public:
     PlayerInventory Inventory;
     
 private:
+    static void variablesSetToXml(const VariablesSet &variables, tinyxml2::XMLDocument &document, tinyxml2::XMLElement *root);
+    static void variablesSetFromXml(VariablesSet &variables, tinyxml2::XMLElement *root);
+    
     std::vector<std::string> _ownedEquips;
     std::string _saveFileName;
 };

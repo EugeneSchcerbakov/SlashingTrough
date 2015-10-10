@@ -73,7 +73,7 @@ public:
     virtual void idleUpdate(float dt);
     virtual void addHealth(float health, bool callDamageReceived = true);
     virtual void extendRadius(float increase);
-    virtual void onDamageReceived();
+    virtual void onDamageReceived(float damage);
     virtual void kill();
     
     virtual void setPosition(float x, float y);

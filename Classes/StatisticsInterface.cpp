@@ -12,6 +12,7 @@
 #include "Store.h"
 #include "ScreenChanger.h"
 #include "Log.h"
+#include "DailyMissions.h"
 
 StaticticsInterface* StaticticsInterface::create(FieldLevel::WeakPtr level, PlayerInfo::Score score, bool victory, bool complete)
 {
@@ -169,6 +170,8 @@ void StaticticsInterface::initLootPanel()
             _panel->addChild(sprite);
             
             xy.x += sprite->getContentSize().width * scale;
+            
+            DailyMissions::getInstance().statistics.incInt(id);
         }
         
         auto lootText = cocos2d::ui::Text::create("Loot:", "font_prototype.ttf", 23);

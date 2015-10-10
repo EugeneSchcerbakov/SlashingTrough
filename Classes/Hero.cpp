@@ -7,6 +7,7 @@
 //
 
 #include "Hero.h"
+#include "DailyMissions.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
 #include "Store.h"
@@ -103,9 +104,11 @@ void Hero::idleUpdate(float dt)
     }
 }
 
-void Hero::onDamageReceived()
+void Hero::onDamageReceived(float damage)
 {
     sendEvent(Event("DamageReceived"));
+    
+    DailyMissions::getInstance().statistics.incFloat(Tracking::DamageReceivedForSingleRun, damage);
 }
 
 void Hero::addHealth(float health, bool callDamageReceived)
@@ -125,7 +128,7 @@ void Hero::addHealth(float health, bool callDamageReceived)
     
     if (actual < 0.0f && callDamageReceived)
     {
-        onDamageReceived();
+        onDamageReceived(actual);
     }
     
     if (_health > _maxHealth) {

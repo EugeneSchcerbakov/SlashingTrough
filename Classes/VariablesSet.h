@@ -25,6 +25,11 @@ public:
     void setFloat(const std::string &name, float value);
     void setString(const std::string &name, const std::string &value);
     
+    void incInt(const std::string &name, int amount = 1);
+    void incFloat(const std::string &name, float amount = 1.0f);
+    
+    void clear();
+    
     friend class PlayerInfo;
     
 protected:
