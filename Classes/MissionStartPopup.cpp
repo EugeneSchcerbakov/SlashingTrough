@@ -41,7 +41,9 @@ bool MissionStartPopup::hitTest(const cocos2d::Vec2 &pt)
 
 void MissionStartPopup::showEffect()
 {
-    if (_tint->getNumberOfRunningActions() > 0) {
+    Popup::showEffect();
+    
+    if (_panel->getNumberOfRunningActions() > 0) {
         return;
     }
     
@@ -59,15 +61,13 @@ void MissionStartPopup::showEffect()
     auto playMove = cocos2d::MoveBy::create(time, cocos2d::Vec2(-playDeltaX*2.0f, 0.0f));
     _play->setPositionX(size.width + playDeltaX);
     _play->runAction(playMove);
-    
-    auto fadein = cocos2d::FadeIn::create(time);
-    _tint->setOpacity(0);
-    _tint->runAction(fadein);
 }
 
 float MissionStartPopup::hideEffect()
 {
-    if (_tint->getNumberOfRunningActions() > 0) {
+    Popup::hideEffect();
+    
+    if (_panel->getNumberOfRunningActions() > 0) {
         return 0.0f;
     }
     
@@ -80,9 +80,6 @@ float MissionStartPopup::hideEffect()
     
     auto playMove = cocos2d::MoveBy::create(time, cocos2d::Vec2(playDeltaX*2.0f, 0.0f));
     _play->runAction(playMove);
-    
-    auto fadeout = cocos2d::FadeOut::create(time);
-    _tint->runAction(fadeout);
     
     return time;
 }
@@ -103,16 +100,6 @@ bool MissionStartPopup::init(const std::string &levelId, const std::string &titl
 
     cocos2d::Vec2 origin = director->getVisibleOrigin();
     cocos2d::Size size = director->getVisibleSize();
-    
-    // block touches propagation
-    auto blockInput = cocos2d::EventListenerTouchOneByOne::create();
-    blockInput->setSwallowTouches(true);
-    blockInput->onTouchBegan = [](cocos2d::Touch* touch, cocos2d::Event* event){return true;};
-    director->getEventDispatcher()->addEventListenerWithSceneGraphPriority(blockInput, this);
-    
-    // black underlayer
-    _tint = cocos2d::Sprite::create("ui/ui_bg_tint.png");
-    _tint->setScale(4.0f);
     
     // panel
     float panelScale = 1.75f;
@@ -165,7 +152,6 @@ bool MissionStartPopup::init(const std::string &levelId, const std::string &titl
     
     initLootPanel();
     
-    addChild(_tint, 0);
     addChild(_panel, 1);
     addChild(_play, 1);
     

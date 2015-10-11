@@ -43,7 +43,9 @@ public:
     
     int getDifficult() const;
     int getCoinsReward() const;
+    int getLootAmount() const;
     std::string getDescription() const;
+    std::string getLootId() const;
     
 private:
     Info _info;

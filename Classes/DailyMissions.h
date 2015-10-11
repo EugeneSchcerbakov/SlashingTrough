@@ -36,6 +36,8 @@ public:
     void checkAfterRun();
     void checkSwitchDay();
     
+    const std::vector<DailyTask::Ptr>& getTodayMissions() const;
+    
     VariablesSet statistics;
     
 private:

@@ -80,6 +80,8 @@
 		CD2AE6331B779FD4001DF4B7 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE6301B779FD4001DF4B7 /* Log.cpp */; };
 		CD2AE6371B77AB2C001DF4B7 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */; };
 		CD2AE6381B77AB2C001DF4B7 /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */; };
+		CD2F2A701BCA7C5E008C72D7 /* DailyMissionsPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2F2A6E1BCA7C5E008C72D7 /* DailyMissionsPopup.cpp */; settings = {ASSET_TAGS = (); }; };
+		CD2F2A711BCA7C5E008C72D7 /* DailyMissionsPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD2F2A6E1BCA7C5E008C72D7 /* DailyMissionsPopup.cpp */; settings = {ASSET_TAGS = (); }; };
 		CD327E701B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */; };
@@ -315,6 +317,8 @@
 		CD2AE6301B779FD4001DF4B7 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
 		CD2AE6311B779FD4001DF4B7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
+		CD2F2A6E1BCA7C5E008C72D7 /* DailyMissionsPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DailyMissionsPopup.cpp; sourceTree = "<group>"; };
+		CD2F2A6F1BCA7C5E008C72D7 /* DailyMissionsPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMissionsPopup.h; sourceTree = "<group>"; };
 		CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectsLayer.cpp; sourceTree = "<group>"; };
 		CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsLayer.h; sourceTree = "<group>"; };
 		CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlKeyboard.cpp; sourceTree = "<group>"; };
@@ -683,6 +687,8 @@
 				CD255B271B9B27A80062223A /* StatisticsInterface.h */,
 				CD00C3081B9617C40017D771 /* MissionStartPopup.cpp */,
 				CD00C3091B9617C40017D771 /* MissionStartPopup.h */,
+				CD2F2A6E1BCA7C5E008C72D7 /* DailyMissionsPopup.cpp */,
+				CD2F2A6F1BCA7C5E008C72D7 /* DailyMissionsPopup.h */,
 				CDE676B51B93030100233FFB /* MapPlayerMark.cpp */,
 				CDE676B61B93030100233FFB /* MapPlayerMark.h */,
 				CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */,
@@ -979,6 +985,7 @@
 				CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CD1D5EE81BC93DBA009C9352 /* DailyTask.cpp in Sources */,
+				CD2F2A701BCA7C5E008C72D7 /* DailyMissionsPopup.cpp in Sources */,
 				CD26715E1BC2E62900BD5B43 /* PopupCore.cpp in Sources */,
 				CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
@@ -1009,6 +1016,7 @@
 				CD0AB2CC1B8A31C200139A03 /* MapWidget.cpp in Sources */,
 				CDC8811A1B515A2100030818 /* FieldSectorWidget.cpp in Sources */,
 				CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */,
+				CD2F2A711BCA7C5E008C72D7 /* DailyMissionsPopup.cpp in Sources */,
 				CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */,
 				CDC9DE781B557F55006F53F6 /* Projectile.cpp in Sources */,
 				CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */,

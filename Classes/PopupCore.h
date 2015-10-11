@@ -17,8 +17,8 @@
 class Popup : public cocos2d::ui::Layout
 {
 public:
-    virtual void showEffect() = 0;
-    virtual float hideEffect() = 0; // return effect duration
+    virtual void showEffect();
+    virtual float hideEffect(); // return effect duration
     
     virtual void setClose(bool close);
     
@@ -32,6 +32,8 @@ protected:
     
 private:
     cocos2d::EventListenerTouchOneByOne *_inputLocker;
+    
+    cocos2d::Sprite *_tint;
     
     bool _closing;
 };

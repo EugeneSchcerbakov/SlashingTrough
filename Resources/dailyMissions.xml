@@ -10,16 +10,15 @@
         <KillXEnemies difficult="1"
             required="100"
             coinsReward="100"
-            lootRewardId="some sword"
+            lootRewardId="back_dash_shard"
             lootRewardAmount="1"
-            description="" >
+            description="Kill 100 orks" >
         </KillXEnemies>
         <CollectXCoins difficult="1"
             required="1000"
             coinsReward="100"
-            lootRewardId="some sword"
+            lootRewardId="vampirism_shard"
             lootRewardAmount="1"
-            description="" >
         </CollectXCoins>
     </MissionsPool>
 </DailyMissions>

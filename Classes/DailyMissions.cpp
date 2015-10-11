@@ -59,7 +59,7 @@ bool DailyMissions::loadMissions(const std::string &filename)
             info.difficult = missionNode->IntAttribute("difficult");
             info.required = missionNode->IntAttribute("required");
             info.coinsReward = missionNode->IntAttribute("coinsReward");
-            info.lootRewardId = missionNode->IntAttribute("lootRewardId");
+            info.lootRewardId = missionNode->Attribute("lootRewardId");
             info.lootRewardAmount = missionNode->IntAttribute("lootRewardAmount");
             info.description = missionNode->Attribute("description");
             
@@ -98,5 +98,10 @@ void DailyMissions::checkAfterRun()
 
 void DailyMissions::checkSwitchDay()
 {
-    
+    _today = _pool;
+}
+
+const std::vector<DailyTask::Ptr>& DailyMissions::getTodayMissions() const
+{
+    return _today;
 }

@@ -10,6 +10,7 @@
 #define __SlashingTrough__MapInterface__
 
 #include "MissionStartPopup.h"
+#include "DailyMissionsPopup.h"
 #include "MapWidget.h"
 
 class MapInterface : public PopupCarrier

@@ -9,9 +9,6 @@
 #ifndef __SlashingTrough__MissionStartPopup__
 #define __SlashingTrough__MissionStartPopup__
 
-#include "cocos2d.h"
-#include "ui/CocosGUI.h"
-
 #include "PopupCore.h"
 #include "FieldLevel.h"
 
@@ -30,14 +27,11 @@ protected:
     virtual ~MissionStartPopup();
     
     bool init(const std::string &levelId, const std::string &title);
-    
-    bool onBoardTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
 
 private:
     void initLootPanel();
     
     cocos2d::Sprite *_panel;
-    cocos2d::Sprite *_tint;
     cocos2d::ui::Button *_play;
     
     FieldLevel::Ptr _level;

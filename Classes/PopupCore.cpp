@@ -22,6 +22,31 @@ Popup::~Popup()
     dispatcher->removeEventListenersForTarget(this);
 }
 
+void Popup::showEffect()
+{
+    if (_tint->getNumberOfRunningActions() > 0) {
+        return;
+    }
+    
+    auto fadein = cocos2d::FadeIn::create(0.2f);
+    _tint->setOpacity(0);
+    _tint->runAction(fadein);
+}
+
+float Popup::hideEffect()
+{
+    if (_tint->getNumberOfRunningActions() > 0) {
+        return 0.0f;
+    }
+    
+    float time = 0.1f;
+    
+    auto fadeout = cocos2d::FadeOut::create(time);
+    _tint->runAction(fadeout);
+    
+    return time;
+}
+
 void Popup::setClose(bool close)
 {
     _closing = close;
@@ -46,6 +71,12 @@ bool Popup::init()
     _inputLocker->onTouchBegan = [](cocos2d::Touch* touch, cocos2d::Event* event){return true;};
     
     dispatcher->addEventListenerWithSceneGraphPriority(_inputLocker, this);
+    
+    // black underlayer
+    _tint = cocos2d::Sprite::create("ui/ui_bg_tint.png");
+    _tint->setScale(4.0f);
+    
+    addChild(_tint, 0);
     
     return true;
 }

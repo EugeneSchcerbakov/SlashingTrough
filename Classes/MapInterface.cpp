@@ -79,12 +79,26 @@ bool MapInterface::init()
         }
     };
     
-    float shopBtnScale = 1.8f;
+    auto onDailyPressed = [&](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
+    {
+        if (e == cocos2d::ui::Widget::TouchEventType::ENDED) {
+            auto popup = DailyMissionPopup::create();
+            pushPopup(popup, Order::POPUP, "DailyMissionPopup");
+        }
+    };
+    
+    float btnScale = 1.8f;
     auto shopButton = cocos2d::ui::Button::create("ui/ui_btn_shop.png");
-    shopButton->setScale(shopBtnScale);
-    shopButton->setPositionX(origin.x + shopButton->getContentSize().width * shopBtnScale * 0.5f + 25.0f);
-    shopButton->setPositionY(origin.y + shopButton->getContentSize().height * shopBtnScale * 0.5f + 25.0f);
+    shopButton->setScale(btnScale);
+    shopButton->setPositionX(origin.x + shopButton->getContentSize().width * btnScale * 0.5f + 25.0f);
+    shopButton->setPositionY(origin.y + shopButton->getContentSize().height * btnScale * 0.5f + 25.0f);
     shopButton->addTouchEventListener(onShopPressed);
+    
+    auto dailyButton = cocos2d::ui::Button::create("ui/ui_btn_daily-missions.png");
+    dailyButton->setScale(btnScale);
+    dailyButton->setPositionX(shopButton->getPositionX() + 100.0f);
+    dailyButton->setPositionY(origin.y + dailyButton->getContentSize().height * btnScale * 0.5f + 25.0f);
+    dailyButton->addTouchEventListener(onDailyPressed);
 
     float settingsScale = 2.0f;
     auto settings = cocos2d::ui::Button::create("ui/ui_btn_options.png");
@@ -95,6 +109,7 @@ bool MapInterface::init()
     _guiLayer->addChild(coinIcon);
     _guiLayer->addChild(_coinsText);
     _guiLayer->addChild(shopButton);
+    _guiLayer->addChild(dailyButton);
     _guiLayer->addChild(settings);
     
     addChild(_background, Order::COLOR);

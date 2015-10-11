@@ -46,7 +46,17 @@ int DailyTask::getCoinsReward() const
     return _info.coinsReward;
 }
 
+int DailyTask::getLootAmount() const
+{
+    return _info.lootRewardAmount;
+}
+
 std::string DailyTask::getDescription() const
 {
     return _info.description;
+}
+
+std::string DailyTask::getLootId() const
+{
+    return _info.lootRewardId;
 }
