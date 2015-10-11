@@ -142,6 +142,8 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     addChild(_panel, 1);
     addChild(continueText, 1);
     
+    DailyMissions::getInstance().checkAfterRun();
+    
     return true;
 }
 

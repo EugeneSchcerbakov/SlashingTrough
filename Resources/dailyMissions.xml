@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<DailyMissions>
+    <MasteringSettings>
+        <Mastering2 missions="3" />
+        <Mastering3 missions="4" />
+        <Mastering4 missions="5" />
+        <Mastering5 missions="6" />
+    </MasteringSettings>
+    <MissionsPool>
+        <KillXEnemies difficult="1"
+            required="100"
+            coinsReward="100"
+            lootRewardId="some sword"
+            lootRewardAmount="1"
+            description="" >
+        </KillXEnemies>
+        <CollectXCoins difficult="1"
+            required="1000"
+            coinsReward="100"
+            lootRewardId="some sword"
+            lootRewardAmount="1"
+            description="" >
+        </CollectXCoins>
+    </MissionsPool>
+</DailyMissions>

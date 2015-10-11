@@ -23,3 +23,8 @@ int misc::random(int min, int max)
 {
     return cocos2d::random(min, max);
 }
+
+bool math::samef(float a, float b)
+{
+    return fabsf(a - b) < std::numeric_limits<float>::epsilon();
+}

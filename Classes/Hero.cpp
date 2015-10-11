@@ -108,7 +108,7 @@ void Hero::onDamageReceived(float damage)
 {
     sendEvent(Event("DamageReceived"));
     
-    DailyMissions::getInstance().statistics.incFloat(Tracking::DamageReceivedForSingleRun, damage);
+    DailyMissions::getInstance().statistics.incInt(Tracking::DamageReceivedForSingleRun, (int)damage);
 }
 
 void Hero::addHealth(float health, bool callDamageReceived)

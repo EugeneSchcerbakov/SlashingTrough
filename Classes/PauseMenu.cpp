@@ -8,6 +8,7 @@
 
 #include "PauseMenu.h"
 
+#include "DailyMissions.h"
 #include "ScreenChanger.h"
 #include "Log.h"
 
@@ -123,6 +124,7 @@ void PauseMenu::showPanel()
     {
         if (e == cocos2d::ui::Widget::TouchEventType::ENDED)
         {
+            DailyMissions::getInstance().checkAfterRun();
             ScreenChanger::changeScreen(ScreenChanger::MAP);
         }
     };

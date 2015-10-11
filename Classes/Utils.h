@@ -35,6 +35,8 @@ namespace math
         return value < min ? min : value < max ? value : max;
     }
     
+    bool samef(float a, float b);
+    
     const float PI = 3.14159265358979323846f;
 }
 

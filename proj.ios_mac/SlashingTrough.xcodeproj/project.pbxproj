@@ -68,6 +68,10 @@
 		CD10C8C11B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */; };
 		CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
+		CD1D5EE81BC93DBA009C9352 /* DailyTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */; settings = {ASSET_TAGS = (); }; };
+		CD1D5EE91BC93DBA009C9352 /* DailyTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */; settings = {ASSET_TAGS = (); }; };
+		CD1D5EEB1BC9502E009C9352 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5EEA1BC9502E009C9352 /* dailyMissions.xml */; settings = {ASSET_TAGS = (); }; };
+		CD1D5EEC1BC9502E009C9352 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD1D5EEA1BC9502E009C9352 /* dailyMissions.xml */; settings = {ASSET_TAGS = (); }; };
 		CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
 		CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD255B261B9B27A80062223A /* StatisticsInterface.cpp */; };
 		CD26715E1BC2E62900BD5B43 /* PopupCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD26715C1BC2E62900BD5B43 /* PopupCore.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -301,6 +305,9 @@
 		CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenChanger.h; sourceTree = "<group>"; };
 		CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenu.cpp; sourceTree = "<group>"; };
 		CD1B69D01BA1E72500DF8CD1 /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenu.h; sourceTree = "<group>"; };
+		CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DailyTask.cpp; sourceTree = "<group>"; };
+		CD1D5EE71BC93DBA009C9352 /* DailyTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyTask.h; sourceTree = "<group>"; };
+		CD1D5EEA1BC9502E009C9352 /* dailyMissions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dailyMissions.xml; sourceTree = "<group>"; };
 		CD255B261B9B27A80062223A /* StatisticsInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StatisticsInterface.cpp; sourceTree = "<group>"; };
 		CD255B271B9B27A80062223A /* StatisticsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsInterface.h; sourceTree = "<group>"; };
 		CD26715C1BC2E62900BD5B43 /* PopupCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopupCore.cpp; sourceTree = "<group>"; };
@@ -524,6 +531,7 @@
 				CDB37C1C1B6CCB2F00138775 /* models */,
 				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
+				CD1D5EEA1BC9502E009C9352 /* dailyMissions.xml */,
 				CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */,
 				CD0EB17A1B75F2F500267CEA /* presets.xml */,
 				CD0EB17D1B76086E00267CEA /* levels.xml */,
@@ -658,6 +666,8 @@
 				CDC881001B5142DF00030818 /* Field.h */,
 				CDC794571B1C1A0000B83EA2 /* Store.cpp */,
 				CDC794581B1C1A0000B83EA2 /* Store.h */,
+				CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */,
+				CD1D5EE71BC93DBA009C9352 /* DailyTask.h */,
 				CDF7431F1BC5753500BF84DC /* DailyMissions.cpp */,
 				CDF743201BC5753500BF84DC /* DailyMissions.h */,
 			);
@@ -885,6 +895,7 @@
 				CD75035A1AFF9AF000DBD732 /* fonts in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				CD1D5EEB1BC9502E009C9352 /* dailyMissions.xml in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
@@ -911,6 +922,7 @@
 				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
+				CD1D5EEC1BC9502E009C9352 /* dailyMissions.xml in Resources */,
 				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
 				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
 				CD0EB17F1B76086E00267CEA /* levels.xml in Resources */,
@@ -966,6 +978,7 @@
 				CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */,
 				CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */,
 				CD00C30A1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
+				CD1D5EE81BC93DBA009C9352 /* DailyTask.cpp in Sources */,
 				CD26715E1BC2E62900BD5B43 /* PopupCore.cpp in Sources */,
 				CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
@@ -1021,6 +1034,7 @@
 				CDC9DE7C1B558478006F53F6 /* ProjectileWidget.cpp in Sources */,
 				CDC8811E1B51664800030818 /* Hero.cpp in Sources */,
 				CD637E831B234F42002F98EF /* StoreCategoryButton.cpp in Sources */,
+				CD1D5EE91BC93DBA009C9352 /* DailyTask.cpp in Sources */,
 				CDE676B81B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */,
 				CDF743221BC5753500BF84DC /* DailyMissions.cpp in Sources */,

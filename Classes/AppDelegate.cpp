@@ -9,6 +9,7 @@
 #include "FieldSector.h"
 #include "LevelsCache.h"
 #include "Store.h"
+#include "DailyMissions.h"
 #include "Utils.h"
 #include "Log.h"
 
@@ -71,7 +72,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     PresetsLoader::getInstance().load("presets.xml");
     LevelsCache::getInstance().load("levels.xml");
     Store::getInstance().loadStore("storeItems.xml");
+    DailyMissions::getInstance().loadMissions("dailyMissions.xml");
     PlayerInfo::getInstance().load("st_save.xml");
+    
+    DailyMissions::getInstance().checkSwitchDay();
 
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);

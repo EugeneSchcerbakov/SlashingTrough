@@ -9,6 +9,7 @@
 #ifndef DailyMissions_hpp
 #define DailyMissions_hpp
 
+#include "DailyTask.h"
 #include "VariablesSet.h"
 
 namespace Tracking
@@ -27,15 +28,21 @@ class DailyMissions
 public:
     static DailyMissions& getInstance();
     
-    DailyMissions();
+    bool loadMissions(const std::string &filename);
     
-    void prepareForLevel(const std::string id);
+    void prepareForRun();
     void clearStatistics();
-
+    
+    void checkAfterRun();
+    void checkSwitchDay();
+    
     VariablesSet statistics;
     
 private:
-    std::string _lastLevelId;
+    DailyMissions();
+    
+    std::vector<DailyTask::Ptr> _pool;
+    std::vector<DailyTask::Ptr> _today;
 };
 
 #endif /* DailyMissions_hpp */
