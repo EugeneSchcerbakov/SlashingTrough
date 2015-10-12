@@ -12,8 +12,12 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
+                   ../../Classes/Abilities.cpp \
                    ../../Classes/ControlKeyboard.cpp \
                    ../../Classes/ControlTouch.cpp \
+                   ../../Classes/DailyTask.cpp \
+                   ../../Classes/DailyMissions.cpp \
+                   ../../Classes/DailyMissionsPopup.cpp \
                    ../../Classes/EffectsLayer.cpp \
                    ../../Classes/Enemy.cpp \
                    ../../Classes/EnemyWidget.cpp \
@@ -49,13 +53,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/StoreItemBaseWidget.cpp \
                    ../../Classes/StoreWeaponWidget.cpp \
                    ../../Classes/StoreArmorWidget.cpp \
+                   ../../Classes/StoreCrystallWidget.cpp \
+                   ../../Classes/PopupCore.cpp \
                    ../../Classes/LevelsCache.cpp \
                    ../../Classes/ScreenChanger.cpp \
                    ../../Classes/Utils.cpp \
                    ../../Classes/Log.cpp \
                    ../../Classes/VariablesSet.cpp \
                    ../../Classes/Item.cpp \
-                   ../../Classes/ItemFeature.cpp \
                    ../../Classes/VictoryCondition.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
