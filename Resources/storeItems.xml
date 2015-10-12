@@ -16,7 +16,7 @@
             texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="ice_sword"
-        price="100"
+        price="200"
         name="Frozen blade"
         desc="Chilled and light"
         icon="icons/icon_wpn_ice-sword.png"
@@ -31,7 +31,7 @@
             texture="effects/trail_2.png"/>
     </Weapon>
     <Weapon id="noble_sword"
-        price="300"
+        price="800"
         name="Noble Sword"
         desc="Looks expencive"
         icon="icons/icon_wpn_noble-sword.png"
@@ -46,7 +46,7 @@
             texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="lava_sword"
-        price="1000"
+        price="1900"
         name="Lava Sword"
         desc="It's hot!"
         icon="icons/icon_wpn_lava-sword.png"
@@ -70,7 +70,7 @@
         addHealth="0">
     </Armor>
     <Armor id="leather_armor"
-        price="150"
+        price="400"
         name="Lether Armor"
         desc="Made from best cows"
         icon="icons/icon_arm_leather.png"
@@ -78,7 +78,7 @@
         addHealth="10">
     </Armor>
     <Armor id="noble_armor"
-        price="500"
+        price="1000"
         name="Noble Chestplate"
         desc="Shiny, isn't it?"
         icon="icons/icon_arm_noble.png"
@@ -86,7 +86,7 @@
         addHealth="25">
     </Armor>
     <Armor id="black_armor"
-        price="1500"
+        price="3500"
         name="Black Knight"
         desc="Total Badass Thingy"
         icon="icons/icon_arm_black.png"

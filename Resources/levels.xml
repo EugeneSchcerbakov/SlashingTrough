@@ -2,6 +2,9 @@
 <Levels>
     <Level id="level_1" status="unlocked" condition="classic">
         <Rewards coins="100">
+        <Drop itemId="back_dash_shard"
+            dropChance="75"
+            dropOnce="true"/>            
         </Rewards>
         <Unlocks>
             <Unlock id="level_2" />
@@ -28,6 +31,12 @@
     </Level>
     <Level id="level_2" status="locked" condition="classic">
         <Rewards coins="150">
+        <Drop itemId="back_dash_shard"
+            dropChance="75"
+            dropOnce="true"/>
+        <Drop itemId="back_dash_shard"
+            dropChance="50"
+            dropOnce="true"/>                        
         </Rewards>
         <Unlocks>
             <Unlock id="level_3" />
@@ -64,6 +73,12 @@
     </Level>
     <Level id="level_3" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="back_dash_shard"
+            dropChance="75"
+            dropOnce="true"/>
+        <Drop itemId="back_dash_shard"
+            dropChance="50"
+            dropOnce="true"/>                                 
         </Rewards>
         <Unlocks>
             <Unlock id="level_4" />
@@ -101,6 +116,12 @@
     </Level>
     <Level id="level_4" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="back_dash_shard"
+            dropChance="75"
+            dropOnce="true"/>
+        <Drop itemId="back_dash_shard"
+            dropChance="50"
+            dropOnce="true"/>              
         </Rewards>
         <Unlocks>
             <Unlock id="level_5" />
@@ -141,6 +162,12 @@
     </Level>
     <Level id="level_5" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="back_dash_shard"
+            dropChance="75"
+            dropOnce="true"/>
+        <Drop itemId="back_dash_shard"
+            dropChance="50"
+            dropOnce="true"/>             
         </Rewards>
         <Unlocks>
             <Unlock id="level_6" />
@@ -182,6 +209,9 @@
     </Level>
     <Level id="level_6" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>            
         </Rewards>
         <Unlocks>
             <Unlock id="level_7" />
@@ -228,6 +258,9 @@
     </Level>
     <Level id="level_7" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>              
         </Rewards>
         <Unlocks>
             <Unlock id="level_8" />
@@ -275,6 +308,9 @@
     </Level>
     <Level id="level_8" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>              
         </Rewards>
         <Unlocks>
             <Unlock id="level_9" />
@@ -320,9 +356,15 @@
     </Level>
     <Level id="level_9" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>                              
         </Rewards>
         <Unlocks>
-            <Unlock id="level_10" />
+            <Unlock id="level_10" />          
         </Unlocks>
         <Description>
             <Speed value="520"/>
@@ -366,9 +408,12 @@
     </Level>
     <Level id="level_10" status="locked" condition="classic">
         <Rewards coins="200">
+        <Drop itemId="regeneration_shard"
+            dropChance="75"
+            dropOnce="true"/>              
         </Rewards>
         <Unlocks>
-            <Unlock id="level_id" />
+            <Unlock id="level_11" />
         </Unlocks>
         <Description>
             <Speed value="530"/>
@@ -378,6 +423,55 @@
             <Preset dif="9-12"/>
             <Preset dif="10-12"/>
             <Speed value="540"/>
+            <Preset dif="10-12"/>
+            <Preset dif="10-13"/>
+            <Preset dif="11-14"/>
+            <Preset dif="11-14"/>
+            <Speed value="550"/>
+            <Preset dif="12-14"/>
+            <Preset dif="12-15"/>
+            <Preset dif="13-15"/>
+            <Preset dif="13-16"/>
+            <Speed value="560"/>
+            <Preset dif="13-16"/>
+            <Preset dif="13-17"/>
+            <Preset dif="15-18"/>
+            <Preset dif="15-18"/>
+            <Speed value="570"/>
+            <Preset dif="15-18"/>
+            <Preset dif="16-19"/>
+            <Preset dif="16-20"/>
+            <Preset dif="18-20"/>
+            <Speed value="570"/>
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="580"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_11" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="magic_shield_shard"
+            dropChance="75"
+            dropOnce="true"/>             
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_12" />
+        </Unlocks>
+        <Description>
+            <Speed value="540"/>
+            <LinkRand/>            
             <Preset dif="10-12"/>
             <Preset dif="10-13"/>
             <Preset dif="11-14"/>
@@ -412,7 +506,402 @@
             <Preset dif="25-27"/>
             <Preset dif="26-27"/>
             <Preset dif="27-27"/>
+            <Speed value="580"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>            
             <Link id="finish"/>
         </Description>
-    </Level>                                                      
+    </Level>
+    <Level id="level_11" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="magic_shield_shard"
+            dropChance="75"
+            dropOnce="true"/>              
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_12" />
+        </Unlocks>
+        <Description>
+            <Speed value="550"/>
+            <LinkRand/>            
+            <Preset dif="12-14"/>
+            <Preset dif="12-15"/>
+            <Preset dif="13-15"/>
+            <Preset dif="13-16"/>
+            <Speed value="560"/>
+            <Preset dif="13-16"/>
+            <Preset dif="13-17"/>
+            <Preset dif="15-18"/>
+            <Preset dif="15-18"/>
+            <Speed value="570"/>
+            <Preset dif="15-18"/>
+            <Preset dif="16-19"/>
+            <Preset dif="16-20"/>
+            <Preset dif="18-20"/>
+            <Speed value="570"/>
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="580"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Speed value="580"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>
+            <Speed value="590"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="29-30"/>
+            <Preset dif="29-31"/>
+            <Preset dif="29=31"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="32-32"/>                         
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_12" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="magic_shield_shard"
+            dropChance="75"
+            dropOnce="true"/>              
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_13" />
+        </Unlocks>
+        <Description>
+            <Speed value="560"/>
+            <LinkRand/>            
+            <Preset dif="13-16"/>
+            <Preset dif="13-17"/>
+            <Preset dif="15-18"/>
+            <Preset dif="15-18"/>
+            <Speed value="570"/>
+            <Preset dif="15-18"/>
+            <Preset dif="16-19"/>
+            <Preset dif="16-20"/>
+            <Preset dif="18-20"/>
+            <Speed value="570"/>
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="570"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Speed value="580"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>
+            <Speed value="580"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="29-30"/>
+            <Preset dif="29-31"/>
+            <Preset dif="29=31"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="32-32"/>
+            <Speed value="590"/>
+            <Preset dif="28-31"/>
+            <Preset dif="29-32"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30=34"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="34-35"/>
+            <Preset dif="34-35"/>                                     
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_13" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="magic_shield_shard"
+            dropChance="75"
+            dropOnce="true"/>              
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_14" />
+        </Unlocks>
+        <Description>
+            <Speed value="550"/>
+            <LinkRand/>            
+            <Preset dif="13-16"/>
+            <Preset dif="13-17"/>
+            <Preset dif="15-18"/>
+            <Preset dif="15-18"/>
+            <Speed value="560"/>
+            <Preset dif="15-18"/>
+            <Preset dif="16-19"/>
+            <Preset dif="16-20"/>
+            <Preset dif="18-20"/>
+            <Speed value="570"/>
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="570"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Speed value="580"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>
+            <Speed value="580"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="29-30"/>
+            <Preset dif="29-31"/>
+            <Preset dif="29=31"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="32-32"/>
+            <Speed value="590"/>
+            <Preset dif="28-31"/>
+            <Preset dif="29-32"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30=34"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="34-35"/>
+            <Preset dif="34-35"/>
+            <Speed value="590"/>
+            <Preset dif="31-33"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="32-35"/>
+            <Preset dif="33=35"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-37"/>
+            <Preset dif="36-37"/>                                                  
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_14" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="magic_shield_shard"
+            dropChance="75"
+            dropOnce="true"/>              
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_15" />
+        </Unlocks>
+        <Description>
+            <Speed value="550"/>
+            <LinkRand/>            
+            <Preset dif="15-18"/>
+            <Preset dif="16-19"/>
+            <Preset dif="16-20"/>
+            <Preset dif="18-20"/>
+            <Speed value="560"/>
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="570"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Speed value="580"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>
+            <Speed value="590"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="29-30"/>
+            <Preset dif="29-31"/>
+            <Preset dif="29=31"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="32-32"/>
+            <Speed value="590"/>
+            <Preset dif="28-31"/>
+            <Preset dif="29-32"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30=34"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="34-35"/>
+            <Preset dif="34-35"/>
+            <Speed value="600"/>
+            <Preset dif="31-33"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="32-35"/>
+            <Preset dif="33=35"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-37"/>
+            <Preset dif="36-37"/>
+            <Speed value="600"/>
+            <Preset dif="32-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="32-35"/>
+            <Preset dif="33-36"/>
+            <Preset dif="33=36"/>
+            <Preset dif="34-37"/>
+            <Preset dif="34-37"/>
+            <Preset dif="35-38"/>
+            <Preset dif="36-38"/>                                                              
+            <Link id="finish"/>
+        </Description>
+    </Level>
+    <Level id="level_15" status="locked" condition="classic">
+        <Rewards coins="200">
+        <Drop itemId="proj_defence_shard"
+            dropChance="75"
+            dropOnce="true"/>              
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_id" />
+        </Unlocks>
+        <Description>
+            <Speed value="550"/>
+            <LinkRand/>            
+            <Preset dif="18-20"/>
+            <Preset dif="18-21"/>
+            <Preset dif="19-22"/>
+            <Preset dif="20-22"/>
+            <Speed value="560"/>
+            <Preset dif="20-22"/>
+            <Preset dif="21-23"/>
+            <Preset dif="21-24"/>
+            <Preset dif="22-24"/>
+            <Preset dif="23-25"/>
+            <Preset dif="23-25"/>
+            <Preset dif="25-27"/>
+            <Preset dif="26-27"/>
+            <Preset dif="27-27"/>
+            <Speed value="570"/>
+            <Preset dif="26-27"/>
+            <Preset dif="26-28"/>
+            <Preset dif="26-28"/>
+            <Preset dif="27-28"/>
+            <Preset dif="27=29"/>
+            <Preset dif="27-29"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="30-30"/>
+            <Speed value="590"/>
+            <Preset dif="28-30"/>
+            <Preset dif="28-30"/>
+            <Preset dif="29-30"/>
+            <Preset dif="29-31"/>
+            <Preset dif="29=31"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="30-32"/>
+            <Preset dif="32-32"/>
+            <Speed value="590"/>
+            <Preset dif="28-31"/>
+            <Preset dif="29-32"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30-33"/>
+            <Preset dif="30=34"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="34-35"/>
+            <Preset dif="34-35"/>
+            <Speed value="600"/>
+            <Preset dif="31-33"/>
+            <Preset dif="31-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="32-35"/>
+            <Preset dif="33=35"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-37"/>
+            <Preset dif="36-37"/>
+            <Speed value="600"/>
+            <Preset dif="32-34"/>
+            <Preset dif="32-35"/>
+            <Preset dif="32-35"/>
+            <Preset dif="33-36"/>
+            <Preset dif="33=36"/>
+            <Preset dif="34-37"/>
+            <Preset dif="34-37"/>
+            <Preset dif="35-38"/>
+            <Preset dif="36-38"/>
+            <Speed value="610"/>
+            <Preset dif="34-36"/>
+            <Preset dif="34-36"/>
+            <Preset dif="35-37"/>
+            <Preset dif="35-37"/>
+            <Preset dif="36=37"/>
+            <Preset dif="36-38"/>
+            <Preset dif="37-38"/>
+            <Preset dif="37-39"/>
+            <Preset dif="39-40"/>                                                                            
+            <Link id="finish"/>
+        </Description>
+    </Level>                                                                                   
 </Levels>
