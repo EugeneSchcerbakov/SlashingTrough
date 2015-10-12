@@ -1,13 +1,13 @@
 //
-//  StoreCystallWidget.h
+//  StoreCrystallWidget.h
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 18/09/15.
 //
 //
 
-#ifndef __SlashingTrough__StoreCystallWidget__
-#define __SlashingTrough__StoreCystallWidget__
+#ifndef __SlashingTrough__StoreCrystallWidget__
+#define __SlashingTrough__StoreCrystallWidget__
 
 #include "Store.h"
 #include "StoreItemBaseWidget.h"
@@ -30,4 +30,4 @@ private:
     void initShardsPanel();
 };
 
-#endif /* defined(__SlashingTrough__StoreCystallWidget__) */
+#endif /* defined(__SlashingTrough__StoreCrystallWidget__) */

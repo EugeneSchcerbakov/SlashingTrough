@@ -120,8 +120,8 @@
 		CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
 		CD89CC5C1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
 		CD89CC5D1ACC52D0008C1E06 /* GameInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */; };
-		CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */; };
-		CD9C6C641BAC632200EE383C /* StoreCystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */; };
+		CD9C6C631BAC632200EE383C /* StoreCrystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCrystallWidget.cpp */; };
+		CD9C6C641BAC632200EE383C /* StoreCrystallWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9C6C611BAC632200EE383C /* StoreCrystallWidget.cpp */; };
 		CD9D04DE1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */; };
 		CD9D04DF1B8B8F4400FFE0F3 /* MapLevelMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */; };
 		CD9D04E11B8B949400FFE0F3 /* map.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD9D04E01B8B949400FFE0F3 /* map.xml */; };
@@ -352,8 +352,8 @@
 		CD81E5131B20B439008059C2 /* StoreInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInterface.h; sourceTree = "<group>"; };
 		CD89CC5A1ACC52D0008C1E06 /* GameInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInfo.cpp; sourceTree = "<group>"; };
 		CD89CC5B1ACC52D0008C1E06 /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
-		CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCystallWidget.cpp; sourceTree = "<group>"; };
-		CD9C6C621BAC632200EE383C /* StoreCystallWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCystallWidget.h; sourceTree = "<group>"; };
+		CD9C6C611BAC632200EE383C /* StoreCrystallWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreCrystallWidget.cpp; sourceTree = "<group>"; };
+		CD9C6C621BAC632200EE383C /* StoreCrystallWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCrystallWidget.h; sourceTree = "<group>"; };
 		CD9D04DC1B8B8F4400FFE0F3 /* MapLevelMark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapLevelMark.cpp; sourceTree = "<group>"; };
 		CD9D04DD1B8B8F4400FFE0F3 /* MapLevelMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLevelMark.h; sourceTree = "<group>"; };
 		CD9D04E01B8B949400FFE0F3 /* map.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.xml; sourceTree = "<group>"; };
@@ -713,8 +713,8 @@
 				CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */,
 				CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */,
 				CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */,
-				CD9C6C611BAC632200EE383C /* StoreCystallWidget.cpp */,
-				CD9C6C621BAC632200EE383C /* StoreCystallWidget.h */,
+				CD9C6C611BAC632200EE383C /* StoreCrystallWidget.cpp */,
+				CD9C6C621BAC632200EE383C /* StoreCrystallWidget.h */,
 				CD26715C1BC2E62900BD5B43 /* PopupCore.cpp */,
 				CD26715D1BC2E62900BD5B43 /* PopupCore.h */,
 			);
@@ -987,7 +987,7 @@
 				CD1D5EE81BC93DBA009C9352 /* DailyTask.cpp in Sources */,
 				CD2F2A701BCA7C5E008C72D7 /* DailyMissionsPopup.cpp in Sources */,
 				CD26715E1BC2E62900BD5B43 /* PopupCore.cpp in Sources */,
-				CD9C6C631BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
+				CD9C6C631BAC632200EE383C /* StoreCrystallWidget.cpp in Sources */,
 				CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */,
 				CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */,
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
@@ -1009,7 +1009,7 @@
 				CDC880FE1B513D8700030818 /* FieldSector.cpp in Sources */,
 				CDC5E62C1B52D564000756EB /* Enemy.cpp in Sources */,
 				CD255B291B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
-				CD9C6C641BAC632200EE383C /* StoreCystallWidget.cpp in Sources */,
+				CD9C6C641BAC632200EE383C /* StoreCrystallWidget.cpp in Sources */,
 				CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */,

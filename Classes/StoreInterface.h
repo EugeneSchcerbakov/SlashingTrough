@@ -11,7 +11,7 @@
 
 #include "StoreWeaponWidget.h"
 #include "StoreArmorWidget.h"
-#include "StoreCystallWidget.h"
+#include "StoreCrystallWidget.h"
 #include "StoreCategoryButton.h"
 
 class StoreInterface : public cocos2d::Scene

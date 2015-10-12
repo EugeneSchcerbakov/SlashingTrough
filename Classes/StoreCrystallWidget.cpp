@@ -1,12 +1,12 @@
 //
-//  StoreCystallWidget.cpp
+//  StoreCrystallWidget.cpp
 //  SlashingTrough
 //
 //  Created by Eugene Shcherbakov on 18/09/15.
 //
 //
 
-#include "StoreCystallWidget.h"
+#include "StoreCrystallWidget.h"
 
 #include "PlayerInfo.h"
 #include "Log.h"
