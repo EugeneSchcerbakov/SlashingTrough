@@ -10,9 +10,9 @@
     <LevelMark levelId="level_8" x="122.0" y="1710.0" text="8"/>
     <LevelMark levelId="level_9" x="310.0" y="1512.0" text="9"/>
     <LevelMark levelId="level_10" x="450.0" y="1480.0" text="10"/>
-    <LevelMark levelId="level_11" x="450.0" y="1580.0" text="10"/>
-    <LevelMark levelId="level_12" x="450.0" y="1680.0" text="10"/>
-    <LevelMark levelId="level_13" x="450.0" y="1780.0" text="10"/>
-    <LevelMark levelId="level_14" x="450.0" y="1880.0" text="10"/>
-    <LevelMark levelId="level_15" x="450.0" y="1980.0" text="10"/>               
+    <LevelMark levelId="level_11" x="402.0" y="1376.0" text="11"/>
+    <LevelMark levelId="level_12" x="555 .0" y="1314.0" text="12"/>
+    <LevelMark levelId="level_13" x="474.0" y="1223.0" text="13"/>
+    <LevelMark levelId="level_14" x="571.0" y="1154.0" text="14"/>
+    <LevelMark levelId="level_15" x="225.0" y="1148.0" text="15"/>               
 </Map>
