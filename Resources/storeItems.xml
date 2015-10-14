@@ -8,7 +8,7 @@
         sprite="gamefield/wpn_iron_sword.png"
         damage="10.0"
         speed="0.33"
-        distance="450.0">
+        distance="430.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -23,7 +23,7 @@
         sprite="gamefield/wpn_ice_sword.png"
         damage="15.0"
         speed="0.31"
-        distance="450.0">
+        distance="430.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -38,7 +38,7 @@
         sprite="gamefield/wpn_noble_sword.png"
         damage="20.0"
         speed="0.33"
-        distance="450.0">
+        distance="430.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
@@ -53,7 +53,7 @@
         sprite="gamefield/wpn_lava_sword.png"
         damage="25.0"
         speed="0.33"
-        distance="450.0">
+        distance="430.0">
         <Trail length="0.1"
             width="200.0"
             posYCoeff="0.6"
