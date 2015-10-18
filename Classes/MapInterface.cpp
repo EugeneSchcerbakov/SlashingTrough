@@ -8,6 +8,7 @@
 
 #include "MapInterface.h"
 
+#include "DailyMissions.h"
 #include "ScreenChanger.h"
 #include "LevelsCache.h"
 #include "PlayerInfo.h"
@@ -118,7 +119,29 @@ bool MapInterface::init()
     
     attachHandlerWithZOrder(Order::CONTROLS);
     
+    checkDailyMissionsCompletness();
+    
     return true;
+}
+
+void MapInterface::checkDailyMissionsCompletness()
+{
+    DailyMissions &daily = DailyMissions::getInstance();
+    
+    auto  missions = daily.getTodayMissions();
+    bool needSave = false;
+    
+    for (DailyTaskBase::Ptr task : missions)
+    {
+        if (task->checkCompletness() && !task->isRewarded()) {
+            task->giveReward();
+            needSave = true;
+        }
+    }
+    
+    if (needSave) {
+        PlayerInfo::getInstance().save();
+    }
 }
 
 bool MapInterface::mapTouchBegan(cocos2d::Touch *touch, cocos2d::Event *e)

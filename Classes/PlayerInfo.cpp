@@ -92,6 +92,8 @@ const std::string PlayerInfo::VarKeyItemWpn = "EquipedWeapon";
 const std::string PlayerInfo::VarKeyItemArm = "EquipedArmor";
 const std::string PlayerInfo::VarKeyCrystallWpn = "EquippedWeaponCrystall";
 const std::string PlayerInfo::VarKeyCrystallArm = "EquippedArmorCrystall";
+const std::string PlayerInfo::VarKeyLastPlayedLevel = "LastPlayedLevel";
+const std::string PlayerInfo::VarDailyMastering = "DailyMissionMastering";
 
 const std::string PlayerInfo::DEFAULT_WEAPON_ID = "default_sword";
 const std::string PlayerInfo::DEFAULT_ARMOR_ID = "default_armor";
@@ -183,8 +185,20 @@ void PlayerInfo::load(const std::string &filename)
             levelElem = levelElem->NextSiblingElement();
         }
         
-        auto dailyStat = root->FirstChildElement("DailyInfo");
-        variablesSetFromXml(DailyMissions::getInstance().statistics, dailyStat);
+        auto dailyInfo = root->FirstChildElement("DailyInfo");
+        auto taskNode = dailyInfo->FirstChildElement();
+        while (taskNode)
+        {
+            std::string id = taskNode->Attribute("id");
+            bool rewarded = taskNode->BoolAttribute("rewarded");
+            
+            VariablesSet data;
+            variablesSetFromXml(data, taskNode);
+            
+            DailyMissions::getInstance().restoreTodayMissions(id, data, rewarded);
+            
+            taskNode = taskNode->NextSiblingElement();
+        }
         
         WRITE_INIT("Save file successfully loaded.");
     }
@@ -273,9 +287,19 @@ void PlayerInfo::save()
         
         root->LinkEndChild(levelsProgress);
         
-        auto dailyStat = document.NewElement("DailyInfo");
-        variablesSetToXml(DailyMissions::getInstance().statistics, document, dailyStat);
-        root->LinkEndChild(dailyStat);
+        auto dailyInfo = document.NewElement("DailyInfo");
+        DailyMissions &daily = DailyMissions::getInstance();
+        for (DailyTaskBase::Ptr dailyTask : daily.getTodayMissions())
+        {
+            auto taskNode = document.NewElement("Task");
+            taskNode->SetAttribute("id", dailyTask->getInfo().id.c_str());
+            taskNode->SetAttribute("rewarded", dailyTask->isRewarded());
+            
+            variablesSetToXml(dailyTask->getProgress(), document, taskNode);
+            
+            dailyInfo->LinkEndChild(taskNode);
+        }
+        root->LinkEndChild(dailyInfo);
         
         document.LinkEndChild(declaration);
         document.LinkEndChild(root);

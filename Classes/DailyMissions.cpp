@@ -7,6 +7,8 @@
 //
 
 #include "DailyMissions.h"
+#include "PlayerInfo.h"
+#include "Utils.h"
 #include "Log.h"
 
 #include "cocos2d.h"
@@ -22,16 +24,19 @@ DailyMissions::DailyMissions()
 {
 }
 
-static std::string getTrackingForTask(const std::string &type)
+static DailyTaskBase::BaseInfo taskInfoFromXml(tinyxml2::XMLElement *elem)
 {
-    if (type == "KillXEnemies") {
-        return Tracking::TotalEnemiesKilled;
-    } else if (type == "CollectXCoins") {
-        return Tracking::TotalCoinsRewarded;
-    } else {
-        WRITE_WARN("Unknown task type:" + type);
-        return "";
-    }
+    DailyTaskBase::BaseInfo info;
+    
+    info.id = elem->Attribute("id");
+    info.difficult = elem->IntAttribute("difficult");
+    info.required = elem->IntAttribute("required");
+    info.coinsReward = elem->IntAttribute("coinsReward");
+    info.lootRewardId = elem->Attribute("lootRewardId");
+    info.lootRewardAmount = elem->IntAttribute("lootRewardAmount");
+    info.description = elem->Attribute("description");
+    
+    return info;
 }
 
 bool DailyMissions::loadMissions(const std::string &filename)
@@ -51,22 +56,33 @@ bool DailyMissions::loadMissions(const std::string &filename)
         auto masteringNode = root->FirstChildElement("MasteringSettings");
         auto missionsNode = root->FirstChildElement("MissionsPool");
         
-        auto missionNode = missionsNode->FirstChildElement();
-        while (missionNode)
+        auto taskNode = missionsNode->FirstChildElement();
+        while (taskNode)
         {
-            DailyTask::Info info;
-            info.tracking = getTrackingForTask(missionNode->Name());
-            info.difficult = missionNode->IntAttribute("difficult");
-            info.required = missionNode->IntAttribute("required");
-            info.coinsReward = missionNode->IntAttribute("coinsReward");
-            info.lootRewardId = missionNode->Attribute("lootRewardId");
-            info.lootRewardAmount = missionNode->IntAttribute("lootRewardAmount");
-            info.description = missionNode->Attribute("description");
+            std::string name = taskNode->Name();
             
-            DailyTask::Ptr task = DailyTask::create(info);
-            _pool.push_back(task);
+            DailyTaskBase::BaseInfo info = taskInfoFromXml(taskNode);
+            DailyTaskBase::Ptr task = nullptr;
             
-            missionNode = missionNode->NextSiblingElement();
+            if (name == "KillXEnemies") {
+                int amount = taskNode->IntAttribute("killsRequired");
+                task = KillXEnemies::create(info, amount);
+            } else if (name == "CollectXCoins") {
+                int amount = taskNode->IntAttribute("coinsRequired");
+                task = CollectXCoins::create(info, amount);
+            } else if (name == "CompleteLevelWithoutHealthLooses") {
+                std::string levelId = taskNode->Attribute("levelId");
+                task = CompleteLevelWithoutHealthLooses::create(info, levelId);
+            } else {
+                WRITE_WARN("Unknown task type: " + name);
+            }
+            
+            if (task)
+            {
+                _pool.push_back(task);
+            }
+            
+            taskNode = taskNode->NextSiblingElement();
         }
         
         WRITE_INIT("Daily missions loaded successfully.");
@@ -79,29 +95,95 @@ bool DailyMissions::loadMissions(const std::string &filename)
     return false;
 }
 
-void DailyMissions::prepareForRun()
+void DailyMissions::beforeRun()
 {
-    statistics.setInt(Tracking::KillsForSingleRun, 0);
-    statistics.setInt(Tracking::CoinsForSingleRun, 0);
-    statistics.setInt(Tracking::DamageReceivedForSingleRun, 0);
+    for (DailyTaskBase::Ptr task : _today)
+    {
+        task->onRunBegan();
+    }
 }
 
-void DailyMissions::clearStatistics()
+void DailyMissions::event(const DailyTaskEvent &event)
 {
-    statistics.clear();
+    for (DailyTaskBase::Ptr task : _today)
+    {
+        if (task->isSubscribed(event)) {
+            task->onEvent(event);
+        }
+    }
 }
 
-void DailyMissions::checkAfterRun()
+void DailyMissions::restoreTodayMissions(const std::string &id, VariablesSet progress, bool rewarded)
 {
+    DailyTaskBase::Ptr task = nullptr;
     
+    for (DailyTaskBase::Ptr ref : _pool) {
+        if (ref->getInfo().id == id) {
+            task = ref;
+            break;
+        }
+    }
+    
+    if (task) {
+        task->restore(progress, rewarded);
+        _today.push_back(task);
+    } else {
+        WRITE_WARN("Trying to restore unknown task with id:" + id);
+    }
 }
 
-void DailyMissions::checkSwitchDay()
+void DailyMissions::checkMissionsStatus()
 {
-    _today = _pool;
+    if (_today.empty())
+    {
+        generateTodaysMissions();
+    }
 }
 
-const std::vector<DailyTask::Ptr>& DailyMissions::getTodayMissions() const
+void DailyMissions::generateTodaysMissions()
+{
+    _today.clear();
+    
+    PlayerInfo &player = PlayerInfo::getInstance();
+    
+    int mastering = player.variables.getInt(PlayerInfo::VarDailyMastering, -1);
+    if (mastering <= 0) {
+        mastering = 1;
+        player.variables.setInt(PlayerInfo::VarDailyMastering, mastering);
+        player.save();
+    }
+    
+    std::vector<DailyTaskBase::Ptr> cach;
+    for (DailyTaskBase::Ptr task : _pool) {
+        if (task->getInfo().difficult == mastering) {
+            cach.push_back(task);
+        }
+    }
+    
+    const std::size_t maxGoals = 3;
+    
+    while (_today.size() < maxGoals)
+    {
+        int index = misc::random(0, cach.size() - 1);
+        bool shouldAdd = true;
+        
+        DailyTaskBase::Ptr expectant = cach[index];
+        
+        for (DailyTaskBase::Ptr task : _today) {
+            if (expectant == task) {
+                shouldAdd = false;
+                break;
+            }
+        }
+        
+        if (shouldAdd)
+        {
+            _today.push_back(expectant);
+        }
+    }
+}
+
+const std::vector<DailyTaskBase::Ptr>& DailyMissions::getTodayMissions() const
 {
     return _today;
 }

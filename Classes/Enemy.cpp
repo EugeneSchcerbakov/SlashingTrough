@@ -194,10 +194,14 @@ void Enemy::onDamageReceived(float damage)
         hero->addStamina(getStaminaPoints());
         hero->addScorePoint(getScorePoints());
         
-        daily.statistics.incInt(Tracking::TotalEnemiesKilled, 1);
-        daily.statistics.incInt(Tracking::KillsForSingleRun, 1);
-        daily.statistics.incInt(Tracking::TotalCoinsRewarded, getCoinPoints());
-        daily.statistics.incInt(Tracking::CoinsForSingleRun, getCoinPoints());
+        DailyTaskEvent eventKill(Tracking::EnemyKilled);
+        DailyTaskEvent eventCoin(Tracking::CoinEarned);
+        
+        eventKill.data.setInt("amount", 1);
+        eventCoin.data.setInt("amount", getCoinPoints());
+        
+        daily.event(eventKill);
+        daily.event(eventCoin);
     }
 }
 

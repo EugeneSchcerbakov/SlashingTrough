@@ -13,42 +13,108 @@
 #include <string>
 #include <vector>
 
-class DailyTask
+#include "VariablesSet.h"
+
+class DailyTaskEvent
 {
 public:
-    struct Info
+    DailyTaskEvent(const std::string &id)
+    : _id(id)
+    {}
+    
+    inline bool is(const std::string &id) const {return id == _id;}
+    VariablesSet data;
+private:
+    const std::string _id;
+};
+
+class DailyTaskBase
+{
+public:
+    struct BaseInfo
     {
         int difficult;
         int required;
         int coinsReward;
         int lootRewardAmount;
         
+        std::string id;
         std::string lootRewardId;
         std::string description;
-        std::string tracking;
         
-        Info() = default;
+        BaseInfo() = default;
     };
     
-    typedef std::shared_ptr<DailyTask> Ptr;
-    typedef std::weak_ptr<DailyTask> WeakPtr;
-    
-    static Ptr create(const Info &info);
+    typedef std::shared_ptr<DailyTaskBase> Ptr;
+    typedef std::weak_ptr<DailyTaskBase> WeakPtr;
     
 public:
-    DailyTask(const Info &info);
-    virtual ~DailyTask();
+    DailyTaskBase(const BaseInfo &info, const std::string &subscription);
+    virtual ~DailyTaskBase();
     
-    bool checkCompletness();
+    virtual void onEvent(const DailyTaskEvent &event) = 0;
+    virtual bool checkCompletness() = 0;
+    virtual void restore(VariablesSet progress, bool rewarded);
+    virtual void onRunBegan();
     
-    int getDifficult() const;
-    int getCoinsReward() const;
-    int getLootAmount() const;
-    std::string getDescription() const;
-    std::string getLootId() const;
+    void giveReward();
+    
+    bool isSubscribed(const DailyTaskEvent &event) const;
+    bool isRewarded() const;
+    
+    const BaseInfo& getInfo() const;
+    const VariablesSet& getProgress() const;
+    
+protected:
+    BaseInfo _info;
+    VariablesSet _progress;
+    bool _rewarded;
+    const std::string _subscription;
+    
+    friend class DailyMissions;
+};
+
+class KillXEnemies : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, int killsRequired);
+    
+    KillXEnemies(const BaseInfo &info, int killsRequired);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual bool checkCompletness() override;
     
 private:
-    Info _info;
+    const int _killsRequired;
+};
+
+class CollectXCoins : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, int coinsRequired);
+    
+    CollectXCoins(const BaseInfo &info, int killsRequired);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual bool checkCompletness() override;
+    
+private:
+    const int _coinsRequired;
+};
+
+class CompleteLevelWithoutHealthLooses : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, const std::string &levelId);
+    
+    CompleteLevelWithoutHealthLooses(const BaseInfo &info, const std::string &levelId);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual void onRunBegan() override;
+    virtual bool checkCompletness() override;
+    
+private:
+    const std::string _levelId;
 };
 
 #endif /* DailyTask_hpp */

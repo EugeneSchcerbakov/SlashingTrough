@@ -142,8 +142,6 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
     addChild(_panel, 1);
     addChild(continueText, 1);
     
-    DailyMissions::getInstance().checkAfterRun();
-    
     return true;
 }
 
@@ -173,7 +171,10 @@ void StaticticsInterface::initLootPanel()
             
             xy.x += sprite->getContentSize().width * scale;
             
-            DailyMissions::getInstance().statistics.incInt(id);
+            DailyTaskEvent event(Tracking::ItemEarned);
+            event.data.setString("id", id);
+            event.data.setInt("amount", 1);
+            DailyMissions::getInstance().event(event);
         }
         
         auto lootText = cocos2d::ui::Text::create("Loot:", "font_prototype.ttf", 23);

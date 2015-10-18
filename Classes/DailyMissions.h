@@ -10,41 +10,38 @@
 #define DailyMissions_hpp
 
 #include "DailyTask.h"
-#include "VariablesSet.h"
 
 namespace Tracking
 {
-    const std::string TotalEnemiesKilled = "TotalEnemiesKilled";
-    const std::string TotalCoinsRewarded = "TotalCoinsRewarded";
-    const std::string TotalSquarePassed = "TotalSquarePassed";
-    const std::string LevelCompleteTime = "LevelCompleteTime";
-    const std::string DamageReceivedForSingleRun = "DamageReceivedForSingleRun";
-    const std::string KillsForSingleRun = "KillsForSingleRun";
-    const std::string CoinsForSingleRun = "CoinsForSingleRun";
+    const std::string EnemyKilled = "EnemyKilled";
+    const std::string SquarePassed = "SquarePassed";
+    const std::string DamageReceived = "DamageReceived";
+    const std::string CoinEarned = "CoinEarned";
+    const std::string ItemEarned = "LootEarned";
 };
 
 class DailyMissions
-{
+{    
 public:
     static DailyMissions& getInstance();
     
     bool loadMissions(const std::string &filename);
     
-    void prepareForRun();
-    void clearStatistics();
+    void beforeRun();
+    void event(const DailyTaskEvent &event);
+    void restoreTodayMissions(const std::string &id, VariablesSet progress, bool rewarded);
     
-    void checkAfterRun();
-    void checkSwitchDay();
+    void checkMissionsStatus();
     
-    const std::vector<DailyTask::Ptr>& getTodayMissions() const;
-    
-    VariablesSet statistics;
+    const std::vector<DailyTaskBase::Ptr>& getTodayMissions() const;
     
 private:
     DailyMissions();
     
-    std::vector<DailyTask::Ptr> _pool;
-    std::vector<DailyTask::Ptr> _today;
+    void generateTodaysMissions();
+    
+    std::vector<DailyTaskBase::Ptr> _pool;
+    std::vector<DailyTaskBase::Ptr> _today;
 };
 
 #endif /* DailyMissions_hpp */

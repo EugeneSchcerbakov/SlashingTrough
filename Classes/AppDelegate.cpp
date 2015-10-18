@@ -75,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     DailyMissions::getInstance().loadMissions("dailyMissions.xml");
     PlayerInfo::getInstance().load("st_save.xml");
     
-    DailyMissions::getInstance().checkSwitchDay();
+    DailyMissions::getInstance().checkMissionsStatus();
 
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);

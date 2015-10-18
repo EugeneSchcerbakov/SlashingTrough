@@ -13,7 +13,7 @@
 class DailyTaskWidget : public cocos2d::Node
 {
 public:
-    static DailyTaskWidget* create(DailyTask::WeakPtr taskPtr)
+    static DailyTaskWidget* create(DailyTaskBase::WeakPtr taskPtr)
     {
         DailyTaskWidget *widget = new DailyTaskWidget();
         if (widget && widget->init(taskPtr)) {
@@ -36,24 +36,24 @@ protected:
         
     }
     
-    bool init(DailyTask::WeakPtr taskPtr)
+    bool init(DailyTaskBase::WeakPtr taskPtr)
     {
         if (!cocos2d::Node::init() || taskPtr.expired()) {
             return false;
         }
         
-        DailyTask::Ptr task = taskPtr.lock();
+        DailyTaskBase::Ptr task = taskPtr.lock();
         
         auto titleText = cocos2d::ui::Text::create();
         titleText->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_LEFT);
-        titleText->setString(task->getDescription());
+        titleText->setString(task->getInfo().description);
         titleText->setFontName("font_prototype.ttf");
         titleText->setFontSize(18);
         titleText->setTextColor(cocos2d::Color4B::WHITE);
         titleText->setTextAreaSize(cocos2d::Size(150.0f, 0.0f));
         titleText->ignoreContentAdaptWithSize(false);
         
-        std::string iconFile = Store::getInstance().getItemById(task->getLootId())->getIcon();
+        std::string iconFile = Store::getInstance().getItemById(task->getInfo().lootRewardId)->getIcon();
         
         auto lootIcon = cocos2d::Sprite::create(iconFile);
         lootIcon->setScale(0.5f);
@@ -167,7 +167,7 @@ bool DailyMissionPopup::init()
     goalPos.x = 30.0;
     goalPos.y = _panel->getContentSize().height - 100.0f;
     
-    for (DailyTask::Ptr task : daily.getTodayMissions())
+    for (DailyTaskBase::Ptr task : daily.getTodayMissions())
     {
         DailyTaskWidget *widget = DailyTaskWidget::create(task);
         widget->setPosition(goalPos);

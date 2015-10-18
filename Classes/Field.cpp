@@ -58,7 +58,9 @@ void Field::initialize(FieldLevel::WeakPtr level)
         pushFrontSector();
     }
     
-    DailyMissions::getInstance().prepareForRun();
+    DailyMissions::getInstance().beforeRun();
+    
+    PlayerInfo::getInstance().variables.setString(PlayerInfo::VarKeyLastPlayedLevel, _level->getId());
     
     WRITE_LOG("Game started with level:" + _level->getId());
 }

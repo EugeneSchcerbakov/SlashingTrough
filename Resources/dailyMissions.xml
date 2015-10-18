@@ -7,18 +7,107 @@
         <Mastering5 missions="6" />
     </MasteringSettings>
     <MissionsPool>
-        <KillXEnemies difficult="1"
-            required="100"
+        <KillXEnemies id="KillXEnemies0"
+            difficult="1"
+            killsRequired="10"
             coinsReward="100"
             lootRewardId="back_dash_shard"
             lootRewardAmount="1"
-            description="Kill 100 orks" >
+            description="Kill 10 orks" >
         </KillXEnemies>
-        <CollectXCoins difficult="1"
-            required="1000"
+        <KillXEnemies id="KillXEnemies1"
+            difficult="2"
+            killsRequired="200"
+            coinsReward="200"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 200 orks" >
+        </KillXEnemies>
+        <KillXEnemies id="KillXEnemies2"
+            difficult="3"
+            killsRequired="300"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 300 orks" >
+        </KillXEnemies>
+        <KillXEnemies id="KillXEnemies3"
+            difficult="4"
+            required="400"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 400 orks" >
+        </KillXEnemies>
+
+        <CollectXCoins id="CollectXCoins0"
+            difficult="1"
+            coinsRequired="1000"
             coinsReward="100"
             lootRewardId="vampirism_shard"
             lootRewardAmount="1"
+            description="Collect 1000 coins" >
         </CollectXCoins>
+        <CollectXCoins id="CollectXCoins1"
+            difficult="2"
+            coinsRequired="2000"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Collect 2000 coins" >
+        </CollectXCoins>
+        <CollectXCoins id="CollectXCoins2"
+            difficult="3"
+            coinsRequired="3000"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Collect 3000 coins" >
+        </CollectXCoins>
+        <CollectXCoins id="CollectXCoins3"
+            difficult="4"
+            coinsRequired="4000"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Collect 4000 coins" >
+        </CollectXCoins>
+        
+        <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses0"
+            levelId="level_2"
+            difficult="1"
+            required="0"
+            coinsReward="100"
+            lootRewardId="burning_aura_shard"
+            lootRewardAmount="1"
+            description="Complete level 2 without hp losses" >
+        </CompleteLevelWithoutHealthLooses>
+        <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses1"
+            levelId="level_3"
+            difficult="2"
+            required="0"
+            coinsReward="100"
+            lootRewardId="burning_aura_shard"
+            lootRewardAmount="1"
+            description="Complete level 3 without hp losses" >
+        </CompleteLevelWithoutHealthLooses>
+        <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses2"
+            levelId="level_4"
+            difficult="3"
+            required="0"
+            coinsReward="100"
+            lootRewardId="burning_aura_shard"
+            lootRewardAmount="1"
+            description="Complete level 4 without hp losses" >
+        </CompleteLevelWithoutHealthLooses>
+        <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses3"
+            levelId="level_5"
+            difficult="4"
+            required="0"
+            coinsReward="100"
+            lootRewardId="burning_aura_shard"
+            lootRewardAmount="1"
+            description="Complete level 5 without hp losses" >
+        </CompleteLevelWithoutHealthLooses>
     </MissionsPool>
 </DailyMissions>

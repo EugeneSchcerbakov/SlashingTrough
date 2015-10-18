@@ -25,6 +25,8 @@ protected:
     bool init();
     
 private:
+    void checkDailyMissionsCompletness();
+    
     bool mapTouchBegan(cocos2d::Touch *touch, cocos2d::Event *e);
     void mapTouchEnded(cocos2d::Touch *touch, cocos2d::Event *e);
     void mapTouchCanceled(cocos2d::Touch *touch, cocos2d::Event *e);
