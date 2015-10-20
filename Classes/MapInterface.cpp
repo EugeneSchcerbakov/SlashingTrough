@@ -8,6 +8,7 @@
 
 #include "MapInterface.h"
 
+#include "Store.h"
 #include "DailyMissions.h"
 #include "ScreenChanger.h"
 #include "LevelsCache.h"
@@ -48,6 +49,7 @@ bool MapInterface::init()
     _guiLayer = cocos2d::Layer::create();
     _mapWidget = MapWidget::create("map.xml");
     _mapWidget->setSwallowTouches(false);
+    _effectsLayer = EffectsLayer::create();
     
     auto input = cocos2d::EventListenerTouchOneByOne::create();
     input->onTouchBegan = CC_CALLBACK_2(MapInterface::mapTouchBegan, this);
@@ -83,23 +85,25 @@ bool MapInterface::init()
     auto onDailyPressed = [&](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
         if (e == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            auto popup = DailyMissionPopup::create();
+            auto popup = DailyMissionPopup::create(_effectsLayer);
             pushPopup(popup, Order::POPUP, "DailyMissionPopup");
         }
     };
     
     float btnScale = 1.8f;
-    auto shopButton = cocos2d::ui::Button::create("ui/ui_btn_shop.png");
-    shopButton->setScale(btnScale);
-    shopButton->setPositionX(origin.x + shopButton->getContentSize().width * btnScale * 0.5f + 25.0f);
-    shopButton->setPositionY(origin.y + shopButton->getContentSize().height * btnScale * 0.5f + 25.0f);
-    shopButton->addTouchEventListener(onShopPressed);
+    _shopButton = cocos2d::ui::Button::create("ui/ui_btn_shop.png");
+    _shopButton->setName("shopButton");
+    _shopButton->setScale(btnScale);
+    _shopButton->setPositionX(origin.x + _shopButton->getContentSize().width * btnScale * 0.5f + 25.0f);
+    _shopButton->setPositionY(origin.y + _shopButton->getContentSize().height * btnScale * 0.5f + 25.0f);
+    _shopButton->addTouchEventListener(onShopPressed);
     
-    auto dailyButton = cocos2d::ui::Button::create("ui/ui_btn_daily-missions.png");
-    dailyButton->setScale(btnScale);
-    dailyButton->setPositionX(shopButton->getPositionX() + 100.0f);
-    dailyButton->setPositionY(origin.y + dailyButton->getContentSize().height * btnScale * 0.5f + 25.0f);
-    dailyButton->addTouchEventListener(onDailyPressed);
+    _dailyButton = cocos2d::ui::Button::create("ui/ui_btn_daily-missions.png");
+    _dailyButton->setName("dailyButton");
+    _dailyButton->setScale(btnScale);
+    _dailyButton->setPositionX(_shopButton->getPositionX() + 100.0f);
+    _dailyButton->setPositionY(origin.y + _dailyButton->getContentSize().height * btnScale * 0.5f + 25.0f);
+    _dailyButton->addTouchEventListener(onDailyPressed);
 
     float settingsScale = 2.0f;
     auto settings = cocos2d::ui::Button::create("ui/ui_btn_options.png");
@@ -109,13 +113,14 @@ bool MapInterface::init()
     
     _guiLayer->addChild(coinIcon);
     _guiLayer->addChild(_coinsText);
-    _guiLayer->addChild(shopButton);
-    _guiLayer->addChild(dailyButton);
+    _guiLayer->addChild(_shopButton);
+    _guiLayer->addChild(_dailyButton);
     _guiLayer->addChild(settings);
     
     addChild(_background, Order::COLOR);
     addChild(_mapWidget, Order::MAP);
     addChild(_guiLayer, Order::CONTROLS);
+    addChild(_effectsLayer, Order::EFFECTS);
     
     attachHandlerWithZOrder(Order::CONTROLS);
     
@@ -133,9 +138,32 @@ void MapInterface::checkDailyMissionsCompletness()
     
     for (DailyTaskBase::Ptr task : missions)
     {
-        if (task->checkCompletness() && !task->isRewarded()) {
+        if (task->checkCompletness() && !task->isRewarded())
+        {
             task->giveReward();
             needSave = true;
+            
+            DailyMissionPopup *popup = nullptr;
+            
+            if (!getChildByName("DailyMissionPopup"))
+            {
+                popup = DailyMissionPopup::create(_effectsLayer);
+                pushPopup(popup, Order::POPUP, "DailyMissionPopup");
+            }
+            else
+            {
+                popup = getChildByName<DailyMissionPopup *>("DailyMissionPopup");
+            }
+            
+            if (popup)
+            {
+                cocos2d::Vec2 endp;
+                endp = _shopButton->convertToWorldSpace(cocos2d::Vec2::ZERO);
+                endp.x += _shopButton->getContentSize().width * 0.5f * _shopButton->getScale();
+                endp.y += _shopButton->getContentSize().height * 0.5f * _shopButton->getScale();
+                
+                popup->addTaskRewardEffect(task->getInfo().id, endp);
+            }
         }
     }
     

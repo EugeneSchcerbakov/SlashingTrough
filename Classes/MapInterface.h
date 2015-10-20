@@ -12,6 +12,7 @@
 #include "MissionStartPopup.h"
 #include "DailyMissionsPopup.h"
 #include "MapWidget.h"
+#include "EffectsLayer.h"
 
 class MapInterface : public PopupCarrier
 {
@@ -36,14 +37,18 @@ private:
         COLOR = 0,
         MAP,
         POPUP,
-        CONTROLS
+        CONTROLS,
+        EFFECTS
     };
     
     cocos2d::LayerColor *_background;
     cocos2d::Layer *_guiLayer;
     MapWidget *_mapWidget;
+    EffectsLayer *_effectsLayer;
     
     cocos2d::ui::Text *_coinsText;
+    cocos2d::ui::Button *_shopButton;
+    cocos2d::ui::Button *_dailyButton;
 };
 
 #endif /* defined(__SlashingTrough__MapInterface__) */

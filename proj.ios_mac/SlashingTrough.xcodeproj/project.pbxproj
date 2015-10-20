@@ -110,6 +110,8 @@
 		CD6517F21B8F78B6000181E5 /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6517EF1B8F78B6000181E5 /* VictoryCondition.cpp */; };
 		CD680A971B7F629C009618CC /* Abilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* Abilities.cpp */; };
 		CD680A981B7F629C009618CC /* Abilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD680A951B7F629C009618CC /* Abilities.cpp */; };
+		CD71E0CF1BD3FECE00EB5045 /* EffectFlyingIcon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD71E0CD1BD3FECE00EB5045 /* EffectFlyingIcon.cpp */; settings = {ASSET_TAGS = (); }; };
+		CD71E0D01BD3FECE00EB5045 /* EffectFlyingIcon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD71E0CD1BD3FECE00EB5045 /* EffectFlyingIcon.cpp */; settings = {ASSET_TAGS = (); }; };
 		CD7503531AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
@@ -344,6 +346,8 @@
 		CD6517F01B8F78B6000181E5 /* VictoryCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryCondition.h; sourceTree = "<group>"; };
 		CD680A951B7F629C009618CC /* Abilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Abilities.cpp; sourceTree = "<group>"; };
 		CD680A961B7F629C009618CC /* Abilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abilities.h; sourceTree = "<group>"; };
+		CD71E0CD1BD3FECE00EB5045 /* EffectFlyingIcon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectFlyingIcon.cpp; sourceTree = "<group>"; };
+		CD71E0CE1BD3FECE00EB5045 /* EffectFlyingIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectFlyingIcon.h; sourceTree = "<group>"; };
 		CD7503511AFF6BED00DBD732 /* GameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInterface.cpp; sourceTree = "<group>"; };
 		CD7503521AFF6BED00DBD732 /* GameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInterface.h; sourceTree = "<group>"; };
 		CD7503591AFF9AF000DBD732 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -637,6 +641,8 @@
 			children = (
 				CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */,
 				CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */,
+				CD71E0CD1BD3FECE00EB5045 /* EffectFlyingIcon.cpp */,
+				CD71E0CE1BD3FECE00EB5045 /* EffectFlyingIcon.h */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				CDC8811D1B51664800030818 /* Hero.cpp in Sources */,
 				CDC5E62F1B52D735000756EB /* EnemyWidget.cpp in Sources */,
 				CD2AE6321B779FD4001DF4B7 /* Log.cpp in Sources */,
+				CD71E0CF1BD3FECE00EB5045 /* EffectFlyingIcon.cpp in Sources */,
 				CDCDEA711B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				CDC881091B5149BC00030818 /* VariablesSet.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -1032,6 +1039,7 @@
 				CD0EB1791B75E50600267CEA /* FieldLevel.cpp in Sources */,
 				CD0AB2C81B89FC1200139A03 /* MapInterface.cpp in Sources */,
 				CDC8810E1B514AAA00030818 /* FieldLayer.cpp in Sources */,
+				CD71E0D01BD3FECE00EB5045 /* EffectFlyingIcon.cpp in Sources */,
 				CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
