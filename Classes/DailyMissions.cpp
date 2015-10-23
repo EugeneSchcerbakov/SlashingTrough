@@ -26,6 +26,7 @@ DailyMissions& DailyMissions::getInstance()
 }
 
 DailyMissions::DailyMissions()
+: _mastering(1)
 {
 }
 
@@ -60,6 +61,14 @@ bool DailyMissions::loadMissions(const std::string &filename)
         auto root = document.RootElement();
         auto masteringNode = root->FirstChildElement("MasteringSettings");
         auto missionsNode = root->FirstChildElement("MissionsPool");
+        
+        auto masteringElem = masteringNode->FirstChildElement();
+        while (masteringElem)
+        {
+            int missions = masteringElem->IntAttribute("missions");
+            _masteringData.push_back(missions);
+            masteringElem = masteringElem->NextSiblingElement();
+        }
         
         auto taskNode = missionsNode->FirstChildElement();
         while (taskNode)
@@ -173,25 +182,42 @@ void DailyMissions::checkMissionsStatus()
         std::string time_string = stream.str();
         
         player.variables.setString(PlayerInfo::VarKeyDailyTimestamp, time_string);
+        player.save();
     }
+}
+
+void DailyMissions::checkMastering()
+{
+    PlayerInfo &player = PlayerInfo::getInstance();
+    int missions = player.variables.getInt(PlayerInfo::VarKeyDailyCompleted, 0);
+    int mastering = 1;
+    
+    for (int count : _masteringData)
+    {
+        missions -= count;
+        if (missions >= 0) {
+            mastering += 1;
+        } else {
+            break;
+        }
+    }
+    
+    _mastering = mastering;
 }
 
 void DailyMissions::refreshTodayMissions()
 {
-    PlayerInfo &player = PlayerInfo::getInstance();
-    
-    int mastering = player.variables.getInt(PlayerInfo::VarKeyDailyMastering, -1);
-    if (mastering <= 0) {
-        mastering = 1;
-        player.variables.setInt(PlayerInfo::VarKeyDailyMastering, mastering);
-        player.save();
-    }
-    
     std::vector<DailyTaskBase::Ptr> cach;
     for (DailyTaskBase::Ptr task : _pool) {
-        if (task->getInfo().difficult == mastering) {
+        if (task->getInfo().difficult == _mastering) {
             cach.push_back(task);
         }
+    }
+    
+    if (cach.empty())
+    {
+        WRITE_WARN("Can't find suitable missions for mastering");
+        return;
     }
     
     while (_today.size() < MaxDayMissionsCount)

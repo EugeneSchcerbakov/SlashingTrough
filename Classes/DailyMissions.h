@@ -34,6 +34,7 @@ public:
     void restoreTodayMissions(const std::string &id, VariablesSet progress, bool rewarded);
     
     void checkMissionsStatus();
+    void checkMastering();
     
     const std::vector<DailyTaskBase::Ptr>& getTodayMissions() const;
     
@@ -42,8 +43,11 @@ private:
     
     void refreshTodayMissions();
     
+    int _mastering;
+    
     std::vector<DailyTaskBase::Ptr> _pool;
     std::vector<DailyTaskBase::Ptr> _today;
+    std::vector<int> _masteringData;
 };
 
 #endif /* DailyMissions_hpp */

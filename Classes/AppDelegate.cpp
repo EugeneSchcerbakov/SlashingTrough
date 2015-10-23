@@ -75,6 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     DailyMissions::getInstance().loadMissions("dailyMissions.xml");
     PlayerInfo::getInstance().load("st_save.xml");
     
+    DailyMissions::getInstance().checkMastering();
     DailyMissions::getInstance().checkMissionsStatus();
 
     if (misc::isPlatformDesctop()) {

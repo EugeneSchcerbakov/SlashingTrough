@@ -131,17 +131,20 @@ bool MapInterface::init()
 
 void MapInterface::checkDailyMissionsCompletness()
 {
+    PlayerInfo &player = PlayerInfo::getInstance();
     DailyMissions &daily = DailyMissions::getInstance();
     
     auto  missions = daily.getTodayMissions();
-    bool needSave = false;
+    bool hasCompleted = false;
     
     for (DailyTaskBase::Ptr task : missions)
     {
         if (task->checkCompletness() && !task->isRewarded())
         {
             task->giveReward();
-            needSave = true;
+            hasCompleted = true;
+            
+            player.variables.incInt(PlayerInfo::VarKeyDailyCompleted);
             
             DailyMissionPopup *popup = nullptr;
             
@@ -167,8 +170,14 @@ void MapInterface::checkDailyMissionsCompletness()
         }
     }
     
-    if (needSave) {
-        PlayerInfo::getInstance().save();
+    if (hasCompleted)
+    {
+        daily.checkMastering();
+        player.save();
+    }
+    else
+    {
+        daily.checkMissionsStatus();
     }
 }
 
