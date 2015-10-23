@@ -55,7 +55,8 @@ public:
     static const std::string VarKeyCrystallWpn;
     static const std::string VarKeyCrystallArm;
     static const std::string VarKeyLastPlayedLevel;
-    static const std::string VarDailyMastering;
+    static const std::string VarKeyDailyTimestamp;
+    static const std::string VarKeyDailyMastering;
     
     static const std::string DEFAULT_WEAPON_ID;
     static const std::string DEFAULT_ARMOR_ID;

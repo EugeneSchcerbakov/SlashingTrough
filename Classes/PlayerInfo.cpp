@@ -93,7 +93,8 @@ const std::string PlayerInfo::VarKeyItemArm = "EquipedArmor";
 const std::string PlayerInfo::VarKeyCrystallWpn = "EquippedWeaponCrystall";
 const std::string PlayerInfo::VarKeyCrystallArm = "EquippedArmorCrystall";
 const std::string PlayerInfo::VarKeyLastPlayedLevel = "LastPlayedLevel";
-const std::string PlayerInfo::VarDailyMastering = "DailyMissionMastering";
+const std::string PlayerInfo::VarKeyDailyTimestamp = "DailyTimestamp";
+const std::string PlayerInfo::VarKeyDailyMastering = "DailyMissionMastering";
 
 const std::string PlayerInfo::DEFAULT_WEAPON_ID = "default_sword";
 const std::string PlayerInfo::DEFAULT_ARMOR_ID = "default_armor";

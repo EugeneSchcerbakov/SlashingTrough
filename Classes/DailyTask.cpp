@@ -31,6 +31,12 @@ void DailyTaskBase::restore(VariablesSet progress, bool rewarded)
     _rewarded = rewarded;
 }
 
+void DailyTaskBase::flush()
+{
+    _progress.clear();
+    _rewarded = false;
+}
+
 void DailyTaskBase::onRunBegan()
 {
 }

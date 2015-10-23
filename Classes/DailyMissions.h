@@ -25,6 +25,8 @@ class DailyMissions
 public:
     static DailyMissions& getInstance();
     
+    static const int MaxDayMissionsCount;
+    
     bool loadMissions(const std::string &filename);
     
     void beforeRun();
@@ -38,7 +40,7 @@ public:
 private:
     DailyMissions();
     
-    void generateTodaysMissions();
+    void refreshTodayMissions();
     
     std::vector<DailyTaskBase::Ptr> _pool;
     std::vector<DailyTaskBase::Ptr> _today;

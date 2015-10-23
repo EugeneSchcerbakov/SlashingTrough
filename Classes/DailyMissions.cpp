@@ -8,11 +8,16 @@
 
 #include "DailyMissions.h"
 #include "PlayerInfo.h"
+#include "GameInfo.h"
 #include "Utils.h"
 #include "Log.h"
 
 #include "cocos2d.h"
 #include "tinyxml2/tinyxml2.h"
+#include <ctime>
+#include <sstream>
+
+const int DailyMissions::MaxDayMissionsCount = 3;
 
 DailyMissions& DailyMissions::getInstance()
 {
@@ -134,22 +139,51 @@ void DailyMissions::restoreTodayMissions(const std::string &id, VariablesSet pro
 
 void DailyMissions::checkMissionsStatus()
 {
-    if (_today.empty())
+    GameInfo &gameinfo = GameInfo::getInstance();
+    PlayerInfo &player = PlayerInfo::getInstance();
+    
+    std::string duration_string = gameinfo.getConstString("DAILY_MISSIONS_UPDATE_DURATION", "0");
+    std::string timestamp_string = player.variables.getString(PlayerInfo::VarKeyDailyTimestamp, "0");
+    
+    long duration = std::stol(duration_string);
+    long timestamp = std::stol(timestamp_string);
+    
+    long time = (long)std::time(0);
+    
+    if (time > timestamp + duration)
     {
-        generateTodaysMissions();
+        // remove completed missions
+        for (auto it = _today.begin(); it != _today.end();)
+        {
+            auto task = (*it);
+            if (task->isRewarded()) {
+                it = _today.erase(it);
+            } else {
+                it++;
+            }
+        }
+        
+        if (_today.size() < MaxDayMissionsCount)
+        {
+            refreshTodayMissions();
+        }
+        
+        std::ostringstream stream;
+        stream << time;
+        std::string time_string = stream.str();
+        
+        player.variables.setString(PlayerInfo::VarKeyDailyTimestamp, time_string);
     }
 }
 
-void DailyMissions::generateTodaysMissions()
+void DailyMissions::refreshTodayMissions()
 {
-    _today.clear();
-    
     PlayerInfo &player = PlayerInfo::getInstance();
     
-    int mastering = player.variables.getInt(PlayerInfo::VarDailyMastering, -1);
+    int mastering = player.variables.getInt(PlayerInfo::VarKeyDailyMastering, -1);
     if (mastering <= 0) {
         mastering = 1;
-        player.variables.setInt(PlayerInfo::VarDailyMastering, mastering);
+        player.variables.setInt(PlayerInfo::VarKeyDailyMastering, mastering);
         player.save();
     }
     
@@ -160,9 +194,7 @@ void DailyMissions::generateTodaysMissions()
         }
     }
     
-    const std::size_t maxGoals = 3;
-    
-    while (_today.size() < maxGoals)
+    while (_today.size() < MaxDayMissionsCount)
     {
         int index = misc::random(0, cach.size() - 1);
         bool shouldAdd = true;
@@ -178,6 +210,7 @@ void DailyMissions::generateTodaysMissions()
         
         if (shouldAdd)
         {
+            expectant->flush();
             _today.push_back(expectant);
         }
     }

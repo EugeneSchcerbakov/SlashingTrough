@@ -55,6 +55,7 @@ public:
     virtual void onEvent(const DailyTaskEvent &event) = 0;
     virtual bool checkCompletness() = 0;
     virtual void restore(VariablesSet progress, bool rewarded);
+    virtual void flush();
     virtual void onRunBegan();
     
     void giveReward();
