@@ -57,6 +57,7 @@ public:
     virtual void restore(VariablesSet progress, bool rewarded);
     virtual void flush();
     virtual void onRunBegan();
+    virtual void onRunFinished(bool success);
     
     void giveReward();
     
@@ -112,10 +113,13 @@ public:
     
     virtual void onEvent(const DailyTaskEvent &event) override;
     virtual void onRunBegan() override;
+    virtual void onRunFinished(bool success) override;
     virtual bool checkCompletness() override;
+    virtual void flush() override;
     
 private:
     const std::string _levelId;
+    bool _successCheckFlag;
 };
 
 #endif /* DailyTask_hpp */

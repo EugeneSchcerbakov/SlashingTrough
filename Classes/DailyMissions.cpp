@@ -113,8 +113,22 @@ void DailyMissions::beforeRun()
 {
     for (DailyTaskBase::Ptr task : _today)
     {
-        task->onRunBegan();
+        if (!task->isRewarded()) {
+            task->onRunBegan();
+        }
     }
+}
+
+void DailyMissions::afterRun(bool success)
+{
+    for (DailyTaskBase::Ptr task : _today)
+    {
+        if (!task->isRewarded()) {
+            task->onRunFinished(success);
+        }
+    }
+    
+    checkMissionsCompletness();
 }
 
 void DailyMissions::event(const DailyTaskEvent &event)
@@ -123,6 +137,25 @@ void DailyMissions::event(const DailyTaskEvent &event)
     {
         if (task->isSubscribed(event)) {
             task->onEvent(event);
+        }
+    }
+}
+
+void DailyMissions::rewardCompletedMission(DailyTaskBase::Ptr mission)
+{
+    for (auto iter = _reward.begin(); iter != _reward.end();)
+    {
+        DailyTaskBase::Ptr task = (*iter);
+        if (task == mission)
+        {
+            task->giveReward();
+            
+            iter = _reward.erase(iter);
+            break;
+        }
+        else
+        {
+            iter++;
         }
     }
 }
@@ -146,7 +179,30 @@ void DailyMissions::restoreTodayMissions(const std::string &id, VariablesSet pro
     }
 }
 
-void DailyMissions::checkMissionsStatus()
+void DailyMissions::restoreRewardMissions(const std::string &id)
+{
+    bool ok = true;
+    
+    for (DailyTaskBase::Ptr task : _reward)
+    {
+        if (task->getInfo().id == id) {
+            ok = false;
+            WRITE_WARN("Missions already restored.");
+            break;
+        }
+    }
+    
+    if (ok)
+    {
+        auto task = findMissionInPool(id);
+        if (task)
+        {
+            _reward.push_back(task);
+        }
+    }
+}
+
+void DailyMissions::checkMissionsSwitchTime()
 {
     GameInfo &gameinfo = GameInfo::getInstance();
     PlayerInfo &player = PlayerInfo::getInstance();
@@ -182,6 +238,30 @@ void DailyMissions::checkMissionsStatus()
         std::string time_string = stream.str();
         
         player.variables.setString(PlayerInfo::VarKeyDailyTimestamp, time_string);
+        player.save();
+    }
+}
+
+void DailyMissions::checkMissionsCompletness()
+{
+    PlayerInfo &player = PlayerInfo::getInstance();
+
+    bool hasCompleted = false;
+    
+    for (DailyTaskBase::Ptr task : _today)
+    {
+        if (task->checkCompletness() && !task->isRewarded() && !isTaskInRewardList(task->getInfo().id))
+        {
+            player.variables.incInt(PlayerInfo::VarKeyDailyCompleted);
+            
+            _reward.push_back(task);
+            hasCompleted = true;
+        }
+    }
+    
+    if (hasCompleted)
+    {
+        checkMastering();
         player.save();
     }
 }
@@ -242,7 +322,43 @@ void DailyMissions::refreshTodayMissions()
     }
 }
 
+const DailyTaskBase::Ptr DailyMissions::findMissionInPool(const std::string &id) const
+{
+    DailyTaskBase::Ptr result = nullptr;
+    
+    for (DailyTaskBase::Ptr task : _pool)
+    {
+        if (task->getInfo().id == id)
+        {
+            result = task;
+            break;
+        }
+    }
+    
+    if (!result)
+    {
+        WRITE_WARN("Failt to find dailt task with id: " + id);
+    }
+    
+    return result;
+}
+
+bool DailyMissions::isTaskInRewardList(const std::string &id) const
+{
+    for (DailyTaskBase::Ptr task : _reward) {
+        if (task->getInfo().id == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 const std::vector<DailyTaskBase::Ptr>& DailyMissions::getTodayMissions() const
 {
     return _today;
+}
+
+const std::vector<DailyTaskBase::Ptr>& DailyMissions::getRewardMissions() const
+{
+    return _reward;
 }

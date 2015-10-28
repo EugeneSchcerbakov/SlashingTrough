@@ -253,15 +253,7 @@ void DailyMissionPopup::update(float dt)
             auto id = data.first;
             auto endp = data.second;
             
-            DailyTaskBase::Ptr task = nullptr;
-            
-            for (DailyTaskBase::Ptr ptr : daily.getTodayMissions())
-            {
-                if (id == ptr->getInfo().id ) {
-                    task = ptr;
-                    break;
-                }
-            }
+            DailyTaskBase::Ptr task = daily.findMissionInPool(id);
             
             if (task)
             {

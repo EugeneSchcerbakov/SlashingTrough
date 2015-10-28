@@ -141,8 +141,12 @@ void PlayerInfo::load(const std::string &filename)
     {
         auto root = document.RootElement();
         
+        // load variables
+        
         auto vars = root->FirstChildElement("Variables");
         variablesSetFromXml(variables, vars);
+        
+        // load inventory
         
         auto inventory = root->FirstChildElement("Inventory");
         auto equip = inventory->FirstChildElement();
@@ -152,6 +156,8 @@ void PlayerInfo::load(const std::string &filename)
             Inventory.add(store.getItemById(id), amount);
             equip = equip->NextSiblingElement();
         };
+        
+        // load levels progress
         
         LevelsCache &levelsCache = LevelsCache::getInstance();
         
@@ -186,19 +192,43 @@ void PlayerInfo::load(const std::string &filename)
             levelElem = levelElem->NextSiblingElement();
         }
         
+        // load daily missions
+        
         auto dailyInfo = root->FirstChildElement("DailyInfo");
-        auto taskNode = dailyInfo->FirstChildElement();
-        while (taskNode)
+        auto tasksNode = dailyInfo->FirstChildElement("Tasks");
+        auto rewardsNode = dailyInfo->FirstChildElement("Reward");
+        
+        DailyMissions &daily = DailyMissions::getInstance();
+        
+        if (tasksNode)
         {
-            std::string id = taskNode->Attribute("id");
-            bool rewarded = taskNode->BoolAttribute("rewarded");
+            auto taskNode = tasksNode->FirstChildElement();
             
-            VariablesSet data;
-            variablesSetFromXml(data, taskNode);
+            while (taskNode)
+            {
+                std::string id = taskNode->Attribute("id");
+                bool rewarded = taskNode->BoolAttribute("rewarded");
+                
+                VariablesSet data;
+                variablesSetFromXml(data, taskNode);
             
-            DailyMissions::getInstance().restoreTodayMissions(id, data, rewarded);
+                daily.restoreTodayMissions(id, data, rewarded);
             
-            taskNode = taskNode->NextSiblingElement();
+                taskNode = taskNode->NextSiblingElement();
+            }
+        }
+        
+        if (rewardsNode)
+        {
+            auto rewardNode = rewardsNode->FirstChildElement();
+        
+            while (rewardNode)
+            {
+                std::string id = rewardNode->Attribute("id");
+                daily.restoreRewardMissions(id);
+            
+                rewardNode = rewardNode->NextSiblingElement();
+            }
         }
         
         WRITE_INIT("Save file successfully loaded.");
@@ -289,7 +319,14 @@ void PlayerInfo::save()
         root->LinkEndChild(levelsProgress);
         
         auto dailyInfo = document.NewElement("DailyInfo");
+        auto tasksNode = document.NewElement("Tasks");
+        auto rewardNode = document.NewElement("Reward");
+        
+        dailyInfo->LinkEndChild(tasksNode);
+        dailyInfo->LinkEndChild(rewardNode);
+        
         DailyMissions &daily = DailyMissions::getInstance();
+        
         for (DailyTaskBase::Ptr dailyTask : daily.getTodayMissions())
         {
             auto taskNode = document.NewElement("Task");
@@ -298,8 +335,16 @@ void PlayerInfo::save()
             
             variablesSetToXml(dailyTask->getProgress(), document, taskNode);
             
-            dailyInfo->LinkEndChild(taskNode);
+            tasksNode->LinkEndChild(taskNode);
         }
+        
+        for (DailyTaskBase::Ptr task : daily.getRewardMissions())
+        {
+            auto taskNode = document.NewElement("Task");
+            taskNode->SetAttribute("id", task->getInfo().id.c_str());
+            rewardNode->LinkEndChild(taskNode);
+        }
+        
         root->LinkEndChild(dailyInfo);
         
         document.LinkEndChild(declaration);

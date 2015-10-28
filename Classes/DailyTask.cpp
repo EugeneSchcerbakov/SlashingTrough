@@ -41,6 +41,10 @@ void DailyTaskBase::onRunBegan()
 {
 }
 
+void DailyTaskBase::onRunFinished(bool success)
+{
+}
+
 void DailyTaskBase::giveReward()
 {
     PlayerInfo &player = PlayerInfo::getInstance();
@@ -137,6 +141,7 @@ DailyTaskBase::Ptr CompleteLevelWithoutHealthLooses::create(const BaseInfo &info
 CompleteLevelWithoutHealthLooses::CompleteLevelWithoutHealthLooses(const BaseInfo &info, const std::string &levelId)
 : DailyTaskBase(info, Tracking::DamageReceived)
 , _levelId(levelId)
+, _successCheckFlag(false)
 {
 }
 
@@ -161,6 +166,17 @@ void CompleteLevelWithoutHealthLooses::onRunBegan()
     _progress.setBool("damageReceived", false);
 }
 
+void CompleteLevelWithoutHealthLooses::onRunFinished(bool success)
+{
+    PlayerInfo &player = PlayerInfo::getInstance();
+    std::string currentLevel = player.variables.getString(PlayerInfo::VarKeyLastPlayedLevel);
+    
+    if (currentLevel == _levelId)
+    {
+        _successCheckFlag = success;
+    }
+}
+
 bool CompleteLevelWithoutHealthLooses::checkCompletness()
 {
     LevelsCache &levels = LevelsCache::getInstance();
@@ -171,5 +187,11 @@ bool CompleteLevelWithoutHealthLooses::checkCompletness()
         return false;
     }
     
-    return !_progress.getBool("damageReceived") && level->isStatus(FieldLevel::Status::COMPLETED);
+    return !_progress.getBool("damageReceived") && _successCheckFlag;
+}
+
+void CompleteLevelWithoutHealthLooses::flush()
+{
+    DailyTaskBase::flush();
+    _successCheckFlag = false;
 }

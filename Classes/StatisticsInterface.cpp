@@ -117,6 +117,7 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
         initLootPanel();
     }
     
+    DailyMissions::getInstance().afterRun(victory);
     PlayerInfo::getInstance().save();
     
     auto continueText = cocos2d::ui::Text::create("Tap to continue", "font_prototype.ttf", 40);

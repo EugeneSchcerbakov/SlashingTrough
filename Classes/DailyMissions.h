@@ -30,13 +30,21 @@ public:
     bool loadMissions(const std::string &filename);
     
     void beforeRun();
+    void afterRun(bool success);
     void event(const DailyTaskEvent &event);
+    void rewardCompletedMission(DailyTaskBase::Ptr mission);
     void restoreTodayMissions(const std::string &id, VariablesSet progress, bool rewarded);
+    void restoreRewardMissions(const std::string &id);
     
-    void checkMissionsStatus();
+    void checkMissionsSwitchTime();
+    void checkMissionsCompletness();
     void checkMastering();
     
+    bool isTaskInRewardList(const std::string &id) const;
+    
     const std::vector<DailyTaskBase::Ptr>& getTodayMissions() const;
+    const std::vector<DailyTaskBase::Ptr>& getRewardMissions() const;
+    const DailyTaskBase::Ptr findMissionInPool(const std::string &id) const;
     
 private:
     DailyMissions();
@@ -47,6 +55,7 @@ private:
     
     std::vector<DailyTaskBase::Ptr> _pool;
     std::vector<DailyTaskBase::Ptr> _today;
+    std::vector<DailyTaskBase::Ptr> _reward;
     std::vector<int> _masteringData;
 };
 

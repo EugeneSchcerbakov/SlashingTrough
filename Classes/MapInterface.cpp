@@ -131,42 +131,40 @@ bool MapInterface::init()
 
 void MapInterface::checkDailyMissionsCompletness()
 {
-    PlayerInfo &player = PlayerInfo::getInstance();
     DailyMissions &daily = DailyMissions::getInstance();
+    PlayerInfo &player = PlayerInfo::getInstance();
     
-    auto  missions = daily.getTodayMissions();
     bool hasCompleted = false;
     
-    for (DailyTaskBase::Ptr task : missions)
+    const auto& rewards = daily.getRewardMissions();
+    
+    while (rewards.size() > 0)
     {
-        if (task->checkCompletness() && !task->isRewarded())
+        DailyTaskBase::Ptr task = (*rewards.begin());
+        
+        daily.rewardCompletedMission(task);
+        hasCompleted = true;
+        
+        DailyMissionPopup *popup = nullptr;
+        
+        if (!getChildByName("DailyMissionPopup"))
         {
-            task->giveReward();
-            hasCompleted = true;
+            popup = DailyMissionPopup::create(_effectsLayer);
+            pushPopup(popup, Order::POPUP, "DailyMissionPopup");
+        }
+        else
+        {
+            popup = getChildByName<DailyMissionPopup *>("DailyMissionPopup");
+        }
+        
+        if (popup)
+        {
+            cocos2d::Vec2 endp;
+            endp = _shopButton->convertToWorldSpace(cocos2d::Vec2::ZERO);
+            endp.x += _shopButton->getContentSize().width * 0.5f * _shopButton->getScale();
+            endp.y += _shopButton->getContentSize().height * 0.5f * _shopButton->getScale();
             
-            player.variables.incInt(PlayerInfo::VarKeyDailyCompleted);
-            
-            DailyMissionPopup *popup = nullptr;
-            
-            if (!getChildByName("DailyMissionPopup"))
-            {
-                popup = DailyMissionPopup::create(_effectsLayer);
-                pushPopup(popup, Order::POPUP, "DailyMissionPopup");
-            }
-            else
-            {
-                popup = getChildByName<DailyMissionPopup *>("DailyMissionPopup");
-            }
-            
-            if (popup)
-            {
-                cocos2d::Vec2 endp;
-                endp = _shopButton->convertToWorldSpace(cocos2d::Vec2::ZERO);
-                endp.x += _shopButton->getContentSize().width * 0.5f * _shopButton->getScale();
-                endp.y += _shopButton->getContentSize().height * 0.5f * _shopButton->getScale();
-                
-                popup->addTaskRewardEffect(task->getInfo().id, endp);
-            }
+            popup->addTaskRewardEffect(task->getInfo().id, endp);
         }
     }
     
@@ -177,7 +175,7 @@ void MapInterface::checkDailyMissionsCompletness()
     }
     else
     {
-        daily.checkMissionsStatus();
+        daily.checkMissionsSwitchTime();
     }
 }
 

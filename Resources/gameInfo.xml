@@ -16,7 +16,7 @@
         <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
         <Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="6" />
         <Const name="TOUCH_SWIPE_DISTANCE" type="float" value="5.0" />
-        <Const name="DAILY_MISSIONS_UPDATE_DURATION" type="string" value="120" />
+        <Const name="DAILY_MISSIONS_UPDATE_DURATION" type="string" value="86400" />
 
         <Const name="CAMERA_Y_OFFSET" type="float" value="-650.0" />
         <Const name="CAMERA_VIEW_ANGLE" type="float" value="45.0" />
