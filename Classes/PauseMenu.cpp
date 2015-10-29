@@ -124,6 +124,7 @@ void PauseMenu::showPanel()
     {
         if (e == cocos2d::ui::Widget::TouchEventType::ENDED)
         {
+            DailyMissions::getInstance().afterRun(false);
             ScreenChanger::changeScreen(ScreenChanger::MAP);
         }
     };

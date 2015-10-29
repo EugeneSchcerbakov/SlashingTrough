@@ -84,7 +84,13 @@ bool MapInterface::init()
     
     auto onDailyPressed = [&](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
-        if (e == cocos2d::ui::Widget::TouchEventType::ENDED) {
+        if (e == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            DailyMissions &daily = DailyMissions::getInstance();
+            if (daily.getRewardMissions().empty()) {
+                daily.checkMissionsSwitchTime();
+            }
+            
             auto popup = DailyMissionPopup::create(_effectsLayer);
             pushPopup(popup, Order::POPUP, "DailyMissionPopup");
         }
@@ -124,7 +130,15 @@ bool MapInterface::init()
     
     attachHandlerWithZOrder(Order::CONTROLS);
     
-    checkDailyMissionsCompletness();
+    auto callback = [this]()
+    {
+        checkDailyMissionsCompletness();
+    };
+    
+    auto call = cocos2d::CallFunc::create(callback);
+    auto wait = cocos2d::DelayTime::create(0.3f);
+    auto seq = cocos2d::Sequence::create(wait, call, nullptr);
+    runAction(seq);
     
     return true;
 }

@@ -195,13 +195,8 @@ void Enemy::onDamageReceived(float damage)
         hero->addScorePoint(getScorePoints());
         
         DailyTaskEvent eventKill(Tracking::EnemyKilled);
-        DailyTaskEvent eventCoin(Tracking::CoinEarned);
-        
         eventKill.data.setInt("amount", 1);
-        eventCoin.data.setInt("amount", getCoinPoints());
-        
         daily.event(eventKill);
-        daily.event(eventCoin);
     }
 }
 

@@ -369,6 +369,13 @@ void PlayerInfo::addCoins(int coins)
         total = 0;
         WRITE_WARN("Negative coins amount");
     }
+    if (coins > 0)
+    {
+        DailyMissions &daily = DailyMissions::getInstance();
+        DailyTaskEvent eventCoin(Tracking::CoinEarned);
+        eventCoin.data.setInt("amount", coins);
+        daily.event(eventCoin);
+    }
     variables.setInt(VarKeyCoins, total);
 }
 

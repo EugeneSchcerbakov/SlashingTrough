@@ -164,6 +164,7 @@ void CompleteLevelWithoutHealthLooses::onEvent(const DailyTaskEvent &event)
 void CompleteLevelWithoutHealthLooses::onRunBegan()
 {
     _progress.setBool("damageReceived", false);
+    _successCheckFlag = false;
 }
 
 void CompleteLevelWithoutHealthLooses::onRunFinished(bool success)
