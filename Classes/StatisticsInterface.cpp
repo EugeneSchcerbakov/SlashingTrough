@@ -117,7 +117,17 @@ bool StaticticsInterface::init(FieldLevel::WeakPtr level, PlayerInfo::Score scor
         initLootPanel();
     }
     
-    DailyMissions::getInstance().afterRun(victory);
+    DailyMissions &daily = DailyMissions::getInstance();
+    
+    if (victory)
+    {
+        DailyTaskEvent event(Tracking::LevelFinished);
+        event.data.setFloat("time", _level->getRunningTime());
+        daily.event(event);
+    }
+    
+    daily.afterRun(victory);
+    
     PlayerInfo::getInstance().save();
     
     auto continueText = cocos2d::ui::Text::create("Tap to continue", "font_prototype.ttf", 40);
@@ -171,11 +181,6 @@ void StaticticsInterface::initLootPanel()
             _panel->addChild(sprite);
             
             xy.x += sprite->getContentSize().width * scale;
-            
-            DailyTaskEvent event(Tracking::ItemEarned);
-            event.data.setString("id", id);
-            event.data.setInt("amount", 1);
-            DailyMissions::getInstance().event(event);
         }
         
         auto lootText = cocos2d::ui::Text::create("Loot:", "font_prototype.ttf", 23);

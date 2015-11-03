@@ -17,6 +17,7 @@ FieldLevel::FieldLevel()
 , _coinRewardForCompletition(0)
 , _posOnMapX(0.0f)
 , _posOnMapY(0.0f)
+, _runnigTimeSec(0.0f)
 {
 }
 
@@ -142,6 +143,7 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
 void FieldLevel::prepearForRun(Hero *hero)
 {
     _lastSectorIndex = 0;
+    _runnigTimeSec = 0.0f;
     _sectors.clear();
     _victoryCondition->init(hero);
     
@@ -178,6 +180,8 @@ void FieldLevel::restore(const SaveData &saveData)
 void FieldLevel::update(float dt)
 {
     _victoryCondition->update(dt);
+    
+    _runnigTimeSec += dt;
 }
 
 void FieldLevel::release()
@@ -186,6 +190,7 @@ void FieldLevel::release()
     _construction.clear();
     _id.clear();
     _lastSectorIndex = 0;
+    _runnigTimeSec = 0.0f;
 }
 
 void FieldLevel::setStatus(FieldLevel::Status status)
@@ -296,6 +301,11 @@ float FieldLevel::getMapX() const
 float FieldLevel::getMapY() const
 {
     return _posOnMapY;
+}
+
+float FieldLevel::getRunningTime() const
+{
+    return _runnigTimeSec;
 }
 
 bool FieldLevel::isStatus(Status status)

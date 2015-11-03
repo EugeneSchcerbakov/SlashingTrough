@@ -35,6 +35,11 @@ void PlayerInventory::add(Item::WeakPtr item, int amount)
         auto pair = std::pair<std::string, PlayerItem>(pointer->getId(), newItem);
         _items.insert(pair);
     }
+    
+    DailyTaskEvent event(Tracking::ItemEarned);
+    event.data.setString("id", pointer->getId());
+    event.data.setInt("amount", amount);
+    DailyMissions::getInstance().event(event);
 }
 
 void PlayerInventory::remove(Item::WeakPtr item)

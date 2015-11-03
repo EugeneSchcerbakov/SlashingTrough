@@ -82,6 +82,7 @@ public:
     static Ptr create(const BaseInfo &info, int killsRequired);
     
     KillXEnemies(const BaseInfo &info, int killsRequired);
+    virtual ~KillXEnemies();
     
     virtual void onEvent(const DailyTaskEvent &event) override;
     virtual bool checkCompletness() override;
@@ -90,18 +91,73 @@ private:
     const int _killsRequired;
 };
 
+class KillXEnemiesOnce : public KillXEnemies
+{
+public:
+    static Ptr create(const BaseInfo &info, int killsRequired);
+    
+    KillXEnemiesOnce(const BaseInfo &info, int killsRequired);
+    
+    virtual void onRunBegan() override;
+};
+
 class CollectXCoins : public DailyTaskBase
 {
 public:
     static Ptr create(const BaseInfo &info, int coinsRequired);
     
     CollectXCoins(const BaseInfo &info, int killsRequired);
+    virtual ~CollectXCoins();
     
     virtual void onEvent(const DailyTaskEvent &event) override;
     virtual bool checkCompletness() override;
     
 private:
     const int _coinsRequired;
+};
+
+class CollectXCoinsOnce : public CollectXCoins
+{
+public:
+    static Ptr create(const BaseInfo &info, int coinsRequired);
+    
+    CollectXCoinsOnce(const BaseInfo &info, int coinsRequired);
+    
+    virtual void onRunBegan() override;
+};
+
+class CollectXShards : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, const std::string &shardId, int amount);
+    
+    CollectXShards(const BaseInfo &info, const std::string &shardId, int amount);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual bool checkCompletness() override;
+    
+private:
+    const int _amount;
+    const std::string _shardId;
+};
+
+class CollectXItems : public DailyTaskBase
+{
+public:
+    typedef std::pair<std::string, int> Data; // id - amount
+    typedef std::vector<Data> IdList;
+    
+public:
+    static Ptr create(const BaseInfo &info, IdList idList, const std::string &levelId);
+    
+    CollectXItems(const BaseInfo &info, IdList idList, const std::string &levelId);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual bool checkCompletness() override;
+    
+private:
+    const std::string _levelId;
+    const IdList _itemsRequired;
 };
 
 class CompleteLevelWithoutHealthLooses : public DailyTaskBase
@@ -120,6 +176,40 @@ public:
 private:
     const std::string _levelId;
     bool _successCheckFlag;
+};
+
+class PassXSquares : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, int squares);
+    
+    PassXSquares(const BaseInfo &info, int squares);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual bool checkCompletness() override;
+    
+private:
+    const int _squaresRequired;
+};
+
+class FinishLevelDuringTheTime : public DailyTaskBase
+{
+public:
+    static Ptr create(const BaseInfo &info, const std::string &levelId, float time);
+    
+    FinishLevelDuringTheTime(const BaseInfo &info, const std::string &levelId, float time);
+    
+    virtual void onEvent(const DailyTaskEvent &event) override;
+    virtual void onRunBegan() override;
+    virtual void onRunFinished(bool success) override;
+    virtual bool checkCompletness() override;
+    virtual void flush() override;
+    
+private:
+    const std::string _levelId;
+    const float _requiredTime;
+    
+    bool _status;
 };
 
 #endif /* DailyTask_hpp */

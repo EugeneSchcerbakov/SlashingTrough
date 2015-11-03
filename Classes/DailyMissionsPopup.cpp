@@ -80,7 +80,7 @@ protected:
         titleText->setFontName("font_prototype.ttf");
         titleText->setFontSize(30);
         titleText->setTextColor(cocos2d::Color4B::WHITE);
-        titleText->setTextAreaSize(cocos2d::Size(300.0f, 0.0f));
+        titleText->setTextAreaSize(cocos2d::Size(350.0f, 0.0f));
         titleText->ignoreContentAdaptWithSize(false);
         titleText->setName("titleText");
         

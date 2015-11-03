@@ -81,12 +81,45 @@ bool DailyMissions::loadMissions(const std::string &filename)
             if (name == "KillXEnemies") {
                 int amount = taskNode->IntAttribute("killsRequired");
                 task = KillXEnemies::create(info, amount);
+            } else if (name == "KillXEnemiesOnce") {
+                int amount = taskNode->IntAttribute("killsRequired");
+                task = KillXEnemiesOnce::create(info, amount);
             } else if (name == "CollectXCoins") {
                 int amount = taskNode->IntAttribute("coinsRequired");
                 task = CollectXCoins::create(info, amount);
+            } else if (name == "CollectXCoinsOnce") {
+                int amount = taskNode->IntAttribute("coinsRequired");
+                task = CollectXCoinsOnce::create(info, amount);
+            } else if (name == "CollectXShards") {
+                std::string shardId = taskNode->Attribute("shardId");
+                int amount = taskNode->IntAttribute("shardsAmount");
+                task = CollectXShards::create(info, shardId, amount);
+            } else if (name == "CollectXItems") {
+                CollectXItems::IdList list;
+                std::string levelId = taskNode->Attribute("levelId");
+                auto listNode = taskNode->FirstChildElement("Items");
+                if (listNode) {
+                    auto node = listNode->FirstChildElement();
+                    while (node) {
+                        CollectXItems::Data data;
+                        data.first = node->Name();
+                        data.second = 1;
+                        node->QueryIntAttribute("amount", &data.second);
+                        list.push_back(data);
+                        node = node->NextSiblingElement();
+                    }
+                }
+                task = CollectXItems::create(info, list, levelId);
             } else if (name == "CompleteLevelWithoutHealthLooses") {
                 std::string levelId = taskNode->Attribute("levelId");
                 task = CompleteLevelWithoutHealthLooses::create(info, levelId);
+            } else if (name == "PassXSquares") {
+                int amount = taskNode->IntAttribute("squaresRequired");
+                task = PassXSquares::create(info, amount);
+            } else if (name == "FinishLevelDuringTheTime") {
+                float time = taskNode->FloatAttribute("time");
+                std::string levelId = taskNode->Attribute("levelId");
+                task = FinishLevelDuringTheTime::create(info, levelId, time);
             } else {
                 WRITE_WARN("Unknown task type: " + name);
             }

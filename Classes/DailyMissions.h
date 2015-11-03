@@ -17,7 +17,8 @@ namespace Tracking
     const std::string SquarePassed = "SquarePassed";
     const std::string DamageReceived = "DamageReceived";
     const std::string CoinEarned = "CoinEarned";
-    const std::string ItemEarned = "LootEarned";
+    const std::string ItemEarned = "ItemEarned";
+    const std::string LevelFinished = "LevelFinished";
 };
 
 class DailyMissions

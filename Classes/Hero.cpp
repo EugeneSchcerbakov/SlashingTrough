@@ -21,7 +21,9 @@ Hero::Hero()
 , _leftSideBorder(0.0f)
 , _rightSideBorder(0.0f)
 , _staminaDrainTimeCounter(0.0f)
+, _squarePassChecker(0.0f)
 , _killPointToNextDamageUp(0)
+, _squareSize(GameInfo::getInstance().getConstFloat("SQUARE_SIZE"))
 , _goals(nullptr)
 , _running(false)
 {
@@ -65,8 +67,20 @@ void Hero::init()
 
 void Hero::idleUpdate(float dt)
 {
-    if (_running) {
-        _y += _runningSpeed * dt;
+    if (_running)
+    {
+        float yDelta = _runningSpeed * dt;
+        
+        _y += yDelta;
+        _squarePassChecker += yDelta;
+        
+        if (_squarePassChecker >= _squareSize)
+        {
+            _squarePassChecker = 0.0f;
+            
+            DailyMissions &daily = DailyMissions::getInstance();
+            daily.event(DailyTaskEvent(Tracking::SquarePassed));
+        }
     }
     
     if (_actionSequence.size() > 0) {

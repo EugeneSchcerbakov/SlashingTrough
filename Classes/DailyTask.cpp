@@ -90,6 +90,10 @@ KillXEnemies::KillXEnemies(const BaseInfo &info, int killsRequired)
 {
 }
 
+KillXEnemies::~KillXEnemies()
+{
+}
+
 void KillXEnemies::onEvent(const DailyTaskEvent &event)
 {
     if (!checkCompletness())
@@ -102,6 +106,23 @@ void KillXEnemies::onEvent(const DailyTaskEvent &event)
 bool KillXEnemies::checkCompletness()
 {
     return _progress.getInt("kills") >= _killsRequired;
+}
+
+// KillXEnemiesOnce
+
+DailyTaskBase::Ptr KillXEnemiesOnce::create(const BaseInfo &info, int killsRequired)
+{
+    return std::make_shared<KillXEnemiesOnce>(info, killsRequired);
+}
+
+KillXEnemiesOnce::KillXEnemiesOnce(const BaseInfo &info, int killsRequired)
+: KillXEnemies(info, killsRequired)
+{
+}
+
+void KillXEnemiesOnce::onRunBegan()
+{
+    _progress.setInt("kills", 0);
 }
 
 // CollectXCoins
@@ -117,6 +138,10 @@ CollectXCoins::CollectXCoins(const BaseInfo &info, int coinsRequired)
 {
 }
 
+CollectXCoins::~CollectXCoins()
+{
+}
+
 void CollectXCoins::onEvent(const DailyTaskEvent &event)
 {
     if (!checkCompletness())
@@ -129,6 +154,23 @@ void CollectXCoins::onEvent(const DailyTaskEvent &event)
 bool CollectXCoins::checkCompletness()
 {
     return _progress.getInt("coins") >= _coinsRequired;
+}
+
+// CollectXCoinsOnce
+
+DailyTaskBase::Ptr CollectXCoinsOnce::create(const BaseInfo &info, int coinsRequired)
+{
+    return std::make_shared<CollectXCoinsOnce>(info, coinsRequired);
+}
+
+CollectXCoinsOnce::CollectXCoinsOnce(const BaseInfo &info, int coinsRequired)
+: CollectXCoins(info, coinsRequired)
+{
+}
+
+void CollectXCoinsOnce::onRunBegan()
+{
+    _progress.setInt("coins", 0);
 }
 
 // CompleteLevelWithoutHealthLooses
@@ -195,4 +237,170 @@ void CompleteLevelWithoutHealthLooses::flush()
 {
     DailyTaskBase::flush();
     _successCheckFlag = false;
+}
+
+// PassXSquares
+
+DailyTaskBase::Ptr PassXSquares::create(const BaseInfo &info, int squares)
+{
+    return std::make_shared<PassXSquares>(info, squares);
+}
+
+PassXSquares::PassXSquares(const BaseInfo &info, int squares)
+: DailyTaskBase(info, Tracking::SquarePassed)
+, _squaresRequired(squares)
+{
+}
+
+void PassXSquares::onEvent(const DailyTaskEvent &event)
+{
+    if (!checkCompletness())
+    {
+        _progress.incInt("squaresPassed");
+    }
+}
+
+bool PassXSquares::checkCompletness()
+{
+    return _progress.getInt("squaresPassed") >= _squaresRequired;
+}
+
+// FinishLevelDuringTheTime
+
+DailyTaskBase::Ptr FinishLevelDuringTheTime::create(const BaseInfo &info, const std::string &levelId, float time)
+{
+    return std::make_shared<FinishLevelDuringTheTime>(info, levelId, time);
+}
+
+FinishLevelDuringTheTime::FinishLevelDuringTheTime(const BaseInfo &info, const std::string &levelId, float time)
+: DailyTaskBase(info, Tracking::LevelFinished)
+, _requiredTime(time)
+, _levelId(levelId)
+, _status(false)
+{
+}
+
+void FinishLevelDuringTheTime::onEvent(const DailyTaskEvent &event)
+{
+    float duration = event.data.getFloat("time");
+    _progress.setFloat("time", duration);
+}
+
+void FinishLevelDuringTheTime::onRunBegan()
+{
+    flush();
+}
+
+void FinishLevelDuringTheTime::onRunFinished(bool success)
+{
+    PlayerInfo &player = PlayerInfo::getInstance();
+    std::string currentLevel = player.variables.getString(PlayerInfo::VarKeyLastPlayedLevel);
+    
+    _status = success && _levelId == currentLevel && _progress.getFloat("time") <= _requiredTime;
+}
+
+bool FinishLevelDuringTheTime::checkCompletness()
+{
+    return _status;
+}
+
+void FinishLevelDuringTheTime::flush()
+{
+    DailyTaskBase::flush();
+    
+    _status = false;
+    _progress.setFloat("time", 0.0f);
+}
+
+// CollectXShards
+
+DailyTaskBase::Ptr CollectXShards::create(const BaseInfo &info, const std::string &shardId, int amount)
+{
+    return std::make_shared<CollectXShards>(info, shardId, amount);
+}
+
+CollectXShards::CollectXShards(const BaseInfo &info, const std::string &shardId, int amount)
+: DailyTaskBase(info, Tracking::ItemEarned)
+, _amount(amount)
+, _shardId(shardId)
+{
+}
+
+void CollectXShards::onEvent(const DailyTaskEvent &event)
+{
+    std::string earnedItemId = event.data.getString("id");
+    
+    if (earnedItemId == _shardId)
+    {
+        int earnedAmount = event.data.getInt("amount");
+        if (earnedAmount <= 0) {
+            WRITE_WARN("Earned negative amount of items.");
+            return;
+        }
+        
+        _progress.incInt("amount", earnedAmount);
+    }
+}
+
+bool CollectXShards::checkCompletness()
+{
+    return _progress.getInt("amount") >= _amount;
+}
+
+// CollectXItems
+
+DailyTaskBase::Ptr CollectXItems::create(const BaseInfo &info, IdList idList, const std::string &levelId)
+{
+    return std::make_shared<CollectXItems>(info, idList, levelId);
+}
+
+CollectXItems::CollectXItems(const BaseInfo &info, IdList idList, const std::string &levelId)
+: DailyTaskBase(info, Tracking::ItemEarned)
+, _levelId(levelId)
+, _itemsRequired(idList)
+{
+}
+
+void CollectXItems::onEvent(const DailyTaskEvent &event)
+{
+    if (!checkCompletness())
+    {
+        PlayerInfo &player = PlayerInfo::getInstance();
+        std::string currentLevel = player.variables.getString(PlayerInfo::VarKeyLastPlayedLevel);
+    
+        if (currentLevel != _levelId) {
+            return;
+        }
+    
+        std::string earnedItemId = event.data.getString("id");
+    
+        for (Data data : _itemsRequired)
+        {
+            if (data.first == earnedItemId)
+            {
+                int amount = event.data.getInt("amount");
+                _progress.incInt(data.first, amount);
+            
+                break;
+            }
+        }
+    }
+}
+
+bool CollectXItems::checkCompletness()
+{
+    bool result = true;
+    
+    for (Data data : _itemsRequired)
+    {
+        std::string id = data.first;
+        int required = data.second;
+        
+        if (_progress.getInt(id, 0) < required) {
+            result = false;
+            break;
+        }
+    }
+    
+    return result;
 }

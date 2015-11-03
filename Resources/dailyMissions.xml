@@ -9,11 +9,11 @@
     <MissionsPool>
         <KillXEnemies id="KillXEnemies0"
             difficult="1"
-            killsRequired="10"
+            killsRequired="100"
             coinsReward="100"
             lootRewardId="back_dash_shard"
             lootRewardAmount="1"
-            description="Kill 10 orks" >
+            description="Kill 100 orks" >
         </KillXEnemies>
         <KillXEnemies id="KillXEnemies1"
             difficult="2"
@@ -33,12 +33,45 @@
         </KillXEnemies>
         <KillXEnemies id="KillXEnemies3"
             difficult="4"
-            required="400"
+            killsRequired="400"
             coinsReward="100"
             lootRewardId="back_dash_shard"
             lootRewardAmount="1"
             description="Kill 400 orks" >
         </KillXEnemies>
+        
+        <KillXEnemiesOnce id="KillXEnemiesOnce0"
+            difficult="1"
+            killsRequired="10"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 10 orks in single run" >
+        </KillXEnemiesOnce>
+        <KillXEnemiesOnce id="KillXEnemiesOnce1"
+            difficult="2"
+            killsRequired="20"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 20 orks in single run" >
+        </KillXEnemiesOnce>
+        <KillXEnemiesOnce id="KillXEnemiesOnce2"
+            difficult="3"
+            killsRequired="30"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 30 orks in single run" >
+        </KillXEnemiesOnce>
+        <KillXEnemiesOnce id="KillXEnemiesOnce3"
+            difficult="4"
+            killsRequired="40"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Kill 40 orks in single run" >
+        </KillXEnemiesOnce>
 
         <CollectXCoins id="CollectXCoins0"
             difficult="1"
@@ -73,10 +106,42 @@
             description="Collect 4000 coins" >
         </CollectXCoins>
         
+        <CollectXCoinsOnce id="CollectXCoinsOnce0"
+            difficult="1"
+            coinsRequired="100"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Collect 100 coins in single run" >
+        </CollectXCoinsOnce>
+        <CollectXCoinsOnce id="CollectXCoinsOnce1"
+            difficult="2"
+            coinsRequired="200"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Collect 200 coins in single run" >
+        </CollectXCoinsOnce>
+        <CollectXCoinsOnce id="CollectXCoinsOnce2"
+            difficult="3"
+            coinsRequired="300"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Collect 300 coins in single run" >
+        </CollectXCoinsOnce>
+        <CollectXCoinsOnce id="CollectXCoinsOnce3"
+            difficult="4"
+            coinsRequired="400"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Collect 400 coins in single run" >
+        </CollectXCoinsOnce>
+        
         <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses0"
             levelId="level_2"
             difficult="1"
-            required="0"
             coinsReward="100"
             lootRewardId="burning_aura_shard"
             lootRewardAmount="1"
@@ -85,7 +150,6 @@
         <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses1"
             levelId="level_3"
             difficult="2"
-            required="0"
             coinsReward="100"
             lootRewardId="burning_aura_shard"
             lootRewardAmount="1"
@@ -94,7 +158,6 @@
         <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses2"
             levelId="level_4"
             difficult="3"
-            required="0"
             coinsReward="100"
             lootRewardId="burning_aura_shard"
             lootRewardAmount="1"
@@ -103,11 +166,163 @@
         <CompleteLevelWithoutHealthLooses id="CompleteLevelWithoutHealthLooses3"
             levelId="level_5"
             difficult="4"
-            required="0"
             coinsReward="100"
             lootRewardId="burning_aura_shard"
             lootRewardAmount="1"
             description="Complete level 5 without hp losses" >
         </CompleteLevelWithoutHealthLooses>
+        
+        <PassXSquares id="PassXSquares0"
+            difficult="1"
+            squaresRequired="140"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Pass 140 squares" >
+        </PassXSquares>
+        <PassXSquares id="PassXSquares1"
+            difficult="2"
+            squaresRequired="280"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Pass 280 squares" >
+        </PassXSquares>
+        <PassXSquares id="PassXSquares2"
+            difficult="3"
+            squaresRequired="420"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Pass 420 squares" >
+        </PassXSquares>
+        <PassXSquares id="PassXSquares3"
+            difficult="4"
+            squaresRequired="840"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Pass 840 squares" >
+        </PassXSquares>
+        
+        <FinishLevelDuringTheTime id="FinishLevelDuringTheTime0"
+            levelId="level_2"
+            difficult="1"
+            time="60.0"
+            coinsReward="100"
+            lootRewardId="crit_shard"
+            lootRewardAmount="1"
+            description="Complete level 2 during 60 seconds" >
+        </FinishLevelDuringTheTime>
+        <FinishLevelDuringTheTime id="FinishLevelDuringTheTime1"
+            levelId="level_4"
+            difficult="2"
+            time="75.0"
+            coinsReward="100"
+            lootRewardId="crit_shard"
+            lootRewardAmount="1"
+            description="Complete level 4 during 75 seconds" >
+        </FinishLevelDuringTheTime>
+        <FinishLevelDuringTheTime id="FinishLevelDuringTheTime2"
+            levelId="level_6"
+            difficult="3"
+            time="90.0"
+            coinsReward="100"
+            lootRewardId="crit_shard"
+            lootRewardAmount="1"
+            description="Complete level 6 during 90 seconds" >
+        </FinishLevelDuringTheTime>
+        <FinishLevelDuringTheTime id="FinishLevelDuringTheTime3"
+            levelId="level_8"
+            difficult="4"
+            time="110.0"
+            coinsReward="100"
+            lootRewardId="crit_shard"
+            lootRewardAmount="1"
+            description="Complete level 8 during 110 seconds" >
+        </FinishLevelDuringTheTime>
+        
+        <CollectXShards id="CollectXShards0"
+            difficult="1"
+            shardId="back_dash_shard"
+            shardsAmount="3"
+            coinsReward="100"
+            lootRewardId="proj_defence_shard"
+            lootRewardAmount="1"
+            description="Earn 3 Back Dash shards" >
+        </CollectXShards>
+        <CollectXShards id="CollectXShards1"
+            difficult="2"
+            shardId="back_dash_shard"
+            shardsAmount="7"
+            coinsReward="100"
+            lootRewardId="proj_defence_shard"
+            lootRewardAmount="1"
+            description="Earn 7 Back Dash shards" >
+        </CollectXShards>
+        <CollectXShards id="CollectXShards2"
+            difficult="3"
+            shardId="proj_defence_shard"
+            shardsAmount="3"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Earn 3 Projectile Defence shards" >
+        </CollectXShards>
+        <CollectXShards id="CollectXShards3"
+            difficult="4"
+            shardId="proj_defence_shard"
+            shardsAmount="7"
+            coinsReward="100"
+            lootRewardId="vampirism_shard"
+            lootRewardAmount="1"
+            description="Earn 7 Projectile Defence∫ shards" >
+        </CollectXShards>
+        
+        <CollectXItems id="CollectXShards0"
+            difficult="1"
+            levelId="level_2"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Earn all shards on level 2 and get another one" >
+            <Items>
+                <back_dash_shard amount="2" />
+            </Items>
+        </CollectXItems>
+        <CollectXItems id="CollectXShards1"
+            difficult="2"
+            levelId="level_4"
+            coinsReward="100"
+            lootRewardId="back_dash_shard"
+            lootRewardAmount="1"
+            description="Earn all shards on level 4 and get another one" >
+            <Items>
+                <back_dash_shard amount="2" />
+            </Items>
+        </CollectXItems>
+        <CollectXItems id="CollectXShards2"
+            difficult="3"
+            levelId="level_6"
+            coinsReward="100"
+            lootRewardId="regeneration_shard"
+            lootRewardAmount="1"
+            description="Earn all shards on level 6 and get another one" >
+            <Items>
+                <regeneration_shard />
+            </Items>
+        </CollectXItems>
+        <CollectXItems id="CollectXShards3"
+            difficult="4"
+            levelId="level_8"
+            coinsReward="100"
+            lootRewardId="regeneration_shard"
+            lootRewardAmount="1"
+            description="Earn all shards on level 8 and get another one" >
+            <Items>
+                <regeneration_shard />
+            </Items>
+        </CollectXItems>
+        
     </MissionsPool>
 </DailyMissions>

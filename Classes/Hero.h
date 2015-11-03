@@ -66,6 +66,7 @@ private:
     
     float _runningSpeed;
     float _attackArea;
+    float _squarePassChecker;
     float _damageUpValue;
     float _staminaPoints;
     float _staminaDrainTime;
@@ -74,6 +75,8 @@ private:
     
     float _leftSideBorder;
     float _rightSideBorder;
+    
+    const float _squareSize;
     
     int _killPointToNextDamageUp;
     int _damageUpKillPoints;

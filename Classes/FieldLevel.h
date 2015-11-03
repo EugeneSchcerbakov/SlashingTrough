@@ -82,6 +82,7 @@ public:
     int getSectorsAmount() const;
     float getMapX() const;
     float getMapY() const;
+    float getRunningTime() const;
     bool isStatus(Status status);
     bool isFinished() const;
     
@@ -115,6 +116,7 @@ private:
     int _coinRewardForCompletition;
     float _posOnMapX;
     float _posOnMapY;
+    float _runnigTimeSec;
     
     Status _status;
     
