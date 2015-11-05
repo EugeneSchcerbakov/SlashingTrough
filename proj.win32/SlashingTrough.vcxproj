@@ -141,6 +141,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\ControlKeyboard.cpp" />
     <ClCompile Include="..\Classes\ControlTouch.cpp" />
+    <ClCompile Include="..\Classes\DailyMissions.cpp" />
+    <ClCompile Include="..\Classes\DailyMissionsPopup.cpp" />
+    <ClCompile Include="..\Classes\DailyTask.cpp" />
+    <ClCompile Include="..\Classes\EffectFlyingIcon.cpp" />
     <ClCompile Include="..\Classes\EffectsLayer.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EnemyWidget.cpp" />
@@ -168,6 +172,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\ObstacleWidget.cpp" />
     <ClCompile Include="..\Classes\PauseMenu.cpp" />
     <ClCompile Include="..\Classes\PlayerInfo.cpp" />
+    <ClCompile Include="..\Classes\PopupCore.cpp" />
     <ClCompile Include="..\Classes\Projectile.cpp" />
     <ClCompile Include="..\Classes\ProjectileWidget.cpp" />
     <ClCompile Include="..\Classes\ScreenChanger.cpp" />
@@ -176,7 +181,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Store.cpp" />
     <ClCompile Include="..\Classes\StoreArmorWidget.cpp" />
     <ClCompile Include="..\Classes\StoreCategoryButton.cpp" />
-    <ClCompile Include="..\Classes\StoreCystallWidget.cpp" />
+    <ClCompile Include="..\Classes\StoreCrystallWidget.cpp" />
     <ClCompile Include="..\Classes\StoreInterface.cpp" />
     <ClCompile Include="..\Classes\StoreItemBaseWidget.cpp" />
     <ClCompile Include="..\Classes\StoreItemButton.cpp" />
@@ -191,6 +196,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\ControlKeyboard.h" />
     <ClInclude Include="..\Classes\ControlTouch.h" />
+    <ClInclude Include="..\Classes\DailyMissions.h" />
+    <ClInclude Include="..\Classes\DailyMissionsPopup.h" />
+    <ClInclude Include="..\Classes\DailyTask.h" />
+    <ClInclude Include="..\Classes\EffectFlyingIcon.h" />
     <ClInclude Include="..\Classes\EffectsLayer.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EnemyWidget.h" />
@@ -218,6 +227,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\ObstacleWidget.h" />
     <ClInclude Include="..\Classes\PauseMenu.h" />
     <ClInclude Include="..\Classes\PlayerInfo.h" />
+    <ClInclude Include="..\Classes\PopupCore.h" />
     <ClInclude Include="..\Classes\Projectile.h" />
     <ClInclude Include="..\Classes\ProjectileWidget.h" />
     <ClInclude Include="..\Classes\ScreenChanger.h" />
@@ -226,7 +236,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Store.h" />
     <ClInclude Include="..\Classes\StoreArmorWidget.h" />
     <ClInclude Include="..\Classes\StoreCategoryButton.h" />
-    <ClInclude Include="..\Classes\StoreCystallWidget.h" />
+    <ClInclude Include="..\Classes\StoreCrystallWidget.h" />
     <ClInclude Include="..\Classes\StoreInterface.h" />
     <ClInclude Include="..\Classes\StoreItemBaseWidget.h" />
     <ClInclude Include="..\Classes\StoreItemButton.h" />
