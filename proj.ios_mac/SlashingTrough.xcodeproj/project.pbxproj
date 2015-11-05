@@ -86,18 +86,12 @@
 		CD327E711B14D2D30065ABC8 /* EffectsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD327E6E1B14D2D30065ABC8 /* EffectsLayer.cpp */; };
 		CD3E69AB1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */; };
 		CD3E69AC1AD3A593008F7FB0 /* ControlKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */; };
-		CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */; };
-		CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */; };
-		CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
-		CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */; };
 		CD44C6FE1AE9503E008569F6 /* ControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */; };
 		CD44C6FF1AE9503E008569F6 /* ControlTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */; };
 		CD5F1CCE1B2457B300D0341A /* PlayerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */; };
 		CD5F1CCF1B2457B300D0341A /* PlayerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */; };
 		CD5F8C7E1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
 		CD5F8C7F1AD03DB8000CF14A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */; };
-		CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
-		CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */ = {isa = PBXBuildFile; fileRef = CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */; };
 		CD637E761B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
 		CD637E771B22D9E8002F98EF /* StoreWeaponWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */; };
 		CD637E7A1B234458002F98EF /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD637E781B234458002F98EF /* Item.cpp */; };
@@ -116,7 +110,6 @@
 		CD7503541AFF6BED00DBD732 /* GameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7503511AFF6BED00DBD732 /* GameInterface.cpp */; };
 		CD75035A1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
 		CD75035B1AFF9AF000DBD732 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD7503591AFF9AF000DBD732 /* fonts */; };
-		CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */; };
 		CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD79525E1AEF5314006EC5A5 /* MediaPlayer.framework */; };
 		CD81E5141B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
 		CD81E5151B20B439008059C2 /* StoreInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD81E5121B20B439008059C2 /* StoreInterface.cpp */; };
@@ -134,8 +127,6 @@
 		CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CDA26D0C1ADCFEAA00D8CD6E /* textures */; };
 		CDB37C1D1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
 		CDB37C1E1B6CCB2F00138775 /* models in Resources */ = {isa = PBXBuildFile; fileRef = CDB37C1C1B6CCB2F00138775 /* models */; };
-		CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
-		CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */ = {isa = PBXBuildFile; fileRef = CDBF5AEC1AEEAC1000BF3812 /* gui.lua */; };
 		CDC5E6221B52930F000756EB /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6201B52930F000756EB /* Obstacle.cpp */; };
 		CDC5E6231B52930F000756EB /* Obstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6201B52930F000756EB /* Obstacle.cpp */; };
 		CDC5E6261B529EB8000756EB /* ObstacleWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC5E6241B529EB8000756EB /* ObstacleWidget.cpp */; };
@@ -174,7 +165,6 @@
 		CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA6F1B6E2BE600B0820C /* StoreItemBaseWidget.cpp */; };
 		CDCDEA751B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */; };
 		CDCDEA761B6E2ECF00B0820C /* StoreArmorWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */; };
-		CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */; };
 		CDD8F7BA1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDD8F7BB1ACBBCE9002ADCCE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */; };
 		CDE676B71B93030100233FFB /* MapPlayerMark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDE676B51B93030100233FFB /* MapPlayerMark.cpp */; };
@@ -215,34 +205,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
-		};
-		CD79525A1AEF5097006EC5A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 15EFA59E198B2DAA000C57D3;
-			remoteInfo = "libluacocos2d iOS";
-		};
-		CDD8F7AF1ACBB617002ADCCE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15C1C2CC198748D200A46ACC;
-			remoteInfo = "libluacocos2d Mac";
-		};
-		CDD8F7B11ACBB617002ADCCE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 15EFA616198B2DAA000C57D3;
-			remoteInfo = "libluacocos2d iOS";
-		};
-		CDD8F7B51ACBB693002ADCCE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 15C1C255198748D200A46ACC;
-			remoteInfo = "libluacocos2d Mac";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -325,15 +287,12 @@
 		CD327E6F1B14D2D30065ABC8 /* EffectsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectsLayer.h; sourceTree = "<group>"; };
 		CD3E69A91AD3A593008F7FB0 /* ControlKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlKeyboard.cpp; sourceTree = "<group>"; };
 		CD3E69AA1AD3A593008F7FB0 /* ControlKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlKeyboard.h; sourceTree = "<group>"; };
-		CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2d.lua; sourceTree = "<group>"; };
-		CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2dConstants.lua; sourceTree = "<group>"; };
 		CD44C6FC1AE9503E008569F6 /* ControlTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTouch.cpp; sourceTree = "<group>"; };
 		CD44C6FD1AE9503E008569F6 /* ControlTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTouch.h; sourceTree = "<group>"; };
 		CD5F1CCC1B2457B300D0341A /* PlayerInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerInfo.cpp; sourceTree = "<group>"; };
 		CD5F1CCD1B2457B300D0341A /* PlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfo.h; sourceTree = "<group>"; };
 		CD5F8C7C1AD03DB8000CF14A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		CD5F8C7D1AD03DB8000CF14A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiConstants.lua; sourceTree = "<group>"; };
 		CD637E741B22D9E8002F98EF /* StoreWeaponWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreWeaponWidget.cpp; sourceTree = "<group>"; };
 		CD637E751B22D9E8002F98EF /* StoreWeaponWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreWeaponWidget.h; sourceTree = "<group>"; };
 		CD637E781B234458002F98EF /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
@@ -365,7 +324,6 @@
 		CD9D04E41B8B9B7100FFE0F3 /* LevelsCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsCache.h; sourceTree = "<group>"; };
 		CDA26D0C1ADCFEAA00D8CD6E /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CDB37C1C1B6CCB2F00138775 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
-		CDBF5AEC1AEEAC1000BF3812 /* gui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gui.lua; sourceTree = "<group>"; };
 		CDC5E6201B52930F000756EB /* Obstacle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Obstacle.cpp; sourceTree = "<group>"; };
 		CDC5E6211B52930F000756EB /* Obstacle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Obstacle.h; sourceTree = "<group>"; };
 		CDC5E6241B529EB8000756EB /* ObstacleWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObstacleWidget.cpp; sourceTree = "<group>"; };
@@ -403,7 +361,6 @@
 		CDCDEA701B6E2BE600B0820C /* StoreItemBaseWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreItemBaseWidget.h; sourceTree = "<group>"; };
 		CDCDEA731B6E2ECF00B0820C /* StoreArmorWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoreArmorWidget.cpp; sourceTree = "<group>"; };
 		CDCDEA741B6E2ECF00B0820C /* StoreArmorWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreArmorWidget.h; sourceTree = "<group>"; };
-		CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../cocos2d/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		CDD8F7B81ACBBCE9002ADCCE /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		CDD8F7B91ACBBCE9002ADCCE /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		CDE676B51B93030100233FFB /* MapPlayerMark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapPlayerMark.cpp; sourceTree = "<group>"; };
@@ -422,7 +379,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD79525F1AEF5314006EC5A5 /* MediaPlayer.framework in Frameworks */,
-				CD79525D1AEF50BC006EC5A5 /* libluacocos2d iOS.a in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
@@ -442,7 +398,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD8F7B71ACBB6DD002ADCCE /* libluacocos2d Mac.a in Frameworks */,
 				1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */,
 				5087E76717EB910900C73F5D /* libz.dylib in Frameworks */,
 				503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */,
@@ -495,7 +450,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				46880B7519C43A67006E1F66 /* Resources */,
@@ -537,7 +491,6 @@
 				CD7503591AFF9AF000DBD732 /* fonts */,
 				CDA26D0C1ADCFEAA00D8CD6E /* textures */,
 				CDB37C1C1B6CCB2F00138775 /* models */,
-				CD3F1A8B1ACD15C5000ADDD6 /* scripts */,
 				CDC7945B1B1C202D00B83EA2 /* storeItems.xml */,
 				CD1D5EEA1BC9502E009C9352 /* dailyMissions.xml */,
 				CD2AE6361B77AB2C001DF4B7 /* gameInfo.xml */,
@@ -624,17 +577,6 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
-		};
-		CD3F1A8B1ACD15C5000ADDD6 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				CD6359C61B09B2DE00DAF734 /* GuiConstants.lua */,
-				CDBF5AEC1AEEAC1000BF3812 /* gui.lua */,
-				CD3F1A8C1ACD15C5000ADDD6 /* Cocos2d.lua */,
-				CD3F1A8D1ACD15C5000ADDD6 /* Cocos2dConstants.lua */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
 		};
 		CDC5E6281B529ECF000756EB /* Effects */ = {
 			isa = PBXGroup;
@@ -759,15 +701,6 @@
 			name = Control;
 			sourceTree = "<group>";
 		};
-		CDD8F7AB1ACBB617002ADCCE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */,
-				CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -782,7 +715,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CD79525B1AEF5097006EC5A5 /* PBXTargetDependency */,
 				1AC6FB25180E99E1004C840B /* PBXTargetDependency */,
 			);
 			name = "SlashingTrough iOS";
@@ -801,7 +733,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CDD8F7B61ACBB693002ADCCE /* PBXTargetDependency */,
 				1AC6FB16180E9959004C840B /* PBXTargetDependency */,
 			);
 			name = "SlashingTrough Mac";
@@ -839,10 +770,6 @@
 					ProductGroup = 1AC6FAE6180E9839004C840B /* Products */;
 					ProjectRef = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
 				},
-				{
-					ProductGroup = CDD8F7AB1ACBB617002ADCCE /* Products */;
-					ProjectRef = CDD8F7AA1ACBB617002ADCCE /* cocos2d_lua_bindings.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -867,20 +794,6 @@
 			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CDD8F7B01ACBB617002ADCCE /* libluacocos2d Mac.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluacocos2d Mac.a";
-			remoteRef = CDD8F7AF1ACBB617002ADCCE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CDD8F7B21ACBB617002ADCCE /* libluacocos2d iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluacocos2d iOS.a";
-			remoteRef = CDD8F7B11ACBB617002ADCCE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -895,12 +808,10 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				CD0EB17B1B75F2F500267CEA /* presets.xml in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
-				CD3F1A8E1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				CD2AE6371B77AB2C001DF4B7 /* gameInfo.xml in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
-				CDBF5AED1AEEAC1000BF3812 /* gui.lua in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -909,7 +820,6 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				CD1D5EEB1BC9502E009C9352 /* dailyMissions.xml in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
-				CD6359C71B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				CDB37C1D1B6CCB2F00138775 /* models in Resources */,
 				CDA26D0D1ADCFEAA00D8CD6E /* textures in Resources */,
@@ -917,7 +827,6 @@
 				CDC7945C1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				CD0EB17E1B76086E00267CEA /* levels.xml in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
-				CD3F1A901ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -931,11 +840,7 @@
 				CD2AE6381B77AB2C001DF4B7 /* gameInfo.xml in Resources */,
 				CDC7945D1B1C202D00B83EA2 /* storeItems.xml in Resources */,
 				CDB37C1E1B6CCB2F00138775 /* models in Resources */,
-				CD3F1A8F1ACD15C5000ADDD6 /* Cocos2d.lua in Resources */,
-				CD3F1A911ACD15C5000ADDD6 /* Cocos2dConstants.lua in Resources */,
-				CD6359C81B09B2DE00DAF734 /* GuiConstants.lua in Resources */,
 				CD1D5EEC1BC9502E009C9352 /* dailyMissions.xml in Resources */,
-				CDBF5AEE1AEEAC1000BF3812 /* gui.lua in Resources */,
 				CD75035B1AFF9AF000DBD732 /* fonts in Resources */,
 				CD0EB17F1B76086E00267CEA /* levels.xml in Resources */,
 				CDA26D0E1ADCFEAA00D8CD6E /* textures in Resources */,
@@ -1081,16 +986,6 @@
 			name = "cocos2dx iOS";
 			targetProxy = 1AC6FB24180E99E1004C840B /* PBXContainerItemProxy */;
 		};
-		CD79525B1AEF5097006EC5A5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libluacocos2d iOS";
-			targetProxy = CD79525A1AEF5097006EC5A5 /* PBXContainerItemProxy */;
-		};
-		CDD8F7B61ACBB693002ADCCE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libluacocos2d Mac";
-			targetProxy = CDD8F7B51ACBB693002ADCCE /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1117,10 +1012,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
-					"$(SRCROOT)/../cocos2d/cocos/scripting/lua-bindings/manual",
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
-					"$(SRCROOT)/../cocos2d/external/lua/luajit/include",
-					"$(SRCROOT)/../cocos2d/external/lua/tolua",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1158,10 +1050,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios",
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
-					"$(SRCROOT)/../cocos2d/cocos/scripting/lua-bindings/manual",
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
-					"$(SRCROOT)/../cocos2d/external/lua/luajit/include",
-					"$(SRCROOT)/../cocos2d/external/lua/tolua",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
