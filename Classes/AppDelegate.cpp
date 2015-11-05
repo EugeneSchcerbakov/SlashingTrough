@@ -1,8 +1,5 @@
 #include "AppDelegate.h"
 
-#include "ui/lua_cocos2dx_ui_manual.hpp"
-#include "cocostudio/lua_cocos2dx_coco_studio_manual.hpp"
-
 #include "ScreenChanger.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -37,16 +34,11 @@ void AppDelegate::initGLContextAttrs()
 bool AppDelegate::applicationDidFinishLaunching() {
     WRITE_INIT("Slashing Through started.");
     
-    srand(time(nullptr));
-    
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     auto fileUtils = cocos2d::FileUtils::getInstance();
-    auto luaEngine = cocos2d::LuaEngine::getInstance();
 	auto frameSize = cocos2d::Size(640.0f, 1136.0f);
-    
-    ScriptEngineManager::getInstance()->setScriptEngine(luaEngine);
 
 	cocos2d::Application::Platform platform;
 	platform = cocos2d::Application::getInstance()->getTargetPlatform();
@@ -55,13 +47,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		fileUtils->addSearchPath("../../Resources/fonts");
 		fileUtils->addSearchPath("../../Resources/textures");
 		fileUtils->addSearchPath("../../Resources/scripts");
-		luaEngine->addSearchPath("../../Resources/scripts");
 	}
 
 	fileUtils->addSearchPath("textures");
     fileUtils->addSearchPath("fonts");
 	fileUtils->addSearchPath("scripts");
-	luaEngine->addSearchPath("scripts");
     
     if(!glview) {
         glview = GLViewImpl::create("Slashing Trough");
@@ -86,11 +76,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::FIXED_WIDTH);
     director->setAnimationInterval(1.0 / 60);
-
-    lua_State *luaState = luaEngine->getLuaStack()->getLuaState();
-    register_ui_moudle(luaState);
-    register_cocostudio_module(luaState);
-    luaEngine->executeScriptFile("gui.lua");
     
     ScreenChanger::changeScreen(ScreenChanger::START);
 
