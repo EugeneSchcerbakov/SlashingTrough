@@ -24,6 +24,9 @@ public:
         ATTACK
     };
     
+    typedef std::shared_ptr<HeroAction> Ptr;
+    typedef std::weak_ptr<HeroAction> WeakPtr;
+    
 public:
     HeroAction(Hero *hero, float duration, Type type);
     virtual ~HeroAction();
@@ -58,6 +61,8 @@ protected:
 class AttackAndMove : public HeroAction
 {
 public:
+    static Ptr create(Hero *hero, float duration, float deltaX, float deltaY);
+    
     AttackAndMove(Hero *hero, float duration, float deltaX, float deltaY);
     
     void update(float dt) override;
@@ -75,6 +80,8 @@ private:
 class JumpBack : public HeroAction
 {
 public:
+    static Ptr create(Hero *hero, float duration, float jumpDist);
+    
     JumpBack(Hero *hero, float duration, float jumpDist);
     
     void start() override;

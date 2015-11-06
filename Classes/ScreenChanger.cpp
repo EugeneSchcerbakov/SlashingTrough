@@ -23,6 +23,10 @@ ScreenChanger::Screen ScreenChanger::GAME = "GameScreen";
 
 static void changeScene(cocos2d::Scene *scene, ScreenChanger::Screen screen)
 {
+    if (!scene) {
+        return;
+    }
+    
     auto director = cocos2d::Director::getInstance();
     
     std::string log = "";

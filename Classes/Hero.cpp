@@ -76,8 +76,8 @@ void Hero::idleUpdate(float dt)
         }
     }
     
-    if (_actionSequence.size() > 0) {
-        HeroAction *action = _actionSequence.front();
+    if (!_actionSequence.empty()) {
+        HeroAction::Ptr action = _actionSequence.front();
         if (!action->isFinished()) {
             if (!action->isStarted()) {
                 action->start();
@@ -88,7 +88,6 @@ void Hero::idleUpdate(float dt)
             }
             action->update(dt);
         } else {
-            delete action;
             _actionSequence.pop_front();
         }
     }
@@ -223,9 +222,13 @@ void Hero::onSwipeBack()
     }
 }
 
-void Hero::addAction(HeroAction *action)
+void Hero::addAction(HeroAction::WeakPtr actionPtr)
 {
-    _actionSequence.push_back(action);
+    if (!actionPtr.expired()) {
+        _actionSequence.push_back(actionPtr.lock());
+    } else {
+        WRITE_WARN("Failed to add invalid hero action.");
+    }
 }
 
 void Hero::addKillsPoint(int killsPoint)
@@ -267,7 +270,8 @@ float Hero::getSpeed() const
 HeroAction* Hero::getLastAction() const
 {
     if (!_actionSequence.empty()) {
-        return _actionSequence.back();
+        HeroAction::Ptr action = _actionSequence.back();
+        return action.get();
     }
     return nullptr;
 }
@@ -297,15 +301,17 @@ bool Hero::isActionsQueueFull() const
     return _actionSequence.size() >= (std::size_t)_actionsSequenceMaxSize;
 }
 
-bool Hero::isAbleToPerform(HeroAction *action)
+bool Hero::isAbleToPerform(HeroAction::WeakPtr actionPtr)
 {
-    if (!action) {
+    if (actionPtr.expired()) {
         return false;
     }
     
+    HeroAction::Ptr action = actionPtr.lock();
+    
     if (action->isType(HeroAction::Type::ATTACK_MOVE))
     {
-        auto move = dynamic_cast<AttackAndMove *>(action);
+        auto move = dynamic_cast<AttackAndMove *>(action.get());
         float x = move->getFinishX();
         return x < _rightSideBorder && x > _leftSideBorder;
     }
@@ -327,7 +333,7 @@ bool Hero::isActionInQueue(const std::string &tag) const
         return false;
     }
     for (auto it = _actionSequence.begin(); it != _actionSequence.end(); ++it) {
-        HeroAction *action = (*it);
+        HeroAction::Ptr action = (*it);
         if (action && (*it)->isTag(tag)) {
             return true;
         }

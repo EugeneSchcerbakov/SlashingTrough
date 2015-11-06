@@ -127,13 +127,13 @@ bool FieldSectorWidget::init()
     meshdata->subMeshIndices.push_back(indices);
     meshdata->subMeshIds.push_back("");
     
-    cocos2d::ModelData *modeldata = new cocos2d::ModelData();
-    modeldata->matrialId = "ground_tex";
+    cocos2d::ModelData modeldata;
+    modeldata.matrialId = "ground_tex";
     
-    cocos2d::NodeData *nodedata = new cocos2d::NodeData();
-    nodedata->id = "ground";
-    nodedata->transform.translate(0.0f, 0.0f, 0.0f);
-    nodedata->modelNodeDatas.push_back(modeldata);
+    cocos2d::NodeData nodedata;
+    nodedata.id = "ground";
+    nodedata.transform.translate(0.0f, 0.0f, 0.0f);
+    nodedata.modelNodeDatas.push_back(&modeldata);
     
     cocos2d::NTextureData texdata;
     texdata.id = "tex";
@@ -147,7 +147,7 @@ bool FieldSectorWidget::init()
     matdata.id = "ground_tex";
     
     meshdatas.meshDatas.push_back(meshdata);
-    nodedatas.nodes.push_back(nodedata);
+    nodedatas.nodes.push_back(&nodedata);
     materialdats.materials.push_back(matdata);
     
     initFrom(nodedatas, meshdatas, materialdats);

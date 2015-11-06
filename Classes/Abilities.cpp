@@ -56,7 +56,7 @@ void BackDash::swipeBack()
     
     if (_allow)
     {
-        HeroAction *action = new JumpBack(_hero, _duration, -_distance);
+        HeroAction::Ptr action = JumpBack::create(_hero, _duration, -_distance);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");
@@ -117,7 +117,7 @@ void BackDashShield::swipeBack()
     
     if (_allow)
     {
-        HeroAction *action = new JumpBack(_hero, _duration, -_distance);
+        HeroAction::Ptr action = JumpBack::create(_hero, _duration, -_distance);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");

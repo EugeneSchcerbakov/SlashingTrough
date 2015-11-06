@@ -41,7 +41,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
         const float deltaY = gameinfo.getConstFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
         const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
         
-        HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
+        HeroAction::Ptr action = AttackAndMove::create(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
         {
             Event e("SwipeRight");
@@ -57,7 +57,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
         const float deltaY = gameinfo.getConstFloat("HERO_SWIPE_OFFSET_ON_SQUARE") * _squareSize;
         const float duration = _hero->getWeapon() ? _hero->getWeapon()->getSpeed() : 0.0f;
         
-        HeroAction *action = new AttackAndMove(_hero, duration, deltaX, deltaY);
+        HeroAction::Ptr action = AttackAndMove::create(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
         {
             Event e("SwipeLeft");

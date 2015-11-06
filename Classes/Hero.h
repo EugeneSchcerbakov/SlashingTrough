@@ -32,7 +32,7 @@ public:
     void onSwipeRight();
     void onSwipeBack();
     
-    void addAction(HeroAction *action);
+    void addAction(HeroAction::WeakPtr actionPtr);
     void addKillsPoint(int killsPoint);
     void addCoinsPoint(int coinsPoint);
     void addScorePoint(int scorePoint);
@@ -50,11 +50,11 @@ public:
     Entities* getGoals();
     
     bool isActionsQueueFull() const;
-    bool isAbleToPerform(HeroAction *action);
+    bool isAbleToPerform(HeroAction::WeakPtr actionPtr);
     bool isActionInQueue(const std::string &tag) const;
     
 private:
-    typedef std::list<HeroAction *> ActionSequence;
+    typedef std::list<HeroAction::Ptr> ActionSequence;
     
 private:    
     ActionSequence _actionSequence;

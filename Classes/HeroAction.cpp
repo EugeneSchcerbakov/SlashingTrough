@@ -79,6 +79,11 @@ void HeroAction::setTag(const std::string &tag)
 
 // HeroActionMove
 
+HeroAction::Ptr AttackAndMove::create(Hero *hero, float duration, float deltaX, float deltaY)
+{
+    return std::make_shared<AttackAndMove>(hero, duration, deltaX, deltaY);
+}
+
 AttackAndMove::AttackAndMove(Hero *hero, float duration, float deltaX, float deltaY)
 : HeroAction(hero, duration, Type::ATTACK_MOVE)
 {
@@ -133,6 +138,11 @@ float AttackAndMove::getFinishY() const
 }
 
 // HeroActionJumpBack
+
+HeroAction::Ptr JumpBack::create(Hero *hero, float duration, float jumpDist)
+{
+    return std::make_shared<JumpBack>(hero, duration, jumpDist);
+}
 
 JumpBack::JumpBack(Hero *hero, float duration, float jumpDist)
 : HeroAction(hero, duration, Type::JUMPBACK)
