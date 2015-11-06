@@ -88,7 +88,6 @@ bool GameInfo::loadInfo(const std::string &filename)
                     info.rangeAttack.distance = rangeAttackInfo->FloatAttribute("distance");
                     info.rangeAttack.recoveryTime = rangeAttackInfo->FloatAttribute("recoveryTime");
                     info.rangeAttack.projectile.healthDamage = rangeAttackInfo->FloatAttribute("healthDamage");
-                    info.rangeAttack.projectile.staminaDamage = rangeAttackInfo->FloatAttribute("staminaDamage");
                     info.rangeAttack.projectile.speed = rangeAttackInfo->FloatAttribute("projectileSpeed");
                     info.rangeAttack.projectile.lifeTime = rangeAttackInfo->FloatAttribute("projectileLifeTime");
                     info.rangeAttack.projectile.texture = rangeAttackInfo->Attribute("projectileTexture");
@@ -108,7 +107,6 @@ bool GameInfo::loadInfo(const std::string &filename)
                     info.melleAttack.areaWidth = melleAttackInfo->FloatAttribute("areaWidth");
                     info.melleAttack.areaHeight = melleAttackInfo->FloatAttribute("areaHeight");
                     info.melleAttack.dmgHealth = melleAttackInfo->FloatAttribute("dmgHealth");
-                    info.melleAttack.dmgStamina = melleAttackInfo->FloatAttribute("dmgStamina");
                     info.melleAttack.showHighlightRange = melleAttackInfo->FloatAttribute("showHighlightRange");
                     info.melleAttack.showHighlightTime = melleAttackInfo->FloatAttribute("showHighlightTime");
                     info.melleAttack.recoveryTime = melleAttackInfo->FloatAttribute("recoveryTime");

@@ -20,7 +20,6 @@ public:
     struct ProjectileType
     {
         float healthDamage;
-        float staminaDamage;
         float speed;
         float lifeTime;
         std::string texture;
@@ -70,7 +69,6 @@ public:
             float areaWidth;
             float areaHeight;
             float dmgHealth;
-            float dmgStamina;
             float showHighlightRange;
             float showHighlightTime;
             float recoveryTime;

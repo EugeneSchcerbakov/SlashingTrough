@@ -123,11 +123,6 @@ void FieldLayer::refreshInterface()
         
         _gameInterface->setHealthPointsLabel(percentageHealth);
         
-        float maxStaminaPoints = GameInfo::getInstance().getConstFloat("HERO_STAMINA_POINTS");
-        float curStaminaPoints = hero->getStamina();
-        
-        _gameInterface->setStaminaPoints(curStaminaPoints / maxStaminaPoints);
-        
         auto sector = _field.getCurrentSector();
         std::string difficultText = cocos2d::StringUtils::format("preset id: %s", sector->getPresetId().c_str());
         _gameInterface->setDifficultLable(difficultText);

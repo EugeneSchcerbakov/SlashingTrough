@@ -29,10 +29,6 @@ void Obstacle::idleUpdate(float dt)
         float len = sqrtf(dx * dx + dy * dy);
         if (len < _radius && goaly < _y) {
             _goal->addHealth(-_damage);
-            if (_goal->isType(Entity::Type::HERO)) {
-                Hero *hero = dynamic_cast<Hero *>(_goal);
-                hero->addStamina(-_staminaDrainPoints);
-            }
             kill();
         }
     }

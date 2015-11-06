@@ -33,7 +33,6 @@ public:
     void onSwipeBack();
     
     void addAction(HeroAction *action);
-    void addStamina(float stamina);
     void addKillsPoint(int killsPoint);
     void addCoinsPoint(int coinsPoint);
     void addScorePoint(int scorePoint);
@@ -43,7 +42,6 @@ public:
     void setSideBorders(float left, float right);
     
     float getSpeed() const;
-    float getStamina() const;
     HeroAction* getLastAction() const;
     ItemWeapon* getWeapon() const;
     ItemArmor* getArmor() const;
@@ -67,19 +65,12 @@ private:
     float _runningSpeed;
     float _attackArea;
     float _squarePassChecker;
-    float _damageUpValue;
-    float _staminaPoints;
-    float _staminaDrainTime;
-    float _staminaDrainValue;
-    float _staminaDrainTimeCounter;
     
     float _leftSideBorder;
     float _rightSideBorder;
     
     const float _squareSize;
-    
-    int _killPointToNextDamageUp;
-    int _damageUpKillPoints;
+
     int _actionsSequenceMaxSize;
     
     bool _running;

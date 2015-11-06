@@ -20,9 +20,7 @@ Hero::Hero()
 , _runningSpeed(0.0f)
 , _leftSideBorder(0.0f)
 , _rightSideBorder(0.0f)
-, _staminaDrainTimeCounter(0.0f)
 , _squarePassChecker(0.0f)
-, _killPointToNextDamageUp(0)
 , _squareSize(GameInfo::getInstance().getConstFloat("SQUARE_SIZE"))
 , _goals(nullptr)
 , _running(false)
@@ -38,11 +36,6 @@ void Hero::init()
     _radius = 0.0f;
     _health = gameinfo.getConstFloat("HERO_HEALTH_POINTS");
     _attackArea = gameinfo.getConstFloat("HERO_ATTACK_AREA");
-    _damageUpValue = gameinfo.getConstFloat("HERO_DAMAGE_UP_VALUE");
-    _damageUpKillPoints = gameinfo.getConstInt("HERO_DAMAGE_UP_KP");
-    _staminaPoints = gameinfo.getConstFloat("HERO_STAMINA_POINTS");
-    _staminaDrainTime = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_TIME");
-    _staminaDrainValue = gameinfo.getConstFloat("HERO_STAMINA_DRAIN_VALUE");
     _actionsSequenceMaxSize = gameinfo.getConstInt("HERO_ACTIONS_SEQUENCE_SIZE");
     
     float baseHealth = GameInfo::getInstance().getConstFloat("HERO_HEALTH_POINTS");
@@ -98,17 +91,6 @@ void Hero::idleUpdate(float dt)
             delete action;
             _actionSequence.pop_front();
         }
-    }
-    
-    _staminaDrainTimeCounter += dt;
-    if (_staminaDrainTimeCounter >= _staminaDrainTime) {
-        _staminaDrainTimeCounter = 0.0f;
-        addStamina(-_staminaDrainValue);
-    }
-    
-    if (_staminaPoints <= 0.0f && isAlive()) {
-        _staminaPoints = 0.0f;
-        kill();
     }
     
     for (auto crystall : _equip.crystalls) {
@@ -246,27 +228,9 @@ void Hero::addAction(HeroAction *action)
     _actionSequence.push_back(action);
 }
 
-void Hero::addStamina(float stamina)
-{
-    _staminaPoints += stamina;
-    
-    float max = GameInfo::getInstance().getConstFloat("HERO_STAMINA_POINTS");
-    if (_staminaPoints > max) {
-        _staminaPoints = max;
-    }
-    if (_staminaPoints < 0.0f) {
-        _staminaPoints = 0.0f;
-    }
-}
-
 void Hero::addKillsPoint(int killsPoint)
 {
     _score.kills += killsPoint;
-    _killPointToNextDamageUp += killsPoint;
-    if (_killPointToNextDamageUp >= _damageUpKillPoints) {
-        _killPointToNextDamageUp = 0;
-        _damage += _damageUpValue;
-    }
 }
 
 void Hero::addCoinsPoint(int coinsPoint)
@@ -298,11 +262,6 @@ void Hero::setSideBorders(float left, float right)
 float Hero::getSpeed() const
 {
     return _runningSpeed;
-}
-
-float Hero::getStamina() const
-{
-    return _staminaPoints;
 }
 
 HeroAction* Hero::getLastAction() const

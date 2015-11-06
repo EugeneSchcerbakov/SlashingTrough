@@ -24,7 +24,6 @@ public:
     void setKillPointsLabel(int value);
     void setDamagePointsLabel(int value);
     void setHealthPointsLabel(float value);
-    void setStaminaPoints(float value);
     
 protected:
     GameInterface();

@@ -88,10 +88,6 @@ void GameInterface::setHealthPointsLabel(float value)
     _hpBar->setPercentage(value);
 }
 
-void GameInterface::setStaminaPoints(float value)
-{
-}
-
 bool GameInterface::init()
 {
     if (!cocos2d::Layer::init()) {

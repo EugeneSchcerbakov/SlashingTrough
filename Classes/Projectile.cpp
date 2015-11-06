@@ -18,7 +18,6 @@ Projectile::Projectile(const GameInfo::ProjectileType &projectile, float x, floa
 , _speed(projectile.speed)
 , _lifeTime(projectile.lifeTime)
 , _healthDmg(projectile.healthDamage)
-, _staminaDmg(projectile.staminaDamage)
 , _localTime(0.0f)
 , _reflected(false)
 {
@@ -82,13 +81,7 @@ void Projectile::tryDamage(Entity *goal)
     
     if (len < 80.0f)
     {
-        goal->addHealth(-_healthDmg);
-        if (goal->isType(Entity::Type::HERO))
-        {
-            auto hero = dynamic_cast<Hero *>(goal);
-            hero->addStamina(-_staminaDmg);
-        }
-        
+        goal->addHealth(-_healthDmg);        
         kill();
     }
 }

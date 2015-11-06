@@ -42,7 +42,7 @@ private:
     bool _reflected;
     
     const float _lifeTime;
-    const float _healthDmg, _staminaDmg;
+    const float _healthDmg;
 };
 
 #endif /* defined(__SlashingTrough__Projectile__) */

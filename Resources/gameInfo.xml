@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
 <GameInfo>
 	<GlobalVariables>
-        <Const name="HERO_DAMAGE_UP_KP" type="int" value="0" />
-        <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
-				
         <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
         <Const name="HERO_ATTACK_AREA" type="float" value="0.75" />
-        <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
-        <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
-        <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
         <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
         <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 

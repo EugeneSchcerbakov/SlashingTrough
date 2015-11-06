@@ -48,10 +48,6 @@ void Enemy::idleUpdate(float dt)
         if (len < _radius && _goal->getPositionY() < _y)
         {
             _goal->addHealth(-_damage);
-            if (_goal->isType(Entity::Type::HERO)) {
-                Hero *hero = dynamic_cast<Hero *>(_goal);
-                hero->addStamina(-_staminaDrainPoints);
-            }
             kill();
         }
         
@@ -173,7 +169,6 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
         float y = hero->getPositionY();
         if (checkMelleZone(x, y)) {
             hero->addHealth(-_melleAttack.dmgHealth);
-            hero->addStamina(-_melleAttack.dmgStamina);
             _melleAttacked = true;
         }
     }
@@ -191,7 +186,6 @@ void Enemy::onDamageReceived(float damage)
             
         hero->addKillsPoint(getKillPoints());
         hero->addCoinsPoint(getCoinPoints());
-        hero->addStamina(getStaminaPoints());
         hero->addScorePoint(getScorePoints());
         
         DailyTaskEvent eventKill(Tracking::EnemyKilled);
