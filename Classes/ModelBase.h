@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <list>
+#include <memory>
 
 #include "VariablesSet.h"
 

@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/DailyMissions.cpp \
                    ../../Classes/DailyMissionsPopup.cpp \
                    ../../Classes/EffectsLayer.cpp \
+                   ../../Classes/EffectFlyingIcon.cpp \
                    ../../Classes/Enemy.cpp \
                    ../../Classes/EnemyWidget.cpp \
                    ../../Classes/Field.cpp \
@@ -63,16 +64,13 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Item.cpp \
                    ../../Classes/VictoryCondition.cpp
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
-					$(LOCAL_PATH)/../../cocos2d/scripting/lua-bindings/manual \
-                    $(LOCAL_PATH)/../../cocos2d/external/lua/tolua
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END
 
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
-LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
 
 # _COCOS_LIB_ANDROID_BEGIN
 # _COCOS_LIB_ANDROID_END
@@ -80,7 +78,6 @@ LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,.)
-$(call import-module,scripting/lua-bindings/proj.android)
 
 # _COCOS_LIB_IMPORT_ANDROID_BEGIN
 # _COCOS_LIB_IMPORT_ANDROID_END

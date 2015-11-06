@@ -243,8 +243,8 @@ void DailyMissions::checkMissionsSwitchTime()
     std::string duration_string = gameinfo.getConstString("DAILY_MISSIONS_UPDATE_DURATION", "0");
     std::string timestamp_string = player.variables.getString(PlayerInfo::VarKeyDailyTimestamp, "0");
     
-    long duration = std::stol(duration_string);
-    long timestamp = std::stol(timestamp_string);
+    long duration = atol(duration_string.c_str());
+    long timestamp = atol(timestamp_string.c_str());
     
     long time = (long)std::time(0);
     
