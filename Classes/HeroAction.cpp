@@ -145,12 +145,12 @@ HeroAction::Ptr JumpBack::create(Hero *hero, float duration, float jumpDist)
 }
 
 JumpBack::JumpBack(Hero *hero, float duration, float jumpDist)
-: HeroAction(hero, duration, Type::JUMPBACK)
+: HeroAction(hero, duration, Type::JUMP)
 {
     _startY = hero->getPositionY();
     
     HeroAction *lastAction = hero->getLastAction();
-    if (lastAction && lastAction->isType(Type::JUMPBACK)) {
+    if (lastAction && lastAction->isType(Type::JUMP)) {
         auto jumpback = dynamic_cast<JumpBack *>(lastAction);
         _startY = jumpback->getFinishY();
     }
@@ -184,4 +184,34 @@ void JumpBack::update(float dt)
 float JumpBack::getFinishY() const
 {
     return _endY;
+}
+
+// HeroAction JumpForwardAttack
+
+HeroAction::Ptr JumpForwardAttack::create(Hero *hero, float duration, float jumpDist)
+{
+    return std::make_shared<JumpForwardAttack>(hero, duration, jumpDist);
+}
+
+JumpForwardAttack::JumpForwardAttack(Hero *hero, float duration, float jumpDist)
+: JumpBack(hero, duration, jumpDist)
+, _attackPeriodTime(0.0f)
+{
+}
+
+void JumpForwardAttack::update(float dt)
+{
+    if (!_isFinished)
+    {
+        const float period = 0.05f;
+        
+        _attackPeriodTime += dt;
+        
+        if (_attackPeriodTime >= period) {
+            _attackPeriodTime = 0.0f;
+            _hero->attack();
+        }
+    }
+    
+    JumpBack::update(dt);
 }

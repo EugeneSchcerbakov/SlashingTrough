@@ -71,6 +71,9 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
     if (key == cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
         _hero->onSwipeBack();
     }
+    if (key == cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW) {
+        _hero->onSwipeForward();
+    }
 }
 
 bool ControlKeyboard::init(cocos2d::Node *node)

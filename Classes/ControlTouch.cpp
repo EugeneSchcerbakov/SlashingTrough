@@ -116,6 +116,11 @@ void ControlTouch::touchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
             _hero->onSwipeBack();
             _isSwipingNow = false;
         }
+        // swipe forward
+        if (scalar >= -0.3f && scalar <= 0.3 && touch->getDelta().y > 0.0f) {
+            _hero->onSwipeForward();
+            _isSwipingNow = false;
+        }
     }
 }
 

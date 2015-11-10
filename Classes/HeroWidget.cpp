@@ -204,6 +204,23 @@ void HeroWidget::acceptEvent(const Event &event)
             _shield->runAction(cocos2d::FadeIn::create(0.1f));
         }
     } else if (event.is("JumpBackEnd")) {
+    } else if (event.is("JumpForwardAttack")) {
+        removeAllAnimations();
+        if (_swordSide != _nextSwordSide) {
+            _swordSide = _nextSwordSide;
+        }
+        float time = event.variables.getFloat("duration");
+        if (_swordSide == SwordSide::RIGHT) {
+            auto swordAction = AnimSwordRightSwipeLeft(time);
+            _sword->runAction(swordAction);
+            _nextSwordSide = SwordSide::LEFT;
+        } else if (_swordSide == SwordSide::LEFT) {
+            auto swordAction = AnimSwordLeftSwipeRight(time);
+            _sword->runAction(swordAction);
+            _nextSwordSide = SwordSide::RIGHT;
+
+        }
+        runSwordTrailEffect(time);
     } else if (event.is("HideShield")) {
         auto func = [this](){_shield->setVisible(false);};
         auto fade = cocos2d::FadeOut::create(0.05f);

@@ -222,6 +222,15 @@ void Hero::onSwipeBack()
     }
 }
 
+void Hero::onSwipeForward()
+{
+    for (auto crystall : _equip.crystalls) {
+        if (crystall) {
+            crystall->onSwipeForward();
+        }
+    }
+}
+
 void Hero::addAction(HeroAction::WeakPtr actionPtr)
 {
     if (!actionPtr.expired()) {
@@ -315,7 +324,7 @@ bool Hero::isAbleToPerform(HeroAction::WeakPtr actionPtr)
         float x = move->getFinishX();
         return x < _rightSideBorder && x > _leftSideBorder;
     }
-    else if (action->isType(HeroAction::Type::JUMPBACK))
+    else if (action->isType(HeroAction::Type::JUMP))
     {
         return true;
     }

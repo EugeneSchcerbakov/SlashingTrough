@@ -14,19 +14,21 @@
 
 #include "Item.h"
 
-class BackDash : public Ability
+class Dash : public Ability
 {
 public:
     static Ptr create(float cooldown, float distance, float duration);
     
 public:
-    BackDash(float cooldown, float distance, float duration);
+    Dash(float cooldown, float distance, float duration);
     
     void init(Hero *p) override;
     void update(float dt) override;
     void swipeBack() override;
     
 protected:
+    virtual void makeDash();
+    
     static const std::string TAG;
     
     float _cooldown;
@@ -36,7 +38,7 @@ protected:
     bool _allow;
 };
 
-class BackDashShield : public BackDash
+class BackDashShield : public Dash
 {
 public:
     static Ptr create(float cooldown, float distance, float duration, float shieldTime);
@@ -55,6 +57,30 @@ protected:
     bool _shieldShown;
     
     const float _shieldLiveTime;
+};
+
+class ForwardDash : public Dash
+{
+public:
+    static Ptr create(float cooldown, float distance, float duration);
+    
+public:
+    ForwardDash(float cooldown, float distance, float duration);
+    
+    virtual void swipeBack() override;
+    virtual void swipeForward() override;
+};
+
+class ForwardDashAttack : public ForwardDash
+{
+public:
+    static Ptr create(float cooldown, float distance, float duration);
+    
+public:
+    ForwardDashAttack(float cooldown, float distance, float duration);
+    
+protected:
+    virtual void makeDash() override;
 };
 
 class Vampirism : public Ability

@@ -20,7 +20,7 @@ public:
     {
         NONE,
         ATTACK_MOVE,
-        JUMPBACK,
+        JUMP,
         ATTACK
     };
     
@@ -84,14 +84,27 @@ public:
     
     JumpBack(Hero *hero, float duration, float jumpDist);
     
-    void start() override;
-    void update(float dt) override;
+    virtual void start() override;
+    virtual void update(float dt) override;
     
     float getFinishY() const;
     
 private:
     float _startY;
     float _endY;
+};
+
+class JumpForwardAttack : public JumpBack
+{
+public:
+    static Ptr create(Hero *hero, float duration, float jumpDist);
+    
+    JumpForwardAttack(Hero *hero, float duration, float jumpDist);
+    
+    virtual void update(float dt) override;
+    
+private:
+    float _attackPeriodTime;
 };
 
 #endif /* defined(__SlashingTrough__HeroAction__) */

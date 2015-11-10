@@ -15,9 +15,9 @@
 
 // Backsliding
 
-const std::string BackDash::TAG = "BackslidngAction";
+const std::string Dash::TAG = "Dash";
 
-BackDash::BackDash(float cooldown, float distance, float duration)
+Dash::Dash(float cooldown, float distance, float duration)
 : Ability()
 , _cooldown(cooldown)
 , _distance(distance)
@@ -27,17 +27,17 @@ BackDash::BackDash(float cooldown, float distance, float duration)
 {
 }
 
-BackDash::Ptr BackDash::create(float cooldown, float distance, float duration)
+Ability::Ptr Dash::create(float cooldown, float distance, float duration)
 {
-    return std::make_shared<BackDash>(cooldown, distance, duration);
+    return std::make_shared<Dash>(cooldown, distance, duration);
 }
 
-void BackDash::init(Hero *p)
+void Dash::init(Hero *p)
 {
     Ability::init(p);
 }
 
-void BackDash::update(float dt)
+void Dash::update(float dt)
 {
     Ability::update(dt);
     
@@ -50,20 +50,25 @@ void BackDash::update(float dt)
     }
 }
 
-void BackDash::swipeBack()
+void Dash::swipeBack()
 {
     Ability::swipeBack();
     
+    makeDash();
+}
+
+void Dash::makeDash()
+{
     if (_allow)
     {
-        HeroAction::Ptr action = JumpBack::create(_hero, _duration, -_distance);
+        HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");
             e.variables.setFloat("duration", _duration);
             action->setEvent(e);
             action->setTag(TAG);
-        
+            
             _hero->addAction(action);
             _allow = false;
         }
@@ -72,13 +77,13 @@ void BackDash::swipeBack()
 
 // BackslidingShield
 
-BackDashShield::Ptr BackDashShield::create(float cooldown, float distance, float duration, float shieldTime)
+Ability::Ptr BackDashShield::create(float cooldown, float distance, float duration, float shieldTime)
 {
     return std::make_shared<BackDashShield>(cooldown, distance, duration, shieldTime);
 }
 
 BackDashShield::BackDashShield(float cooldown, float distance, float duration, float shieldTime)
-: BackDash(cooldown, distance, duration)
+: Dash(cooldown, distance, duration)
 , _shieldLiveTime(shieldTime)
 , _shieldShown(false)
 {
@@ -117,7 +122,7 @@ void BackDashShield::swipeBack()
     
     if (_allow)
     {
-        HeroAction::Ptr action = JumpBack::create(_hero, _duration, -_distance);
+        HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");
@@ -187,6 +192,54 @@ bool BackDashShield::isPointUnderBarrier(float x, float y) const
     float dotp = nx * xface + ny * yface;
     
     return len <= barrierRadius && dotp >= 0.5f;
+}
+
+Ability::Ptr ForwardDash::create(float cooldown, float distance, float duration)
+{
+    return std::make_shared<ForwardDash>(cooldown, distance, duration);
+}
+
+ForwardDash::ForwardDash(float cooldown, float distance, float duration)
+: Dash(cooldown, distance, duration)
+{
+}
+
+void ForwardDash::swipeBack()
+{
+    Ability::swipeBack();
+}
+
+void ForwardDash::swipeForward()
+{
+    makeDash();
+}
+
+Ability::Ptr ForwardDashAttack::create(float cooldown, float distance, float duration)
+{
+    return std::make_shared<ForwardDashAttack>(cooldown, distance, duration);
+}
+
+ForwardDashAttack::ForwardDashAttack(float cooldown, float distance, float duration)
+: ForwardDash(cooldown, distance, duration)
+{
+}
+
+void ForwardDashAttack::makeDash()
+{
+    if (_allow)
+    {
+        HeroAction::Ptr action = JumpForwardAttack::create(_hero, _duration, _distance);
+        if (_hero->isAbleToPerform(action))
+        {
+            Event e("JumpForwardAttack");
+            e.variables.setFloat("duration", _duration);
+            action->setEvent(e);
+            action->setTag(TAG);
+            
+            _hero->addAction(action);
+            _allow = false;
+        }
+    }
 }
 
 Ability::Ptr Vampirism::create(float healthDrain, float healthReturn)

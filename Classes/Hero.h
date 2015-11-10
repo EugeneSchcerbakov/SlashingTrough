@@ -31,6 +31,7 @@ public:
     void onSwipeLeft();
     void onSwipeRight();
     void onSwipeBack();
+    void onSwipeForward();
     
     void addAction(HeroAction::WeakPtr actionPtr);
     void addKillsPoint(int killsPoint);
