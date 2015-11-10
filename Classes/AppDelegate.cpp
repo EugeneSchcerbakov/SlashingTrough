@@ -64,31 +64,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     Store::getInstance().loadStore("storeItems.xml");
     DailyMissions::getInstance().loadMissions("dailyMissions.xml");
     PlayerInfo::getInstance().load("st_save.xml");
-    
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("back_dash_shard"));
-    
-    
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    PlayerInfo::getInstance().Inventory.add(Store::getInstance().getItemById("forward_dash_shard"));
-    
+        
     DailyMissions::getInstance().checkMastering();
     DailyMissions::getInstance().checkMissionsSwitchTime();
 
