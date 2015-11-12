@@ -16,6 +16,7 @@
         <Const name="CAMERA_VIEW_ANGLE" type="float" value="45.0" />
         <Const name="CAMERA_VIEW_HEIGHT" type="float" value="1050.0" />
         <Const name="CAMERA_FIELD_OF_VIEW" type="float" value="50.0" />
+        <Const name="CAMERA_LERP_VELOCITY" type="float" value="0.0002" />
         <Const name="CAMERA_FAR_Z_CLIP_PLANE" type="float" value="5000.0" />
 
         <Const name="GOLD_POINTS_VISIBILITY" type="bool" value="true" />

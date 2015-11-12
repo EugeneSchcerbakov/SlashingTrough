@@ -18,6 +18,7 @@
 #include "ProjectileWidget.h"
 #include "ObstacleWidget.h"
 #include "EnemyWidget.h"
+#include "FieldCamera.h"
 
 #include "ControlKeyboard.h"
 #include "ControlTouch.h"
@@ -49,7 +50,7 @@ private:
     std::vector<EnemyWidget *> _enemiesWidgets;
     
     cocos2d::Node *_fieldScroller;
-    cocos2d::Camera *_fieldCamera;
+    FieldCamera *_fieldCamera;
     
     GameInterface *_gameInterface;
     HeroWidget *_heroWidget;

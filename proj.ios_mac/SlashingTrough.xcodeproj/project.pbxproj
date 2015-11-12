@@ -66,6 +66,8 @@
 		CD0EB17F1B76086E00267CEA /* levels.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD0EB17D1B76086E00267CEA /* levels.xml */; };
 		CD10C8C01B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */; };
 		CD10C8C11B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */; };
+		CD1B4D471BF3D10B004B2D26 /* FieldCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B4D451BF3D10B004B2D26 /* FieldCamera.cpp */; settings = {ASSET_TAGS = (); }; };
+		CD1B4D481BF3D10B004B2D26 /* FieldCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B4D451BF3D10B004B2D26 /* FieldCamera.cpp */; settings = {ASSET_TAGS = (); }; };
 		CD1B69D11BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD1B69D21BA1E72500DF8CD1 /* PauseMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */; };
 		CD1D5EE81BC93DBA009C9352 /* DailyTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -269,6 +271,8 @@
 		CD0EB17D1B76086E00267CEA /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
 		CD10C8BE1B8E1A6800E56DC9 /* ScreenChanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenChanger.cpp; sourceTree = "<group>"; };
 		CD10C8BF1B8E1A6800E56DC9 /* ScreenChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenChanger.h; sourceTree = "<group>"; };
+		CD1B4D451BF3D10B004B2D26 /* FieldCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldCamera.cpp; sourceTree = "<group>"; };
+		CD1B4D461BF3D10B004B2D26 /* FieldCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldCamera.h; sourceTree = "<group>"; };
 		CD1B69CF1BA1E72500DF8CD1 /* PauseMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenu.cpp; sourceTree = "<group>"; };
 		CD1B69D01BA1E72500DF8CD1 /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenu.h; sourceTree = "<group>"; };
 		CD1D5EE61BC93DBA009C9352 /* DailyTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DailyTask.cpp; sourceTree = "<group>"; };
@@ -680,6 +684,8 @@
 				CDC5E62E1B52D735000756EB /* EnemyWidget.h */,
 				CDC8811F1B516C2300030818 /* HeroWidget.cpp */,
 				CDC881201B516C2300030818 /* HeroWidget.h */,
+				CD1B4D451BF3D10B004B2D26 /* FieldCamera.cpp */,
+				CD1B4D461BF3D10B004B2D26 /* FieldCamera.h */,
 				CDC881171B515A2100030818 /* FieldSectorWidget.cpp */,
 				CDC881181B515A2100030818 /* FieldSectorWidget.h */,
 				CDC8810B1B514AAA00030818 /* FieldLayer.cpp */,
@@ -905,6 +911,7 @@
 				CDC794591B1C1A0000B83EA2 /* Store.cpp in Sources */,
 				CD10C8C01B8E1A6800E56DC9 /* ScreenChanger.cpp in Sources */,
 				CDF743211BC5753500BF84DC /* DailyMissions.cpp in Sources */,
+				CD1B4D471BF3D10B004B2D26 /* FieldCamera.cpp in Sources */,
 				CD0AB2CB1B8A31C200139A03 /* MapWidget.cpp in Sources */,
 				CD255B281B9B27A80062223A /* StatisticsInterface.cpp in Sources */,
 				CD9D04E51B8B9B7100FFE0F3 /* LevelsCache.cpp in Sources */,
@@ -947,6 +954,7 @@
 				CD71E0D01BD3FECE00EB5045 /* EffectFlyingIcon.cpp in Sources */,
 				CDC881221B516C2300030818 /* HeroWidget.cpp in Sources */,
 				CDCDEA721B6E2BE600B0820C /* StoreItemBaseWidget.cpp in Sources */,
+				CD1B4D481BF3D10B004B2D26 /* FieldCamera.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				CD00C30B1B9617C40017D771 /* MissionStartPopup.cpp in Sources */,
 				CDC5E6301B52D735000756EB /* EnemyWidget.cpp in Sources */,

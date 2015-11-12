@@ -44,23 +44,7 @@ bool FieldLayer::init(const std::string &levelId)
         return false;
     }
     
-    auto gameinfo = GameInfo::getInstance();
-    auto director = cocos2d::Director::getInstance();
-    auto winSize = director->getWinSize();
-    
-    _cameraYOffset = gameinfo.getConstFloat("CAMERA_Y_OFFSET", -850.0f);
-    float viewAngle = gameinfo.getConstFloat("CAMERA_VIEW_ANGLE", 50);
-    float viewHeight = gameinfo.getConstFloat("CAMERA_VIEW_HEIGHT", 1100.0f);
-    float squareSize = gameinfo.getConstFloat("SQUARE_SIZE");
-    float viewPosX = squareSize * 3.0f * 0.5f;
-    float aspect = winSize.width / winSize.height;
-    float fov = gameinfo.getConstFloat("CAMERA_FIELD_OF_VIEW", 50.0f);
-    float zfar = gameinfo.getConstFloat("CAMERA_FAR_Z_CLIP_PLANE", 1000.0f);
-    
-    _fieldCamera = cocos2d::Camera::createPerspective(fov, aspect, 0.1f, zfar);
-    _fieldCamera->setCameraFlag(cocos2d::CameraFlag::USER1);
-    _fieldCamera->setPosition3D(cocos2d::Vec3(viewPosX, 0.0f, viewHeight));
-    _fieldCamera->setRotation3D(cocos2d::Vec3(viewAngle, 0.0f, 0.0f));
+    _fieldCamera = FieldCamera::create();
     
     _fieldScroller = cocos2d::Node::create();
     _fieldScroller->setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
@@ -90,7 +74,10 @@ void FieldLayer::update(float dt)
 {
     _field.idleUpdate(dt);
     
-    _fieldCamera->setPositionY(_heroWidget->getPositionY() + _cameraYOffset);
+    cocos2d::Vec2 camPos;
+    camPos.x = _heroWidget->getPositionX();
+    camPos.y = _heroWidget->getPositionY();
+    _fieldCamera->setTargetPosition(camPos);
     
     for (auto it = _enemiesWidgets.begin(); it != _enemiesWidgets.end(); ) {
         EnemyWidget *widget = (*it);
