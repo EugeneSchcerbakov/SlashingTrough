@@ -11,6 +11,9 @@
 #include "GameInfo.h"
 #include "Utils.h"
 
+// we need this because of gettimeofday unix and windows compatibility
+using namespace cocos2d;
+
 FieldCamera* FieldCamera::create()
 {
     FieldCamera *camera = new FieldCamera();
@@ -63,7 +66,7 @@ bool FieldCamera::init()
     addChild(_camera);
     scheduleUpdate();
     
-	cocos2d::gettimeofday(&_lastUpdate, nullptr);
+	gettimeofday(&_lastUpdate, nullptr);
     
     return true;
 }
@@ -71,7 +74,7 @@ bool FieldCamera::init()
 void FieldCamera::update(float dt)
 {
     timeval now;
-    cocos2d::gettimeofday(&now, nullptr);
+    gettimeofday(&now, nullptr);
 
     double update_delta = ((now.tv_sec - _lastUpdate.tv_sec) + (now.tv_usec - _lastUpdate.tv_usec) / 1000000.0) * 1000.0;
     
