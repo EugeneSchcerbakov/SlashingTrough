@@ -203,13 +203,13 @@ void JumpForwardAttack::update(float dt)
 {
     if (!_isFinished)
     {
-        const float period = 0.05f;
+        const float period = _duration / 3.0f;
         
         _attackPeriodTime += dt;
         
         if (_attackPeriodTime >= period) {
             _attackPeriodTime = 0.0f;
-            _hero->attack();
+            _hero->attack(0.99f);
         }
     }
     

@@ -26,6 +26,7 @@ public:
     void onDamageReceived(float damage) override;
     void addHealth(float health, bool callDamageReceived = true) override;
     void attack();
+    void attack(float area);
     void flushScore();
     void refreshGoals(Entities *entities);
     void onSwipeLeft();
@@ -57,7 +58,9 @@ public:
 private:
     typedef std::list<HeroAction::Ptr> ActionSequence;
     
-private:    
+private:
+    void attackHandler(float area);
+    
     ActionSequence _actionSequence;
     PlayerInfo::Equipment _equip;
     PlayerInfo::Score _score;

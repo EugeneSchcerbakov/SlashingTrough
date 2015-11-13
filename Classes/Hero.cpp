@@ -135,6 +135,16 @@ void Hero::addHealth(float health, bool callDamageReceived)
 
 void Hero::attack()
 {
+    attackHandler(_attackArea);
+}
+
+void Hero::attack(float area)
+{
+    attackHandler(area);
+}
+
+void Hero::attackHandler(float area)
+{
     if (_goals) {
         float x1 = getPositionX();
         float y1 = getPositionY();
@@ -159,7 +169,7 @@ void Hero::attack()
             
             float dotp = nx * xface + ny * yface;
             
-            if (len <= _radius && dotp >= _attackArea) {
+            if (len <= _radius && dotp >= area) {
                 entity->addHealth(-_damage);
                 
                 for (auto crystall : _equip.crystalls) {
