@@ -80,7 +80,7 @@ void Hero::idleUpdate(float dt)
         HeroAction::Ptr action = _actionSequence.front();
         if (!action->isFinished()) {
             if (!action->isStarted()) {
-                action->start();
+                action->start(_y);
                 Event event = action->getEvent();
                 if (!event.is("")) {
                     sendEvent(event);

@@ -31,7 +31,7 @@ public:
     HeroAction(Hero *hero, float duration, Type type);
     virtual ~HeroAction();
     
-    virtual void start();
+    virtual void start(float currentY);
     virtual void update(float dt);
     virtual void setEvent(const Event &event);
     virtual bool isFinished() const;
@@ -84,12 +84,13 @@ public:
     
     JumpBack(Hero *hero, float duration, float jumpDist);
     
-    virtual void start() override;
+    virtual void start(float y) override;
     virtual void update(float dt) override;
     
     float getFinishY() const;
     
 private:
+    float _jumpDist;
     float _startY;
     float _endY;
 };

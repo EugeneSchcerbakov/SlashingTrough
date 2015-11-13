@@ -25,7 +25,7 @@ HeroAction::~HeroAction()
 {
 }
 
-void HeroAction::start()
+void HeroAction::start(float currentY)
 {
     _isStarted = true;
 }
@@ -146,22 +146,18 @@ HeroAction::Ptr JumpBack::create(Hero *hero, float duration, float jumpDist)
 
 JumpBack::JumpBack(Hero *hero, float duration, float jumpDist)
 : HeroAction(hero, duration, Type::JUMP)
+, _jumpDist(jumpDist)
+, _startY(0.0f)
+, _endY(0.0f)
 {
-    _startY = hero->getPositionY();
-    
-    HeroAction *lastAction = hero->getLastAction();
-    if (lastAction && lastAction->isType(Type::JUMP)) {
-        auto jumpback = dynamic_cast<JumpBack *>(lastAction);
-        _startY = jumpback->getFinishY();
-    }
-
-    _endY = _startY + jumpDist;
 }
 
-void JumpBack::start()
+void JumpBack::start(float y)
 {
-    HeroAction::start();
+    HeroAction::start(y);
     _hero->setRunning(false);
+    _startY = y;
+    _endY = _startY + _jumpDist;
 }
 
 void JumpBack::update(float dt)
