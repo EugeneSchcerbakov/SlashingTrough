@@ -6,7 +6,7 @@
         desc="Your default weapon"
         icon="icons/icon_wpn_iron-sword.png"
         sprite="gamefield/wpn_iron_sword.png"
-        damage="10.0"
+        damage="12.0"
         speed="0.33"
         distance="430.0">
         <Trail length="0.1"
@@ -16,7 +16,7 @@
             texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="ice_sword"
-        price="200"
+        price="1000"
         name="Frozen blade"
         desc="Chilled and light"
         icon="icons/icon_wpn_ice-sword.png"
@@ -31,12 +31,12 @@
             texture="effects/trail_2.png"/>
     </Weapon>
     <Weapon id="noble_sword"
-        price="800"
+        price="10000"
         name="Noble Sword"
         desc="Looks expencive"
         icon="icons/icon_wpn_noble-sword.png"
         sprite="gamefield/wpn_noble_sword.png"
-        damage="20.0"
+        damage="19.0"
         speed="0.33"
         distance="430.0">
         <Trail length="0.1"
@@ -46,12 +46,12 @@
             texture="effects/trail_1.png"/>
     </Weapon>
     <Weapon id="lava_sword"
-        price="1900"
+        price="17000"
         name="Lava Sword"
         desc="It's hot!"
         icon="icons/icon_wpn_lava-sword.png"
         sprite="gamefield/wpn_lava_sword.png"
-        damage="25.0"
+        damage="22.0"
         speed="0.33"
         distance="430.0">
         <Trail length="0.1"
@@ -70,28 +70,28 @@
         addHealth="0">
     </Armor>
     <Armor id="leather_armor"
-        price="400"
+        price="3500"
         name="Lether Armor"
         desc="Made from best cows"
         icon="icons/icon_arm_leather.png"
         sprite=""
-        addHealth="10">
+        addHealth="50">
     </Armor>
     <Armor id="noble_armor"
-        price="1000"
+        price="30000"
         name="Noble Chestplate"
         desc="Shiny, isn't it?"
         icon="icons/icon_arm_noble.png"
         sprite=""
-        addHealth="25">
+        addHealth="90">
     </Armor>
     <Armor id="black_armor"
-        price="3500"
+        price="65000"
         name="Black Knight"
         desc="Total Badass Thingy"
         icon="icons/icon_arm_black.png"
         sprite=""
-        addHealth="50">
+        addHealth="190">
     </Armor>
     
     <Shard id="back_dash_shard" icon="icons/icon_crystal_1.png" />

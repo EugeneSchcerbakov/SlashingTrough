@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <GameInfo>
 	<GlobalVariables>
+        <Const name="HERO_DAMAGE_UP_KP" type="int" value="0" />
+        <const name="HERO_DAMAGE_UP_VALUE" type="float" value="0.0f" />
+				
         <Const name="HERO_HEALTH_POINTS" type="float" value="50.0" />
-        <Const name="HERO_ATTACK_AREA" type="float" value="0.8" />
+        <Const name="HERO_ATTACK_AREA" type="float" value="0.85" />
+        <Const name="HERO_STAMINA_POINTS" type="float" value="100.0" />
+        <Const name="HERO_STAMINA_DRAIN_TIME" type="float" value="0.0" />
+        <Const name="HERO_STAMINA_DRAIN_VALUE" type="float" value="0.0" />
         <Const name="HERO_SWIPE_OFFSET_ON_SQUARE" type="float" value="0.0" />
         <Const name="HERO_ACTIONS_SEQUENCE_SIZE" type="int" value="2" />
 
@@ -10,18 +16,16 @@
         <Const name="DEFAULT_SEСTOR_SQUARES_COUNT" type="int" value="8" />
         <Const name="SECTORS_SEQUENCE_MAX_SIZE" type="int" value="6" />
         <Const name="TOUCH_SWIPE_DISTANCE" type="float" value="5.0" />
-        <Const name="DAILY_MISSIONS_UPDATE_DURATION" type="string" value="86400" />
 
         <Const name="CAMERA_Y_OFFSET" type="float" value="-650.0" />
         <Const name="CAMERA_VIEW_ANGLE" type="float" value="45.0" />
         <Const name="CAMERA_VIEW_HEIGHT" type="float" value="1050.0" />
         <Const name="CAMERA_FIELD_OF_VIEW" type="float" value="50.0" />
-        <Const name="CAMERA_LERP_VELOCITY" type="float" value="0.0002" />
         <Const name="CAMERA_FAR_Z_CLIP_PLANE" type="float" value="5000.0" />
 
         <Const name="GOLD_POINTS_VISIBILITY" type="bool" value="true" />
         <Const name="KILL_POINTS_VISIBILITY" type="bool" value="false" />
-        <Const name="DAMAGE_POINTS_VISIBILITY" type="bool" value="false" />
+        <Const name="DAMAGE_POINTS_VISIBILITY" type="bool" value="true" />
         <Const name="STAMINA_BAR_VISIBILITY" type="bool" value="false" />
         <Const name="HEALTH_POINTS_VISIBILITY" type="bool" value="true" />
 
@@ -31,20 +35,20 @@
     <GameplayObjects>
         <Obstacle name="O1"
             destructible="false"
-            health="1.0"
+            health="10.0"
             damage="5.0"
             killPoints="1"
             staminaDrainPoints="0"
-            goldPointsReward="0"
-            staminaPointsReward="0"
-            scorePointsReward="0"
+            goldPointsReward="1"
+            staminaPointsReward="1"
+            scorePointsReward="1"
             sprite="gamefield/obstacle_0.png" />
         <Enemy name="B1"
-            health="5.0"
+            health="10.0"
             damage="5.0"
                 staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="3"
+                goldPointsReward="1"
                 scorePointsReward="1"
                 killPoints="1"
             sprite="gamefield/creep_0.png"
@@ -52,32 +56,32 @@
             R="250" G="242" B="27" >
         </Enemy>
         <Enemy name="B2"
-            health="15.0"
-            damage="15.0"
+            health="17.0"
+            damage="9.0"
             staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="4"
-                scorePointsReward="5"
-                killPoints="5"
+                goldPointsReward="3"
+                scorePointsReward="3"
+                killPoints="3"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
             R="168" G="166" B="3" >
         </Enemy>
         <Enemy name="B3"
-            health="50.0"
-            damage="50.0"
+            health="19.0"
+            damage="11.0"
                 staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="5"
-                scorePointsReward="15"
-                killPoints="15"
+                goldPointsReward="4"
+                scorePointsReward="4"
+                killPoints="4"
             sprite="gamefield/creep_2.png"
             model="models/orc.c3t"
             R="168" G="166" B="3" >
         </Enemy>
         <Enemy name="M1"
-            health="10.0"
-            damage="10.0"
+            health="15.0"
+            damage="7.0"
             staminaDrainPoints="0"
                 staminaPointsReward="0"
                 goldPointsReward="5"
@@ -90,20 +94,20 @@
                 recoveryTime="2.0f"
                 areaWidth="0.7"
                 areaHeight="1.2"
-                dmgHealth="10.0"
+                dmgHealth="7.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
         <Enemy name="M2"
-            health="30.0"
-            damage="30.0"
+            health="18.0"
+            damage="10.0"
                 staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="7"
-                scorePointsReward="30"
-                killPoints="30"
+                goldPointsReward="3"
+                scorePointsReward="3"
+                killPoints="3"
             sprite="gamefield/creep_4.png"
             model="models/orc.c3t"
             R="156" G="47" B="0" >
@@ -111,20 +115,20 @@
                 recoveryTime="2.0f"
                 areaWidth="0.7"
                 areaHeight="1.2"
-                dmgHealth="30.0"
+                dmgHealth="10.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
                 <Enemy name="M3"
-            health="100.0"
-            damage="100.0"
+            health="20.0"
+            damage="13.0"
                 staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="10"
-                scorePointsReward="100"
-                killPoints="100"
+                goldPointsReward="5"
+                scorePointsReward="5"
+                killPoints="5"
             sprite="gamefield/creep_4.png"
             model="models/orc.c3t"
             R="156" G="47" B="0" >
@@ -132,23 +136,42 @@
                 recoveryTime="2.0f"
                 areaWidth="0.7"
                 areaHeight="1.2"
-                dmgHealth="100.0"
+                dmgHealth="13.0"
                 dmgStamina="0.0"
                 showHighlightRange="800.0"
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
                 <Enemy name="R1"
-            health="10.0"
-            damage="10.0"
+            health="12.0"
+            damage="6.0"
             staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="4"
-                scorePointsReward="10"
-                killPoints="10"
+                goldPointsReward="1"
+                scorePointsReward="1"
+                killPoints="1"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
             R="61" G="173" B="242" >
+            <RangeAttack distance="750.0"
+                recoveryTime="20.3"
+                healthDamage="6.0"
+                staminaDamage="0.0"
+                projectileTexture="gamefield/projectile_0.png"
+                projectileSpeed="800.0"
+                projectileLifeTime="0.8" />
+        </Enemy>
+                        <Enemy name="R2"
+            health="17.0"
+            damage="10.0"
+            staminaDrainPoints="0"
+                staminaPointsReward="0"
+                goldPointsReward="3"
+                scorePointsReward="3"
+                killPoints="3"
+            sprite="gamefield/creep_1.png"
+            model="models/orc.c3t"
+            R="0" G="93" B="150" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
                 healthDamage="10.0"
@@ -157,39 +180,20 @@
                 projectileSpeed="800.0"
                 projectileLifeTime="0.8" />
         </Enemy>
-                        <Enemy name="R2"
-            health="30.0"
-            damage="30.0"
-            staminaDrainPoints="0"
-                staminaPointsReward="0"
-                goldPointsReward="6"
-                scorePointsReward="30"
-                killPoints="30"
-            sprite="gamefield/creep_1.png"
-            model="models/orc.c3t"
-            R="0" G="93" B="150" >
-            <RangeAttack distance="750.0"
-                recoveryTime="20.3"
-                healthDamage="30.0"
-                staminaDamage="0.0"
-                projectileTexture="gamefield/projectile_0.png"
-                projectileSpeed="800.0"
-                projectileLifeTime="0.8" />
-        </Enemy>
                                 <Enemy name="R3"
-            health="100.0"
-            damage="100.0"
+            health="19.0"
+            damage="12.0"
             staminaDrainPoints="0"
                 staminaPointsReward="0"
-                goldPointsReward="9"
-                scorePointsReward="100"
-                killPoints="100"
+                goldPointsReward="4"
+                scorePointsReward="4"
+                killPoints="4"
             sprite="gamefield/creep_1.png"
             model="models/orc.c3t"
             R="0" G="93" B="150" >
             <RangeAttack distance="750.0"
                 recoveryTime="20.3"
-                healthDamage="100.0"
+                healthDamage="12.0"
                 staminaDamage="0.0"
                 projectileTexture="gamefield/projectile_0.png"
                 projectileSpeed="800.0"
