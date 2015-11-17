@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
 <Map>
-    <LevelMark levelId="level_1" x="230.0" y="2097.0" text="1"/>
-    <LevelMark levelId="level_2" x="360.0" y="2052.0" text="2"/>
-    <LevelMark levelId="level_3" x="460.0" y="1997.0" text="3"/>
-    <LevelMark levelId="level_4" x="350.0" y="1934.0" text="4"/>
-    <LevelMark levelId="level_5" x="273.0" y="1902.0" text="5"/>
-    <LevelMark levelId="level_6" x="216.0" y="1850.0" text="6"/>
-    <LevelMark levelId="level_7" x="161.0" y="1784.0" text="7"/>
-    <LevelMark levelId="level_8" x="122.0" y="1710.0" text="8"/>
-    <LevelMark levelId="level_9" x="310.0" y="1512.0" text="9"/>
-    <LevelMark levelId="level_10" x="450.0" y="1480.0" text="10"/>
-    <LevelMark levelId="level_11" x="402.0" y="1376.0" text="11"/>
-    <LevelMark levelId="level_12" x="555 .0" y="1314.0" text="12"/>
-    <LevelMark levelId="level_13" x="474.0" y="1223.0" text="13"/>
-    <LevelMark levelId="level_14" x="571.0" y="1154.0" text="14"/>
-    <LevelMark levelId="level_15" x="225.0" y="1148.0" text="15"/>               
+    <LevelMark levelId="level_1" x="460.0" y="1997.0" text="4rows"/>
+    <LevelMark levelId="level_2" x="350.0" y="1934.0" text="5rows"/>
 </Map>

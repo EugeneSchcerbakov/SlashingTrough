@@ -80,6 +80,8 @@ public:
     SaveData getSaveData() const;
     int getCoinsReward() const;
     int getSectorsAmount() const;
+    int getLevelWidth() const;
+    int getLevelHeight() const;
     float getMapX() const;
     float getMapY() const;
     float getRunningTime() const;
@@ -114,6 +116,8 @@ private:
     
     int _lastSectorIndex;
     int _coinRewardForCompletition;
+    int _levelWidth;
+    int _levelHeight;
     float _posOnMapX;
     float _posOnMapY;
     float _runnigTimeSec;

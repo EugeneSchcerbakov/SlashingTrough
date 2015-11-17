@@ -44,15 +44,16 @@ bool FieldLayer::init(const std::string &levelId)
         return false;
     }
     
-    _fieldCamera = FieldCamera::create();
-    
     _fieldScroller = cocos2d::Node::create();
     _fieldScroller->setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
     _fieldScroller->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-    _fieldScroller->addChild(_fieldCamera);
     
     _field.setupAccepter(accepter, static_cast<void *>(this));
     _field.initialize(LevelsCache::getInstance().getLevelById(levelId));
+    
+    _fieldCamera = FieldCamera::create();
+    _fieldCamera->setCameraX(_field.getLevel()->getLevelWidth() * 0.5f);
+    _fieldScroller->addChild(_fieldCamera);
     
     _heroWidget = HeroWidget::create(_field.getHero());
     _heroWidget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);

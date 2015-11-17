@@ -15,6 +15,8 @@ FieldLevel::FieldLevel()
 : _lastSectorIndex(0)
 , _status(Status::LOCKED)
 , _coinRewardForCompletition(0)
+, _levelWidth(0)
+, _levelHeight(0)
 , _posOnMapX(0.0f)
 , _posOnMapY(0.0f)
 , _runnigTimeSec(0.0f)
@@ -144,6 +146,8 @@ void FieldLevel::prepearForRun(Hero *hero)
 {
     _lastSectorIndex = 0;
     _runnigTimeSec = 0.0f;
+    _levelWidth = 0;
+    _levelHeight = 0;
     _sectors.clear();
     _victoryCondition->init(hero);
     
@@ -293,6 +297,16 @@ int FieldLevel::getSectorsAmount() const
     return (int)_sectors.size();
 }
 
+int FieldLevel::getLevelWidth() const
+{
+    return _levelWidth;
+}
+
+int FieldLevel::getLevelHeight() const
+{
+    return _levelHeight;
+}
+
 float FieldLevel::getMapX() const
 {
     return _posOnMapX;
@@ -337,6 +351,11 @@ void FieldLevel::addSector(const Preset &preset, float speed)
     
     sector->setX(0.0f);
     sector->setY(ypos);
+    
+    _levelHeight += sector->getHeight();
+    if (_levelWidth < sector->getWidth()) {
+        _levelWidth = sector->getWidth();
+    }
     
     _sectors.push_back(sector);
 }

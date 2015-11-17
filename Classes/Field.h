@@ -31,6 +31,7 @@ public:
     void popBackSector();
     void addEntity(Entity *entity);
     
+    FieldLevel::Ptr getLevel();
     FieldSector::Ptr getSectorByUid(Uid uid);
     FieldSector::Ptr getCurrentSector();
     Entity* getEntityByUid(Uid uid);

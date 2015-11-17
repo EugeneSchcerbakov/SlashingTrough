@@ -18,6 +18,9 @@ public:
     
     void setTargetPosition(const cocos2d::Vec2 &pos);
     
+    void setCameraX(float x);
+    void setCameraY(float y);
+    
 protected:
     FieldCamera();
     virtual ~FieldCamera();

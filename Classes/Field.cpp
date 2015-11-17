@@ -37,21 +37,22 @@ void Field::initialize(FieldLevel::WeakPtr level)
     
     _defaultSectorYSquares = gameinfo.getConstInt("DEFAULT_SEСTOR_SQUARES_COUNT");
     _squareSize = gameinfo.getConstFloat("SQUARE_SIZE");
-
-    float heroStartX = _squareSize * 3.0f * 0.5f;
-    float heroStartY = 0.0f;
     
     _hero = new Hero();
-    _hero->setPosition(heroStartX, heroStartY);
-    _hero->setRunning(true);
-    _hero->setSideBorders(0.0f, _squareSize * 3.0f);
-    _heroLastYPos = _hero->getPositionY();
     
     _level = level.lock();
     _level->prepearForRun(_hero);
     if (_level->isStatus(FieldLevel::Status::LOCKED)) {
         WRITE_WARN("Trying to start locked level.");
     }
+    
+    float heroStartX = _squareSize * 3.0f * 0.5f;
+    float heroStartY = 0.0f;
+    
+    _hero->setPosition(heroStartX, heroStartY);
+    _hero->setRunning(true);
+    _hero->setSideBorders(0.0f, _level->getLevelWidth());
+    _heroLastYPos = _hero->getPositionY();
     
     int sectorsQueueSize = gameinfo.getConstInt("SECTORS_SEQUENCE_MAX_SIZE");
     for (int k = 0; k < sectorsQueueSize; ++k) {
@@ -207,6 +208,11 @@ void Field::addEntity(Entity *entity)
         e.variables.setInt("uid", entity->getUid());
         sendEvent(e);
     }
+}
+
+FieldLevel::Ptr Field::getLevel()
+{
+    return _level;
 }
 
 FieldSector::Ptr Field::getSectorByUid(Uid uid)

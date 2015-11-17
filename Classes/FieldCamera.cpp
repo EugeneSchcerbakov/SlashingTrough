@@ -108,3 +108,13 @@ void FieldCamera::setTargetPosition(const cocos2d::Vec2 &pos)
 {
     _targetPos = pos;
 }
+
+void FieldCamera::setCameraX(float x)
+{
+    _camera->setPositionX(x);
+}
+
+void FieldCamera::setCameraY(float y)
+{
+    _camera->setPositionY(y);
+}
