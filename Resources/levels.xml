@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Levels>
     <Level id="level_1" status="unlocked" condition="classic">
-        <Rewards coins="100">
+        <Rewards coins="150">
         <Drop itemId="back_dash_shard"
             dropChance="75"
             dropOnce="true"/>            
@@ -30,7 +30,7 @@
         </Description>
     </Level>
     <Level id="level_2" status="locked" condition="classic">
-        <Rewards coins="150">
+        <Rewards coins="200">
         <Drop itemId="back_dash_shard"
             dropChance="75"
             dropOnce="true"/>
@@ -106,7 +106,7 @@
         </Description>
     </Level>
     <Level id="level_4" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="300">
         <Drop itemId="back_dash_shard"
             dropChance="75"
             dropOnce="true"/>
@@ -150,7 +150,7 @@
         </Description>
     </Level>
     <Level id="level_5" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="400">
         <Drop itemId="back_dash_shard"
             dropChance="75"
             dropOnce="true"/>
@@ -197,7 +197,7 @@
         </Description>
     </Level>
     <Level id="level_6" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="400">
         <Drop itemId="regeneration_shard"
             dropChance="75"
             dropOnce="true"/>            
@@ -246,7 +246,7 @@
         </Description>
     </Level>
     <Level id="level_7" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="500">
         <Drop itemId="regeneration_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -296,7 +296,7 @@
         </Description>
     </Level>
     <Level id="level_8" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="650">
         <Drop itemId="regeneration_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -356,7 +356,7 @@
             <Unlock id="level_10" />          
         </Unlocks>
         <Description>
-            <Speed value="480"/>
+            <Speed value="750"/>
             <LinkRand/>            
             <Preset dif="8-9"/>
             <Preset dif="8-9"/>
@@ -396,7 +396,7 @@
         </Description>
     </Level>
     <Level id="level_10" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="800">
         <Drop itemId="regeneration_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -450,7 +450,7 @@
         </Description>
     </Level>
     <Level id="level_11" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="800">
         <Drop itemId="magic_shield_shard"
             dropChance="75"
             dropOnce="true"/>             
@@ -509,7 +509,7 @@
         </Description>
     </Level>
     <Level id="level_11" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="900">
         <Drop itemId="magic_shield_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -573,7 +573,7 @@
         </Description>
     </Level>
     <Level id="level_12" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="1200">
         <Drop itemId="magic_shield_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -642,7 +642,7 @@
         </Description>
     </Level>
     <Level id="level_13" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="1400">
         <Drop itemId="magic_shield_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -721,7 +721,7 @@
         </Description>
     </Level>
     <Level id="level_14" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="1400">
         <Drop itemId="magic_shield_shard"
             dropChance="75"
             dropOnce="true"/>              
@@ -805,7 +805,7 @@
         </Description>
     </Level>
     <Level id="level_15" status="locked" condition="classic">
-        <Rewards coins="200">
+        <Rewards coins="1500">
         <Drop itemId="proj_defence_shard"
             dropChance="75"
             dropOnce="true"/>              
