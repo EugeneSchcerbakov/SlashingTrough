@@ -223,6 +223,7 @@ bool EnemyWidget::init()
         bool reverse = CCRANDOM_0_1() > 0.5f;
         
         state->setSpeed(reverse ? -anim_speed : anim_speed);
+        state->setQuality(cocos2d::Animate3DQuality::QUALITY_HIGH);
         auto animate = cocos2d::RepeatForever::create(state);
         _sprite->runAction(animate);
     }

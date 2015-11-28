@@ -102,6 +102,7 @@ bool StoreInterface::init()
     _scroller = cocos2d::ui::ListView::create();
     _scroller->setItemsMargin(22.0f);
     _scroller->setGravity(cocos2d::ui::ListView::Gravity::CENTER_HORIZONTAL);
+    _scroller->setScrollBarEnabled(false);
     _scroller->setClippingEnabled(true);
 	_scroller->setContentSize(cocos2d::Size(frameSize.width, frameSize.height - 270.0f));
     _scroller->setPositionX(0.0f);

@@ -133,7 +133,7 @@ void HeroWidget::removeAllAnimations()
 void HeroWidget::runSwordTrailEffect(float duration)
 {
     auto func_start = [&](){_swordTrail->setVisible(true);};
-    auto func_end = [&](){_swordTrail->setVisible(true);};
+    auto func_end = [&](){_swordTrail->setVisible(false);};
     
     float opacityCoeff = 1.0f;
     ItemWeapon *weapon = _hero->getWeapon();

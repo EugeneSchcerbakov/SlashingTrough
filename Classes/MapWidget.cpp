@@ -69,6 +69,7 @@ bool MapWidget::init(const std::string &mapDesc)
     setDirection(cocos2d::ui::ScrollView::Direction::BOTH);
     setContentSize(size);
     setInnerContainerSize(cocos2d::Size(_map->getContentSize()) * scale);
+    setScrollBarEnabled(false);
     setBounceEnabled(true);
     addChild(_map);
     
