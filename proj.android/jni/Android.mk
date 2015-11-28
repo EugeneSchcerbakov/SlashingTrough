@@ -12,57 +12,7 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/Abilities.cpp \
-                   ../../Classes/ControlKeyboard.cpp \
-                   ../../Classes/ControlTouch.cpp \
-                   ../../Classes/DailyTask.cpp \
-                   ../../Classes/DailyMissions.cpp \
-                   ../../Classes/DailyMissionsPopup.cpp \
-                   ../../Classes/EffectsLayer.cpp \
-                   ../../Classes/EffectFlyingIcon.cpp \
-                   ../../Classes/Enemy.cpp \
-                   ../../Classes/EnemyWidget.cpp \
-                   ../../Classes/Field.cpp \
-                   ../../Classes/FieldLayer.cpp \
-                   ../../Classes/FieldSector.cpp \
-                   ../../Classes/FieldLevel.cpp \
-                   ../../Classes/FieldSectorWidget.cpp \
-                   ../../Classes/GameInfo.cpp \
-                   ../../Classes/GameInterface.cpp \
-                   ../../Classes/GameScene.cpp \
-                   ../../Classes/Hero.cpp \
-                   ../../Classes/HeroAction.cpp \
-                   ../../Classes/HeroWidget.cpp \
-                   ../../Classes/ModelBase.cpp \
-                   ../../Classes/Obstacle.cpp \
-                   ../../Classes/ObstacleWidget.cpp \
-                   ../../Classes/Projectile.cpp \
-                   ../../Classes/ProjectileWidget.cpp \
-                   ../../Classes/PlayerInfo.cpp \
-                   ../../Classes/Store.cpp \
-                   ../../Classes/StartInterface.cpp \
-                   ../../Classes/StatisticsInterface.cpp \
-                   ../../Classes/MissionStartPopup.cpp \
-                   ../../Classes/MapPlayerMark.cpp \
-                   ../../Classes/MapLevelMark.cpp \
-                   ../../Classes/MapWidget.cpp \
-                   ../../Classes/MapInterface.cpp \
-                   ../../Classes/PauseMenu.cpp \
-                   ../../Classes/StoreCategoryButton.cpp \
-                   ../../Classes/StoreInterface.cpp \
-                   ../../Classes/StoreItemButton.cpp \
-                   ../../Classes/StoreItemBaseWidget.cpp \
-                   ../../Classes/StoreWeaponWidget.cpp \
-                   ../../Classes/StoreArmorWidget.cpp \
-                   ../../Classes/StoreCrystallWidget.cpp \
-                   ../../Classes/PopupCore.cpp \
-                   ../../Classes/LevelsCache.cpp \
-                   ../../Classes/ScreenChanger.cpp \
-                   ../../Classes/Utils.cpp \
-                   ../../Classes/Log.cpp \
-                   ../../Classes/VariablesSet.cpp \
-                   ../../Classes/Item.cpp \
-                   ../../Classes/VictoryCondition.cpp
+                   ../../Classes/HelloWorldScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
