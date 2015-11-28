@@ -188,7 +188,7 @@ bool PopupCarrier::touchBegan(cocos2d::Touch *touch, cocos2d::Event *e)
         cocos2d::Vec2 pt;
         pt = popup->convertTouchToNodeSpace(touch);
         
-        if (!popup->hitTest(pt))
+        if (!popup->hitTest(pt, cocos2d::Camera::getDefaultCamera(), nullptr))
         {
             removePopup(popup);
             return false;

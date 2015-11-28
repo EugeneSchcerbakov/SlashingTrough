@@ -34,9 +34,9 @@ MissionStartPopup::~MissionStartPopup()
 {
 }
 
-bool MissionStartPopup::hitTest(const cocos2d::Vec2 &pt)
+bool MissionStartPopup::hitTest(const cocos2d::Vec2 &pt, const cocos2d::Camera* camera, cocos2d::Vec3 *p) const
 {
-    return _play->hitTest(pt) || _panel->getBoundingBox().containsPoint(pt);
+    return _play->hitTest(pt, camera, p) || _panel->getBoundingBox().containsPoint(pt);
 }
 
 void MissionStartPopup::showEffect()

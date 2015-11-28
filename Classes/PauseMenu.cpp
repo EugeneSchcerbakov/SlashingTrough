@@ -38,9 +38,9 @@ bool PauseMenu::hitTest(const cocos2d::Vec2 &pt)
     bool panelTest = false;
     auto panel = getChildByName<cocos2d::ui::Layout *>("panel");
     if (panel) {
-        panelTest = panel->hitTest(pt);
+        panelTest = panel->hitTest(pt, cocos2d::Camera::getDefaultCamera(), nullptr);
     }
-    return _pauseButton->hitTest(pt) || panelTest;
+    return _pauseButton->hitTest(pt, cocos2d::Camera::getDefaultCamera(), nullptr) || panelTest;
 }
 
 bool PauseMenu::init()

@@ -113,7 +113,7 @@ DailyMissionPopup* DailyMissionPopup::create(EffectsLayer *container)
     return popup;
 }
 
-bool DailyMissionPopup::hitTest(const cocos2d::Vec2 &pt)
+bool DailyMissionPopup::hitTest(const cocos2d::Vec2 &pt, const cocos2d::Camera* camera, cocos2d::Vec3 *p) const
 {
     return _panel->getBoundingBox().containsPoint(pt);
 }

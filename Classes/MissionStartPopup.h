@@ -17,7 +17,7 @@ class MissionStartPopup : public Popup
 public:
     static MissionStartPopup* create(const std::string &levelId, const std::string &title);
     
-    bool hitTest(const cocos2d::Vec2 &pt) override;
+    bool hitTest(const cocos2d::Vec2 &pt, const cocos2d::Camera* camera, cocos2d::Vec3 *p) const override;
     
     virtual void showEffect() override;
     virtual float hideEffect() override; // return effect duration
