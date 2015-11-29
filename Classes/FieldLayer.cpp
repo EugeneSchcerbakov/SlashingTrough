@@ -46,10 +46,8 @@ bool FieldLayer::init(const std::string &levelId)
     
     _fieldCamera = FieldCamera::create();
     
-    _fieldScroller = cocos2d::Node::create();
-    _fieldScroller->setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
-    _fieldScroller->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-    _fieldScroller->addChild(_fieldCamera);
+    setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
+    addChild(_fieldCamera);
     
     _field.setupAccepter(accepter, static_cast<void *>(this));
     _field.initialize(LevelsCache::getInstance().getLevelById(levelId));
@@ -62,9 +60,7 @@ bool FieldLayer::init(const std::string &levelId)
     _controlTouch = ControlTouch::create(_field.getHero(), dispatcher, this);
     _controlKeyboard = ControlKeyboard::create(_field.getHero(), dispatcher, this);
     
-    _fieldScroller->addChild(_heroWidget);
-    
-    addChild(_fieldScroller);
+    addChild(_heroWidget);
     scheduleUpdate();
     
     return true;
@@ -82,7 +78,7 @@ void FieldLayer::update(float dt)
     for (auto it = _enemiesWidgets.begin(); it != _enemiesWidgets.end(); ) {
         EnemyWidget *widget = (*it);
         if (widget && widget->isDeletionAllowed()) {
-            _fieldScroller->removeChild(widget);
+            removeChild(widget);
             it = _enemiesWidgets.erase(it);
         } else {
             ++it;
@@ -126,11 +122,11 @@ void FieldLayer::acceptEvent(const Event &event)
             widget->setPositionX(sector->getX());
             widget->setPositionY(sector->getY());
             widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-            _fieldScroller->addChild(widget, 0, uid);
+            addChild(widget, 0, uid);
         }
     } else if (event.is("SectorDeleted")) {
         Uid uid = event.variables.getInt("uid");
-        _fieldScroller->removeChildByTag(uid, true);
+        removeChildByTag(uid, true);
     } else if (event.is("EntityAdded")) {
         Uid uid = event.variables.getInt("uid");
         Entity *entity = _field.getEntityByUid(uid);
@@ -140,18 +136,18 @@ void FieldLayer::acceptEvent(const Event &event)
                 auto obstacle = dynamic_cast<Obstacle *>(entity);
                 auto widget = ObstacleWidget::create(obstacle);
                 widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-                _fieldScroller->addChild(widget, 1, uid);
+                addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
                 auto widget = EnemyWidget::create(enemy);
                 widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-                _fieldScroller->addChild(widget, 2, uid);
+                addChild(widget, 2, uid);
                 _enemiesWidgets.push_back(widget);
             } else if (type == Entity::Type::PROJECTILE) {
                 auto proj = dynamic_cast<Projectile *>(entity);
                 auto widget = ProjectileWidget::create(proj);
                 widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
-                _fieldScroller->addChild(widget, 10, uid);
+                addChild(widget, 10, uid);
             }
         } else {
             CC_ASSERT(false);
@@ -160,7 +156,7 @@ void FieldLayer::acceptEvent(const Event &event)
         Uid uid = event.variables.getInt("uid");
         auto entity = _field.getEntityByUid(uid);
         if (entity && !entity->isType(Entity::Type::ENEMY)) {
-            _fieldScroller->removeChildByTag(uid, true);
+            removeChildByTag(uid, true);
         }
     } else if (event.is("LevelFinished")) {
         LevelsCache &levelsCache = LevelsCache::getInstance();

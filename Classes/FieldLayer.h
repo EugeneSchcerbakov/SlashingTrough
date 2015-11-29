@@ -49,7 +49,6 @@ private:
     
     std::vector<EnemyWidget *> _enemiesWidgets;
     
-    cocos2d::Node *_fieldScroller;
     FieldCamera *_fieldCamera;
     
     GameInterface *_gameInterface;
