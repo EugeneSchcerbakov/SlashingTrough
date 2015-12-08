@@ -33,3 +33,4 @@ Ruler
 *.~lock*
 proj.win32/Release.win32/st_save.xml
 proj.win32/Release.win32/st_log.htm
+/proj.wp8-xaml/
