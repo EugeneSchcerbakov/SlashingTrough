@@ -11,8 +11,8 @@
         </Unlocks>
         <Description enemiesAmount="50"
             lengthInSquares="100"
-            runningSpeedBegin="100"
-            runningSpeedEnd="1000"
+            runningSpeedBegin="500"
+            runningSpeedEnd="700"
             enemiesDifficultCoeff="75.0"
             availableEnemiesPool="B1, B2, B3, R1, R2, R3, M1, M2, M3"/>
     </Level>                                                                                

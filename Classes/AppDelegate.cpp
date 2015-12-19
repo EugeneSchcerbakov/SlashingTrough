@@ -75,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
     glview->setDesignResolutionSize(frameSize.width, frameSize.height, ResolutionPolicy::FIXED_WIDTH);
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(1.0f / 60.0f);
     
     ScreenChanger::changeScreen(ScreenChanger::START);
 

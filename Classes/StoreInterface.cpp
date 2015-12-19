@@ -188,7 +188,7 @@ void StoreInterface::fillScrollerWithWeapons()
         _scroller->pushBackCustomItem(widget);
     }
     
-    _scroller->refreshView();
+	_scroller->forceDoLayout();
     _scroller->jumpToTop();
 }
 
@@ -205,7 +205,7 @@ void StoreInterface::fillScrollerWithArmors()
         _scroller->pushBackCustomItem(widget);
     }
     
-    _scroller->refreshView();
+	_scroller->forceDoLayout();
     _scroller->jumpToTop();
 }
 
@@ -222,6 +222,6 @@ void StoreInterface::fillScrollerWithCrystalls()
         _scroller->pushBackCustomItem(widget);
     }
     
-    _scroller->refreshView();
+	_scroller->forceDoLayout();
     _scroller->jumpToTop();
 }

@@ -12,6 +12,7 @@
 #include <math.h>
 #include <utility>
 #include <algorithm>
+#include <sstream>
 
 namespace misc
 {
