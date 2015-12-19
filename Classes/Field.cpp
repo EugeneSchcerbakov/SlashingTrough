@@ -96,11 +96,7 @@ void Field::idleUpdate(float dt)
     _level->update(dt);
     _hero->idleUpdate(dt);
     _hero->refreshGoals(&_entities);
-    if (_level->getSectorByIndex(_passedSectors)) {
-        auto sector = _level->getSectorByIndex(_passedSectors);
-        float speed = sector->getRunningSpeed();
-        _hero->setRunningSpeed(speed);
-    }
+    _hero->setRunningSpeed(_level->getRinningSpeedForPos(_hero->getPositionY()));
     
     for (auto iter = _sectors.begin(); iter != _sectors.end();)
     {
@@ -164,10 +160,10 @@ void Field::pushFrontSector()
             Entity *entity = nullptr;
             switch (info.type) {
                 case Entity::Type::OBSTACLE:
-                    entity = new Obstacle(gameinfo.getObstacleInfoByName(info.name));
+                    entity = new Obstacle(gameinfo.getObstacleInfoByName(info.entityId));
                     break;
                 case Entity::Type::ENEMY:
-                    entity = new Enemy(gameinfo.getEnemyInfoByName(info.name), this);
+                    entity = new Enemy(gameinfo.getEnemyInfoByName(info.entityId), this);
                     break;
                 default:
                     break;

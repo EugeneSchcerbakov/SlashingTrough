@@ -39,7 +39,9 @@
             staminaPointsReward="1"
             scorePointsReward="1"
             sprite="gamefield/obstacle_0.png" />
-        <Enemy name="B1"
+        <Enemy group="BS"
+            difficult="1"
+            name="B1"
             health="10.0"
             damage="5.0"
                 staminaDrainPoints="0"
@@ -51,7 +53,9 @@
             model="models/orc.c3t"
             R="250" G="242" B="27" >
         </Enemy>
-        <Enemy name="B2"
+        <Enemy group="BS"
+            difficult="2"
+            name="B2"
             health="17.0"
             damage="9.0"
             staminaDrainPoints="0"
@@ -63,7 +67,9 @@
             model="models/orc.c3t"
             R="168" G="166" B="3" >
         </Enemy>
-        <Enemy name="B3"
+        <Enemy group="BS"
+            difficult="3"
+            name="B3"
             health="19.0"
             damage="11.0"
                 staminaDrainPoints="0"
@@ -75,7 +81,9 @@
             model="models/orc.c3t"
             R="168" G="166" B="3" >
         </Enemy>
-        <Enemy name="M1"
+        <Enemy group="ML"
+            difficult="1"
+            name="M1"
             health="15.0"
             damage="7.0"
             staminaDrainPoints="0"
@@ -96,7 +104,9 @@
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
-        <Enemy name="M2"
+        <Enemy group="ML"
+            difficult="2"
+            name="M2"
             health="18.0"
             damage="10.0"
                 staminaDrainPoints="0"
@@ -117,7 +127,9 @@
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
-                <Enemy name="M3"
+        <Enemy group="ML"
+            difficult="3"
+            name="M3"
             health="20.0"
             damage="13.0"
                 staminaDrainPoints="0"
@@ -138,7 +150,9 @@
                 showHighlightTime="0.8"
                 mustShowHighlight="true" />
         </Enemy>
-                <Enemy name="R1"
+        <Enemy group="RG"
+            difficult="1"
+            name="R1"
             health="12.0"
             damage="6.0"
             staminaDrainPoints="0"
@@ -157,7 +171,9 @@
                 projectileSpeed="800.0"
                 projectileLifeTime="0.8" />
         </Enemy>
-                        <Enemy name="R2"
+        <Enemy group="RG"
+            difficult="2"
+            name="R2"
             health="17.0"
             damage="10.0"
             staminaDrainPoints="0"
@@ -176,7 +192,9 @@
                 projectileSpeed="800.0"
                 projectileLifeTime="0.8" />
         </Enemy>
-                                <Enemy name="R3"
+        <Enemy group="RG"
+            difficult="3"
+            name="R3"
             health="19.0"
             damage="12.0"
             staminaDrainPoints="0"

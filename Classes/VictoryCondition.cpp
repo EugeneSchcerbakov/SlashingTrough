@@ -61,7 +61,7 @@ void ClassicCondition::update(float dt)
     
         // check for player reach the area if the last sector.
         // last sector is the finalizing sector and must be always empty
-        if (_hero->getPositionY() >= sector->getY()) {
+        if (sector && _hero->getPositionY() >= sector->getY()) {
             _result = Result::VIRTORY;
         }
     }

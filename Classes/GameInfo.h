@@ -86,6 +86,7 @@ public:
         float health;
         float staminaDrainPoints;
         
+        int difficult;
         int killPoints;
         int goldPointsReward;
         int scorePointsReward;
@@ -94,6 +95,8 @@ public:
         RangeAttack rangeAttack;
         MelleAttack melleAttack;
         
+        std::string name;
+        std::string group;
         std::string sprite;
         std::string model;
         int colorR, colorG, colorB;
@@ -130,6 +133,7 @@ public:
     
     const ObstacleType& getObstacleInfoByName(const std::string &name) const;
     const EnemyType& getEnemyInfoByName(const std::string &name) const;
+    const EnemyType& getEnemyInfoByDeifficult(const std::string &group, int diffucult) const;
     
     GameplayObjectsTypes getObstaclesTypes() const;
     GameplayObjectsTypes getEnemiesTypes() const;

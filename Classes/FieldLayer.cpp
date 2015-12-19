@@ -107,8 +107,10 @@ void FieldLayer::refreshInterface()
         _gameInterface->setHealthPointsLabel(percentageHealth);
         
         auto sector = _field.getCurrentSector();
-        std::string difficultText = cocos2d::StringUtils::format("preset id: %s", sector->getPresetId().c_str());
-        _gameInterface->setDifficultLable(difficultText);
+        if (sector) {
+            std::string difficultText = cocos2d::StringUtils::format("preset id: %s", sector->getPresetId().c_str());
+            _gameInterface->setDifficultLable(difficultText);
+        }
     }
 }
 

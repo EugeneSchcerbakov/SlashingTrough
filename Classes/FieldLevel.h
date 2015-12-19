@@ -83,6 +83,7 @@ public:
     float getMapX() const;
     float getMapY() const;
     float getRunningTime() const;
+    float getRinningSpeedForPos(float ypos) const;
     bool isStatus(Status status);
     bool isFinished() const;
     
@@ -91,26 +92,21 @@ public:
 private:
     struct ConstructionInfo
     {
-        std::string type;
-        std::string id;
-        int diffLower;
-        int diffUpper;
-        float speed;
-        // if id is empty, will be taken random
-        // preset with specified difficult
+        int enemiesAmount;
+        int lengthInSquares;
+        float runningSpeedBegin;
+        float runningSpeedEnd;
+        float enemiesDifficultCoeff;
+        
+        std::vector<std::string> abaliableEnemies;
         
         ConstructionInfo() = default;
-        ConstructionInfo(const std::string &t, const std::string &iD, int lower, int upper, float spd)
-        : type(t)
-        , id(iD)
-        , diffLower(lower)
-        , diffUpper(upper)
-        , speed(spd)
-        {}
     };
     
 private:
-    void addSector(const Preset &preset, float speed);
+    void addSector(const Preset &preset);
+    void mirrorPreset(Preset &preset);
+    bool isSuitablePreset(const Preset &preset) const;
     
     int _lastSectorIndex;
     int _coinRewardForCompletition;
@@ -119,12 +115,11 @@ private:
     float _runnigTimeSec;
     
     Status _status;
-    
+    ConstructionInfo _info;
     VictoryCondition::Ptr _victoryCondition;
     
     std::string _id;
     std::vector<FieldSector::Ptr> _sectors;
-    std::vector<ConstructionInfo> _construction;
     std::vector<std::string> _unlocks; // id's of unlocked levels after complete
     std::vector<Drop> _drops;
 };

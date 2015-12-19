@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Map>
     <LevelMark levelId="level_1" x="230.0" y="2097.0" text="1"/>
-    <LevelMark levelId="level_2" x="360.0" y="2052.0" text="2"/>
+    <LevelMark levelId="level_1" x="360.0" y="2052.0" text="2"/>
     <LevelMark levelId="level_3" x="460.0" y="1997.0" text="3"/>
     <LevelMark levelId="level_4" x="350.0" y="1934.0" text="4"/>
     <LevelMark levelId="level_5" x="273.0" y="1902.0" text="5"/>

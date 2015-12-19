@@ -58,8 +58,6 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
 {
     release();
     
-    float speed = 0.0f;
-    
     auto head = node->ToElement();
     auto reward = head->FirstChildElement("Rewards");
     auto unlocks = head->FirstChildElement("Unlocks");
@@ -99,44 +97,24 @@ void FieldLevel::initFromXml(tinyxml2::XMLNode *node)
         }
     }
     
-    tinyxml2::XMLElement *elem = nullptr;
-    if (description) {
-        elem = description->FirstChildElement();
-    }
-    
-    while (elem) {
-        std::string type = elem->Name();
-        if (type == "Preset") {
-            if (elem->Attribute("id")) {
-                std::string id = elem->Attribute("id");
-                _construction.push_back(ConstructionInfo(type, id, 0, 0, speed));
-            } else if (elem->Attribute("dif")) {
-                std::string dif = elem->Attribute("dif");
-                std::size_t pos = dif.find("-");
-                if (pos != std::string::npos) {
-                    std::size_t pos = dif.find("-");
-                    std::string s0 = dif.substr(0, pos);
-                    std::string s1 = dif.substr(pos+1, (dif.length()-1) - pos);
-                    int lower = atoi(s0.c_str());
-                    int upper = atoi(s1.c_str());
-                    if (lower > upper) {std::swap(lower, upper);}
-                    _construction.push_back(ConstructionInfo(type, "", lower, upper, speed));
-                } else {
-                    int difficult = atoi(dif.c_str());
-                    _construction.push_back(ConstructionInfo(type, "", difficult, difficult, speed));
-                }
-            }
-        } else if (type == "Link") {
-            std::string id = elem->Attribute("id");
-            _construction.push_back(ConstructionInfo(type, id, 0, 0, speed));
-        } else if (type == "LinkRand") {
-            _construction.push_back(ConstructionInfo(type, "", 0, 0, speed));
-        } else if (type == "Speed") {
-            speed = elem->FloatAttribute("value");
-        } else {
-            WRITE_WARN("Unknown level entity: " + type);
+    if (description)
+    {
+        _info.enemiesAmount = description->IntAttribute("enemiesAmount");
+        _info.lengthInSquares = description->IntAttribute("lengthInSquares");
+        _info.runningSpeedBegin = description->FloatAttribute("runningSpeedBegin");
+        _info.runningSpeedEnd = description->FloatAttribute("runningSpeedEnd");
+        _info.enemiesDifficultCoeff = description->FloatAttribute("enemiesDifficultCoeff");
+        
+        std::string enemiesPool = description->Attribute("availableEnemiesPool");
+        std::stringstream stream(enemiesPool);
+        
+        while (stream.good())
+        {
+            std::string substr;
+            std::getline(stream, substr, ',');
+            substr.erase(std::remove(substr.begin(), substr.end(), ' '), substr.end());
+            _info.abaliableEnemies.push_back(substr);
         }
-        elem = elem->NextSiblingElement();
     }
 }
 
@@ -147,21 +125,173 @@ void FieldLevel::prepearForRun(Hero *hero)
     _sectors.clear();
     _victoryCondition->init(hero);
     
-    PresetsLoader &presets = PresetsLoader::getInstance();
+    PresetsLibrary &presetsLib = PresetsLibrary::getInstance();
     
-    for (auto info : _construction) {
-        if (info.type == "Preset") {
-            if (info.id.empty()) {
-                int difficult = misc::random(info.diffLower, info.diffUpper);
-                addSector(presets.getRandomPresetWithDif(difficult), info.speed);
-            } else {
-                addSector(presets.getPresetById(info.id), info.speed);
+    std::vector<Preset> route;
+    
+    int maxEnemiesPerSector = 5;
+    int curEnemiesPerSector = maxEnemiesPerSector;
+    
+    const float minValuation = 0.5f;
+    float targetValuation = 0.8f;
+    float valuation = 0.0;
+    
+    // generate route with spawn points
+    
+    do
+    {
+        route.clear();
+        int routeLen = 0;
+        int spawnNum = 0;
+        
+        while (spawnNum <= _info.enemiesAmount)
+        {
+            // try to add some diversity by giving a chance to change required spawn amount for sector
+            // chance to get smaller/bigger amount always multiplied by 0.4
+            
+            int amount = curEnemiesPerSector;
+            int sign = misc::random(0, 100) < 50 ? 1 : -1;
+            int chance = misc::random(0, 100);
+            if (chance > 70)
+            {
+                int add = sign;
+                float maxChance = 100;
+                float probability = misc::random(0, maxChance);
+                while (maxChance > 0)
+                {
+                    maxChance = maxChance * 0.4f;
+                    
+                    if (probability > maxChance) {
+                        break;
+                    } else {
+                        add += sign;
+                    }
+                }
+                
+                amount = math::clamp(amount + add, 0, maxEnemiesPerSector);
             }
-        } else if (info.type == "Link") {
-            addSector(presets.getLinkById(info.id), info.speed);
-        } else if (info.type == "LinkRand") {
-            addSector(presets.getRandomLink(), info.speed);
+            
+            Preset preset = presetsLib.getRandomWithEnemiesAmount(amount);
+            
+            if (isSuitablePreset(preset))
+            {
+                int mirrirChance = misc::random(0, 100);
+                if (mirrirChance > 50) {
+                    mirrorPreset(preset);
+                }
+                
+                spawnNum += preset.enemiesAmount;
+                routeLen += preset.squaresByHeight;
+                route.push_back(preset);
+            }
+            
+            if (routeLen > _info.lengthInSquares) {
+                break;
+            }
         }
+        
+        float routeLenValuation = 0.0f;
+        float spawnNumValuation = 0.0f;
+        
+        routeLenValuation = (float)routeLen / (float)_info.lengthInSquares;
+        spawnNumValuation = (float)spawnNum / (float)_info.enemiesAmount;
+        
+        routeLenValuation = math::clamp(routeLenValuation, 0.0f, 1.0f);
+        spawnNumValuation = math::clamp(spawnNumValuation, 0.0f, 1.0f);
+        
+        valuation = spawnNumValuation * routeLenValuation;
+        
+        curEnemiesPerSector--;
+        
+        if (curEnemiesPerSector < 0) {
+            targetValuation -= 0.5f;
+            if (targetValuation < minValuation) {
+                break;
+            } else {
+                curEnemiesPerSector = maxEnemiesPerSector;
+            }
+        }
+        
+    } while (valuation < targetValuation);
+    
+    Preset emptyPreset = presetsLib.getRandomWithEnemiesAmount(0);
+    route.insert(route.begin(), emptyPreset);
+    route.insert(route.end(), emptyPreset);
+    
+    // accomodate level with real enemies
+    // overal enemies difficult mast be close as possible to overal level difficult
+    
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
+    int totalEnemies = 0;
+    for (const auto& preset : route) {
+        totalEnemies += preset.spawnMap.size();
+    }
+    
+    float difficultCoeff = _info.enemiesDifficultCoeff / totalEnemies;
+    float whole, fractional;
+    fractional = modff(difficultCoeff, &whole);
+    
+    int count1 = totalEnemies * fractional;
+    int count2 = totalEnemies - count1;
+    
+    int difficult1 = whole + 1;
+    int difficult2 = whole;
+    
+    std::multimap<std::string, std::string> enemies; // key - group, value - id
+    std::vector<std::string> requiredEnemies;
+    
+    for (Preset &preset : route) {
+        for (auto& spawn : preset.spawnMap) {
+            requiredEnemies.push_back(spawn.group);
+        }
+    }
+    
+    for (const std::string& group : requiredEnemies)
+    {
+        int diffcult = enemies.size() < count1 ? difficult1 : difficult2;
+        
+        for (const std::string& id : _info.abaliableEnemies)
+        {
+            const auto& type = gameinfo.getEnemyInfoByName(id);
+            if (type.group == group && type.difficult == diffcult)
+            {
+                auto data = std::pair<std::string, std::string>(group, id);
+                enemies.insert(data);
+                break;
+            }
+        }
+    }
+    
+    for (Preset &preset : route)
+    {
+        for (auto& spawn : preset.spawnMap)
+        {
+            auto bounds = enemies.equal_range(spawn.group);
+            std::vector<std::pair<std::string, std::string>> sample;
+            std::copy(bounds.first, bounds.second, std::back_inserter(sample));
+            
+            if (!sample.empty())
+            {
+                int min = 0;
+                int max = sample.size() - 1;
+                int index = misc::random(min, max);
+                std::string id = sample[index].second;
+                
+                spawn.entityId = id;
+                
+                // remove enemy from list
+                auto it = bounds.first;
+                for (; it != bounds.second; ++it) {
+                    if (it->second == id) {
+                        enemies.erase(it);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        addSector(preset);
     }
 }
 
@@ -187,7 +317,6 @@ void FieldLevel::update(float dt)
 void FieldLevel::release()
 {
     _sectors.clear();
-    _construction.clear();
     _id.clear();
     _lastSectorIndex = 0;
     _runnigTimeSec = 0.0f;
@@ -308,6 +437,21 @@ float FieldLevel::getRunningTime() const
     return _runnigTimeSec;
 }
 
+float FieldLevel::getRinningSpeedForPos(float ypos) const
+{
+    float s1 = _info.runningSpeedBegin;
+    float s2 = _info.runningSpeedEnd;
+    
+    float squareSize = GameInfo::getInstance().getConstFloat("SQUARE_SIZE");
+    float length = _info.lengthInSquares * squareSize;
+    float t = ypos / length;
+    t = math::clamp(t, 0.0f, 1.0f);
+    
+    float speed = math::lerp(s1, s2, t);
+    
+    return speed;
+}
+
 bool FieldLevel::isStatus(Status status)
 {
     return _status == status;
@@ -323,10 +467,10 @@ VictoryCondition::WeakPtr FieldLevel::getVictoryCondition() const
     return _victoryCondition;
 }
 
-void FieldLevel::addSector(const Preset &preset, float speed)
+void FieldLevel::addSector(const Preset &preset)
 {
     auto sector = FieldSector::create();
-    sector->init(preset, speed);
+    sector->init(preset);
     
     float ypos = 0.0f;
     if (!_sectors.empty()) {
@@ -339,4 +483,38 @@ void FieldLevel::addSector(const Preset &preset, float speed)
     sector->setY(ypos);
     
     _sectors.push_back(sector);
+}
+
+void FieldLevel::mirrorPreset(Preset &preset)
+{
+    for (auto &spawn : preset.spawnMap)
+    {
+        spawn.x = (preset.squaresByWidth - spawn.x) - 1;
+    }
+}
+
+bool FieldLevel::isSuitablePreset(const Preset &preset) const
+{
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
+    for (const auto& spawn : preset.spawnMap)
+    {
+        const std::string &group = spawn.group;
+        
+        bool found = false;
+        
+        for (const std::string &abaliable : _info.abaliableEnemies) {
+            auto enemy = gameinfo.getEnemyInfoByName(abaliable);
+            if (enemy.group == group) {
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            return false;
+        }
+    }
+    
+    return true;
 }

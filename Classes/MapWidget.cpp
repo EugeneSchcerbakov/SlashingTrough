@@ -102,11 +102,14 @@ bool MapWidget::initLevelMarkers(const std::string &mapFile)
                 float y = node->FloatAttribute("y");
                 y = _map->getContentSize().height - y;
                 FieldLevel::WeakPtr level = levelsCache.getLevelById(levelId);
-                MapLevelMark *mark = MapLevelMark::create(level);
-                mark->setLevelText(text);
-                mark->setPosition(cocos2d::Vec2(x, y));
-                _map->addChild(mark, 0);
-                _levelMarkers.push_back(mark);
+                if (!level.expired())
+                {
+                    MapLevelMark *mark = MapLevelMark::create(level);
+                    mark->setLevelText(text);
+                    mark->setPosition(cocos2d::Vec2(x, y));
+                    _map->addChild(mark, 0);
+                    _levelMarkers.push_back(mark);
+                }
             } else {
                 WRITE_WARN("Unknown map element: " + name);
             }

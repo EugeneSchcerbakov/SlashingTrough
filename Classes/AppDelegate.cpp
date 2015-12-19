@@ -59,7 +59,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     
 	GameInfo::getInstance().loadInfo("gameInfo.xml");
-    PresetsLoader::getInstance().load("presets.xml");
+    PresetsLibrary::getInstance().load("presets.xml");
     LevelsCache::getInstance().load("levels.xml");
     Store::getInstance().loadStore("storeItems.xml");
     DailyMissions::getInstance().loadMissions("dailyMissions.xml");

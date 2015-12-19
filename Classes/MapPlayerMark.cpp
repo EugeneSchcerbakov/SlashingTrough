@@ -63,6 +63,10 @@ void MapPlayerMark::refreshPosition()
         setPosition(cocos2d::Vec2(level->getMapX(), level->getMapY()));
     } else {
         auto level = levels.getLevelById(lastCompleted).lock();
+        if (!level) {
+            return;
+        }
+        
         std::string prev = gameinfo.getGlobalString("LAST_COMPLETED_LEVEL");
         if (!prev.empty() && lastCompleted != prev) {
             auto prevLevel = levels.getLevelById(prev).lock();

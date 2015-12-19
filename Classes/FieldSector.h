@@ -20,49 +20,42 @@
 
 class Field;
 
-struct Square
+struct SpawnSquare
 {
-    int x;
-    int y;
+    int x, y;
     Entity::Type type;
-    std::string name;
+    std::string group; // range, melli or stand
+    std::string entityId; // will use il level generation stage
     
-    Square()
-    : x(-1)
-    , y(-1)
-    , type(Entity::Type::NONE)
-    {
-    }
+    SpawnSquare() = default;
 };
 
 struct Preset
 {
-    std::vector<Square> map;
+    std::vector<SpawnSquare> spawnMap;
     std::string id;
-    int difficult;
+    int enemiesAmount;
+    int obsticlesAmount;
     int squaresByWidth;
     int squaresByHeight;
     
     Preset()
-    : difficult(0)
+    : enemiesAmount(0)
+    , obsticlesAmount(0)
     , squaresByWidth(0)
     , squaresByHeight(0)
-    {
-    }
+    {}
 };
 
-class PresetsLoader
+class PresetsLibrary
 {
 public:
-    static PresetsLoader& getInstance();
+    static PresetsLibrary& getInstance();
     
     void load(const std::string &filename);
     
-    Preset getPresetById(const std::string &id) const;
-    Preset getRandomPresetWithDif(int difficut) const;
-    
-    Preset getLinkById(const std::string &id) const;
-    Preset getRandomLink() const;
+    Preset getRandomWithEnemiesAmount(int amount) const;
+    Preset getPResetById(const std::string &id) const;
     
 private:
     static const std::string EMPTY_SQUARE;
@@ -71,8 +64,7 @@ private:
     int calcPresetWidth(tinyxml2::XMLElement *elem) const;
     int calcPresetHeight(tinyxml2::XMLElement *elem) const;
     
-    std::multimap<int, Preset> _presets;
-    std::vector<Preset> _links;
+    std::multimap<int, Preset> _presets; // key - spawn points amount
 };
 
 class FieldSector : public ModelBase
@@ -86,7 +78,7 @@ public:
 public:
     FieldSector();
     
-    void init(const Preset &preset, float runningSpeed);
+    void init(const Preset &preset);
     
     void setX(float x);
     void setY(float y);
@@ -95,22 +87,20 @@ public:
     float getHeight() const;
     float getX() const;
     float getY() const;
-    float getRunningSpeed() const;
     int getSquaresNumByX() const;
     int getSquaresNumByY() const;
     
-    const std::vector<Square>& getContent() const;
+    const std::vector<SpawnSquare>& getContent() const;
     const std::string& getPresetId() const;
     
 private:
-    std::vector<Square> _content;
+    std::vector<SpawnSquare> _content;
     std::string _presetId;
     
     float _width;
     float _height;
     float _logicX; // bottom left corner
     float _logicY;
-    float _runningSpeed;
     
     int _squareSize;
     int _squaresByWidth;

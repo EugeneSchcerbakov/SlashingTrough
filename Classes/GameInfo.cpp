@@ -70,20 +70,23 @@ bool GameInfo::loadInfo(const std::string &filename)
             } else if (type == "Enemy") {
                 auto rangeAttackInfo = elem->FirstChildElement("RangeAttack");
                 auto melleAttackInfo = elem->FirstChildElement("MelleAttack");
+                std::string name = elem->Attribute("name");
                 EnemyType info;
+                info.name = name;
                 info.damage = elem->FloatAttribute("damage");
                 info.health = elem->FloatAttribute("health");
                 info.staminaDrainPoints = elem->FloatAttribute("staminaDrainPoints");
+                info.difficult = elem->IntAttribute("difficult");
                 info.killPoints = elem->IntAttribute("killPoints");
                 info.goldPointsReward = elem->IntAttribute("goldPointsReward");
                 info.staminaPointsReward = elem->IntAttribute("staminaPointsReward");
                 info.scorePointsReward = elem->IntAttribute("scorePointsReward");
+                info.group = elem->Attribute("group");
                 info.sprite = elem->Attribute("sprite");
                 info.model = elem->Attribute("model") ? elem->Attribute("model") : "";
                 info.colorR = elem->IntAttribute("R");
                 info.colorG = elem->IntAttribute("G");
                 info.colorB = elem->IntAttribute("B");
-                std::string name = elem->Attribute("name");
                 if (rangeAttackInfo) {
                     info.rangeAttack.distance = rangeAttackInfo->FloatAttribute("distance");
                     info.rangeAttack.recoveryTime = rangeAttackInfo->FloatAttribute("recoveryTime");
@@ -224,6 +227,21 @@ const GameInfo::EnemyType& GameInfo::getEnemyInfoByName(const std::string &name)
         WRITE_WARN("Failed to get enemy: " + name);
         return (*_enemiesSettings.end()).second;
     }
+}
+
+const GameInfo::EnemyType& GameInfo::getEnemyInfoByDeifficult(const std::string &group, int diffucult) const
+{
+    for (auto it = _enemiesSettings.cbegin(); it != _enemiesSettings.end(); it++)
+    {
+        const EnemyType &type = (*it).second;
+        if (type.group == group && type.difficult == diffucult)
+        {
+            return type;
+        }
+    }
+    
+    WRITE_WARN("Failed to get entity with group: " + group);
+    return (*_enemiesSettings.end()).second;
 }
 
 GameInfo::GameplayObjectsTypes GameInfo::getObstaclesTypes() const
