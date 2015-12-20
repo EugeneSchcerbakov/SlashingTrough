@@ -14,6 +14,8 @@
 #include "LevelsCache.h"
 #include "PlayerInfo.h"
 
+#include "CheatsPanel.h"
+
 MapInterface* MapInterface::create()
 {
     MapInterface *map = new MapInterface();
@@ -127,6 +129,9 @@ bool MapInterface::init()
     addChild(_mapWidget, Order::MAP);
     addChild(_guiLayer, Order::CONTROLS);
     addChild(_effectsLayer, Order::EFFECTS);
+    
+    auto cheats = CheatsPanel::create();
+    addChild(cheats, Order::EFFECTS + 1);
     
     attachHandlerWithZOrder(Order::CONTROLS);
     

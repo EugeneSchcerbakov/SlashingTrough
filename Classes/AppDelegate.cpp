@@ -9,6 +9,7 @@
 #include "DailyMissions.h"
 #include "Utils.h"
 #include "Log.h"
+#include "Cheats.h"
 
 USING_NS_CC;
 
@@ -68,6 +69,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     DailyMissions::getInstance().checkMastering();
     DailyMissions::getInstance().checkMissionsSwitchTime();
 
+    Cheats::initBasicCheats();
+    
     if (misc::isPlatformDesctop()) {
         director->setDisplayStats(true);
         glview->setFrameZoomFactor(GameInfo::getInstance().getConstFloat("DESCTOP_FRAME_SCALE", 1.0f));

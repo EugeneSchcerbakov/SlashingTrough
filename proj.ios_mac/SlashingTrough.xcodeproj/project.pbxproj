@@ -173,6 +173,10 @@
 		CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD21C09CB8200CD4ECD /* storeItems.xml */; };
 		CD519BE61C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
 		CD519BE71C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
+		CDF015C41C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
+		CDF015C51C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
+		CDF015C81C27039C0015A4CD /* Cheats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C61C27039C0015A4CD /* Cheats.cpp */; };
+		CDF015C91C27039C0015A4CD /* Cheats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C61C27039C0015A4CD /* Cheats.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -373,6 +377,10 @@
 		CD519BD01C09CB8200CD4ECD /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
 		CD519BD21C09CB8200CD4ECD /* storeItems.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = storeItems.xml; sourceTree = "<group>"; };
 		CD519BD31C09CB8200CD4ECD /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
+		CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheatsPanel.cpp; sourceTree = "<group>"; };
+		CDF015C31C26DA0A0015A4CD /* CheatsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatsPanel.h; sourceTree = "<group>"; };
+		CDF015C61C27039C0015A4CD /* Cheats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cheats.cpp; sourceTree = "<group>"; };
+		CDF015C71C27039C0015A4CD /* Cheats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cheats.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -523,6 +531,10 @@
 				CD519AFD1C09CB7300CD4ECD /* ControlKeyboard.h */,
 				CD519AFE1C09CB7300CD4ECD /* ControlTouch.cpp */,
 				CD519AFF1C09CB7300CD4ECD /* ControlTouch.h */,
+				CDF015C61C27039C0015A4CD /* Cheats.cpp */,
+				CDF015C71C27039C0015A4CD /* Cheats.h */,
+				CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */,
+				CDF015C31C26DA0A0015A4CD /* CheatsPanel.h */,
 				CD519B001C09CB7300CD4ECD /* DailyMissions.cpp */,
 				CD519B011C09CB7300CD4ECD /* DailyMissions.h */,
 				CD519B021C09CB7300CD4ECD /* DailyMissionsPopup.cpp */,
@@ -829,6 +841,7 @@
 				CD519B8E1C09CB7300CD4ECD /* Item.cpp in Sources */,
 				CD519B961C09CB7300CD4ECD /* MapLevelMark.cpp in Sources */,
 				CD519B741C09CB7300CD4ECD /* EnemyWidget.cpp in Sources */,
+				CDF015C81C27039C0015A4CD /* Cheats.cpp in Sources */,
 				CD519B8A1C09CB7300CD4ECD /* HeroAction.cpp in Sources */,
 				CD519B7C1C09CB7300CD4ECD /* FieldLevel.cpp in Sources */,
 				CD519B761C09CB7300CD4ECD /* Field.cpp in Sources */,
@@ -873,6 +886,7 @@
 				CD519BAA1C09CB7300CD4ECD /* Projectile.cpp in Sources */,
 				CD519BC61C09CB7300CD4ECD /* VariablesSet.cpp in Sources */,
 				CD519B781C09CB7300CD4ECD /* FieldCamera.cpp in Sources */,
+				CDF015C41C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */,
 				CD519B6E1C09CB7300CD4ECD /* EffectFlyingIcon.cpp in Sources */,
 				CD519BA81C09CB7300CD4ECD /* PopupCore.cpp in Sources */,
 				CD519B801C09CB7300CD4ECD /* FieldSectorWidget.cpp in Sources */,
@@ -898,6 +912,7 @@
 				CD519BA91C09CB7300CD4ECD /* PopupCore.cpp in Sources */,
 				CD519B771C09CB7300CD4ECD /* Field.cpp in Sources */,
 				CD519B931C09CB7300CD4ECD /* Log.cpp in Sources */,
+				CDF015C91C27039C0015A4CD /* Cheats.cpp in Sources */,
 				CD519BC71C09CB7300CD4ECD /* VariablesSet.cpp in Sources */,
 				CD519B791C09CB7300CD4ECD /* FieldCamera.cpp in Sources */,
 				CD519B871C09CB7300CD4ECD /* GameScene.cpp in Sources */,
@@ -923,6 +938,7 @@
 				CD519BC11C09CB7300CD4ECD /* StoreItemButton.cpp in Sources */,
 				CD519BA31C09CB7300CD4ECD /* ObstacleWidget.cpp in Sources */,
 				CD519B891C09CB7300CD4ECD /* Hero.cpp in Sources */,
+				CDF015C51C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */,
 				CD519BB11C09CB7300CD4ECD /* StartInterface.cpp in Sources */,
 				CD519BC51C09CB7300CD4ECD /* Utils.cpp in Sources */,
 				CD519B6B1C09CB7300CD4ECD /* DailyMissionsPopup.cpp in Sources */,
