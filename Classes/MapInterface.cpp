@@ -57,9 +57,9 @@ bool MapInterface::init()
     input->onTouchCancelled = CC_CALLBACK_2(MapInterface::mapTouchCanceled, this);
     getEventDispatcher()->addEventListenerWithSceneGraphPriority(input, _guiLayer);
     
-    cocos2d::Sprite *coinIcon = cocos2d::Sprite::create("icons/icon_coin.png");
-    coinIcon->setScale(1.8f);
-    float coinsIconWidth = coinIcon->getContentSize().width * coinIcon->getScale();
+    _coinIcon = cocos2d::Sprite::create("icons/icon_coin.png");
+    _coinIcon->setScale(1.8f);
+    float coinsIconWidth = _coinIcon->getContentSize().width * _coinIcon->getScale();
     
     std::string coinsString = cocos2d::StringUtils::format("%d", player.getCoins());
     _coinsText = cocos2d::ui::Text::create("", "font_prototype.ttf", 45);
@@ -72,8 +72,8 @@ bool MapInterface::init()
     _coinsText->setPositionX(size.width * 0.5f - _coinsText->getContentSize().width * 0.5f + coinsIconWidth * 0.5f);
     _coinsText->setPositionY(size.height - 45);
     
-    coinIcon->setPositionX(_coinsText->getPositionX() - coinsIconWidth * 0.5f);
-    coinIcon->setPositionY(size.height - coinIcon->getContentSize().height * 1.8f * 0.5f - 20.0f);
+    _coinIcon->setPositionX(_coinsText->getPositionX() - coinsIconWidth * 0.5f);
+    _coinIcon->setPositionY(size.height - _coinIcon->getContentSize().height * 1.8f * 0.5f - 20.0f);
     
     auto onShopPressed = [](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
@@ -117,7 +117,7 @@ bool MapInterface::init()
     settings->setPositionX(origin.x + settings->getContentSize().width * settingsScale * 0.5f + 20.0f);
     settings->setPositionY(origin.y + size.height - settings->getContentSize().height * settingsScale * 0.5f - 20.0f);
     
-    _guiLayer->addChild(coinIcon);
+    _guiLayer->addChild(_coinIcon);
     _guiLayer->addChild(_coinsText);
     _guiLayer->addChild(_shopButton);
     _guiLayer->addChild(_dailyButton);
@@ -140,7 +140,28 @@ bool MapInterface::init()
     auto seq = cocos2d::Sequence::create(wait, call, nullptr);
     runAction(seq);
     
+    scheduleUpdate();
+    
     return true;
+}
+
+void MapInterface::update(float dt)
+{
+    cocos2d::Size frameSize = cocos2d::Director::getInstance()->getVisibleSize();
+    
+    PlayerInfo &session = PlayerInfo::getInstance();
+    
+    int lastCoins =  atoi(_coinsText->getString().c_str());
+    int nowCoins = session.getCoins();
+    if (lastCoins != nowCoins)
+    {
+        _coinsText->setString(cocos2d::StringUtils::toString(nowCoins));
+        
+        float coinsIconWidth = _coinIcon->getContentSize().width * _coinIcon->getScale();
+        
+        _coinsText->setPositionX(frameSize.width * 0.5f - _coinsText->getContentSize().width * 0.5f + coinsIconWidth * 0.5f);
+        _coinIcon->setPositionX(_coinsText->getPositionX() - coinsIconWidth * 0.5f);
+    }
 }
 
 void MapInterface::checkDailyMissionsCompletness()

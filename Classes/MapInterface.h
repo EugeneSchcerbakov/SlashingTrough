@@ -24,6 +24,7 @@ protected:
     virtual ~MapInterface();
     
     bool init();
+    void update(float dt);
     
 private:
     void checkDailyMissionsCompletness();
@@ -46,6 +47,7 @@ private:
     MapWidget *_mapWidget;
     EffectsLayer *_effectsLayer;
     
+    cocos2d::Sprite *_coinIcon;
     cocos2d::ui::Text *_coinsText;
     cocos2d::ui::Button *_shopButton;
     cocos2d::ui::Button *_dailyButton;
