@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\Abilities.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Cheats.cpp" />
+    <ClCompile Include="..\Classes\CheatsPanel.cpp" />
     <ClCompile Include="..\Classes\ControlKeyboard.cpp" />
     <ClCompile Include="..\Classes\ControlTouch.cpp" />
     <ClCompile Include="..\Classes\DailyMissions.cpp" />
@@ -201,6 +203,8 @@
   <ItemGroup>
     <ClInclude Include="..\Classes\Abilities.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Cheats.h" />
+    <ClInclude Include="..\Classes\CheatsPanel.h" />
     <ClInclude Include="..\Classes\ControlKeyboard.h" />
     <ClInclude Include="..\Classes\ControlTouch.h" />
     <ClInclude Include="..\Classes\DailyMissions.h" />
