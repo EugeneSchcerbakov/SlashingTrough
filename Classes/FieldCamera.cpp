@@ -75,9 +75,13 @@ void FieldCamera::update(float dt)
 {
     timeval now;
     gettimeofday(&now, nullptr);
+	
+	auto director = cocos2d::Director::getInstance();
+	auto scheduler = director->getScheduler();
 
     double update_delta = ((now.tv_sec - _lastUpdate.tv_sec) + (now.tv_usec - _lastUpdate.tv_usec) / 1000000.0) * 1000.0;
-    
+	update_delta *= scheduler->getTimeScale();
+
     bool flag = false;
     int cycles = (int)(update_delta / _interval);
     
