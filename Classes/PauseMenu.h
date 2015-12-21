@@ -43,6 +43,8 @@ private:
     
     cocos2d::ui::Button *_pauseButton;
     cocos2d::Sprite *_tint;
+
+	static const std::string panelName;
 };
 
 #endif /* defined(__SlashingTrough__PauseMenu__) */

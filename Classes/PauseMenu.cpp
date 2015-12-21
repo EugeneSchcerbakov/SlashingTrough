@@ -12,6 +12,8 @@
 #include "ScreenChanger.h"
 #include "Log.h"
 
+const std::string PauseMenu::panelName = "panel";
+
 PauseMenu* PauseMenu::create()
 {
     PauseMenu *pauseMenu = new PauseMenu();
@@ -36,7 +38,7 @@ PauseMenu::~PauseMenu()
 bool PauseMenu::hitTest(const cocos2d::Vec2 &pt)
 {
     bool panelTest = false;
-    auto panel = getChildByName<cocos2d::ui::Layout *>("panel");
+	auto panel = getChildByName<cocos2d::ui::Layout *>(panelName);
     if (panel) {
         panelTest = panel->hitTest(pt, cocos2d::Camera::getDefaultCamera(), nullptr);
     }
@@ -61,8 +63,16 @@ bool PauseMenu::init()
                 sendMessageAboutResume();
                 hidePanel();
             } else {
-                sendMessageAboutPause();
-                showPanel();
+				bool acting = false;
+				auto panel = getChildByName<cocos2d::ui::Layout *>(panelName);
+				if (panel) {
+					acting = panel->getNumberOfRunningActions() > 0;
+				}
+
+				if (!acting) {
+					sendMessageAboutPause();
+					showPanel();
+				}
             }
             _isGamePaused = !_isGamePaused;
         }
@@ -86,7 +96,7 @@ bool PauseMenu::init()
 
 void PauseMenu::showPanel()
 {
-    if (getChildByName("panel")) {
+	if (getChildByName(panelName)) {
         WRITE_LOG("Trying to show paus pause panel then another one is already shown.");
         return;
     }
@@ -174,12 +184,12 @@ void PauseMenu::showPanel()
     _tint->setOpacity(0);
     _tint->runAction(fadein);
     
-    addChild(panel, Order::Panel, "panel");
+	addChild(panel, Order::Panel, panelName);
 }
 
 void PauseMenu::hidePanel()
 {
-    auto panel = getChildByName<cocos2d::ui::Layout *>("panel");
+	auto panel = getChildByName<cocos2d::ui::Layout *>(panelName);
     
     if (panel)
     {
@@ -196,7 +206,7 @@ void PauseMenu::hidePanel()
         
         auto funcClear = [&]()
         {
-            removeChildByName("panel");
+			removeChildByName(panelName);
         };
         
         auto move = cocos2d::MoveTo::create(0.5f, cocos2d::Vec2(x0, y0));
