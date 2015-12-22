@@ -80,9 +80,9 @@ private:
 class JumpBack : public HeroAction
 {
 public:
-    static Ptr create(Hero *hero, float duration, float jumpDist);
+	static Ptr create(Hero *hero, float duration, float jumpDist, bool invulnerable);
     
-    JumpBack(Hero *hero, float duration, float jumpDist);
+	JumpBack(Hero *hero, float duration, float jumpDist, bool invulnerable);
     
     virtual void start(float y) override;
     virtual void update(float dt) override;
@@ -93,14 +93,15 @@ private:
     float _jumpDist;
     float _startY;
     float _endY;
+	const bool _invulnerable;
 };
 
 class JumpForwardAttack : public JumpBack
 {
 public:
-    static Ptr create(Hero *hero, float duration, float jumpDist);
+	static Ptr create(Hero *hero, float duration, float jumpDist, bool invulnerable);
     
-    JumpForwardAttack(Hero *hero, float duration, float jumpDist);
+	JumpForwardAttack(Hero *hero, float duration, float jumpDist, bool invulnerable);
     
     virtual void update(float dt) override;
     

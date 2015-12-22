@@ -139,16 +139,17 @@ float AttackAndMove::getFinishY() const
 
 // HeroActionJumpBack
 
-HeroAction::Ptr JumpBack::create(Hero *hero, float duration, float jumpDist)
+HeroAction::Ptr JumpBack::create(Hero *hero, float duration, float jumpDist, bool invulnerable)
 {
-    return std::make_shared<JumpBack>(hero, duration, jumpDist);
+	return std::make_shared<JumpBack>(hero, duration, jumpDist, invulnerable);
 }
 
-JumpBack::JumpBack(Hero *hero, float duration, float jumpDist)
+JumpBack::JumpBack(Hero *hero, float duration, float jumpDist, bool invulnerable)
 : HeroAction(hero, duration, Type::JUMP)
 , _jumpDist(jumpDist)
 , _startY(0.0f)
 , _endY(0.0f)
+, _invulnerable(invulnerable)
 {
 }
 
@@ -156,6 +157,7 @@ void JumpBack::start(float y)
 {
     HeroAction::start(y);
     _hero->setRunning(false);
+	_hero->setInvulnerable(_invulnerable);
     _startY = y;
     _endY = _startY + _jumpDist;
 }
@@ -174,6 +176,7 @@ void JumpBack::update(float dt)
     
     if (_isFinished) {
         _hero->setRunning(true);
+		_hero->setInvulnerable(false);
     }
 }
 
@@ -184,13 +187,13 @@ float JumpBack::getFinishY() const
 
 // HeroAction JumpForwardAttack
 
-HeroAction::Ptr JumpForwardAttack::create(Hero *hero, float duration, float jumpDist)
+HeroAction::Ptr JumpForwardAttack::create(Hero *hero, float duration, float jumpDist, bool invulnerable)
 {
-    return std::make_shared<JumpForwardAttack>(hero, duration, jumpDist);
+	return std::make_shared<JumpForwardAttack>(hero, duration, jumpDist, invulnerable);
 }
 
-JumpForwardAttack::JumpForwardAttack(Hero *hero, float duration, float jumpDist)
-: JumpBack(hero, duration, jumpDist)
+JumpForwardAttack::JumpForwardAttack(Hero *hero, float duration, float jumpDist, bool invulnerable)
+: JumpBack(hero, duration, jumpDist, invulnerable)
 , _attackPeriodTime(0.0f)
 {
 }

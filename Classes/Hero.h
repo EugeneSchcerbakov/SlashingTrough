@@ -41,6 +41,7 @@ public:
     
     void setRunningSpeed(float speed);
     void setRunning(bool running);
+	void setInvulnerable(bool invulnerable);
     void setSideBorders(float left, float right);
     
     float getSpeed() const;
@@ -78,6 +79,7 @@ private:
     int _actionsSequenceMaxSize;
     
     bool _running;
+	bool _invulnerable;
 };
 
 #endif /* defined(__SlashingTrough__Hero__) */

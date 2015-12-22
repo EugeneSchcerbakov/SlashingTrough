@@ -24,6 +24,7 @@ Hero::Hero()
 , _squareSize(GameInfo::getInstance().getConstFloat("SQUARE_SIZE"))
 , _goals(nullptr)
 , _running(false)
+, _invulnerable(false)
 {
     init();
 }
@@ -112,12 +113,16 @@ void Hero::addHealth(float health, bool callDamageReceived)
 {
     float actual = health;
     
+	if (actual < 0.0f) {
+		actual = actual * (_invulnerable ? 0.0f : 1.0f);
+	}
+
     for (auto crystall : _equip.crystalls) {
         if (crystall) {
             actual = crystall->onDamage(actual);
         }
     }
-    
+
     _health += actual;
     if (_health < 0.0f) {
         _health = 0.0f;
@@ -263,6 +268,11 @@ void Hero::addCoinsPoint(int coinsPoint)
 void Hero::addScorePoint(int scorePoint)
 {
     _score.score = scorePoint;
+}
+
+void Hero::setInvulnerable(bool invulnerable)
+{
+	_invulnerable = invulnerable;
 }
 
 void Hero::setRunningSpeed(float speed)

@@ -17,19 +17,20 @@
 
 const std::string Dash::TAG = "Dash";
 
-Dash::Dash(float cooldown, float distance, float duration)
+Dash::Dash(float cooldown, float distance, float duration, bool invulnerable)
 : Ability()
 , _cooldown(cooldown)
 , _distance(distance)
 , _duration(duration)
 , _time(0.0)
+, _invulnerable(invulnerable)
 , _allow(true)
 {
 }
 
-Ability::Ptr Dash::create(float cooldown, float distance, float duration)
+Ability::Ptr Dash::create(float cooldown, float distance, float duration, bool invulnerable)
 {
-    return std::make_shared<Dash>(cooldown, distance, duration);
+	return std::make_shared<Dash>(cooldown, distance, duration, invulnerable);
 }
 
 void Dash::init(Hero *p)
@@ -61,7 +62,7 @@ void Dash::makeDash()
 {
     if (_allow)
     {
-        HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance);
+        HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance, _invulnerable);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");
@@ -77,13 +78,13 @@ void Dash::makeDash()
 
 // BackslidingShield
 
-Ability::Ptr BackDashShield::create(float cooldown, float distance, float duration, float shieldTime)
+Ability::Ptr BackDashShield::create(float cooldown, float distance, float duration, float shieldTime, bool invulnerability)
 {
-    return std::make_shared<BackDashShield>(cooldown, distance, duration, shieldTime);
+    return std::make_shared<BackDashShield>(cooldown, distance, duration, shieldTime, invulnerability);
 }
 
-BackDashShield::BackDashShield(float cooldown, float distance, float duration, float shieldTime)
-: Dash(cooldown, distance, duration)
+BackDashShield::BackDashShield(float cooldown, float distance, float duration, float shieldTime, bool invulnerability)
+: Dash(cooldown, distance, duration, invulnerability)
 , _shieldLiveTime(shieldTime)
 , _shieldShown(false)
 {
@@ -122,7 +123,7 @@ void BackDashShield::swipeBack()
     
     if (_allow)
     {
-        HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance);
+		HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance, _invulnerable);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpBackStart");
@@ -194,13 +195,13 @@ bool BackDashShield::isPointUnderBarrier(float x, float y) const
     return len <= barrierRadius && dotp >= 0.5f;
 }
 
-Ability::Ptr ForwardDash::create(float cooldown, float distance, float duration)
+Ability::Ptr ForwardDash::create(float cooldown, float distance, float duration, bool invulnerable)
 {
-    return std::make_shared<ForwardDash>(cooldown, distance, duration);
+	return std::make_shared<ForwardDash>(cooldown, distance, duration, invulnerable);
 }
 
-ForwardDash::ForwardDash(float cooldown, float distance, float duration)
-: Dash(cooldown, distance, duration)
+ForwardDash::ForwardDash(float cooldown, float distance, float duration, bool invulnerable)
+: Dash(cooldown, distance, duration, invulnerable)
 {
 }
 
@@ -214,13 +215,13 @@ void ForwardDash::swipeForward()
     makeDash();
 }
 
-Ability::Ptr ForwardDashAttack::create(float cooldown, float distance, float duration)
+Ability::Ptr ForwardDashAttack::create(float cooldown, float distance, float duration, bool invulnerable)
 {
-    return std::make_shared<ForwardDashAttack>(cooldown, distance, duration);
+	return std::make_shared<ForwardDashAttack>(cooldown, distance, duration, invulnerable);
 }
 
-ForwardDashAttack::ForwardDashAttack(float cooldown, float distance, float duration)
-: ForwardDash(cooldown, distance, duration)
+ForwardDashAttack::ForwardDashAttack(float cooldown, float distance, float duration, bool invulnerable)
+: ForwardDash(cooldown, distance, duration, invulnerable)
 {
 }
 
@@ -228,7 +229,7 @@ void ForwardDashAttack::makeDash()
 {
     if (_allow)
     {
-        HeroAction::Ptr action = JumpForwardAttack::create(_hero, _duration, _distance);
+		HeroAction::Ptr action = JumpForwardAttack::create(_hero, _duration, _distance, _invulnerable);
         if (_hero->isAbleToPerform(action))
         {
             Event e("JumpForwardAttack");

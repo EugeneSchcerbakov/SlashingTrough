@@ -125,12 +125,12 @@
         <Tier1 shards="3"
             icon="icons/icon_crystal_5.png"
             desc="Swipe forward to make forward dash.">
-            <Ability name="ForwardDash" cooldown="0.35" distance="600" duration="0.2" />
+            <Ability name="ForwardDash" cooldown="0.35" distance="600" duration="0.2" invulnerability="true" />
         </Tier1>
         <Tier2 shards="7"
             icon="icons/icon_crystal_5.png"
-            desc="Swipe back to make forward dash with attack">
-            <Ability name="ForwardDashAttack" cooldown="0.4" distance="500" duration="0.2" />
+            desc="Swipe forward to make forward dash with attack">
+            <Ability name="ForwardDashAttack" cooldown="0.4" distance="500" duration="0.2" invulnerability="true" />
         </Tier2>
     </Crystall>
     

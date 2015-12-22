@@ -17,10 +17,10 @@
 class Dash : public Ability
 {
 public:
-    static Ptr create(float cooldown, float distance, float duration);
+	static Ptr create(float cooldown, float distance, float duration, bool invulnerable);
     
 public:
-    Dash(float cooldown, float distance, float duration);
+	Dash(float cooldown, float distance, float duration, bool invulnerable);
     
     void init(Hero *p) override;
     void update(float dt) override;
@@ -36,15 +36,17 @@ protected:
     float _duration;
     float _time;
     bool _allow;
+
+	const bool _invulnerable;
 };
 
 class BackDashShield : public Dash
 {
 public:
-    static Ptr create(float cooldown, float distance, float duration, float shieldTime);
+	static Ptr create(float cooldown, float distance, float duration, float shieldTime, bool invulnerable);
     
 public:
-    BackDashShield(float cooldown, float distance, float duration, float shieldTime);
+	BackDashShield(float cooldown, float distance, float duration, float shieldTime, bool invulnerable);
     
     void update(float dt) override;
     void swipeBack() override;
@@ -62,10 +64,10 @@ protected:
 class ForwardDash : public Dash
 {
 public:
-    static Ptr create(float cooldown, float distance, float duration);
+	static Ptr create(float cooldown, float distance, float duration, bool invulnerable);
     
 public:
-    ForwardDash(float cooldown, float distance, float duration);
+	ForwardDash(float cooldown, float distance, float duration, bool invulnerable);
     
     virtual void swipeBack() override;
     virtual void swipeForward() override;
@@ -74,10 +76,10 @@ public:
 class ForwardDashAttack : public ForwardDash
 {
 public:
-    static Ptr create(float cooldown, float distance, float duration);
+	static Ptr create(float cooldown, float distance, float duration, bool invulnerable);
     
 public:
-    ForwardDashAttack(float cooldown, float distance, float duration);
+	ForwardDashAttack(float cooldown, float distance, float duration, bool invulnerable);
     
 protected:
     virtual void makeDash() override;
