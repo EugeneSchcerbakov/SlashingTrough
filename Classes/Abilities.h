@@ -43,10 +43,10 @@ protected:
 class BackDashShield : public Dash
 {
 public:
-	static Ptr create(float cooldown, float distance, float duration, float shieldTime, bool invulnerable);
+	static Ptr create(float cooldown, float distance, float duration, float shieldTime);
     
 public:
-	BackDashShield(float cooldown, float distance, float duration, float shieldTime, bool invulnerable);
+	BackDashShield(float cooldown, float distance, float duration, float shieldTime);
     
     void update(float dt) override;
     void swipeBack() override;
@@ -59,6 +59,32 @@ protected:
     bool _shieldShown;
     
     const float _shieldLiveTime;
+};
+
+class BackDashShot : public Dash
+{
+public:
+    static Ptr create(float cooldown, float distance, float duration, int shotsAmount,
+                      float shotInterval, float damageModifier, bool nearestTarget);
+    
+public:
+    BackDashShot(float cooldown, float distance, float duration, int shotsAmount,
+                 float shotInterval, float damageModifier, bool nearestTarget);
+    
+    virtual void update(float dt) override;
+    virtual void swipeBack() override;
+
+protected:
+    virtual void makeForwardShot();
+    virtual void makeAimedShot(); // to mearest enemy
+    
+    float _shotTimer;
+    int _shotsToMake;
+    
+    const int _shotsAmount;
+    const bool _nearestTraget;
+    const float _shotInterval;
+    const float _damageModifier;
 };
 
 class ForwardDash : public Dash

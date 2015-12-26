@@ -117,6 +117,12 @@
             desc="Swipe back to make back dash. And use mahic shield">
             <Ability name="BackDashShield" cooldown="0.3" distance="200" duration="0.15" shieldTime="1.0" />
         </Tier2>
+        <Tier3 shards="10"
+            icon="icons/icon_crystal_1.png"
+            desc="Swipe back to shoot the target">
+            <Ability name="BackDashShot" cooldown="0.5" distance="200" duration="0.15"
+                shotInterval="0.1" damageModifier="1.5" shotsAmount="1" nearestTraget="false" />
+        </Tier3>
     </Crystall>
     
     <Crystall id="forward_dash_crystall"

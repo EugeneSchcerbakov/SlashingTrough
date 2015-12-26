@@ -34,6 +34,7 @@ public:
     virtual void start(float currentY);
     virtual void update(float dt);
     virtual void setEvent(const Event &event);
+    virtual void setCallback(const std::function<void()> &callback);
     virtual bool isFinished() const;
     virtual bool isStarted() const;
     
@@ -47,6 +48,7 @@ protected:
     Hero *_hero;
     Event _event;
     std::string _tag;
+    std::function<void()> _onStart;
     
     float _duration;
     float _localTime;

@@ -41,7 +41,7 @@ void Field::initialize(FieldLevel::WeakPtr level)
     float heroStartX = _squareSize * 3.0f * 0.5f;
     float heroStartY = 0.0f;
     
-    _hero = new Hero();
+    _hero = new Hero(this);
     _hero->setPosition(heroStartX, heroStartY);
     _hero->setRunning(true);
     _hero->setSideBorders(0.0f, _squareSize * 3.0f);

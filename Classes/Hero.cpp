@@ -7,6 +7,8 @@
 //
 
 #include "Hero.h"
+#include "Field.h"
+#include "Projectile.h"
 #include "DailyMissions.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -15,8 +17,9 @@
 
 #include <math.h>
 
-Hero::Hero()
+Hero::Hero(Field *field)
 : Entity(Entity::Type::HERO)
+, _field(field)
 , _runningSpeed(0.0f)
 , _leftSideBorder(0.0f)
 , _rightSideBorder(0.0f)
@@ -207,6 +210,13 @@ void Hero::refreshGoals(Entities *entities)
 {
     if (entities) {
         _goals = entities;
+    }
+}
+
+void Hero::shootProjectile(Projectile *projectile)
+{
+    if (projectile) {
+        _field->addEntity(projectile);
     }
 }
 

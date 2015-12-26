@@ -39,7 +39,16 @@ static Ability::Ptr createAbility(tinyxml2::XMLElement *elem)
         float distance = elem->FloatAttribute("distance");
         float duration = elem->FloatAttribute("duration");
         float shieldTime = elem->FloatAttribute("shieldTime");
-        ability = BackDashShield::create(cooldown, -distance, duration, shieldTime, false);
+        ability = BackDashShield::create(cooldown, -distance, duration, shieldTime);
+    } else if (name == "BackDashShot") {
+        float cooldown = elem->FloatAttribute("cooldown");
+        float distance = elem->FloatAttribute("distance");
+        float duration = elem->FloatAttribute("duration");
+        float shotInterval = elem->FloatAttribute("shotInterval");
+        float damageModifier = elem->FloatAttribute("damageModifier");
+        int shotsAmount = elem->IntAttribute("shotsAmount");
+        bool nearestTarget = elem->BoolAttribute("nearestTraget");
+        ability = BackDashShot::create(cooldown, -distance, duration, shotsAmount, shotInterval, damageModifier, nearestTarget);
     } else if (name == "ForwardDash") {
         float cooldown = elem->FloatAttribute("cooldown");
         float distance = elem->FloatAttribute("distance");

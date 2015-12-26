@@ -16,10 +16,13 @@
 #include "Item.h"
 #include "PlayerInfo.h"
 
+class Field;
+class Projectile;
+
 class Hero : public Entity
 {
 public:
-    Hero();
+    Hero(Field *field);
     
     void init();
     void idleUpdate(float dt) override;
@@ -29,6 +32,7 @@ public:
     void attack(float area);
     void flushScore();
     void refreshGoals(Entities *entities);
+    void shootProjectile(Projectile *projectile);
     void onSwipeLeft();
     void onSwipeRight();
     void onSwipeBack();
@@ -66,6 +70,7 @@ private:
     PlayerInfo::Equipment _equip;
     PlayerInfo::Score _score;
     Entities *_goals;
+    Field *_field;
     
     float _runningSpeed;
     float _attackArea;

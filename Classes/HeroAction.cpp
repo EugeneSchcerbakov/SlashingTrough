@@ -28,6 +28,10 @@ HeroAction::~HeroAction()
 void HeroAction::start(float currentY)
 {
     _isStarted = true;
+    
+    if (_onStart) {
+        _onStart();
+    }
 }
 
 void HeroAction::update(float dt)
@@ -45,6 +49,11 @@ void HeroAction::update(float dt)
 void HeroAction::setEvent(const Event &event)
 {
     _event = event;
+}
+
+void HeroAction::setCallback(const std::function<void()> &callback)
+{
+    _onStart = callback;
 }
 
 bool HeroAction::isFinished() const
