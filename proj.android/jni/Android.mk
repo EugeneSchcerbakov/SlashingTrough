@@ -15,6 +15,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Abilities.cpp \
                    ../../Classes/ControlKeyboard.cpp \
                    ../../Classes/ControlTouch.cpp \
+                   ../../Classes/Cheats.cpp \
+                   ../../Classes/CheatsPanel.cpp \
                    ../../Classes/DailyTask.cpp \
                    ../../Classes/DailyMissions.cpp \
                    ../../Classes/DailyMissionsPopup.cpp \
