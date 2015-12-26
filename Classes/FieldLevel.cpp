@@ -249,7 +249,7 @@ void FieldLevel::prepearForRun(Hero *hero)
     
     for (const std::string& group : requiredEnemies)
     {
-        int diffcult = enemies.size() < count1 ? difficult1 : difficult2;
+        int diffcult = (int)enemies.size() < count1 ? difficult1 : difficult2;
         
         for (const std::string& id : _info.abaliableEnemies)
         {
