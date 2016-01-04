@@ -30,9 +30,14 @@ class FieldLayer : public cocos2d::Layer
 public:
     static FieldLayer* create(const std::string &levelId, GameInterface *gameInterface);
     
+    static const unsigned short TargetColor;
+    static const unsigned short TargetDistor;
+    
 protected:
     FieldLayer(GameInterface *gameInterface);
     virtual ~FieldLayer();
+    
+    virtual void visit(cocos2d::Renderer *renderer, const cocos2d::Mat4 &parentTransform, uint32_t parentFlags) override;
     
     bool init(const std::string &levelId);
     void update(float dt) override;
@@ -49,7 +54,18 @@ private:
     
     std::vector<EnemyWidget *> _enemiesWidgets;
     
+    cocos2d::experimental::FrameBuffer *_fboColor;
+    cocos2d::experimental::FrameBuffer *_fboDistor;
+    cocos2d::experimental::RenderTarget *_rtSceneDistor;
+    cocos2d::experimental::RenderTarget *_rtSceneColor;
+    cocos2d::experimental::RenderTargetDepthStencil *_rtSceneDepth;
+    cocos2d::Sprite *_rtColorBuffer;
+    
+    cocos2d::GLProgram *_distortionShader;
+    cocos2d::GLProgramState *_distortionState;
+    
     FieldCamera *_fieldCamera;
+    FieldCamera *_distorCamera;
     
     GameInterface *_gameInterface;
     HeroWidget *_heroWidget;

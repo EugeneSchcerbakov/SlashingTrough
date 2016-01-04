@@ -14,6 +14,9 @@
 #include "ScreenChanger.h"
 #include "Log.h"
 
+const unsigned short FieldLayer::TargetColor = (unsigned short)cocos2d::CameraFlag::USER1;
+const unsigned short FieldLayer::TargetDistor = (unsigned short)cocos2d::CameraFlag::USER2;
+
 FieldLayer* FieldLayer::create(const std::string &levelId, GameInterface *gameInterface)
 {
     FieldLayer *layer = new FieldLayer(gameInterface);
@@ -44,15 +47,53 @@ bool FieldLayer::init(const std::string &levelId)
         return false;
     }
     
-    _fieldCamera = FieldCamera::create();
+    auto director = cocos2d::Director::getInstance();
     
-    setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
-    addChild(_fieldCamera);
+    cocos2d::Size fboSize = director->getWinSizeInPixels();
+    
+    std::string distortionSource = cocos2d::FileUtils::getInstance()->getStringFromFile("shaders/distortionPost.fsh");
+    _distortionShader = cocos2d::GLProgram::createWithByteArrays(cocos2d::ccPositionTexture_vert, distortionSource.c_str());
+    _distortionShader->bindAttribLocation(cocos2d::GLProgram::ATTRIBUTE_NAME_POSITION, cocos2d::GLProgram::VERTEX_ATTRIB_POSITION);
+    _distortionShader->bindAttribLocation(cocos2d::GLProgram::ATTRIBUTE_NAME_TEX_COORD, cocos2d::GLProgram::VERTEX_ATTRIB_TEX_COORDS);
+    _distortionShader->link();
+    _distortionShader->updateUniforms();
+    _distortionShader->retain();
+    
+    _distortionState = cocos2d::GLProgramState::getOrCreateWithGLProgram(_distortionShader);
+    _distortionState->retain();
+    
+    _rtSceneColor = cocos2d::experimental::RenderTarget::create(fboSize.width, fboSize.height);
+    _rtSceneDepth = cocos2d::experimental::RenderTargetDepthStencil::create(fboSize.width, fboSize.height);
+    _rtSceneDistor = cocos2d::experimental::RenderTarget::create(fboSize.width, fboSize.height);
+    
+    _distortionState->setUniformTexture("normalBuffer", _rtSceneDistor->getTexture());
+    
+    _fboColor = cocos2d::experimental::FrameBuffer::create(1, fboSize.width, fboSize.height);
+    _fboColor->attachRenderTarget(_rtSceneColor);
+    _fboColor->attachDepthStencilTarget(_rtSceneDepth);
+    _fboColor->setClearColor(cocos2d::Color4F(0.0f, 0.0f, 0.0f, 1.0f));
+    _fboColor->setClearDepth(0.0f);
+    
+    _fboDistor = cocos2d::experimental::FrameBuffer::create(1, fboSize.width, fboSize.height);
+    _fboDistor->attachRenderTarget(_rtSceneDistor);
+    _fboDistor->setClearColor(cocos2d::Color4F(0.0f, 0.0f, 0.0f, 1.0f));
+    _fboDistor->setClearDepth(0.0f);
+    
+    _rtColorBuffer = cocos2d::Sprite::create();
+    _rtColorBuffer->initWithTexture(_rtSceneColor->getTexture());
+    _rtColorBuffer->setGLProgramState(_distortionState);
+    _rtColorBuffer->setPosition(fboSize.width*0.5f, fboSize.height*0.5f);
+    _rtColorBuffer->setFlippedY(true);
+    
+    _fieldCamera = FieldCamera::create(cocos2d::CameraFlag::USER1);
+    _fieldCamera->getActualCamera()->setFrameBufferObject(_fboColor);
+    _distorCamera = FieldCamera::create(cocos2d::CameraFlag::USER2);
+    _distorCamera->getActualCamera()->setFrameBufferObject(_fboDistor);
     
     _field.setupAccepter(accepter, static_cast<void *>(this));
     _field.initialize(LevelsCache::getInstance().getLevelById(levelId));
     
-    _heroWidget = HeroWidget::create(_field.getHero());
+    _heroWidget = HeroWidget::create(_field.getHero(), this);
     _heroWidget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
     
     auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
@@ -60,8 +101,12 @@ bool FieldLayer::init(const std::string &levelId)
     _controlTouch = ControlTouch::create(_field.getHero(), dispatcher, this);
     _controlKeyboard = ControlKeyboard::create(_field.getHero(), dispatcher, this);
     
+    addChild(_fieldCamera);
+    addChild(_distorCamera);
     addChild(_heroWidget);
+    addChild(_rtColorBuffer);
     scheduleUpdate();
+    setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
     
     return true;
 }
@@ -74,6 +119,7 @@ void FieldLayer::update(float dt)
     camPos.x = _heroWidget->getPositionX();
     camPos.y = _heroWidget->getPositionY();
     _fieldCamera->setTargetPosition(camPos);
+    _distorCamera->setTargetPosition(camPos);
     
     for (auto it = _enemiesWidgets.begin(); it != _enemiesWidgets.end(); ) {
         EnemyWidget *widget = (*it);
@@ -86,6 +132,11 @@ void FieldLayer::update(float dt)
     }
     
     refreshInterface();
+}
+
+void FieldLayer::visit(cocos2d::Renderer *renderer, const cocos2d::Mat4 &parentTransform, uint32_t parentFlags)
+{
+    cocos2d::Layer::visit(renderer, parentTransform, parentFlags);
 }
 
 void FieldLayer::refreshInterface()
@@ -123,7 +174,7 @@ void FieldLayer::acceptEvent(const Event &event)
             FieldSectorWidget *widget = FieldSectorWidget::create(sector);
             widget->setPositionX(sector->getX());
             widget->setPositionY(sector->getY());
-            widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
+            widget->setCameraMask(FieldLayer::TargetColor);
             addChild(widget, 0, uid);
         }
     } else if (event.is("SectorDeleted")) {
@@ -137,18 +188,18 @@ void FieldLayer::acceptEvent(const Event &event)
             if (type == Entity::Type::OBSTACLE) {
                 auto obstacle = dynamic_cast<Obstacle *>(entity);
                 auto widget = ObstacleWidget::create(obstacle);
-                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
+                widget->setCameraMask(FieldLayer::TargetColor);
                 addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
                 auto widget = EnemyWidget::create(enemy);
-                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
+                widget->setCameraMask(FieldLayer::TargetColor);
                 addChild(widget, 2, uid);
                 _enemiesWidgets.push_back(widget);
             } else if (type == Entity::Type::PROJECTILE) {
                 auto proj = dynamic_cast<Projectile *>(entity);
                 auto widget = ProjectileWidget::create(proj);
-                widget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
+                widget->setCameraMask(FieldLayer::TargetColor);
                 addChild(widget, 10, uid);
             }
         } else {

@@ -31,16 +31,17 @@ struct SwordTrans
 class HeroWidget : public cocos2d::BillBoard
 {
 public:
-    static HeroWidget* create(Hero *hero);
+    static HeroWidget* create(Hero *hero, cocos2d::Layer *distortion);
     
 protected:
-    HeroWidget(Hero *hero);
+    HeroWidget(Hero *hero, cocos2d::Layer *distortion);
     virtual ~HeroWidget();
     
     bool init();
     void update(float dt);
 	void removeAllAnimations();
     void runSwordTrailEffect(float duration);
+    void runForwardDistortion(float time);
     void acceptEvent(const Event &event);
     
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeRight(float duration);
@@ -66,6 +67,9 @@ private:
     cocos2d::Sprite *_shield;
     cocos2d::Node *_bodyController;
     cocos2d::MotionStreak *_swordTrail;
+    
+    cocos2d::Layer *_distortion;
+    cocos2d::Sprite *_dashDistor;
 };
 
 #endif /* defined(__SlashingTrough__HeroWidget__) */

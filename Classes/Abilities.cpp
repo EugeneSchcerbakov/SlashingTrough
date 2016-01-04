@@ -67,6 +67,7 @@ void Dash::makeDash()
         {
             Event e("JumpBackStart");
             e.variables.setFloat("duration", _duration);
+            e.variables.setBool("showDistortion", _distance > 0.0f);
             action->setEvent(e);
             action->setTag(TAG);
             

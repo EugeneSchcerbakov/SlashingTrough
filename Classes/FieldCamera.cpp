@@ -14,10 +14,10 @@
 // we need this because of gettimeofday unix and windows compatibility
 using namespace cocos2d;
 
-FieldCamera* FieldCamera::create()
+FieldCamera* FieldCamera::create(cocos2d::CameraFlag flag)
 {
     FieldCamera *camera = new FieldCamera();
-    if (camera && camera->init()) {
+    if (camera && camera->init(flag)) {
         camera->autorelease();
     } else {
         delete camera;
@@ -36,7 +36,7 @@ FieldCamera::~FieldCamera()
 {
 }
 
-bool FieldCamera::init()
+bool FieldCamera::init(cocos2d::CameraFlag flag)
 {
     if (!cocos2d::Node::init()) {
         return false;
@@ -58,7 +58,7 @@ bool FieldCamera::init()
     _lerpVelocity = gameinfo.getConstFloat("CAMERA_LERP_VELOCITY", 1.0f);
     
     _camera = cocos2d::Camera::createPerspective(fov, aspect, 0.1f, zfar);
-    _camera->setCameraFlag(cocos2d::CameraFlag::USER1);
+    _camera->setCameraFlag(flag);
     _camera->setPosition3D(cocos2d::Vec3(viewPosX, 0.0f, viewHeight));
     _camera->setRotation3D(cocos2d::Vec3(viewAngle, 0.0f, 0.0f));
     _camera->setPositionY(_yOffset);
@@ -111,4 +111,9 @@ void FieldCamera::fixedUpdate()
 void FieldCamera::setTargetPosition(const cocos2d::Vec2 &pos)
 {
     _targetPos = pos;
+}
+
+cocos2d::Camera* FieldCamera::getActualCamera()
+{
+    return _camera;
 }

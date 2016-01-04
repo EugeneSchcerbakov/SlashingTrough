@@ -7,14 +7,15 @@
 //
 
 #include "HeroWidget.h"
+#include "FieldLayer.h"
 #include "Store.h"
 
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
-HeroWidget* HeroWidget::create(Hero *hero)
+HeroWidget* HeroWidget::create(Hero *hero, cocos2d::Layer *distortion)
 {
-    HeroWidget *widget = new HeroWidget(hero);
+    HeroWidget *widget = new HeroWidget(hero, distortion);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -24,8 +25,9 @@ HeroWidget* HeroWidget::create(Hero *hero)
     return widget;
 }
 
-HeroWidget::HeroWidget(Hero *hero)
+HeroWidget::HeroWidget(Hero *hero, cocos2d::Layer *distortion)
 : _hero(hero)
+, _distortion(distortion)
 {
 }
 
@@ -79,6 +81,12 @@ bool HeroWidget::init()
     _swordTrail = cocos2d::MotionStreak::create(trailLen, 1.0f, trailWidth, cocos2d::Color3B::WHITE, trailTex);
     _swordTrail->setOpacity(0);
     
+    _dashDistor = cocos2d::Sprite::create("effects/dash_distortion.png");
+    _dashDistor->setCameraMask(FieldLayer::TargetDistor);
+    _dashDistor->setScale(5.0f);
+    _dashDistor->setVisible(false);
+    _distortion->addChild(_dashDistor);
+    
     _swordSide = SwordSide::RIGHT;
 	_nextSwordSide = _swordSide;
     
@@ -96,6 +104,8 @@ void HeroWidget::update(float dt)
 {
     setPositionX(_hero->getPositionX());
     setPositionY(_hero->getPositionY());
+    
+    _dashDistor->setPosition3D(getPosition3D() + cocos2d::Vec3(10.0f, -65.0f, 0.0f));
     
     if (_swordTrail->isVisible())
     {
@@ -159,6 +169,20 @@ void HeroWidget::runSwordTrailEffect(float duration)
     _swordTrail->runAction(effect);
 }
 
+void HeroWidget::runForwardDistortion(float time)
+{
+    auto distorFuncEnd = [&]{_dashDistor->setVisible(false);};
+    auto distortionEnd = cocos2d::CallFunc::create(distorFuncEnd);
+    auto distortionFadein = cocos2d::FadeIn::create(time * 0.25f);
+    auto distortionWait = cocos2d::DelayTime::create(time * 0.75f);
+    auto distortionFadeout = cocos2d::FadeOut::create(0.3f);
+    auto distortionEffect = cocos2d::Sequence::create(distortionFadein, distortionWait, distortionFadeout, distortionEnd, nullptr);
+    _dashDistor->setVisible(true);
+    _dashDistor->setOpacity(0);
+    _dashDistor->stopAllActions();
+    _dashDistor->runAction(distortionEffect);
+}
+
 void HeroWidget::acceptEvent(const Event &event)
 {
 	if (event.is("SwipeRight")) {
@@ -203,6 +227,10 @@ void HeroWidget::acceptEvent(const Event &event)
             _shield->setOpacity(0);
             _shield->runAction(cocos2d::FadeIn::create(0.1f));
         }
+        if (event.variables.getBool("showDistortion", false)) {
+            float time = event.variables.getFloat("duration");
+            runForwardDistortion(time);
+        }
     } else if (event.is("JumpBackEnd")) {
     } else if (event.is("JumpForwardAttack")) {
         removeAllAnimations();
@@ -221,6 +249,7 @@ void HeroWidget::acceptEvent(const Event &event)
 
         }
         runSwordTrailEffect(time);
+        runForwardDistortion(time);
     } else if (event.is("HideShield")) {
         auto func = [this](){_shield->setVisible(false);};
         auto fade = cocos2d::FadeOut::create(0.05f);

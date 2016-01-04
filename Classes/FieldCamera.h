@@ -14,15 +14,17 @@
 class FieldCamera : public cocos2d::Node
 {
 public:
-    static FieldCamera* create();
+    static FieldCamera* create(cocos2d::CameraFlag flag);
     
     void setTargetPosition(const cocos2d::Vec2 &pos);
+    
+    cocos2d::Camera* getActualCamera();
     
 protected:
     FieldCamera();
     virtual ~FieldCamera();
     
-    virtual bool init() override;
+    virtual bool init(cocos2d::CameraFlag flag);
     virtual void update(float dt) override;
     
 private:

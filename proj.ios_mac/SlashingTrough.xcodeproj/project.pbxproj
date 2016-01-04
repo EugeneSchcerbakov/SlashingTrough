@@ -155,8 +155,6 @@
 		CD519BC71C09CB7300CD4ECD /* VariablesSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD519B5E1C09CB7300CD4ECD /* VariablesSet.cpp */; };
 		CD519BC81C09CB7300CD4ECD /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD519B601C09CB7300CD4ECD /* VictoryCondition.cpp */; };
 		CD519BC91C09CB7300CD4ECD /* VictoryCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD519B601C09CB7300CD4ECD /* VictoryCondition.cpp */; };
-		CD519BD41C09CB8200CD4ECD /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BCA1C09CB8200CD4ECD /* dailyMissions.xml */; };
-		CD519BD51C09CB8200CD4ECD /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BCA1C09CB8200CD4ECD /* dailyMissions.xml */; };
 		CD519BD61C09CB8200CD4ECD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD519BCB1C09CB8200CD4ECD /* fonts */; };
 		CD519BD71C09CB8200CD4ECD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = CD519BCB1C09CB8200CD4ECD /* fonts */; };
 		CD519BD81C09CB8200CD4ECD /* gameInfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BCC1C09CB8200CD4ECD /* gameInfo.xml */; };
@@ -173,6 +171,10 @@
 		CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD21C09CB8200CD4ECD /* storeItems.xml */; };
 		CD519BE61C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
 		CD519BE71C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
+		CDCA1CC41C37F30500522A59 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC31C37F30500522A59 /* shaders */; };
+		CDCA1CC51C37F30500522A59 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC31C37F30500522A59 /* shaders */; };
+		CDCA1CC71C38008300522A59 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC61C38008300522A59 /* dailyMissions.xml */; };
+		CDCA1CC81C38008300522A59 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC61C38008300522A59 /* dailyMissions.xml */; };
 		CDF015C41C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
 		CDF015C51C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
 		CDF015C81C27039C0015A4CD /* Cheats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C61C27039C0015A4CD /* Cheats.cpp */; };
@@ -368,7 +370,6 @@
 		CD519B5F1C09CB7300CD4ECD /* VariablesSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariablesSet.h; sourceTree = "<group>"; };
 		CD519B601C09CB7300CD4ECD /* VictoryCondition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VictoryCondition.cpp; sourceTree = "<group>"; };
 		CD519B611C09CB7300CD4ECD /* VictoryCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryCondition.h; sourceTree = "<group>"; };
-		CD519BCA1C09CB8200CD4ECD /* dailyMissions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dailyMissions.xml; sourceTree = "<group>"; };
 		CD519BCB1C09CB8200CD4ECD /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		CD519BCC1C09CB8200CD4ECD /* gameInfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gameInfo.xml; sourceTree = "<group>"; };
 		CD519BCD1C09CB8200CD4ECD /* levels.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = levels.xml; sourceTree = "<group>"; };
@@ -377,6 +378,8 @@
 		CD519BD01C09CB8200CD4ECD /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
 		CD519BD21C09CB8200CD4ECD /* storeItems.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = storeItems.xml; sourceTree = "<group>"; };
 		CD519BD31C09CB8200CD4ECD /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
+		CDCA1CC31C37F30500522A59 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
+		CDCA1CC61C38008300522A59 /* dailyMissions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dailyMissions.xml; sourceTree = "<group>"; };
 		CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheatsPanel.cpp; sourceTree = "<group>"; };
 		CDF015C31C26DA0A0015A4CD /* CheatsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatsPanel.h; sourceTree = "<group>"; };
 		CDF015C61C27039C0015A4CD /* Cheats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cheats.cpp; sourceTree = "<group>"; };
@@ -508,15 +511,16 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CD519BCA1C09CB8200CD4ECD /* dailyMissions.xml */,
+				CDCA1CC31C37F30500522A59 /* shaders */,
 				CD519BCB1C09CB8200CD4ECD /* fonts */,
+				CD519BCF1C09CB8200CD4ECD /* models */,
+				CD519BD31C09CB8200CD4ECD /* textures */,
 				CD519BCC1C09CB8200CD4ECD /* gameInfo.xml */,
+				CDCA1CC61C38008300522A59 /* dailyMissions.xml */,
 				CD519BCD1C09CB8200CD4ECD /* levels.xml */,
 				CD519BCE1C09CB8200CD4ECD /* map.xml */,
-				CD519BCF1C09CB8200CD4ECD /* models */,
 				CD519BD01C09CB8200CD4ECD /* presets.xml */,
 				CD519BD21C09CB8200CD4ECD /* storeItems.xml */,
-				CD519BD31C09CB8200CD4ECD /* textures */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -788,9 +792,9 @@
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				CD519BDE1C09CB8200CD4ECD /* models in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
-				CD519BD41C09CB8200CD4ECD /* dailyMissions.xml in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				CDCA1CC71C38008300522A59 /* dailyMissions.xml in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				CD519BE41C09CB8200CD4ECD /* storeItems.xml in Resources */,
 				CD519BDC1C09CB8200CD4ECD /* map.xml in Resources */,
@@ -803,6 +807,7 @@
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				CD519BD81C09CB8200CD4ECD /* gameInfo.xml in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				CDCA1CC41C37F30500522A59 /* shaders in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -817,13 +822,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD519BE11C09CB8200CD4ECD /* presets.xml in Resources */,
+				CDCA1CC51C37F30500522A59 /* shaders in Resources */,
 				CD519BDD1C09CB8200CD4ECD /* map.xml in Resources */,
+				CDCA1CC81C38008300522A59 /* dailyMissions.xml in Resources */,
 				CD519BDF1C09CB8200CD4ECD /* models in Resources */,
 				CD519BDB1C09CB8200CD4ECD /* levels.xml in Resources */,
 				CD519BD71C09CB8200CD4ECD /* fonts in Resources */,
 				CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */,
 				CD519BD91C09CB8200CD4ECD /* gameInfo.xml in Resources */,
-				CD519BD51C09CB8200CD4ECD /* dailyMissions.xml in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				CD519BE71C09CB8200CD4ECD /* textures in Resources */,
 			);
