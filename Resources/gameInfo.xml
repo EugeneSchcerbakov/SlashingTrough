@@ -40,7 +40,7 @@
             scorePointsReward="1"
             sprite="gamefield/obstacle_0.png" />
         <Enemy group="BS"
-            difficult="1"
+            difficult="5"
             name="B1"
             health="10.0"
             damage="5.0"
@@ -54,7 +54,7 @@
             R="250" G="242" B="27" >
         </Enemy>
         <Enemy group="BS"
-            difficult="2"
+            difficult="10"
             name="B2"
             health="17.0"
             damage="9.0"
@@ -68,7 +68,7 @@
             R="168" G="166" B="3" >
         </Enemy>
         <Enemy group="BS"
-            difficult="3"
+            difficult="12"
             name="B3"
             health="19.0"
             damage="11.0"
@@ -82,7 +82,7 @@
             R="168" G="166" B="3" >
         </Enemy>
         <Enemy group="ML"
-            difficult="1"
+            difficult="8"
             name="M1"
             health="15.0"
             damage="7.0"
@@ -105,7 +105,7 @@
                 mustShowHighlight="true" />
         </Enemy>
         <Enemy group="ML"
-            difficult="2"
+            difficult="11"
             name="M2"
             health="18.0"
             damage="10.0"
@@ -128,7 +128,7 @@
                 mustShowHighlight="true" />
         </Enemy>
         <Enemy group="ML"
-            difficult="3"
+            difficult="14"
             name="M3"
             health="20.0"
             damage="13.0"
@@ -151,7 +151,7 @@
                 mustShowHighlight="true" />
         </Enemy>
         <Enemy group="RG"
-            difficult="1"
+            difficult="7"
             name="R1"
             health="12.0"
             damage="6.0"
@@ -172,7 +172,7 @@
                 projectileLifeTime="0.8" />
         </Enemy>
         <Enemy group="RG"
-            difficult="2"
+            difficult="11"
             name="R2"
             health="17.0"
             damage="10.0"
@@ -193,7 +193,7 @@
                 projectileLifeTime="0.8" />
         </Enemy>
         <Enemy group="RG"
-            difficult="3"
+            difficult="13"
             name="R3"
             health="19.0"
             damage="12.0"
