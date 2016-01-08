@@ -221,23 +221,6 @@ void FieldLevel::prepearForRun(Hero *hero)
     // accomodate level with real enemies
     // overal enemies difficult mast be close as possible to overal level difficult
     
-    GameInfo &gameinfo = GameInfo::getInstance();
-    
-    int totalEnemies = 0;
-    for (const auto& preset : route) {
-        totalEnemies += preset.spawnMap.size();
-    }
-    
-    float difficultCoeff = _info.enemiesDifficultCoeff / totalEnemies;
-    float whole, fractional;
-    fractional = modff(difficultCoeff, &whole);
-    
-    int count1 = totalEnemies * fractional;
-    int count2 = totalEnemies - count1;
-    
-    int difficult1 = whole + 1;
-    int difficult2 = whole;
-    
     std::multimap<std::string, std::string> enemies; // key - group, value - id
     std::vector<std::string> requiredEnemies;
     
@@ -247,21 +230,40 @@ void FieldLevel::prepearForRun(Hero *hero)
         }
     }
     
-    for (const std::string& group : requiredEnemies)
+    GameInfo &gameinfo = GameInfo::getInstance();
+    
+    float totalDifficult = 0.0f;
+    
+    for (int k = 0; k < requiredEnemies.size(); k++)
     {
-        int diffcult = (int)enemies.size() < count1 ? difficult1 : difficult2;
+        std::string group = requiredEnemies[k];
         
-        for (const std::string& id : _info.abaliableEnemies)
-        {
-            const auto& type = gameinfo.getEnemyInfoByName(id);
-            if (type.group == group && type.difficult == diffcult)
-            {
-                auto data = std::pair<std::string, std::string>(group, id);
-                enemies.insert(data);
-                break;
+        std::vector<std::string> enemiesForGroup;
+        for (const std::string& id : _info.abaliableEnemies) {
+            GameInfo::EnemyType type;
+            type = gameinfo.getEnemyInfoByName(id);
+            
+            if (type.group == group) {
+                enemiesForGroup.push_back(id);
             }
         }
+        
+        std::size_t lower = 0;
+        std::size_t upper = enemiesForGroup.size() - 1;
+        std::size_t index = misc::random(lower, upper);
+        
+        std::string id = enemiesForGroup.at(index);
+        
+        GameInfo::EnemyType type = gameinfo.getEnemyInfoByName(id);
+        totalDifficult += (float)type.difficult;
+        
+        auto data = std::pair<std::string, std::string>(group, id);
+        enemies.insert(data);
     }
+    
+    float difficultValuation = 0.0f;
+    difficultValuation = totalDifficult / _info.enemiesDifficultCoeff;
+    difficultValuation = math::clamp(difficultValuation, 0.0f, 1.0f);
     
     for (Preset &preset : route)
     {
