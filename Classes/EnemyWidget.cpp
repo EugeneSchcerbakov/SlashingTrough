@@ -7,6 +7,9 @@
 //
 
 #include "EnemyWidget.h"
+#include "FieldLayer.h"
+
+#include "Particle3D\PU\CCPUParticleSystem3D.h"
 
 // HealthBar implementation
 
@@ -161,9 +164,9 @@ private:
 
 // EnemyWidget implementation
 
-EnemyWidget* EnemyWidget::create(Enemy *enemy)
+EnemyWidget* EnemyWidget::create(Enemy *enemy, cocos2d::Layer *fieldLayer)
 {
-    EnemyWidget *widget = new EnemyWidget(enemy);
+    EnemyWidget *widget = new EnemyWidget(enemy, fieldLayer);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -173,8 +176,9 @@ EnemyWidget* EnemyWidget::create(Enemy *enemy)
     return widget;
 }
 
-EnemyWidget::EnemyWidget(Enemy *enemy)
+EnemyWidget::EnemyWidget(Enemy *enemy, cocos2d::Layer *fieldLayer)
 : _enemy(enemy)
+, _fieldLayer(fieldLayer)
 , _allowDeletion(false)
 {
     CC_ASSERT(_enemy);
@@ -353,7 +357,15 @@ void EnemyWidget::acceptEvent(const Event &event)
         _weapon->setOpacity(0);
         _weapon->setRotation(-30.0f * sideCoeff);
         _weapon->runAction(action);
-    }
+	} else if (event.is("HitedByProjectile")) {
+		cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 0.0f, 50.0f);
+		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
+		particle->setScale(10.0f);
+		particle->setPosition3D(getPosition3D() + offset);
+		particle->setCameraMask(FieldLayer::TargetColor);
+		particle->startParticleSystem();
+		_fieldLayer->addChild(particle);
+	}
 }
 
 void EnemyWidget::accepter(const Event &event, void *param)

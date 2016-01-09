@@ -10,6 +10,8 @@
 #include "FieldLayer.h"
 #include "Store.h"
 
+#include "Particle3D\PU\CCPUParticleSystem3D.h"
+
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
@@ -266,7 +268,15 @@ void HeroWidget::acceptEvent(const Event &event)
         auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
         auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
         _body->runAction(effect);
-    } else {
+	} else if (event.is("HitedByProjectile")) {
+		cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 20.0f, 50.0f);
+		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
+		particle->setScale(8.0f);
+		particle->setPosition3D(getPosition3D() + offset);
+		particle->setCameraMask(FieldLayer::TargetColor);
+		particle->startParticleSystem();
+		_distortion->addChild(particle);
+	} else {
         CC_ASSERT(false);
     }
 }

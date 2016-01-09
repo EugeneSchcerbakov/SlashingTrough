@@ -192,7 +192,7 @@ void FieldLayer::acceptEvent(const Event &event)
                 addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
-                auto widget = EnemyWidget::create(enemy);
+                auto widget = EnemyWidget::create(enemy, this);
                 widget->setCameraMask(FieldLayer::TargetColor);
                 addChild(widget, 2, uid);
                 _enemiesWidgets.push_back(widget);
