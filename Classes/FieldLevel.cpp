@@ -204,7 +204,7 @@ void FieldLevel::prepearForRun(Hero *hero)
         curEnemiesPerSector--;
         
         if (curEnemiesPerSector < 0) {
-            targetValuation -= 0.5f;
+            targetValuation = targetValuation * 0.9f;
             if (targetValuation < minValuation) {
                 break;
             } else {
