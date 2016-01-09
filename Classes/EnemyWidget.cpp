@@ -9,7 +9,7 @@
 #include "EnemyWidget.h"
 #include "FieldLayer.h"
 
-#include "Particle3D\PU\CCPUParticleSystem3D.h"
+#include "cocos-ext.h"
 
 // HealthBar implementation
 

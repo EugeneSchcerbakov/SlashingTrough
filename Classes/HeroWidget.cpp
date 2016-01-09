@@ -10,7 +10,7 @@
 #include "FieldLayer.h"
 #include "Store.h"
 
-#include "Particle3D\PU\CCPUParticleSystem3D.h"
+#include "cocos-ext.h"
 
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
