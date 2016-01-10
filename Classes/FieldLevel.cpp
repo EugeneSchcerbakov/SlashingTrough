@@ -149,29 +149,34 @@ void FieldLevel::prepearForRun(Hero *hero)
             // try to add some diversity by giving a chance to change required spawn amount for sector
             // chance to get smaller/bigger amount always multiplied by 0.4
             
-            int amount = curEnemiesPerSector;
-            int sign = misc::random(0, 100) < 50 ? 1 : -1;
-            int chance = misc::random(0, 100);
-            if (chance > 70)
-            {
-                int add = sign;
-                float maxChance = 100;
-                float probability = misc::random(0, maxChance);
-                while (maxChance > 0)
-                {
-                    maxChance = maxChance * 0.4f;
-                    
-                    if (probability > maxChance) {
-                        break;
-                    } else {
-                        add += sign;
-                    }
-                }
-                
-                amount = math::clamp(amount + add, 0, maxEnemiesPerSector);
-            }
+            Preset preset;
             
-            Preset preset = presetsLib.getRandomWithEnemiesAmount(amount);
+            while (preset.id.empty())
+            {
+                int amount = curEnemiesPerSector;
+                int sign = misc::random(0, 100) < 50 ? 1 : -1;
+                int chance = misc::random(0, 100);
+                if (chance > 70)
+                {
+                    int add = sign;
+                    float maxChance = 100;
+                    float probability = misc::random(0, maxChance);
+                    while (maxChance > 0)
+                    {
+                        maxChance = maxChance * 0.4f;
+                    
+                        if (probability > maxChance) {
+                            break;
+                        } else {
+                            add += sign;
+                        }
+                    }
+                
+                    amount = math::clamp(amount + add, 0, maxEnemiesPerSector);
+                }
+            
+                preset = presetsLib.getRandomWithEnemiesAmount(amount);
+            }
             
             if (isSuitablePreset(preset))
             {
