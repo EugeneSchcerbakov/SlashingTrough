@@ -269,10 +269,15 @@ void HeroWidget::acceptEvent(const Event &event)
         auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
         _body->runAction(effect);
 	} else if (event.is("HitedByProjectile")) {
+        cocos2d::Vec3 pos;
+        pos.x = event.variables.getFloat("x");
+        pos.y = event.variables.getFloat("y");
+        pos.z = getPositionZ();
 		cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 20.0f, 50.0f);
+        
 		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
 		particle->setScale(8.0f);
-		particle->setPosition3D(getPosition3D() + offset);
+		particle->setPosition3D(pos + offset);
 		particle->setCameraMask(FieldLayer::TargetColor);
 		particle->startParticleSystem();
 		_distortion->addChild(particle);

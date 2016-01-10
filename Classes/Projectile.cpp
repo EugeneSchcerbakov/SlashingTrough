@@ -81,8 +81,12 @@ void Projectile::tryDamage(Entity *goal)
     
     if (len < 80.0f)
     {
+        Event e("HitedByProjectile");
+        e.variables.setFloat("x", _x);
+        e.variables.setFloat("y", _y);
+        
         goal->addHealth(-_healthDmg);
-		goal->sendEvent(Event("HitedByProjectile"));
+		goal->sendEvent(e);
         kill();
     }
 }
