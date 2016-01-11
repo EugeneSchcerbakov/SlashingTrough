@@ -239,7 +239,7 @@ void FieldLevel::prepearForRun(Hero *hero)
     
     float totalDifficult = 0.0f;
     
-    for (int k = 0; k < requiredEnemies.size(); k++)
+    for (std::size_t k = 0; k < requiredEnemies.size(); k++)
     {
         std::string group = requiredEnemies[k];
         
