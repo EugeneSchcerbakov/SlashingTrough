@@ -364,6 +364,24 @@ void EnemyWidget::acceptEvent(const Event &event)
 		particle->setCameraMask(EffectsLayer::TargetColor);
 		particle->startParticleSystem();
 		_fieldEffects->addChild(particle);
+        
+        Effect *distortion = Effect::create("effects/circle_distortion.png");
+        distortion->setPosition3D(getPosition3D());
+        distortion->setCameraMask(EffectsLayer::TargetDistor);
+        distortion->setScale(0.3f);
+        distortion->setOpacity(0);
+        auto finish = [distortion](){distortion->finish();};
+        auto callback = cocos2d::CallFunc::create(finish);
+        auto fadein = cocos2d::FadeIn::create(0.1f);
+        auto fadeout = cocos2d::FadeOut::create(0.3f);
+        auto fadestay = cocos2d::DelayTime::create(0.2f);
+        auto fade = cocos2d::Sequence::create(fadein, fadestay, fadeout, nullptr);
+        auto scale = cocos2d::ScaleTo::create(1.0f, 2.0f);
+        auto effect = cocos2d::Spawn::create(fade, scale, nullptr);
+        auto delay = cocos2d::DelayTime::create(0.2f);
+        auto seq = cocos2d::Sequence::create(delay, effect, callback, nullptr);
+        distortion->runAction(seq);
+        _fieldEffects->addEffect(distortion);
 	}
 }
 

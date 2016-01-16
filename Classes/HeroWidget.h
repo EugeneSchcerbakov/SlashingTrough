@@ -41,6 +41,7 @@ protected:
 	void removeAllAnimations();
     void runSwordTrailEffect(float duration);
     void runForwardDistortion(float time);
+    void runSwirlDistortion(bool flipX);
     void acceptEvent(const Event &event);
     
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeRight(float duration);

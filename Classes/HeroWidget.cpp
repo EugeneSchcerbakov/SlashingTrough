@@ -86,7 +86,7 @@ bool HeroWidget::init()
     _dashDistor->setCameraMask(EffectsLayer::TargetDistor);
     _dashDistor->setScale(5.0f);
     _dashDistor->setVisible(false);
-    _distortion->addChild(_dashDistor);
+    _fieldEffects->addChild(_dashDistor);
     
     _swordSide = SwordSide::RIGHT;
 	_nextSwordSide = _swordSide;
@@ -184,6 +184,32 @@ void HeroWidget::runForwardDistortion(float time)
     _dashDistor->runAction(distortionEffect);
 }
 
+void HeroWidget::runSwirlDistortion(bool flipX)
+{
+    Effect *swirl = Effect::create("effects/swirl_distortion_01.png");
+    swirl->setCameraMask(EffectsLayer::TargetDistor);
+    swirl->setPosition3D(getPosition3D());
+    swirl->setScale(1.7f);
+    swirl->setOpacity(0);
+    swirl->setAncestor(this);
+    swirl->setFlippedX(flipX);
+    swirl->scheduleUpdate();
+    
+    auto swirlEnd = [swirl](){swirl->finish();};
+    auto end = cocos2d::CallFunc::create(swirlEnd);
+    auto fadein = cocos2d::FadeTo::create(0.1f, 220);
+    auto fadewait = cocos2d::DelayTime::create(0.4f);
+    auto fadeout = cocos2d::FadeTo::create(0.3f, 0);
+    auto fade = cocos2d::Sequence::create(fadein, fadewait, fadeout, nullptr);
+    auto scale = cocos2d::ScaleTo::create(1.0f, 2.4f);
+    auto rotation = cocos2d::RotateBy::create(0.8f, 180.0f * (flipX ? -1.0f : 1.0f));
+    auto rotateAction = cocos2d::Sequence::create(rotation, end, nullptr);
+    auto effect = cocos2d::Spawn::create(fade, scale, rotateAction, nullptr);
+    
+    swirl->runAction(effect);
+    _fieldEffects->addEffect(swirl);
+}
+
 void HeroWidget::acceptEvent(const Event &event)
 {
 	if (event.is("SwipeRight")) {
@@ -198,6 +224,7 @@ void HeroWidget::acceptEvent(const Event &event)
 			_sword->runAction(swordAction);
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::RIGHT;
+            runSwirlDistortion(true);
         } else if (_swordSide == SwordSide::LEFT) {
 			auto swordAction = AnimSwordLeftSwipeRight(time);
 			_sword->runAction(swordAction);
@@ -220,6 +247,7 @@ void HeroWidget::acceptEvent(const Event &event)
 			_sword->runAction(swordAction);
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::LEFT;
+            runSwirlDistortion(false);
         }
 		runSwordTrailEffect(time);
     } else if (event.is("JumpBackStart")) {
