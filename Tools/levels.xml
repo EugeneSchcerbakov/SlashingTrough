@@ -1,0 +1,901 @@
+<?xml version="1.0" ?>
+<Levels>
+    <Level condition="classic" id="level_1" status="unlocked">
+        <Rewards coins="100.0">
+            <Drop dropChance="50" dropOnce="true" itemId="forward_dash_crystall"/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_2"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B1" enemiesAmount="12" enemiesDifficultCoeff="33.0" lengthInSquares="60" runningSpeedBegin="400.0" runningSpeedEnd="500.0"/>
+    </Level>
+    <Level condition="classic" id="level_2" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_3"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B1, R1" enemiesAmount="17" enemiesDifficultCoeff="102.85" lengthInSquares="80" runningSpeedBegin="410.0" runningSpeedEnd="510.0"/>
+    </Level>
+    <Level condition="classic" id="level_3" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_4"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B1, M1" enemiesAmount="23" enemiesDifficultCoeff="152.375" lengthInSquares="100" runningSpeedBegin="420.0" runningSpeedEnd="520.0"/>
+    </Level>
+    <Level condition="classic" id="level_4" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_5"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R1, B2" enemiesAmount="25" enemiesDifficultCoeff="205.625" lengthInSquares="100" runningSpeedBegin="430.0" runningSpeedEnd="530.0"/>
+    </Level>
+    <Level condition="classic" id="level_5" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_6"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B1, B2" enemiesAmount="26" enemiesDifficultCoeff="199.55" lengthInSquares="100" runningSpeedBegin="440.0" runningSpeedEnd="540.0"/>
+    </Level>
+    <Level condition="classic" id="level_6" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_7"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B1, B2" enemiesAmount="26" enemiesDifficultCoeff="199.55" lengthInSquares="100" runningSpeedBegin="450.0" runningSpeedEnd="550.0"/>
+    </Level>
+    <Level condition="classic" id="level_7" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_8"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R1, B2" enemiesAmount="27" enemiesDifficultCoeff="222.075" lengthInSquares="100" runningSpeedBegin="460.0" runningSpeedEnd="560.0"/>
+    </Level>
+    <Level condition="classic" id="level_8" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_9"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R1, B2" enemiesAmount="29" enemiesDifficultCoeff="238.525" lengthInSquares="100" runningSpeedBegin="470.0" runningSpeedEnd="570.0"/>
+    </Level>
+    <Level condition="classic" id="level_9" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_10"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R1, R2" enemiesAmount="31" enemiesDifficultCoeff="270.475" lengthInSquares="100" runningSpeedBegin="480.0" runningSpeedEnd="580.0"/>
+    </Level>
+    <Level condition="classic" id="level_10" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_11"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R1, M2" enemiesAmount="33" enemiesDifficultCoeff="288.75" lengthInSquares="100" runningSpeedBegin="490.0" runningSpeedEnd="590.0"/>
+    </Level>
+    <Level condition="classic" id="level_11" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_12"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B2, R2" enemiesAmount="33" enemiesDifficultCoeff="287.925" lengthInSquares="100" runningSpeedBegin="500.0" runningSpeedEnd="600.0"/>
+    </Level>
+    <Level condition="classic" id="level_12" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_13"/>
+        </Unlocks>
+        <Description availableEnemiesPool="B2, M2" enemiesAmount="33" enemiesDifficultCoeff="290.4" lengthInSquares="100" runningSpeedBegin="510.0" runningSpeedEnd="610.0"/>
+    </Level>
+    <Level condition="classic" id="level_13" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_14"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R2, M2" enemiesAmount="34" enemiesDifficultCoeff="299.2" lengthInSquares="100" runningSpeedBegin="520.0" runningSpeedEnd="620.0"/>
+    </Level>
+    <Level condition="classic" id="level_14" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_15"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R2, M2" enemiesAmount="34" enemiesDifficultCoeff="299.2" lengthInSquares="100" runningSpeedBegin="530.0" runningSpeedEnd="630.0"/>
+    </Level>
+    <Level condition="classic" id="level_15" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_16"/>
+        </Unlocks>
+        <Description availableEnemiesPool="R2, B3" enemiesAmount="35" enemiesDifficultCoeff="328.125" lengthInSquares="100" runningSpeedBegin="540.0" runningSpeedEnd="640.0"/>
+    </Level>
+    <Level condition="classic" id="level_16" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_17"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="34" enemiesDifficultCoeff="113.9" lengthInSquares="100" runningSpeedBegin="550.0" runningSpeedEnd="650.0"/>
+    </Level>
+    <Level condition="classic" id="level_17" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_18"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="117.25" lengthInSquares="100" runningSpeedBegin="560.0" runningSpeedEnd="660.0"/>
+    </Level>
+    <Level condition="classic" id="level_18" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_19"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="117.25" lengthInSquares="100" runningSpeedBegin="570.0" runningSpeedEnd="670.0"/>
+    </Level>
+    <Level condition="classic" id="level_19" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_20"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="119.0" lengthInSquares="100" runningSpeedBegin="580.0" runningSpeedEnd="680.0"/>
+    </Level>
+    <Level condition="classic" id="level_20" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_21"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="37" enemiesDifficultCoeff="127.65" lengthInSquares="100" runningSpeedBegin="590.0" runningSpeedEnd="690.0"/>
+    </Level>
+    <Level condition="classic" id="level_21" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_22"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="119.0" lengthInSquares="100" runningSpeedBegin="600.0" runningSpeedEnd="700.0"/>
+    </Level>
+    <Level condition="classic" id="level_22" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_23"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="119.0" lengthInSquares="100" runningSpeedBegin="610.0" runningSpeedEnd="710.0"/>
+    </Level>
+    <Level condition="classic" id="level_23" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_24"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="37" enemiesDifficultCoeff="125.8" lengthInSquares="100" runningSpeedBegin="620.0" runningSpeedEnd="720.0"/>
+    </Level>
+    <Level condition="classic" id="level_24" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_25"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="37" enemiesDifficultCoeff="125.8" lengthInSquares="100" runningSpeedBegin="630.0" runningSpeedEnd="730.0"/>
+    </Level>
+    <Level condition="classic" id="level_25" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_26"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="38" enemiesDifficultCoeff="131.1" lengthInSquares="100" runningSpeedBegin="640.0" runningSpeedEnd="740.0"/>
+    </Level>
+    <Level condition="classic" id="level_26" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_27"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="35" enemiesDifficultCoeff="120.75" lengthInSquares="100" runningSpeedBegin="650.0" runningSpeedEnd="750.0"/>
+    </Level>
+    <Level condition="classic" id="level_27" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_28"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="37" enemiesDifficultCoeff="127.65" lengthInSquares="100" runningSpeedBegin="660.0" runningSpeedEnd="760.0"/>
+    </Level>
+    <Level condition="classic" id="level_28" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_29"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="38" enemiesDifficultCoeff="131.1" lengthInSquares="100" runningSpeedBegin="670.0" runningSpeedEnd="770.0"/>
+    </Level>
+    <Level condition="classic" id="level_29" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_30"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="38" enemiesDifficultCoeff="131.1" lengthInSquares="100" runningSpeedBegin="680.0" runningSpeedEnd="780.0"/>
+    </Level>
+    <Level condition="classic" id="level_30" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_31"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="40" enemiesDifficultCoeff="140.0" lengthInSquares="100" runningSpeedBegin="690.0" runningSpeedEnd="790.0"/>
+    </Level>
+    <Level condition="classic" id="level_31" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_32"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_32" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_33"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_33" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_34"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_34" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_35"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_35" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_36"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_36" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_37"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_37" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_38"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_38" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_39"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_39" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_40"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_40" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_41"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_41" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_42"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_42" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_43"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_43" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_44"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_44" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_45"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_45" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_46"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_46" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_47"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_47" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_48"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_48" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_49"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_49" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_50"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_50" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_51"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_51" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_52"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_52" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_53"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_53" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_54"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_54" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_55"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_55" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_56"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_56" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_57"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_57" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_58"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_58" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_59"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_59" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_60"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_60" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_61"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_61" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_62"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_62" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_63"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_63" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_64"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_64" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_65"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_65" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_66"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_66" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_67"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_67" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_68"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_68" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_69"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_69" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_70"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_70" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_71"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_71" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_72"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_72" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_73"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_73" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_74"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_74" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_75"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_75" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_76"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_76" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_77"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_77" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_78"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_78" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_79"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_79" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_80"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_80" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_81"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_81" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_82"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_82" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_83"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_83" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_84"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_84" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_85"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_85" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_86"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_86" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_87"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_87" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_88"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_88" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_89"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_89" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_90"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_90" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_91"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_91" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_92"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_92" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_93"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_93" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_94"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_94" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_95"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_95" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_96"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_96" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_97"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_97" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_98"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_98" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_99"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_99" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks>
+            <Unlock id="level_100"/>
+        </Unlocks>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+    <Level condition="classic" id="level_100" status="locked">
+        <Rewards coins="">
+            <Drop dropChance="0" dropOnce="false" itemId=""/>
+        </Rewards>
+        <Unlocks/>
+        <Description availableEnemiesPool="" enemiesAmount="7" enemiesDifficultCoeff="7" lengthInSquares="100" runningSpeedBegin="" runningSpeedEnd=""/>
+    </Level>
+</Levels>
