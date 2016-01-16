@@ -19,6 +19,7 @@
 #include "ObstacleWidget.h"
 #include "EnemyWidget.h"
 #include "FieldCamera.h"
+#include "EffectsLayer.h"
 
 #include "ControlKeyboard.h"
 #include "ControlTouch.h"
@@ -29,9 +30,6 @@ class FieldLayer : public cocos2d::Layer
 {
 public:
     static FieldLayer* create(const std::string &levelId, GameInterface *gameInterface);
-    
-    static const unsigned short TargetColor;
-    static const unsigned short TargetDistor;
     
 protected:
     FieldLayer(GameInterface *gameInterface);
@@ -63,6 +61,8 @@ private:
     
     cocos2d::GLProgram *_distortionShader;
     cocos2d::GLProgramState *_distortionState;
+    
+    EffectsLayer *_fieldEffects;
     
     FieldCamera *_fieldCamera;
     FieldCamera *_distorCamera;

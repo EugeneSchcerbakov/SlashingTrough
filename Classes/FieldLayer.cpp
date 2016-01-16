@@ -14,9 +14,6 @@
 #include "ScreenChanger.h"
 #include "Log.h"
 
-const unsigned short FieldLayer::TargetColor = (unsigned short)cocos2d::CameraFlag::USER1;
-const unsigned short FieldLayer::TargetDistor = (unsigned short)cocos2d::CameraFlag::USER2;
-
 FieldLayer* FieldLayer::create(const std::string &levelId, GameInterface *gameInterface)
 {
     FieldLayer *layer = new FieldLayer(gameInterface);
@@ -85,6 +82,8 @@ bool FieldLayer::init(const std::string &levelId)
     _rtColorBuffer->setPosition(fboSize.width*0.5f, fboSize.height*0.5f);
     _rtColorBuffer->setFlippedY(true);
     
+    _fieldEffects = EffectsLayer::create();
+    
     _fieldCamera = FieldCamera::create(cocos2d::CameraFlag::USER1);
     _fieldCamera->getActualCamera()->setFrameBufferObject(_fboColor);
     _distorCamera = FieldCamera::create(cocos2d::CameraFlag::USER2);
@@ -93,7 +92,7 @@ bool FieldLayer::init(const std::string &levelId)
     _field.setupAccepter(accepter, static_cast<void *>(this));
     _field.initialize(LevelsCache::getInstance().getLevelById(levelId));
     
-    _heroWidget = HeroWidget::create(_field.getHero(), this);
+    _heroWidget = HeroWidget::create(_field.getHero(), _fieldEffects);
     _heroWidget->setCameraMask((unsigned short)cocos2d::CameraFlag::USER1);
     
     auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
@@ -105,6 +104,7 @@ bool FieldLayer::init(const std::string &levelId)
     addChild(_distorCamera);
     addChild(_heroWidget);
     addChild(_rtColorBuffer);
+    addChild(_fieldEffects);
     scheduleUpdate();
     setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
     
@@ -174,7 +174,7 @@ void FieldLayer::acceptEvent(const Event &event)
             FieldSectorWidget *widget = FieldSectorWidget::create(sector);
             widget->setPositionX(sector->getX());
             widget->setPositionY(sector->getY());
-            widget->setCameraMask(FieldLayer::TargetColor);
+            widget->setCameraMask(EffectsLayer::TargetColor);
             addChild(widget, 0, uid);
         }
     } else if (event.is("SectorDeleted")) {
@@ -188,18 +188,18 @@ void FieldLayer::acceptEvent(const Event &event)
             if (type == Entity::Type::OBSTACLE) {
                 auto obstacle = dynamic_cast<Obstacle *>(entity);
                 auto widget = ObstacleWidget::create(obstacle);
-                widget->setCameraMask(FieldLayer::TargetColor);
+                widget->setCameraMask(EffectsLayer::TargetColor);
                 addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
-                auto widget = EnemyWidget::create(enemy, this);
-                widget->setCameraMask(FieldLayer::TargetColor);
+                auto widget = EnemyWidget::create(enemy, _fieldEffects);
+                widget->setCameraMask(EffectsLayer::TargetColor);
                 addChild(widget, 2, uid);
                 _enemiesWidgets.push_back(widget);
             } else if (type == Entity::Type::PROJECTILE) {
                 auto proj = dynamic_cast<Projectile *>(entity);
                 auto widget = ProjectileWidget::create(proj);
-                widget->setCameraMask(FieldLayer::TargetColor);
+                widget->setCameraMask(EffectsLayer::TargetColor);
                 addChild(widget, 10, uid);
             }
         } else {

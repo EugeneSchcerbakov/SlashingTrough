@@ -7,7 +7,6 @@
 //
 
 #include "HeroWidget.h"
-#include "FieldLayer.h"
 #include "Store.h"
 
 #include "cocos-ext.h"
@@ -15,9 +14,9 @@
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
-HeroWidget* HeroWidget::create(Hero *hero, cocos2d::Layer *distortion)
+HeroWidget* HeroWidget::create(Hero *hero, EffectsLayer *fieldEffects)
 {
-    HeroWidget *widget = new HeroWidget(hero, distortion);
+    HeroWidget *widget = new HeroWidget(hero, fieldEffects);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -27,9 +26,9 @@ HeroWidget* HeroWidget::create(Hero *hero, cocos2d::Layer *distortion)
     return widget;
 }
 
-HeroWidget::HeroWidget(Hero *hero, cocos2d::Layer *distortion)
+HeroWidget::HeroWidget(Hero *hero, EffectsLayer *fieldEffects)
 : _hero(hero)
-, _distortion(distortion)
+, _fieldEffects(fieldEffects)
 {
 }
 
@@ -84,7 +83,7 @@ bool HeroWidget::init()
     _swordTrail->setOpacity(0);
     
     _dashDistor = cocos2d::Sprite::create("effects/dash_distortion.png");
-    _dashDistor->setCameraMask(FieldLayer::TargetDistor);
+    _dashDistor->setCameraMask(EffectsLayer::TargetDistor);
     _dashDistor->setScale(5.0f);
     _dashDistor->setVisible(false);
     _distortion->addChild(_dashDistor);
@@ -278,9 +277,9 @@ void HeroWidget::acceptEvent(const Event &event)
 		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
 		particle->setScale(8.0f);
 		particle->setPosition3D(pos + offset);
-		particle->setCameraMask(FieldLayer::TargetColor);
+		particle->setCameraMask(EffectsLayer::TargetColor);
 		particle->startParticleSystem();
-		_distortion->addChild(particle);
+		_fieldEffects->addChild(particle);
 	} else {
         CC_ASSERT(false);
     }

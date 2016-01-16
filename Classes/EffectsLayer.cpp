@@ -11,18 +11,51 @@
 // Effect implementation
 
 Effect::Effect(const std::string &name, int zOrder)
-: _name(name)
+: Sprite()
+, _name(name)
 , _zOrder(zOrder)
 , _isFinished(false)
+, _ancestor(nullptr)
 {
+}
+
+Effect* Effect::create(const std::string &texture)
+{
+    Effect *effect = new Effect("Noname", 0);
+    if (effect && effect->initWithFile(texture)) {
+        effect->autorelease();
+    } else {
+        delete effect;
+        effect = nullptr;
+    }
+    return effect;
 }
 
 bool Effect::init()
 {
-    if (!cocos2d::Node::init()) {
+    if (!cocos2d::Sprite::init()) {
         return false;
     }
+    
     return true;
+}
+
+void Effect::update(float dt)
+{
+    if (_ancestor)
+    {
+        setPosition3D(_ancestor->getPosition3D());
+    }
+}
+
+void Effect::setAncestor(cocos2d::Node *ancestor)
+{
+    _ancestor = ancestor;
+}
+
+void Effect::finish()
+{
+    _isFinished = true;
 }
 
 bool Effect::isFinished() const
@@ -31,6 +64,9 @@ bool Effect::isFinished() const
 }
 
 // EffectsLayer implementation
+
+const unsigned short EffectsLayer::TargetColor = (unsigned short)cocos2d::CameraFlag::USER1;
+const unsigned short EffectsLayer::TargetDistor = (unsigned short)cocos2d::CameraFlag::USER2;
 
 EffectsLayer* EffectsLayer::create()
 {

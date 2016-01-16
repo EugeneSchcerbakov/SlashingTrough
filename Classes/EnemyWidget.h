@@ -9,8 +9,7 @@
 #ifndef __SlashingTrough__EnemyWidget__
 #define __SlashingTrough__EnemyWidget__
 
-#include "cocos2d.h"
-
+#include "EffectsLayer.h"
 #include "Enemy.h"
 
 class HealthBar;
@@ -19,12 +18,12 @@ class MelleHitZone;
 class EnemyWidget : public cocos2d::BillBoard
 {
 public:
-    static EnemyWidget* create(Enemy *enemy, cocos2d::Layer *fieldLayer);
+    static EnemyWidget* create(Enemy *enemy, EffectsLayer *fieldEffects);
     
     bool isDeletionAllowed() const;
     
 protected:
-	EnemyWidget(Enemy *enemy, cocos2d::Layer *fieldLayer);
+	EnemyWidget(Enemy *enemy, EffectsLayer *fieldEffects);
     virtual ~EnemyWidget();
     
     bool init() override;
@@ -39,7 +38,7 @@ private:
     
     Enemy *_enemy;
     
-	cocos2d::Layer *_fieldLayer;
+	EffectsLayer*_fieldEffects;
     cocos2d::Node *_sprite;
     cocos2d::Sprite *_blood;
     cocos2d::Sprite *_weapon;

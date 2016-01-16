@@ -9,9 +9,8 @@
 #ifndef __SlashingTrough__HeroWidget__
 #define __SlashingTrough__HeroWidget__
 
-#include <cocos2d.h>
-
 #include "Hero.h"
+#include "EffectsLayer.h"
 
 enum class SwordSide {
     LEFT,
@@ -31,10 +30,10 @@ struct SwordTrans
 class HeroWidget : public cocos2d::BillBoard
 {
 public:
-    static HeroWidget* create(Hero *hero, cocos2d::Layer *distortion);
+    static HeroWidget* create(Hero *hero, EffectsLayer *fieldEffects);
     
 protected:
-    HeroWidget(Hero *hero, cocos2d::Layer *distortion);
+    HeroWidget(Hero *hero, EffectsLayer *fieldEffects);
     virtual ~HeroWidget();
     
     bool init();
@@ -68,7 +67,7 @@ private:
     cocos2d::Node *_bodyController;
     cocos2d::MotionStreak *_swordTrail;
     
-    cocos2d::Layer *_distortion;
+    EffectsLayer *_fieldEffects;
     cocos2d::Sprite *_dashDistor;
 };
 

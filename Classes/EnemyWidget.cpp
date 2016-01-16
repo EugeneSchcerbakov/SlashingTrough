@@ -7,7 +7,6 @@
 //
 
 #include "EnemyWidget.h"
-#include "FieldLayer.h"
 
 #include "cocos-ext.h"
 
@@ -164,9 +163,9 @@ private:
 
 // EnemyWidget implementation
 
-EnemyWidget* EnemyWidget::create(Enemy *enemy, cocos2d::Layer *fieldLayer)
+EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *fieldEffects)
 {
-    EnemyWidget *widget = new EnemyWidget(enemy, fieldLayer);
+    EnemyWidget *widget = new EnemyWidget(enemy, fieldEffects);
     if (widget && widget->init()) {
         widget->autorelease();
     } else {
@@ -176,9 +175,9 @@ EnemyWidget* EnemyWidget::create(Enemy *enemy, cocos2d::Layer *fieldLayer)
     return widget;
 }
 
-EnemyWidget::EnemyWidget(Enemy *enemy, cocos2d::Layer *fieldLayer)
+EnemyWidget::EnemyWidget(Enemy *enemy, EffectsLayer *fieldEffects)
 : _enemy(enemy)
-, _fieldLayer(fieldLayer)
+, _fieldEffects(fieldEffects)
 , _allowDeletion(false)
 {
     CC_ASSERT(_enemy);
@@ -362,9 +361,9 @@ void EnemyWidget::acceptEvent(const Event &event)
 		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
 		particle->setScale(10.0f);
 		particle->setPosition3D(getPosition3D() + offset);
-		particle->setCameraMask(FieldLayer::TargetColor);
+		particle->setCameraMask(EffectsLayer::TargetColor);
 		particle->startParticleSystem();
-		_fieldLayer->addChild(particle);
+		_fieldEffects->addChild(particle);
 	}
 }
 
