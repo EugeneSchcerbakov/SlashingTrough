@@ -36,7 +36,7 @@
         </Unlocks>
         <Description availableEnemiesPool="B1 R1, M1" enemiesAmount="25" enemiesDifficultCoeff="205.625" lengthInSquares="100" runningSpeedBegin="430.0" runningSpeedEnd="530.0"/>
     </Level>
-    <Level condition="classic" id="level_5" status="locked">
+    <Level condition="classic" id="level_5" status="unlocked">
         <Rewards coins="">
             <Drop dropChance="0" dropOnce="false" itemId=""/>
         </Rewards>

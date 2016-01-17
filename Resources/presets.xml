@@ -308,5 +308,47 @@
         <row>--BS--</row>
         <row>----ML</row>
         <row>------</row>                
+    </Preset>
+    <Preset id="L8-13">
+        <row>--ML--</row>
+        <row>----R1</row>
+        <row>------</row>
+        <row>--BS--</row>
+        <row>------</row>
     </Preset>                                                                
+    <Preset id="L8-14">
+        <row>------</row>
+        <row>--ML--</row>
+        <row>----R1</row>
+        <row>BS----</row>
+        <row>------</row>
+    </Preset>
+    <Preset id="L8-15">
+        <row>----BS</row>
+        <row>ML----</row>
+        <row>------</row>
+        <row>--R1--</row>
+        <row>------</row>
+    </Preset>    
+    <Preset id="L8-16">
+        <row>----ML</row>
+        <row>------</row>
+        <row>--R1--</row>
+        <row>------</row>
+        <row>--BS--</row>
+    </Preset>
+    <Preset id="L8-17">
+        <row>------</row>
+        <row>ML----</row>
+        <row>----R1</row>
+        <row>--BS--</row>
+        <row>------</row>
+    </Preset>
+    <Preset id="L8-18">
+        <row>----BS</row>
+        <row>R1----</row>
+        <row>------</row>
+        <row>--ML--</row>
+        <row>------</row>
+    </Preset>            
 </Presets>
