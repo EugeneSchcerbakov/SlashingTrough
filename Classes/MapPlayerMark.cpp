@@ -51,36 +51,51 @@ bool MapPlayerMark::init()
 
 void MapPlayerMark::refreshPosition()
 {
-    GameInfo &gameinfo = GameInfo::getInstance();
     LevelsCache &levels = LevelsCache::getInstance();
     PlayerInfo &player = PlayerInfo::getInstance();
-    
-    std::string lastCompleted = player.variables.getString("LastCompletedLevel");
-    
-    if (lastCompleted.empty()) {
-        // probably player doesn't complete any level by now
-        auto level = levels.getLevelByIndex(0).lock();
-        setPosition(cocos2d::Vec2(level->getMapX(), level->getMapY()));
-    } else {
-        auto level = levels.getLevelById(lastCompleted).lock();
-        if (!level) {
-            return;
+
+    std::string lastAttachedLevelId = player.variables.getString("LevelMarkAttachId");
+    std::string lastCompletedId = player.variables.getString("LastCompletedLevel");
+
+    if (lastCompletedId.empty() && lastAttachedLevelId.empty()) {
+        // first game launch
+        FieldLevel::Ptr levelPtr = levels.getLevelByIndex(0).lock();
+        setPosition(cocos2d::Vec2(levelPtr->getMapX(), levelPtr->getMapY()));
+    }
+    else {
+        FieldLevel::Ptr prevLevel = levels.getLevelById(lastCompletedId).lock();
+        FieldLevel::Ptr nextLevel = nullptr;
+
+        // determin valid next level
+        auto unlocks = prevLevel->getUnlocks();
+
+        for (auto itr = unlocks.begin(); itr != unlocks.end(); itr++)
+        {
+            const std::string id = (*itr);
+            FieldLevel::Ptr temp = levels.getLevelById(id).lock();
+
+            // avoid spinoff levels
+            if (!temp->getUnlocks().empty()) {
+                nextLevel = temp;
+                break;
+            }
         }
-        
-        std::string prev = gameinfo.getGlobalString("LAST_COMPLETED_LEVEL");
-        if (!prev.empty() && lastCompleted != prev) {
-            auto prevLevel = levels.getLevelById(prev).lock();
+
+        if (nextLevel) {
             cocos2d::Vec2 p0(prevLevel->getMapX(), prevLevel->getMapY());
-            setPosition(p0);
-            if (!level->getUnlocks().empty()) {
-                cocos2d::Vec2 p1(level->getMapX(), level->getMapY());
+            cocos2d::Vec2 p1(nextLevel->getMapX(), nextLevel->getMapY());
+            
+            if (nextLevel->getId() != lastAttachedLevelId) {
+                setPosition(p0);
                 auto move = cocos2d::MoveTo::create(2.0f, p1);
                 runAction(move);
-                gameinfo.setGlobalString("LAST_COMPLETED_LEVEL", lastCompleted);
             }
-        } else {
-            setPosition(cocos2d::Vec2(level->getMapX(), level->getMapY()));
-            gameinfo.setGlobalString("LAST_COMPLETED_LEVEL", lastCompleted);
+            else {
+                setPosition(p1);
+            }
+
+            player.variables.setString("LevelMarkAttachId", nextLevel->getId());
+            player.save();
         }
     }
 }
