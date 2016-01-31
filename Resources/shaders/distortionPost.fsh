@@ -13,7 +13,7 @@ void main()
     vec4 distor = texture2D(normalBuffer, v_texCoord);
     vec3 normal = normalize(2.0 * distor.xyz - 1.0);
     
-    vec2 uv = v_texCoord + normal.xy * ABS_OFFSET;
+    vec2 uv = v_texCoord + normal.xy * (ABS_OFFSET * distor.a);
     vec4 color = texture2D(CC_Texture0, uv);
     
     gl_FragColor = color;

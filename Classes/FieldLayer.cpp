@@ -73,7 +73,7 @@ bool FieldLayer::init(const std::string &levelId)
     
     _fboDistor = cocos2d::experimental::FrameBuffer::create(1, fboSize.width, fboSize.height);
     _fboDistor->attachRenderTarget(_rtSceneDistor);
-    _fboDistor->setClearColor(cocos2d::Color4F(0.0f, 0.0f, 0.0f, 1.0f));
+    _fboDistor->setClearColor(cocos2d::Color4F(0.0f, 0.0f, 0.0f, 0.0f));
     _fboDistor->setClearDepth(0.0f);
     
     _rtColorBuffer = cocos2d::Sprite::create();
