@@ -101,7 +101,7 @@ private:
     bool _completedState;
 };
 
-DailyMissionPopup* DailyMissionPopup::create(EffectsLayer *container)
+DailyMissionPopup* DailyMissionPopup::create(cocos2d::Layer *container)
 {
     DailyMissionPopup *popup = new DailyMissionPopup(container);
     if (popup && popup->init()) {
@@ -183,7 +183,7 @@ float DailyMissionPopup::hideEffect()
     return time;
 }
 
-DailyMissionPopup::DailyMissionPopup(EffectsLayer *container)
+DailyMissionPopup::DailyMissionPopup(cocos2d::Layer *container)
 : Popup()
 , _globalEffects(container)
 , _shown(false)
@@ -274,7 +274,7 @@ void DailyMissionPopup::update(float dt)
                     from.y += icon->getContentSize().height * 0.5f * scale;
                     
                     auto effect = EffectFlyingIcon::create(image, from, endp, scale);
-                    _globalEffects->addEffect(effect);
+                    _globalEffects->addChild(effect);
                     
                     widget->setCompletedState(true);
                 }

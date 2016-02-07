@@ -10,13 +10,12 @@
 #define DailyMissionsPopup_hpp
 
 #include "DailyMissions.h"
-#include "EffectsLayer.h"
 #include "PopupCore.h"
 
 class DailyMissionPopup : public Popup
 {
 public:
-    static DailyMissionPopup* create(EffectsLayer *container);
+    static DailyMissionPopup* create(cocos2d::Layer *container);
     
     bool hitTest(const cocos2d::Vec2 &pt, const cocos2d::Camera* camera, cocos2d::Vec3 *p) const override;
     
@@ -26,7 +25,7 @@ public:
     virtual float hideEffect() override;
     
 protected:
-    DailyMissionPopup(EffectsLayer *container);
+    DailyMissionPopup(cocos2d::Layer *container);
     virtual ~DailyMissionPopup();
     
     virtual bool init() override;
@@ -36,7 +35,7 @@ private:
     void checkInternalState();
     
     cocos2d::Sprite *_panel;
-    EffectsLayer *_globalEffects;
+    cocos2d::Layer *_globalEffects;
     
     std::list<std::pair<std::string, cocos2d::Vec2>> _effects;
     

@@ -8,13 +8,14 @@
 
 #include "HeroWidget.h"
 #include "Store.h"
+#include "EffectsLayer.h"
 
 #include "cocos-ext.h"
 
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
-HeroWidget* HeroWidget::create(Hero *hero, EffectsLayer *fieldEffects)
+HeroWidget* HeroWidget::create(Hero *hero, cocos2d::Layer *fieldEffects)
 {
     HeroWidget *widget = new HeroWidget(hero, fieldEffects);
     if (widget && widget->init()) {
@@ -26,7 +27,7 @@ HeroWidget* HeroWidget::create(Hero *hero, EffectsLayer *fieldEffects)
     return widget;
 }
 
-HeroWidget::HeroWidget(Hero *hero, EffectsLayer *fieldEffects)
+HeroWidget::HeroWidget(Hero *hero, cocos2d::Layer *fieldEffects)
 : _hero(hero)
 , _fieldEffects(fieldEffects)
 {
@@ -83,7 +84,7 @@ bool HeroWidget::init()
     _swordTrail->setOpacity(0);
     
     _dashDistor = cocos2d::Sprite::create("effects/dash_distortion.png");
-    _dashDistor->setCameraMask(EffectsLayer::TargetDistor);
+    _dashDistor->setCameraMask(Effect::TargetDistor);
     _dashDistor->setScale(5.0f);
     _dashDistor->setVisible(false);
     _fieldEffects->addChild(_dashDistor);
@@ -187,7 +188,7 @@ void HeroWidget::runForwardDistortion(float time)
 void HeroWidget::runSwirlDistortion(bool flipX)
 {
     Effect *swirl = Effect::create("effects/swirl_distortion_01.png");
-    swirl->setCameraMask(EffectsLayer::TargetDistor);
+    swirl->setCameraMask(Effect::TargetDistor);
     swirl->setPosition3D(getPosition3D());
     swirl->setScale(1.7f);
     swirl->setOpacity(0);
@@ -207,7 +208,7 @@ void HeroWidget::runSwirlDistortion(bool flipX)
     auto effect = cocos2d::Spawn::create(fade, scale, rotateAction, nullptr);
     
     swirl->runAction(effect);
-    _fieldEffects->addEffect(swirl);
+    _fieldEffects->addChild(swirl);
 }
 
 void HeroWidget::acceptEvent(const Event &event)
@@ -305,7 +306,7 @@ void HeroWidget::acceptEvent(const Event &event)
 		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
 		particle->setScale(8.0f);
 		particle->setPosition3D(pos + offset);
-		particle->setCameraMask(EffectsLayer::TargetColor);
+		particle->setCameraMask(Effect::TargetColor);
 		particle->startParticleSystem();
 		_fieldEffects->addChild(particle);
 	} else {

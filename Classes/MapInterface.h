@@ -12,7 +12,6 @@
 #include "MissionStartPopup.h"
 #include "DailyMissionsPopup.h"
 #include "MapWidget.h"
-#include "EffectsLayer.h"
 
 class MapInterface : public PopupCarrier
 {
@@ -44,8 +43,8 @@ private:
     
     cocos2d::LayerColor *_background;
     cocos2d::Layer *_guiLayer;
+    cocos2d::Layer *_effectsLayer;
     MapWidget *_mapWidget;
-    EffectsLayer *_effectsLayer;
     
     cocos2d::Sprite *_coinIcon;
     cocos2d::ui::Text *_coinsText;

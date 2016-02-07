@@ -24,7 +24,7 @@ EffectFlyingIcon* EffectFlyingIcon::create(std::string icon, cocos2d::Vec2 from,
 }
 
 EffectFlyingIcon::EffectFlyingIcon()
-: Effect("EffectFlyingIcon", 0)
+: Effect()
 {
 }
 
@@ -47,7 +47,7 @@ bool EffectFlyingIcon::init(std::string icon, cocos2d::Vec2 from, cocos2d::Vec2 
     
     auto func = [this]()
     {
-        _isFinished = true;
+        finish();
     };
     
     cocos2d::Vec2 m, v0, v1;

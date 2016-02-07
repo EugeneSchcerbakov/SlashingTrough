@@ -7,6 +7,7 @@
 //
 
 #include "EnemyWidget.h"
+#include "EffectsLayer.h"
 
 #include "cocos-ext.h"
 
@@ -163,7 +164,7 @@ private:
 
 // EnemyWidget implementation
 
-EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *fieldEffects)
+EnemyWidget* EnemyWidget::create(Enemy *enemy, cocos2d::Layer *fieldEffects)
 {
     EnemyWidget *widget = new EnemyWidget(enemy, fieldEffects);
     if (widget && widget->init()) {
@@ -175,7 +176,7 @@ EnemyWidget* EnemyWidget::create(Enemy *enemy, EffectsLayer *fieldEffects)
     return widget;
 }
 
-EnemyWidget::EnemyWidget(Enemy *enemy, EffectsLayer *fieldEffects)
+EnemyWidget::EnemyWidget(Enemy *enemy, cocos2d::Layer *fieldEffects)
 : _enemy(enemy)
 , _fieldEffects(fieldEffects)
 , _allowDeletion(false)
@@ -361,13 +362,13 @@ void EnemyWidget::acceptEvent(const Event &event)
 		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
 		particle->setScale(10.0f);
 		particle->setPosition3D(getPosition3D() + offset);
-		particle->setCameraMask(EffectsLayer::TargetColor);
+		particle->setCameraMask(Effect::TargetColor);
 		particle->startParticleSystem();
 		_fieldEffects->addChild(particle);
         
         Effect *distortion = Effect::create("effects/circle_distortion.png");
         distortion->setPosition3D(getPosition3D());
-        distortion->setCameraMask(EffectsLayer::TargetDistor);
+        distortion->setCameraMask(Effect::TargetDistor);
         distortion->setScale(0.3f);
         distortion->setOpacity(0);
         auto finish = [distortion](){distortion->finish();};
@@ -381,7 +382,7 @@ void EnemyWidget::acceptEvent(const Event &event)
         auto delay = cocos2d::DelayTime::create(0.2f);
         auto seq = cocos2d::Sequence::create(delay, effect, callback, nullptr);
         distortion->runAction(seq);
-        _fieldEffects->addEffect(distortion);
+        _fieldEffects->addChild(distortion);
 	}
 }
 

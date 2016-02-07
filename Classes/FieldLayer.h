@@ -19,7 +19,6 @@
 #include "ObstacleWidget.h"
 #include "EnemyWidget.h"
 #include "FieldCamera.h"
-#include "EffectsLayer.h"
 
 #include "ControlKeyboard.h"
 #include "ControlTouch.h"
@@ -62,7 +61,7 @@ private:
     cocos2d::GLProgram *_distortionShader;
     cocos2d::GLProgramState *_distortionState;
     
-    EffectsLayer *_fieldEffects;
+    cocos2d::Layer *_fieldEffects;
     
     FieldCamera *_fieldCamera;
     FieldCamera *_distorCamera;

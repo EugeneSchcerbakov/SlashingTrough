@@ -49,9 +49,9 @@ bool MapInterface::init()
     
     _background = cocos2d::LayerColor::create(cocos2d::Color4B::BLACK);
     _guiLayer = cocos2d::Layer::create();
+    _effectsLayer = cocos2d::Layer::create();
     _mapWidget = MapWidget::create("map.xml");
     _mapWidget->setSwallowTouches(false);
-    _effectsLayer = EffectsLayer::create();
     
     auto input = cocos2d::EventListenerTouchOneByOne::create();
     input->onTouchBegan = CC_CALLBACK_2(MapInterface::mapTouchBegan, this);

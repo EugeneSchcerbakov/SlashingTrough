@@ -7,6 +7,7 @@
 //
 
 #include "FieldLayer.h"
+#include "EffectsLayer.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
 #include "Utils.h"
@@ -82,7 +83,7 @@ bool FieldLayer::init(const std::string &levelId)
     _rtColorBuffer->setPosition(fboSize.width*0.5f, fboSize.height*0.5f);
     _rtColorBuffer->setFlippedY(true);
     
-    _fieldEffects = EffectsLayer::create();
+    _fieldEffects = cocos2d::Layer::create();
     
     _fieldCamera = FieldCamera::create(cocos2d::CameraFlag::USER1);
     _fieldCamera->getActualCamera()->setFrameBufferObject(_fboColor);
@@ -174,7 +175,7 @@ void FieldLayer::acceptEvent(const Event &event)
             FieldSectorWidget *widget = FieldSectorWidget::create(sector);
             widget->setPositionX(sector->getX());
             widget->setPositionY(sector->getY());
-            widget->setCameraMask(EffectsLayer::TargetColor);
+            widget->setCameraMask(Effect::TargetColor);
             addChild(widget, 0, uid);
         }
     } else if (event.is("SectorDeleted")) {
@@ -188,18 +189,18 @@ void FieldLayer::acceptEvent(const Event &event)
             if (type == Entity::Type::OBSTACLE) {
                 auto obstacle = dynamic_cast<Obstacle *>(entity);
                 auto widget = ObstacleWidget::create(obstacle);
-                widget->setCameraMask(EffectsLayer::TargetColor);
+                widget->setCameraMask(Effect::TargetColor);
                 addChild(widget, 1, uid);
             } else if (type == Entity::Type::ENEMY) {
                 auto enemy = dynamic_cast<Enemy *>(entity);
                 auto widget = EnemyWidget::create(enemy, _fieldEffects);
-                widget->setCameraMask(EffectsLayer::TargetColor);
+                widget->setCameraMask(Effect::TargetColor);
                 addChild(widget, 2, uid);
                 _enemiesWidgets.push_back(widget);
             } else if (type == Entity::Type::PROJECTILE) {
                 auto proj = dynamic_cast<Projectile *>(entity);
                 auto widget = ProjectileWidget::create(proj);
-                widget->setCameraMask(EffectsLayer::TargetColor);
+                widget->setCameraMask(Effect::TargetColor);
                 addChild(widget, 10, uid);
             }
         } else {
