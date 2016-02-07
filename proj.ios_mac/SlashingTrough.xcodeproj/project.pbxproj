@@ -173,6 +173,8 @@
 		CD519BE71C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
 		CD81549F1C415D6E00904EB0 /* particles in Resources */ = {isa = PBXBuildFile; fileRef = CD81549E1C415D6E00904EB0 /* particles */; };
 		CD8154A01C415D6E00904EB0 /* particles in Resources */ = {isa = PBXBuildFile; fileRef = CD81549E1C415D6E00904EB0 /* particles */; };
+		CD9F5A4D1C675C0C00C37ED1 /* EffectExplosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9F5A4B1C675C0C00C37ED1 /* EffectExplosion.cpp */; };
+		CD9F5A4E1C675C0C00C37ED1 /* EffectExplosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9F5A4B1C675C0C00C37ED1 /* EffectExplosion.cpp */; };
 		CDCA1CC41C37F30500522A59 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC31C37F30500522A59 /* shaders */; };
 		CDCA1CC51C37F30500522A59 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC31C37F30500522A59 /* shaders */; };
 		CDCA1CC71C38008300522A59 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC61C38008300522A59 /* dailyMissions.xml */; };
@@ -381,6 +383,8 @@
 		CD519BD21C09CB8200CD4ECD /* storeItems.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = storeItems.xml; sourceTree = "<group>"; };
 		CD519BD31C09CB8200CD4ECD /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
 		CD81549E1C415D6E00904EB0 /* particles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = particles; sourceTree = "<group>"; };
+		CD9F5A4B1C675C0C00C37ED1 /* EffectExplosion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectExplosion.cpp; sourceTree = "<group>"; };
+		CD9F5A4C1C675C0C00C37ED1 /* EffectExplosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectExplosion.h; sourceTree = "<group>"; };
 		CDCA1CC31C37F30500522A59 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
 		CDCA1CC61C38008300522A59 /* dailyMissions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dailyMissions.xml; sourceTree = "<group>"; };
 		CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheatsPanel.cpp; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 				CD519B051C09CB7300CD4ECD /* DailyTask.h */,
 				CD519B061C09CB7300CD4ECD /* EffectFlyingIcon.cpp */,
 				CD519B071C09CB7300CD4ECD /* EffectFlyingIcon.h */,
+				CD9F5A4B1C675C0C00C37ED1 /* EffectExplosion.cpp */,
+				CD9F5A4C1C675C0C00C37ED1 /* EffectExplosion.h */,
 				CD519B081C09CB7300CD4ECD /* EffectsLayer.cpp */,
 				CD519B091C09CB7300CD4ECD /* EffectsLayer.h */,
 				CD519B0A1C09CB7300CD4ECD /* Enemy.cpp */,
@@ -865,6 +871,7 @@
 				CD519BC41C09CB7300CD4ECD /* Utils.cpp in Sources */,
 				CD519BBC1C09CB7300CD4ECD /* StoreInterface.cpp in Sources */,
 				CD519B7E1C09CB7300CD4ECD /* FieldSector.cpp in Sources */,
+				CD9F5A4D1C675C0C00C37ED1 /* EffectExplosion.cpp in Sources */,
 				CD519B9A1C09CB7300CD4ECD /* MapWidget.cpp in Sources */,
 				CD519B621C09CB7300CD4ECD /* Abilities.cpp in Sources */,
 				CD519BA61C09CB7300CD4ECD /* PlayerInfo.cpp in Sources */,
@@ -944,6 +951,7 @@
 				CD519BB51C09CB7300CD4ECD /* Store.cpp in Sources */,
 				CD519BAD1C09CB7300CD4ECD /* ProjectileWidget.cpp in Sources */,
 				CD519B711C09CB7300CD4ECD /* EffectsLayer.cpp in Sources */,
+				CD9F5A4E1C675C0C00C37ED1 /* EffectExplosion.cpp in Sources */,
 				CD519B6D1C09CB7300CD4ECD /* DailyTask.cpp in Sources */,
 				CD519B811C09CB7300CD4ECD /* FieldSectorWidget.cpp in Sources */,
 				CD519B751C09CB7300CD4ECD /* EnemyWidget.cpp in Sources */,

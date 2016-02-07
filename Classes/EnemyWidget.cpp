@@ -9,7 +9,7 @@
 #include "EnemyWidget.h"
 #include "EffectsLayer.h"
 
-#include "cocos-ext.h"
+#include "EffectExplosion.h"
 
 // HealthBar implementation
 
@@ -358,31 +358,7 @@ void EnemyWidget::acceptEvent(const Event &event)
         _weapon->setRotation(-30.0f * sideCoeff);
         _weapon->runAction(action);
 	} else if (event.is("HitedByProjectile")) {
-		cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 0.0f, 50.0f);
-		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
-		particle->setScale(10.0f);
-		particle->setPosition3D(getPosition3D() + offset);
-		particle->setCameraMask(Effect::TargetColor);
-		particle->startParticleSystem();
-		_fieldEffects->addChild(particle);
-        
-        Effect *distortion = Effect::create("effects/circle_distortion.png");
-        distortion->setPosition3D(getPosition3D());
-        distortion->setCameraMask(Effect::TargetDistor);
-        distortion->setScale(0.3f);
-        distortion->setOpacity(0);
-        auto finish = [distortion](){distortion->finish();};
-        auto callback = cocos2d::CallFunc::create(finish);
-        auto fadein = cocos2d::FadeIn::create(0.1f);
-        auto fadeout = cocos2d::FadeOut::create(0.3f);
-        auto fadestay = cocos2d::DelayTime::create(0.2f);
-        auto fade = cocos2d::Sequence::create(fadein, fadestay, fadeout, nullptr);
-        auto scale = cocos2d::ScaleTo::create(1.0f, 2.0f);
-        auto effect = cocos2d::Spawn::create(fade, scale, nullptr);
-        auto delay = cocos2d::DelayTime::create(0.2f);
-        auto seq = cocos2d::Sequence::create(delay, effect, callback, nullptr);
-        distortion->runAction(seq);
-        _fieldEffects->addChild(distortion);
+        _fieldEffects->addChild(EffectExplosion::create(getPosition3D()));
 	}
 }
 

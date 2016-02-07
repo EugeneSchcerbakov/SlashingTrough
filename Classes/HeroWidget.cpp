@@ -8,9 +8,7 @@
 
 #include "HeroWidget.h"
 #include "Store.h"
-#include "EffectsLayer.h"
-
-#include "cocos-ext.h"
+#include "EffectExplosion.h"
 
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
@@ -301,14 +299,8 @@ void HeroWidget::acceptEvent(const Event &event)
         pos.x = event.variables.getFloat("x");
         pos.y = event.variables.getFloat("y");
         pos.z = getPositionZ();
-		cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 20.0f, 50.0f);
         
-		auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
-		particle->setScale(8.0f);
-		particle->setPosition3D(pos + offset);
-		particle->setCameraMask(Effect::TargetColor);
-		particle->startParticleSystem();
-		_fieldEffects->addChild(particle);
+        _fieldEffects->addChild(EffectExplosion::create(pos));
 	} else {
         CC_ASSERT(false);
     }
