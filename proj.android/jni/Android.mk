@@ -24,6 +24,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../Classes/DailyMissionsPopup.cpp \
 ../../Classes/EffectsLayer.cpp \
 ../../Classes/EffectFlyingIcon.cpp \
+../../Classes/EffectExplosion.cpp \
 ../../Classes/Enemy.cpp \
 ../../Classes/EnemyWidget.cpp \
 ../../Classes/Field.cpp \

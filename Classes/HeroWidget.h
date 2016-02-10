@@ -11,6 +11,8 @@
 
 #include "Hero.h"
 
+#include "cocos2d.h"
+
 enum class SwordSide {
     LEFT,
     RIGHT

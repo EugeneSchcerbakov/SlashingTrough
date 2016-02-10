@@ -2,18 +2,21 @@
     "android": {
         "Chartboost": {
             "ads": {
-                "Default": {
+                "Interstitial": {
                     "type": "interstitial"
-                }, 
-                "Level Complete": {
+                },
+                "RewardedVideo": {
                     "type": "rewarded_video"
-                }, 
+                },
+                "Video": {
+                    "type": "video"
+                },
                 "MoreApp": {
                     "type": "more_app"
                 }
-            }, 
-            "id": "4f7b433509b6025804000002", 
-            "signature": "dd2d41b69ac01b80f443f5b6cf06096d457f82bd"
+            },
+            "id": "56b9d8f404b0161b2d859f8e",
+            "signature": "2ebeffa9924482e694d8d47c8668f41f080f4283"
         }
     }, 
     "ios": {
