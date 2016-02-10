@@ -1,5 +1,9 @@
 #include "AppDelegate.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "PluginChartboost/PluginChartboost.h"
+#endif
+
 #include "ScreenChanger.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -34,6 +38,10 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     WRITE_INIT("Slashing Through started.");
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    sdkbox::PluginChartboost::init();
+#endif
     
     // initialize director
     auto director = Director::getInstance();

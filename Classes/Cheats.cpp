@@ -8,6 +8,10 @@
 
 #include "Cheats.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "PluginChartboost/PluginChartboost.h"
+#endif
+
 #include "GameInfo.h"
 #include "PlayerInfo.h"
 #include "Store.h"
@@ -98,6 +102,33 @@ void Cheats::initBasicCheats()
             level->setStatus(FieldLevel::Status::UNLOCKED);
         }
     };
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    std::function<void()> ad_chartboost_interstitial = []()
+    {
+        sdkbox::PluginChartboost::show("Interstitial");
+    };
+    
+    std::function<void()> ad_chartboost_rewarded_video = []()
+    {
+        sdkbox::PluginChartboost::show("RewardedVideo");
+    };
+    
+    std::function<void()> ad_chartboost_video = []()
+    {
+        sdkbox::PluginChartboost::show("Video");
+    };
+
+    std::function<void()> ad_chartboost_moreapp = []()
+    {
+        sdkbox::PluginChartboost::show("MoreApp");
+    };
+    
+    cheats.addCheat("ad_chartboost_interstitial", "Ad Chartboost Interstitial", ad_chartboost_interstitial);
+    cheats.addCheat("ad_chartboost_rewarded_video", "Ad Chartboost Rewarded Video", ad_chartboost_rewarded_video);
+    cheats.addCheat("ad_chartboost_video", "Ad Chartboost Video", ad_chartboost_video);
+    cheats.addCheat("ad_chartboost_moreapp", "Ad Chartboost MoreApp", ad_chartboost_moreapp);
+#endif
     
     cheats.addCheat("add_coins", "Add 10'000 coins", coins);
     cheats.addCheat("add_shard", "Add 3 shards of each crystalls", shards);
