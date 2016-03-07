@@ -25,6 +25,8 @@ public:
 
 	virtual void setPosition(const cocos2d::Vec2 &position){setPosition(position.x, position.y);}
 	virtual void setPosition(float x, float y);
+    
+    virtual void setScale(float scale) override;
 
 	#ifdef MAGIC_3D
 	virtual void setPosition3D(const cocos2d::Vec3 &position){setPosition3D(position.x, position.y, position.z);}

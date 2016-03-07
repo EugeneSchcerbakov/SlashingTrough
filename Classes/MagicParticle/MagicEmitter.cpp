@@ -139,6 +139,11 @@ void MagicEmitter::setPosition(float x, float y)
 		Node::setPosition(x, y);
 }
 
+void MagicEmitter::setScale(float scale)
+{
+    emitter->SetScale(scale);
+}
+
 #ifdef MAGIC_3D
 void MagicEmitter::setPosition3D(float x, float y, float z)
 {

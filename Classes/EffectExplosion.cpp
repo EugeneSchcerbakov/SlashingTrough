@@ -9,6 +9,7 @@
 #include "EffectExplosion.h"
 
 #include "cocos-ext.h"
+#include "MagicEmitter.h"
 
 EffectExplosion* EffectExplosion::create(const cocos2d::Vec3 &pos)
 {
@@ -45,6 +46,12 @@ bool EffectExplosion::init(const cocos2d::Vec3 &pos)
     particle->setCameraMask(Effect::TargetColor);
     particle->startParticleSystem();
     addChild(particle);
+    
+    MagicEmitter *hit = MagicEmitter::create("hit01");
+    hit->setCameraMask(Effect::TargetColor);
+    hit->setPosition3D(cocos2d::Vec3(pos));
+    hit->setScale(0.8f);
+    addChild(hit);
     
     auto *distortion = cocos2d::Sprite::create("effects/circle_distortion.png");
     distortion->setPosition3D(pos);
