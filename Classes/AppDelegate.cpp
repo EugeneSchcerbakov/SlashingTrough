@@ -4,6 +4,9 @@
 #include "PluginChartboost/PluginChartboost.h"
 #endif
 
+#include "mp_cocos.h"
+#include "platform_cocos.h"
+
 #include "ScreenChanger.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -17,12 +20,23 @@
 
 USING_NS_CC;
 
-AppDelegate::AppDelegate() {
+AppDelegate::AppDelegate()
+: _device(nullptr)
+{
 
 }
 
 AppDelegate::~AppDelegate() 
 {
+    if (_device)
+    {
+        _device->Destroy();
+        delete _device;
+        _device = nullptr;
+    }
+    
+    MP_Manager& mp = MP_Manager::GetInstance();
+    mp.Destroy();
 }
 
 //if you want a different context,just modify the value of glContextAttrs
@@ -49,9 +63,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto fileUtils = cocos2d::FileUtils::getInstance();
 	auto frameSize = cocos2d::Size(640.0f, 1136.0f);
 
-	cocos2d::Application::Platform platform;
-	platform = cocos2d::Application::getInstance()->getTargetPlatform();
-	if (platform == cocos2d::Application::Platform::OS_WINDOWS) {
+	cocos2d::Application::Platform targetPlatform;
+	targetPlatform = cocos2d::Application::getInstance()->getTargetPlatform();
+	if (targetPlatform == cocos2d::Application::Platform::OS_WINDOWS) {
 		fileUtils->addSearchPath("../../Resources");
 		fileUtils->addSearchPath("../../Resources/fonts");
 		fileUtils->addSearchPath("../../Resources/textures");
@@ -66,6 +80,39 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("Slashing Trough");
         director->setOpenGLView(glview);
     }
+    
+    cocos2d::Size clientSize = director->getWinSizeInPixels();
+    _device = new MP_Device_Cocos(clientSize.width, clientSize.height);
+    _device->Create();
+    
+    MP_Manager& MP=MP_Manager::GetInstance();
+    
+    MP_Platform* platform=new MP_Platform_COCOS;
+    MAGIC_AXIS_ENUM axis=MAGIC_pXpYnZ;
+    
+#ifdef SHADER_WRAP
+    bool filters[MAGIC_RENDER_STATE__MAX];
+    for (int i=0;i<MAGIC_RENDER_STATE__MAX;i++)
+        filters[i]=false;
+    filters[MAGIC_RENDER_STATE_BLENDING]=true;
+    filters[MAGIC_RENDER_STATE_TEXTURE]=true;
+    filters[MAGIC_RENDER_STATE_ADDRESS_U]=true;
+    filters[MAGIC_RENDER_STATE_ADDRESS_V]=true;
+    filters[MAGIC_RENDER_STATE_ZENABLE]=true;
+    filters[MAGIC_RENDER_STATE_ZWRITE]=true;
+#ifndef SHADER_ALPHATEST_WRAP
+    filters[MAGIC_RENDER_STATE_ALPHATEST_INIT]=true;
+    filters[MAGIC_RENDER_STATE_ALPHATEST]=true;
+#endif
+#else
+    bool* filters=NULL;
+#endif
+    
+    MP.Initialization(filters, true, axis, platform, MAGIC_INTERPOLATION_ENABLE, MAGIC_CHANGE_EMITTER_DEFAULT, 1024, 1024, 1, 1.f, 0.1f, true);
+    MP.LoadAllEmitters();
+    MP.RefreshAtlas();
+    MP.CloseFiles();
+    MP.Stop();
     
 	GameInfo::getInstance().loadInfo("gameInfo.xml");
     PresetsLibrary::getInstance().load("presets.xml");
