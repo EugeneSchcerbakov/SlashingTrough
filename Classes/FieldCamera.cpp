@@ -11,6 +11,9 @@
 #include "GameInfo.h"
 #include "Utils.h"
 
+#include "magic.h"
+#include "mp_cocos.h"
+
 // we need this because of gettimeofday unix and windows compatibility
 using namespace cocos2d;
 
@@ -94,6 +97,8 @@ void FieldCamera::update(float dt)
     if (flag) {
         _lastUpdate = now;
     }
+    
+    updateMagicParticlesCamera();
 }
 
 void FieldCamera::fixedUpdate()
@@ -106,6 +111,26 @@ void FieldCamera::fixedUpdate()
     float delta = math::lerp(y0, y1, t);
     
     _camera->setPositionY(delta);
+}
+
+void FieldCamera::updateMagicParticlesCamera()
+{
+    cocos2d::Vec3 pos = _camera->getPosition3D();
+    MP_Manager &MP = MP_Manager::GetInstance();
+    
+    MAGIC_CAMERA cam;
+    cam.mode = MAGIC_CAMERA_PERSPECTIVE;
+    cam.pos.x = pos.x;
+    cam.pos.y = pos.y;
+    cam.pos.z = pos.z;
+    cam.dir.x = 0.0;
+    cam.dir.y = 0.0;
+    cam.dir.y = 0.0;
+    
+    Magic_SetCamera(&cam);
+    
+    cocos2d::Mat4 viewProjMat = _camera->getViewProjectionMatrix();
+    MP.device->SetProjectionMatrix((MP_MATRIX *)viewProjMat.m);
 }
 
 void FieldCamera::setTargetPosition(const cocos2d::Vec2 &pos)

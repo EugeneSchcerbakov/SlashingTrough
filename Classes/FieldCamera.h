@@ -20,6 +20,8 @@ public:
     
     cocos2d::Camera* getActualCamera();
     
+    void updateMagicParticlesCamera();
+    
 protected:
     FieldCamera();
     virtual ~FieldCamera();
