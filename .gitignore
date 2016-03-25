@@ -23,6 +23,7 @@ log.txt
 /proj.win32/Release.win32/*.obj
 /proj.win32/Release.win32/*.log
 /proj.win32/Release.win32/*.exp
+/proj.ios_mac/.idea
 *.apk
 *.o
 *.d
