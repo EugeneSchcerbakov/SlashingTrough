@@ -7,6 +7,9 @@
 //
 
 #include "StoreWeaponWidget.h"
+#include "Utils.h"
+
+#include "audio/include/SimpleAudioEngine.h"
 
 StoreWeaponWidget* StoreWeaponWidget::create(Item::WeakPtr item)
 {
@@ -65,6 +68,17 @@ bool StoreWeaponWidget::init()
     addChild(damageText, 1);
     
     return true;
+}
+
+void StoreWeaponWidget::onBuy()
+{
+    StoreItemBaseWidget::onBuy();
+
+    int index = 2 + misc::random(0, 1);
+    std::string soundId = cocos2d::StringUtils::format("gear_equip_0%d.mp3", index);
+
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->playEffect(soundId.c_str());
 }
 
 std::string StoreWeaponWidget::chooseSpeedLabel(float speed)

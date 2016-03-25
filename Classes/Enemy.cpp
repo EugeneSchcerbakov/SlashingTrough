@@ -90,6 +90,8 @@ void Enemy::processRangeAttack(Hero *hero, float dt, float len)
         projectile = new Projectile(_rangeAttack.projectile, _x, _y, nx, ny);
         projectile->setGoal(_goal);
         _field->addEntity(projectile);
+
+        sendEvent(Event("ProjectileShot"));
         
         _rangeAttackTimer = _rangeAttack.recoveryTime;
         if (_rangeAttackTimer <= 0.0f) {

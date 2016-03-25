@@ -187,6 +187,8 @@
 		CDCA1CC51C37F30500522A59 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC31C37F30500522A59 /* shaders */; };
 		CDCA1CC71C38008300522A59 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC61C38008300522A59 /* dailyMissions.xml */; };
 		CDCA1CC81C38008300522A59 /* dailyMissions.xml in Resources */ = {isa = PBXBuildFile; fileRef = CDCA1CC61C38008300522A59 /* dailyMissions.xml */; };
+		CDDDB1171C9F372F00AC3353 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = CDDDB1161C9F372F00AC3353 /* audio */; };
+		CDDDB1181C9F372F00AC3353 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = CDDDB1161C9F372F00AC3353 /* audio */; };
 		CDF015C41C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
 		CDF015C51C26DA0A0015A4CD /* CheatsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */; };
 		CDF015C81C27039C0015A4CD /* Cheats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF015C61C27039C0015A4CD /* Cheats.cpp */; };
@@ -433,6 +435,7 @@
 		CD9F5A4C1C675C0C00C37ED1 /* EffectExplosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectExplosion.h; sourceTree = "<group>"; };
 		CDCA1CC31C37F30500522A59 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
 		CDCA1CC61C38008300522A59 /* dailyMissions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dailyMissions.xml; sourceTree = "<group>"; };
+		CDDDB1161C9F372F00AC3353 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		CDF015C21C26DA0A0015A4CD /* CheatsPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheatsPanel.cpp; sourceTree = "<group>"; };
 		CDF015C31C26DA0A0015A4CD /* CheatsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatsPanel.h; sourceTree = "<group>"; };
 		CDF015C61C27039C0015A4CD /* Cheats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cheats.cpp; sourceTree = "<group>"; };
@@ -603,6 +606,7 @@
 				CD9F04051C8D9CA60065E659 /* particles3d */,
 				CD81549E1C415D6E00904EB0 /* particles */,
 				CDCA1CC31C37F30500522A59 /* shaders */,
+				CDDDB1161C9F372F00AC3353 /* audio */,
 				CD519BCB1C09CB8200CD4ECD /* fonts */,
 				CD519BCF1C09CB8200CD4ECD /* models */,
 				CD519BD31C09CB8200CD4ECD /* textures */,
@@ -922,6 +926,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDDB1171C9F372F00AC3353 /* audio in Resources */,
 				CD519BE61C09CB8200CD4ECD /* textures in Resources */,
 				CD519BE01C09CB8200CD4ECD /* presets.xml in Resources */,
 				CD519BDA1C09CB8200CD4ECD /* levels.xml in Resources */,
@@ -973,6 +978,7 @@
 				CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */,
 				CD8154A01C415D6E00904EB0 /* particles in Resources */,
 				CD519BD91C09CB8200CD4ECD /* gameInfo.xml in Resources */,
+				CDDDB1181C9F372F00AC3353 /* audio in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				CD519BE71C09CB8200CD4ECD /* textures in Resources */,
 			);

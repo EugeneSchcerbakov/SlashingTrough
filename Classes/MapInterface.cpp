@@ -15,6 +15,7 @@
 #include "PlayerInfo.h"
 
 #include "CheatsPanel.h"
+#include "audio/include/SimpleAudioEngine.h"
 
 MapInterface* MapInterface::create()
 {
@@ -81,6 +82,9 @@ bool MapInterface::init()
     {
         if (e == cocos2d::ui::Widget::TouchEventType::ENDED) {
             ScreenChanger::changeScreen(ScreenChanger::STORE);
+
+            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+            audioEngine->playEffect("ui_transition_04.mp3");
         }
     };
     

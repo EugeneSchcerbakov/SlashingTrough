@@ -15,6 +15,8 @@
 #include "ScreenChanger.h"
 #include "Log.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 FieldLayer* FieldLayer::create(const std::string &levelId, GameInterface *gameInterface)
 {
     FieldLayer *layer = new FieldLayer(gameInterface);
@@ -34,6 +36,9 @@ FieldLayer::FieldLayer(GameInterface *gameInterface)
 
 FieldLayer::~FieldLayer()
 {
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->stopBackgroundMusic();
+    
     _field.finalize();
     _controlTouch->free();
     _controlKeyboard->free();
@@ -108,6 +113,10 @@ bool FieldLayer::init(const std::string &levelId)
     addChild(_fieldEffects);
     scheduleUpdate();
     setPosition3D(cocos2d::Vec3(0.0f, 0.0f, 0.0f));
+    
+    CocosDenshion::SimpleAudioEngine *audio = nullptr;
+    audio = CocosDenshion::SimpleAudioEngine::getInstance();
+    audio->playBackgroundMusic("background.mp3", true);
     
     return true;
 }

@@ -8,6 +8,8 @@
 
 #include "StoreArmorWidget.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 StoreArmorWidget* StoreArmorWidget::create(Item::WeakPtr item)
 {
     StoreArmorWidget *widget = new StoreArmorWidget(item);
@@ -65,4 +67,12 @@ bool StoreArmorWidget::init()
     addChild(protectText, 1);
     
     return true;
+}
+
+void StoreArmorWidget::onBuy()
+{
+    StoreItemBaseWidget::onBuy();
+
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->playEffect("gear_equip_01.mp3");
 }

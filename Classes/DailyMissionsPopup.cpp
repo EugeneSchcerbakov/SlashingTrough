@@ -10,6 +10,8 @@
 #include "Store.h"
 #include "EffectFlyingIcon.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 class DailyTaskWidget : public cocos2d::Node
 {
 public:
@@ -150,6 +152,8 @@ void DailyMissionPopup::showEffect()
     auto seq = cocos2d::Sequence::create(move, call, nullptr);
     
     _panel->runAction(seq);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_04.mp3");
 }
 
 float DailyMissionPopup::hideEffect()
@@ -180,6 +184,8 @@ float DailyMissionPopup::hideEffect()
     
     _panel->runAction(seq);
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_03.mp3");
+
     return time;
 }
 
@@ -208,7 +214,7 @@ bool DailyMissionPopup::init()
     
     _panel = cocos2d::Sprite::create("ui/ui_panel_daily-missions.png");
     _panel->setPositionX(origin.x + size.width + _panel->getContentSize().width * 0.5f);
-    _panel->setPositionY(origin.y + size.height * 0.5f + 80.0);
+    _panel->setPositionY(origin.y + size.height * 0.5f + 80.0f);
     
     auto titleText = cocos2d::ui::Text::create("Daily goals", "font_prototype.ttf", 36);
     titleText->setTextColor(cocos2d::Color4B::YELLOW);

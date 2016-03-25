@@ -22,6 +22,8 @@ protected:
     virtual ~StoreArmorWidget();
     
     bool init();
+
+    virtual void onBuy() override;
 };
 
 #endif /* defined(__SlashingTrough__StoreArmorWidget__) */

@@ -22,6 +22,8 @@ protected:
     virtual ~StoreWeaponWidget();
     
     bool init();
+
+    virtual void onBuy() override;
     
 private:
     static std::string chooseSpeedLabel(float speed);

@@ -7,6 +7,8 @@
 #include "mp_cocos.h"
 #include "platform_cocos.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 #include "ScreenChanger.h"
 #include "GameInfo.h"
 #include "PlayerInfo.h"
@@ -69,12 +71,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		fileUtils->addSearchPath("../../Resources");
 		fileUtils->addSearchPath("../../Resources/fonts");
 		fileUtils->addSearchPath("../../Resources/textures");
-		fileUtils->addSearchPath("../../Resources/scripts");
+        fileUtils->addSearchPath("../../Resources/audio");
 	}
 
 	fileUtils->addSearchPath("textures");
     fileUtils->addSearchPath("fonts");
-	fileUtils->addSearchPath("scripts");
+    fileUtils->addSearchPath("audio");
     
     if(!glview) {
         glview = GLViewImpl::create("Slashing Trough");

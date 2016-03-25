@@ -22,9 +22,11 @@ protected:
     
     virtual bool init();
     virtual void update(float dt);
-    
+
+    virtual void onBuy();
+
     virtual void onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event);
-    
+
     Item::WeakPtr _item;
     StoreItemButton *_button;
 };

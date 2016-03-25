@@ -12,6 +12,8 @@
 #include "ScreenChanger.h"
 #include "Log.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 const std::string PauseMenu::panelName = "panel";
 
 PauseMenu* PauseMenu::create()
@@ -136,15 +138,25 @@ void PauseMenu::showPanel()
         {
             DailyMissions::getInstance().afterRun(false);
             ScreenChanger::changeScreen(ScreenChanger::MAP);
+
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_btn_01.mp3");
         }
     };
     
     auto onAudioPressed = [this](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
+        if (e == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_btn_01.mp3");
+        }
     };
     
     auto onRestartPressed = [this](cocos2d::Ref *ref, cocos2d::ui::Widget::TouchEventType e)
     {
+        if (e == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_btn_01.mp3");
+        }
     };
     
     auto btnMap = cocos2d::ui::Button::create("ui/ui_btn_map.png");
@@ -185,6 +197,8 @@ void PauseMenu::showPanel()
     _tint->runAction(fadein);
     
 	addChild(panel, Order::Panel, panelName);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_01.mp3");
 }
 
 void PauseMenu::hidePanel()
@@ -219,6 +233,8 @@ void PauseMenu::hidePanel()
         auto tintfade = cocos2d::FadeOut::create(0.3f);
         auto tinteff = cocos2d::Sequence::create(tintfade, tinthide, nullptr);
         _tint->runAction(tinteff);
+
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_02.mp3");
     }
 }
 

@@ -13,6 +13,8 @@
 #include "PlayerInfo.h"
 #include "Utils.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 StoreInterface* StoreInterface::create()
 {
     StoreInterface *object = new StoreInterface();
@@ -148,6 +150,9 @@ void StoreInterface::onBackPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::To
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
         ScreenChanger::changeScreen(ScreenChanger::MAP);
+
+        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+        audioEngine->playEffect("ui_transition_03.mp3");
     }
 }
 
@@ -173,6 +178,9 @@ void StoreInterface::onCategoryChanged(Category tab)
             CC_ASSERT(false);
             break;
     }
+
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->playEffect("ui_btn_02.mp3");
 }
 
 void StoreInterface::fillScrollerWithWeapons()

@@ -13,6 +13,8 @@
 #include "LevelsCache.h"
 #include "Log.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 MissionStartPopup* MissionStartPopup::create(const std::string &levelId, const std::string &title)
 {
     MissionStartPopup *popup = new MissionStartPopup();
@@ -61,6 +63,8 @@ void MissionStartPopup::showEffect()
     auto playMove = cocos2d::MoveBy::create(time, cocos2d::Vec2(-playDeltaX*2.0f, 0.0f));
     _play->setPositionX(size.width + playDeltaX);
     _play->runAction(playMove);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_01.mp3");
 }
 
 float MissionStartPopup::hideEffect()
@@ -80,6 +84,8 @@ float MissionStartPopup::hideEffect()
     
     auto playMove = cocos2d::MoveBy::create(time, cocos2d::Vec2(playDeltaX*2.0f, 0.0f));
     _play->runAction(playMove);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ui_transition_02.mp3");
     
     return time;
 }

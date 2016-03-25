@@ -11,6 +11,8 @@
 #include "PlayerInfo.h"
 #include "Log.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 StoreCrystallWidget* StoreCrystallWidget::create(Item::WeakPtr item)
 {
     StoreCrystallWidget *widget = new StoreCrystallWidget(item);
@@ -180,22 +182,22 @@ void StoreCrystallWidget::update(float dt)
     }
 }
 
-void StoreCrystallWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
+void StoreCrystallWidget::onBuy()
 {
-    if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
-    {
-        Crystall::Ptr item = _item.lock();
-        Crystall *crystall = Crystall::cast(item);
+    Crystall::Ptr item = _item.lock();
+    Crystall *crystall = Crystall::cast(item);
     
-        if (crystall->isUnlocked())
-        {
-            PlayerInfo &player = PlayerInfo::getInstance();
+    if (crystall->isUnlocked())
+    {
+        PlayerInfo &player = PlayerInfo::getInstance();
         
-            if (!player.equipped(item)) {
-                player.equip(item);
-                player.save();
-            }
+        if (!player.equipped(item)) {
+               player.equip(item);
+            player.save();
         }
+
+        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+        audioEngine->playEffect("gear_equip_04.mp3");
     }
 }
 

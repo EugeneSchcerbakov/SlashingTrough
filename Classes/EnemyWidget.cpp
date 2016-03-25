@@ -11,6 +11,8 @@
 
 #include "EffectExplosion.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 // HealthBar implementation
 
 class HealthBar : public cocos2d::Node
@@ -359,7 +361,9 @@ void EnemyWidget::acceptEvent(const Event &event)
         _weapon->runAction(action);
 	} else if (event.is("HitedByProjectile")) {
         _fieldEffects->addChild(EffectExplosion::create(getPosition3D()));
-	}
+	} else if (event.is("ProjectileShot")) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("fire_01.mp3");
+    }
 }
 
 void EnemyWidget::accepter(const Event &event, void *param)

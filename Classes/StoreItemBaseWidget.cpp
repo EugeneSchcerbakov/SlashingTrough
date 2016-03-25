@@ -81,26 +81,31 @@ void StoreItemBaseWidget::update(float dt)
     }
 }
 
+void StoreItemBaseWidget::onBuy()
+{
+    Item::Ptr ptr = _item.lock();
+    PlayerInfo &player = PlayerInfo::getInstance();
+
+    bool needSave = false;
+    if (!player.Inventory.owned(ptr)) {
+        if (Store::getInstance().buy(ptr->getId())) {
+            player.equip(ptr);
+            needSave = true;
+        }
+    } else if (!player.equipped(ptr)) {
+        player.equip(ptr);
+        needSave = true;
+    }
+
+    if (needSave) {
+        player.save();
+    }
+}
+
 void StoreItemBaseWidget::onBuyPressed(cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType event)
 {
     if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
     {
-        Item::Ptr ptr = _item.lock();
-        PlayerInfo &player = PlayerInfo::getInstance();
-        
-        bool needSave = false;
-        if (!player.Inventory.owned(ptr)) {
-            if (Store::getInstance().buy(ptr->getId())) {
-                player.equip(ptr);
-                needSave = true;
-            }
-        } else if (!player.equipped(ptr)) {
-            player.equip(ptr);
-            needSave = true;
-        }
-        
-        if (needSave) {
-            player.save();
-        }
+        onBuy();
     }
 }

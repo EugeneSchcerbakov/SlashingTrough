@@ -9,6 +9,7 @@
 #include "EffectExplosion.h"
 
 #include "cocos-ext.h"
+#include "audio/include/SimpleAudioEngine.h"
 #include "MagicEmitter.h"
 
 EffectExplosion* EffectExplosion::create(const cocos2d::Vec3 &pos)
@@ -72,6 +73,9 @@ bool EffectExplosion::init(const cocos2d::Vec3 &pos)
     auto seq = cocos2d::Sequence::create(delay, effect, callback, nullptr);
     
     distortion->runAction(seq);
+
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->playEffect("fire_05.mp3");
     
     return true;
 }

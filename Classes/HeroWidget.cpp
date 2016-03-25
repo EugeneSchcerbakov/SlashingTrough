@@ -10,6 +10,9 @@
 #include "Store.h"
 #include "EffectExplosion.h"
 
+#include "audio/include/SimpleAudioEngine.h"
+#include "Utils.h"
+
 const SwordTrans HeroWidget::_swordRightTrans(cocos2d::Vec2(35.0f, 0.0f), 160.0f);
 const SwordTrans HeroWidget::_swordLeftTrans(cocos2d::Vec2(-35.0f, 0.0f), 160.0f);
 
@@ -224,10 +227,16 @@ void HeroWidget::acceptEvent(const Event &event)
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::RIGHT;
             runSwirlDistortion(true);
+            
+            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+            audioEngine->playEffect("whoosh_01.mp3");
         } else if (_swordSide == SwordSide::LEFT) {
 			auto swordAction = AnimSwordLeftSwipeRight(time);
 			_sword->runAction(swordAction);
 			_nextSwordSide = SwordSide::RIGHT;
+
+            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+            audioEngine->playEffect("whoosh_02.mp3");
         }
 		runSwordTrailEffect(time);
     } else if (event.is("SwipeLeft")) {
@@ -240,6 +249,9 @@ void HeroWidget::acceptEvent(const Event &event)
 			auto swordAction = AnimSwordRightSwipeLeft(time);
 			_sword->runAction(swordAction);
 			_nextSwordSide = SwordSide::LEFT;
+
+            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+            audioEngine->playEffect("whoosh_02.mp3");
         } else if (_swordSide == SwordSide::LEFT) {
 			auto bodyAction = AnimBodySwipeLeft(time);
 			auto swordAction = AnimSwordLeftSwipeLeft(time);
@@ -247,9 +259,15 @@ void HeroWidget::acceptEvent(const Event &event)
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::LEFT;
             runSwirlDistortion(false);
+            
+            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+            audioEngine->playEffect("whoosh_01.mp3");
         }
 		runSwordTrailEffect(time);
     } else if (event.is("JumpBackStart")) {
+        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+        audioEngine->playEffect("fire_03.mp3");
+        
         if (event.variables.getBool("showShield", false) && !_shield->isVisible()) {
             _shield->setVisible(true);
             _shield->setOpacity(0);
@@ -294,6 +312,9 @@ void HeroWidget::acceptEvent(const Event &event)
         auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
         auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
         _body->runAction(effect);
+
+        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+        audioEngine->playEffect("get_damage_01.mp3");
 	} else if (event.is("HitedByProjectile")) {
         cocos2d::Vec3 pos;
         pos.x = event.variables.getFloat("x");
