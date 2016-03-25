@@ -227,18 +227,13 @@ void HeroWidget::acceptEvent(const Event &event)
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::RIGHT;
             runSwirlDistortion(true);
-            
-            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-            audioEngine->playEffect("whoosh_01.mp3");
         } else if (_swordSide == SwordSide::LEFT) {
 			auto swordAction = AnimSwordLeftSwipeRight(time);
 			_sword->runAction(swordAction);
 			_nextSwordSide = SwordSide::RIGHT;
-
-            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-            audioEngine->playEffect("whoosh_02.mp3");
         }
 		runSwordTrailEffect(time);
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
     } else if (event.is("SwipeLeft")) {
 		removeAllAnimations();
 		if (_swordSide != _nextSwordSide) {
@@ -249,9 +244,6 @@ void HeroWidget::acceptEvent(const Event &event)
 			auto swordAction = AnimSwordRightSwipeLeft(time);
 			_sword->runAction(swordAction);
 			_nextSwordSide = SwordSide::LEFT;
-
-            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-            audioEngine->playEffect("whoosh_02.mp3");
         } else if (_swordSide == SwordSide::LEFT) {
 			auto bodyAction = AnimBodySwipeLeft(time);
 			auto swordAction = AnimSwordLeftSwipeLeft(time);
@@ -259,11 +251,9 @@ void HeroWidget::acceptEvent(const Event &event)
 			_bodyController->runAction(bodyAction);
 			_nextSwordSide = SwordSide::LEFT;
             runSwirlDistortion(false);
-            
-            auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-            audioEngine->playEffect("whoosh_01.mp3");
         }
 		runSwordTrailEffect(time);
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
     } else if (event.is("JumpBackStart")) {
         auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
         audioEngine->playEffect("fire_03.mp3");
@@ -279,6 +269,8 @@ void HeroWidget::acceptEvent(const Event &event)
         }
     } else if (event.is("JumpBackEnd")) {
     } else if (event.is("JumpForwardAttack")) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_01.mp3");
+
         removeAllAnimations();
         if (_swordSide != _nextSwordSide) {
             _swordSide = _nextSwordSide;
@@ -292,7 +284,6 @@ void HeroWidget::acceptEvent(const Event &event)
             auto swordAction = AnimSwordLeftSwipeRight(time);
             _sword->runAction(swordAction);
             _nextSwordSide = SwordSide::RIGHT;
-
         }
         runSwordTrailEffect(time);
         runForwardDistortion(time);
