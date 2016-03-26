@@ -63,6 +63,7 @@ private:
 	void _handleEventShieldDamageReceived(const VariablesSet& args);
 	void _handleEventDamageReceived(const VariablesSet& args);
     void _handleEventHitedByProjectile(const VariablesSet& args);
+	void _handleEventPlaySound(const VariablesSet& args);
 
     Hero *_hero;
     

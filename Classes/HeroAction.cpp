@@ -117,7 +117,7 @@ void AttackAndMove::update(float dt)
     if (!_isAttacked) {
         float wait = 0.25f;
         if (_localTime >= wait) {
-            _hero->attack();
+            _hero->attack(true);
             _isAttacked = true;
         }
     }

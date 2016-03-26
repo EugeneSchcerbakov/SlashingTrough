@@ -141,9 +141,19 @@ void Hero::addHealth(float health, bool callDamageReceived)
     }
 }
 
-void Hero::attack()
+void Hero::attack(bool playAudioEffect)
 {
-    attackHandler(_attackArea);
+    bool hit = attackHandler(_attackArea);
+
+    if (playAudioEffect)
+    {
+        std::string soundId = hit ? "hit_01.mp3" : "whoosh_02.mp3";
+
+        Event e("play_sound");
+        e.variables.setString("soundId", soundId);
+
+        sendEvent(e);
+    }
 }
 
 void Hero::attack(float area)
@@ -151,8 +161,10 @@ void Hero::attack(float area)
     attackHandler(area);
 }
 
-void Hero::attackHandler(float area)
+bool Hero::attackHandler(float area)
 {
+    bool result = false;
+
     if (_goals) {
         float x1 = getPositionX();
         float y1 = getPositionY();
@@ -194,9 +206,13 @@ void Hero::attackHandler(float area)
                         }
                     }
                 }
+
+                result = true;
             }
         }
     }
+
+    return result;
 }
 
 void Hero::flushScore()

@@ -107,6 +107,7 @@ bool HeroWidget::init()
     _hero->registerEventHandler("shield_damage_received", BIND_EVENT_HANDLER(HeroWidget::_handleEventShieldDamageReceived, this));
     _hero->registerEventHandler("damage_received", BIND_EVENT_HANDLER(HeroWidget::_handleEventDamageReceived, this));
     _hero->registerEventHandler("hited_by_projectile", BIND_EVENT_HANDLER(HeroWidget::_handleEventHitedByProjectile, this));
+    _hero->registerEventHandler("play_sound", BIND_EVENT_HANDLER(HeroWidget::_handleEventPlaySound, this));
 
     return true;
 }
@@ -246,8 +247,6 @@ void HeroWidget::_handleEventSwipeRight(const VariablesSet& args)
     }
 
     runSwordTrailEffect(time);
-
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
 }
 
 void HeroWidget::_handleEventSwipeLeft(const VariablesSet& args)
@@ -277,8 +276,6 @@ void HeroWidget::_handleEventSwipeLeft(const VariablesSet& args)
     }
 
     runSwordTrailEffect(time);
-
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
 }
 
 void HeroWidget::_handleEventJumpBackStart(const VariablesSet& args)
@@ -363,6 +360,16 @@ void HeroWidget::_handleEventHitedByProjectile(const VariablesSet& args)
     pos.z = getPositionZ();
 
     _fieldEffects->addChild(EffectExplosion::create(pos));
+}
+
+void HeroWidget::_handleEventPlaySound(const VariablesSet& args)
+{
+    std::string soundId = args.getString("soundId");
+
+    if (soundId.length() > 0)
+    {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(soundId.c_str());
+    }
 }
 
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)

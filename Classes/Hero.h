@@ -28,7 +28,7 @@ public:
     void idleUpdate(float dt) override;
     void onDamageReceived(float damage) override;
     void addHealth(float health, bool callDamageReceived = true) override;
-    void attack();
+    void attack(bool playAudioEffect = false);
     void attack(float area);
     void flushScore();
     void refreshGoals(Entities *entities);
@@ -64,7 +64,7 @@ private:
     typedef std::list<HeroAction::Ptr> ActionSequence;
     
 private:
-    void attackHandler(float area);
+    bool attackHandler(float area);
     
     ActionSequence _actionSequence;
     PlayerInfo::Equipment _equip;
