@@ -201,8 +201,13 @@ bool EnemyWidget::init()
         return false;
     }
     
-    _enemy->setupAccepter(accepter, static_cast<void *>(this));
-    
+    _enemy->registerEventHandler("damage_received", BIND_EVENT_HANDLER(EnemyWidget::_handleEventDamageReceived, this));
+    _enemy->registerEventHandler("fatal_damage_received", BIND_EVENT_HANDLER(EnemyWidget::_handleEventFatalDamageReceived, this));
+    _enemy->registerEventHandler("show_melle_highlight", BIND_EVENT_HANDLER(EnemyWidget::_handleEventShowMelleHighlight, this));
+    _enemy->registerEventHandler("show_melle_attack", BIND_EVENT_HANDLER(EnemyWidget::_handleEventShowMelleAttack, this));
+    _enemy->registerEventHandler("hited_by_projectile", BIND_EVENT_HANDLER(EnemyWidget::_handleEventHitedByProjectile, this));
+    _enemy->registerEventHandler("projectile_shot", BIND_EVENT_HANDLER(EnemyWidget::_handleEventProjectileShot, this));
+
     float spriteHeght = 0.0f;
     float healthBarYShift = 80.0f;
     
@@ -299,74 +304,89 @@ void EnemyWidget::runHitAccentEffect()
     _sprite->runAction(effect);
 }
 
-void EnemyWidget::acceptEvent(const Event &event)
+void EnemyWidget::_handleEventDamageReceived(const VariablesSet& args)
 {
-    if (event.is("DamageReceived")) {
-        int health = (int)_enemy->getHealth();
-        _healhBar->refresh(health);
-        if (_enemy->isAlive()) {
-            runHitAccentEffect();
-        } else {
-            auto func = [this](){_allowDeletion = true;};
-            auto fade = cocos2d::FadeOut::create(0.2f);
-            auto call = cocos2d::CallFunc::create(func);
-            auto effect = cocos2d::Sequence::create(fade, call, nullptr);
-            _sprite->runAction(effect);
-        }
-    } else if (event.is("FatalDamageReceived")) {
-        _allowDeletion = true;
-    } else if (event.is("ShowMelleHighlight")) {
-        float showTime = event.variables.getFloat("ShowTime");
-        float zoneX = _enemy->getMelleAreaCenterX() - _enemy->getPositionX();
-        float zoneY = _enemy->getMelleAreaCenterY() - _enemy->getPositionY();
+    int health = (int)_enemy->getHealth();
+    _healhBar->refresh(health);
 
-        auto fadein = cocos2d::FadeIn::create(showTime);
-        
-        _hitZoneWidget->setVisible(true);
-        _hitZoneWidget->setPosition(zoneX, zoneY);
-        _hitZoneWidget->runAction(fadein);
-    } else if (event.is("ShowMelleAttack")) {
-        float showTime = event.variables.getFloat("ShowTime");
-        float sideCoeff = 0.0f;
-        if (_enemy->isMelleType(GameInfo::EnemyType::Melle::SAME_LINE)) {
-            sideCoeff = 4.0f;
-        } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::LEFT_LINE)) {
-            sideCoeff = 1.0f;
-        } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::RIGHT_LINE)) {
-            sideCoeff = 7.0f;
-        }
-        
-        auto func_end = [&](){_weapon->setVisible(false);};
-        auto end_call = cocos2d::CallFunc::create(func_end);
-        auto fadein = cocos2d::FadeIn::create(showTime * 0.5f);
-        auto fadeout = cocos2d::FadeOut::create(showTime * 0.5f);
-        auto rotate = cocos2d::RotateBy::create(showTime, -120.0f);
-        auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
-        auto transparency = cocos2d::Sequence::create(fadein, fadeout, nullptr);
-        auto motion = cocos2d::Spawn::create(transparency, rotate_ease, nullptr);
-        auto action = cocos2d::Sequence::create(motion, end_call, nullptr);
-        
-        if (_hitZoneWidget->isVisible()) {
-            auto zone_end = [&](){_hitZoneWidget->setVisible(false);};
-            auto zone_hide = cocos2d::FadeOut::create(0.25f);
-            auto zone_wait = cocos2d::DelayTime::create(showTime);
-            auto zone_call = cocos2d::CallFunc::create(zone_end);
-            auto zone_action = cocos2d::Sequence::create(zone_wait, zone_hide, zone_call, nullptr);
-            _hitZoneWidget->runAction(zone_action);
-        }
-        
-        _weapon->setVisible(true);
-        _weapon->setOpacity(0);
-        _weapon->setRotation(-30.0f * sideCoeff);
-        _weapon->runAction(action);
-	} else if (event.is("HitedByProjectile")) {
-        _fieldEffects->addChild(EffectExplosion::create(getPosition3D()));
-	} else if (event.is("ProjectileShot")) {
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("fire_01.mp3");
+    if (_enemy->isAlive()) {
+        runHitAccentEffect();
+    } else {
+        auto func = [this](){_allowDeletion = true;};
+        auto fade = cocos2d::FadeOut::create(0.2f);
+        auto call = cocos2d::CallFunc::create(func);
+        auto effect = cocos2d::Sequence::create(fade, call, nullptr);
+
+        _sprite->runAction(effect);
     }
 }
 
-void EnemyWidget::accepter(const Event &event, void *param)
+void EnemyWidget::_handleEventFatalDamageReceived(const VariablesSet& args)
 {
-    static_cast<EnemyWidget *>(param)->acceptEvent(event);
+    _allowDeletion = true;
+}
+
+void EnemyWidget::_handleEventShowMelleHighlight(const VariablesSet& args)
+{
+    float showTime = args.getFloat("ShowTime");
+    float zoneX = _enemy->getMelleAreaCenterX() - _enemy->getPositionX();
+    float zoneY = _enemy->getMelleAreaCenterY() - _enemy->getPositionY();
+
+    auto fadein = cocos2d::FadeIn::create(showTime);
+
+    _hitZoneWidget->setVisible(true);
+    _hitZoneWidget->setPosition(zoneX, zoneY);
+    _hitZoneWidget->runAction(fadein);
+}
+
+void EnemyWidget::_handleEventShowMelleAttack(const VariablesSet& args)
+{
+    float showTime = args.getFloat("ShowTime");
+    float sideCoeff = 0.0f;
+
+    if (_enemy->isMelleType(GameInfo::EnemyType::Melle::SAME_LINE)) {
+        sideCoeff = 4.0f;
+    } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::LEFT_LINE)) {
+        sideCoeff = 1.0f;
+    } else if (_enemy->isMelleType(GameInfo::EnemyType::Melle::RIGHT_LINE)) {
+        sideCoeff = 7.0f;
+    }
+
+    auto func_end = [&](){_weapon->setVisible(false);};
+    auto end_call = cocos2d::CallFunc::create(func_end);
+    auto fadein = cocos2d::FadeIn::create(showTime * 0.5f);
+    auto fadeout = cocos2d::FadeOut::create(showTime * 0.5f);
+    auto rotate = cocos2d::RotateBy::create(showTime, -120.0f);
+    auto rotate_ease = cocos2d::EaseSineInOut::create(rotate);
+    auto transparency = cocos2d::Sequence::create(fadein, fadeout, nullptr);
+    auto motion = cocos2d::Spawn::create(transparency, rotate_ease, nullptr);
+    auto action = cocos2d::Sequence::create(motion, end_call, nullptr);
+
+    if (_hitZoneWidget->isVisible())
+    {
+        auto zone_end = [&](){_hitZoneWidget->setVisible(false);};
+        auto zone_hide = cocos2d::FadeOut::create(0.25f);
+        auto zone_wait = cocos2d::DelayTime::create(showTime);
+        auto zone_call = cocos2d::CallFunc::create(zone_end);
+        auto zone_action = cocos2d::Sequence::create(zone_wait, zone_hide, zone_call, nullptr);
+
+        _hitZoneWidget->runAction(zone_action);
+    }
+
+    _weapon->setVisible(true);
+    _weapon->setOpacity(0);
+    _weapon->setRotation(-30.0f * sideCoeff);
+    _weapon->runAction(action);
+}
+
+void EnemyWidget::_handleEventHitedByProjectile(const VariablesSet& args)
+{
+    auto effect = EffectExplosion::create(getPosition3D());
+
+    _fieldEffects->addChild(effect);
+}
+
+void EnemyWidget::_handleEventProjectileShot(const VariablesSet& args)
+{
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("fire_01.mp3");
 }

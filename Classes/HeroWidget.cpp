@@ -44,7 +44,6 @@ bool HeroWidget::init()
         return false;
     }
     
-    _hero->setupAccepter(accepter, static_cast<void *>(this));
     ItemWeapon *weapon = _hero->getWeapon();
     float trailLen = 0.0f, trailWidth = 0.0f;
     std::string trailTex, swordTex;
@@ -99,7 +98,16 @@ bool HeroWidget::init()
     addChild(_swordTrail, 1);
     addChild(_shield, 2);
     scheduleUpdate();
-    
+
+    _hero->registerEventHandler("swipe_right", BIND_EVENT_HANDLER(HeroWidget::_handleEventSwipeRight, this));
+    _hero->registerEventHandler("swipe_left", BIND_EVENT_HANDLER(HeroWidget::_handleEventSwipeLeft, this));
+    _hero->registerEventHandler("jump_back_start", BIND_EVENT_HANDLER(HeroWidget::_handleEventJumpBackStart, this));
+    _hero->registerEventHandler("jump_forward_attack", BIND_EVENT_HANDLER(HeroWidget::_handleEventJumpForwardAttack, this));
+    _hero->registerEventHandler("hide_shield", BIND_EVENT_HANDLER(HeroWidget::_handleEventHideShield, this));
+    _hero->registerEventHandler("shield_damage_received", BIND_EVENT_HANDLER(HeroWidget::_handleEventShieldDamageReceived, this));
+    _hero->registerEventHandler("damage_received", BIND_EVENT_HANDLER(HeroWidget::_handleEventDamageReceived, this));
+    _hero->registerEventHandler("hited_by_projectile", BIND_EVENT_HANDLER(HeroWidget::_handleEventHitedByProjectile, this));
+
     return true;
 }
 
@@ -212,115 +220,149 @@ void HeroWidget::runSwirlDistortion(bool flipX)
     _fieldEffects->addChild(swirl);
 }
 
-void HeroWidget::acceptEvent(const Event &event)
+void HeroWidget::_handleEventSwipeRight(const VariablesSet& args)
 {
-	if (event.is("SwipeRight")) {
-		removeAllAnimations();
-		if (_swordSide != _nextSwordSide) {
-			_swordSide = _nextSwordSide;
-		}
-		float time = event.variables.getFloat("duration");
-        if (_swordSide == SwordSide::RIGHT) {
-			auto bodyAction = AnimBodySwipeRight(time);
-			auto swordAction = AnimSwordRightSwipeRight(time);
-			_sword->runAction(swordAction);
-			_bodyController->runAction(bodyAction);
-			_nextSwordSide = SwordSide::RIGHT;
-            runSwirlDistortion(true);
-        } else if (_swordSide == SwordSide::LEFT) {
-			auto swordAction = AnimSwordLeftSwipeRight(time);
-			_sword->runAction(swordAction);
-			_nextSwordSide = SwordSide::RIGHT;
-        }
-		runSwordTrailEffect(time);
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
-    } else if (event.is("SwipeLeft")) {
-		removeAllAnimations();
-		if (_swordSide != _nextSwordSide) {
-			_swordSide = _nextSwordSide;
-		}
-		float time = event.variables.getFloat("duration");
-        if (_swordSide == SwordSide::RIGHT) {
-			auto swordAction = AnimSwordRightSwipeLeft(time);
-			_sword->runAction(swordAction);
-			_nextSwordSide = SwordSide::LEFT;
-        } else if (_swordSide == SwordSide::LEFT) {
-			auto bodyAction = AnimBodySwipeLeft(time);
-			auto swordAction = AnimSwordLeftSwipeLeft(time);
-			_sword->runAction(swordAction);
-			_bodyController->runAction(bodyAction);
-			_nextSwordSide = SwordSide::LEFT;
-            runSwirlDistortion(false);
-        }
-		runSwordTrailEffect(time);
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
-    } else if (event.is("JumpBackStart")) {
-        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-        audioEngine->playEffect("fire_03.mp3");
-        
-        if (event.variables.getBool("showShield", false) && !_shield->isVisible()) {
-            _shield->setVisible(true);
-            _shield->setOpacity(0);
-            _shield->runAction(cocos2d::FadeIn::create(0.1f));
-        }
-        if (event.variables.getBool("showDistortion", false)) {
-            float time = event.variables.getFloat("duration");
-            runForwardDistortion(time);
-        }
-    } else if (event.is("JumpBackEnd")) {
-    } else if (event.is("JumpForwardAttack")) {
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_01.mp3");
+    removeAllAnimations();
 
-        removeAllAnimations();
-        if (_swordSide != _nextSwordSide) {
-            _swordSide = _nextSwordSide;
-        }
-        float time = event.variables.getFloat("duration");
-        if (_swordSide == SwordSide::RIGHT) {
-            auto swordAction = AnimSwordRightSwipeLeft(time);
-            _sword->runAction(swordAction);
-            _nextSwordSide = SwordSide::LEFT;
-        } else if (_swordSide == SwordSide::LEFT) {
-            auto swordAction = AnimSwordLeftSwipeRight(time);
-            _sword->runAction(swordAction);
-            _nextSwordSide = SwordSide::RIGHT;
-        }
-        runSwordTrailEffect(time);
+    if (_swordSide != _nextSwordSide) {
+        _swordSide = _nextSwordSide;
+    }
+
+    float time = args.getFloat("duration");
+
+    if (_swordSide == SwordSide::RIGHT) {
+        auto bodyAction = AnimBodySwipeRight(time);
+        auto swordAction = AnimSwordRightSwipeRight(time);
+
+        _sword->runAction(swordAction);
+        _bodyController->runAction(bodyAction);
+        _nextSwordSide = SwordSide::RIGHT;
+
+        runSwirlDistortion(true);
+    } else if (_swordSide == SwordSide::LEFT) {
+        auto swordAction = AnimSwordLeftSwipeRight(time);
+        _sword->runAction(swordAction);
+        _nextSwordSide = SwordSide::RIGHT;
+    }
+
+    runSwordTrailEffect(time);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
+}
+
+void HeroWidget::_handleEventSwipeLeft(const VariablesSet& args)
+{
+    removeAllAnimations();
+
+    if (_swordSide != _nextSwordSide) {
+        _swordSide = _nextSwordSide;
+    }
+
+    float time = args.getFloat("duration");
+
+    if (_swordSide == SwordSide::RIGHT) {
+        auto swordAction = AnimSwordRightSwipeLeft(time);
+
+        _sword->runAction(swordAction);
+        _nextSwordSide = SwordSide::LEFT;
+    } else if (_swordSide == SwordSide::LEFT) {
+        auto bodyAction = AnimBodySwipeLeft(time);
+        auto swordAction = AnimSwordLeftSwipeLeft(time);
+
+        _sword->runAction(swordAction);
+        _bodyController->runAction(bodyAction);
+        _nextSwordSide = SwordSide::LEFT;
+
+        runSwirlDistortion(false);
+    }
+
+    runSwordTrailEffect(time);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_02.mp3");
+}
+
+void HeroWidget::_handleEventJumpBackStart(const VariablesSet& args)
+{
+    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
+    audioEngine->playEffect("fire_03.mp3");
+
+    if (args.getBool("showShield", false) && !_shield->isVisible()) {
+        _shield->setVisible(true);
+        _shield->setOpacity(0);
+        _shield->runAction(cocos2d::FadeIn::create(0.1f));
+    }
+
+    if (args.getBool("showDistortion", false)) {
+        float time = args.getFloat("duration");
         runForwardDistortion(time);
-    } else if (event.is("HideShield")) {
-        auto func = [this](){_shield->setVisible(false);};
-        auto fade = cocos2d::FadeOut::create(0.05f);
-        auto call = cocos2d::CallFunc::create(func);
-        auto eff = cocos2d::Sequence::create(fade, call, nullptr);
-        _shield->runAction(eff);
-    } else if (event.is("ShieldDamageReceived")) {
-        auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
-        auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
-        auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
-        _shield->runAction(effect);
-    } else if (event.is("DamageReceived")) {
-        auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
-        auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
-        auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
-        _body->runAction(effect);
-
-        auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-        audioEngine->playEffect("get_damage_01.mp3");
-	} else if (event.is("HitedByProjectile")) {
-        cocos2d::Vec3 pos;
-        pos.x = event.variables.getFloat("x");
-        pos.y = event.variables.getFloat("y");
-        pos.z = getPositionZ();
-        
-        _fieldEffects->addChild(EffectExplosion::create(pos));
-	} else {
-        CC_ASSERT(false);
     }
 }
 
-void HeroWidget::accepter(const Event &event, void *param)
+void HeroWidget::_handleEventJumpForwardAttack(const VariablesSet& args)
 {
-    static_cast<HeroWidget *>(param)->acceptEvent(event);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("whoosh_01.mp3");
+
+    removeAllAnimations();
+
+    if (_swordSide != _nextSwordSide) {
+        _swordSide = _nextSwordSide;
+    }
+
+    float time = args.getFloat("duration");
+
+    if (_swordSide == SwordSide::RIGHT) {
+        auto swordAction = AnimSwordRightSwipeLeft(time);
+
+        _sword->runAction(swordAction);
+        _nextSwordSide = SwordSide::LEFT;
+    } else if (_swordSide == SwordSide::LEFT) {
+        auto swordAction = AnimSwordLeftSwipeRight(time);
+
+        _sword->runAction(swordAction);
+        _nextSwordSide = SwordSide::RIGHT;
+    }
+
+    runSwordTrailEffect(time);
+    runForwardDistortion(time);
+}
+
+void HeroWidget::_handleEventHideShield(const VariablesSet& args)
+{
+    auto func = [this](){_shield->setVisible(false);};
+    auto fade = cocos2d::FadeOut::create(0.05f);
+    auto call = cocos2d::CallFunc::create(func);
+    auto eff = cocos2d::Sequence::create(fade, call, nullptr);
+
+    _shield->runAction(eff);
+}
+
+void HeroWidget::_handleEventShieldDamageReceived(const VariablesSet& args)
+{
+    auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
+    auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
+    auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
+
+    _shield->runAction(effect);
+}
+
+void HeroWidget::_handleEventDamageReceived(const VariablesSet& args)
+{
+    auto tint0 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::RED);
+    auto tint1 = cocos2d::TintTo::create(0.1f, cocos2d::Color3B::WHITE);
+    auto effect = cocos2d::Sequence::create(tint0, tint1, nullptr);
+    _body->runAction(effect);
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("get_damage_01.mp3");
+}
+
+void HeroWidget::_handleEventHitedByProjectile(const VariablesSet& args)
+{
+    cocos2d::Vec3 pos;
+    pos.x = args.getFloat("x");
+    pos.y = args.getFloat("y");
+    pos.z = getPositionZ();
+
+    _fieldEffects->addChild(EffectExplosion::create(pos));
 }
 
 cocos2d::FiniteTimeAction* HeroWidget::AnimSwordRightSwipeRight(float duration)

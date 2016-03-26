@@ -85,7 +85,7 @@ void Field::idleUpdate(float dt)
 {
     if (!_finished && (!_hero->isAlive() || _level->isFinished())) {
         auto finishCondition = _level->getVictoryCondition().lock();
-        Event e("LevelFinished");
+        Event e("level_finished");
         e.variables.setInt("uid", _hero->getUid());
         e.variables.setString("levelId", _level->getId());
         e.variables.setBool("victory", finishCondition->isResult(VictoryCondition::Result::VIRTORY));
@@ -111,7 +111,7 @@ void Field::idleUpdate(float dt)
         if ((sectorY + sectorH * 2.0f) < heroY)
         {
             // first of all delete sector widget
-            Event e("SectorDeleted");
+            Event e("sector_added");
             e.variables.setInt("uid", sector->getUid());
             sendEvent(e);
             
@@ -136,7 +136,7 @@ void Field::idleUpdate(float dt)
             ++iter;
         } else {
             // first of all delete entity widget
-            Event e("EntityDeleted");
+            Event e("entity_deleted");
             e.variables.setInt("uid", entity->getUid());
             sendEvent(e);
             
@@ -178,7 +178,7 @@ void Field::pushFrontSector()
     
         _sectors.push_back(sector);
     
-        Event e("SectorAdded");
+        Event e("sector_added");
         e.variables.setInt("uid", sector->getUid());
         sendEvent(e);
     }
@@ -199,7 +199,7 @@ void Field::addEntity(Entity *entity)
     {
         _entities.push_back(entity);
         
-        Event e("EntityAdded");
+        Event e("entity_added");
         e.variables.setInt("uid", entity->getUid());
         sendEvent(e);
     }

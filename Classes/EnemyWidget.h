@@ -32,11 +32,14 @@ protected:
     
     void runHitAccentEffect();
     
-    void acceptEvent(const Event &event);
-    
 private:
-    static void accepter(const Event &event, void *param);
-    
+    void _handleEventDamageReceived(const VariablesSet& args);
+	void _handleEventFatalDamageReceived(const VariablesSet& args);
+	void _handleEventShowMelleHighlight(const VariablesSet& args);
+	void _handleEventShowMelleAttack(const VariablesSet& args);
+	void _handleEventHitedByProjectile(const VariablesSet& args);
+	void _handleEventProjectileShot(const VariablesSet& args);
+
     Enemy *_enemy;
     
 	cocos2d::Layer*_fieldEffects;

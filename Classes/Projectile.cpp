@@ -81,7 +81,7 @@ void Projectile::tryDamage(Entity *goal)
     
     if (len < 80.0f)
     {
-        Event e("HitedByProjectile");
+        Event e("hited_by_projectile");
         e.variables.setFloat("x", _x);
         e.variables.setFloat("y", _y);
         

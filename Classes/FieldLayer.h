@@ -40,10 +40,12 @@ protected:
     void update(float dt) override;
     void refreshInterface();
     
-    void acceptEvent(const Event &event);
-    
 private:
-    static void accepter(const Event &event, void *param);
+    void _handleEventSectorAdded(const VariablesSet& args);
+    void _handleEventSectorDeleted(const VariablesSet& args);
+    void _handleEventEntityAdded(const VariablesSet& args);
+    void _handleEventEntityDeleted(const VariablesSet& args);
+    void _handleEventLevelFinished(const VariablesSet& args);
 
     void makeLevelComplete(FieldLevel::WeakPtr levelPtr);
     

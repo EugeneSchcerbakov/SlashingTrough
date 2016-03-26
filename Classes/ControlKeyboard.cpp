@@ -44,7 +44,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
         HeroAction::Ptr action = AttackAndMove::create(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
         {
-            Event e("SwipeRight");
+            Event e("swipe_right");
             e.variables.setFloat("duration", duration);
             action->setEvent(e);
             
@@ -60,7 +60,7 @@ void ControlKeyboard::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d:
         HeroAction::Ptr action = AttackAndMove::create(_hero, duration, deltaX, deltaY);
         if (_hero->isAbleToPerform(action))
         {
-            Event e("SwipeLeft");
+            Event e("swipe_left");
             e.variables.setFloat("duration", duration);
             action->setEvent(e);
             

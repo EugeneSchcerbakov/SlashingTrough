@@ -94,8 +94,13 @@ bool FieldLayer::init(const std::string &levelId)
     _fieldCamera->getActualCamera()->setFrameBufferObject(_fboColor);
     _distorCamera = FieldCamera::create(cocos2d::CameraFlag::USER2);
     _distorCamera->getActualCamera()->setFrameBufferObject(_fboDistor);
-    
-    _field.setupAccepter(accepter, static_cast<void *>(this));
+
+    _field.registerEventHandler("sector_added", BIND_EVENT_HANDLER(FieldLayer::_handleEventSectorAdded, this));
+    _field.registerEventHandler("sector_deleted", BIND_EVENT_HANDLER(FieldLayer::_handleEventSectorDeleted, this));
+    _field.registerEventHandler("entity_added", BIND_EVENT_HANDLER(FieldLayer::_handleEventEntityAdded, this));
+    _field.registerEventHandler("entity_deleted", BIND_EVENT_HANDLER(FieldLayer::_handleEventEntityDeleted, this));
+    _field.registerEventHandler("level_finished", BIND_EVENT_HANDLER(FieldLayer::_handleEventLevelFinished, this));
+
     _field.initialize(LevelsCache::getInstance().getLevelById(levelId));
     
     _heroWidget = HeroWidget::create(_field.getHero(), _fieldEffects);
@@ -175,77 +180,82 @@ void FieldLayer::refreshInterface()
     }
 }
 
-void FieldLayer::acceptEvent(const Event &event)
+void FieldLayer::_handleEventSectorAdded(const VariablesSet& args)
 {
-    if (event.is("SectorAdded")) {
-        Uid uid = event.variables.getInt("uid");
-        FieldSector::Ptr sector = _field.getSectorByUid(uid);
-        if (sector) {
-            FieldSectorWidget *widget = FieldSectorWidget::create(sector);
-            widget->setPositionX(sector->getX());
-            widget->setPositionY(sector->getY());
-            widget->setCameraMask(Effect::TargetColor);
-            addChild(widget, 0, uid);
-        }
-    } else if (event.is("SectorDeleted")) {
-        Uid uid = event.variables.getInt("uid");
-        removeChildByTag(uid, true);
-    } else if (event.is("EntityAdded")) {
-        Uid uid = event.variables.getInt("uid");
-        Entity *entity = _field.getEntityByUid(uid);
-        if (entity) {
-            Entity::Type type = entity->getType();
-            if (type == Entity::Type::OBSTACLE) {
-                auto obstacle = dynamic_cast<Obstacle *>(entity);
-                auto widget = ObstacleWidget::create(obstacle);
-                widget->setCameraMask(Effect::TargetColor);
-                addChild(widget, 1, uid);
-            } else if (type == Entity::Type::ENEMY) {
-                auto enemy = dynamic_cast<Enemy *>(entity);
-                auto widget = EnemyWidget::create(enemy, _fieldEffects);
-                widget->setCameraMask(Effect::TargetColor);
-                addChild(widget, 2, uid);
-                _enemiesWidgets.push_back(widget);
-            } else if (type == Entity::Type::PROJECTILE) {
-                auto proj = dynamic_cast<Projectile *>(entity);
-                auto widget = ProjectileWidget::create(proj);
-                widget->setCameraMask(Effect::TargetColor);
-                addChild(widget, 10, uid);
-            }
-        } else {
-            CC_ASSERT(false);
-        }
-    } else if (event.is("EntityDeleted")) {
-        Uid uid = event.variables.getInt("uid");
-        auto entity = _field.getEntityByUid(uid);
-        if (entity && !entity->isType(Entity::Type::ENEMY)) {
-            removeChildByTag(uid, true);
-        }
-    } else if (event.is("LevelFinished")) {
-        LevelsCache &levelsCache = LevelsCache::getInstance();
-    
-        bool victory = event.variables.getBool("victory", false);
-        std::string levelId = event.variables.getString("levelId");
-        FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
-        FieldLevel::Ptr level = level_ptr.lock();
-    
-        if (level_ptr.expired()) {
-            WRITE_WARN("Failed to get result from invalid level: " + levelId);
-        }
-        
-        bool completitionFact = victory && !level->isStatus(FieldLevel::Status::COMPLETED);
-        
-        if (victory) {
-            makeLevelComplete(level_ptr);
-        }
-            
-        ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), victory, completitionFact);
+    Uid uid = args.getInt("uid");
+    FieldSector::Ptr sector = _field.getSectorByUid(uid);
+    if (sector) {
+        FieldSectorWidget *widget = FieldSectorWidget::create(sector);
+        widget->setPositionX(sector->getX());
+        widget->setPositionY(sector->getY());
+        widget->setCameraMask(Effect::TargetColor);
+        addChild(widget, 0, uid);
     }
 }
 
-void FieldLayer::accepter(const Event &event, void *param)
+void FieldLayer::_handleEventSectorDeleted(const VariablesSet& args)
 {
-    static_cast<FieldLayer *>(param)->acceptEvent(event);
+    Uid uid = args.getInt("uid");
+    removeChildByTag(uid, true);
+}
+
+void FieldLayer::_handleEventEntityAdded(const VariablesSet& args)
+{
+    Uid uid = args.getInt("uid");
+    Entity *entity = _field.getEntityByUid(uid);
+    if (entity) {
+        Entity::Type type = entity->getType();
+        if (type == Entity::Type::OBSTACLE) {
+            auto obstacle = dynamic_cast<Obstacle *>(entity);
+            auto widget = ObstacleWidget::create(obstacle);
+            widget->setCameraMask(Effect::TargetColor);
+            addChild(widget, 1, uid);
+        } else if (type == Entity::Type::ENEMY) {
+            auto enemy = dynamic_cast<Enemy *>(entity);
+            auto widget = EnemyWidget::create(enemy, _fieldEffects);
+            widget->setCameraMask(Effect::TargetColor);
+            addChild(widget, 2, uid);
+            _enemiesWidgets.push_back(widget);
+        } else if (type == Entity::Type::PROJECTILE) {
+            auto proj = dynamic_cast<Projectile *>(entity);
+            auto widget = ProjectileWidget::create(proj);
+            widget->setCameraMask(Effect::TargetColor);
+            addChild(widget, 10, uid);
+        }
+    } else {
+        CC_ASSERT(false);
+    }
+}
+
+void FieldLayer::_handleEventEntityDeleted(const VariablesSet& args)
+{
+    Uid uid = args.getInt("uid");
+    auto entity = _field.getEntityByUid(uid);
+    if (entity && !entity->isType(Entity::Type::ENEMY)) {
+        removeChildByTag(uid, true);
+    }
+}
+
+void FieldLayer::_handleEventLevelFinished(const VariablesSet& args)
+{
+    LevelsCache &levelsCache = LevelsCache::getInstance();
+
+    bool victory = args.getBool("victory", false);
+    std::string levelId = args.getString("levelId");
+    FieldLevel::WeakPtr level_ptr = levelsCache.getLevelById(levelId);
+    FieldLevel::Ptr level = level_ptr.lock();
+
+    if (level_ptr.expired()) {
+        WRITE_WARN("Failed to get result from invalid level: " + levelId);
+    }
+
+    bool completitionFact = victory && !level->isStatus(FieldLevel::Status::COMPLETED);
+
+    if (victory) {
+        makeLevelComplete(level_ptr);
+    }
+
+    ScreenChanger::showStatistics(level_ptr, _field.getHero()->getScore(), victory, completitionFact);
 }
 
 void FieldLayer::makeLevelComplete(FieldLevel::WeakPtr levelPtr)

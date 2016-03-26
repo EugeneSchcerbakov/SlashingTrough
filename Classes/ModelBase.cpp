@@ -34,15 +34,24 @@ ModelBase::~ModelBase()
 {
 }
 
-void ModelBase::sendEvent(const Event &event)
+void ModelBase::registerEventHandler(const std::string& name, Event::Handler callback)
 {
-    _accepter(event, _parameter);
+    auto handler = _eventHandlers.find(name);
+    if (handler == _eventHandlers.end())
+    {
+        auto data = std::pair<std::string, Event::Handler>(name, callback);
+        _eventHandlers.insert(data);
+    }
 }
 
-void ModelBase::setupAccepter(const Accepter &accepter, void *parameter)
+void ModelBase::sendEvent(const Event &event)
 {
-    _accepter = accepter;
-    _parameter = parameter;
+    auto handler = _eventHandlers.find(event._name);
+    if (handler != _eventHandlers.end())
+    {
+        auto callback = (*handler).second;
+        callback(event.variables);
+    }
 }
 
 Uid ModelBase::getUid() const

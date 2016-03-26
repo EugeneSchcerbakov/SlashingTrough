@@ -43,8 +43,7 @@ protected:
     void runSwordTrailEffect(float duration);
     void runForwardDistortion(float time);
     void runSwirlDistortion(bool flipX);
-    void acceptEvent(const Event &event);
-    
+
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeRight(float duration);
     cocos2d::FiniteTimeAction* AnimSwordRightSwipeLeft(float duration);
     cocos2d::FiniteTimeAction* AnimSwordLeftSwipeRight(float duration);
@@ -56,8 +55,15 @@ private:
     static const SwordTrans _swordRightTrans;
     static const SwordTrans _swordLeftTrans;
     
-    static void accepter(const Event &event, void *param);
-    
+	void _handleEventSwipeRight(const VariablesSet& args);
+	void _handleEventSwipeLeft(const VariablesSet& args);
+	void _handleEventJumpBackStart(const VariablesSet& args);
+	void _handleEventJumpForwardAttack(const VariablesSet& args);
+	void _handleEventHideShield(const VariablesSet& args);
+	void _handleEventShieldDamageReceived(const VariablesSet& args);
+	void _handleEventDamageReceived(const VariablesSet& args);
+    void _handleEventHitedByProjectile(const VariablesSet& args);
+
     Hero *_hero;
     
     SwordSide _swordSide;

@@ -91,7 +91,7 @@ void Enemy::processRangeAttack(Hero *hero, float dt, float len)
         projectile->setGoal(_goal);
         _field->addEntity(projectile);
 
-        sendEvent(Event("ProjectileShot"));
+        sendEvent(Event("projectile_shot"));
         
         _rangeAttackTimer = _rangeAttack.recoveryTime;
         if (_rangeAttackTimer <= 0.0f) {
@@ -137,7 +137,7 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
             return;
         }
         if (_melleAttack.mustShowHighlight) {
-            Event e("ShowMelleHighlight");
+            Event e("show_melle_highlight");
             e.variables.setFloat("ShowTime", _melleAttack.showHighlightTime);
             sendEvent(e);
         }
@@ -159,7 +159,7 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
         float y = hero->getPositionY();
         if (checkMelleZone(x, y)) {
             _state = State::MELLE_ATTACK_BEGIN;
-            Event e("ShowMelleAttack");
+            Event e("show_melle_attack");
             e.variables.setFloat("ShowTime", _melleDuration);
             sendEvent(e);
         }
@@ -178,7 +178,7 @@ void Enemy::processMelleAttack(Hero *hero, float dt, float len)
 
 void Enemy::onDamageReceived(float damage)
 {
-    sendEvent(Event("DamageReceived"));
+    sendEvent(Event("damage_received"));
     
     if (!isAlive() && _goal->isType(Entity::Type::HERO))
     {
@@ -199,7 +199,7 @@ void Enemy::onDamageReceived(float damage)
 void Enemy::kill()
 {
     Entity::kill();
-    sendEvent(Event("FatalDamageReceived"));
+    sendEvent(Event("fatal_damage_received"));
 }
 
 void Enemy::discardMelleAttack()

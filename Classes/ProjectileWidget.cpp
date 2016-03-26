@@ -35,8 +35,6 @@ bool ProjectileWidget::init()
         return false;
     }
     
-    _projectile->setupAccepter(accepter, static_cast<void *>(this));
-    
     _rotationDir = rand() % 100 > 50 ? 1.0f : -1.0f;
     
     _sprite = cocos2d::Sprite::create(_projectile->getSpriteFilename());
@@ -67,14 +65,4 @@ void ProjectileWidget::update(float dt)
     float angle = getRotation();
     angle += rotationSpeed * dt * _rotationDir;
     _sprite->setRotation(angle);
-}
-
-
-void ProjectileWidget::acceptEvent(const Event &event)
-{
-}
-
-void ProjectileWidget::accepter(const Event &event, void *param)
-{
-    static_cast<ProjectileWidget *>(param)->acceptEvent(event);
 }

@@ -25,11 +25,7 @@ protected:
     bool init() override;
     void update(float dt) override;
     
-    void acceptEvent(const Event &event);
-    
 private:
-    static void accepter(const Event &event, void *param);
-    
     Projectile *_projectile;
     cocos2d::Sprite *_sprite;
     

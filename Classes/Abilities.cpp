@@ -65,7 +65,7 @@ void Dash::makeDash()
         HeroAction::Ptr action = JumpBack::create(_hero, _duration, _distance, _invulnerable);
         if (_hero->isAbleToPerform(action))
         {
-            Event e("JumpBackStart");
+            Event e("jump_back_start");
             e.variables.setFloat("duration", _duration);
             e.variables.setBool("showDistortion", _distance > 0.0f);
             action->setEvent(e);
@@ -100,7 +100,7 @@ void BackDashShield::update(float dt)
             _shieldTimer -= dt;
             updateBarrier();
         } else {
-            Event e("HideShield");
+            Event e("hide_shield");
             _hero->sendEvent(e);
             _shieldShown = false;
         }
@@ -110,7 +110,7 @@ void BackDashShield::update(float dt)
         if (_time >= _cooldown) {
             _allow = true;
             _time = 0.0f;
-            Event e("JumpBackEnd");
+            Event e("jump_back_end");
             _hero->sendEvent(e);
         } else {
             _time += dt;
@@ -133,7 +133,7 @@ void BackDashShield::swipeBack()
                 _shieldShown = true;
             };
             
-            Event e("JumpBackStart");
+            Event e("jump_back_start");
             e.variables.setFloat("duration", _duration);
             e.variables.setBool("showShield", true);
             action->setEvent(e);
@@ -159,7 +159,7 @@ void BackDashShield::updateBarrier()
                     float y = entity->getPositionY();
                     if (isPointUnderBarrier(x, y)) {
                         entity->kill();
-                        _hero->sendEvent(Event("ShieldDamageReceived"));
+                        _hero->sendEvent(Event("shield_damage_received"));
                     }
                 } else if (entity->isType(Entity::Type::ENEMY)) {
                     Enemy *enemy = dynamic_cast<Enemy *>(entity);
@@ -168,7 +168,7 @@ void BackDashShield::updateBarrier()
                         float y = enemy->getMelleAreaCenterY();
                         if (isPointUnderBarrier(x, y)) {
                             enemy->discardMelleAttack();
-                            _hero->sendEvent(Event("ShieldDamageReceived"));
+                            _hero->sendEvent(Event("shield_damage_received"));
                         }
                     }
                 }
@@ -261,7 +261,7 @@ void BackDashShot::swipeBack()
                 _shotTimer = 0.0f;
             };
             
-            Event e("JumpBackStart");
+            Event e("jump_back_start");
             e.variables.setFloat("duration", _duration);
             action->setEvent(e);
             action->setCallback(func);
@@ -429,7 +429,7 @@ void ForwardDashAttack::makeDash()
 		HeroAction::Ptr action = JumpForwardAttack::create(_hero, _duration, _distance, _invulnerable);
         if (_hero->isAbleToPerform(action))
         {
-            Event e("JumpForwardAttack");
+            Event e("jump_forward_attack");
             e.variables.setFloat("duration", _duration);
             action->setEvent(e);
             action->setTag(TAG);

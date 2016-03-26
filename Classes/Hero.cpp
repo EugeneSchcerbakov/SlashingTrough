@@ -105,7 +105,7 @@ void Hero::idleUpdate(float dt)
 
 void Hero::onDamageReceived(float damage)
 {
-    sendEvent(Event("DamageReceived"));
+    sendEvent(Event("damage_received"));
     
     DailyTaskEvent event(Tracking::DamageReceived);
     event.data.setFloat("amount", damage);

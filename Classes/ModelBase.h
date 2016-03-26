@@ -14,6 +14,8 @@
 #include <list>
 #include <memory>
 #include <functional>
+#include <string>
+#include <map>
 
 #include "VariablesSet.h"
 
@@ -22,15 +24,22 @@ class Entity;
 typedef unsigned int Uid;
 typedef std::list<Entity *> Entities;
 
+#define BIND_EVENT_HANDLER(__handler__, __target__) std::bind(&__handler__, __target__, std::placeholders::_1)
+
 class Event
 {
+    friend class ModelBase;
+
+public:
+    typedef std::function<void(const VariablesSet&)> Handler;
+
 public:
     Event();
     Event(const std::string &name);
     bool is(const std::string &name) const;
     
     VariablesSet variables;
-    
+
 private:
     std::string _name;
 };
@@ -38,22 +47,19 @@ private:
 class ModelBase
 {
 public:
-    typedef void(*Accepter)(const Event &, void *);
-    
-public:
     ModelBase();
     virtual ~ModelBase();
-    
+
+    void registerEventHandler(const std::string& name, Event::Handler callback);
     void sendEvent(const Event &event);
-    void setupAccepter(const Accepter &accepter, void *parameter);
-    
+
     Uid getUid() const;
     
 private:
     static Uid generateUid();
     const Uid _uid;
-    Accepter _accepter;
-    void *_parameter;
+
+    std::map<std::string, Event::Handler> _eventHandlers;
 };
 
 class Entity : public ModelBase
