@@ -39,15 +39,6 @@ bool EffectExplosion::init(const cocos2d::Vec3 &pos)
         return false;
     }
     
-    cocos2d::Vec3 offset = cocos2d::Vec3(0.0f, 0.0f, 50.0f);
-    
-    auto particle = cocos2d::PUParticleSystem3D::create("particles/explosion.pu", "particles/explosion.material");
-    particle->setScale(10.0f);
-    particle->setPosition3D(pos + offset);
-    particle->setCameraMask(Effect::TargetColor);
-    particle->startParticleSystem();
-    addChild(particle);
-    
     MagicEmitter *hit = MagicEmitter::create("hit01");
     hit->setCameraMask(Effect::TargetColor);
     hit->setPosition3D(cocos2d::Vec3(pos));
