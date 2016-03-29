@@ -259,6 +259,10 @@ void BackDashShot::swipeBack()
             {
                 _shotsToMake = _shotsAmount;
                 _shotTimer = 0.0f;
+
+                Event soundEvent("play_sound");
+                soundEvent.variables.setString("soundId", "fire_03.mp3");
+                _hero->sendEvent(soundEvent);
             };
             
             Event e("jump_back_start");

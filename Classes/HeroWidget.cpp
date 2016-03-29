@@ -280,9 +280,6 @@ void HeroWidget::_handleEventSwipeLeft(const VariablesSet& args)
 
 void HeroWidget::_handleEventJumpBackStart(const VariablesSet& args)
 {
-    auto audioEngine = CocosDenshion::SimpleAudioEngine::getInstance();
-    audioEngine->playEffect("fire_03.mp3");
-
     if (args.getBool("showShield", false) && !_shield->isVisible()) {
         _shield->setVisible(true);
         _shield->setOpacity(0);
