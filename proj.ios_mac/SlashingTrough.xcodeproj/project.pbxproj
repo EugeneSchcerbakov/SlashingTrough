@@ -175,8 +175,6 @@
 		CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD21C09CB8200CD4ECD /* storeItems.xml */; };
 		CD519BE61C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
 		CD519BE71C09CB8200CD4ECD /* textures in Resources */ = {isa = PBXBuildFile; fileRef = CD519BD31C09CB8200CD4ECD /* textures */; };
-		CD81549F1C415D6E00904EB0 /* particles in Resources */ = {isa = PBXBuildFile; fileRef = CD81549E1C415D6E00904EB0 /* particles */; };
-		CD8154A01C415D6E00904EB0 /* particles in Resources */ = {isa = PBXBuildFile; fileRef = CD81549E1C415D6E00904EB0 /* particles */; };
 		CD9F04061C8D9CA60065E659 /* particles3d in Resources */ = {isa = PBXBuildFile; fileRef = CD9F04051C8D9CA60065E659 /* particles3d */; };
 		CD9F04071C8D9CA60065E659 /* particles3d in Resources */ = {isa = PBXBuildFile; fileRef = CD9F04051C8D9CA60065E659 /* particles3d */; };
 		CD9F04091C8DA29D0065E659 /* resources_marker.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD9F04081C8DA29D0065E659 /* resources_marker.txt */; };
@@ -428,7 +426,6 @@
 		CD519BD01C09CB8200CD4ECD /* presets.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = presets.xml; sourceTree = "<group>"; };
 		CD519BD21C09CB8200CD4ECD /* storeItems.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = storeItems.xml; sourceTree = "<group>"; };
 		CD519BD31C09CB8200CD4ECD /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
-		CD81549E1C415D6E00904EB0 /* particles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = particles; sourceTree = "<group>"; };
 		CD9F04051C8D9CA60065E659 /* particles3d */ = {isa = PBXFileReference; lastKnownFileType = folder; path = particles3d; sourceTree = "<group>"; };
 		CD9F04081C8DA29D0065E659 /* resources_marker.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resources_marker.txt; sourceTree = "<group>"; };
 		CD9F5A4B1C675C0C00C37ED1 /* EffectExplosion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectExplosion.cpp; sourceTree = "<group>"; };
@@ -604,7 +601,6 @@
 			isa = PBXGroup;
 			children = (
 				CD9F04051C8D9CA60065E659 /* particles3d */,
-				CD81549E1C415D6E00904EB0 /* particles */,
 				CDCA1CC31C37F30500522A59 /* shaders */,
 				CDDDB1161C9F372F00AC3353 /* audio */,
 				CD519BCB1C09CB8200CD4ECD /* fonts */,
@@ -946,7 +942,6 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				CD519BD61C09CB8200CD4ECD /* fonts in Resources */,
-				CD81549F1C415D6E00904EB0 /* particles in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				CD519BD81C09CB8200CD4ECD /* gameInfo.xml in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -976,7 +971,6 @@
 				CD519BDB1C09CB8200CD4ECD /* levels.xml in Resources */,
 				CD519BD71C09CB8200CD4ECD /* fonts in Resources */,
 				CD519BE51C09CB8200CD4ECD /* storeItems.xml in Resources */,
-				CD8154A01C415D6E00904EB0 /* particles in Resources */,
 				CD519BD91C09CB8200CD4ECD /* gameInfo.xml in Resources */,
 				CDDDB1181C9F372F00AC3353 /* audio in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
