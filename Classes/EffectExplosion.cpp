@@ -11,6 +11,8 @@
 #include "cocos-ext.h"
 #include "audio/include/SimpleAudioEngine.h"
 #include "MagicEmitter.h"
+#include "Utils.h"
+#include <array>
 
 EffectExplosion* EffectExplosion::create(const cocos2d::Vec3 &pos)
 {
@@ -38,11 +40,20 @@ bool EffectExplosion::init(const cocos2d::Vec3 &pos)
     if (!Effect::init()) {
         return false;
     }
-    
-    MagicEmitter *hit = MagicEmitter::create("hit01");
+
+    std::array<std::string, 3> effectsId = {
+            "Fire explosion 2",
+            "Fire explosion 3",
+            "Fire explosion 4"
+    };
+
+    int index = misc::random(0, effectsId.size() - 1);
+    std::string effectId = effectsId[index];
+
+    MagicEmitter *hit = MagicEmitter::create(effectId.c_str());
     hit->setCameraMask(Effect::TargetColor);
-    hit->setPosition3D(cocos2d::Vec3(pos));
-    hit->setScale(0.8f);
+    hit->setPosition3D(pos);
+    hit->setScale(1.25f);
     addChild(hit);
     
     auto *distortion = cocos2d::Sprite::create("effects/circle_distortion.png");

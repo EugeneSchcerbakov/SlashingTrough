@@ -25,7 +25,7 @@
         <Const name="STAMINA_BAR_VISIBILITY" type="bool" value="false" />
         <Const name="HEALTH_POINTS_VISIBILITY" type="bool" value="true" />
 
-		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.625" />
+		<Const name="DESCTOP_FRAME_SCALE" type="float" value="0.75" />
 	</GlobalVariables>
 
     <GameplayObjects>
